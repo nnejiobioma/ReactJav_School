@@ -21,13 +21,15 @@ import {
   Terminal,
   Timer,
   Building,
-  Check
+  Check,
+  Calendar
 } from 'lucide-react';
 import { Course, Profile } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { formatDuration } from '@/lib/utils';
 import { ACADEMY_TRACKS } from '@/data/academyTracks';
 import StudentRecordModal from '@/components/student/StudentRecordModal';
+import TutoringAttendanceTracker from '@/components/attendance/TutoringAttendanceTracker';
 
 export default function StudentDashboardPage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
@@ -241,6 +243,15 @@ export default function StudentDashboardPage() {
                 >
                   <Video size={16} />
                   <span>Join 1-on-1 Live Room</span>
+                </Link>
+
+                <Link
+                  href="/tutoring/attendance"
+                  className="btn btn-secondary btn-sm"
+                  style={{ fontSize: '0.85rem', padding: '0.55rem 1.1rem', gap: '0.4rem' }}
+                >
+                  <Calendar size={16} color="var(--accent-emerald)" />
+                  <span>Attendance & Sign-Off</span>
                 </Link>
 
                 <button
@@ -491,6 +502,11 @@ export default function StudentDashboardPage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* 1-on-1 Direct Tutoring Attendance Tracker (Dual Sign-off) */}
+            <div style={{ marginTop: '2rem' }}>
+              <TutoringAttendanceTracker initialRole="student" showHeaderBanner={false} />
             </div>
           </div>
         );

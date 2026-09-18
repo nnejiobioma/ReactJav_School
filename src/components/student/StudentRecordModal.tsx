@@ -20,9 +20,11 @@ import {
   Check, 
   Flame, 
   FileText,
-  AlertCircle
+  AlertCircle,
+  CalendarCheck,
+  UserCheck
 } from 'lucide-react';
-import { Course, Profile, CBTAttempt } from '@/types';
+import { Course, Profile, CBTAttempt, MonthlyAttendanceSummary, TutoringAttendanceSession } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { formatDuration } from '@/lib/utils';
 
@@ -42,6 +44,8 @@ export default function StudentRecordModal({
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [enrolledCourses, setEnrolledCourses] = useState<{ course: Course; stats: { totalLessons: number; completedLessons: number; percentage: number } }[]>([]);
   const [cbtAttempts, setCbtAttempts] = useState<CBTAttempt[]>([]);
+  const [tutoringSummary, setTutoringSummary] = useState<MonthlyAttendanceSummary | null>(null);
+  const [tutoringSessions, setTutoringSessions] = useState<TutoringAttendanceSession[]>([]);
   
   // Email dispatch modal state
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
@@ -72,6 +76,11 @@ export default function StudentRecordModal({
 
     const attempts = LocalDataService.getCBTAttempts(user.id);
     setCbtAttempts(attempts);
+
+    const tutSummary = LocalDataService.getMonthlyAttendanceSummary('2026-09', user.id);
+    setTutoringSummary(tutSummary);
+    const tutSessions = LocalDataService.getTutoringAttendance({ studentId: user.id, month: '2026-09' });
+    setTutoringSessions(tutSessions);
 
     const initialMatric = `RJ-2026-ENG-${(user.id || 'usr_001').slice(-5).toUpperCase()}`;
     setRecipientEmail(user.email || 'student@example.com');
@@ -780,6 +789,198 @@ export default function StudentRecordModal({
               </div>
             </div>
 
+            {/* DIRECT TUTORING ATTENDANCE & DUAL-SIGNOFF RECORD */}
+            {(currentUser.tutoring_enrolled || (tutoringSummary && tutoringSummary.total_sessions > 0)) && (
+              <div style={{ marginBottom: '2.5rem' }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '0.75rem',
+                  flexWrap: 'wrap',
+                  gap: '0.5rem',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <CalendarCheck size={18} color="var(--accent-emerald)" />
+                    <h3 
+                      className="print-dark-text"
+                      style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)' }}
+                    >
+                      2. Direct 1-on-1 Tutoring Attendance Ledger (Dual-Signoff Audited)
+                    </h3>
+                  </div>
+                  <span 
+                    className="print-muted-text"
+                    style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}
+                  >
+                    Monthly Validation: {tutoringSummary?.month_label || 'September 2026'}
+                  </span>
+                </div>
+
+                {/* Validation Rule Notice */}
+                <div 
+                  className="print-bg-subtle print-border"
+                  style={{
+                    padding: '0.75rem 1rem',
+                    background: 'rgba(16, 185, 129, 0.06)',
+                    border: '1px solid rgba(16, 185, 129, 0.25)',
+                    borderRadius: '0.65rem',
+                    marginBottom: '1rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    flexWrap: 'wrap',
+                    gap: '0.75rem',
+                  }}
+                >
+                  <p 
+                    className="print-muted-text"
+                    style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: 0 }}
+                  >
+                    <strong style={{ color: '#34d399' }}>Dual-Signoff Rule:</strong> Attendance sessions are valid and accepted <em>only</em> if both the Student Fellow and Instructor have checked the verification box. Single-signature sessions are invalid.
+                  </p>
+                  <span 
+                    className="badge badge-emerald print-badge-passed"
+                    style={{ fontSize: '0.75rem', fontWeight: 700 }}
+                  >
+                    {tutoringSummary?.attendance_percentage || 0}% Monthly Verified
+                  </span>
+                </div>
+
+                {/* Sessions Ledger Table */}
+                <div 
+                  className="print-border"
+                  style={{
+                    overflowX: 'auto',
+                    border: '1px solid var(--border-subtle)',
+                    borderRadius: '0.75rem',
+                  }}
+                >
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
+                    <thead>
+                      <tr 
+                        className="print-bg-subtle print-border"
+                        style={{
+                          background: 'var(--bg-surface-elevated)',
+                          borderBottom: '1px solid var(--border-subtle)',
+                          textAlign: 'left',
+                        }}
+                      >
+                        <th 
+                          className="print-dark-text print-border"
+                          style={{ padding: '0.75rem 1rem', fontWeight: 700, color: 'var(--text-primary)' }}
+                        >
+                          Session & Track
+                        </th>
+                        <th 
+                          className="print-dark-text print-border"
+                          style={{ padding: '0.75rem 1rem', fontWeight: 700, color: 'var(--text-primary)' }}
+                        >
+                          Instructor
+                        </th>
+                        <th 
+                          className="print-dark-text print-border"
+                          style={{ padding: '0.75rem 1rem', fontWeight: 700, color: 'var(--text-primary)' }}
+                        >
+                          Student Check
+                        </th>
+                        <th 
+                          className="print-dark-text print-border"
+                          style={{ padding: '0.75rem 1rem', fontWeight: 700, color: 'var(--text-primary)' }}
+                        >
+                          Instructor Check
+                        </th>
+                        <th 
+                          className="print-dark-text print-border"
+                          style={{ padding: '0.75rem 1rem', fontWeight: 700, color: 'var(--text-primary)', textAlign: 'right' }}
+                        >
+                          Validity Status
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {tutoringSessions.length > 0 ? (
+                        tutoringSessions.map((session, index) => {
+                          const isValid = session.is_valid || (session.student_checked && session.instructor_checked);
+
+                          return (
+                            <tr 
+                              key={session.id}
+                              className="print-border"
+                              style={{
+                                borderBottom: index < tutoringSessions.length - 1 ? '1px solid var(--border-subtle)' : 'none',
+                                background: index % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)',
+                              }}
+                            >
+                              <td style={{ padding: '0.85rem 1rem' }}>
+                                <span 
+                                  className="print-dark-text"
+                                  style={{ fontWeight: 700, color: 'var(--text-primary)', display: 'block' }}
+                                >
+                                  {session.session_title}
+                                </span>
+                                <span 
+                                  className="print-muted-text"
+                                  style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}
+                                >
+                                  {new Date(session.session_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} • {session.session_time} • {session.track_name}
+                                </span>
+                              </td>
+                              <td 
+                                className="print-muted-text"
+                                style={{ padding: '0.85rem 1rem', color: 'var(--text-secondary)' }}
+                              >
+                                {session.instructor_name}
+                              </td>
+                              <td style={{ padding: '0.85rem 1rem' }}>
+                                {session.student_checked ? (
+                                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--accent-emerald)', fontSize: '0.8rem', fontWeight: 600 }}>
+                                    <Check size={14} /> Signed
+                                  </span>
+                                ) : (
+                                  <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>
+                                    Unsigned
+                                  </span>
+                                )}
+                              </td>
+                              <td style={{ padding: '0.85rem 1rem' }}>
+                                {session.instructor_checked ? (
+                                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--accent-emerald)', fontSize: '0.8rem', fontWeight: 600 }}>
+                                    <Check size={14} /> Verified
+                                  </span>
+                                ) : (
+                                  <span style={{ color: 'var(--accent-amber)', fontSize: '0.8rem' }}>
+                                    Pending
+                                  </span>
+                                )}
+                              </td>
+                              <td style={{ padding: '0.85rem 1rem', textAlign: 'right' }}>
+                                {isValid ? (
+                                  <span className="badge badge-emerald print-badge-passed" style={{ fontSize: '0.72rem' }}>
+                                    Accepted (Valid)
+                                  </span>
+                                ) : (
+                                  <span className="badge badge-amber" style={{ fontSize: '0.72rem' }}>
+                                    Invalid (Incomplete)
+                                  </span>
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <tr>
+                          <td colSpan={5} style={{ padding: '1.25rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                            No direct tutoring attendance sessions recorded for this billing cycle.
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
             {/* 5. BREAKDOWN OF CDT / CBT EXAMINATIONS */}
             <div style={{ marginBottom: '2.5rem' }}>
               <div style={{
@@ -796,7 +997,7 @@ export default function StudentRecordModal({
                     className="print-dark-text"
                     style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)' }}
                   >
-                    2. Computer-Based Testing (CDT/CBT) Examination Assessments
+                    3. Computer-Based Testing (CDT/CBT) Examination Assessments
                   </h3>
                 </div>
                 <span 

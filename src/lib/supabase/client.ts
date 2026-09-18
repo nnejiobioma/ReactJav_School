@@ -13,7 +13,9 @@ import {
   IntranetAccessRequest,
   IntranetBulletin,
   SubscriptionPlan,
-  SubscriptionStatus
+  SubscriptionStatus,
+  TutoringAttendanceSession,
+  MonthlyAttendanceSummary
 } from '@/types';
 import { 
   DEMO_PROFILES, 
@@ -25,7 +27,8 @@ import {
   INITIAL_ROOM_MESSAGES,
   SUBSCRIPTION_PLANS,
   SAMPLE_INTRANET_REQUESTS,
-  CAMPUS_BULLETINS
+  CAMPUS_BULLETINS,
+  INITIAL_TUTORING_ATTENDANCE
 } from './mockData';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -60,6 +63,7 @@ const STORAGE_KEYS = {
   LIVE_MESSAGES: 'reactjav_live_messages',
   INTRANET_REQUESTS: 'reactjav_intranet_requests',
   CAMPUS_BULLETINS: 'reactjav_campus_bulletins',
+  TUTORING_ATTENDANCE: 'reactjav_tutoring_attendance',
 };
 
 // Client-side Local State Store (Local Persistence Fallback)
@@ -728,6 +732,204 @@ export class LocalDataService {
       status: 'none',
       reason: 'No active student subscription. Tuition payment and administrative clearance required.',
     };
+  }
+
+  // ==========================================
+  // Direct Tutoring Attendance & Dual Sign-off System
+  // ==========================================
+
+  static getTutoringAttendance(filter?: {
+    month?: string;
+    studentId?: string;
+    instructorId?: string;
+  }): TutoringAttendanceSession[] {
+    if (typeof window === 'undefined') {
+      let list = [...INITIAL_TUTORING_ATTENDANCE];
+      if (filter?.month) list = list.filter((s) => s.month === filter.month);
+      if (filter?.studentId) list = list.filter((s) => s.student_id === filter.studentId);
+      if (filter?.instructorId) list = list.filter((s) => s.instructor_id === filter.instructorId);
+      return list;
+    }
+
+    const stored = localStorage.getItem(STORAGE_KEYS.TUTORING_ATTENDANCE);
+    let list: TutoringAttendanceSession[] = [];
+    if (stored) {
+      try {
+        list = JSON.parse(stored);
+      } catch {
+        list = [...INITIAL_TUTORING_ATTENDANCE];
+      }
+    } else {
+      list = [...INITIAL_TUTORING_ATTENDANCE];
+      localStorage.setItem(STORAGE_KEYS.TUTORING_ATTENDANCE, JSON.stringify(list));
+    }
+
+    if (filter?.month) {
+      list = list.filter((s) => s.month === filter.month);
+    }
+    if (filter?.studentId) {
+      list = list.filter((s) => s.student_id === filter.studentId);
+    }
+    if (filter?.instructorId) {
+      list = list.filter((s) => s.instructor_id === filter.instructorId);
+    }
+
+    return list.sort((a, b) => new Date(b.session_date).getTime() - new Date(a.session_date).getTime());
+  }
+
+  static saveAllTutoringAttendance(sessions: TutoringAttendanceSession[]): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(STORAGE_KEYS.TUTORING_ATTENDANCE, JSON.stringify(sessions));
+    window.dispatchEvent(new Event('storage'));
+  }
+
+  static toggleStudentAttendanceSignoff(
+    sessionId: string,
+    checked: boolean,
+    studentId?: string
+  ): { success: boolean; session?: TutoringAttendanceSession; message: string } {
+    const all = this.getTutoringAttendance();
+    const index = all.findIndex((s) => s.id === sessionId);
+    if (index === -1) {
+      return { success: false, message: 'Session record not found.' };
+    }
+
+    const current = { ...all[index] };
+    current.student_checked = checked;
+    current.student_checked_at = checked ? new Date().toISOString() : undefined;
+
+    // Dual-Signoff Rule: Valid ONLY IF BOTH student and instructor have checked the box!
+    current.is_valid = current.student_checked === true && current.instructor_checked === true;
+
+    all[index] = current;
+    this.saveAllTutoringAttendance(all);
+
+    const message = current.is_valid
+      ? 'Dual Verification Confirmed! Attendance accepted and stamped.'
+      : checked
+      ? 'Student sign-off recorded. Awaiting Instructor verification to become valid.'
+      : 'Student sign-off withdrawn. Session is marked unconfirmed.';
+
+    return { success: true, session: current, message };
+  }
+
+  static toggleInstructorAttendanceSignoff(
+    sessionId: string,
+    checked: boolean,
+    instructorId?: string
+  ): { success: boolean; session?: TutoringAttendanceSession; message: string } {
+    const all = this.getTutoringAttendance();
+    const index = all.findIndex((s) => s.id === sessionId);
+    if (index === -1) {
+      return { success: false, message: 'Session record not found.' };
+    }
+
+    const current = { ...all[index] };
+    current.instructor_checked = checked;
+    current.instructor_checked_at = checked ? new Date().toISOString() : undefined;
+
+    // Dual-Signoff Rule: Valid ONLY IF BOTH student and instructor have checked the box!
+    current.is_valid = current.student_checked === true && current.instructor_checked === true;
+
+    all[index] = current;
+    this.saveAllTutoringAttendance(all);
+
+    const message = current.is_valid
+      ? 'Dual Verification Confirmed! Attendance accepted and stamped.'
+      : checked
+      ? 'Instructor sign-off recorded. Awaiting Student confirmation to become valid.'
+      : 'Instructor sign-off withdrawn. Session is marked unconfirmed.';
+
+    return { success: true, session: current, message };
+  }
+
+  static addTutoringAttendanceSession(
+    sessionData: Partial<TutoringAttendanceSession>
+  ): TutoringAttendanceSession {
+    const all = this.getTutoringAttendance();
+    const currentUser = this.getCurrentUser();
+    const now = new Date();
+    const dateStr = sessionData.session_date || now.toISOString().split('T')[0];
+    const month = sessionData.month || dateStr.slice(0, 7);
+
+    const newSession: TutoringAttendanceSession = {
+      id: sessionData.id || `att_tut_${Date.now()}`,
+      student_id: sessionData.student_id || currentUser.id,
+      student_name: sessionData.student_name || currentUser.full_name || 'Alex Morgan',
+      student_avatar: sessionData.student_avatar || currentUser.avatar_url || undefined,
+      instructor_id: sessionData.instructor_id || 'usr_instructor_001',
+      instructor_name: sessionData.instructor_name || 'Dr. Elena Chen',
+      instructor_avatar: sessionData.instructor_avatar || 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
+      track_id: sessionData.track_id || currentUser.tutoring_track_id || 'python-engineering',
+      track_name: sessionData.track_name || currentUser.tutoring_track_name || 'Python Engineering',
+      session_date: dateStr,
+      session_time: sessionData.session_time || '14:00 - 15:30 GMT',
+      session_title: sessionData.session_title || '1-on-1 Direct Tutoring Mentorship Session',
+      month,
+      student_checked: !!sessionData.student_checked,
+      student_checked_at: sessionData.student_checked ? new Date().toISOString() : undefined,
+      instructor_checked: !!sessionData.instructor_checked,
+      instructor_checked_at: sessionData.instructor_checked ? new Date().toISOString() : undefined,
+      is_valid: !!(sessionData.student_checked && sessionData.instructor_checked),
+      topic_summary: sessionData.topic_summary || '1-on-1 Direct Tutoring coursework and code pairing.',
+      notes: sessionData.notes || '',
+      created_at: now.toISOString(),
+    };
+
+    all.unshift(newSession);
+    this.saveAllTutoringAttendance(all);
+    return newSession;
+  }
+
+  static getMonthlyAttendanceSummary(month: string, studentId?: string): MonthlyAttendanceSummary {
+    const sessions = this.getTutoringAttendance({ month, studentId });
+    const total = sessions.length;
+    const valid = sessions.filter((s) => s.is_valid).length;
+    const pending = sessions.filter((s) => !s.is_valid && (s.student_checked || s.instructor_checked)).length;
+    const unconfirmed = sessions.filter((s) => !s.student_checked && !s.instructor_checked).length;
+    const percentage = total > 0 ? Math.round((valid / total) * 100) : 0;
+
+    let audit_status: MonthlyAttendanceSummary['audit_status'] = 'Compliant';
+    if (percentage < 60) {
+      audit_status = 'Critical Attendance Warning';
+    } else if (percentage < 80 || pending > 0) {
+      audit_status = 'Pending Review';
+    }
+
+    const [year, mStr] = month.split('-');
+    const dateObj = new Date(parseInt(year, 10), parseInt(mStr, 10) - 1, 1);
+    const month_label = isNaN(dateObj.getTime())
+      ? month
+      : dateObj.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+    return {
+      month,
+      month_label,
+      total_sessions: total,
+      valid_sessions: valid,
+      pending_sessions: pending,
+      unconfirmed_sessions: unconfirmed,
+      attendance_percentage: percentage,
+      audit_status,
+    };
+  }
+
+  static getAvailableAttendanceMonths(): { month: string; label: string }[] {
+    const all = this.getTutoringAttendance();
+    const set = new Set<string>();
+    all.forEach((s) => set.add(s.month));
+    const currentMonth = new Date().toISOString().slice(0, 7);
+    set.add(currentMonth);
+
+    const sorted = Array.from(set).sort().reverse();
+    return sorted.map((m) => {
+      const [year, mStr] = m.split('-');
+      const dateObj = new Date(parseInt(year, 10), parseInt(mStr, 10) - 1, 1);
+      const label = isNaN(dateObj.getTime())
+        ? m
+        : dateObj.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      return { month: m, label };
+    });
   }
 }
 

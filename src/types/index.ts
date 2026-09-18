@@ -263,5 +263,47 @@ export interface IntranetBulletin {
   created_at: string;
 }
 
+// ==========================================
+// Direct Tutoring Attendance Tracking Types
+// ==========================================
 
+export interface TutoringAttendanceSession {
+  id: string;
+  student_id: string;
+  student_name: string;
+  student_avatar?: string;
+  instructor_id: string;
+  instructor_name: string;
+  instructor_avatar?: string;
+  track_id: string;
+  track_name: string;
+  session_date: string; // YYYY-MM-DD e.g. "2026-09-04"
+  session_time: string; // e.g. "14:00 - 15:30 GMT"
+  session_title: string;
+  month: string; // YYYY-MM e.g. "2026-09"
 
+  // DUAL-SIGNOFF MECHANISM:
+  // Attendance is only valid/accepted if BOTH student and instructor have checked the box!
+  student_checked: boolean;
+  student_checked_at?: string;
+  instructor_checked: boolean;
+  instructor_checked_at?: string;
+
+  // Computed validity (strictly requires student_checked && instructor_checked)
+  is_valid: boolean;
+
+  topic_summary?: string;
+  notes?: string;
+  created_at: string;
+}
+
+export interface MonthlyAttendanceSummary {
+  month: string; // YYYY-MM
+  month_label: string; // e.g. "September 2026"
+  total_sessions: number;
+  valid_sessions: number;
+  pending_sessions: number;
+  unconfirmed_sessions: number;
+  attendance_percentage: number;
+  audit_status: 'Compliant' | 'Pending Review' | 'Critical Attendance Warning';
+}

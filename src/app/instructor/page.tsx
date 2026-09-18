@@ -12,16 +12,20 @@ import {
   ExternalLink, 
   Sparkles,
   Layers,
-  ArrowRight
+  ArrowRight,
+  Calendar,
+  ShieldCheck
 } from 'lucide-react';
 import { Course, Profile } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { formatCurrency } from '@/lib/utils';
+import TutoringAttendanceTracker from '@/components/attendance/TutoringAttendanceTracker';
 
 export default function InstructorDashboardPage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [courses, setCourses] = useState<Course[]>([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [activeTab, setActiveTab] = useState<'courses' | 'attendance'>('courses');
 
   // New course form
   const [title, setTitle] = useState('');
@@ -129,8 +133,71 @@ export default function InstructorDashboardPage() {
         </button>
       </div>
 
-      {/* Analytics Metric Cards */}
+      {/* Studio View Selector Tabs */}
       <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        marginBottom: '2rem',
+        background: 'var(--bg-surface)',
+        padding: '0.35rem',
+        borderRadius: '0.85rem',
+        border: '1px solid var(--border-subtle)',
+        width: 'fit-content',
+        flexWrap: 'wrap',
+      }}>
+        <button
+          onClick={() => setActiveTab('courses')}
+          style={{
+            padding: '0.6rem 1.25rem',
+            borderRadius: '0.65rem',
+            border: 'none',
+            background: activeTab === 'courses' ? 'var(--primary)' : 'transparent',
+            color: activeTab === 'courses' ? '#ffffff' : 'var(--text-secondary)',
+            fontWeight: 700,
+            fontSize: '0.85rem',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.45rem',
+            transition: 'all 0.15s ease',
+          }}
+        >
+          <BookOpen size={16} />
+          <span>Curricula Management ({courses.length})</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('attendance')}
+          style={{
+            padding: '0.6rem 1.25rem',
+            borderRadius: '0.65rem',
+            border: 'none',
+            background: activeTab === 'attendance' ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)' : 'transparent',
+            color: activeTab === 'attendance' ? '#ffffff' : 'var(--text-secondary)',
+            fontWeight: 700,
+            fontSize: '0.85rem',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.45rem',
+            transition: 'all 0.15s ease',
+          }}
+        >
+          <Calendar size={16} />
+          <span>1-on-1 Direct Tutoring Attendance Desk</span>
+          <span className="badge badge-emerald" style={{ fontSize: '0.62rem', padding: '0.1rem 0.4rem' }}>
+            Dual Sign-off
+          </span>
+        </button>
+      </div>
+
+      {activeTab === 'attendance' ? (
+        <TutoringAttendanceTracker initialRole="instructor" />
+      ) : (
+        <>
+          {/* Analytics Metric Cards */}
+          <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
         gap: '1.5rem',
@@ -283,6 +350,8 @@ export default function InstructorDashboardPage() {
           ))}
         </div>
       </div>
+      </>
+      )}
 
       {/* Create Course Modal */}
       {showCreateModal && (

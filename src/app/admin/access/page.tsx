@@ -16,10 +16,12 @@ import {
   ExternalLink,
   CreditCard,
   Building,
-  UserCheck
+  UserCheck,
+  Calendar
 } from 'lucide-react';
 import { Profile, IntranetAccessRequest, SubscriptionStatus } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
+import TutoringAttendanceTracker from '@/components/attendance/TutoringAttendanceTracker';
 
 export default function AdminAccessPage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
@@ -27,6 +29,7 @@ export default function AdminAccessPage() {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [actionFeedback, setActionFeedback] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'clearance' | 'attendance'>('clearance');
 
   const loadData = () => {
     setCurrentUser(LocalDataService.getCurrentUser());
@@ -170,6 +173,102 @@ export default function AdminAccessPage() {
           </Link>
         </div>
       </div>
+
+      {/* Admin Section Tabs */}
+      <div style={{
+        display: 'flex',
+        gap: '0.75rem',
+        borderBottom: '1px solid var(--border-subtle)',
+        marginBottom: '2rem',
+        paddingBottom: '0.25rem'
+      }}>
+        <button
+          onClick={() => setActiveTab('clearance')}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '0.75rem 1.25rem',
+            background: 'transparent',
+            border: 'none',
+            borderBottom: activeTab === 'clearance' ? '2px solid var(--primary)' : '2px solid transparent',
+            color: activeTab === 'clearance' ? '#ffffff' : 'var(--text-secondary)',
+            fontWeight: 700,
+            fontSize: '0.95rem',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+          }}
+        >
+          <ShieldCheck size={18} color={activeTab === 'clearance' ? 'var(--primary)' : 'var(--text-muted)'} />
+          <span>Tuition & Bursar Clearance</span>
+          {pendingCount > 0 && (
+            <span style={{
+              background: 'rgba(245, 158, 11, 0.2)',
+              color: '#fbbf24',
+              fontSize: '0.72rem',
+              padding: '0.15rem 0.5rem',
+              borderRadius: '9999px',
+              fontWeight: 700,
+            }}>
+              {pendingCount}
+            </span>
+          )}
+        </button>
+
+        <button
+          onClick={() => setActiveTab('attendance')}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '0.75rem 1.25rem',
+            background: 'transparent',
+            border: 'none',
+            borderBottom: activeTab === 'attendance' ? '2px solid var(--accent-emerald)' : '2px solid transparent',
+            color: activeTab === 'attendance' ? '#ffffff' : 'var(--text-secondary)',
+            fontWeight: 700,
+            fontSize: '0.95rem',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+          }}
+        >
+          <Calendar size={18} color={activeTab === 'attendance' ? 'var(--accent-emerald)' : 'var(--text-muted)'} />
+          <span>Direct Tutoring Attendance Audit (Dual Sign-Off)</span>
+        </button>
+      </div>
+
+      {activeTab === 'attendance' ? (
+        <div>
+          <div style={{
+            background: 'rgba(16, 185, 129, 0.08)',
+            border: '1px solid rgba(16, 185, 129, 0.25)',
+            borderRadius: '1rem',
+            padding: '1.25rem 1.5rem',
+            marginBottom: '2rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '1rem'
+          }}>
+            <div>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.25rem' }}>
+                Dean & Bursar Attendance Verification Audit
+              </h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>
+                Monthly dual-verification audit ledger for direct tutoring fellows. Sessions require both student and instructor sign-off to qualify for certification.
+              </p>
+            </div>
+            <Link href="/tutoring/attendance" className="btn btn-outline btn-sm">
+              <ExternalLink size={14} />
+              <span>Full Attendance Portal</span>
+            </Link>
+          </div>
+
+          <TutoringAttendanceTracker initialRole="admin" />
+        </div>
+      ) : (
+        <>
 
       {/* Action Feedback Toast */}
       {actionFeedback && (
@@ -448,6 +547,8 @@ export default function AdminAccessPage() {
           )}
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 }

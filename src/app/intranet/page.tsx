@@ -239,6 +239,22 @@ export default function IntranetHubPage() {
                     <span>Open IDE Sandbox</span>
                   </Link>
 
+                  <Link
+                    href="/tutoring/attendance"
+                    className="btn btn-secondary btn-sm"
+                    style={{
+                      padding: '0.65rem 1.15rem',
+                      fontWeight: 600,
+                      fontSize: '0.85rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.45rem',
+                    }}
+                  >
+                    <Calendar size={16} color="var(--accent-emerald)" />
+                    <span>Attendance & Dual Sign-Off</span>
+                  </Link>
+
                   <button
                     onClick={() => {
                       setAutoPrintRecord(false);
