@@ -833,7 +833,7 @@ videoElement.srcObject = displayStream;`,
 
   return (
     <div style={{
-      height: 'calc(100vh - var(--header-height, 5.5rem))',
+      height: 'calc(100vh - var(--header-height, 6.75rem))',
       display: 'flex',
       flexDirection: 'column',
       background: 'var(--bg-main)',

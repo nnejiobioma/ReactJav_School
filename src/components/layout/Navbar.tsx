@@ -117,7 +117,7 @@ export default function Navbar() {
         display: 'grid',
         gridTemplateColumns: 'minmax(180px, 1fr) auto minmax(180px, 1fr)',
         alignItems: 'center',
-        height: 'var(--header-height, 5.5rem)',
+        height: 'var(--header-height, 6.75rem)',
         gap: '1rem',
       }}>
         {/* ================= COLUMN 1: BRAND LOGO (Left Aligned) ================= */}
@@ -125,25 +125,25 @@ export default function Navbar() {
           <Link href="/" style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.85rem',
+            gap: '0.95rem',
             textDecoration: 'none',
             flexShrink: 0,
           }}>
             <div style={{
-              width: '3.1rem',
-              height: '3.1rem',
-              borderRadius: '0.85rem',
+              width: '3.4rem',
+              height: '3.4rem',
+              borderRadius: '0.95rem',
               background: 'var(--grad-primary)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 4px 14px -2px rgba(79, 70, 229, 0.35)',
+              boxShadow: '0 4px 16px -2px rgba(79, 70, 229, 0.4)',
               transition: 'transform 0.2s ease',
             }}>
-              <GraduationCap size={26} color="#ffffff" />
+              <GraduationCap size={28} color="#ffffff" />
             </div>
             <span style={{
-              fontSize: '1.75rem',
+              fontSize: '1.85rem',
               fontWeight: 800,
               letterSpacing: '-0.03em',
               color: 'var(--text-primary)',
@@ -171,8 +171,8 @@ export default function Navbar() {
             alignItems: 'center',
             gap: '0.35rem',
             background: 'var(--bg-surface)',
-            padding: '0.3rem 0.45rem',
-            borderRadius: '0.85rem',
+            padding: '0.38rem 0.55rem',
+            borderRadius: '0.95rem',
             border: '1px solid var(--border-subtle)',
             boxShadow: 'var(--shadow-sm)',
           }}>
@@ -182,16 +182,16 @@ export default function Navbar() {
               style={{
                 background: (pathname === '/' || pathname.startsWith('/courses')) ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
                 color: (pathname === '/' || pathname.startsWith('/courses')) ? 'var(--primary)' : 'var(--text-secondary)',
-                fontSize: '0.84rem',
-                padding: '0.45rem 0.75rem',
+                fontSize: '0.86rem',
+                padding: '0.52rem 0.85rem',
                 fontWeight: 600,
-                borderRadius: '0.65rem',
+                borderRadius: '0.75rem',
                 gap: '0.45rem',
                 display: 'inline-flex',
                 alignItems: 'center',
               }}
             >
-              <BookOpen size={15} />
+              <BookOpen size={16} />
               <span>Programmes</span>
             </Link>
 
@@ -201,18 +201,18 @@ export default function Navbar() {
               style={{
                 background: (pathname.startsWith('/academy') || pathname.startsWith('/tutoring')) ? 'rgba(16, 185, 129, 0.14)' : 'transparent',
                 color: (pathname.startsWith('/academy') || pathname.startsWith('/tutoring')) ? 'var(--accent-emerald)' : 'var(--text-secondary)',
-                fontSize: '0.84rem',
-                padding: '0.45rem 0.75rem',
+                fontSize: '0.86rem',
+                padding: '0.52rem 0.85rem',
                 fontWeight: 600,
-                borderRadius: '0.65rem',
+                borderRadius: '0.75rem',
                 gap: '0.45rem',
                 display: 'inline-flex',
                 alignItems: 'center',
               }}
             >
-              <GraduationCap size={15} color="var(--accent-emerald)" />
+              <GraduationCap size={16} color="var(--accent-emerald)" />
               <span>Direct Tutoring</span>
-              <span className="badge badge-emerald" style={{ fontSize: '0.6rem', padding: '0.08rem 0.35rem' }}>
+              <span className="badge badge-emerald" style={{ fontSize: '0.62rem', padding: '0.1rem 0.4rem' }}>
                 1-on-1
               </span>
             </Link>
@@ -223,21 +223,21 @@ export default function Navbar() {
               style={{
                 background: pathname === '/subscribe' ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
                 color: pathname === '/subscribe' ? 'var(--primary)' : 'var(--text-secondary)',
-                fontSize: '0.84rem',
-                padding: '0.45rem 0.75rem',
+                fontSize: '0.86rem',
+                padding: '0.52rem 0.85rem',
                 fontWeight: 600,
-                borderRadius: '0.65rem',
+                borderRadius: '0.75rem',
                 gap: '0.45rem',
                 display: 'inline-flex',
                 alignItems: 'center',
               }}
             >
-              <Sparkles size={15} color="var(--primary)" />
+              <Sparkles size={16} color="var(--primary)" />
               <span>Tuition & Plans</span>
             </Link>
           </div>
 
-          <div style={{ width: '1px', height: '24px', background: 'var(--border-subtle)', margin: '0 0.15rem' }} />
+          <div style={{ width: '1px', height: '28px', background: 'var(--border-subtle)', margin: '0 0.25rem' }} />
 
           {/* Campus Intranet & Hub Pill Container */}
           <div style={{
@@ -245,8 +245,8 @@ export default function Navbar() {
             alignItems: 'center',
             gap: '0.35rem',
             background: isIntranetActive ? 'rgba(79, 70, 229, 0.08)' : 'var(--bg-surface)',
-            padding: '0.3rem 0.45rem',
-            borderRadius: '0.85rem',
+            padding: '0.38rem 0.55rem',
+            borderRadius: '0.95rem',
             border: '1px solid var(--border-subtle)',
             boxShadow: 'var(--shadow-sm)',
           }}>
@@ -257,15 +257,15 @@ export default function Navbar() {
                 background: pathname === '/intranet' ? 'rgba(79, 70, 229, 0.16)' : 'transparent',
                 color: pathname === '/intranet' ? 'var(--primary)' : 'var(--text-primary)',
                 fontWeight: 600,
-                fontSize: '0.84rem',
-                padding: '0.45rem 0.75rem',
+                fontSize: '0.86rem',
+                padding: '0.52rem 0.85rem',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.45rem',
-                borderRadius: '0.65rem',
+                borderRadius: '0.75rem',
               }}
             >
-              <ShieldCheck size={15} color={currentUser?.admin_granted || currentUser?.tutoring_enrolled || currentUser?.role !== 'student' ? 'var(--accent-emerald)' : 'var(--accent-amber)'} />
+              <ShieldCheck size={16} color={currentUser?.admin_granted || currentUser?.tutoring_enrolled || currentUser?.role !== 'student' ? 'var(--accent-emerald)' : 'var(--accent-amber)'} />
               <span>Campus Intranet</span>
             </Link>
 
@@ -275,16 +275,16 @@ export default function Navbar() {
               style={{
                 background: pathname.startsWith('/dashboard') ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
                 color: pathname.startsWith('/dashboard') ? 'var(--primary)' : 'var(--text-secondary)',
-                fontSize: '0.84rem',
-                padding: '0.45rem 0.75rem',
+                fontSize: '0.86rem',
+                padding: '0.52rem 0.85rem',
                 fontWeight: 600,
-                borderRadius: '0.65rem',
+                borderRadius: '0.75rem',
                 gap: '0.45rem',
                 display: 'inline-flex',
                 alignItems: 'center',
               }}
             >
-              <LayoutDashboard size={15} />
+              <LayoutDashboard size={16} />
               <span>Dashboard</span>
             </Link>
 
@@ -298,10 +298,10 @@ export default function Navbar() {
                     ? 'rgba(79, 70, 229, 0.16)' 
                     : 'transparent',
                   color: 'var(--text-secondary)',
-                  fontSize: '0.84rem',
-                  padding: '0.45rem 0.65rem',
+                  fontSize: '0.86rem',
+                  padding: '0.52rem 0.75rem',
                   fontWeight: 600,
-                  borderRadius: '0.65rem',
+                  borderRadius: '0.75rem',
                   gap: '0.35rem',
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -309,9 +309,9 @@ export default function Navbar() {
                   cursor: 'pointer',
                 }}
               >
-                <Layers size={15} color="var(--primary)" />
+                <Layers size={16} color="var(--primary)" />
                 <span>Tools</span>
-                <ChevronDown size={13} color="var(--text-muted)" style={{ transform: showToolsMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                <ChevronDown size={14} color="var(--text-muted)" style={{ transform: showToolsMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
               </button>
 
               {showToolsMenu && (
@@ -478,18 +478,18 @@ export default function Navbar() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.4rem',
-              padding: '0.35rem 0.65rem',
+              padding: '0.42rem 0.75rem',
               background: 'var(--bg-surface)',
               borderRadius: '9999px',
               border: '1px solid var(--border-subtle)',
-              fontSize: '0.75rem',
+              fontSize: '0.76rem',
               fontWeight: 600,
               color: hasSupabase ? 'var(--accent-emerald)' : 'var(--text-muted)',
               cursor: 'default',
             }}
           >
-            <Database size={13} color={hasSupabase ? 'var(--accent-emerald)' : 'var(--primary)'} />
-            <span style={{ fontSize: '0.72rem' }}>{hasSupabase ? 'Live DB' : 'Demo DB'}</span>
+            <Database size={14} color={hasSupabase ? 'var(--accent-emerald)' : 'var(--primary)'} />
+            <span style={{ fontSize: '0.74rem' }}>{hasSupabase ? 'Live DB' : 'Demo DB'}</span>
             <span style={{
               width: '6px',
               height: '6px',
@@ -509,18 +509,18 @@ export default function Navbar() {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.45rem',
-              padding: '0.45rem 0.95rem',
-              borderRadius: '0.75rem',
-              fontSize: '0.84rem',
+              gap: '0.5rem',
+              padding: '0.52rem 1.15rem',
+              borderRadius: '0.85rem',
+              fontSize: '0.86rem',
               fontWeight: 700,
               textDecoration: 'none',
-              boxShadow: '0 2px 10px rgba(79, 70, 229, 0.25)',
+              boxShadow: '0 2px 12px rgba(79, 70, 229, 0.28)',
               whiteSpace: 'nowrap',
             }}
             title="Log In or Register Account"
           >
-            <LogIn size={15} />
+            <LogIn size={16} />
             <span>Log In</span>
           </Link>
 
@@ -532,9 +532,9 @@ export default function Navbar() {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.55rem',
-                padding: '0.35rem 0.75rem',
-                borderRadius: '0.85rem',
+                gap: '0.65rem',
+                padding: '0.42rem 0.85rem',
+                borderRadius: '0.95rem',
                 border: '1px solid var(--border-subtle)',
                 background: 'var(--bg-surface)',
                 cursor: 'pointer',
@@ -546,8 +546,8 @@ export default function Navbar() {
                   src={currentUser?.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
                   alt={currentUser?.full_name || 'User'}
                   style={{
-                    width: '30px',
-                    height: '30px',
+                    width: '32px',
+                    height: '32px',
                     borderRadius: '50%',
                     objectFit: 'cover',
                     border: '1.5px solid var(--border-subtle)',
