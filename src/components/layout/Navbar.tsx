@@ -33,11 +33,11 @@ export default function Navbar() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [hasSupabase, setHasSupabase] = useState(false);
   const [showRoleMenu, setShowRoleMenu] = useState(false);
-  const [showToolsMenu, setShowToolsMenu] = useState(false);
+  const [showIntranetMenu, setShowIntranetMenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const roleMenuRef = useRef<HTMLDivElement>(null);
-  const toolsMenuRef = useRef<HTMLDivElement>(null);
+  const intranetMenuRef = useRef<HTMLDivElement>(null);
 
   const loadUserData = () => {
     setCurrentUser(LocalDataService.getCurrentUser());
@@ -57,8 +57,8 @@ export default function Navbar() {
       if (roleMenuRef.current && !roleMenuRef.current.contains(e.target as Node)) {
         setShowRoleMenu(false);
       }
-      if (toolsMenuRef.current && !toolsMenuRef.current.contains(e.target as Node)) {
-        setShowToolsMenu(false);
+      if (intranetMenuRef.current && !intranetMenuRef.current.contains(e.target as Node)) {
+        setShowIntranetMenu(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -72,7 +72,7 @@ export default function Navbar() {
   // Close menus on route change
   useEffect(() => {
     setShowRoleMenu(false);
-    setShowToolsMenu(false);
+    setShowIntranetMenu(false);
     setMobileMenuOpen(false);
   }, [pathname]);
 
@@ -239,227 +239,236 @@ export default function Navbar() {
 
           <div style={{ width: '1px', height: '28px', background: 'var(--border-subtle)', margin: '0 0.25rem' }} />
 
-          {/* Campus Intranet & Hub Pill Container */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.35rem',
-            background: isIntranetActive ? 'rgba(79, 70, 229, 0.08)' : 'var(--bg-surface)',
-            padding: '0.38rem 0.55rem',
-            borderRadius: '0.95rem',
-            border: '1px solid var(--border-subtle)',
-            boxShadow: 'var(--shadow-sm)',
-          }}>
-            <Link
-              href="/intranet"
+          {/* Collapsed Campus Intranet Dropdown */}
+          <div ref={intranetMenuRef} style={{ position: 'relative' }}>
+            <button
+              onClick={() => setShowIntranetMenu(!showIntranetMenu)}
               className="btn btn-sm"
               style={{
-                background: pathname === '/intranet' ? 'rgba(79, 70, 229, 0.16)' : 'transparent',
-                color: pathname === '/intranet' ? 'var(--primary)' : 'var(--text-primary)',
+                background: isIntranetActive ? 'rgba(79, 70, 229, 0.16)' : 'var(--bg-surface)',
+                color: isIntranetActive ? 'var(--primary)' : 'var(--text-primary)',
                 fontWeight: 600,
                 fontSize: '0.86rem',
-                padding: '0.52rem 0.85rem',
+                padding: '0.52rem 0.95rem',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.45rem',
-                borderRadius: '0.75rem',
+                gap: '0.5rem',
+                borderRadius: '0.85rem',
+                border: isIntranetActive ? '1px solid rgba(79, 70, 229, 0.35)' : '1px solid var(--border-subtle)',
+                boxShadow: 'var(--shadow-sm)',
+                cursor: 'pointer',
               }}
+              title="Campus Intranet Portal & Resources"
             >
-              <ShieldCheck size={16} color={currentUser?.admin_granted || currentUser?.tutoring_enrolled || currentUser?.role !== 'student' ? 'var(--accent-emerald)' : 'var(--accent-amber)'} />
+              <ShieldCheck size={17} color={currentUser?.admin_granted || currentUser?.tutoring_enrolled || currentUser?.role !== 'student' ? 'var(--accent-emerald)' : 'var(--accent-amber)'} />
               <span>Campus Intranet</span>
-            </Link>
+              <ChevronDown 
+                size={14} 
+                color="var(--text-muted)" 
+                style={{ 
+                  transform: showIntranetMenu ? 'rotate(180deg)' : 'none', 
+                  transition: 'transform 0.2s ease' 
+                }} 
+              />
+            </button>
 
-            <Link
-              href="/dashboard"
-              className="btn btn-sm"
-              style={{
-                background: pathname.startsWith('/dashboard') ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
-                color: pathname.startsWith('/dashboard') ? 'var(--primary)' : 'var(--text-secondary)',
-                fontSize: '0.86rem',
-                padding: '0.52rem 0.85rem',
-                fontWeight: 600,
-                borderRadius: '0.75rem',
-                gap: '0.45rem',
-                display: 'inline-flex',
-                alignItems: 'center',
-              }}
-            >
-              <LayoutDashboard size={16} />
-              <span>Dashboard</span>
-            </Link>
-
-            {/* Campus Tools & Labs Popover Dropdown */}
-            <div ref={toolsMenuRef} style={{ position: 'relative' }}>
-              <button
-                onClick={() => setShowToolsMenu(!showToolsMenu)}
-                className="btn btn-sm"
-                style={{
-                  background: (pathname.startsWith('/cbt') || pathname.startsWith('/live') || pathname.startsWith('/intranet/ide') || pathname.startsWith('/tutoring/attendance') || pathname.startsWith('/admin/access'))
-                    ? 'rgba(79, 70, 229, 0.16)' 
-                    : 'transparent',
-                  color: 'var(--text-secondary)',
-                  fontSize: '0.86rem',
-                  padding: '0.52rem 0.75rem',
-                  fontWeight: 600,
-                  borderRadius: '0.75rem',
-                  gap: '0.35rem',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  border: 'none',
-                  cursor: 'pointer',
-                }}
-              >
-                <Layers size={16} color="var(--primary)" />
-                <span>Tools</span>
-                <ChevronDown size={14} color="var(--text-muted)" style={{ transform: showToolsMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-              </button>
-
-              {showToolsMenu && (
+            {showIntranetMenu && (
+              <div style={{
+                position: 'absolute',
+                top: 'calc(100% + 0.6rem)',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '320px',
+                background: 'var(--bg-surface-elevated)',
+                border: '1px solid var(--border-accent)',
+                borderRadius: '0.95rem',
+                padding: '0.6rem',
+                boxShadow: 'var(--shadow-lg)',
+                zIndex: 250,
+                animation: 'fadeIn 0.15s ease',
+              }}>
                 <div style={{
-                  position: 'absolute',
-                  top: 'calc(100% + 0.6rem)',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  width: '260px',
-                  background: 'var(--bg-surface-elevated)',
-                  border: '1px solid var(--border-accent)',
-                  borderRadius: '0.875rem',
-                  padding: '0.5rem',
-                  boxShadow: 'var(--shadow-lg)',
-                  zIndex: 250,
-                  animation: 'fadeIn 0.15s ease',
+                  padding: '0.4rem 0.75rem 0.5rem',
+                  borderBottom: '1px solid var(--border-subtle)',
+                  marginBottom: '0.35rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
                 }}>
-                  <div style={{
-                    padding: '0.4rem 0.6rem 0.4rem',
-                    borderBottom: '1px solid var(--border-subtle)',
-                    marginBottom: '0.3rem',
-                  }}>
-                    <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                      Intranet Labs & Utilities
-                    </span>
-                  </div>
-
-                  <Link
-                    href="/intranet/ide"
-                    onClick={() => setShowToolsMenu(false)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.65rem',
-                      padding: '0.5rem 0.65rem',
-                      borderRadius: '0.5rem',
-                      color: pathname.startsWith('/intranet/ide') ? 'var(--accent-emerald)' : 'var(--text-primary)',
-                      textDecoration: 'none',
-                      fontSize: '0.84rem',
-                      fontWeight: 500,
-                      background: pathname.startsWith('/intranet/ide') ? 'rgba(16, 185, 129, 0.1)' : 'transparent',
-                    }}
-                  >
-                    <Terminal size={15} color="var(--accent-emerald)" />
-                    <div>
-                      <span style={{ display: 'block', fontWeight: 600 }}>IDE Sandbox</span>
-                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Interactive browser code lab</span>
-                    </div>
-                  </Link>
-
-                  <Link
-                    href="/cbt"
-                    onClick={() => setShowToolsMenu(false)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.65rem',
-                      padding: '0.5rem 0.65rem',
-                      borderRadius: '0.5rem',
-                      color: pathname.startsWith('/cbt') ? 'var(--accent-amber)' : 'var(--text-primary)',
-                      textDecoration: 'none',
-                      fontSize: '0.84rem',
-                      fontWeight: 500,
-                      background: pathname.startsWith('/cbt') ? 'rgba(217, 119, 6, 0.1)' : 'transparent',
-                    }}
-                  >
-                    <Timer size={15} color="var(--accent-amber)" />
-                    <div>
-                      <span style={{ display: 'block', fontWeight: 600 }}>CBT Examination</span>
-                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Timed proctored tests</span>
-                    </div>
-                  </Link>
-
-                  <Link
-                    href="/live"
-                    onClick={() => setShowToolsMenu(false)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.65rem',
-                      padding: '0.5rem 0.65rem',
-                      borderRadius: '0.5rem',
-                      color: pathname.startsWith('/live') ? 'var(--accent-pink)' : 'var(--text-primary)',
-                      textDecoration: 'none',
-                      fontSize: '0.84rem',
-                      fontWeight: 500,
-                      background: pathname.startsWith('/live') ? 'rgba(219, 39, 119, 0.1)' : 'transparent',
-                    }}
-                  >
-                    <Video size={15} color="var(--accent-pink)" />
-                    <div>
-                      <span style={{ display: 'block', fontWeight: 600 }}>Live Audio/Video Studio</span>
-                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Real-time voice & screen share</span>
-                    </div>
-                  </Link>
-
-                  <Link
-                    href="/tutoring/attendance"
-                    onClick={() => setShowToolsMenu(false)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.65rem',
-                      padding: '0.5rem 0.65rem',
-                      borderRadius: '0.5rem',
-                      color: pathname.startsWith('/tutoring/attendance') ? 'var(--accent-emerald)' : 'var(--text-primary)',
-                      textDecoration: 'none',
-                      fontSize: '0.84rem',
-                      fontWeight: 500,
-                      background: pathname.startsWith('/tutoring/attendance') ? 'rgba(16, 185, 129, 0.1)' : 'transparent',
-                    }}
-                  >
-                    <CalendarCheck size={15} color="var(--accent-emerald)" />
-                    <div>
-                      <span style={{ display: 'block', fontWeight: 600 }}>Tutoring Attendance</span>
-                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Dual-signoff verification tracker</span>
-                    </div>
-                  </Link>
-
-                  {(currentUser?.role === 'admin' || currentUser?.role === 'instructor') && (
-                    <Link
-                      href="/admin/access"
-                      onClick={() => setShowToolsMenu(false)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.65rem',
-                        padding: '0.5rem 0.65rem',
-                        borderRadius: '0.5rem',
-                        color: pathname.startsWith('/admin/access') ? 'var(--accent-amber)' : 'var(--text-primary)',
-                        textDecoration: 'none',
-                        fontSize: '0.84rem',
-                        fontWeight: 500,
-                        borderTop: '1px solid var(--border-subtle)',
-                        marginTop: '0.2rem',
-                        background: pathname.startsWith('/admin/access') ? 'rgba(217, 119, 6, 0.1)' : 'transparent',
-                      }}
-                    >
-                      <UserCheck size={15} color="var(--accent-amber)" />
-                      <div>
-                        <span style={{ display: 'block', fontWeight: 600 }}>Clearance Desk</span>
-                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Bursar & admission audits</span>
-                      </div>
-                    </Link>
-                  )}
+                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                    Campus Intranet Portal
+                  </span>
+                  <span className={currentUser?.admin_granted || currentUser?.tutoring_enrolled || currentUser?.role !== 'student' ? 'badge badge-emerald' : 'badge badge-amber'} style={{ fontSize: '0.62rem', padding: '0.08rem 0.35rem' }}>
+                    {currentUser?.admin_granted || currentUser?.tutoring_enrolled || currentUser?.role !== 'student' ? 'Clearance Active' : 'Restricted'}
+                  </span>
                 </div>
-              )}
-            </div>
+
+                <Link
+                  href="/intranet"
+                  onClick={() => setShowIntranetMenu(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.55rem 0.75rem',
+                    borderRadius: '0.55rem',
+                    color: pathname === '/intranet' ? 'var(--primary)' : 'var(--text-primary)',
+                    textDecoration: 'none',
+                    fontSize: '0.85rem',
+                    background: pathname === '/intranet' ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
+                    marginBottom: '0.15rem',
+                  }}
+                >
+                  <ShieldCheck size={18} color="var(--primary)" />
+                  <div>
+                    <span style={{ display: 'block', fontWeight: 700 }}>Intranet Home</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Official campus news, bulletins & clearance</span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/dashboard"
+                  onClick={() => setShowIntranetMenu(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.55rem 0.75rem',
+                    borderRadius: '0.55rem',
+                    color: pathname.startsWith('/dashboard') ? 'var(--primary)' : 'var(--text-primary)',
+                    textDecoration: 'none',
+                    fontSize: '0.85rem',
+                    background: pathname.startsWith('/dashboard') ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
+                    marginBottom: '0.15rem',
+                  }}
+                >
+                  <LayoutDashboard size={18} color="var(--primary)" />
+                  <div>
+                    <span style={{ display: 'block', fontWeight: 700 }}>Student Dashboard</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Enrolled courses, stats & study records</span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/intranet/ide"
+                  onClick={() => setShowIntranetMenu(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.55rem 0.75rem',
+                    borderRadius: '0.55rem',
+                    color: pathname.startsWith('/intranet/ide') ? 'var(--accent-emerald)' : 'var(--text-primary)',
+                    textDecoration: 'none',
+                    fontSize: '0.85rem',
+                    background: pathname.startsWith('/intranet/ide') ? 'rgba(16, 185, 129, 0.12)' : 'transparent',
+                    marginBottom: '0.15rem',
+                  }}
+                >
+                  <Terminal size={18} color="var(--accent-emerald)" />
+                  <div>
+                    <span style={{ display: 'block', fontWeight: 700 }}>IDE Sandbox</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Browser code execution & engineering pods</span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/cbt"
+                  onClick={() => setShowIntranetMenu(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.55rem 0.75rem',
+                    borderRadius: '0.55rem',
+                    color: pathname.startsWith('/cbt') ? 'var(--accent-amber)' : 'var(--text-primary)',
+                    textDecoration: 'none',
+                    fontSize: '0.85rem',
+                    background: pathname.startsWith('/cbt') ? 'rgba(217, 119, 6, 0.12)' : 'transparent',
+                    marginBottom: '0.15rem',
+                  }}
+                >
+                  <Timer size={18} color="var(--accent-amber)" />
+                  <div>
+                    <span style={{ display: 'block', fontWeight: 700 }}>CBT Examination Hub</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Timed proctored tests & certifications</span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/live"
+                  onClick={() => setShowIntranetMenu(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.55rem 0.75rem',
+                    borderRadius: '0.55rem',
+                    color: pathname.startsWith('/live') ? 'var(--accent-pink)' : 'var(--text-primary)',
+                    textDecoration: 'none',
+                    fontSize: '0.85rem',
+                    background: pathname.startsWith('/live') ? 'rgba(219, 39, 119, 0.12)' : 'transparent',
+                    marginBottom: '0.15rem',
+                  }}
+                >
+                  <Video size={18} color="var(--accent-pink)" />
+                  <div>
+                    <span style={{ display: 'block', fontWeight: 700 }}>Live Audio/Video Studio</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Real-time voice & screen share rooms</span>
+                  </div>
+                </Link>
+
+                <Link
+                  href="/tutoring/attendance"
+                  onClick={() => setShowIntranetMenu(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.55rem 0.75rem',
+                    borderRadius: '0.55rem',
+                    color: pathname.startsWith('/tutoring/attendance') ? 'var(--accent-emerald)' : 'var(--text-primary)',
+                    textDecoration: 'none',
+                    fontSize: '0.85rem',
+                    background: pathname.startsWith('/tutoring/attendance') ? 'rgba(16, 185, 129, 0.12)' : 'transparent',
+                    marginBottom: '0.15rem',
+                  }}
+                >
+                  <CalendarCheck size={18} color="var(--accent-emerald)" />
+                  <div>
+                    <span style={{ display: 'block', fontWeight: 700 }}>Tutoring Attendance Tracker</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Dual-signoff monthly audit ledger</span>
+                  </div>
+                </Link>
+
+                {(currentUser?.role === 'admin' || currentUser?.role === 'instructor') && (
+                  <Link
+                    href="/admin/access"
+                    onClick={() => setShowIntranetMenu(false)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.75rem',
+                      padding: '0.55rem 0.75rem',
+                      borderRadius: '0.55rem',
+                      color: pathname.startsWith('/admin/access') ? 'var(--accent-amber)' : 'var(--text-primary)',
+                      textDecoration: 'none',
+                      fontSize: '0.85rem',
+                      borderTop: '1px solid var(--border-subtle)',
+                      marginTop: '0.25rem',
+                      paddingTop: '0.55rem',
+                      background: pathname.startsWith('/admin/access') ? 'rgba(217, 119, 6, 0.12)' : 'transparent',
+                    }}
+                  >
+                    <UserCheck size={18} color="var(--accent-amber)" />
+                    <div>
+                      <span style={{ display: 'block', fontWeight: 700 }}>Registrar Clearance Desk</span>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Tuition verification & admissions</span>
+                    </div>
+                  </Link>
+                )}
+              </div>
+            )}
           </div>
         </nav>
 
