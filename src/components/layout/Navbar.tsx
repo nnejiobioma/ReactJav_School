@@ -3,13 +3,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { 
-  BookOpen, 
-  GraduationCap, 
-  LayoutDashboard, 
-  Sparkles, 
-  Database, 
-  UserCheck, 
+import {
+  BookOpen,
+  GraduationCap,
+  LayoutDashboard,
+  Sparkles,
+  Database,
+  UserCheck,
   ShieldCheck,
   ChevronDown,
   LogOut,
@@ -87,10 +87,10 @@ export default function Navbar() {
     admin: 'badge-amber',
   }[currentUser?.role || 'student'];
 
-  const isIntranetActive = 
-    pathname.startsWith('/intranet') || 
-    pathname.startsWith('/cbt') || 
-    pathname.startsWith('/live') || 
+  const isIntranetActive =
+    pathname.startsWith('/intranet') ||
+    pathname.startsWith('/cbt') ||
+    pathname.startsWith('/live') ||
     pathname.startsWith('/dashboard') ||
     pathname.startsWith('/tutoring/attendance') ||
     pathname.startsWith('/admin/access');
@@ -108,10 +108,10 @@ export default function Navbar() {
     }}>
       {/* Centered 3-Column Header Grid */}
       <div className="header-grid-container">
-        {/* ================= COLUMN 1: BRAND LOGO (Left Aligned) ================= */}
-        <div style={{ justifySelf: 'start', display: 'flex', alignItems: 'center' }}>
-          <Link 
-            href="/" 
+        {/* ================= COLUMN 1: BRAND LOGO ================= */}
+        <div className="header-logo-container">
+          <Link
+            href="/"
             className="header-logo-link"
             style={{
               display: 'flex',
@@ -121,9 +121,9 @@ export default function Navbar() {
               flexShrink: 0,
             }}
           >
-            <div className="header-logo-icon">
+            {/*<div className="header-logo-icon">
               <GraduationCap size={56} color="#ffffff" />
-            </div>
+            </div>*/}
             <span className="header-logo-text">
               React<span className="text-gradient">Jav</span>
             </span>
@@ -131,7 +131,7 @@ export default function Navbar() {
         </div>
 
         {/* ================= COLUMN 2: CENTERED PRIMARY NAVIGATION ================= */}
-        <nav 
+        <nav
           className="header-desktop-nav"
           style={{
             justifySelf: 'center',
@@ -237,13 +237,13 @@ export default function Navbar() {
             >
               <ShieldCheck size={17} color={currentUser?.admin_granted || currentUser?.tutoring_enrolled || currentUser?.role !== 'student' ? 'var(--accent-emerald)' : 'var(--accent-amber)'} />
               <span>Campus Intranet</span>
-              <ChevronDown 
-                size={14} 
-                color="var(--text-muted)" 
-                style={{ 
-                  transform: showIntranetMenu ? 'rotate(180deg)' : 'none', 
-                  transition: 'transform 0.2s ease' 
-                }} 
+              <ChevronDown
+                size={14}
+                color="var(--text-muted)"
+                style={{
+                  transform: showIntranetMenu ? 'rotate(180deg)' : 'none',
+                  transition: 'transform 0.2s ease'
+                }}
               />
             </button>
 
@@ -456,7 +456,7 @@ export default function Navbar() {
           flexShrink: 0,
         }}>
           {/* 1. Supabase Status Indicator (Compact) */}
-          <div 
+          <div
             title={hasSupabase ? 'Supabase Live: Connected to PostgreSQL & Auth' : 'Supabase Demo Mock: Operating with local storage persistence'}
             style={{
               display: 'inline-flex',
@@ -574,34 +574,34 @@ export default function Navbar() {
                     marginTop: '0.5rem',
                     padding: '0.25rem 0.5rem',
                     borderRadius: '0.4rem',
-                    background: currentUser?.tutoring_enrolled || currentUser?.admin_granted || currentUser?.role !== 'student' 
-                      ? 'rgba(16, 185, 129, 0.15)' 
-                      : currentUser?.subscription_status === 'pending_approval' 
-                      ? 'rgba(245, 158, 11, 0.15)' 
-                      : 'rgba(255, 255, 255, 0.05)',
+                    background: currentUser?.tutoring_enrolled || currentUser?.admin_granted || currentUser?.role !== 'student'
+                      ? 'rgba(16, 185, 129, 0.15)'
+                      : currentUser?.subscription_status === 'pending_approval'
+                        ? 'rgba(245, 158, 11, 0.15)'
+                        : 'rgba(255, 255, 255, 0.05)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     fontSize: '0.7rem',
                   }}>
                     <span style={{ color: 'var(--text-muted)' }}>Intranet:</span>
-                    <span style={{ 
-                      fontWeight: 600, 
-                      color: currentUser?.tutoring_enrolled || currentUser?.admin_granted || currentUser?.role !== 'student' 
-                        ? '#34d399' 
-                        : currentUser?.subscription_status === 'pending_approval' 
-                        ? '#fbbf24' 
-                        : 'var(--text-secondary)'
+                    <span style={{
+                      fontWeight: 600,
+                      color: currentUser?.tutoring_enrolled || currentUser?.admin_granted || currentUser?.role !== 'student'
+                        ? '#34d399'
+                        : currentUser?.subscription_status === 'pending_approval'
+                          ? '#fbbf24'
+                          : 'var(--text-secondary)'
                     }}>
                       {currentUser?.tutoring_enrolled
                         ? 'Tutoring Scholar (Active)'
-                        : currentUser?.role !== 'student' 
-                        ? 'Faculty Access' 
-                        : currentUser?.admin_granted 
-                        ? 'Granted & Active' 
-                        : currentUser?.subscription_status === 'pending_approval' 
-                        ? 'Awaiting Clearance' 
-                        : 'Not Subscribed'}
+                        : currentUser?.role !== 'student'
+                          ? 'Faculty Access'
+                          : currentUser?.admin_granted
+                            ? 'Granted & Active'
+                            : currentUser?.subscription_status === 'pending_approval'
+                              ? 'Awaiting Clearance'
+                              : 'Not Subscribed'}
                     </span>
                   </div>
                 </div>
