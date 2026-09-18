@@ -107,47 +107,24 @@ export default function Navbar() {
       width: '100%',
     }}>
       {/* Centered 3-Column Header Grid */}
-      <div style={{
-        width: '100%',
-        maxWidth: '1680px',
-        margin: '0 auto',
-        padding: '0 clamp(1rem, 2.5vw, 2.5rem)',
-        display: 'grid',
-        gridTemplateColumns: 'minmax(180px, 1fr) auto minmax(180px, 1fr)',
-        alignItems: 'center',
-        height: 'var(--header-height, 6.75rem)',
-        gap: '1rem',
-      }}>
+      <div className="header-grid-container">
         {/* ================= COLUMN 1: BRAND LOGO (Left Aligned) ================= */}
         <div style={{ justifySelf: 'start', display: 'flex', alignItems: 'center' }}>
-          <Link href="/" style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.95rem',
-            textDecoration: 'none',
-            flexShrink: 0,
-          }}>
-            <div style={{
-              width: '3.4rem',
-              height: '3.4rem',
-              borderRadius: '0.95rem',
-              background: 'var(--grad-primary)',
+          <Link 
+            href="/" 
+            className="header-logo-link"
+            style={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 4px 16px -2px rgba(79, 70, 229, 0.4)',
-              transition: 'transform 0.2s ease',
-            }}>
-              <GraduationCap size={28} color="#ffffff" />
+              gap: '1.25rem',
+              textDecoration: 'none',
+              flexShrink: 0,
+            }}
+          >
+            <div className="header-logo-icon">
+              <GraduationCap size={56} color="#ffffff" />
             </div>
-            <span style={{
-              fontSize: '1.85rem',
-              fontWeight: 800,
-              letterSpacing: '-0.03em',
-              color: 'var(--text-primary)',
-              lineHeight: 1,
-              display: 'inline-block',
-            }}>
+            <span className="header-logo-text">
               React<span className="text-gradient">Jav</span>
             </span>
           </Link>
@@ -799,18 +776,6 @@ export default function Navbar() {
           </div>
         </div>
       )}
-
-      {/* Embedded CSS for Responsive Breakpoint */}
-      <style jsx>{`
-        @media (max-width: 1140px) {
-          .header-desktop-nav {
-            display: none !important;
-          }
-          .header-mobile-toggle {
-            display: inline-flex !important;
-          }
-        }
-      `}</style>
     </header>
   );
 }

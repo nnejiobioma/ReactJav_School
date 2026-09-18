@@ -43,7 +43,7 @@ export default function RootLayout({
       </head>
       <body>
         <Navbar />
-        <main style={{ minHeight: 'calc(100vh - var(--header-height, 6.75rem))' }}>
+        <main style={{ minHeight: 'calc(100vh - var(--header-height, 8.75rem))' }}>
           {children}
         </main>
         <Footer />

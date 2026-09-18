@@ -155,7 +155,7 @@ export default function CampusIDEPage() {
       <div style={{
         display: 'flex',
         flexDirection: 'column',
-        height: 'calc(100vh - var(--header-height, 6.75rem))',
+        height: 'calc(100vh - var(--header-height, 8.75rem))',
         background: 'var(--bg-main)',
         overflow: 'hidden',
       }}>
