@@ -17,8 +17,6 @@ import {
   Timer,
   Video,
   Terminal,
-  LogIn,
-  Layers,
   CalendarCheck,
   Menu,
   X,
@@ -511,29 +509,7 @@ export default function Navbar() {
           {/* 2. Theme Toggle */}
           <ThemeSelector />
 
-          {/* 3. PROMINENT "LOG IN" BUTTON */}
-          <Link
-            href="/auth"
-            className="btn btn-primary btn-sm"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.52rem 1.15rem',
-              borderRadius: '0.85rem',
-              fontSize: '0.86rem',
-              fontWeight: 700,
-              textDecoration: 'none',
-              boxShadow: '0 2px 12px rgba(79, 70, 229, 0.28)',
-              whiteSpace: 'nowrap',
-            }}
-            title="Log In or Register Account"
-          >
-            <LogIn size={16} />
-            <span>Log In</span>
-          </Link>
-
-          {/* 4. ACTIVE USER PROFILE & PERSONA SWITCHER */}
+          {/* 3. ACTIVE USER PROFILE & PERSONA SWITCHER */}
           <div ref={roleMenuRef} style={{ position: 'relative' }}>
             <button
               onClick={() => setShowRoleMenu(!showRoleMenu)}
@@ -819,13 +795,6 @@ export default function Navbar() {
             </Link>
             <Link href="/tutoring/attendance" className="btn btn-secondary btn-sm" style={{ justifyContent: 'flex-start', gap: '0.5rem', color: 'var(--accent-emerald)' }}>
               <CalendarCheck size={16} /> Tutoring Attendance Tracker
-            </Link>
-          </div>
-
-          <div style={{ paddingTop: '0.5rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', gap: '0.75rem' }}>
-            <Link href="/auth" className="btn btn-primary btn-sm" style={{ flex: 1, justifyContent: 'center', gap: '0.45rem' }}>
-              <LogIn size={15} />
-              <span>Log In / Sign In</span>
             </Link>
           </div>
         </div>
