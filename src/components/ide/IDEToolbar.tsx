@@ -202,7 +202,7 @@ export default function IDEToolbar({
           style={{ padding: '0.45rem 0.75rem', fontSize: '0.8rem', gap: '0.4rem' }}
         >
           <RotateCcw size={14} />
-          <span style={{ display: 'none', sm: 'inline' }}>Reset</span>
+          <span>Reset</span>
         </button>
 
         {/* Copy Code */}
