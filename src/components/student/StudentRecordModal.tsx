@@ -410,7 +410,7 @@ export default function StudentRecordModal({
                 </h2>
                 <span className="badge badge-emerald print-badge-passed" style={{ fontSize: '0.75rem', fontWeight: 700 }}>
                   <Check size={13} style={{ marginRight: '0.3rem' }} />
-                  Verified Active Scholar
+                  {currentUser.tutoring_enrolled ? 'Direct Tutoring Fellow (Active)' : 'Verified Active Scholar'}
                 </span>
               </div>
 
@@ -475,7 +475,9 @@ export default function StudentRecordModal({
                     className="print-dark-text"
                     style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)' }}
                   >
-                    Full-Stack Software Engineering
+                    {currentUser.tutoring_enrolled 
+                      ? `1-on-1 Direct Tutoring: ${currentUser.tutoring_track_name || 'Active Track'}` 
+                      : 'Full-Stack Software Engineering'}
                   </span>
                 </div>
 

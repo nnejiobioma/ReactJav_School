@@ -153,6 +153,23 @@ export default function Navbar() {
               <Sparkles size={16} color="var(--primary)" />
               <span>Tuition & Plans</span>
             </Link>
+
+            <Link
+              href="/academy"
+              className="btn btn-sm"
+              style={{
+                background: (pathname.startsWith('/academy') || pathname.startsWith('/tutoring')) ? 'rgba(16, 185, 129, 0.14)' : 'transparent',
+                color: (pathname.startsWith('/academy') || pathname.startsWith('/tutoring')) ? 'var(--accent-emerald)' : 'var(--text-secondary)',
+                fontSize: '0.85rem',
+                padding: '0.45rem 0.8rem',
+                fontWeight: 600,
+                borderRadius: '0.65rem',
+                gap: '0.45rem',
+              }}
+            >
+              <GraduationCap size={16} color="var(--accent-emerald)" />
+              <span>Direct Tutoring</span>
+            </Link>
           </div>
 
           <div style={{ width: '1px', height: '28px', background: 'var(--border-subtle)', margin: '0 0.35rem' }} />
@@ -185,11 +202,16 @@ export default function Navbar() {
                 borderRadius: '0.65rem',
               }}
             >
-              <ShieldCheck size={16} color={currentUser?.admin_granted || currentUser?.role !== 'student' ? 'var(--accent-emerald)' : 'var(--accent-amber)'} />
+              <ShieldCheck size={16} color={currentUser?.admin_granted || currentUser?.tutoring_enrolled || currentUser?.role !== 'student' ? 'var(--accent-emerald)' : 'var(--accent-amber)'} />
               <span>Campus Intranet</span>
-              {currentUser?.role === 'student' && !currentUser?.admin_granted && (
+              {currentUser?.role === 'student' && !currentUser?.admin_granted && !currentUser?.tutoring_enrolled && (
                 <span className="badge badge-amber" style={{ fontSize: '0.625rem', padding: '0.1rem 0.35rem' }}>
                   {currentUser?.subscription_status === 'pending_approval' ? 'Pending' : 'Lock'}
+                </span>
+              )}
+              {currentUser?.tutoring_enrolled && (
+                <span className="badge badge-emerald" style={{ fontSize: '0.625rem', padding: '0.1rem 0.35rem' }}>
+                  Tutoring
                 </span>
               )}
             </Link>
@@ -404,7 +426,7 @@ export default function Navbar() {
                     marginTop: '0.4rem',
                     padding: '0.25rem 0.5rem',
                     borderRadius: '0.4rem',
-                    background: currentUser?.admin_granted || currentUser?.role !== 'student' 
+                    background: currentUser?.tutoring_enrolled || currentUser?.admin_granted || currentUser?.role !== 'student' 
                       ? 'rgba(16, 185, 129, 0.15)' 
                       : currentUser?.subscription_status === 'pending_approval' 
                       ? 'rgba(245, 158, 11, 0.15)' 
@@ -417,13 +439,15 @@ export default function Navbar() {
                     <span style={{ color: 'var(--text-muted)' }}>Intranet:</span>
                     <span style={{ 
                       fontWeight: 600, 
-                      color: currentUser?.admin_granted || currentUser?.role !== 'student' 
+                      color: currentUser?.tutoring_enrolled || currentUser?.admin_granted || currentUser?.role !== 'student' 
                         ? '#34d399' 
                         : currentUser?.subscription_status === 'pending_approval' 
                         ? '#fbbf24' 
                         : 'var(--text-secondary)'
                     }}>
-                      {currentUser?.role !== 'student' 
+                      {currentUser?.tutoring_enrolled
+                        ? 'Tutoring Scholar (Active)'
+                        : currentUser?.role !== 'student' 
                         ? 'Faculty Access' 
                         : currentUser?.admin_granted 
                         ? 'Granted & Active' 

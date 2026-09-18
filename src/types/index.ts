@@ -19,6 +19,13 @@ export interface Profile {
   granted_at?: string;
   granted_by?: string;
   rejection_reason?: string;
+  // Direct Tutoring & Track Study Records
+  tutoring_enrolled?: boolean;
+  tutoring_track_id?: string;
+  tutoring_track_name?: string;
+  tutoring_enrolled_at?: string;
+  tutoring_frequency?: string;
+  tutoring_mentor_name?: string;
 }
 
 export interface Course {

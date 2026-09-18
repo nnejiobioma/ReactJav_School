@@ -20,11 +20,13 @@ import {
   AlertCircle,
   QrCode,
   Calendar,
-  Terminal
+  Terminal,
+  Check
 } from 'lucide-react';
 import IntranetGuard from '@/components/intranet/IntranetGuard';
 import { Profile, IntranetBulletin, CBTExam, LiveRoom, Course } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
+import { ACADEMY_TRACKS } from '@/data/academyTracks';
 import StudentRecordModal from '@/components/student/StudentRecordModal';
 
 export default function IntranetHubPage() {
@@ -114,7 +116,9 @@ export default function IntranetHubPage() {
                   {currentUser?.full_name || 'Enrolled Student'}
                 </span>
                 <span style={{ fontSize: '0.72rem', color: '#10b981', fontWeight: 600 }}>
-                  ● Cleared Fellow ({currentUser?.subscription_plan || 'Annual Pass'})
+                  {currentUser?.tutoring_enrolled 
+                    ? `● Tutoring Fellow (${currentUser.tutoring_track_name || 'Active'})`
+                    : `● Cleared Fellow (${currentUser?.subscription_plan || 'Annual Pass'})`}
                 </span>
               </div>
             </div>
@@ -157,6 +161,162 @@ export default function IntranetHubPage() {
             </div>
           </div>
         </div>
+
+        {/* Direct Tutoring Track Study Tracker Banner */}
+        {currentUser?.tutoring_enrolled && (() => {
+          const trackData = ACADEMY_TRACKS.find(t => t.id === currentUser.tutoring_track_id) || ACADEMY_TRACKS[0];
+          return (
+            <div style={{
+              borderRadius: '1.25rem',
+              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(79, 70, 229, 0.08) 100%)',
+              border: '1px solid rgba(16, 185, 129, 0.35)',
+              marginBottom: '2.5rem',
+              boxShadow: 'var(--shadow-md)',
+              padding: '2rem',
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: '1.5rem',
+                marginBottom: '1.5rem',
+                paddingBottom: '1.25rem',
+                borderBottom: '1px solid rgba(16, 185, 129, 0.2)',
+              }}>
+                <div style={{ maxWidth: '640px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
+                    <span className="badge badge-emerald" style={{ fontSize: '0.72rem' }}>
+                      1-on-1 Direct Tutoring Pathway
+                    </span>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>
+                      Pacing: {currentUser.tutoring_frequency || '2x per week'}
+                    </span>
+                    <span style={{ color: 'var(--border-subtle)' }}>•</span>
+                    <span style={{ fontSize: '0.75rem', color: '#34d399', fontWeight: 700 }}>
+                      Intranet Clearance: 100% Guaranteed
+                    </span>
+                  </div>
+                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', margin: '0 0 0.4rem 0' }}>
+                    Active Track: {currentUser.tutoring_track_name || trackData.name}
+                  </h3>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                    Your coursework and study milestones are tracked automatically. As an enrolled Direct Tutoring Fellow, you hold unhindered privileges across all Campus Intranet facilities: live screen-pairing rooms, CBT assessments, the code sandbox, and registrar transcripts.
+                  </p>
+                </div>
+
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                  <Link
+                    href="/live"
+                    className="btn btn-primary btn-sm"
+                    style={{
+                      background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                      padding: '0.65rem 1.25rem',
+                      fontWeight: 700,
+                      fontSize: '0.85rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.45rem',
+                    }}
+                  >
+                    <Video size={16} />
+                    <span>Launch 1-on-1 Live Room</span>
+                  </Link>
+
+                  <Link
+                    href="/intranet/ide"
+                    className="btn btn-secondary btn-sm"
+                    style={{
+                      padding: '0.65rem 1.15rem',
+                      fontWeight: 600,
+                      fontSize: '0.85rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.45rem',
+                    }}
+                  >
+                    <Terminal size={16} color="var(--accent-emerald)" />
+                    <span>Open IDE Sandbox</span>
+                  </Link>
+
+                  <button
+                    onClick={() => {
+                      setAutoPrintRecord(false);
+                      setIsRecordModalOpen(true);
+                    }}
+                    className="btn btn-secondary btn-sm"
+                    style={{
+                      padding: '0.65rem 1.15rem',
+                      fontWeight: 600,
+                      fontSize: '0.85rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.45rem',
+                    }}
+                  >
+                    <GraduationCap size={16} color="var(--primary)" />
+                    <span>Track Transcript & Records</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Modules & Capstone Projects Grid */}
+              <div style={{
+                background: 'var(--bg-surface)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '0.875rem',
+                padding: '1.25rem',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                    Track Study Modules & Curriculum Roadmap
+                  </span>
+                  <span className="badge badge-primary" style={{ fontSize: '0.7rem' }}>
+                    Certification: {trackData.certification}
+                  </span>
+                </div>
+
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                  gap: '0.6rem',
+                }}>
+                  {trackData.syllabus.map((mod, i) => (
+                    <div key={i} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.6rem',
+                      padding: '0.6rem 0.85rem',
+                      background: 'var(--bg-surface-elevated)',
+                      borderRadius: '0.5rem',
+                      border: '1px solid var(--border-subtle)',
+                      fontSize: '0.8rem',
+                      color: 'var(--text-primary)',
+                    }}>
+                      <div style={{
+                        width: '20px',
+                        height: '20px',
+                        borderRadius: '50%',
+                        background: i === 0 ? 'rgba(16, 185, 129, 0.2)' : 'var(--bg-surface)',
+                        border: i === 0 ? '1px solid #10b981' : '1px solid var(--border-subtle)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: i === 0 ? '#10b981' : 'var(--text-muted)',
+                        fontSize: '0.7rem',
+                        fontWeight: 700,
+                        flexShrink: 0,
+                      }}>
+                        {i === 0 ? <Check size={12} /> : i + 1}
+                      </div>
+                      <span style={{ lineHeight: 1.3 }}>{mod}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Intranet Quick Access Grid */}
         <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

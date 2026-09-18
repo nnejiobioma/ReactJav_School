@@ -561,6 +561,109 @@ export class LocalDataService {
     return CAMPUS_BULLETINS;
   }
 
+  static enrollInDirectTutoring(
+    userId?: string,
+    track?: { id: string; name: string },
+    details?: {
+      learnerName?: string;
+      frequency?: string;
+      notes?: string;
+    }
+  ): { success: boolean; user: Profile } {
+    const currentUser = this.getCurrentUser();
+    const targetUserId = userId || currentUser.id;
+    const trackId = track?.id || 'python-engineering';
+    const trackName = track?.name || 'Python Engineering';
+
+    const updatedUser: Profile = {
+      ...currentUser,
+      id: targetUserId,
+      full_name: details?.learnerName?.trim() || currentUser.full_name || 'Tutoring Scholar',
+      tutoring_enrolled: true,
+      tutoring_track_id: trackId,
+      tutoring_track_name: trackName,
+      tutoring_enrolled_at: new Date().toISOString(),
+      tutoring_frequency: details?.frequency || '2x per week (Recommended)',
+      subscription_status: 'active',
+      subscription_plan: 'annual',
+      admin_granted: true,
+      granted_at: new Date().toISOString(),
+      granted_by: 'Academic Lead (Direct Tutoring Desk)',
+      payment_reference: 'DIR-TUT-' + Date.now().toString(36).toUpperCase(),
+      payment_date: new Date().toISOString(),
+    };
+
+    this.setCurrentUser(updatedUser);
+
+    // 1. Auto-enroll student into corresponding track courses so studies, lessons, and records are tracked immediately
+    const courses = this.getCourses();
+    if (courses.length > 0) {
+      const matchingCourse = courses.find(c => 
+        c.title.toLowerCase().includes(trackName.toLowerCase()) || 
+        (c.track && c.track.toLowerCase().includes(trackName.toLowerCase())) ||
+        (c.category && c.category.toLowerCase().includes(trackName.toLowerCase()))
+      ) || courses[0];
+
+      this.enroll(updatedUser.id, matchingCourse.id);
+      if (courses[1] && courses[1].id !== matchingCourse.id) {
+        this.enroll(updatedUser.id, courses[1].id);
+      }
+    }
+
+    // 2. Auto-provision a dedicated 1-on-1 Live Mentoring Room for direct tutoring
+    try {
+      const existingRooms = this.getLiveRooms();
+      const tutoringRoomId = `room_tutoring_${trackId}`;
+      const hasRoom = existingRooms.some(r => r.id === tutoringRoomId);
+      if (!hasRoom) {
+        const tutoringRoom: LiveRoom = {
+          id: tutoringRoomId,
+          title: `1-on-1 Mentoring Pod: ${trackName}`,
+          description: `Dedicated 1-on-1 direct tutoring and code pairing room for ${updatedUser.full_name}. Real-time screen share, shared code editor, and interactive whiteboard enabled.`,
+          instructor_id: 'usr_instructor_001',
+          instructor_name: 'Dr. Elena Chen (Faculty Lead)',
+          instructor_avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
+          course_title: trackName,
+          is_active: true,
+          scheduled_time: 'Live On-Demand (Tutoring Session)',
+          participant_count: 2,
+          tags: ['1-on-1 Tutoring', 'Screen Share', 'Code Pairing', trackName],
+          created_at: new Date().toISOString(),
+        };
+        this.createLiveRoom(tutoringRoom);
+      }
+    } catch {
+      // ignore room provision errors
+    }
+
+    // 3. Post an official Campus Intranet Bulletin welcoming the tutoring fellow
+    try {
+      const bulletins = this.getCampusBulletins();
+      const newBulletin: IntranetBulletin = {
+        id: `blt_tut_${Date.now()}`,
+        title: `Direct Tutoring Fellow Onboarded: ${updatedUser.full_name} (${trackName})`,
+        category: 'Admission',
+        priority: 'high',
+        author: 'Academic Registrar',
+        author_role: 'Office of Direct Tutoring & Mentorship',
+        content: `Academic Clearance and unrestricted Campus Intranet fellowship privileges granted for ${updatedUser.full_name} in the ${trackName} track. CBT certifications, 1-on-1 live rooms, and transcript tracking active.`,
+        created_at: new Date().toISOString(),
+      };
+      bulletins.unshift(newBulletin);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(STORAGE_KEYS.CAMPUS_BULLETINS, JSON.stringify(bulletins));
+      }
+    } catch {
+      // ignore bulletin errors
+    }
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    return { success: true, user: updatedUser };
+  }
+
   static checkIntranetAccess(user?: Profile | null): {
     hasAccess: boolean;
     status: SubscriptionStatus;
@@ -581,6 +684,15 @@ export class LocalDataService {
         hasAccess: true,
         status: 'active',
         reason: 'Faculty & Administrative clearance granted.',
+      };
+    }
+
+    // Direct Tutoring Fellows have automatic guaranteed Intranet clearance & study tracking
+    if (target.tutoring_enrolled) {
+      return {
+        hasAccess: true,
+        status: 'active',
+        reason: `Direct Tutoring Fellow (${target.tutoring_track_name || 'Active Track'}) - Intranet clearance & study tracking active.`,
       };
     }
 

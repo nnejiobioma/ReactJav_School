@@ -108,16 +108,16 @@ export default function CBTExamCenterPage() {
             style={{ width: '48px', height: '48px', borderRadius: '50%', border: '2px solid var(--primary)', objectFit: 'cover' }}
           />
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem', flexWrap: 'wrap' }}>
               <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                 {currentUser?.full_name}
               </span>
               <span className="badge badge-emerald" style={{ fontSize: '0.65rem' }}>
-                Verified Candidate
+                {currentUser?.tutoring_enrolled ? `Tutoring Fellow (${currentUser.tutoring_track_name})` : 'Verified Candidate'}
               </span>
             </div>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-              Candidate ID: {currentUser?.id?.toUpperCase() || 'CAND-9402'} • Browser System Ready
+              Candidate ID: {currentUser?.id?.toUpperCase() || 'CAND-9402'} • {currentUser?.tutoring_enrolled ? '1-on-1 Tutoring Study Assessment Track Active' : 'Browser System Ready'}
             </span>
           </div>
         </div>

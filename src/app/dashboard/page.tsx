@@ -16,11 +16,17 @@ import {
   ShieldCheck,
   Printer,
   Mail,
-  FileText
+  FileText,
+  Video,
+  Terminal,
+  Timer,
+  Building,
+  Check
 } from 'lucide-react';
 import { Course, Profile } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { formatDuration } from '@/lib/utils';
+import { ACADEMY_TRACKS } from '@/data/academyTracks';
 import StudentRecordModal from '@/components/student/StudentRecordModal';
 
 export default function StudentDashboardPage() {
@@ -167,6 +173,328 @@ export default function StudentDashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* 1-on-1 Direct Tutoring Fellow Track & Intranet Study Tracking */}
+      {currentUser?.tutoring_enrolled && (() => {
+        const tutoringTrack = ACADEMY_TRACKS.find(t => t.id === currentUser?.tutoring_track_id) || ACADEMY_TRACKS[0];
+        return (
+          <div style={{
+            marginBottom: '3.5rem',
+            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(99, 102, 241, 0.05) 100%)',
+            border: '1px solid rgba(16, 185, 129, 0.35)',
+            borderRadius: '1.25rem',
+            padding: '2rem',
+            boxShadow: 'var(--shadow-md)',
+          }}>
+            {/* Header & Badges */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '1rem',
+              marginBottom: '1.5rem',
+              paddingBottom: '1.25rem',
+              borderBottom: '1px solid rgba(16, 185, 129, 0.2)',
+            }}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
+                  <span className="badge badge-emerald" style={{ fontSize: '0.72rem', padding: '0.2rem 0.6rem' }}>
+                    1-on-1 Direct Tutoring Fellow
+                  </span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>
+                    Cadence: {currentUser.tutoring_frequency || '2x per week'}
+                  </span>
+                  <span style={{ color: 'var(--border-subtle)' }}>•</span>
+                  <span style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.3rem',
+                    color: '#34d399',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                  }}>
+                    <ShieldCheck size={14} />
+                    <span>Campus Intranet Unrestricted Clearance</span>
+                  </span>
+                </div>
+
+                <h2 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                  Active Pathway: {tutoringTrack.name}
+                </h2>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: '0.35rem 0 0', maxWidth: '720px', lineHeight: 1.5 }}>
+                  {tutoringTrack.description}
+                </p>
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+                <Link
+                  href="/live"
+                  className="btn btn-primary btn-sm"
+                  style={{
+                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                    fontWeight: 700,
+                    fontSize: '0.85rem',
+                    padding: '0.55rem 1.15rem',
+                    gap: '0.4rem',
+                  }}
+                >
+                  <Video size={16} />
+                  <span>Join 1-on-1 Live Room</span>
+                </Link>
+
+                <button
+                  onClick={() => {
+                    setAutoPrintRecord(false);
+                    setIsRecordModalOpen(true);
+                  }}
+                  className="btn btn-secondary btn-sm"
+                  style={{ fontSize: '0.85rem', padding: '0.55rem 1.1rem', gap: '0.4rem' }}
+                >
+                  <GraduationCap size={16} color="var(--primary)" />
+                  <span>Transcript & Studies Record</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Campus Intranet Facilities Fast-Lane Access Grid */}
+            <h3 style={{
+              fontSize: '1rem',
+              fontWeight: 700,
+              color: 'var(--text-primary)',
+              marginBottom: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+            }}>
+              <Building size={16} color="var(--primary)" />
+              <span>Campus Intranet Resources & Study Facilities (Fully Cleared)</span>
+            </h3>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '1rem',
+              marginBottom: '2rem',
+            }}>
+              {/* Card 1: Intranet Hub */}
+              <Link href="/intranet" style={{ textDecoration: 'none' }}>
+                <div style={{
+                  background: 'var(--bg-surface)',
+                  border: '1px solid var(--border-subtle)',
+                  borderRadius: '0.875rem',
+                  padding: '1.25rem',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  transition: 'transform 0.2s, border-color 0.2s',
+                }}>
+                  <div>
+                    <div style={{
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '0.5rem',
+                      background: 'rgba(99, 102, 241, 0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '0.75rem',
+                    }}>
+                      <Building size={18} color="var(--primary)" />
+                    </div>
+                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 0.25rem 0' }}>
+                      Campus Intranet Hub
+                    </h4>
+                    <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                      Private bulletins, internal academic records, and university announcements.
+                    </p>
+                  </div>
+                  <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--primary)', fontSize: '0.78rem', fontWeight: 600 }}>
+                    <span>Enter Intranet Hub</span>
+                    <ArrowRight size={13} />
+                  </div>
+                </div>
+              </Link>
+
+              {/* Card 2: 1-on-1 Live Room */}
+              <Link href="/live" style={{ textDecoration: 'none' }}>
+                <div style={{
+                  background: 'var(--bg-surface)',
+                  border: '1px solid var(--border-subtle)',
+                  borderRadius: '0.875rem',
+                  padding: '1.25rem',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  transition: 'transform 0.2s, border-color 0.2s',
+                }}>
+                  <div>
+                    <div style={{
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '0.5rem',
+                      background: 'rgba(236, 72, 153, 0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '0.75rem',
+                    }}>
+                      <Video size={18} color="var(--accent-pink)" />
+                    </div>
+                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 0.25rem 0' }}>
+                      1-on-1 Live Mentoring
+                    </h4>
+                    <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                      Hardware 1080p screen share, shared code whiteboard, and direct faculty pairing.
+                    </p>
+                  </div>
+                  <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--accent-pink)', fontSize: '0.78rem', fontWeight: 600 }}>
+                    <span>Open Live Room</span>
+                    <ArrowRight size={13} />
+                  </div>
+                </div>
+              </Link>
+
+              {/* Card 3: CBT Examination */}
+              <Link href="/cbt" style={{ textDecoration: 'none' }}>
+                <div style={{
+                  background: 'var(--bg-surface)',
+                  border: '1px solid var(--border-subtle)',
+                  borderRadius: '0.875rem',
+                  padding: '1.25rem',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  transition: 'transform 0.2s, border-color 0.2s',
+                }}>
+                  <div>
+                    <div style={{
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '0.5rem',
+                      background: 'rgba(245, 158, 11, 0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '0.75rem',
+                    }}>
+                      <Timer size={18} color="var(--accent-amber)" />
+                    </div>
+                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 0.25rem 0' }}>
+                      CBT Examination Center
+                    </h4>
+                    <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                      Timed standardized assessments, objective evaluations, and digital test slips.
+                    </p>
+                  </div>
+                  <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--accent-amber)', fontSize: '0.78rem', fontWeight: 600 }}>
+                    <span>Take CBT Assessment</span>
+                    <ArrowRight size={13} />
+                  </div>
+                </div>
+              </Link>
+
+              {/* Card 4: IDE Sandbox */}
+              <Link href="/intranet/ide" style={{ textDecoration: 'none' }}>
+                <div style={{
+                  background: 'var(--bg-surface)',
+                  border: '1px solid var(--border-subtle)',
+                  borderRadius: '0.875rem',
+                  padding: '1.25rem',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  transition: 'transform 0.2s, border-color 0.2s',
+                }}>
+                  <div>
+                    <div style={{
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '0.5rem',
+                      background: 'rgba(16, 185, 129, 0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '0.75rem',
+                    }}>
+                      <Terminal size={18} color="var(--accent-emerald)" />
+                    </div>
+                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 0.25rem 0' }}>
+                      Engineering IDE Sandbox
+                    </h4>
+                    <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                      Multi-file compiler, real-time preview, and playground for coursework code.
+                    </p>
+                  </div>
+                  <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--accent-emerald)', fontSize: '0.78rem', fontWeight: 600 }}>
+                    <span>Open Code Sandbox</span>
+                    <ArrowRight size={13} />
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            {/* Track Syllabus Milestones Checklist */}
+            <div style={{
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: '1rem',
+              padding: '1.5rem',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
+                  Curriculum Modules & Study Milestones for {tutoringTrack.name}
+                </h4>
+                <span className="badge badge-emerald" style={{ fontSize: '0.72rem' }}>
+                  Award: {tutoringTrack.certification}
+                </span>
+              </div>
+
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '0.75rem',
+              }}>
+                {tutoringTrack.syllabus.map((mod, idx) => (
+                  <div key={idx} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.75rem 1rem',
+                    background: 'var(--bg-surface-elevated)',
+                    border: '1px solid var(--border-subtle)',
+                    borderRadius: '0.65rem',
+                  }}>
+                    <div style={{
+                      width: '24px',
+                      height: '24px',
+                      borderRadius: '50%',
+                      background: idx === 0 ? 'rgba(16, 185, 129, 0.2)' : 'var(--bg-surface)',
+                      border: idx === 0 ? '1px solid #10b981' : '1px solid var(--border-subtle)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: idx === 0 ? '#10b981' : 'var(--text-muted)',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      flexShrink: 0,
+                    }}>
+                      {idx === 0 ? <Check size={14} /> : idx + 1}
+                    </div>
+                    <span style={{ fontSize: '0.82rem', color: 'var(--text-primary)', fontWeight: 500, lineHeight: 1.4 }}>
+                      {mod}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Enrolled Courses Section */}
       <div style={{ marginBottom: '4rem' }}>

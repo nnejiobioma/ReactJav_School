@@ -21,8 +21,10 @@ import {
   CheckCircle2, 
   GraduationCap, 
   Calendar,
-  Layers
+  Layers,
+  MessageSquare
 } from 'lucide-react';
+import { getTutoringWhatsAppUrl } from '@/data/academyTracks';
 
 export default function HomePage() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -597,6 +599,140 @@ export default function HomePage() {
 
       {/* The REACTJav Learning Framework & Hub Ecosystem */}
       <REACTJavLearningModel />
+
+      {/* Direct 1-on-1 Tutoring & Academy Tracks Spotlight */}
+      <div style={{
+        margin: '4.5rem 0',
+        padding: '3.5rem 2.5rem',
+        borderRadius: '1.75rem',
+        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(79, 70, 229, 0.08) 100%)',
+        border: '1px solid var(--border-accent)',
+        position: 'relative',
+        overflow: 'hidden',
+        boxShadow: 'var(--shadow-md)',
+      }}>
+        <div style={{ maxWidth: '960px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+            <span className="badge badge-emerald" style={{ fontSize: '0.72rem', padding: '0.25rem 0.65rem' }}>
+              1-on-1 Direct Tutoring
+            </span>
+            <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>
+              ReactJav Academy Tracks & Learning Pathways
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
+            <h2 style={{
+              fontSize: 'clamp(1.85rem, 3.5vw, 2.75rem)',
+              fontWeight: 900,
+              color: 'var(--text-primary)',
+              letterSpacing: '-0.025em',
+              lineHeight: 1.15,
+              margin: 0,
+            }}>
+              Prefer Dedicated 1-on-1 Mentorship?
+            </h2>
+            <p style={{
+              fontSize: '1.05rem',
+              color: 'var(--text-secondary)',
+              lineHeight: 1.6,
+              maxWidth: '780px',
+              margin: 0,
+            }}>
+              Explore our tiered Academy Tracks modeled for students aged 5 to adult. From foundational computational logic to full-stack web and mobile application deployment, every session is a private, live screen-pairing experience with an expert mentor.
+            </p>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '1rem',
+            marginBottom: '2.5rem',
+          }}>
+            <div style={{
+              padding: '1.25rem',
+              borderRadius: '1rem',
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-subtle)',
+            }}>
+              <div style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>👶 🧠</div>
+              <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-primary)' }}>Zone 01: Foundation & Explorer</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+                Junior Dev (Ages 5–10), Computational Logic, Python Engineering & AI Literacy.
+              </div>
+            </div>
+
+            <div style={{
+              padding: '1.25rem',
+              borderRadius: '1rem',
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-subtle)',
+            }}>
+              <div style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>🌐 📱</div>
+              <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-primary)' }}>Zone 02: Builder & Professional</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+                Web Architecture, Mobile App Dev, UI/UX Design & Workforce Readiness pathways.
+              </div>
+            </div>
+
+            <div style={{
+              padding: '1.25rem',
+              borderRadius: '1rem',
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-subtle)',
+            }}>
+              <div style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>🛠️ 🎯</div>
+              <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-primary)' }}>Bespoke Custom Roadmaps</div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+                Build-your-own track tailored for school syllabus, hackathons, or career milestones.
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Link
+              href="/academy"
+              className="btn btn-primary"
+              style={{
+                padding: '0.85rem 2rem',
+                fontSize: '0.95rem',
+                fontWeight: 700,
+                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '0.75rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                boxShadow: '0 4px 14px -2px rgba(16, 185, 129, 0.4)',
+              }}
+            >
+              <Sparkles size={16} />
+              <span>Explore Academy Tracks & Pathways</span>
+            </Link>
+
+            <a
+              href={getTutoringWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary"
+              style={{
+                padding: '0.85rem 1.5rem',
+                fontSize: '0.95rem',
+                fontWeight: 600,
+                borderRadius: '0.75rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                textDecoration: 'none',
+              }}
+            >
+              <MessageSquare size={16} color="var(--accent-emerald)" />
+              <span>Chat With Academy Team</span>
+            </a>
+          </div>
+        </div>
+      </div>
 
       {/* Transformation in Action - Learner Voices */}
       <REACTJavTestimonials />

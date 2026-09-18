@@ -1,0 +1,262 @@
+export interface AcademyTrack {
+  id: string;
+  name: string;
+  sub: string;
+  icon: string;
+  tags: string[];
+  zone: 'zone-01' | 'zone-02';
+  zoneName: string;
+  tier: string;
+  description: string;
+  recommendedSchedule: string;
+  overview: string;
+  syllabus: string[];
+  projects: string[];
+  certification: string;
+  prerequisites: string[];
+}
+
+export const ACADEMY_TRACKS: AcademyTrack[] = [
+  // --- ZONE 01: FOUNDATION & EXPLORER ---
+  {
+    id: 'junior-dev-track',
+    name: 'Junior Dev Track',
+    sub: 'Ages 5–10',
+    icon: '👶',
+    tags: ['Algorithmic Logic', 'Scratch Coding', 'Cyber Safety Basics'],
+    zone: 'zone-01',
+    zoneName: 'Foundation & Explorer',
+    tier: 'Foundation (Ages 5–10)',
+    description: 'Foundational computer science concepts taught through visual logic blocks, interactive storytelling, and kid-friendly digital safety.',
+    recommendedSchedule: '2x per week (45–60 mins recommended)',
+    overview: 'Designed specifically for younger minds to foster creative confidence and analytical thinking. Students learn how software works behind the screen through visual programming blocks, gamified puzzles, and safe internet habits.',
+    syllabus: [
+      'Visual Coding Basics: Events, Triggers & Loops',
+      'Sprite Animation & Interactive Storytelling',
+      'Variables & Scoring Systems in Mini-Games',
+      'Algorithmic Sequences & Debugging Logic',
+      'Kid-Safe Digital Citizenship & Password Hygiene'
+    ],
+    projects: ['Interactive Animated Storybook', 'Multi-Level Maze Arcade Game', 'Family Cyber Safety Shield'],
+    certification: 'ReactJav Certified Junior Developer',
+    prerequisites: ['Tablet or computer with browser access', 'No prior coding experience required']
+  },
+  {
+    id: 'computational-logic',
+    name: 'Computational Logic',
+    sub: 'Foundational Thinking Systems',
+    icon: '🧠',
+    tags: ['Sequencing Systems', 'Logical Loops', 'Problem Decomposition'],
+    zone: 'zone-01',
+    zoneName: 'Foundation & Explorer',
+    tier: 'Foundation & Explorer (Ages 8–13)',
+    description: 'Engineering foundational problem-solving through sequence architecture, conditional reasoning, and computational algorithms.',
+    recommendedSchedule: '2x per week (60 mins)',
+    overview: 'This track builds the core mental models behind high-level engineering: step-by-step decomposition, pattern recognition, and robust conditional logic before diving into complex text syntax.',
+    syllabus: [
+      'Core Sequence Architecture & Execution Flows',
+      'Boolean Logic, Truth Tables & Branching Conditions',
+      'Iterative Loops & Nested State Traversal',
+      'Modular Function Decomposition & Abstraction',
+      'Algorithmic Complexity & Optimization Thinking'
+    ],
+    projects: ['Algorithmic Logic Puzzle Engine', 'Automated Decision-Tree Matrix', 'Math & Code Simulation Suite'],
+    certification: 'ReactJav Certified Logic Explorer',
+    prerequisites: ['Laptop or desktop computer', 'Basic reading and numeracy skills']
+  },
+  {
+    id: 'python-engineering',
+    name: 'Python Engineering',
+    sub: 'Beginner → Advanced Architecture',
+    icon: '🐍',
+    tags: ['Python Fundamentals', 'Algorithmic Thinking', 'AI Literacy'],
+    zone: 'zone-01',
+    zoneName: 'Foundation & Explorer',
+    tier: 'Explorer & Builder (Ages 10–14+)',
+    description: 'Transitioning to text-based syntax and machine learning heuristics to master modern data tools, scripting, and automation.',
+    recommendedSchedule: '2x per week (60 mins)',
+    overview: 'Students transition into industry-standard Python programming, learning data structures, file processing, object-oriented design, and practical AI integrations to solve real-world problems.',
+    syllabus: [
+      'Python Syntax, Types, Dynamic Typing & Expressions',
+      'Data Structures: Lists, Dictionaries, Sets & Tuples',
+      'Object-Oriented Programming (OOP) & Modular Architecture',
+      'File I/O, Error Handling & API Consumption',
+      'AI Literacy, Prompt Chaining & Applied Heuristics'
+    ],
+    projects: ['Personal AI Terminal Assistant', 'Interactive Data Analytics Dashboard', 'Automated Web Scraping Script'],
+    certification: 'ReactJav Certified Python Engineer',
+    prerequisites: ['Laptop with VS Code / Python installed', 'Basic typing ability']
+  },
+  {
+    id: 'build-your-own-track',
+    name: 'Build Your Own Track',
+    sub: 'Bespoke Technical Tracks',
+    icon: '🛠️',
+    tags: ['Bespoke Roadmap', 'Goal Alignment', 'Progress Milestones'],
+    zone: 'zone-01',
+    zoneName: 'Foundation & Explorer',
+    tier: 'All Tiers (Tailored for Individual Goals)',
+    description: 'Custom-tailored 1-on-1 curriculum designed around the student’s specific ambitions, school syllabus, competitions, or personal capstones.',
+    recommendedSchedule: 'Flexible (1x–3x per week)',
+    overview: 'Every student has a distinct pace and curiosity. Our academic leads curate a bespoke roadmap combining chosen domains—such as robotics, competitive programming, game development, or exam prep.',
+    syllabus: [
+      'Diagnostic Needs Assessment & Custom Goal Mapping',
+      'Tailored Modular Learning Milestones',
+      'Targeted Exam, Competition, or Capstone Coaching',
+      'Continuous Mentor Feedback & Project Refinement',
+      'Final Industry-Style Portfolio & Presentation'
+    ],
+    projects: ['Personalized Dream Project', 'Competition / Olympiad Portfolio', 'Custom Capstone Presentation'],
+    certification: 'ReactJav Bespoke Engineering Diploma',
+    prerequisites: ['Device with camera/mic for screen sharing', 'Pre-consultation discovery session']
+  },
+
+  // --- ZONE 02: BUILDER & PROFESSIONAL ---
+  {
+    id: 'web-architecture',
+    name: 'Web Architecture',
+    sub: 'Frontend & Backend Systems',
+    icon: '🌐',
+    tags: ['HTML/CSS/JS', 'Personal Portfolios', 'Applied AI Projects'],
+    zone: 'zone-02',
+    zoneName: 'Builder & Professional',
+    tier: 'Builder (Ages 14–18+)',
+    description: 'Constructing, styling, and deploying production-ready digital assets and modern web applications with React, modern CSS, and APIs.',
+    recommendedSchedule: '2x per week (60–75 mins)',
+    overview: 'From responsive flexbox and CSS variables to modern React component architecture and full-stack API integration, this track prepares students to ship real products on the live internet.',
+    syllabus: [
+      'Modern Semantic HTML5 & Responsive Glassmorphism Design',
+      'Modern JavaScript ES6+: Async/Await, Closures & DOM',
+      'React Components, Hooks, State Management & Routing',
+      'REST APIs, Supabase Database Integration & Auth',
+      'Production Deployment, Vercel CI/CD & Lighthouse Performance'
+    ],
+    projects: ['Production Developer Portfolio', 'Full-Stack SaaS Web Application', 'AI-Integrated Web Experience'],
+    certification: 'ReactJav Certified Web Architect',
+    prerequisites: ['Laptop with VS Code & modern browser', 'Comfort with text typing and basic logic']
+  },
+  {
+    id: 'app-development',
+    name: 'App Development',
+    sub: 'Concept to Production Launch',
+    icon: '📱',
+    tags: ['Product Architecture', 'Mobile UI Systems', 'Release Pipeline Basics'],
+    zone: 'zone-02',
+    zoneName: 'Builder & Professional',
+    tier: 'Builder & Professional (Ages 14–18+)',
+    description: 'Engineering responsive cross-platform mobile experiences from wireframe concepts to native APIs and mobile release workflows.',
+    recommendedSchedule: '2x per week (60–75 mins)',
+    overview: 'Students build cross-platform mobile apps using React Native and modern mobile design conventions, learning navigation flows, local storage, touch gestures, and backend cloud syncing.',
+    syllabus: [
+      'Mobile UX Paradigms & Touch Architecture',
+      'Cross-Platform Components & Layout Systems',
+      'Mobile Navigation Stacks & Global State Management',
+      'Device APIs: Camera, Geolocation & Local Notifications',
+      'Cloud Synchronization, Offline-First Data & App Store Prep'
+    ],
+    projects: ['Personal Productivity Mobile App', 'Social Pulse Feed with Cloud Sync', 'Cap-Stone Mobile MVP'],
+    certification: 'ReactJav Certified App Engineer',
+    prerequisites: ['Laptop capable of running simulators or physical testing device']
+  },
+  {
+    id: 'digital-professional',
+    name: 'Digital Professional',
+    sub: 'Workforce Ready',
+    icon: '💼',
+    tags: ['Workforce Readiness', 'Industry Communication', 'Tool Optimization'],
+    zone: 'zone-02',
+    zoneName: 'Builder & Professional',
+    tier: 'Professional & College Prep (Ages 16+)',
+    description: 'High-leverage engineering workflows, Git collaboration, terminal mastery, and technical communication for corporate and startup readiness.',
+    recommendedSchedule: '2x per week (60 mins)',
+    overview: 'Bridge the gap between coding exercises and professional team engineering. Learn how top tech teams write clean code, manage branching strategies, conduct code reviews, and automate delivery.',
+    syllabus: [
+      'Advanced Git, Branching Strategies & PR Workflows',
+      'Command-Line Mastery, SSH, Environment Configs & Toolchains',
+      'Testing Methodologies: Unit Testing, TDD & CI/CD Pipelines',
+      'Technical Documentation, Readmes & System Architecture Diagrams',
+      'Engineering Interview Preparation & Technical Communication'
+    ],
+    projects: ['Open-Source Pull Request Contribution', 'Automated GitHub Actions CI/CD Pipeline', 'Full Tech Architecture Specification'],
+    certification: 'ReactJav Professional Engineering Badge',
+    prerequisites: ['Foundational coding experience in any language']
+  },
+  {
+    id: 'digital-design',
+    name: 'Digital Design',
+    sub: 'Creative & Interface Engineering',
+    icon: '🎨',
+    tags: ['UI/UX Fundamentals', 'Interface Engineering', 'Design Thinking'],
+    zone: 'zone-02',
+    zoneName: 'Builder & Professional',
+    tier: 'Explorer to Builder (Ages 12–18+)',
+    description: 'Mastering user interface design, visual hierarchy, Figma component systems, interactive prototyping, and design-to-developer handoff.',
+    recommendedSchedule: '2x per week (60 mins)',
+    overview: 'Great code needs great design. Students learn the principles of human-centered design, color theory, typography scales, Figma auto-layout, design tokens, and usability testing.',
+    syllabus: [
+      'Design Thinking & User Empathy Mapping',
+      'Typography, Color Harmonies & Visual Contrast Architecture',
+      'Figma Masterclass: Auto-Layout, Components & Variants',
+      'Interactive Prototyping & Micro-Interaction Design',
+      'Design Systems, Accessibility (WCAG) & Developer Specs'
+    ],
+    projects: ['Comprehensive Multi-Screen App UI Kit', 'Interactive High-Fidelity Mobile Prototype', 'Brand Identity & Design System Guide'],
+    certification: 'ReactJav Certified UI/UX Specialist',
+    prerequisites: ['Computer with modern web browser and free Figma account']
+  }
+];
+
+export const TUTORING_PERKS = [
+  {
+    title: '100% 1-on-1 Attention',
+    description: 'No crowded classrooms. Your dedicated mentor devotes the entire session solely to your learner’s pace, questions, and goals.',
+    icon: 'Users'
+  },
+  {
+    title: 'Bespoke Pacing & Curriculum',
+    description: 'Fast-track through topics you grasp quickly, or take extra time on complex logic without feeling rushed or left behind.',
+    icon: 'Zap'
+  },
+  {
+    title: 'Real Projects, Not Just Quizzes',
+    description: 'Build live apps, deploy websites, and assemble portfolio-grade projects you can proudly show on GitHub and college apps.',
+    icon: 'FolderGit2'
+  },
+  {
+    title: 'Flexible International Scheduling',
+    description: 'Morning, evening, or weekend sessions designed to fit around school, exams, and international time zones.',
+    icon: 'CalendarClock'
+  }
+];
+
+export const TUTORING_METRICS = [
+  {
+    value: '100%',
+    label: 'Industry Aligned',
+    sub: 'Curriculum built for 2026+'
+  },
+  {
+    value: 'Ages 5–Adult',
+    label: 'Targeted Learning',
+    sub: 'Tiered Junior, Teen & Pro Paths'
+  },
+  {
+    value: '1-on-1 Live',
+    label: 'Direct Tutoring Delivery',
+    sub: 'Private Expert Mentorship'
+  },
+  {
+    value: 'Global',
+    label: 'Anywhere in the World',
+    sub: 'Live Zoom Screen-Pairing'
+  }
+];
+
+export const TUTORING_WHATSAPP_NUMBER = '2348060966929';
+
+export function getTutoringWhatsAppUrl(trackName?: string): string {
+  const message = trackName 
+    ? `Hello ReactJav Academy 👋, I'm interested in the ${trackName} 1-on-1 Direct Tutoring track. Please share the syllabus, schedule, and enrolment details.`
+    : `Hello ReactJav Academy 👋, I would like to book a 1-on-1 Direct Tutoring discovery session for our learner. Please share available tracks and times.`;
+  return `https://wa.me/${TUTORING_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}

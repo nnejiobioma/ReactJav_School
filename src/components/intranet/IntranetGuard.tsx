@@ -122,7 +122,11 @@ export default function IntranetGuard({ children, requiredFeatureTitle }: Intran
               </span>
               <span style={{ color: 'var(--text-muted)' }}>•</span>
               <span style={{ color: 'var(--text-secondary)' }}>
-                {isStudent ? 'Verified Student Fellowship Clearance' : 'Faculty & Administrative Access Mode'}
+                {currentUser?.tutoring_enrolled
+                  ? `Direct Tutoring Fellow (${currentUser.tutoring_track_name || 'Active Track'}) • Studies & Intranet Tracked`
+                  : isStudent 
+                  ? 'Verified Student Fellowship Clearance' 
+                  : 'Faculty & Administrative Access Mode'}
               </span>
             </div>
 
@@ -312,14 +316,18 @@ export default function IntranetGuard({ children, requiredFeatureTitle }: Intran
           </div>
 
           {/* Action links */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <Link href="/academy" className="btn btn-primary btn-sm" style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }}>
+              <GraduationCap size={16} />
+              <span>Enrol in Direct Tutoring</span>
+            </Link>
             <Link href="/" className="btn btn-secondary btn-sm">
               <BookOpen size={16} />
               <span>Browse Public Catalog</span>
             </Link>
             <Link href="/admin/access" className="btn btn-outline btn-sm">
               <ShieldAlert size={16} />
-              <span>Open Admin Clearance Desk</span>
+              <span>Admin Desk</span>
             </Link>
           </div>
         </div>
@@ -548,6 +556,51 @@ export default function IntranetGuard({ children, requiredFeatureTitle }: Intran
               </span>
             </div>
           </div>
+        </div>
+
+        {/* Direct Tutoring Alternative Pathway Callout */}
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(99, 102, 241, 0.08) 100%)',
+          border: '1px solid rgba(16, 185, 129, 0.35)',
+          borderRadius: '1rem',
+          padding: '1.5rem',
+          marginBottom: '2rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '1rem',
+        }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.25rem' }}>
+              <span className="badge badge-emerald" style={{ fontSize: '0.7rem' }}>
+                Instant Access Pathway
+              </span>
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                1-on-1 Direct Tutoring Fellowships
+              </span>
+            </div>
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: 0, maxWidth: '520px', lineHeight: 1.5 }}>
+              Enrolling under Direct Tutoring immediately unlocks the entire Campus Intranet with 100% active academic clearance, automated coursework tracking, timed CBT exams, and private mentoring rooms.
+            </p>
+          </div>
+
+          <Link
+            href="/academy"
+            className="btn btn-primary btn-sm"
+            style={{
+              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              fontWeight: 700,
+              padding: '0.65rem 1.25rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+            }}
+          >
+            <GraduationCap size={16} />
+            <span>Enrol in Direct Tutoring</span>
+            <ArrowRight size={14} />
+          </Link>
         </div>
 
         {/* Call to Actions */}

@@ -109,6 +109,60 @@ export default function VirtualRoomsHubPage() {
         </p>
       </div>
 
+      {/* 1-on-1 Direct Mentoring Pod Spotlight for Tutoring Scholars */}
+      {currentUser?.tutoring_enrolled && (
+        <div style={{
+          padding: '1.75rem 2rem',
+          borderRadius: '1.25rem',
+          background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.12) 0%, rgba(16, 185, 129, 0.1) 100%)',
+          border: '1px solid rgba(236, 72, 153, 0.35)',
+          marginBottom: '2.5rem',
+          boxShadow: 'var(--shadow-md)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '1.5rem',
+        }}>
+          <div style={{ maxWidth: '640px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
+              <span className="badge badge-emerald" style={{ fontSize: '0.68rem' }}>
+                1-on-1 Mentorship Clearance Active
+              </span>
+              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>
+                Track: {currentUser.tutoring_track_name}
+              </span>
+            </div>
+            <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--text-primary)', margin: '0 0 0.35rem 0' }}>
+              Your Private 1-on-1 Live Pairing Pod
+            </h2>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+              Connect directly with your assigned Faculty Lead and Senior Mentors. Use full-screen 1080p desktop sharing, diagram architectural workflows on the interactive whiteboard, or code alongside instructors in real time.
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <Link
+              href={`/live/${rooms.find(r => r.id.startsWith('room_tutoring_'))?.id || activeRooms[0]?.id || 'room_arch_office_hours_01'}`}
+              className="btn btn-primary"
+              style={{
+                background: 'linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)',
+                fontWeight: 700,
+                fontSize: '0.9rem',
+                padding: '0.75rem 1.4rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                boxShadow: '0 4px 16px rgba(236, 72, 153, 0.35)',
+              }}
+            >
+              <Video size={18} />
+              <span>Launch 1-on-1 Mentoring Pod</span>
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* Action Header */}
       <div style={{
         display: 'flex',
