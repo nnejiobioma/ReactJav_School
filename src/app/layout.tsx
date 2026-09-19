@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import AdminEditModeBar from '@/components/admin/AdminEditModeBar';
 
 export const metadata: Metadata = {
   title: 'ReactJav • Modern LMS with Supabase & Next.js',
@@ -47,6 +48,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <AdminEditModeBar />
       </body>
     </html>
   );

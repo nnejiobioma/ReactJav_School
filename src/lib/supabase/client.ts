@@ -15,7 +15,8 @@ import {
   SubscriptionPlan,
   SubscriptionStatus,
   TutoringAttendanceSession,
-  MonthlyAttendanceSummary
+  MonthlyAttendanceSummary,
+  SiteContentConfig
 } from '@/types';
 import { 
   DEMO_PROFILES, 
@@ -30,6 +31,7 @@ import {
   CAMPUS_BULLETINS,
   INITIAL_TUTORING_ATTENDANCE
 } from './mockData';
+import { DEFAULT_SITE_CONTENT } from './defaultSiteContent';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -64,6 +66,8 @@ const STORAGE_KEYS = {
   INTRANET_REQUESTS: 'reactjav_intranet_requests',
   CAMPUS_BULLETINS: 'reactjav_campus_bulletins',
   TUTORING_ATTENDANCE: 'reactjav_tutoring_attendance',
+  SITE_CONTENT: 'reactjav_site_content',
+  ADMIN_EDIT_MODE: 'reactjav_admin_edit_mode',
 };
 
 // Client-side Local State Store (Local Persistence Fallback)
@@ -932,6 +936,92 @@ export class LocalDataService {
         : dateObj.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
       return { month: m, label };
     });
+  }
+
+  // ==========================================
+  // Site-Wide Content Management (CMS) Methods
+  // ==========================================
+
+  static getSiteContent(): SiteContentConfig {
+    if (typeof window === 'undefined') return DEFAULT_SITE_CONTENT;
+    const stored = localStorage.getItem(STORAGE_KEYS.SITE_CONTENT);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        // Deep merge with defaults in case of missing keys
+        return {
+          ...DEFAULT_SITE_CONTENT,
+          ...parsed,
+          hero: { ...DEFAULT_SITE_CONTENT.hero, ...(parsed.hero || {}) },
+          flagship: { ...DEFAULT_SITE_CONTENT.flagship, ...(parsed.flagship || {}) },
+          catalog_header: { ...DEFAULT_SITE_CONTENT.catalog_header, ...(parsed.catalog_header || {}) },
+          partition_gateway: { ...DEFAULT_SITE_CONTENT.partition_gateway, ...(parsed.partition_gateway || {}) },
+          learning_model: { ...DEFAULT_SITE_CONTENT.learning_model, ...(parsed.learning_model || {}) },
+          direct_tutoring: { ...DEFAULT_SITE_CONTENT.direct_tutoring, ...(parsed.direct_tutoring || {}) },
+          testimonials: { ...DEFAULT_SITE_CONTENT.testimonials, ...(parsed.testimonials || {}) },
+          faq: { ...DEFAULT_SITE_CONTENT.faq, ...(parsed.faq || {}) },
+          bottom_cta: { ...DEFAULT_SITE_CONTENT.bottom_cta, ...(parsed.bottom_cta || {}) },
+          footer: { ...DEFAULT_SITE_CONTENT.footer, ...(parsed.footer || {}) },
+        };
+      } catch {
+        // fallback
+      }
+    }
+    return DEFAULT_SITE_CONTENT;
+  }
+
+  static saveSiteContent(content: SiteContentConfig): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(STORAGE_KEYS.SITE_CONTENT, JSON.stringify(content));
+    window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: content }));
+  }
+
+  static updateSiteSection<K extends keyof SiteContentConfig>(
+    sectionKey: K,
+    data: Partial<SiteContentConfig[K]>
+  ): SiteContentConfig {
+    const current = this.getSiteContent();
+    const updated: SiteContentConfig = {
+      ...current,
+      [sectionKey]: {
+        ...(current[sectionKey] as any),
+        ...data,
+      },
+    };
+    this.saveSiteContent(updated);
+    return updated;
+  }
+
+  static resetSiteSection(sectionKey: keyof SiteContentConfig): SiteContentConfig {
+    const current = this.getSiteContent();
+    const updated: SiteContentConfig = {
+      ...current,
+      [sectionKey]: DEFAULT_SITE_CONTENT[sectionKey],
+    };
+    this.saveSiteContent(updated);
+    return updated;
+  }
+
+  static resetAllSiteContent(): SiteContentConfig {
+    if (typeof window === 'undefined') return DEFAULT_SITE_CONTENT;
+    localStorage.removeItem(STORAGE_KEYS.SITE_CONTENT);
+    window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: DEFAULT_SITE_CONTENT }));
+    return DEFAULT_SITE_CONTENT;
+  }
+
+  static isEditModeActive(): boolean {
+    if (typeof window === 'undefined') return true;
+    const stored = localStorage.getItem(STORAGE_KEYS.ADMIN_EDIT_MODE);
+    if (stored !== null) {
+      return stored === 'true';
+    }
+    return true; // default active for admin
+  }
+
+  static setEditModeActive(active: boolean): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(STORAGE_KEYS.ADMIN_EDIT_MODE, active ? 'true' : 'false');
+    window.dispatchEvent(new CustomEvent('reactjav-edit-mode-toggled', { detail: { active } }));
   }
 }
 

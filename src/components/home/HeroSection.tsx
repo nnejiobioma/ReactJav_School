@@ -1,8 +1,8 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
 import { Search, Sparkles, Flame, Users, Award, Globe, DollarSign, ArrowRight } from 'lucide-react';
+import { SiteHeroContent } from '@/types';
+import { DEFAULT_SITE_CONTENT } from '@/lib/supabase/defaultSiteContent';
 
 interface HeroSectionProps {
   searchQuery: string;
@@ -10,6 +10,7 @@ interface HeroSectionProps {
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
   categories: string[];
+  content?: SiteHeroContent;
 }
 
 export default function HeroSection({
@@ -18,6 +19,7 @@ export default function HeroSection({
   selectedCategory,
   setSelectedCategory,
   categories,
+  content = DEFAULT_SITE_CONTENT.hero,
 }: HeroSectionProps) {
   return (
     <section style={{
@@ -53,11 +55,11 @@ export default function HeroSection({
           letterSpacing: '0.05em',
         }}>
           <Flame size={14} color="#ef4444" />
-          <span>2026 Admissions Open</span>
+          <span>{content.announcement_badge}</span>
         </div>
         <span style={{ color: 'rgba(255,255,255,0.2)' }}>•</span>
         <span style={{ color: '#e2e8f0' }}>
-          Sponsored Programmes & Flexible Access Across the world
+          {content.announcement_text}
         </span>
         <a
           href="#programmes-catalog"
@@ -71,7 +73,7 @@ export default function HeroSection({
             marginLeft: '0.25rem',
           }}
         >
-          <span>Explore Below</span>
+          <span>{content.announcement_link_text}</span>
           <ArrowRight size={13} />
         </a>
       </div>
@@ -90,7 +92,7 @@ export default function HeroSection({
         gap: '0.5rem',
       }}>
         <Sparkles size={16} color="var(--accent-cyan)" />
-        <span>Learn Hard Things First • A World-Class Tech Academy</span>
+        <span>{content.eyebrow}</span>
       </div>
 
       {/* Main REACTJav Hero Headline */}
@@ -103,13 +105,13 @@ export default function HeroSection({
         margin: '0 auto 1.5rem',
         color: 'var(--text-primary)',
       }}>
-        Every Programme Leads to a{' '}
+        {content.title_prefix}{' '}
         <span style={{
           background: 'linear-gradient(135deg, #0284c7 0%, #6366f1 50%, #db2777 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}>
-          Real Career Outcome.
+          {content.title_highlight}
         </span>
       </h1>
 
@@ -120,8 +122,7 @@ export default function HeroSection({
         margin: '0 auto 2.5rem',
         lineHeight: 1.6,
       }}>
-        Master high-paying skills in AI, Data, Software Engineering, Game Design and Digital Leadership.
-        Learn with peers, build production portfolios, and access subsidized tuition via global foundation partnerships.
+        {content.subtitle}
       </p>
 
       {/* Search Input Bar */}
@@ -142,7 +143,7 @@ export default function HeroSection({
         />
         <input
           type="text"
-          placeholder="Search by programme, tech tool (Python, React, SQL...), or career..."
+          placeholder={content.search_placeholder}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="form-input"
@@ -226,10 +227,10 @@ export default function HeroSection({
           </div>
           <div>
             <div style={{ fontSize: '1.45rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.1 }}>
-              350,000+
+              {content.metric_1_value}
             </div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.2rem', fontWeight: 500 }}>
-              Graduates & Learners
+              {content.metric_1_label}
             </div>
           </div>
         </div>
@@ -257,10 +258,10 @@ export default function HeroSection({
           </div>
           <div>
             <div style={{ fontSize: '1.45rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.1 }}>
-              85%
+              {content.metric_2_value}
             </div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.2rem', fontWeight: 500 }}>
-              Career Placement Rate
+              {content.metric_2_label}
             </div>
           </div>
         </div>
@@ -288,10 +289,10 @@ export default function HeroSection({
           </div>
           <div>
             <div style={{ fontSize: '1.45rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.1 }}>
-              Global Access
+              {content.metric_3_value}
             </div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.2rem', fontWeight: 500 }}>
-              Across The Globe
+              {content.metric_3_label}
             </div>
           </div>
         </div>
@@ -319,10 +320,10 @@ export default function HeroSection({
           </div>
           <div>
             <div style={{ fontSize: '1.45rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.1 }}>
-              Upto 100%
+              {content.metric_4_value}
             </div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.2rem', fontWeight: 500 }}>
-              Scholarship Access
+              {content.metric_4_label}
             </div>
           </div>
         </div>

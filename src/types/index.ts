@@ -309,3 +309,153 @@ export interface MonthlyAttendanceSummary {
   attendance_percentage: number;
   audit_status: 'Compliant' | 'Pending Review' | 'Critical Attendance Warning';
 }
+
+// ==========================================
+// Site-Wide Content Management (CMS) Types
+// ==========================================
+
+export interface SiteHeroContent {
+  announcement_badge: string;
+  announcement_text: string;
+  announcement_link_text: string;
+  eyebrow: string;
+  title_prefix: string;
+  title_highlight: string;
+  subtitle: string;
+  search_placeholder: string;
+  metric_1_value: string;
+  metric_1_label: string;
+  metric_2_value: string;
+  metric_2_label: string;
+  metric_3_value: string;
+  metric_3_label: string;
+  metric_4_value: string;
+  metric_4_label: string;
+}
+
+export interface SiteFlagshipContent {
+  badge: string;
+  title: string;
+  description: string;
+  next_intake: string;
+  duration: string;
+  sponsorship: string;
+  partner_badge: string;
+  enrolled_count_text: string;
+  cta_primary_text: string;
+  cta_secondary_text: string;
+  thumbnail_url?: string;
+}
+
+export interface SiteCatalogHeaderContent {
+  eyebrow: string;
+  title: string;
+  description?: string;
+}
+
+export interface SitePartitionGatewayContent {
+  eyebrow: string;
+  title_prefix: string;
+  title_public_highlight: string;
+  title_intranet_highlight: string;
+  subtitle: string;
+  public_title: string;
+  public_badge: string;
+  public_description: string;
+  public_bullets: string[];
+  public_cta_1_text: string;
+  public_cta_2_text: string;
+  intranet_title: string;
+  intranet_badge: string;
+  intranet_description: string;
+  intranet_bullets: string[];
+  intranet_cta_text: string;
+}
+
+export interface SiteLearningPillar {
+  id: string;
+  title: string;
+  description: string;
+  tag: string;
+}
+
+export interface SiteLearningModelContent {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  pillars: SiteLearningPillar[];
+}
+
+export interface SiteDirectTutoringContent {
+  badge: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  zone_1_title: string;
+  zone_1_desc: string;
+  zone_2_title: string;
+  zone_2_desc: string;
+  zone_3_title: string;
+  zone_3_desc: string;
+  cta_primary_text: string;
+  cta_whatsapp_text: string;
+}
+
+export interface SiteTestimonialItem {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  quote: string;
+  outcome: string;
+}
+
+export interface SiteTestimonialsContent {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  items: SiteTestimonialItem[];
+}
+
+export interface SiteFaqItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface SiteFaqContent {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  items: SiteFaqItem[];
+}
+
+export interface SiteBottomCtaContent {
+  title_prefix: string;
+  title_highlight: string;
+  subtitle: string;
+  cta_primary_text: string;
+  cta_secondary_text: string;
+}
+
+export interface SiteFooterContent {
+  brand_tagline: string;
+  mission_badge: string;
+  copyright_text: string;
+  alliance_1: string;
+  alliance_2: string;
+  alliance_3: string;
+}
+
+export interface SiteContentConfig {
+  hero: SiteHeroContent;
+  flagship: SiteFlagshipContent;
+  catalog_header: SiteCatalogHeaderContent;
+  partition_gateway: SitePartitionGatewayContent;
+  learning_model: SiteLearningModelContent;
+  direct_tutoring: SiteDirectTutoringContent;
+  testimonials: SiteTestimonialsContent;
+  faq: SiteFaqContent;
+  bottom_cta: SiteBottomCtaContent;
+  footer: SiteFooterContent;
+}
