@@ -20,8 +20,9 @@ import {
   ExternalLink,
   GripVertical
 } from 'lucide-react';
-import { Course, Section, Lesson } from '@/types';
+import { Course, Section, Lesson, QuizQuestion } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
+import QuizQuestionEditorModal, { createDefaultQuestion } from '@/components/quiz/QuizQuestionEditorModal';
 
 interface CurriculumEditorProps {
   course: Course;
@@ -222,6 +223,15 @@ export default function CurriculumEditor({
   const [showLessonModal, setShowLessonModal] = useState(false);
   const [expandedLessons, setExpandedLessons] = useState<Record<string, boolean>>({});
 
+  // Checkpoint Assessment Questions state
+  const [quizQuestions, setQuizQuestions] = useState<QuizQuestion[]>([]);
+  const [showQuizEditorModal, setShowQuizEditorModal] = useState(false);
+  const [directQuizEditingLesson, setDirectQuizEditingLesson] = useState<{
+    lesson: Lesson;
+    sectionId: string;
+    parentLessonId?: string;
+  } | null>(null);
+
   const toggleLessonExpanded = (lessonId: string) => {
     setExpandedLessons((prev) => ({
       ...prev,
@@ -293,6 +303,7 @@ export default function CurriculumEditor({
     setLessonContent('');
     setLessonDuration(300);
     setLessonPreview(false);
+    setQuizQuestions([createDefaultQuestion('', 1)]);
     setShowLessonModal(true);
   };
 
@@ -305,6 +316,7 @@ export default function CurriculumEditor({
     setLessonContent(lesson.content || '');
     setLessonDuration(lesson.duration_seconds || 300);
     setLessonPreview(!!lesson.is_free_preview);
+    setQuizQuestions(lesson.quiz_questions && lesson.quiz_questions.length > 0 ? lesson.quiz_questions : [createDefaultQuestion(lesson.id, 1)]);
     setShowLessonModal(true);
   };
 
@@ -317,6 +329,7 @@ export default function CurriculumEditor({
     setLessonContent('');
     setLessonDuration(180);
     setLessonPreview(false);
+    setQuizQuestions([createDefaultQuestion('', 1)]);
     setShowLessonModal(true);
   };
 
@@ -329,6 +342,7 @@ export default function CurriculumEditor({
     setLessonContent(subLesson.content || '');
     setLessonDuration(subLesson.duration_seconds || 180);
     setLessonPreview(!!subLesson.is_free_preview);
+    setQuizQuestions(subLesson.quiz_questions && subLesson.quiz_questions.length > 0 ? subLesson.quiz_questions : [createDefaultQuestion(subLesson.id, 1)]);
     setShowLessonModal(true);
   };
 
@@ -385,6 +399,7 @@ export default function CurriculumEditor({
                           content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
                           duration_seconds: lessonDuration,
                           is_free_preview: lessonPreview,
+                          quiz_questions: lessonType === 'quiz' ? (quizQuestions.length > 0 ? quizQuestions : (sub.quiz_questions || [createDefaultQuestion(sub.id, 1)])) : undefined,
                         };
                       }
                       return sub;
@@ -399,8 +414,9 @@ export default function CurriculumEditor({
         });
       } else {
         // Add new sub-lesson
+        const newSubId = `sub_${Date.now()}`;
         const newSubLes: Lesson = {
-          id: `sub_${Date.now()}`,
+          id: newSubId,
           section_id: activeSectionId,
           parent_lesson_id: pId,
           title: lessonTitle.trim(),
@@ -410,17 +426,7 @@ export default function CurriculumEditor({
           duration_seconds: lessonDuration,
           position: ((parentLessonForSubLesson.sub_lessons?.length || 0) + 1),
           is_free_preview: lessonPreview,
-          quiz_questions: lessonType === 'quiz' ? [
-            {
-              id: `q_${Date.now()}`,
-              lesson_id: `sub_${Date.now()}`,
-              question: 'Sample assessment question for this sub-module?',
-              options: ['Option A (Correct)', 'Option B', 'Option C', 'Option D'],
-              correct_option_index: 0,
-              explanation: 'Demonstration explanation for the correct answer.',
-              position: 1,
-            }
-          ] : undefined,
+          quiz_questions: lessonType === 'quiz' ? (quizQuestions.length > 0 ? quizQuestions : [createDefaultQuestion(newSubId, 1)]) : undefined,
         };
 
         updatedSections = sections.map((sec) => {
@@ -459,6 +465,7 @@ export default function CurriculumEditor({
                     content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
                     duration_seconds: lessonDuration,
                     is_free_preview: lessonPreview,
+                    quiz_questions: lessonType === 'quiz' ? (quizQuestions.length > 0 ? quizQuestions : (les.quiz_questions || [createDefaultQuestion(les.id, 1)])) : undefined,
                   };
                 }
                 return les;
@@ -469,8 +476,9 @@ export default function CurriculumEditor({
         });
       } else {
         // Create new main lesson
+        const newLesId = `les_${Date.now()}`;
         const newLes: Lesson = {
-          id: `les_${Date.now()}`,
+          id: newLesId,
           section_id: activeSectionId,
           title: lessonTitle.trim(),
           type: lessonType,
@@ -480,17 +488,7 @@ export default function CurriculumEditor({
           position: (activeSec.lessons?.length || 0) + 1,
           is_free_preview: lessonPreview,
           sub_lessons: [],
-          quiz_questions: lessonType === 'quiz' ? [
-            {
-              id: `q_${Date.now()}`,
-              lesson_id: `les_${Date.now()}`,
-              question: 'Sample assessment question for this module?',
-              options: ['Option A (Correct)', 'Option B', 'Option C', 'Option D'],
-              correct_option_index: 0,
-              explanation: 'Demonstration explanation for the correct answer.',
-              position: 1,
-            }
-          ] : undefined,
+          quiz_questions: lessonType === 'quiz' ? (quizQuestions.length > 0 ? quizQuestions : [createDefaultQuestion(newLesId, 1)]) : undefined,
         };
 
         updatedSections = sections.map((sec) => {
@@ -512,9 +510,65 @@ export default function CurriculumEditor({
     setLessonTitle('');
     setLessonUrl('');
     setLessonContent('');
+    setQuizQuestions([]);
     setEditingLesson(null);
     setParentLessonForSubLesson(null);
     setShowLessonModal(false);
+  };
+
+  // Direct Checkpoint Assessment Question Save (from list button)
+  const handleSaveDirectQuizQuestions = (newQuestions: QuizQuestion[]) => {
+    if (!directQuizEditingLesson) return;
+    const { lesson, sectionId, parentLessonId } = directQuizEditingLesson;
+
+    let updatedSections: Section[];
+    if (parentLessonId) {
+      // Updating a sub-lesson's quiz questions
+      updatedSections = sections.map((sec) => {
+        if (sec.id === sectionId) {
+          return {
+            ...sec,
+            lessons: (sec.lessons || []).map((l) => {
+              if (l.id === parentLessonId) {
+                return {
+                  ...l,
+                  sub_lessons: (l.sub_lessons || []).map((sl) => {
+                    if (sl.id === lesson.id) {
+                      return { ...sl, quiz_questions: newQuestions };
+                    }
+                    return sl;
+                  }),
+                };
+              }
+              return l;
+            }),
+          };
+        }
+        return sec;
+      });
+    } else {
+      // Updating a main lesson's quiz questions
+      updatedSections = sections.map((sec) => {
+        if (sec.id === sectionId) {
+          return {
+            ...sec,
+            lessons: (sec.lessons || []).map((l) => {
+              if (l.id === lesson.id) {
+                return { ...l, quiz_questions: newQuestions };
+              }
+              return l;
+            }),
+          };
+        }
+        return sec;
+      });
+    }
+
+    setSections(updatedSections);
+    persistChanges(updatedSections);
+    setDirectQuizEditingLesson(null);
+    setSavedToast(true);
+    setTimeout(() => setSavedToast(false), 3000);
   };
 
   const handleDeleteLesson = (secId: string, lesId: string) => {
@@ -963,6 +1017,26 @@ export default function CurriculumEditor({
                           <span>Sub-lesson</span>
                         </button>
 
+                        {/* Checkpoint Assessment Questions Button (if quiz) */}
+                        {lesson.type === 'quiz' && (
+                          <button
+                            onClick={() => setDirectQuizEditingLesson({ lesson, sectionId: activeSec.id })}
+                            className="btn btn-secondary btn-sm"
+                            style={{
+                              padding: '0.32rem 0.65rem',
+                              fontSize: '0.75rem',
+                              gap: '0.35rem',
+                              background: 'rgba(245, 158, 11, 0.1)',
+                              borderColor: 'rgba(245, 158, 11, 0.35)',
+                              color: 'var(--accent-amber)',
+                            }}
+                            title="Edit Checkpoint Assessment Questions"
+                          >
+                            <HelpCircle size={13} />
+                            <span>Questions ({lesson.quiz_questions?.length || 0})</span>
+                          </button>
+                        )}
+
                         {/* Edit Main Lesson Button */}
                         <button
                           onClick={() => handleOpenEditLesson(lesson)}
@@ -1126,6 +1200,25 @@ export default function CurriculumEditor({
 
                               {/* Actions for Sub-lesson */}
                               <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
+                                {sub.type === 'quiz' && (
+                                  <button
+                                    onClick={() => setDirectQuizEditingLesson({ lesson: sub, sectionId: activeSec.id, parentLessonId: lesson.id })}
+                                    className="btn btn-secondary btn-sm"
+                                    style={{
+                                      padding: '0.25rem 0.55rem',
+                                      fontSize: '0.72rem',
+                                      gap: '0.25rem',
+                                      background: 'rgba(245, 158, 11, 0.1)',
+                                      borderColor: 'rgba(245, 158, 11, 0.3)',
+                                      color: 'var(--accent-amber)',
+                                    }}
+                                    title="Edit Checkpoint Assessment Questions"
+                                  >
+                                    <HelpCircle size={12} />
+                                    <span>Questions ({sub.quiz_questions?.length || 0})</span>
+                                  </button>
+                                )}
+
                                 <button
                                   onClick={() => handleOpenEditSubLesson(sub, lesson)}
                                   className="btn btn-secondary btn-sm"
@@ -1309,6 +1402,71 @@ export default function CurriculumEditor({
                 </div>
               )}
 
+              {lessonType === 'quiz' && (
+                <div style={{
+                  background: 'rgba(245, 158, 11, 0.08)',
+                  border: '1px solid rgba(245, 158, 11, 0.3)',
+                  borderRadius: '0.65rem',
+                  padding: '1rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.75rem',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <div>
+                      <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <HelpCircle size={15} color="var(--accent-amber)" />
+                        <span>Checkpoint Assessment Questions ({quizQuestions.length})</span>
+                      </span>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                        Configure as many questions as possible with multiple choices and explanations.
+                      </span>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setShowQuizEditorModal(true)}
+                      className="btn btn-secondary btn-sm"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                        color: 'var(--accent-amber)',
+                        borderColor: 'rgba(245, 158, 11, 0.4)',
+                        background: 'rgba(245, 158, 11, 0.1)',
+                      }}
+                    >
+                      <Pencil size={13} />
+                      <span>{quizQuestions.length > 0 ? `Edit Questions (${quizQuestions.length})` : 'Add Questions'}</span>
+                    </button>
+                  </div>
+
+                  {quizQuestions.length > 0 && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', maxHeight: '130px', overflowY: 'auto' }}>
+                      {quizQuestions.map((q, idx) => (
+                        <div key={q.id || idx} style={{
+                          fontSize: '0.8rem',
+                          padding: '0.4rem 0.65rem',
+                          background: 'var(--bg-surface)',
+                          borderRadius: '0.4rem',
+                          border: '1px solid var(--border-subtle)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                        }}>
+                          <span style={{ color: '#ffffff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '340px' }}>
+                            <strong>Q{idx + 1}:</strong> {q.question}
+                          </span>
+                          <span style={{ fontSize: '0.7rem', color: 'var(--accent-amber)', flexShrink: 0, marginLeft: '0.5rem' }}>
+                            {q.options.length} options
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
                 <input
                   type="checkbox"
@@ -1455,6 +1613,31 @@ export default function CurriculumEditor({
           <Check size={18} />
           <span>Curriculum updated and saved to database!</span>
         </div>
+      )}
+
+      {/* Quiz Question Editor Modal from Lesson Form */}
+      {showQuizEditorModal && (
+        <QuizQuestionEditorModal
+          isOpen={showQuizEditorModal}
+          lessonTitle={lessonTitle || 'Interactive Quiz'}
+          initialQuestions={quizQuestions}
+          onClose={() => setShowQuizEditorModal(false)}
+          onSave={(newQuestions) => {
+            setQuizQuestions(newQuestions);
+            setShowQuizEditorModal(false);
+          }}
+        />
+      )}
+
+      {/* Direct Quiz Question Editor Modal from Curriculum Row */}
+      {directQuizEditingLesson && (
+        <QuizQuestionEditorModal
+          isOpen={directQuizEditingLesson !== null}
+          lessonTitle={directQuizEditingLesson.lesson.title}
+          initialQuestions={directQuizEditingLesson.lesson.quiz_questions || []}
+          onClose={() => setDirectQuizEditingLesson(null)}
+          onSave={handleSaveDirectQuizQuestions}
+        />
       )}
     </div>
   );

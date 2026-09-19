@@ -2,32 +2,75 @@
 
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { HelpCircle, CheckCircle2, XCircle, RotateCcw, Award, ArrowRight } from 'lucide-react';
+import { HelpCircle, CheckCircle2, XCircle, RotateCcw, Award, ArrowRight, Edit3, Plus } from 'lucide-react';
 import { QuizQuestion } from '@/types';
+import QuizQuestionEditorModal from '@/components/quiz/QuizQuestionEditorModal';
 
 interface QuizRunnerProps {
   questions: QuizQuestion[];
   lessonTitle: string;
   onComplete: () => void;
+  canEdit?: boolean;
+  onUpdateQuestions?: (questions: QuizQuestion[]) => void;
 }
 
 export default function QuizRunner({
   questions,
   lessonTitle,
   onComplete,
+  canEdit = false,
+  onUpdateQuestions,
 }: QuizRunnerProps) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
   const [isFinished, setIsFinished] = useState(false);
+  const [isEditingQuestions, setIsEditingQuestions] = useState(false);
 
   if (!questions || questions.length === 0) {
     return (
       <div className="glass-card" style={{ textAlign: 'center', padding: '3rem' }}>
         <HelpCircle size={40} color="var(--accent-amber)" style={{ margin: '0 auto 1rem' }} />
         <h3>No Quiz Questions Configured</h3>
-        <p style={{ color: 'var(--text-secondary)' }}>This module is currently being finalized by the instructor.</p>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: canEdit ? '1.5rem' : '0' }}>
+          This module is currently being finalized by the instructor.
+        </p>
+        {canEdit && onUpdateQuestions && (
+          <div>
+            <button
+              onClick={() => setIsEditingQuestions(true)}
+              className="btn btn-primary"
+              style={{
+                background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+                borderColor: '#d97706',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+              }}
+            >
+              <Plus size={16} />
+              <span>Add Checkpoint Assessment Questions</span>
+            </button>
+            {isEditingQuestions && (
+              <QuizQuestionEditorModal
+                isOpen={isEditingQuestions}
+                lessonTitle={lessonTitle}
+                initialQuestions={[]}
+                onClose={() => setIsEditingQuestions(false)}
+                onSave={(newQuestions) => {
+                  onUpdateQuestions(newQuestions);
+                  setIsEditingQuestions(false);
+                  setCurrentIdx(0);
+                  setSelectedOption(null);
+                  setShowExplanation(false);
+                  setUserAnswers({});
+                  setIsFinished(false);
+                }}
+              />
+            )}
+          </div>
+        )}
       </div>
     );
   }
@@ -146,12 +189,35 @@ export default function QuizRunner({
         borderBottom: '1px solid var(--border-subtle)',
         paddingBottom: '1rem',
         marginBottom: '1.5rem',
+        flexWrap: 'wrap',
+        gap: '0.75rem',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
           <HelpCircle size={20} color="var(--accent-amber)" />
           <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>
             Checkpoint Assessment
           </span>
+          {canEdit && onUpdateQuestions && (
+            <button
+              onClick={() => setIsEditingQuestions(true)}
+              className="btn btn-secondary btn-sm"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                fontSize: '0.75rem',
+                padding: '0.25rem 0.65rem',
+                color: 'var(--accent-amber)',
+                borderColor: 'rgba(245, 158, 11, 0.35)',
+                background: 'rgba(245, 158, 11, 0.08)',
+                marginLeft: '0.25rem',
+              }}
+              title="Edit Checkpoint Assessment questions"
+            >
+              <Edit3 size={13} />
+              <span>Edit Questions ({questions.length})</span>
+            </button>
+          )}
         </div>
         <span style={{
           fontSize: '0.825rem',
@@ -263,6 +329,25 @@ export default function QuizRunner({
           </button>
         )}
       </div>
+
+      {/* Checkpoint Assessment Question Editor Modal */}
+      {isEditingQuestions && onUpdateQuestions && (
+        <QuizQuestionEditorModal
+          isOpen={isEditingQuestions}
+          lessonTitle={lessonTitle}
+          initialQuestions={questions}
+          onClose={() => setIsEditingQuestions(false)}
+          onSave={(newQuestions) => {
+            onUpdateQuestions(newQuestions);
+            setIsEditingQuestions(false);
+            setCurrentIdx(0);
+            setSelectedOption(null);
+            setShowExplanation(false);
+            setUserAnswers({});
+            setIsFinished(false);
+          }}
+        />
+      )}
     </div>
   );
 }

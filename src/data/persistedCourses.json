@@ -7,7 +7,7 @@
     "description": "Master production-ready web application development with React 19, Next.js App Router, Supabase PostgreSQL, Row-Level Security, and real-time state management.",
     "category": "Software Engineering",
     "track": "Software Engineering",
-    "level": "Intermediate",
+    "level": "Beginner",
     "outcome_hook": "Build production-ready web applications with React 19, Next.js App Router, Supabase PostgreSQL, and Row-Level Security.",
     "duration_weeks": 24,
     "weekly_hours": "20-30 hrs/week",

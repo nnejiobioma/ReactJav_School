@@ -350,6 +350,14 @@ export default function CoursePlayerPage() {
                 questions={currentLesson.quiz_questions || []}
                 lessonTitle={currentLesson.title}
                 onComplete={handleLessonAutoCompleted}
+                canEdit={canEdit}
+                onUpdateQuestions={(newQuestions) => {
+                  const updatedLesson: Lesson = {
+                    ...currentLesson,
+                    quiz_questions: newQuestions,
+                  };
+                  handleSaveLesson(updatedLesson);
+                }}
               />
             )}
 
