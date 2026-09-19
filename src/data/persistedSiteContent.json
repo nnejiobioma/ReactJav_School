@@ -1,0 +1,235 @@
+{
+  "hero": {
+    "announcement_badge": "2026 Admissions Open",
+    "announcement_text": "Sponsored Programmes & Flexible Access Across the world",
+    "announcement_link_text": "Explore Below",
+    "eyebrow": "Learn Hard Things First • A World-Class Tech Academy",
+    "title_prefix": "Every Programme Leads to a",
+    "title_highlight": "Real Career Outcome.",
+    "subtitle": "Master high-paying skills in AI, Data, Software Engineering, Game Design and Digital Leadership. Learn with peers, build production portfolios, and access subsidized tuition via global foundation partnerships.",
+    "search_placeholder": "Search by programme, tech tool (Python, React, SQL...), or career...",
+    "metric_1_value": "350,000+",
+    "metric_1_label": "Graduates & Learners Empowered",
+    "metric_2_value": "85%",
+    "metric_2_label": "Employment or Career Progression Rate",
+    "metric_3_value": "54+",
+    "metric_3_label": "City Hubs & Tech Alliances Worldwide",
+    "metric_4_value": "$0 Upfront",
+    "metric_4_label": "Foundation-Backed Sponsorship Grants Available"
+  },
+  "flagship": {
+    "badge": "Flagship Programme • High Demand",
+    "title": "PostgreSQL Enterprise Architecture & RLS Security",
+    "description": "Master production database design, Row-Level Security policies, and scalable cloud synchronization with Supabase and Next.js App Router.",
+    "next_intake": "April 2026",
+    "duration": "12 Weeks",
+    "sponsorship": "100% Sponsored (Mastercard Foundation)",
+    "partner_badge": "Mastercard Foundation Partnered",
+    "enrolled_count_text": "8,400+ Enrolled",
+    "cta_primary_text": "Explore Full Syllabus",
+    "cta_secondary_text": "Check Eligibility & Grants",
+    "thumbnail_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+  },
+  "catalog_header": {
+    "eyebrow": "Catalogue of Specializations",
+    "title": "All REACTJav Programmes",
+    "description": "Browse all available technical specializations, engineering modules, and career tracks."
+  },
+  "partition_gateway": {
+    "eyebrow": "Platform Partition Architecture",
+    "title_prefix": "Choose Your Destination:",
+    "title_public_highlight": "Public Catalog",
+    "title_intranet_highlight": "Campus Intranet",
+    "subtitle": "Explore open syllabi publicly or access the gated internal campus for certified testing and live collaboration.",
+    "public_title": "Part 1: The Public Catalog",
+    "public_badge": "Open to All Visitors",
+    "public_description": "Browse full engineering course outlines, syllabi breakdowns, lesson objectives, instructor profiles, and free preview lectures without login requirements.",
+    "public_bullets": [
+      "Unlimited course catalog exploration",
+      "Syllabus & curriculum inspection",
+      "Transparent tuition plan comparisons"
+    ],
+    "public_cta_1_text": "Browse Curricula",
+    "public_cta_2_text": "Tuition & Plans",
+    "intranet_title": "Part 2: The Campus Intranet",
+    "intranet_badge": "Gated: Subscription & Admin Clearance",
+    "intranet_description": "Private internal facility containing timed CBT examinations with certificate printouts, live virtual rooms with 1080p screen sharing, and code archives.",
+    "intranet_bullets": [
+      "Timed 60-min CBT Examination Center",
+      "Live Virtual Meeting Rooms & Breakout Pods",
+      "Enrolled Course Player & Internal Code Sandbox"
+    ],
+    "intranet_cta_text": "Enter Campus Intranet"
+  },
+  "learning_model": {
+    "eyebrow": "The REACTJav Framework",
+    "title": "How Learning Happens at REACTJav",
+    "subtitle": "Built around peer accountability, project milestones, and hands-on code execution rather than passive video consumption.",
+    "pillars": [
+      {
+        "id": "pil_1",
+        "title": "Peer-to-Peer Learning",
+        "description": "Code and review alongside driven fellows in daily syncs and pair-programming pods.",
+        "tag": "COLLABORATIVE"
+      },
+      {
+        "id": "pil_2",
+        "title": "Project-First Mastery",
+        "description": "Every module requires delivering deployed, production-grade applications to pass.",
+        "tag": "PORTFOLIO DRIVEN"
+      },
+      {
+        "id": "pil_3",
+        "title": "Direct 1-on-1 Mentorship",
+        "description": "Book private screen-sharing sessions with seasoned software engineers.",
+        "tag": "INDIVIDUAL FOCUS"
+      },
+      {
+        "id": "pil_4",
+        "title": "Timed CBT & Certifications",
+        "description": "Validate competence through enterprise-grade timed computer-based testing.",
+        "tag": "VERIFIED CREDENTIALS"
+      }
+    ]
+  },
+  "direct_tutoring": {
+    "badge": "1-on-1 Direct Tutoring",
+    "eyebrow": "ReactJav Academy Tracks & Learning Pathways",
+    "title": "Prefer Dedicated 1-on-1 Mentorship?",
+    "description": "Explore our tiered Academy Tracks modeled for students aged 5 to adult. From foundational computational logic to full-stack web and mobile application deployment, every session is a private, live screen-pairing experience with an expert mentor.",
+    "zone_1_title": "Zone 01: Foundation & Explorer",
+    "zone_1_desc": "Junior Dev (Ages 5–10), Computational Logic, Python Engineering & AI Literacy.",
+    "zone_2_title": "Zone 02: Builder & Professional",
+    "zone_2_desc": "Web Architecture, Mobile App Dev, UI/UX Design & Workforce Readiness pathways.",
+    "zone_3_title": "Bespoke Custom Roadmaps",
+    "zone_3_desc": "Build-your-own track tailored for school syllabus, hackathons, or career milestones.",
+    "cta_primary_text": "Explore Academy Tracks & Pathways",
+    "cta_whatsapp_text": "Chat With Academy Team",
+    "whatsapp_number": "+358 0465695068"
+  },
+  "testimonials": {
+    "eyebrow": "Transformation in Action",
+    "title": "Learner Voices & Career Trajectories",
+    "subtitle": "Hear how fellows transformed their careers and built scalable software products through ReactJav.",
+    "items": [
+      {
+        "id": "t_1",
+        "name": "Amara Okafor",
+        "role": "Cloud Solutions Associate at Amazon",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+        "quote": "The dual-signoff direct tutoring and Postgres RLS mastery were the exact reasons I passed the technical bar for cloud engineering.",
+        "outcome": "Software Engineering Track"
+      },
+      {
+        "id": "t_2",
+        "name": "Tariq Mansour",
+        "role": "Data Engineer at FinTech Alliance",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+        "quote": "Building deployed projects with timed CBT certifications gave me tangible proof of skill that employers respected immediately.",
+        "outcome": "AI & Data Analytics Track"
+      },
+      {
+        "id": "t_3",
+        "name": "Zainab Bello",
+        "role": "Frontend Architect at EdTech Global",
+        "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80",
+        "quote": "Starting from foundational logic in Zone 01 to building full-stack applications with Next.js and Supabase was a seamless journey.",
+        "outcome": "Web Architecture Pathway"
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Answers & Clarity",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about admissions, sponsorship grants, direct tutoring, and campus intranet access.",
+    "items": [
+      {
+        "id": "faq_1",
+        "question": "Who is eligible for Mastercard Foundation sponsorship grants?",
+        "answer": "Applicants demonstrating strong commitment to tech leadership and problem-solving within their communities can qualify for 100% subsidized tuition. Check eligibility via the Tuition & Plans page."
+      },
+      {
+        "id": "faq_2",
+        "question": "What is the Dual-Signoff Rule in Direct Tutoring?",
+        "answer": "Attendance and credit for direct 1-on-1 tutoring sessions are strictly validated only when both the student fellow and the assigned instructor have checked and signed off on the session ledger."
+      },
+      {
+        "id": "faq_3",
+        "question": "How does the Campus Intranet partition differ from the Public Catalog?",
+        "answer": "The Public Catalog is open to everyone to inspect course outlines and preview lessons. The Campus Intranet is a secured environment containing timed CBT exams, live meeting studios, and official academic records."
+      },
+      {
+        "id": "faq_4",
+        "question": "Are certificates accredited and verifiable?",
+        "answer": "Yes! Every course certificate is issued upon 100% curriculum completion and includes a unique verification hash and digital registrar signature."
+      }
+    ]
+  },
+  "bottom_cta": {
+    "title_prefix": "Ready to",
+    "title_highlight": "Do Hard Things",
+    "subtitle": "Join over 350,000 learners mastering in-demand tech and leadership skills. Applications for the 2026 cohort close soon.",
+    "cta_primary_text": "Apply For A Programme",
+    "cta_secondary_text": "View Tuition & Sponsorships"
+  },
+  "footer": {
+    "brand_tagline": "World-class tech and leadership academy powered by REACTJav. Built to empower over 350,000 learners with project-first engineering and accessible education.",
+    "mission_badge": "DO HARD THINGS",
+    "copyright_text": "© 2026 REACTJav Academy. All rights reserved. • Global Quality, Accessible Education.",
+    "alliance_1": "Mastercard Foundation Partner",
+    "alliance_2": "54 City Hubs (Lagos, Nairobi, Kigali, Casablanca...)",
+    "alliance_3": "Enterprise Verified Credentials"
+  },
+  "tutoring_hero": {
+    "badge": "ReactJav Academy • Direct 1-on-1 Tutoring",
+    "title_prefix": "Engineering Mastery for",
+    "title_highlight": "The Next Generation",
+    "subtitle": "From foundational logic to professional-grade deployment, our tiered tracks ensure students don’t just learn to code—they learn to engineer the future with private, expert-led 1-on-1 mentorship.",
+    "cta_primary_text": "Book 1-on-1 Discovery Chat",
+    "cta_secondary_text": "Explore Learning Zones",
+    "cta_whatsapp_text": "WhatsApp Direct",
+    "whatsapp_number": "+358 0465695068"
+  },
+  "tutoring_zones": {
+    "zone_1_badge": "Zone 01",
+    "zone_1_title": "Foundation & Explorer",
+    "zone_1_subtitle": "Ages 6–13: digital literacy, computational logic, Python fundamentals, and applied AI literacy.",
+    "zone_2_badge": "Zone 02",
+    "zone_2_title": "Builder & Professional",
+    "zone_2_subtitle": "Ages 14–17+: web development, mobile app systems, interface design, and workforce readiness pathways."
+  },
+  "tutoring_metrics": {
+    "metric_1_value": "100%",
+    "metric_1_label": "Industry Aligned",
+    "metric_1_sub": "Curriculum built for 2026+",
+    "metric_2_value": "Ages 5–Adult",
+    "metric_2_label": "Targeted Learning",
+    "metric_2_sub": "Tiered Junior, Teen & Pro Paths",
+    "metric_3_value": "1-on-1 Live",
+    "metric_3_label": "Direct Tutoring Delivery",
+    "metric_3_sub": "Private Expert Mentorship",
+    "metric_4_value": "Global",
+    "metric_4_label": "Anywhere in the World",
+    "metric_4_sub": "Live Zoom Screen-Pairing"
+  },
+  "tutoring_perks": {
+    "badge": "The ReactJav Tutoring Advantage",
+    "title": "Why 1-on-1 Live Tutoring Works",
+    "subtitle": "Unlike pre-recorded video lectures or crowded classrooms, private live mentoring adapts completely to how your learner thinks, solves, and builds.",
+    "perk_1_title": "100% 1-on-1 Attention",
+    "perk_1_desc": "No crowded classrooms. Your dedicated mentor devotes the entire session solely to your learner’s pace, questions, and goals.",
+    "perk_2_title": "Bespoke Pacing & Curriculum",
+    "perk_2_desc": "Fast-track through topics you grasp quickly, or take extra time on complex logic without feeling rushed or left behind.",
+    "perk_3_title": "Real Projects, Not Just Quizzes",
+    "perk_3_desc": "Build live apps, deploy websites, and assemble portfolio-grade projects you can proudly show on GitHub and college apps.",
+    "perk_4_title": "Flexible International Scheduling",
+    "perk_4_desc": "Morning, evening, or weekend sessions designed to fit around school, exams, and international time zones."
+  },
+  "tutoring_bottom_cta": {
+    "title": "Request Your Personalized Roadmap & Quote",
+    "subtitle": "Every journey begins with a complimentary 20-minute discovery chat. We evaluate current experience, discuss passions, and design a customized 1-on-1 learning plan.",
+    "cta_primary_text": "Book Discovery Chat",
+    "cta_whatsapp_text": "Chat on WhatsApp",
+    "whatsapp_number": "+358 0465695068"
+  }
+}

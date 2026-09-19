@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import AdminEditModeBar from '@/components/admin/AdminEditModeBar';
+import ServerSyncProvider from '@/components/common/ServerSyncProvider';
 
 export const metadata: Metadata = {
   title: 'ReactJav • Modern LMS with Supabase & Next.js',
@@ -49,6 +50,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <AdminEditModeBar />
+        <ServerSyncProvider />
       </body>
     </html>
   );

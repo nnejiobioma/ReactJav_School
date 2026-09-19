@@ -136,6 +136,8 @@ export class LocalDataService {
       courses.unshift(updatedCourse);
     }
     localStorage.setItem(STORAGE_KEYS.COURSES, JSON.stringify(courses));
+    // Persist directly to server disk
+    this.persistToServer({ type: 'course', data: updatedCourse });
   }
 
   static getEnrollments(userId: string): string[] {
@@ -988,10 +990,51 @@ export class LocalDataService {
     return DEFAULT_SITE_CONTENT;
   }
 
+  // ==========================================
+  // SERVER-SIDE DISK PERSISTENCE & SYNC
+  // ==========================================
+
+  private static async persistToServer(payload: { type: string; data: any }): Promise<void> {
+    if (typeof window === 'undefined') return;
+    try {
+      await fetch('/api/admin/persist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } catch (err) {
+      console.warn('[LocalDataService] Server persist offline fallback:', err);
+    }
+  }
+
+  static async syncFromServer(): Promise<void> {
+    if (typeof window === 'undefined') return;
+    try {
+      const res = await fetch('/api/admin/persist');
+      if (!res.ok) return;
+      const { siteContent, courses, tracks } = await res.json();
+      if (siteContent) {
+        localStorage.setItem(STORAGE_KEYS.SITE_CONTENT, JSON.stringify(siteContent));
+        window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: siteContent }));
+      }
+      if (courses && Array.isArray(courses)) {
+        localStorage.setItem(STORAGE_KEYS.COURSES, JSON.stringify(courses));
+      }
+      if (tracks && Array.isArray(tracks)) {
+        localStorage.setItem(STORAGE_KEYS.ACADEMY_TRACKS, JSON.stringify(tracks));
+        window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: { tracks } }));
+      }
+    } catch (err) {
+      console.warn('[LocalDataService] syncFromServer fallback:', err);
+    }
+  }
+
   static saveSiteContent(content: SiteContentConfig): void {
     if (typeof window === 'undefined') return;
     localStorage.setItem(STORAGE_KEYS.SITE_CONTENT, JSON.stringify(content));
     window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: content }));
+    // Persist to server disk
+    this.persistToServer({ type: 'siteContent', data: content });
   }
 
   static updateSiteSection<K extends keyof SiteContentConfig>(
@@ -1024,6 +1067,7 @@ export class LocalDataService {
     if (typeof window === 'undefined') return DEFAULT_SITE_CONTENT;
     localStorage.removeItem(STORAGE_KEYS.SITE_CONTENT);
     window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: DEFAULT_SITE_CONTENT }));
+    this.persistToServer({ type: 'reset', data: { target: 'siteContent' } });
     return DEFAULT_SITE_CONTENT;
   }
 
@@ -1068,6 +1112,8 @@ export class LocalDataService {
     }
     localStorage.setItem(STORAGE_KEYS.ACADEMY_TRACKS, JSON.stringify(updated));
     window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: { track } }));
+    // Persist to server disk
+    this.persistToServer({ type: 'track', data: track });
     return updated;
   }
 
@@ -1075,6 +1121,7 @@ export class LocalDataService {
     if (typeof window === 'undefined') return ACADEMY_TRACKS;
     localStorage.removeItem(STORAGE_KEYS.ACADEMY_TRACKS);
     window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: { tracks: ACADEMY_TRACKS } }));
+    this.persistToServer({ type: 'reset', data: { target: 'tracks' } });
     return ACADEMY_TRACKS;
   }
 }
