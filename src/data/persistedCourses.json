@@ -172,6 +172,176 @@
                 "is_free_preview": false
               }
             ]
+          },
+          {
+            "id": "les_1789842871332",
+            "section_id": "sec_1789842536138",
+            "title": "1.3 Branching, Merging & Remote Synchronization",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+            "content": null,
+            "duration_seconds": 300,
+            "position": 3,
+            "is_free_preview": false,
+            "sub_lessons": [
+              {
+                "id": "sub_1789842880654",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842871332",
+                "title": "Branch Management: Modern branch switching using git switch and git switch -c vs. legacy git checkout.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 1,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789842900698",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842871332",
+                "title": "Merge Topologies: Fast-forward merges vs. Three-way merge commits (--no-ff).",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 2,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789842913802",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842871332",
+                "title": "Rebase Fundamentals: Linearizing history with git rebase, rebasing local branches onto upstream main, and interactive rebasing (git rebase -i) to squash, reword, and drop commits.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 3,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789842929092",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842871332",
+                "title": "Merge Conflicts: Dissecting two-way and three-way conflict markers, resolving conflicts using CLI and VS Code merge editors, and aborting failed merges (git merge --abort).",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 4,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789842941500",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842871332",
+                "title": "Remote Upstream Operations: Configuring remotes (git remote add/set-url), tracking branches (git push -u origin <branch>), automated remote tracking (push.autoSetupRemote), and force pushing safely (--force-with-lease vs --force).",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 5,
+                "is_free_preview": false
+              }
+            ]
+          },
+          {
+            "id": "les_1789843000834",
+            "section_id": "sec_1789842536138",
+            "title": "1.4 GitHub Enterprise Standards, Security & Collaboration",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+            "content": null,
+            "duration_seconds": 300,
+            "position": 4,
+            "is_free_preview": false,
+            "sub_lessons": [
+              {
+                "id": "sub_1789843012050",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789843000834",
+                "title": "Authentication Infrastructure: Generating and configuring Ed25519 SSH keys, testing connections, and managing GitHub Personal Access Tokens (PAT) with fine-grained permissions.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 1,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789843020835",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789843000834",
+                "title": "Repository Hygiene: Writing production .gitignore rules (handling OS artifacts, .env* files, build caches), tracking empty directories with .gitkeep, and managing repository metadata.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 2,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789843030426",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789843000834",
+                "title": "Commit Conventions: Enforcing Conventional Commits specification (feat:, fix:, chore:, refactor:, docs:) for automated semantic versioning and changelog generation.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 3,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789843040058",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789843000834",
+                "title": "Pull Request Lifecycle: Opening PRs, drafts, branch protection rules (requiring status checks, review approvals, blocking direct pushes), PR review tools, and code suggestion acceptance.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 4,
+                "is_free_preview": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sec_1789843059754",
+        "course_id": "crs_nextjs_supabase_01",
+        "title": "How are you doing?",
+        "position": 2,
+        "lessons": [
+          {
+            "id": "les_1789843090236",
+            "section_id": "sec_1789843059754",
+            "title": "How are you doing?",
+            "type": "quiz",
+            "video_url": null,
+            "content": null,
+            "duration_seconds": 300,
+            "position": 1,
+            "is_free_preview": false,
+            "sub_lessons": [],
+            "quiz_questions": [
+              {
+                "id": "q_1789843090236",
+                "lesson_id": "les_1789843090236",
+                "question": "Sample assessment question for this module?",
+                "options": [
+                  "Option A (Correct)",
+                  "Option B",
+                  "Option C",
+                  "Option D"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Demonstration explanation for the correct answer.",
+                "position": 1
+              }
+            ]
           }
         ]
       }
