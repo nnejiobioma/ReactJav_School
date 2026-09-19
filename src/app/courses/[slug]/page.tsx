@@ -16,11 +16,15 @@ import {
   UserCheck,
   CreditCard,
   Lock,
-  Sparkles
+  Sparkles,
+  Pencil,
+  ExternalLink
 } from 'lucide-react';
 import { Course, Profile } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { formatCurrency, formatDuration } from '@/lib/utils';
+import AdminEditableSection from '@/components/admin/AdminEditableSection';
+import AdminCourseOutlineModal from '@/components/course/AdminCourseOutlineModal';
 
 export default function CourseDetailPage() {
   const params = useParams();
@@ -31,17 +35,37 @@ export default function CourseDetailPage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrolling, setEnrolling] = useState(false);
+  const [isOutlineModalOpen, setIsOutlineModalOpen] = useState(false);
+  const [outlineModalTab, setOutlineModalTab] = useState<'curriculum' | 'details'>('curriculum');
 
   useEffect(() => {
-    const user = LocalDataService.getCurrentUser();
-    setCurrentUser(user);
+    const loadCourseData = () => {
+      const user = LocalDataService.getCurrentUser();
+      setCurrentUser(user);
 
-    const foundCourse = LocalDataService.getCourseBySlug(slug);
-    if (foundCourse) {
-      setCourse(foundCourse);
-      setIsEnrolled(LocalDataService.isEnrolled(user.id, foundCourse.id));
-    }
+      const foundCourse = LocalDataService.getCourseBySlug(slug);
+      if (foundCourse) {
+        setCourse(foundCourse);
+        setIsEnrolled(LocalDataService.isEnrolled(user.id, foundCourse.id));
+      }
+    };
+
+    loadCourseData();
+
+    const handleUpdate = () => {
+      loadCourseData();
+    };
+
+    window.addEventListener('reactjav-site-content-updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+
+    return () => {
+      window.removeEventListener('reactjav-site-content-updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
   }, [slug]);
+
+  const isAdmin = currentUser?.role === 'admin' || currentUser?.role === 'instructor';
 
   if (!course) {
     return (
@@ -99,11 +123,19 @@ export default function CourseDetailPage() {
   return (
     <div>
       {/* Top Banner / Hero */}
-      <section style={{
-        background: 'linear-gradient(180deg, rgba(18, 25, 42, 0.9) 0%, var(--bg-main) 100%)',
-        borderBottom: '1px solid var(--border-subtle)',
-        padding: '3.5rem 0 3rem',
-      }}>
+      <AdminEditableSection
+        sectionKey={`course_hero_${course.id}`}
+        sectionTitle="Course Overview & Details"
+        onEdit={() => {
+          setOutlineModalTab('details');
+          setIsOutlineModalOpen(true);
+        }}
+      >
+        <section style={{
+          background: 'linear-gradient(180deg, rgba(18, 25, 42, 0.9) 0%, var(--bg-main) 100%)',
+          borderBottom: '1px solid var(--border-subtle)',
+          padding: '3.5rem 0 3rem',
+        }}>
         <div className="container" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -277,18 +309,75 @@ export default function CourseDetailPage() {
           </div>
         </div>
       </section>
+      </AdminEditableSection>
 
       {/* Syllabus Breakdown Section */}
-      <section className="container" style={{ padding: '4rem 1.5rem' }}>
-        <div style={{ maxWidth: '850px' }}>
-          <div style={{ marginBottom: '2rem' }}>
-            <h2 style={{ fontSize: '1.75rem', color: '#ffffff', marginBottom: '0.5rem' }}>
-              Curriculum Syllabus
-            </h2>
-            <p style={{ color: 'var(--text-secondary)' }}>
-              {course.sections?.length} modules • {totalLessons} lessons • {formatDuration(totalDuration)} total length
-            </p>
-          </div>
+      <AdminEditableSection
+        sectionKey={`course_outline_${course.id}`}
+        sectionTitle="Course Outline & Curriculum"
+        onEdit={() => {
+          setOutlineModalTab('curriculum');
+          setIsOutlineModalOpen(true);
+        }}
+      >
+        <section className="container" style={{ padding: '4rem 1.5rem' }}>
+          <div style={{ maxWidth: '850px' }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '2rem',
+              flexWrap: 'wrap',
+              gap: '1rem',
+            }}>
+              <div>
+                <h2 style={{ fontSize: '1.75rem', color: '#ffffff', marginBottom: '0.5rem' }}>
+                  Curriculum Syllabus
+                </h2>
+                <p style={{ color: 'var(--text-secondary)' }}>
+                  {course.sections?.length} modules • {totalLessons} lessons • {formatDuration(totalDuration)} total length
+                </p>
+              </div>
+
+              {isAdmin && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOutlineModalTab('curriculum');
+                      setIsOutlineModalOpen(true);
+                    }}
+                    className="btn btn-sm btn-primary"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.45rem',
+                      fontSize: '0.8rem',
+                      padding: '0.4rem 0.85rem',
+                      borderRadius: '0.65rem',
+                    }}
+                  >
+                    <Pencil size={13} />
+                    <span>Edit Course Outline</span>
+                  </button>
+                  <Link
+                    href={`/instructor/builder/${course.id}`}
+                    className="btn btn-sm btn-secondary"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.45rem',
+                      fontSize: '0.8rem',
+                      padding: '0.4rem 0.85rem',
+                      borderRadius: '0.65rem',
+                    }}
+                  >
+                    <ExternalLink size={13} />
+                    <span>Builder Studio</span>
+                  </Link>
+                </div>
+              )}
+            </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             {course.sections?.map((section, idx) => (
@@ -298,11 +387,40 @@ export default function CourseDetailPage() {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   marginBottom: '1rem',
+                  gap: '0.75rem',
                 }}>
-                  <h3 style={{ fontSize: '1.1rem', color: '#ffffff' }}>
-                    {section.title}
-                  </h3>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                    <h3 style={{ fontSize: '1.1rem', color: '#ffffff', margin: 0 }}>
+                      {section.title}
+                    </h3>
+                    {isAdmin && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setOutlineModalTab('curriculum');
+                          setIsOutlineModalOpen(true);
+                        }}
+                        style={{
+                          background: 'transparent',
+                          border: '1px solid rgba(99, 102, 241, 0.3)',
+                          borderRadius: '0.35rem',
+                          color: 'var(--primary)',
+                          padding: '0.15rem 0.45rem',
+                          fontSize: '0.72rem',
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.3rem',
+                        }}
+                        title="Edit section in curriculum builder"
+                      >
+                        <Pencil size={11} />
+                        <span>Edit Section</span>
+                      </button>
+                    )}
+                  </div>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', flexShrink: 0 }}>
                     {(section.lessons || []).reduce((acc, l) => acc + 1 + (l.sub_lessons?.length || 0), 0)} lessons
                   </span>
                 </div>
@@ -436,6 +554,16 @@ export default function CourseDetailPage() {
           </div>
         </div>
       </section>
+      </AdminEditableSection>
+
+      {/* Admin Course Outline & Curriculum Editor Modal */}
+      <AdminCourseOutlineModal
+        isOpen={isOutlineModalOpen}
+        onClose={() => setIsOutlineModalOpen(false)}
+        course={course}
+        onCourseUpdated={(updated) => setCourse(updated)}
+        initialTab={outlineModalTab}
+      />
     </div>
   );
 }
