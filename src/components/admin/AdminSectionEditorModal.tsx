@@ -1149,6 +1149,416 @@ export default function AdminSectionEditorModal({
               </div>
             </>
           )}
+
+          {/* DIRECT TUTORING PAGE: HERO SECTION */}
+          {sectionKey === 'tutoring_hero' && (
+            <>
+              <div>
+                <label className="form-label">Hero Badge Tag</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={formData.badge || ''}
+                  onChange={(e) => handleChange('badge', e.target.value)}
+                />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <label className="form-label">Headline Prefix</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.title_prefix || ''}
+                    onChange={(e) => handleChange('title_prefix', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label className="form-label">Headline Highlight (Gradient)</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.title_highlight || ''}
+                    onChange={(e) => handleChange('title_highlight', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="form-label">Subtitle / Description</label>
+                <textarea
+                  className="form-input"
+                  rows={3}
+                  value={formData.subtitle || ''}
+                  onChange={(e) => handleChange('subtitle', e.target.value)}
+                />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem' }}>
+                <div>
+                  <label className="form-label">Primary CTA Label</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.cta_primary_text || ''}
+                    onChange={(e) => handleChange('cta_primary_text', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label className="form-label">Secondary CTA Label</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.cta_secondary_text || ''}
+                    onChange={(e) => handleChange('cta_secondary_text', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label className="form-label">WhatsApp CTA Label</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.cta_whatsapp_text || ''}
+                    onChange={(e) => handleChange('cta_whatsapp_text', e.target.value)}
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* DIRECT TUTORING PAGE: LEARNING ZONES HEADER */}
+          {sectionKey === 'tutoring_zones' && (
+            <>
+              <div style={{ borderBottom: '1px solid var(--border-subtle)', paddingBottom: '1rem', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--primary)', display: 'block', marginBottom: '0.75rem' }}>
+                  Zone 01 Header & Scope
+                </span>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '1rem', marginBottom: '0.75rem' }}>
+                  <div>
+                    <label className="form-label">Zone 01 Badge</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      value={formData.zone_1_badge || ''}
+                      onChange={(e) => handleChange('zone_1_badge', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="form-label">Zone 01 Title</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      value={formData.zone_1_title || ''}
+                      onChange={(e) => handleChange('zone_1_title', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="form-label">Zone 01 Description / Scope</label>
+                  <textarea
+                    className="form-input"
+                    rows={2}
+                    value={formData.zone_1_subtitle || ''}
+                    onChange={(e) => handleChange('zone_1_subtitle', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--accent-purple)', display: 'block', marginBottom: '0.75rem' }}>
+                  Zone 02 Header & Scope
+                </span>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '1rem', marginBottom: '0.75rem' }}>
+                  <div>
+                    <label className="form-label">Zone 02 Badge</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      value={formData.zone_2_badge || ''}
+                      onChange={(e) => handleChange('zone_2_badge', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="form-label">Zone 02 Title</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      value={formData.zone_2_title || ''}
+                      onChange={(e) => handleChange('zone_2_title', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="form-label">Zone 02 Description / Scope</label>
+                  <textarea
+                    className="form-input"
+                    rows={2}
+                    value={formData.zone_2_subtitle || ''}
+                    onChange={(e) => handleChange('zone_2_subtitle', e.target.value)}
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* DIRECT TUTORING PAGE: IMPACT METRICS */}
+          {sectionKey === 'tutoring_metrics' && (
+            <>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+                <div style={{ padding: '0.85rem', borderRadius: '0.75rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-subtle)' }}>
+                  <label className="form-label">Metric 1 Value</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_1_value || ''}
+                    onChange={(e) => handleChange('metric_1_value', e.target.value)}
+                  />
+                  <label className="form-label" style={{ marginTop: '0.4rem' }}>Metric 1 Label</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_1_label || ''}
+                    onChange={(e) => handleChange('metric_1_label', e.target.value)}
+                  />
+                  <label className="form-label" style={{ marginTop: '0.4rem' }}>Metric 1 Subtitle</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_1_sub || ''}
+                    onChange={(e) => handleChange('metric_1_sub', e.target.value)}
+                  />
+                </div>
+
+                <div style={{ padding: '0.85rem', borderRadius: '0.75rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-subtle)' }}>
+                  <label className="form-label">Metric 2 Value</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_2_value || ''}
+                    onChange={(e) => handleChange('metric_2_value', e.target.value)}
+                  />
+                  <label className="form-label" style={{ marginTop: '0.4rem' }}>Metric 2 Label</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_2_label || ''}
+                    onChange={(e) => handleChange('metric_2_label', e.target.value)}
+                  />
+                  <label className="form-label" style={{ marginTop: '0.4rem' }}>Metric 2 Subtitle</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_2_sub || ''}
+                    onChange={(e) => handleChange('metric_2_sub', e.target.value)}
+                  />
+                </div>
+
+                <div style={{ padding: '0.85rem', borderRadius: '0.75rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-subtle)' }}>
+                  <label className="form-label">Metric 3 Value</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_3_value || ''}
+                    onChange={(e) => handleChange('metric_3_value', e.target.value)}
+                  />
+                  <label className="form-label" style={{ marginTop: '0.4rem' }}>Metric 3 Label</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_3_label || ''}
+                    onChange={(e) => handleChange('metric_3_label', e.target.value)}
+                  />
+                  <label className="form-label" style={{ marginTop: '0.4rem' }}>Metric 3 Subtitle</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_3_sub || ''}
+                    onChange={(e) => handleChange('metric_3_sub', e.target.value)}
+                  />
+                </div>
+
+                <div style={{ padding: '0.85rem', borderRadius: '0.75rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-subtle)' }}>
+                  <label className="form-label">Metric 4 Value</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_4_value || ''}
+                    onChange={(e) => handleChange('metric_4_value', e.target.value)}
+                  />
+                  <label className="form-label" style={{ marginTop: '0.4rem' }}>Metric 4 Label</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_4_label || ''}
+                    onChange={(e) => handleChange('metric_4_label', e.target.value)}
+                  />
+                  <label className="form-label" style={{ marginTop: '0.4rem' }}>Metric 4 Subtitle</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.metric_4_sub || ''}
+                    onChange={(e) => handleChange('metric_4_sub', e.target.value)}
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* DIRECT TUTORING PAGE: WHY 1-ON-1 WORKS (PERKS) */}
+          {sectionKey === 'tutoring_perks' && (
+            <>
+              <div>
+                <label className="form-label">Section Badge</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={formData.badge || ''}
+                  onChange={(e) => handleChange('badge', e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="form-label">Section Title</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={formData.title || ''}
+                  onChange={(e) => handleChange('title', e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="form-label">Section Subtitle</label>
+                <textarea
+                  className="form-input"
+                  rows={2}
+                  value={formData.subtitle || ''}
+                  onChange={(e) => handleChange('subtitle', e.target.value)}
+                />
+              </div>
+
+              <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '0.75rem' }}>
+                  Tutoring Perks (4 Cards)
+                </span>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div style={{ padding: '0.75rem', borderRadius: '0.65rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-subtle)' }}>
+                    <label className="form-label">Perk 1 Title</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      value={formData.perk_1_title || ''}
+                      onChange={(e) => handleChange('perk_1_title', e.target.value)}
+                    />
+                    <label className="form-label" style={{ marginTop: '0.35rem' }}>Perk 1 Description</label>
+                    <textarea
+                      className="form-input"
+                      rows={2}
+                      value={formData.perk_1_desc || ''}
+                      onChange={(e) => handleChange('perk_1_desc', e.target.value)}
+                    />
+                  </div>
+
+                  <div style={{ padding: '0.75rem', borderRadius: '0.65rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-subtle)' }}>
+                    <label className="form-label">Perk 2 Title</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      value={formData.perk_2_title || ''}
+                      onChange={(e) => handleChange('perk_2_title', e.target.value)}
+                    />
+                    <label className="form-label" style={{ marginTop: '0.35rem' }}>Perk 2 Description</label>
+                    <textarea
+                      className="form-input"
+                      rows={2}
+                      value={formData.perk_2_desc || ''}
+                      onChange={(e) => handleChange('perk_2_desc', e.target.value)}
+                    />
+                  </div>
+
+                  <div style={{ padding: '0.75rem', borderRadius: '0.65rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-subtle)' }}>
+                    <label className="form-label">Perk 3 Title</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      value={formData.perk_3_title || ''}
+                      onChange={(e) => handleChange('perk_3_title', e.target.value)}
+                    />
+                    <label className="form-label" style={{ marginTop: '0.35rem' }}>Perk 3 Description</label>
+                    <textarea
+                      className="form-input"
+                      rows={2}
+                      value={formData.perk_3_desc || ''}
+                      onChange={(e) => handleChange('perk_3_desc', e.target.value)}
+                    />
+                  </div>
+
+                  <div style={{ padding: '0.75rem', borderRadius: '0.65rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-subtle)' }}>
+                    <label className="form-label">Perk 4 Title</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      value={formData.perk_4_title || ''}
+                      onChange={(e) => handleChange('perk_4_title', e.target.value)}
+                    />
+                    <label className="form-label" style={{ marginTop: '0.35rem' }}>Perk 4 Description</label>
+                    <textarea
+                      className="form-input"
+                      rows={2}
+                      value={formData.perk_4_desc || ''}
+                      onChange={(e) => handleChange('perk_4_desc', e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* DIRECT TUTORING PAGE: BOTTOM CTA */}
+          {sectionKey === 'tutoring_bottom_cta' && (
+            <>
+              <div>
+                <label className="form-label">Banner Title</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={formData.title || ''}
+                  onChange={(e) => handleChange('title', e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="form-label">Banner Subtitle / Description</label>
+                <textarea
+                  className="form-input"
+                  rows={3}
+                  value={formData.subtitle || ''}
+                  onChange={(e) => handleChange('subtitle', e.target.value)}
+                />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', borderTop: '1px solid var(--border-subtle)', paddingTop: '1rem' }}>
+                <div>
+                  <label className="form-label">Primary CTA Button Label</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.cta_primary_text || ''}
+                    onChange={(e) => handleChange('cta_primary_text', e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label className="form-label">WhatsApp CTA Button Label</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={formData.cta_whatsapp_text || ''}
+                    onChange={(e) => handleChange('cta_whatsapp_text', e.target.value)}
+                  />
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Modal Footer */}

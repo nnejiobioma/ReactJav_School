@@ -447,6 +447,61 @@ export interface SiteFooterContent {
   alliance_3: string;
 }
 
+export interface SiteTutoringHeroContent {
+  badge: string;
+  title_prefix: string;
+  title_highlight: string;
+  subtitle: string;
+  cta_primary_text: string;
+  cta_secondary_text: string;
+  cta_whatsapp_text: string;
+}
+
+export interface SiteTutoringZonesContent {
+  zone_1_badge: string;
+  zone_1_title: string;
+  zone_1_subtitle: string;
+  zone_2_badge: string;
+  zone_2_title: string;
+  zone_2_subtitle: string;
+}
+
+export interface SiteTutoringMetricsContent {
+  metric_1_value: string;
+  metric_1_label: string;
+  metric_1_sub: string;
+  metric_2_value: string;
+  metric_2_label: string;
+  metric_2_sub: string;
+  metric_3_value: string;
+  metric_3_label: string;
+  metric_3_sub: string;
+  metric_4_value: string;
+  metric_4_label: string;
+  metric_4_sub: string;
+}
+
+export interface SiteTutoringPerksContent {
+  badge: string;
+  title: string;
+  subtitle: string;
+  perk_1_title: string;
+  perk_1_desc: string;
+  perk_2_title: string;
+  perk_2_desc: string;
+  perk_3_title: string;
+  perk_3_desc: string;
+  perk_4_title: string;
+  perk_4_desc: string;
+}
+
+export interface SiteTutoringBottomCtaContent {
+  title: string;
+  subtitle: string;
+  cta_primary_text: string;
+  cta_whatsapp_text: string;
+}
+
 export interface SiteContentConfig {
   hero: SiteHeroContent;
   flagship: SiteFlagshipContent;
@@ -458,4 +513,10 @@ export interface SiteContentConfig {
   faq: SiteFaqContent;
   bottom_cta: SiteBottomCtaContent;
   footer: SiteFooterContent;
+  tutoring_hero?: SiteTutoringHeroContent;
+  tutoring_zones?: SiteTutoringZonesContent;
+  tutoring_metrics?: SiteTutoringMetricsContent;
+  tutoring_perks?: SiteTutoringPerksContent;
+  tutoring_bottom_cta?: SiteTutoringBottomCtaContent;
 }
+

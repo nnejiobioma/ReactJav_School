@@ -2,15 +2,23 @@
 
 import React from 'react';
 import { AcademyTrack, getTutoringWhatsAppUrl } from '@/data/academyTracks';
-import { ArrowRight, BookOpen, MessageSquare, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, BookOpen, MessageSquare, Sparkles, CheckCircle2, Pencil } from 'lucide-react';
 
 interface TrackCardProps {
   track: AcademyTrack;
   onSelectTrack: (track: AcademyTrack) => void;
   onBookTutoring: (track: AcademyTrack) => void;
+  onEditTrack?: (track: AcademyTrack) => void;
+  isAdmin?: boolean;
 }
 
-export default function TrackCard({ track, onSelectTrack, onBookTutoring }: TrackCardProps) {
+export default function TrackCard({ 
+  track, 
+  onSelectTrack, 
+  onBookTutoring,
+  onEditTrack,
+  isAdmin 
+}: TrackCardProps) {
   return (
     <div
       style={{
@@ -31,6 +39,38 @@ export default function TrackCard({ track, onSelectTrack, onBookTutoring }: Trac
       }}
       className="group-hover-card"
     >
+      {/* Admin Edit Track Button */}
+      {isAdmin && onEditTrack && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onEditTrack(track);
+          }}
+          style={{
+            position: 'absolute',
+            top: '0.85rem',
+            right: '0.85rem',
+            zIndex: 10,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            padding: '0.3rem 0.65rem',
+            borderRadius: '9999px',
+            fontSize: '0.72rem',
+            fontWeight: 800,
+            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+            color: '#ffffff',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.4)',
+            cursor: 'pointer',
+          }}
+          title="Edit this track as Admin"
+        >
+          <Pencil size={11} />
+          <span>Edit Track</span>
+        </button>
+      )}
+
       {/* Top Header: Icon & Tier */}
       <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
         <div

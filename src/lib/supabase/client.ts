@@ -32,6 +32,7 @@ import {
   INITIAL_TUTORING_ATTENDANCE
 } from './mockData';
 import { DEFAULT_SITE_CONTENT } from './defaultSiteContent';
+import { ACADEMY_TRACKS, AcademyTrack } from '@/data/academyTracks';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -68,6 +69,7 @@ const STORAGE_KEYS = {
   TUTORING_ATTENDANCE: 'reactjav_tutoring_attendance',
   SITE_CONTENT: 'reactjav_site_content',
   ADMIN_EDIT_MODE: 'reactjav_admin_edit_mode',
+  ACADEMY_TRACKS: 'reactjav_academy_tracks',
 };
 
 // Client-side Local State Store (Local Persistence Fallback)
@@ -962,6 +964,11 @@ export class LocalDataService {
           faq: { ...DEFAULT_SITE_CONTENT.faq, ...(parsed.faq || {}) },
           bottom_cta: { ...DEFAULT_SITE_CONTENT.bottom_cta, ...(parsed.bottom_cta || {}) },
           footer: { ...DEFAULT_SITE_CONTENT.footer, ...(parsed.footer || {}) },
+          tutoring_hero: { ...DEFAULT_SITE_CONTENT.tutoring_hero, ...(parsed.tutoring_hero || {}) },
+          tutoring_zones: { ...DEFAULT_SITE_CONTENT.tutoring_zones, ...(parsed.tutoring_zones || {}) },
+          tutoring_metrics: { ...DEFAULT_SITE_CONTENT.tutoring_metrics, ...(parsed.tutoring_metrics || {}) },
+          tutoring_perks: { ...DEFAULT_SITE_CONTENT.tutoring_perks, ...(parsed.tutoring_perks || {}) },
+          tutoring_bottom_cta: { ...DEFAULT_SITE_CONTENT.tutoring_bottom_cta, ...(parsed.tutoring_bottom_cta || {}) },
         };
       } catch {
         // fallback
@@ -1022,6 +1029,42 @@ export class LocalDataService {
     if (typeof window === 'undefined') return;
     localStorage.setItem(STORAGE_KEYS.ADMIN_EDIT_MODE, active ? 'true' : 'false');
     window.dispatchEvent(new CustomEvent('reactjav-edit-mode-toggled', { detail: { active } }));
+  }
+
+  static getAcademyTracks(): AcademyTrack[] {
+    if (typeof window === 'undefined') return ACADEMY_TRACKS;
+    const stored = localStorage.getItem(STORAGE_KEYS.ACADEMY_TRACKS);
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch {
+        // fallback
+      }
+    }
+    return ACADEMY_TRACKS;
+  }
+
+  static saveAcademyTrack(track: AcademyTrack): AcademyTrack[] {
+    if (typeof window === 'undefined') return ACADEMY_TRACKS;
+    const current = this.getAcademyTracks();
+    const index = current.findIndex(t => t.id === track.id);
+    let updated: AcademyTrack[];
+    if (index >= 0) {
+      updated = [...current];
+      updated[index] = track;
+    } else {
+      updated = [...current, track];
+    }
+    localStorage.setItem(STORAGE_KEYS.ACADEMY_TRACKS, JSON.stringify(updated));
+    window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: { track } }));
+    return updated;
+  }
+
+  static resetAcademyTracks(): AcademyTrack[] {
+    if (typeof window === 'undefined') return ACADEMY_TRACKS;
+    localStorage.removeItem(STORAGE_KEYS.ACADEMY_TRACKS);
+    window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: { tracks: ACADEMY_TRACKS } }));
+    return ACADEMY_TRACKS;
   }
 }
 
