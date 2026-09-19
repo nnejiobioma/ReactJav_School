@@ -17,7 +17,8 @@ import {
   ChevronRight,
   ChevronDown,
   CornerDownRight,
-  ExternalLink
+  ExternalLink,
+  GripVertical
 } from 'lucide-react';
 import { Course, Section, Lesson } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
@@ -25,6 +26,15 @@ import { LocalDataService } from '@/lib/supabase/client';
 interface CurriculumEditorProps {
   course: Course;
   onCourseUpdated: (updated: Course) => void;
+}
+
+type DragType = 'section' | 'lesson' | 'sub_lesson';
+
+interface DragItem {
+  type: DragType;
+  index: number;
+  parentLessonId?: string;
+  sectionId?: string;
 }
 
 export default function CurriculumEditor({
@@ -36,6 +46,169 @@ export default function CurriculumEditor({
   const [activeSectionId, setActiveSectionId] = useState<string | null>(
     sections[0]?.id || null
   );
+
+  // Drag and Drop state
+  const [draggingItem, setDraggingItem] = useState<DragItem | null>(null);
+  const [dragOverTarget, setDragOverTarget] = useState<{
+    type: DragType;
+    index: number;
+    parentLessonId?: string;
+  } | null>(null);
+
+  // Helper reorder function
+  const reorder = <T,>(list: T[], startIndex: number, endIndex: number): T[] => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    return result;
+  };
+
+  // Section drag handlers
+  const handleSectionDragStart = (e: React.DragEvent, index: number) => {
+    setDraggingItem({ type: 'section', index });
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', `section:${index}`);
+  };
+
+  const handleSectionDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    if (draggingItem?.type === 'section' && draggingItem.index !== index) {
+      setDragOverTarget({ type: 'section', index });
+    }
+  };
+
+  const handleSectionDrop = (e: React.DragEvent, dropIndex: number) => {
+    e.preventDefault();
+    if (draggingItem?.type === 'section' && draggingItem.index !== undefined && draggingItem.index !== dropIndex) {
+      const reordered = reorder(sections, draggingItem.index, dropIndex).map((sec, idx) => ({
+        ...sec,
+        position: idx + 1,
+      }));
+      setSections(reordered);
+      persistChanges(reordered);
+    }
+    setDraggingItem(null);
+    setDragOverTarget(null);
+  };
+
+  // Lesson drag handlers
+  const handleLessonDragStart = (e: React.DragEvent, index: number, sectionId: string) => {
+    setDraggingItem({ type: 'lesson', index, sectionId });
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', `lesson:${index}`);
+  };
+
+  const handleLessonDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    if (draggingItem?.type === 'lesson' && draggingItem.index !== index) {
+      setDragOverTarget({ type: 'lesson', index });
+    }
+  };
+
+  const handleLessonDrop = (e: React.DragEvent, dropIndex: number) => {
+    e.preventDefault();
+    if (
+      draggingItem?.type === 'lesson' &&
+      draggingItem.index !== undefined &&
+      draggingItem.index !== dropIndex &&
+      activeSectionId
+    ) {
+      const currentSec = sections.find((s) => s.id === activeSectionId);
+      if (currentSec) {
+        const currentLessons = currentSec.lessons || [];
+        const reorderedLessons = reorder(currentLessons, draggingItem.index, dropIndex).map((l, idx) => ({
+          ...l,
+          position: idx + 1,
+        }));
+
+        const updatedSections = sections.map((sec) => {
+          if (sec.id === activeSectionId) {
+            return {
+              ...sec,
+              lessons: reorderedLessons,
+            };
+          }
+          return sec;
+        });
+
+        setSections(updatedSections);
+        persistChanges(updatedSections);
+      }
+    }
+    setDraggingItem(null);
+    setDragOverTarget(null);
+  };
+
+  // Sub-lesson drag handlers
+  const handleSubLessonDragStart = (
+    e: React.DragEvent,
+    index: number,
+    parentLessonId: string,
+    sectionId: string
+  ) => {
+    e.stopPropagation();
+    setDraggingItem({ type: 'sub_lesson', index, parentLessonId, sectionId });
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', `sub_lesson:${parentLessonId}:${index}`);
+  };
+
+  const handleSubLessonDragOver = (e: React.DragEvent, index: number, parentLessonId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (
+      draggingItem?.type === 'sub_lesson' &&
+      draggingItem.parentLessonId === parentLessonId &&
+      draggingItem.index !== index
+    ) {
+      setDragOverTarget({ type: 'sub_lesson', index, parentLessonId });
+    }
+  };
+
+  const handleSubLessonDrop = (e: React.DragEvent, dropIndex: number, parentLesson: Lesson) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (
+      draggingItem?.type === 'sub_lesson' &&
+      draggingItem.parentLessonId === parentLesson.id &&
+      draggingItem.index !== undefined &&
+      draggingItem.index !== dropIndex &&
+      activeSectionId
+    ) {
+      const currentSubLessons = parentLesson.sub_lessons || [];
+      const reorderedSubLessons = reorder(currentSubLessons, draggingItem.index, dropIndex).map((sl, idx) => ({
+        ...sl,
+        position: idx + 1,
+      }));
+
+      const updatedSections = sections.map((sec) => {
+        if (sec.id === activeSectionId) {
+          return {
+            ...sec,
+            lessons: (sec.lessons || []).map((les) => {
+              if (les.id === parentLesson.id) {
+                return {
+                  ...les,
+                  sub_lessons: reorderedSubLessons,
+                };
+              }
+              return les;
+            }),
+          };
+        }
+        return sec;
+      });
+
+      setSections(updatedSections);
+      persistChanges(updatedSections);
+    }
+    setDraggingItem(null);
+    setDragOverTarget(null);
+  };
+
+  const handleDragEnd = () => {
+    setDraggingItem(null);
+    setDragOverTarget(null);
+  };
 
   // Lesson form state (Add & Edit - Main & Sub-lessons)
   const [editingLesson, setEditingLesson] = useState<Lesson | null>(null);
@@ -476,32 +649,77 @@ export default function CurriculumEditor({
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {sections.map((sec, idx) => {
               const isSelected = sec.id === activeSectionId;
+              const isDragging = draggingItem?.type === 'section' && draggingItem.index === idx;
+              const isDropTarget = dragOverTarget?.type === 'section' && dragOverTarget.index === idx;
+
               return (
                 <div
                   key={sec.id}
                   onClick={() => setActiveSectionId(sec.id)}
+                  onDragOver={(e) => handleSectionDragOver(e, idx)}
+                  onDrop={(e) => handleSectionDrop(e, idx)}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: '0.75rem 1rem',
                     borderRadius: '0.65rem',
-                    background: isSelected ? 'rgba(99, 102, 241, 0.15)' : 'var(--bg-surface)',
-                    border: isSelected ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
+                    background: isDropTarget
+                      ? 'rgba(99, 102, 241, 0.25)'
+                      : isSelected
+                      ? 'rgba(99, 102, 241, 0.15)'
+                      : 'var(--bg-surface)',
+                    border: isDropTarget
+                      ? '2px dashed var(--primary)'
+                      : isSelected
+                      ? '1px solid var(--primary)'
+                      : '1px solid var(--border-subtle)',
+                    boxShadow: isDropTarget ? '0 0 12px rgba(99, 102, 241, 0.4)' : 'none',
+                    opacity: isDragging ? 0.35 : 1,
                     cursor: 'pointer',
-                    transition: 'all 0.2s ease',
+                    transition: 'all 0.18s ease',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexGrow: 1, minWidth: 0 }}>
+                    {/* Drag Handle */}
+                    <div
+                      draggable
+                      onDragStart={(e) => handleSectionDragStart(e, idx)}
+                      onDragEnd={handleDragEnd}
+                      onClick={(e) => e.stopPropagation()}
+                      style={{
+                        cursor: 'grab',
+                        color: 'var(--text-muted)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        padding: '0.2rem',
+                        borderRadius: '0.25rem',
+                        transition: 'color 0.15s ease',
+                        flexShrink: 0,
+                      }}
+                      title="Drag to reorder section"
+                      onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--primary)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                    >
+                      <GripVertical size={16} />
+                    </div>
+
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600, flexShrink: 0 }}>
                       #{idx + 1}
                     </span>
-                    <span style={{ fontSize: '0.9rem', fontWeight: isSelected ? 600 : 400, color: 'var(--text-primary)' }}>
+                    <span style={{
+                      fontSize: '0.9rem',
+                      fontWeight: isSelected ? 600 : 400,
+                      color: 'var(--text-primary)',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                    }}>
                       {sec.title}
                     </span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                       {sec.lessons?.length || 0} lessons
                     </span>
@@ -610,18 +828,24 @@ export default function CurriculumEditor({
               {(activeSec.lessons || []).map((lesson, lIdx) => {
                 const subLessons = lesson.sub_lessons || [];
                 const isExpanded = expandedLessons[lesson.id] !== false; // expanded by default
+                const isLessonDragging = draggingItem?.type === 'lesson' && draggingItem.index === lIdx;
+                const isLessonDropTarget = dragOverTarget?.type === 'lesson' && dragOverTarget.index === lIdx;
 
                 return (
                   <div
                     key={lesson.id}
+                    onDragOver={(e) => handleLessonDragOver(e, lIdx)}
+                    onDrop={(e) => handleLessonDrop(e, lIdx)}
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
                       borderRadius: '0.75rem',
-                      background: 'var(--bg-surface)',
-                      border: '1px solid var(--border-subtle)',
+                      background: isLessonDropTarget ? 'rgba(99, 102, 241, 0.18)' : 'var(--bg-surface)',
+                      border: isLessonDropTarget ? '2px dashed var(--primary)' : '1px solid var(--border-subtle)',
+                      boxShadow: isLessonDropTarget ? '0 0 14px rgba(99, 102, 241, 0.45)' : 'none',
+                      opacity: isLessonDragging ? 0.35 : 1,
                       overflow: 'hidden',
-                      transition: 'all 0.2s ease',
+                      transition: 'all 0.18s ease',
                     }}
                   >
                     {/* Main Lesson Row */}
@@ -635,7 +859,29 @@ export default function CurriculumEditor({
                         flexWrap: 'wrap',
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexGrow: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', flexGrow: 1, minWidth: 0 }}>
+                        {/* Main Lesson Drag Handle */}
+                        <div
+                          draggable
+                          onDragStart={(e) => handleLessonDragStart(e, lIdx, activeSec.id)}
+                          onDragEnd={handleDragEnd}
+                          style={{
+                            cursor: 'grab',
+                            color: 'var(--text-muted)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            padding: '0.2rem',
+                            borderRadius: '0.25rem',
+                            transition: 'color 0.15s ease',
+                            flexShrink: 0,
+                          }}
+                          title="Drag to reorder lesson"
+                          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--primary)')}
+                          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                        >
+                          <GripVertical size={16} />
+                        </div>
+
                         {/* Expand/Collapse Toggle if it has sub-lessons */}
                         {subLessons.length > 0 ? (
                           <button
@@ -649,13 +895,14 @@ export default function CurriculumEditor({
                               display: 'flex',
                               alignItems: 'center',
                               borderRadius: '0.25rem',
+                              flexShrink: 0,
                             }}
                             title={isExpanded ? 'Collapse Sub-lessons' : 'Expand Sub-lessons'}
                           >
                             {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                           </button>
                         ) : (
-                          <div style={{ width: '16px' }} />
+                          <div style={{ width: '16px', flexShrink: 0 }} />
                         )}
 
                         <div style={{
@@ -673,7 +920,7 @@ export default function CurriculumEditor({
                           {lesson.type === 'quiz' && <HelpCircle size={16} color="var(--accent-amber)" />}
                         </div>
 
-                        <div>
+                        <div style={{ minWidth: 0 }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                             <span style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--text-primary)' }}>
                               {lesson.title}
@@ -697,7 +944,7 @@ export default function CurriculumEditor({
                       </div>
 
                       {/* Main Lesson Actions */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexShrink: 0 }}>
                         {/* + Sub-lesson Button */}
                         <button
                           onClick={() => handleOpenAddSubLesson(lesson)}
@@ -791,96 +1038,134 @@ export default function CurriculumEditor({
                           </button>
                         </div>
 
-                        {subLessons.map((sub, sIdx) => (
-                          <div
-                            key={sub.id}
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'space-between',
-                              padding: '0.55rem 0.85rem',
-                              borderRadius: '0.55rem',
-                              background: 'var(--bg-surface)',
-                              border: '1px solid var(--border-subtle)',
-                              gap: '0.5rem',
-                            }}
-                          >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexGrow: 1 }}>
-                              <CornerDownRight size={14} color="var(--accent-emerald)" style={{ flexShrink: 0 }} />
-                              <div style={{
-                                width: '24px',
-                                height: '24px',
-                                borderRadius: '0.35rem',
-                                background: 'var(--bg-surface-elevated)',
+                        {subLessons.map((sub, sIdx) => {
+                          const isSubDragging =
+                            draggingItem?.type === 'sub_lesson' &&
+                            draggingItem.parentLessonId === lesson.id &&
+                            draggingItem.index === sIdx;
+                          const isSubDropTarget =
+                            dragOverTarget?.type === 'sub_lesson' &&
+                            dragOverTarget.parentLessonId === lesson.id &&
+                            dragOverTarget.index === sIdx;
+
+                          return (
+                            <div
+                              key={sub.id}
+                              onDragOver={(e) => handleSubLessonDragOver(e, sIdx, lesson.id)}
+                              onDrop={(e) => handleSubLessonDrop(e, sIdx, lesson)}
+                              style={{
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: 'center',
-                                flexShrink: 0,
-                              }}>
-                                {sub.type === 'video' && <Video size={13} color="var(--primary)" />}
-                                {sub.type === 'article' && <FileText size={13} color="var(--accent-cyan)" />}
-                                {sub.type === 'quiz' && <HelpCircle size={13} color="var(--accent-amber)" />}
-                              </div>
-
-                              <div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
-                                  <span style={{ fontSize: '0.84rem', fontWeight: 500, color: 'var(--text-primary)' }}>
-                                    {sub.title}
-                                  </span>
-                                  {sub.is_free_preview && (
-                                    <span className="badge badge-cyan" style={{ fontSize: '0.6rem', padding: '0.15rem 0.4rem' }}>
-                                      Free Preview
-                                    </span>
-                                  )}
+                                justifyContent: 'space-between',
+                                padding: '0.55rem 0.85rem',
+                                borderRadius: '0.55rem',
+                                background: isSubDropTarget ? 'rgba(5, 150, 105, 0.18)' : 'var(--bg-surface)',
+                                border: isSubDropTarget ? '2px dashed var(--accent-emerald)' : '1px solid var(--border-subtle)',
+                                boxShadow: isSubDropTarget ? '0 0 12px rgba(5, 150, 105, 0.4)' : 'none',
+                                opacity: isSubDragging ? 0.35 : 1,
+                                gap: '0.5rem',
+                                transition: 'all 0.18s ease',
+                              }}
+                            >
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexGrow: 1, minWidth: 0 }}>
+                                {/* Sub-lesson Drag Handle */}
+                                <div
+                                  draggable
+                                  onDragStart={(e) => handleSubLessonDragStart(e, sIdx, lesson.id, activeSec.id)}
+                                  onDragEnd={handleDragEnd}
+                                  style={{
+                                    cursor: 'grab',
+                                    color: 'var(--text-muted)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    padding: '0.15rem',
+                                    borderRadius: '0.25rem',
+                                    transition: 'color 0.15s ease',
+                                    flexShrink: 0,
+                                  }}
+                                  title="Drag to reorder sub-lesson"
+                                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-emerald)')}
+                                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                                >
+                                  <GripVertical size={14} />
                                 </div>
-                                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                                  <Clock size={10} />
-                                  {Math.round(sub.duration_seconds / 60)} mins • {sub.type.toUpperCase()}
-                                </span>
-                              </div>
-                            </div>
 
-                            {/* Actions for Sub-lesson */}
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                              <button
-                                onClick={() => handleOpenEditSubLesson(sub, lesson)}
-                                className="btn btn-secondary btn-sm"
-                                style={{
-                                  padding: '0.25rem 0.5rem',
-                                  fontSize: '0.72rem',
-                                  gap: '0.25rem',
-                                  background: 'rgba(99, 102, 241, 0.08)',
-                                  borderColor: 'rgba(99, 102, 241, 0.2)',
-                                  color: 'var(--primary)',
-                                }}
-                                title="Edit Sub-lesson"
-                              >
-                                <Pencil size={11} />
-                                <span>Edit</span>
-                              </button>
-
-                              <button
-                                onClick={() => handleDeleteSubLesson(activeSec.id, lesson.id, sub.id)}
-                                style={{
-                                  background: 'none',
-                                  border: 'none',
-                                  color: 'var(--text-muted)',
-                                  cursor: 'pointer',
-                                  padding: '0.25rem',
+                                <CornerDownRight size={14} color="var(--accent-emerald)" style={{ flexShrink: 0 }} />
+                                <div style={{
+                                  width: '24px',
+                                  height: '24px',
                                   borderRadius: '0.35rem',
+                                  background: 'var(--bg-surface-elevated)',
                                   display: 'flex',
                                   alignItems: 'center',
-                                  transition: 'color 0.2s ease',
-                                }}
-                                title="Delete Sub-lesson"
-                                onMouseEnter={(e) => (e.currentTarget.style.color = '#ef4444')}
-                                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-                              >
-                                <Trash2 size={13} />
-                              </button>
+                                  justifyContent: 'center',
+                                  flexShrink: 0,
+                                }}>
+                                  {sub.type === 'video' && <Video size={13} color="var(--primary)" />}
+                                  {sub.type === 'article' && <FileText size={13} color="var(--accent-cyan)" />}
+                                  {sub.type === 'quiz' && <HelpCircle size={13} color="var(--accent-amber)" />}
+                                </div>
+
+                                <div style={{ minWidth: 0 }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
+                                    <span style={{ fontSize: '0.84rem', fontWeight: 500, color: 'var(--text-primary)' }}>
+                                      {sub.title}
+                                    </span>
+                                    {sub.is_free_preview && (
+                                      <span className="badge badge-cyan" style={{ fontSize: '0.6rem', padding: '0.15rem 0.4rem' }}>
+                                        Free Preview
+                                      </span>
+                                    )}
+                                  </div>
+                                  <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                                    <Clock size={10} />
+                                    {Math.round(sub.duration_seconds / 60)} mins • {sub.type.toUpperCase()}
+                                  </span>
+                                </div>
+                              </div>
+
+                              {/* Actions for Sub-lesson */}
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
+                                <button
+                                  onClick={() => handleOpenEditSubLesson(sub, lesson)}
+                                  className="btn btn-secondary btn-sm"
+                                  style={{
+                                    padding: '0.25rem 0.5rem',
+                                    fontSize: '0.72rem',
+                                    gap: '0.25rem',
+                                    background: 'rgba(99, 102, 241, 0.08)',
+                                    borderColor: 'rgba(99, 102, 241, 0.2)',
+                                    color: 'var(--primary)',
+                                  }}
+                                  title="Edit Sub-lesson"
+                                >
+                                  <Pencil size={11} />
+                                  <span>Edit</span>
+                                </button>
+
+                                <button
+                                  onClick={() => handleDeleteSubLesson(activeSec.id, lesson.id, sub.id)}
+                                  style={{
+                                    background: 'none',
+                                    border: 'none',
+                                    color: 'var(--text-muted)',
+                                    cursor: 'pointer',
+                                    padding: '0.25rem',
+                                    borderRadius: '0.35rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    transition: 'color 0.2s ease',
+                                  }}
+                                  title="Delete Sub-lesson"
+                                  onMouseEnter={(e) => (e.currentTarget.style.color = '#ef4444')}
+                                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                                >
+                                  <Trash2 size={13} />
+                                </button>
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     )}
                   </div>
