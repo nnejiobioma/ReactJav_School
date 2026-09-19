@@ -67,6 +67,28 @@ export interface Section {
   lessons?: Lesson[];
 }
 
+export interface LessonQaItem {
+  id: string;
+  user_name: string;
+  user_avatar?: string;
+  role?: string;
+  time_ago: string;
+  question: string;
+  answer?: string;
+  answered_by?: string;
+  answered_at?: string;
+  votes?: number;
+}
+
+export interface LessonResourceItem {
+  id: string;
+  name: string;
+  type: string;
+  size: string;
+  url?: string;
+  description?: string;
+}
+
 export interface Lesson {
   id: string;
   section_id: string;
@@ -83,6 +105,12 @@ export interface Lesson {
   last_position_seconds?: number;
   quiz_questions?: QuizQuestion[];
   sub_lessons?: Lesson[];
+  // Enhanced Lesson Content & Student Materials
+  summary?: string;
+  implementation_tip?: string;
+  lecture_notes?: string;
+  qa_items?: LessonQaItem[];
+  resources?: LessonResourceItem[];
 }
 
 export interface Enrollment {

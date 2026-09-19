@@ -11,16 +11,32 @@ import {
   BookOpen, 
   MessageSquare, 
   Download, 
-  Share2,
-  Lock
+  Share2, 
+  Lock,
+  Printer, 
+  Mail, 
+  GraduationCap, 
+  Award, 
+  FileText, 
+  ShieldCheck,
+  Edit3,
+  Plus,
+  X
 } from 'lucide-react';
-import { Course, Lesson, Profile } from '@/types';
+import { Course, Lesson, Profile, LessonQaItem, LessonResourceItem } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import VideoPlayer from '@/components/player/VideoPlayer';
 import LessonSidebar from '@/components/player/LessonSidebar';
 import QuizRunner from '@/components/quiz/QuizRunner';
 import StudentRecordModal from '@/components/student/StudentRecordModal';
-import { Printer, Mail, GraduationCap, Award, FileText, ShieldCheck } from 'lucide-react';
+import LessonTabEditorModal, { 
+  LessonEditorSection, 
+  DEFAULT_SUMMARY, 
+  DEFAULT_TIP, 
+  DEFAULT_LECTURE_NOTES, 
+  DEFAULT_QA_ITEMS, 
+  DEFAULT_RESOURCES 
+} from '@/components/player/LessonTabEditorModal';
 
 export default function CoursePlayerPage() {
   const params = useParams();
@@ -34,9 +50,12 @@ export default function CoursePlayerPage() {
   const [currentLesson, setCurrentLesson] = useState<Lesson | null>(null);
   const [progressMap, setProgressMap] = useState<Record<string, boolean>>({});
   const [lastPosition, setLastPosition] = useState<number>(0);
-  const [activeTab, setActiveTab] = useState<'overview' | 'qa' | 'resources'>('overview');
+  const [activeTab, setActiveTab] = useState<'summary' | 'notes' | 'qa' | 'resources'>('summary');
   const [isRecordModalOpen, setIsRecordModalOpen] = useState(false);
   const [autoPrintRecord, setAutoPrintRecord] = useState(false);
+  const [editingSection, setEditingSection] = useState<LessonEditorSection | null>(null);
+  const [isAskModalOpen, setIsAskModalOpen] = useState(false);
+  const [newQuestionText, setNewQuestionText] = useState('');
 
   // Load course and progress
   useEffect(() => {
@@ -77,6 +96,22 @@ export default function CoursePlayerPage() {
       </div>
     );
   }
+
+  // Check instructor or admin editing privileges
+  const canEdit = currentUser?.role === 'admin' || currentUser?.role === 'instructor';
+
+  // Computed materials
+  const qaItems = currentLesson.qa_items && currentLesson.qa_items.length > 0
+    ? currentLesson.qa_items
+    : DEFAULT_QA_ITEMS;
+
+  const resources = currentLesson.resources && currentLesson.resources.length > 0
+    ? currentLesson.resources
+    : DEFAULT_RESOURCES;
+
+  const summaryContent = currentLesson.summary || DEFAULT_SUMMARY;
+  const tipContent = currentLesson.implementation_tip || DEFAULT_TIP;
+  const notesContent = currentLesson.lecture_notes || currentLesson.content || DEFAULT_LECTURE_NOTES;
 
   // Check enrollment / preview permission
   const isEnrolled = currentUser ? LocalDataService.isEnrolled(currentUser.id, course.id) : false;
@@ -139,6 +174,76 @@ export default function CoursePlayerPage() {
     if (nextLesson) {
       router.push(`/learn/${course.id}/${nextLesson.id}`);
     }
+  };
+
+  // Save updated lesson materials to course and disk
+  const handleSaveLesson = (updatedLesson: Lesson) => {
+    if (!course) return;
+    const newSections = (course.sections || []).map((sec) => {
+      let sectionChanged = false;
+      const newLessons = (sec.lessons || []).map((l) => {
+        if (l.id === updatedLesson.id) {
+          sectionChanged = true;
+          return updatedLesson;
+        }
+        if (l.sub_lessons && l.sub_lessons.some((sl) => sl.id === updatedLesson.id)) {
+          sectionChanged = true;
+          return {
+            ...l,
+            sub_lessons: l.sub_lessons.map((sl) => (sl.id === updatedLesson.id ? updatedLesson : sl)),
+          };
+        }
+        return l;
+      });
+      return sectionChanged ? { ...sec, lessons: newLessons } : sec;
+    });
+
+    const updatedCourse: Course = {
+      ...course,
+      sections: newSections,
+    };
+
+    LocalDataService.saveCourse(updatedCourse);
+    setCourse(updatedCourse);
+    setCurrentLesson(updatedLesson);
+    setEditingSection(null);
+  };
+
+  // Student question submission
+  const handleStudentAskQuestion = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newQuestionText.trim() || !currentLesson) return;
+    const newQa: LessonQaItem = {
+      id: `qa-${Date.now()}`,
+      user_name: currentUser?.full_name || currentUser?.email?.split('@')[0] || 'Student',
+      time_ago: 'Just now',
+      question: newQuestionText.trim(),
+    };
+    const updatedLesson: Lesson = {
+      ...currentLesson,
+      qa_items: [newQa, ...qaItems],
+    };
+    handleSaveLesson(updatedLesson);
+    setNewQuestionText('');
+    setIsAskModalOpen(false);
+  };
+
+  // Resource download handler
+  const handleDownloadResource = (res: LessonResourceItem) => {
+    if (res.url && res.url !== '#' && res.url.startsWith('http')) {
+      window.open(res.url, '_blank');
+      return;
+    }
+    const blobContent = `-- REACTJav Engineering Material: ${res.name}\n-- Type: ${res.type} (${res.size})\n-- Course: ${course.title}\n-- Module: ${currentLesson.title}\n\n${res.description || 'Supplementary reference material and engineering assets for this lesson.'}\n`;
+    const blob = new Blob([blobContent], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = res.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const stats = currentUser ? LocalDataService.getCourseStats(course.id, currentUser.id) : { totalLessons: 0, completedLessons: 0, percentage: 0 };
@@ -306,27 +411,55 @@ export default function CoursePlayerPage() {
             </p>
           </div>
 
-          {/* Tab Navigation */}
+          {/* Tab Navigation: 4 Explicit Sections */}
           <div style={{
             display: 'flex',
-            gap: '1rem',
+            gap: '0.75rem',
             borderBottom: '1px solid var(--border-subtle)',
             marginBottom: '1.5rem',
+            overflowX: 'auto',
+            paddingBottom: '0.25rem',
           }}>
             <button
-              onClick={() => setActiveTab('overview')}
+              onClick={() => setActiveTab('summary')}
               style={{
                 background: 'none',
                 border: 'none',
                 padding: '0.75rem 0.5rem',
                 fontSize: '0.9rem',
                 fontWeight: 600,
-                color: activeTab === 'overview' ? '#ffffff' : 'var(--text-muted)',
-                borderBottom: activeTab === 'overview' ? '2px solid var(--primary)' : '2px solid transparent',
+                color: activeTab === 'summary' ? '#ffffff' : 'var(--text-muted)',
+                borderBottom: activeTab === 'summary' ? '2px solid var(--primary)' : '2px solid transparent',
                 cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                whiteSpace: 'nowrap',
               }}
             >
-              Lecture Notes & Key Concepts
+              <FileText size={16} color={activeTab === 'summary' ? 'var(--primary)' : undefined} />
+              <span>Summary & Key Takeaways</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('notes')}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: '0.75rem 0.5rem',
+                fontSize: '0.9rem',
+                fontWeight: 600,
+                color: activeTab === 'notes' ? '#ffffff' : 'var(--text-muted)',
+                borderBottom: activeTab === 'notes' ? '2px solid var(--primary)' : '2px solid transparent',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <BookOpen size={16} color={activeTab === 'notes' ? 'var(--primary)' : undefined} />
+              <span>Lecture Notes & Key Concepts</span>
             </button>
 
             <button
@@ -340,9 +473,14 @@ export default function CoursePlayerPage() {
                 color: activeTab === 'qa' ? '#ffffff' : 'var(--text-muted)',
                 borderBottom: activeTab === 'qa' ? '2px solid var(--primary)' : '2px solid transparent',
                 cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                whiteSpace: 'nowrap',
               }}
             >
-              Discussion / Q&A (4)
+              <MessageSquare size={16} color={activeTab === 'qa' ? 'var(--primary)' : undefined} />
+              <span>Discussion / Q&A ({qaItems.length})</span>
             </button>
 
             <button
@@ -356,20 +494,45 @@ export default function CoursePlayerPage() {
                 color: activeTab === 'resources' ? '#ffffff' : 'var(--text-muted)',
                 borderBottom: activeTab === 'resources' ? '2px solid var(--primary)' : '2px solid transparent',
                 cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                whiteSpace: 'nowrap',
               }}
             >
-              Downloadable Resources
+              <Download size={16} color={activeTab === 'resources' ? 'var(--primary)' : undefined} />
+              <span>Downloadable Resources ({resources.length})</span>
             </button>
           </div>
 
-          {/* Tab Content Panels */}
-          {activeTab === 'overview' && (
+          {/* TAB 1: Summary & Key Takeaways Panel */}
+          {activeTab === 'summary' && (
             <div className="glass-card" style={{ padding: '1.75rem' }}>
-              <h3 style={{ fontSize: '1.1rem', color: '#ffffff', marginBottom: '1rem' }}>
-                Summary & Key Takeaways
-              </h3>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.25rem' }}>
-                In this lecture, we explore how Postgres Row-Level Security coordinates with JWT tokens emitted by Supabase Auth. Because policies evaluate directly against database rows before query results are serialized, unauthorized consumers cannot access tenant information even if an API route fails to include filtering constraints.
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+                <h3 style={{ fontSize: '1.1rem', color: '#ffffff', margin: 0 }}>
+                  Summary & Key Takeaways
+                </h3>
+                {canEdit && (
+                  <button
+                    onClick={() => setEditingSection('summary')}
+                    className="btn btn-secondary btn-sm"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      color: 'var(--primary)',
+                      borderColor: 'rgba(99, 102, 241, 0.35)',
+                      background: 'rgba(99, 102, 241, 0.08)',
+                    }}
+                    title="Edit Summary & Key Takeaways"
+                  >
+                    <Edit3 size={14} />
+                    <span>Edit Summary & Takeaways</span>
+                  </button>
+                )}
+              </div>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.25rem', whiteSpace: 'pre-line' }}>
+                {summaryContent}
               </p>
               <div style={{
                 background: 'var(--bg-surface-elevated)',
@@ -378,75 +541,255 @@ export default function CoursePlayerPage() {
                 borderLeft: '4px solid var(--primary)',
                 fontSize: '0.875rem',
                 color: '#c7d2fe',
+                lineHeight: 1.6,
               }}>
-                <strong>Implementation Tip:</strong> Ensure that all foreign keys referenced in your security policies (e.g. <code>user_id</code> and <code>course_id</code>) have B-Tree indices to maintain sub-millisecond query planning speeds.
+                <strong>Implementation Tip:</strong> {tipContent}
               </div>
             </div>
           )}
 
+          {/* TAB 2: Lecture Notes & Key Concepts Panel */}
+          {activeTab === 'notes' && (
+            <div className="glass-card" style={{ padding: '1.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+                <div>
+                  <h3 style={{ fontSize: '1.1rem', color: '#ffffff', margin: 0 }}>
+                    Lecture Notes & Key Concepts
+                  </h3>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                    Detailed architectural notes and technical principles
+                  </span>
+                </div>
+                {canEdit && (
+                  <button
+                    onClick={() => setEditingSection('notes')}
+                    className="btn btn-secondary btn-sm"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      color: 'var(--primary)',
+                      borderColor: 'rgba(99, 102, 241, 0.35)',
+                      background: 'rgba(99, 102, 241, 0.08)',
+                    }}
+                    title="Edit Lecture Notes & Key Concepts"
+                  >
+                    <Edit3 size={14} />
+                    <span>Edit Lecture Notes</span>
+                  </button>
+                )}
+              </div>
+              <div style={{
+                color: 'var(--text-primary)',
+                lineHeight: 1.8,
+                fontSize: '0.95rem',
+                whiteSpace: 'pre-line',
+              }}>
+                {notesContent}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 3: Discussion / Q&A Panel */}
           {activeTab === 'qa' && (
             <div className="glass-card" style={{ padding: '1.75rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-                <h3 style={{ fontSize: '1.1rem', color: '#ffffff' }}>Lesson Questions</h3>
-                <button className="btn btn-primary btn-sm">Ask a Question</button>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+                <div>
+                  <h3 style={{ fontSize: '1.1rem', color: '#ffffff', margin: 0 }}>
+                    Discussion / Q&A ({qaItems.length})
+                  </h3>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                    Student questions and instructor guidance
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                  {canEdit && (
+                    <button
+                      onClick={() => setEditingSection('qa')}
+                      className="btn btn-secondary btn-sm"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        color: 'var(--primary)',
+                        borderColor: 'rgba(99, 102, 241, 0.35)',
+                        background: 'rgba(99, 102, 241, 0.08)',
+                      }}
+                      title="Edit & Manage Q&A Threads"
+                    >
+                      <Edit3 size={14} />
+                      <span>Manage / Edit Q&A</span>
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setIsAskModalOpen(true)}
+                    className="btn btn-primary btn-sm"
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                  >
+                    <Plus size={14} />
+                    <span>Ask a Question</span>
+                  </button>
+                </div>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{
-                  padding: '1rem',
-                  borderRadius: '0.65rem',
-                  background: 'var(--bg-surface)',
-                  border: '1px solid var(--border-subtle)',
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.4rem' }}>
-                    <span style={{ fontWeight: 600, fontSize: '0.85rem', color: '#ffffff' }}>Marcus Reed</span>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>2 hours ago</span>
-                  </div>
-                  <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                    Does Supabase automatically cache RLS policy checks between identical queries in a connection pool?
-                  </p>
-                  <div style={{
-                    marginTop: '0.75rem',
-                    padding: '0.75rem',
-                    background: 'rgba(99, 102, 241, 0.08)',
-                    borderRadius: '0.5rem',
-                    borderLeft: '3px solid var(--primary)',
-                  }}>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--accent-purple)', fontWeight: 600 }}>Instructor Answer:</span>
-                    <p style={{ fontSize: '0.825rem', color: 'var(--text-primary)', marginTop: '0.2rem' }}>
-                      Yes, Postgres query plans cache parsed statements, but the boolean policy expression is re-evaluated per row based on the session's active <code>auth.uid()</code> context.
+                {qaItems.map((item) => (
+                  <div
+                    key={item.id}
+                    style={{
+                      padding: '1rem 1.25rem',
+                      borderRadius: '0.65rem',
+                      background: 'var(--bg-surface)',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                        <span style={{ fontWeight: 600, fontSize: '0.85rem', color: '#ffffff' }}>{item.user_name}</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.time_ago}</span>
+                      </div>
+                      {canEdit && (
+                        <button
+                          onClick={() => setEditingSection('qa')}
+                          style={{
+                            background: 'none',
+                            border: 'none',
+                            color: 'var(--primary)',
+                            fontSize: '0.75rem',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.2rem',
+                          }}
+                        >
+                          <Edit3 size={12} /> Edit
+                        </button>
+                      )}
+                    </div>
+
+                    <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                      {item.question}
                     </p>
+
+                    {item.answer && (
+                      <div style={{
+                        marginTop: '0.75rem',
+                        padding: '0.75rem 1rem',
+                        background: 'rgba(99, 102, 241, 0.08)',
+                        borderRadius: '0.5rem',
+                        borderLeft: '3px solid var(--primary)',
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--accent-purple)', fontWeight: 700 }}>
+                            {item.answered_by || 'Instructor Answer'}:
+                          </span>
+                        </div>
+                        <p style={{ fontSize: '0.825rem', color: 'var(--text-primary)', marginTop: '0.25rem', lineHeight: 1.5 }}>
+                          {item.answer}
+                        </p>
+                      </div>
+                    )}
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           )}
 
+          {/* TAB 4: Downloadable Resources Panel */}
           {activeTab === 'resources' && (
             <div className="glass-card" style={{ padding: '1.75rem' }}>
-              <h3 style={{ fontSize: '1.1rem', color: '#ffffff', marginBottom: '1rem' }}>
-                Supplemental Material
-              </h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                <div style={{
-                  padding: '0.85rem 1rem',
-                  borderRadius: '0.5rem',
-                  background: 'var(--bg-surface)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}>
-                  <div>
-                    <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#ffffff', display: 'block' }}>
-                      Supabase-Postgres-Schema-Starter.sql
-                    </span>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>SQL Migration • 14 KB</span>
-                  </div>
-                  <button className="btn btn-secondary btn-sm">
-                    <Download size={14} />
-                    <span>Download</span>
-                  </button>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+                <div>
+                  <h3 style={{ fontSize: '1.1rem', color: '#ffffff', margin: 0 }}>
+                    Downloadable Resources ({resources.length})
+                  </h3>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                    Lecture attachments, starter files, slides, and cheat sheets
+                  </span>
                 </div>
+                {canEdit && (
+                  <button
+                    onClick={() => setEditingSection('resources')}
+                    className="btn btn-secondary btn-sm"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      color: 'var(--primary)',
+                      borderColor: 'rgba(99, 102, 241, 0.35)',
+                      background: 'rgba(99, 102, 241, 0.08)',
+                    }}
+                    title="Edit & Add Downloadable Resources"
+                  >
+                    <Edit3 size={14} />
+                    <span>Manage / Edit Resources</span>
+                  </button>
+                )}
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {resources.map((res) => (
+                  <div
+                    key={res.id}
+                    style={{
+                      padding: '0.85rem 1.25rem',
+                      borderRadius: '0.5rem',
+                      background: 'var(--bg-surface)',
+                      border: '1px solid var(--border-subtle)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '1rem',
+                      flexWrap: 'wrap',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                      <div style={{
+                        width: '36px',
+                        height: '36px',
+                        borderRadius: '8px',
+                        background: 'rgba(99, 102, 241, 0.1)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--primary)',
+                      }}>
+                        <FileText size={18} />
+                      </div>
+                      <div>
+                        <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#ffffff', display: 'block' }}>
+                          {res.name}
+                        </span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                          {res.type} • {res.size}
+                          {res.description && ` — ${res.description}`}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      {canEdit && (
+                        <button
+                          onClick={() => setEditingSection('resources')}
+                          className="btn btn-secondary btn-sm"
+                          style={{ padding: '0.35rem 0.6rem', fontSize: '0.75rem' }}
+                          title="Edit Resource"
+                        >
+                          <Edit3 size={13} />
+                        </button>
+                      )}
+                      <button
+                        onClick={() => handleDownloadResource(res)}
+                        className="btn btn-secondary btn-sm"
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                      >
+                        <Download size={14} />
+                        <span>Download</span>
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -646,6 +989,108 @@ export default function CoursePlayerPage() {
         specificCourseId={course.id}
         autoPrint={autoPrintRecord}
       />
+
+      {/* Instructor & Admin Lesson Materials Editor Modal */}
+      {editingSection && (
+        <LessonTabEditorModal
+          isOpen={editingSection !== null}
+          initialSection={editingSection}
+          lesson={currentLesson}
+          onClose={() => setEditingSection(null)}
+          onSave={handleSaveLesson}
+        />
+      )}
+
+      {/* Student Ask Question Modal */}
+      {isAskModalOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            background: 'rgba(5, 7, 15, 0.8)',
+            backdropFilter: 'blur(6px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1.5rem',
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsAskModalOpen(false);
+          }}
+        >
+          <div
+            className="glass-card"
+            style={{
+              width: '100%',
+              maxWidth: '520px',
+              padding: '1.75rem',
+              borderRadius: '1rem',
+              border: '1px solid rgba(99, 102, 241, 0.35)',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#ffffff', margin: 0 }}>
+                Ask a Question
+              </h3>
+              <button
+                onClick={() => setIsAskModalOpen(false)}
+                style={{
+                  background: 'rgba(255,255,255,0.05)',
+                  border: '1px solid var(--border-subtle)',
+                  borderRadius: '0.4rem',
+                  color: 'var(--text-muted)',
+                  cursor: 'pointer',
+                  padding: '0.3rem',
+                }}
+              >
+                <X size={16} />
+              </button>
+            </div>
+            <form onSubmit={handleStudentAskQuestion}>
+              <div style={{ marginBottom: '1.25rem' }}>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                  Your Question or Discussion Topic for {currentLesson.title}
+                </label>
+                <textarea
+                  value={newQuestionText}
+                  onChange={(e) => setNewQuestionText(e.target.value)}
+                  rows={4}
+                  required
+                  className="form-input"
+                  placeholder="Ask for clarification on concepts, implementation tips, or edge cases..."
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem 1rem',
+                    borderRadius: '0.5rem',
+                    background: 'var(--bg-surface)',
+                    border: '1px solid var(--border-subtle)',
+                    color: '#ffffff',
+                    fontSize: '0.9rem',
+                    lineHeight: 1.5,
+                  }}
+                />
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem' }}>
+                <button
+                  type="button"
+                  onClick={() => setIsAskModalOpen(false)}
+                  className="btn btn-secondary btn-sm"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-sm"
+                >
+                  Post Question
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
