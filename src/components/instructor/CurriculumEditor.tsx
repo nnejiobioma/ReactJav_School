@@ -45,6 +45,11 @@ export default function CurriculumEditor({
   const [lessonPreview, setLessonPreview] = useState(false);
   const [showLessonModal, setShowLessonModal] = useState(false);
 
+  // Section edit modal state
+  const [editingSection, setEditingSection] = useState<Section | null>(null);
+  const [sectionTitleInput, setSectionTitleInput] = useState('');
+  const [showSectionModal, setShowSectionModal] = useState(false);
+
   const [savedToast, setSavedToast] = useState(false);
 
   const handleAddSection = () => {
@@ -61,6 +66,29 @@ export default function CurriculumEditor({
     setNewSectionTitle('');
     setActiveSectionId(newSec.id);
     persistChanges(updated);
+  };
+
+  const handleOpenEditSection = (sec: Section) => {
+    setEditingSection(sec);
+    setSectionTitleInput(sec.title);
+    setShowSectionModal(true);
+  };
+
+  const handleSaveSection = () => {
+    if (!editingSection || !sectionTitleInput.trim()) return;
+    const updatedSections = sections.map((sec) => {
+      if (sec.id === editingSection.id) {
+        return {
+          ...sec,
+          title: sectionTitleInput.trim(),
+        };
+      }
+      return sec;
+    });
+    setSections(updatedSections);
+    persistChanges(updatedSections);
+    setShowSectionModal(false);
+    setEditingSection(null);
   };
 
   const handleDeleteSection = (secId: string) => {
@@ -329,17 +357,51 @@ export default function CurriculumEditor({
                     </span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                       {sec.lessons?.length || 0} lessons
                     </span>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
+                        handleOpenEditSection(sec);
+                      }}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: 'var(--text-muted)',
+                        cursor: 'pointer',
+                        padding: '0.25rem',
+                        borderRadius: '0.35rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        transition: 'color 0.2s ease',
+                      }}
+                      title="Edit Section Title"
+                      onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--primary)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                    >
+                      <Pencil size={13} />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
                         handleDeleteSection(sec.id);
                       }}
-                      style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: 'var(--text-muted)',
+                        cursor: 'pointer',
+                        padding: '0.25rem',
+                        borderRadius: '0.35rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        transition: 'color 0.2s ease',
+                      }}
                       title="Delete Section"
+                      onMouseEnter={(e) => (e.currentTarget.style.color = '#ef4444')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
                     >
                       <Trash2 size={14} />
                     </button>
@@ -359,10 +421,30 @@ export default function CurriculumEditor({
             marginBottom: '1.25rem',
           }}>
             <div>
-              <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>
-                {activeSec ? activeSec.title : 'Select a Section'}
-              </h3>
-              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>
+                  {activeSec ? activeSec.title : 'Select a Section'}
+                </h3>
+                {activeSec && (
+                  <button
+                    onClick={() => handleOpenEditSection(activeSec)}
+                    className="btn btn-secondary btn-sm"
+                    style={{
+                      padding: '0.25rem 0.55rem',
+                      fontSize: '0.75rem',
+                      gap: '0.3rem',
+                      background: 'rgba(99, 102, 241, 0.1)',
+                      borderColor: 'rgba(99, 102, 241, 0.25)',
+                      color: 'var(--primary)',
+                    }}
+                    title="Edit Section Title"
+                  >
+                    <Pencil size={12} />
+                    <span>Edit Section</span>
+                  </button>
+                )}
+              </div>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                 Manage lessons, video streams, and quizzes for this section
               </p>
             </div>
@@ -633,6 +715,87 @@ export default function CurriculumEditor({
               >
                 <Save size={15} />
                 <span>{editingLesson ? 'Save Changes' : 'Create Lesson'}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Section Modal */}
+      {showSectionModal && editingSection && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.7)',
+          backdropFilter: 'blur(8px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 300,
+          padding: '1.5rem',
+        }}>
+          <div className="glass-card animate-fade-in" style={{
+            width: '100%',
+            maxWidth: '480px',
+            background: 'var(--bg-surface-elevated)',
+            border: '1px solid var(--border-accent)',
+            boxShadow: 'var(--shadow-lg)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
+              <div style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '0.5rem',
+                background: 'rgba(99, 102, 241, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--primary)',
+              }}>
+                <Layers size={16} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', lineHeight: 1.2 }}>
+                  Edit Course Section
+                </h3>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                  Update the title for section #{editingSection.position}
+                </span>
+              </div>
+            </div>
+
+            <div style={{ marginBottom: '1.5rem' }}>
+              <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
+                Section Title
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. Module 1: Architecture, Supabase Foundations & Authentication"
+                value={sectionTitleInput}
+                onChange={(e) => setSectionTitleInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSaveSection()}
+                className="form-input"
+                autoFocus
+              />
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem' }}>
+              <button
+                onClick={() => {
+                  setShowSectionModal(false);
+                  setEditingSection(null);
+                }}
+                className="btn btn-secondary btn-sm"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSaveSection}
+                disabled={!sectionTitleInput.trim()}
+                className="btn btn-primary btn-sm"
+              >
+                <Save size={15} />
+                <span>Save Section</span>
               </button>
             </div>
           </div>
