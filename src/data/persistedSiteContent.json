@@ -24,7 +24,7 @@
     "next_intake": "April 2026",
     "duration": "12 Weeks",
     "sponsorship": "100% Sponsored (Mastercard Foundation)",
-    "partner_badge": "Mastercard Foundation Partnered",
+    "partner_badge": "Partner name",
     "enrolled_count_text": "8,400+ Enrolled",
     "cta_primary_text": "Explore Full Syllabus",
     "cta_secondary_text": "Check Eligibility & Grants",
@@ -167,18 +167,18 @@
   },
   "bottom_cta": {
     "title_prefix": "Ready to",
-    "title_highlight": "Do Hard Things",
+    "title_highlight": "Learn Hard Things First ",
     "subtitle": "Join over 350,000 learners mastering in-demand tech and leadership skills. Applications for the 2026 cohort close soon.",
     "cta_primary_text": "Apply For A Programme",
     "cta_secondary_text": "View Tuition & Sponsorships"
   },
   "footer": {
     "brand_tagline": "World-class tech and leadership academy powered by REACTJav. Built to empower over 350,000 learners with project-first engineering and accessible education.",
-    "mission_badge": "DO HARD THINGS",
+    "mission_badge": "Learn Hard Things First ",
     "copyright_text": "© 2026 REACTJav Academy. All rights reserved. • Global Quality, Accessible Education.",
-    "alliance_1": "Mastercard Foundation Partner",
-    "alliance_2": "54 City Hubs (Lagos, Nairobi, Kigali, Casablanca...)",
-    "alliance_3": "Enterprise Verified Credentials"
+    "alliance_1": "Partner address here",
+    "alliance_2": "Address 1",
+    "alliance_3": "Address 2"
   },
   "tutoring_hero": {
     "badge": "ReactJav Academy • Direct 1-on-1 Tutoring",

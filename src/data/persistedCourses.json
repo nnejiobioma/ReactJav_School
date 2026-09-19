@@ -46,104 +46,132 @@
     },
     "sections": [
       {
-        "id": "sec_01",
+        "id": "sec_1789842536138",
         "course_id": "crs_nextjs_supabase_01",
-        "title": "Module 1: Architecture, Supabase Foundations & Authentication",
+        "title": "Part 1: Beginner — Foundations, Version Control & App Router Core",
         "position": 1,
         "lessons": [
           {
-            "id": "les_01_01",
-            "section_id": "sec_01",
-            "title": "1.1 System Architecture & Database Design for High-Throughput LMS",
+            "id": "les_1789842551748",
+            "section_id": "sec_1789842536138",
+            "title": "Module 1: Professional Git & GitHub Workflows for Engineers 1.1 Git Architecture & Core Mental Models",
             "type": "video",
             "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-            "content": "In this session, we analyze the multi-tenant architecture, comparing client-side state models vs Next.js Server Components with Supabase RLS.",
-            "duration_seconds": 480,
-            "position": 1,
-            "is_free_preview": true,
-            "is_completed": true
-          },
-          {
-            "id": "les_01_02",
-            "section_id": "sec_01",
-            "title": "1.2 Configuring Supabase PostgreSQL & Row Level Security (RLS) Policies",
-            "type": "article",
-            "content": "### Row Level Security (RLS) in PostgreSQL\n\nRow Level Security is the bedrock of multi-tenant security in Supabase. Unlike traditional backends where application code is entirely responsible for filtering rows (where a single missing WHERE clause leads to data leaks), Postgres RLS enforces security at the engine level.\n\n#### Key Concepts:\n1. **`auth.uid()`**: Returns the authenticated user's UUID from the JWT token.\n2. **Policy Expressions**: Boolean expressions evaluated for every `SELECT`, `INSERT`, `UPDATE`, and `DELETE` query.\n\n```sql\n-- Enable RLS\nALTER TABLE public.enrollments ENABLE ROW LEVEL SECURITY;\n\n-- Allow students to read only their own enrollments\nCREATE POLICY \"Student read own enrollments\"\n  ON public.enrollments\n  FOR SELECT\n  USING (auth.uid() = user_id);\n```\n\n#### Best Practices for LMS Applications:\n- Always index columns referenced in RLS policies (e.g. `user_id`, `course_id`).\n- Use security definer functions judiciously for complex aggregation queries.\n- Keep policies declarative and lean for maximum query planning efficiency.",
-            "duration_seconds": 360,
-            "position": 2,
-            "is_free_preview": true,
-            "is_completed": false
-          },
-          {
-            "id": "les_01_03",
-            "section_id": "sec_01",
-            "title": "1.3 Assessment: Architecture & Security Checkpoint",
-            "type": "quiz",
+            "content": null,
             "duration_seconds": 300,
-            "position": 3,
-            "is_free_preview": true,
-            "is_completed": false,
-            "quiz_questions": [
+            "position": 1,
+            "is_free_preview": false,
+            "sub_lessons": [
               {
-                "id": "q_01",
-                "lesson_id": "les_01_03",
-                "question": "What is the primary advantage of Row Level Security (RLS) over application-level filtering?",
-                "options": [
-                  "It compiles SQL into WebAssembly for faster execution",
-                  "Postgres evaluates access policies directly in the database engine, preventing accidental data leaks",
-                  "It eliminates the need for user authentication completely",
-                  "It replaces primary keys with cryptographic hashes"
-                ],
-                "correct_option_index": 1,
-                "explanation": "RLS enforces access rules in the PostgreSQL core engine, ensuring no API endpoint or bug can bypass isolation.",
-                "position": 1
+                "id": "sub_1789842566787",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842551748",
+                "title": "The Three Trees: Deep dive into the Working Directory, the Staging Area (Index), and the Git Repository (HEAD).",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 1,
+                "is_free_preview": false
               },
               {
-                "id": "q_02",
-                "lesson_id": "les_01_03",
-                "question": "How does Supabase expose the currently logged-in user inside an RLS policy?",
-                "options": [
-                  "Via the auth.uid() function extracted from the JWT payload",
-                  "Via an HTTP header forwarded to the client",
-                  "Via a global JavaScript session variable",
-                  "Via localStorage in the browser"
-                ],
-                "correct_option_index": 0,
-                "explanation": "Supabase validates the incoming JWT and sets the Postgres session context, exposing auth.uid() to SQL policies.",
-                "position": 2
+                "id": "sub_1789842578075",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842551748",
+                "title": "Git Object Internals: How Git stores snapshots as immutable objects—Blobs (file contents), Trees (directories), Commits (metadata & root tree pointer), and Annotated Tags.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 2,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789842592826",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842551748",
+                "title": "The Commit Graph: Directed Acyclic Graphs (DAG), SHA-1/SHA-256 hashes, and how HEAD references specific commits or branch tips.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 3,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789842603554",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842551748",
+                "title": "Local Engine Configuration: Setting up global vs. local configs, default branch naming (init.defaultBranch main), credential helpers, line ending normalization (core.autocrlf), and editor configuration.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 4,
+                "is_free_preview": false
               }
             ]
-          }
-        ]
-      },
-      {
-        "id": "sec_02",
-        "course_id": "crs_nextjs_supabase_01",
-        "title": "Module 2: Video Streaming, HLS & Resumable Player Engine",
-        "position": 2,
-        "lessons": [
-          {
-            "id": "les_02_01",
-            "section_id": "sec_02",
-            "title": "2.1 Adaptive Bitrate Streaming & Resumable Playback Checkpoints",
-            "type": "video",
-            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-            "content": "Deep dive into video chunking, buffer management, and persisting playback seconds to PostgreSQL on throttle windows.",
-            "duration_seconds": 620,
-            "position": 1,
-            "is_free_preview": false,
-            "is_completed": false
           },
           {
-            "id": "les_02_02",
-            "section_id": "sec_02",
-            "title": "2.2 Real-time Progress Tracking with Optimistic UI Updates",
-            "type": "article",
-            "content": "### Optimistic UI Patterns in Learning Systems\n\nWhen a student clicks \"Mark as Complete\" or finishes a video module, the learning interface must reflect the completed state **instantaneously (<16ms)** without waiting for network roundtrips.\n\n#### Implementation Pattern:\n1. **Immediate Local Cache Update**: The React state updates the completion checkmark and recalculates progress bar percentage.\n2. **Background Sync**: An asynchronous call pushes the `lesson_progress` update to Supabase.\n3. **Rollback Handling**: If the network request fails due to connectivity loss, the state reverts and triggers an unobtrusive toast notification.\n\nThis pattern eliminates perceptual latency and produces a buttery-smooth desktop and mobile learning experience.",
-            "duration_seconds": 400,
+            "id": "les_1789842629020",
+            "section_id": "sec_1789842536138",
+            "title": "1.2 State Manipulation & Local CLI Mastery",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+            "content": null,
+            "duration_seconds": 300,
             "position": 2,
             "is_free_preview": false,
-            "is_completed": false
+            "sub_lessons": [
+              {
+                "id": "sub_1789842642218",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842629020",
+                "title": "Staging Mechanics: Granular staging with git add -p (patch mode), unstaging via git restore --staged, and tracking file status.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 1,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789842652874",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842629020",
+                "title": "Navigating History: Formatting git log with --graph --oneline --decorate, searching commit messages, and using git diff across commits, working tree, and index.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 2,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789842664150",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842629020",
+                "title": "Undoing Mistakes Safely: Comparing git reset (--soft, --mixed, --hard), git restore, and git clean -fd.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 3,
+                "is_free_preview": false
+              },
+              {
+                "id": "sub_1789842674940",
+                "section_id": "sec_1789842536138",
+                "parent_lesson_id": "les_1789842629020",
+                "title": "Stashing Strategies: Working with git stash push -m, git stash pop, git stash apply, inspecting stash diffs, and stashing untracked files.",
+                "type": "article",
+                "video_url": null,
+                "content": "Sample article content.",
+                "duration_seconds": 180,
+                "position": 4,
+                "is_free_preview": false
+              }
+            ]
           }
         ]
       }
