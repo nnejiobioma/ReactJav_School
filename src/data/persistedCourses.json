@@ -340,6 +340,76 @@
                 "correct_option_index": 0,
                 "explanation": "Demonstration explanation for the correct answer.",
                 "position": 1
+              },
+              {
+                "id": "q_1789846440200_nfe5v",
+                "lesson_id": "",
+                "question": "Checkpoint Question 2: What is the primary concept covered in this section?",
+                "options": [
+                  "Option A: First principle concept (Correct Answer)",
+                  "Option B: Alternative approach",
+                  "Option C: Legacy configuration",
+                  "Option D: Unrelated implementation"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Explanation: This option directly addresses the architectural principle established in this module.",
+                "position": 2
+              },
+              {
+                "id": "q_1789846441223_qdi1x",
+                "lesson_id": "",
+                "question": "Checkpoint Question 3: What is the primary concept covered in this section?",
+                "options": [
+                  "Option A: First principle concept (Correct Answer)",
+                  "Option B: Alternative approach",
+                  "Option C: Legacy configuration",
+                  "Option D: Unrelated implementation"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Explanation: This option directly addresses the architectural principle established in this module.",
+                "position": 3
+              },
+              {
+                "id": "q_1789846441647_rtcy3",
+                "lesson_id": "",
+                "question": "Checkpoint Question 4: What is the primary concept covered in this section?",
+                "options": [
+                  "Option A: First principle concept (Correct Answer)",
+                  "Option B: Alternative approach",
+                  "Option C: Legacy configuration",
+                  "Option D: Unrelated implementation"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Explanation: This option directly addresses the architectural principle established in this module.",
+                "position": 4
+              },
+              {
+                "id": "q_1789846442007_fxx01",
+                "lesson_id": "",
+                "question": "Checkpoint Question 5: What is the primary concept covered in this section?",
+                "options": [
+                  "Option A: First principle concept (Correct Answer)",
+                  "Option B: Alternative approach",
+                  "Option C: Legacy configuration",
+                  "Option D: Unrelated implementation"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Explanation: This option directly addresses the architectural principle established in this module.",
+                "position": 5
+              },
+              {
+                "id": "q_1789846442432_kobrf",
+                "lesson_id": "",
+                "question": "Checkpoint Question 6: What is the primary concept covered in this section?",
+                "options": [
+                  "Option A: First principle concept (Correct Answer)",
+                  "Option B: Alternative approach",
+                  "Option C: Legacy configuration",
+                  "Option D: Unrelated implementation"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Explanation: This option directly addresses the architectural principle established in this module.",
+                "position": 6
               }
             ]
           }
