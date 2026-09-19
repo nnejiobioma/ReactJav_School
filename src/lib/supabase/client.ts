@@ -950,6 +950,17 @@ export class LocalDataService {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
+        // Auto-migrate any old cached WhatsApp number
+        if (parsed.direct_tutoring?.whatsapp_number?.includes('35465695068')) {
+          delete parsed.direct_tutoring.whatsapp_number;
+        }
+        if (parsed.tutoring_hero?.whatsapp_number?.includes('35465695068')) {
+          delete parsed.tutoring_hero.whatsapp_number;
+        }
+        if (parsed.tutoring_bottom_cta?.whatsapp_number?.includes('35465695068')) {
+          delete parsed.tutoring_bottom_cta.whatsapp_number;
+        }
+
         // Deep merge with defaults in case of missing keys
         return {
           ...DEFAULT_SITE_CONTENT,

@@ -252,12 +252,15 @@ export const TUTORING_METRICS = [
   }
 ];
 
-export const TUTORING_WHATSAPP_NUMBER = '35465695068';
-export const TUTORING_WHATSAPP_DISPLAY = '+35465695068';
+export const TUTORING_WHATSAPP_NUMBER = '+3580465695068';
+export const TUTORING_WHATSAPP_DISPLAY = '+358 0465695068';
 
 export function getTutoringWhatsAppUrl(trackName?: string, customNumber?: string): string {
   const rawNumber = customNumber || TUTORING_WHATSAPP_NUMBER;
-  const cleanNumber = rawNumber.replace(/[^0-9]/g, '');
+  let cleanNumber = rawNumber.trim().replace(/[\s\-()]/g, '');
+  if (!cleanNumber.startsWith('+')) {
+    cleanNumber = `+${cleanNumber}`;
+  }
   const message = trackName 
     ? `Hello ReactJav Academy 👋, I'm interested in the ${trackName} 1-on-1 Direct Tutoring track. Please share the syllabus, schedule, and enrolment details.`
     : `Hello ReactJav Academy 👋, I would like to book a 1-on-1 Direct Tutoring discovery session for our learner. Please share available tracks and times.`;
