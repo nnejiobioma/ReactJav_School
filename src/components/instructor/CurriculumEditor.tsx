@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { 
   Plus, 
   Trash2, 
+  Pencil,
   Video, 
   FileText, 
   HelpCircle, 
@@ -34,14 +35,15 @@ export default function CurriculumEditor({
     sections[0]?.id || null
   );
 
-  // New lesson form state
-  const [newLessonTitle, setNewLessonTitle] = useState('');
-  const [newLessonType, setNewLessonType] = useState<'video' | 'article' | 'quiz'>('video');
-  const [newLessonUrl, setNewLessonUrl] = useState('');
-  const [newLessonContent, setNewLessonContent] = useState('');
-  const [newLessonDuration, setNewLessonDuration] = useState(300);
-  const [newLessonPreview, setNewLessonPreview] = useState(false);
-  const [showAddLessonModal, setShowAddLessonModal] = useState(false);
+  // Lesson form state (Add & Edit)
+  const [editingLesson, setEditingLesson] = useState<Lesson | null>(null);
+  const [lessonTitle, setLessonTitle] = useState('');
+  const [lessonType, setLessonType] = useState<'video' | 'article' | 'quiz'>('video');
+  const [lessonUrl, setLessonUrl] = useState('');
+  const [lessonContent, setLessonContent] = useState('');
+  const [lessonDuration, setLessonDuration] = useState(300);
+  const [lessonPreview, setLessonPreview] = useState(false);
+  const [showLessonModal, setShowLessonModal] = useState(false);
 
   const [savedToast, setSavedToast] = useState(false);
 
@@ -70,52 +72,104 @@ export default function CurriculumEditor({
     persistChanges(updated);
   };
 
-  const handleAddLesson = () => {
-    if (!activeSectionId || !newLessonTitle.trim()) return;
+  const handleOpenAddLesson = () => {
+    setEditingLesson(null);
+    setLessonTitle('');
+    setLessonType('video');
+    setLessonUrl('');
+    setLessonContent('');
+    setLessonDuration(300);
+    setLessonPreview(false);
+    setShowLessonModal(true);
+  };
+
+  const handleOpenEditLesson = (lesson: Lesson) => {
+    setEditingLesson(lesson);
+    setLessonTitle(lesson.title);
+    setLessonType(lesson.type);
+    setLessonUrl(lesson.video_url || '');
+    setLessonContent(lesson.content || '');
+    setLessonDuration(lesson.duration_seconds || 300);
+    setLessonPreview(!!lesson.is_free_preview);
+    setShowLessonModal(true);
+  };
+
+  const handleSaveLesson = () => {
+    if (!activeSectionId || !lessonTitle.trim()) return;
     const activeSec = sections.find((s) => s.id === activeSectionId);
     if (!activeSec) return;
 
-    const newLes: Lesson = {
-      id: `les_${Date.now()}`,
-      section_id: activeSectionId,
-      title: newLessonTitle.trim(),
-      type: newLessonType,
-      video_url: newLessonType === 'video' ? (newLessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
-      content: newLessonType === 'article' ? (newLessonContent || 'Sample article content.') : null,
-      duration_seconds: newLessonDuration,
-      position: (activeSec.lessons?.length || 0) + 1,
-      is_free_preview: newLessonPreview,
-      quiz_questions: newLessonType === 'quiz' ? [
-        {
-          id: `q_${Date.now()}`,
-          lesson_id: `les_${Date.now()}`,
-          question: 'Sample assessment question for this module?',
-          options: ['Option A (Correct)', 'Option B', 'Option C', 'Option D'],
-          correct_option_index: 0,
-          explanation: 'Demonstration explanation for the correct answer.',
-          position: 1,
-        }
-      ] : undefined,
-    };
+    let updatedSections: Section[];
 
-    const updatedSections = sections.map((sec) => {
-      if (sec.id === activeSectionId) {
-        return {
-          ...sec,
-          lessons: [...(sec.lessons || []), newLes],
-        };
-      }
-      return sec;
-    });
+    if (editingLesson) {
+      // Update existing lesson in place
+      updatedSections = sections.map((sec) => {
+        if (sec.id === activeSectionId) {
+          return {
+            ...sec,
+            lessons: (sec.lessons || []).map((les) => {
+              if (les.id === editingLesson.id) {
+                return {
+                  ...les,
+                  title: lessonTitle.trim(),
+                  type: lessonType,
+                  video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
+                  content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
+                  duration_seconds: lessonDuration,
+                  is_free_preview: lessonPreview,
+                };
+              }
+              return les;
+            }),
+          };
+        }
+        return sec;
+      });
+    } else {
+      // Create new lesson
+      const newLes: Lesson = {
+        id: `les_${Date.now()}`,
+        section_id: activeSectionId,
+        title: lessonTitle.trim(),
+        type: lessonType,
+        video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
+        content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
+        duration_seconds: lessonDuration,
+        position: (activeSec.lessons?.length || 0) + 1,
+        is_free_preview: lessonPreview,
+        quiz_questions: lessonType === 'quiz' ? [
+          {
+            id: `q_${Date.now()}`,
+            lesson_id: `les_${Date.now()}`,
+            question: 'Sample assessment question for this module?',
+            options: ['Option A (Correct)', 'Option B', 'Option C', 'Option D'],
+            correct_option_index: 0,
+            explanation: 'Demonstration explanation for the correct answer.',
+            position: 1,
+          }
+        ] : undefined,
+      };
+
+      updatedSections = sections.map((sec) => {
+        if (sec.id === activeSectionId) {
+          return {
+            ...sec,
+            lessons: [...(sec.lessons || []), newLes],
+          };
+        }
+        return sec;
+      });
+    }
 
     setSections(updatedSections);
     persistChanges(updatedSections);
 
-    // Reset form
-    setNewLessonTitle('');
-    setNewLessonUrl('');
-    setNewLessonContent('');
-    setShowAddLessonModal(false);
+    // Reset form & close
+    setLessonTitle('');
+    setLessonUrl('');
+    setLessonContent('');
+    setEditingLesson(null);
+    setShowLessonModal(false);
   };
 
   const handleDeleteLesson = (secId: string, lesId: string) => {
@@ -315,7 +369,7 @@ export default function CurriculumEditor({
 
             {activeSec && (
               <button
-                onClick={() => setShowAddLessonModal(true)}
+                onClick={handleOpenAddLesson}
                 className="btn btn-primary btn-sm"
               >
                 <Plus size={16} />
@@ -373,13 +427,44 @@ export default function CurriculumEditor({
                     </div>
                   </div>
 
-                  <button
-                    onClick={() => handleDeleteLesson(activeSec.id, lesson.id)}
-                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
-                    title="Delete Lesson"
-                  >
-                    <Trash2 size={15} />
-                  </button>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <button
+                      onClick={() => handleOpenEditLesson(lesson)}
+                      className="btn btn-secondary btn-sm"
+                      style={{
+                        padding: '0.35rem 0.65rem',
+                        fontSize: '0.78rem',
+                        gap: '0.35rem',
+                        background: 'rgba(99, 102, 241, 0.1)',
+                        borderColor: 'rgba(99, 102, 241, 0.25)',
+                        color: 'var(--primary)',
+                      }}
+                      title="Edit Lesson Details"
+                    >
+                      <Pencil size={13} />
+                      <span>Edit</span>
+                    </button>
+
+                    <button
+                      onClick={() => handleDeleteLesson(activeSec.id, lesson.id)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: 'var(--text-muted)',
+                        cursor: 'pointer',
+                        padding: '0.35rem',
+                        borderRadius: '0.4rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        transition: 'color 0.2s ease',
+                      }}
+                      title="Delete Lesson"
+                      onMouseEnter={(e) => (e.currentTarget.style.color = '#ef4444')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                    >
+                      <Trash2 size={15} />
+                    </button>
+                  </div>
                 </div>
               ))}
 
@@ -397,8 +482,8 @@ export default function CurriculumEditor({
         </div>
       </div>
 
-      {/* Add Lesson Modal */}
-      {showAddLessonModal && (
+      {/* Add / Edit Lesson Modal */}
+      {showLessonModal && (
         <div style={{
           position: 'fixed',
           inset: 0,
@@ -412,13 +497,35 @@ export default function CurriculumEditor({
         }}>
           <div className="glass-card animate-fade-in" style={{
             width: '100%',
-            maxWidth: '520px',
+            maxWidth: '540px',
             background: 'var(--bg-surface-elevated)',
             border: '1px solid var(--border-accent)',
+            boxShadow: 'var(--shadow-lg)',
           }}>
-            <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
-              Add Lesson to {activeSec?.title}
-            </h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
+              <div style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '0.5rem',
+                background: 'rgba(99, 102, 241, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--primary)',
+              }}>
+                {editingLesson ? <Pencil size={16} /> : <Plus size={16} />}
+              </div>
+              <div>
+                <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', lineHeight: 1.2 }}>
+                  {editingLesson ? 'Edit Lesson Details' : `Add Lesson to ${activeSec?.title}`}
+                </h3>
+                {editingLesson && (
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                    Modifying: {editingLesson.title}
+                  </span>
+                )}
+              </div>
+            </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
               <div>
@@ -428,8 +535,8 @@ export default function CurriculumEditor({
                 <input
                   type="text"
                   placeholder="e.g. 1.3 State Management Principles"
-                  value={newLessonTitle}
-                  onChange={(e) => setNewLessonTitle(e.target.value)}
+                  value={lessonTitle}
+                  onChange={(e) => setLessonTitle(e.target.value)}
                   className="form-input"
                 />
               </div>
@@ -440,8 +547,8 @@ export default function CurriculumEditor({
                     Content Type
                   </label>
                   <select
-                    value={newLessonType}
-                    onChange={(e) => setNewLessonType(e.target.value as any)}
+                    value={lessonType}
+                    onChange={(e) => setLessonType(e.target.value as any)}
                     className="form-input"
                   >
                     <option value="video">Video Stream</option>
@@ -457,14 +564,14 @@ export default function CurriculumEditor({
                   <input
                     type="number"
                     min="1"
-                    value={Math.round(newLessonDuration / 60)}
-                    onChange={(e) => setNewLessonDuration(parseInt(e.target.value || '5') * 60)}
+                    value={Math.round(lessonDuration / 60)}
+                    onChange={(e) => setLessonDuration(parseInt(e.target.value || '5') * 60)}
                     className="form-input"
                   />
                 </div>
               </div>
 
-              {newLessonType === 'video' && (
+              {lessonType === 'video' && (
                 <div>
                   <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
                     Video URL (MP4 or HLS Stream)
@@ -472,23 +579,23 @@ export default function CurriculumEditor({
                   <input
                     type="text"
                     placeholder="https://commondatastorage.googleapis.com/.../sample.mp4"
-                    value={newLessonUrl}
-                    onChange={(e) => setNewLessonUrl(e.target.value)}
+                    value={lessonUrl}
+                    onChange={(e) => setLessonUrl(e.target.value)}
                     className="form-input"
                   />
                 </div>
               )}
 
-              {newLessonType === 'article' && (
+              {lessonType === 'article' && (
                 <div>
                   <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
                     Article Markdown Content
                   </label>
                   <textarea
-                    rows={4}
+                    rows={5}
                     placeholder="### Overview&#10;Write markdown lecture notes here..."
-                    value={newLessonContent}
-                    onChange={(e) => setNewLessonContent(e.target.value)}
+                    value={lessonContent}
+                    onChange={(e) => setLessonContent(e.target.value)}
                     className="form-input"
                     style={{ resize: 'vertical' }}
                   />
@@ -499,8 +606,8 @@ export default function CurriculumEditor({
                 <input
                   type="checkbox"
                   id="previewCheckbox"
-                  checked={newLessonPreview}
-                  onChange={(e) => setNewLessonPreview(e.target.checked)}
+                  checked={lessonPreview}
+                  onChange={(e) => setLessonPreview(e.target.checked)}
                   style={{ accentColor: '#6366f1', width: '16px', height: '16px' }}
                 />
                 <label htmlFor="previewCheckbox" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', cursor: 'pointer' }}>
@@ -511,17 +618,21 @@ export default function CurriculumEditor({
 
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem' }}>
               <button
-                onClick={() => setShowAddLessonModal(false)}
+                onClick={() => {
+                  setShowLessonModal(false);
+                  setEditingLesson(null);
+                }}
                 className="btn btn-secondary btn-sm"
               >
                 Cancel
               </button>
               <button
-                onClick={handleAddLesson}
-                disabled={!newLessonTitle.trim()}
+                onClick={handleSaveLesson}
+                disabled={!lessonTitle.trim()}
                 className="btn btn-primary btn-sm"
               >
-                Create Lesson
+                <Save size={15} />
+                <span>{editingLesson ? 'Save Changes' : 'Create Lesson'}</span>
               </button>
             </div>
           </div>
