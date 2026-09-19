@@ -107,6 +107,7 @@ export const DEFAULT_SITE_CONTENT: SiteContentConfig = {
     zone_3_desc: 'Build-your-own track tailored for school syllabus, hackathons, or career milestones.',
     cta_primary_text: 'Explore Academy Tracks & Pathways',
     cta_whatsapp_text: 'Chat With Academy Team',
+    whatsapp_number: '+35465695068',
   },
   testimonials: {
     eyebrow: 'Transformation in Action',
@@ -189,6 +190,7 @@ export const DEFAULT_SITE_CONTENT: SiteContentConfig = {
     cta_primary_text: 'Book 1-on-1 Discovery Chat',
     cta_secondary_text: 'Explore Learning Zones',
     cta_whatsapp_text: 'WhatsApp Direct',
+    whatsapp_number: '+35465695068',
   },
   tutoring_zones: {
     zone_1_badge: 'Zone 01',
@@ -230,6 +232,7 @@ export const DEFAULT_SITE_CONTENT: SiteContentConfig = {
     subtitle: 'Every journey begins with a complimentary 20-minute discovery chat. We evaluate current experience, discuss passions, and design a customized 1-on-1 learning plan.',
     cta_primary_text: 'Book Discovery Chat',
     cta_whatsapp_text: 'Chat on WhatsApp',
+    whatsapp_number: '+35465695068',
   },
 };
 

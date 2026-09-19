@@ -399,6 +399,7 @@ export interface SiteDirectTutoringContent {
   zone_3_desc: string;
   cta_primary_text: string;
   cta_whatsapp_text: string;
+  whatsapp_number?: string;
 }
 
 export interface SiteTestimonialItem {
@@ -455,6 +456,7 @@ export interface SiteTutoringHeroContent {
   cta_primary_text: string;
   cta_secondary_text: string;
   cta_whatsapp_text: string;
+  whatsapp_number?: string;
 }
 
 export interface SiteTutoringZonesContent {
@@ -500,6 +502,7 @@ export interface SiteTutoringBottomCtaContent {
   subtitle: string;
   cta_primary_text: string;
   cta_whatsapp_text: string;
+  whatsapp_number?: string;
 }
 
 export interface SiteContentConfig {

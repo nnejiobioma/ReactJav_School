@@ -370,7 +370,7 @@ export default function TutoringBookingModal({ initialTrack, isOpen, onClose }: 
                 <input
                   type="text"
                   required
-                  placeholder="+234 806 096 6929 or email"
+                  placeholder="+35465695068 or email"
                   value={contactInfo}
                   onChange={(e) => setContactInfo(e.target.value)}
                   className="form-input"

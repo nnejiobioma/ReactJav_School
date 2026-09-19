@@ -278,7 +278,7 @@ export default function AcademyPage() {
               </a>
 
               <a
-                href={getTutoringWhatsAppUrl()}
+                href={getTutoringWhatsAppUrl(undefined, heroData.whatsapp_number)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
@@ -670,7 +670,7 @@ export default function AcademyPage() {
               </button>
 
               <a
-                href={getTutoringWhatsAppUrl()}
+                href={getTutoringWhatsAppUrl(undefined, ctaData.whatsapp_number)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary"

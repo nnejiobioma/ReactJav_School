@@ -852,6 +852,17 @@ export default function AdminSectionEditorModal({
                   />
                 </div>
               </div>
+
+              <div>
+                <label className="form-label">WhatsApp Contact Number (e.g. +35465695068)</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  placeholder="+35465695068"
+                  value={formData.whatsapp_number || ''}
+                  onChange={(e) => handleChange('whatsapp_number', e.target.value)}
+                />
+              </div>
             </>
           )}
 
@@ -1223,6 +1234,17 @@ export default function AdminSectionEditorModal({
                   />
                 </div>
               </div>
+
+              <div>
+                <label className="form-label">WhatsApp Contact Number (e.g. +35465695068)</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  placeholder="+35465695068"
+                  value={formData.whatsapp_number || ''}
+                  onChange={(e) => handleChange('whatsapp_number', e.target.value)}
+                />
+              </div>
             </>
           )}
 
@@ -1556,6 +1578,17 @@ export default function AdminSectionEditorModal({
                     onChange={(e) => handleChange('cta_whatsapp_text', e.target.value)}
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="form-label">WhatsApp Contact Number (e.g. +35465695068)</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  placeholder="+35465695068"
+                  value={formData.whatsapp_number || ''}
+                  onChange={(e) => handleChange('whatsapp_number', e.target.value)}
+                />
               </div>
             </>
           )}

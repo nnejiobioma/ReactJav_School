@@ -803,7 +803,7 @@ export default function HomePage() {
               </Link>
 
               <a
-                href={getTutoringWhatsAppUrl()}
+                href={getTutoringWhatsAppUrl(undefined, siteContent.direct_tutoring?.whatsapp_number)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
