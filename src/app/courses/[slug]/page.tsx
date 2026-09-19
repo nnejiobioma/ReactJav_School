@@ -73,15 +73,27 @@ export default function CourseDetailPage() {
   };
 
   const totalLessons = course.sections?.reduce(
-    (acc, sec) => acc + (sec.lessons?.length || 0), 0
+    (acc, sec) =>
+      acc +
+      (sec.lessons?.reduce((lAcc, l) => lAcc + 1 + (l.sub_lessons?.length || 0), 0) || 0),
+    0
   ) || 0;
 
   const totalDuration = course.sections?.reduce(
-    (acc, sec) => acc + (sec.lessons?.reduce((lAcc, l) => lAcc + l.duration_seconds, 0) || 0), 0
+    (acc, sec) =>
+      acc +
+      (sec.lessons?.reduce(
+        (lAcc, l) =>
+          lAcc +
+          l.duration_seconds +
+          (l.sub_lessons?.reduce((slAcc, sl) => slAcc + sl.duration_seconds, 0) || 0),
+        0
+      ) || 0),
+    0
   ) || 0;
 
   const firstPreviewLesson = course.sections
-    ?.flatMap((s) => s.lessons || [])
+    ?.flatMap((s) => (s.lessons || []).flatMap((l) => [l, ...(l.sub_lessons || [])]))
     .find((l) => l.is_free_preview);
 
   return (
@@ -291,58 +303,131 @@ export default function CourseDetailPage() {
                     {section.title}
                   </h3>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    {section.lessons?.length || 0} lessons
+                    {(section.lessons || []).reduce((acc, l) => acc + 1 + (l.sub_lessons?.length || 0), 0)} lessons
                   </span>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   {section.lessons?.map((lesson) => (
-                    <div
-                      key={lesson.id}
-                      style={{
-                        padding: '0.75rem 1rem',
-                        borderRadius: '0.5rem',
-                        background: 'var(--bg-surface)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                      }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        {lesson.type === 'video' && <PlayCircle size={16} color="var(--primary)" />}
-                        {lesson.type === 'article' && <FileText size={16} color="var(--accent-cyan)" />}
-                        {lesson.type === 'quiz' && <HelpCircle size={16} color="var(--accent-amber)" />}
+                    <div key={lesson.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                      <div
+                        style={{
+                          padding: '0.75rem 1rem',
+                          borderRadius: '0.5rem',
+                          background: 'var(--bg-surface)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          border: '1px solid var(--border-subtle)',
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                          {lesson.type === 'video' && <PlayCircle size={16} color="var(--primary)" />}
+                          {lesson.type === 'article' && <FileText size={16} color="var(--accent-cyan)" />}
+                          {lesson.type === 'quiz' && <HelpCircle size={16} color="var(--accent-amber)" />}
 
-                        <span style={{ fontSize: '0.875rem', color: '#ffffff' }}>
-                          {lesson.title}
-                        </span>
+                          <div>
+                            <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#ffffff', display: 'block' }}>
+                              {lesson.title}
+                            </span>
+                            {lesson.sub_lessons && lesson.sub_lessons.length > 0 && (
+                              <span style={{ fontSize: '0.7rem', color: '#a5b4fc' }}>
+                                {lesson.sub_lessons.length} sub-lessons
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                            {formatDuration(lesson.duration_seconds)}
+                          </span>
+
+                          {lesson.is_free_preview ? (
+                            <Link
+                              href={`/learn/${course.id}/${lesson.id}`}
+                              className="btn btn-outline btn-sm"
+                              style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem', borderColor: 'var(--accent-cyan)', color: 'var(--accent-cyan)' }}
+                            >
+                              Preview
+                            </Link>
+                          ) : !isEnrolled ? (
+                            <Lock size={14} color="var(--text-muted)" />
+                          ) : (
+                            <Link
+                              href={`/learn/${course.id}/${lesson.id}`}
+                              className="btn btn-secondary btn-sm"
+                              style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }}
+                            >
+                              Play
+                            </Link>
+                          )}
+                        </div>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                          {formatDuration(lesson.duration_seconds)}
-                        </span>
+                      {/* Sub-lessons list */}
+                      {lesson.sub_lessons && lesson.sub_lessons.length > 0 && (
+                        <div style={{
+                          marginLeft: '1.5rem',
+                          paddingLeft: '0.75rem',
+                          borderLeft: '2px solid rgba(99, 102, 241, 0.25)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '0.35rem',
+                        }}>
+                          {lesson.sub_lessons.map((subLesson) => (
+                            <div
+                              key={subLesson.id}
+                              style={{
+                                padding: '0.55rem 0.85rem',
+                                borderRadius: '0.375rem',
+                                background: 'rgba(255, 255, 255, 0.02)',
+                                border: '1px solid rgba(255, 255, 255, 0.04)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                              }}
+                            >
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                                <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'var(--primary)', flexShrink: 0 }} />
+                                {subLesson.type === 'video' && <PlayCircle size={14} color="var(--primary)" />}
+                                {subLesson.type === 'article' && <FileText size={14} color="var(--accent-cyan)" />}
+                                {subLesson.type === 'quiz' && <HelpCircle size={14} color="var(--accent-amber)" />}
 
-                        {lesson.is_free_preview ? (
-                          <Link
-                            href={`/learn/${course.id}/${lesson.id}`}
-                            className="btn btn-outline btn-sm"
-                            style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem', borderColor: 'var(--accent-cyan)', color: 'var(--accent-cyan)' }}
-                          >
-                            Preview
-                          </Link>
-                        ) : !isEnrolled ? (
-                          <Lock size={14} color="var(--text-muted)" />
-                        ) : (
-                          <Link
-                            href={`/learn/${course.id}/${lesson.id}`}
-                            className="btn btn-secondary btn-sm"
-                            style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }}
-                          >
-                            Play
-                          </Link>
-                        )}
-                      </div>
+                                <span style={{ fontSize: '0.8rem', color: 'var(--text-primary)' }}>
+                                  {subLesson.title}
+                                </span>
+                              </div>
+
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                                  {formatDuration(subLesson.duration_seconds)}
+                                </span>
+
+                                {subLesson.is_free_preview ? (
+                                  <Link
+                                    href={`/learn/${course.id}/${subLesson.id}`}
+                                    className="btn btn-outline btn-sm"
+                                    style={{ padding: '0.15rem 0.45rem', fontSize: '0.7rem', borderColor: 'var(--accent-cyan)', color: 'var(--accent-cyan)' }}
+                                  >
+                                    Preview
+                                  </Link>
+                                ) : !isEnrolled ? (
+                                  <Lock size={13} color="var(--text-muted)" />
+                                ) : (
+                                  <Link
+                                    href={`/learn/${course.id}/${subLesson.id}`}
+                                    className="btn btn-secondary btn-sm"
+                                    style={{ padding: '0.15rem 0.45rem', fontSize: '0.7rem' }}
+                                  >
+                                    Play
+                                  </Link>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

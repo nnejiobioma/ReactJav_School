@@ -15,6 +15,8 @@ import {
   Clock, 
   Layers, 
   ChevronRight,
+  ChevronDown,
+  CornerDownRight,
   ExternalLink
 } from 'lucide-react';
 import { Course, Section, Lesson } from '@/types';
@@ -35,8 +37,9 @@ export default function CurriculumEditor({
     sections[0]?.id || null
   );
 
-  // Lesson form state (Add & Edit)
+  // Lesson form state (Add & Edit - Main & Sub-lessons)
   const [editingLesson, setEditingLesson] = useState<Lesson | null>(null);
+  const [parentLessonForSubLesson, setParentLessonForSubLesson] = useState<Lesson | null>(null);
   const [lessonTitle, setLessonTitle] = useState('');
   const [lessonType, setLessonType] = useState<'video' | 'article' | 'quiz'>('video');
   const [lessonUrl, setLessonUrl] = useState('');
@@ -44,6 +47,14 @@ export default function CurriculumEditor({
   const [lessonDuration, setLessonDuration] = useState(300);
   const [lessonPreview, setLessonPreview] = useState(false);
   const [showLessonModal, setShowLessonModal] = useState(false);
+  const [expandedLessons, setExpandedLessons] = useState<Record<string, boolean>>({});
+
+  const toggleLessonExpanded = (lessonId: string) => {
+    setExpandedLessons((prev) => ({
+      ...prev,
+      [lessonId]: prev[lessonId] === undefined ? false : !prev[lessonId],
+    }));
+  };
 
   // Section edit modal state
   const [editingSection, setEditingSection] = useState<Section | null>(null);
@@ -101,6 +112,7 @@ export default function CurriculumEditor({
   };
 
   const handleOpenAddLesson = () => {
+    setParentLessonForSubLesson(null);
     setEditingLesson(null);
     setLessonTitle('');
     setLessonType('video');
@@ -112,6 +124,7 @@ export default function CurriculumEditor({
   };
 
   const handleOpenEditLesson = (lesson: Lesson) => {
+    setParentLessonForSubLesson(null);
     setEditingLesson(lesson);
     setLessonTitle(lesson.title);
     setLessonType(lesson.type);
@@ -122,6 +135,52 @@ export default function CurriculumEditor({
     setShowLessonModal(true);
   };
 
+  const handleOpenAddSubLesson = (parentLesson: Lesson) => {
+    setParentLessonForSubLesson(parentLesson);
+    setEditingLesson(null);
+    setLessonTitle('');
+    setLessonType('video');
+    setLessonUrl('');
+    setLessonContent('');
+    setLessonDuration(180);
+    setLessonPreview(false);
+    setShowLessonModal(true);
+  };
+
+  const handleOpenEditSubLesson = (subLesson: Lesson, parentLesson: Lesson) => {
+    setParentLessonForSubLesson(parentLesson);
+    setEditingLesson(subLesson);
+    setLessonTitle(subLesson.title);
+    setLessonType(subLesson.type);
+    setLessonUrl(subLesson.video_url || '');
+    setLessonContent(subLesson.content || '');
+    setLessonDuration(subLesson.duration_seconds || 180);
+    setLessonPreview(!!subLesson.is_free_preview);
+    setShowLessonModal(true);
+  };
+
+  const handleDeleteSubLesson = (secId: string, parentLessonId: string, subLessonId: string) => {
+    const updated = sections.map((sec) => {
+      if (sec.id === secId) {
+        return {
+          ...sec,
+          lessons: (sec.lessons || []).map((les) => {
+            if (les.id === parentLessonId) {
+              return {
+                ...les,
+                sub_lessons: (les.sub_lessons || []).filter((sub) => sub.id !== subLessonId),
+              };
+            }
+            return les;
+          }),
+        };
+      }
+      return sec;
+    });
+    setSections(updated);
+    persistChanges(updated);
+  };
+
   const handleSaveLesson = () => {
     if (!activeSectionId || !lessonTitle.trim()) return;
     const activeSec = sections.find((s) => s.id === activeSectionId);
@@ -129,64 +188,148 @@ export default function CurriculumEditor({
 
     let updatedSections: Section[];
 
-    if (editingLesson) {
-      // Update existing lesson in place
-      updatedSections = sections.map((sec) => {
-        if (sec.id === activeSectionId) {
-          return {
-            ...sec,
-            lessons: (sec.lessons || []).map((les) => {
-              if (les.id === editingLesson.id) {
-                return {
-                  ...les,
-                  title: lessonTitle.trim(),
-                  type: lessonType,
-                  video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
-                  content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
-                  duration_seconds: lessonDuration,
-                  is_free_preview: lessonPreview,
-                };
-              }
-              return les;
-            }),
-          };
-        }
-        return sec;
-      });
-    } else {
-      // Create new lesson
-      const newLes: Lesson = {
-        id: `les_${Date.now()}`,
-        section_id: activeSectionId,
-        title: lessonTitle.trim(),
-        type: lessonType,
-        video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
-        content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
-        duration_seconds: lessonDuration,
-        position: (activeSec.lessons?.length || 0) + 1,
-        is_free_preview: lessonPreview,
-        quiz_questions: lessonType === 'quiz' ? [
-          {
-            id: `q_${Date.now()}`,
-            lesson_id: `les_${Date.now()}`,
-            question: 'Sample assessment question for this module?',
-            options: ['Option A (Correct)', 'Option B', 'Option C', 'Option D'],
-            correct_option_index: 0,
-            explanation: 'Demonstration explanation for the correct answer.',
-            position: 1,
-          }
-        ] : undefined,
-      };
+    if (parentLessonForSubLesson) {
+      // Sub-lesson manipulation (Add or Edit)
+      const pId = parentLessonForSubLesson.id;
 
-      updatedSections = sections.map((sec) => {
-        if (sec.id === activeSectionId) {
-          return {
-            ...sec,
-            lessons: [...(sec.lessons || []), newLes],
-          };
-        }
-        return sec;
-      });
+      if (editingLesson) {
+        // Edit existing sub-lesson
+        updatedSections = sections.map((sec) => {
+          if (sec.id === activeSectionId) {
+            return {
+              ...sec,
+              lessons: (sec.lessons || []).map((les) => {
+                if (les.id === pId) {
+                  return {
+                    ...les,
+                    sub_lessons: (les.sub_lessons || []).map((sub) => {
+                      if (sub.id === editingLesson.id) {
+                        return {
+                          ...sub,
+                          title: lessonTitle.trim(),
+                          type: lessonType,
+                          video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
+                          content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
+                          duration_seconds: lessonDuration,
+                          is_free_preview: lessonPreview,
+                        };
+                      }
+                      return sub;
+                    }),
+                  };
+                }
+                return les;
+              }),
+            };
+          }
+          return sec;
+        });
+      } else {
+        // Add new sub-lesson
+        const newSubLes: Lesson = {
+          id: `sub_${Date.now()}`,
+          section_id: activeSectionId,
+          parent_lesson_id: pId,
+          title: lessonTitle.trim(),
+          type: lessonType,
+          video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
+          content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
+          duration_seconds: lessonDuration,
+          position: ((parentLessonForSubLesson.sub_lessons?.length || 0) + 1),
+          is_free_preview: lessonPreview,
+          quiz_questions: lessonType === 'quiz' ? [
+            {
+              id: `q_${Date.now()}`,
+              lesson_id: `sub_${Date.now()}`,
+              question: 'Sample assessment question for this sub-module?',
+              options: ['Option A (Correct)', 'Option B', 'Option C', 'Option D'],
+              correct_option_index: 0,
+              explanation: 'Demonstration explanation for the correct answer.',
+              position: 1,
+            }
+          ] : undefined,
+        };
+
+        updatedSections = sections.map((sec) => {
+          if (sec.id === activeSectionId) {
+            return {
+              ...sec,
+              lessons: (sec.lessons || []).map((les) => {
+                if (les.id === pId) {
+                  return {
+                    ...les,
+                    sub_lessons: [...(les.sub_lessons || []), newSubLes],
+                  };
+                }
+                return les;
+              }),
+            };
+          }
+          return sec;
+        });
+      }
+    } else {
+      // Main lesson manipulation (Add or Edit)
+      if (editingLesson) {
+        // Update existing main lesson in place
+        updatedSections = sections.map((sec) => {
+          if (sec.id === activeSectionId) {
+            return {
+              ...sec,
+              lessons: (sec.lessons || []).map((les) => {
+                if (les.id === editingLesson.id) {
+                  return {
+                    ...les,
+                    title: lessonTitle.trim(),
+                    type: lessonType,
+                    video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
+                    content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
+                    duration_seconds: lessonDuration,
+                    is_free_preview: lessonPreview,
+                  };
+                }
+                return les;
+              }),
+            };
+          }
+          return sec;
+        });
+      } else {
+        // Create new main lesson
+        const newLes: Lesson = {
+          id: `les_${Date.now()}`,
+          section_id: activeSectionId,
+          title: lessonTitle.trim(),
+          type: lessonType,
+          video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
+          content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
+          duration_seconds: lessonDuration,
+          position: (activeSec.lessons?.length || 0) + 1,
+          is_free_preview: lessonPreview,
+          sub_lessons: [],
+          quiz_questions: lessonType === 'quiz' ? [
+            {
+              id: `q_${Date.now()}`,
+              lesson_id: `les_${Date.now()}`,
+              question: 'Sample assessment question for this module?',
+              options: ['Option A (Correct)', 'Option B', 'Option C', 'Option D'],
+              correct_option_index: 0,
+              explanation: 'Demonstration explanation for the correct answer.',
+              position: 1,
+            }
+          ] : undefined,
+        };
+
+        updatedSections = sections.map((sec) => {
+          if (sec.id === activeSectionId) {
+            return {
+              ...sec,
+              lessons: [...(sec.lessons || []), newLes],
+            };
+          }
+          return sec;
+        });
+      }
     }
 
     setSections(updatedSections);
@@ -197,6 +340,7 @@ export default function CurriculumEditor({
     setLessonUrl('');
     setLessonContent('');
     setEditingLesson(null);
+    setParentLessonForSubLesson(null);
     setShowLessonModal(false);
   };
 
@@ -462,93 +606,286 @@ export default function CurriculumEditor({
 
           {/* Lessons List */}
           {activeSec ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {(activeSec.lessons || []).map((lesson, lIdx) => (
-                <div
-                  key={lesson.id}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '0.75rem 1rem',
-                    borderRadius: '0.65rem',
-                    background: 'var(--bg-surface)',
-                    border: '1px solid var(--border-subtle)',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <div style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '0.4rem',
-                      background: 'var(--bg-surface-elevated)',
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              {(activeSec.lessons || []).map((lesson, lIdx) => {
+                const subLessons = lesson.sub_lessons || [];
+                const isExpanded = expandedLessons[lesson.id] !== false; // expanded by default
+
+                return (
+                  <div
+                    key={lesson.id}
+                    style={{
                       display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                      {lesson.type === 'video' && <Video size={16} color="var(--primary)" />}
-                      {lesson.type === 'article' && <FileText size={16} color="var(--accent-cyan)" />}
-                      {lesson.type === 'quiz' && <HelpCircle size={16} color="var(--accent-amber)" />}
-                    </div>
-
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                          {lesson.title}
-                        </span>
-                        {lesson.is_free_preview && (
-                          <span className="badge badge-cyan" style={{ fontSize: '0.65rem' }}>
-                            Free Preview
-                          </span>
-                        )}
-                      </div>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                        <Clock size={11} />
-                        {Math.round(lesson.duration_seconds / 60)} mins • {lesson.type.toUpperCase()}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <button
-                      onClick={() => handleOpenEditLesson(lesson)}
-                      className="btn btn-secondary btn-sm"
+                      flexDirection: 'column',
+                      borderRadius: '0.75rem',
+                      background: 'var(--bg-surface)',
+                      border: '1px solid var(--border-subtle)',
+                      overflow: 'hidden',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    {/* Main Lesson Row */}
+                    <div
                       style={{
-                        padding: '0.35rem 0.65rem',
-                        fontSize: '0.78rem',
-                        gap: '0.35rem',
-                        background: 'rgba(99, 102, 241, 0.1)',
-                        borderColor: 'rgba(99, 102, 241, 0.25)',
-                        color: 'var(--primary)',
-                      }}
-                      title="Edit Lesson Details"
-                    >
-                      <Pencil size={13} />
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      onClick={() => handleDeleteLesson(activeSec.id, lesson.id)}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        color: 'var(--text-muted)',
-                        cursor: 'pointer',
-                        padding: '0.35rem',
-                        borderRadius: '0.4rem',
                         display: 'flex',
                         alignItems: 'center',
-                        transition: 'color 0.2s ease',
+                        justifyContent: 'space-between',
+                        padding: '0.85rem 1rem',
+                        gap: '0.75rem',
+                        flexWrap: 'wrap',
                       }}
-                      title="Delete Lesson"
-                      onMouseEnter={(e) => (e.currentTarget.style.color = '#ef4444')}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
                     >
-                      <Trash2 size={15} />
-                    </button>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexGrow: 1 }}>
+                        {/* Expand/Collapse Toggle if it has sub-lessons */}
+                        {subLessons.length > 0 ? (
+                          <button
+                            onClick={() => toggleLessonExpanded(lesson.id)}
+                            style={{
+                              background: 'none',
+                              border: 'none',
+                              color: 'var(--text-muted)',
+                              cursor: 'pointer',
+                              padding: '0.2rem',
+                              display: 'flex',
+                              alignItems: 'center',
+                              borderRadius: '0.25rem',
+                            }}
+                            title={isExpanded ? 'Collapse Sub-lessons' : 'Expand Sub-lessons'}
+                          >
+                            {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                          </button>
+                        ) : (
+                          <div style={{ width: '16px' }} />
+                        )}
+
+                        <div style={{
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '0.4rem',
+                          background: 'var(--bg-surface-elevated)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                        }}>
+                          {lesson.type === 'video' && <Video size={16} color="var(--primary)" />}
+                          {lesson.type === 'article' && <FileText size={16} color="var(--accent-cyan)" />}
+                          {lesson.type === 'quiz' && <HelpCircle size={16} color="var(--accent-amber)" />}
+                        </div>
+
+                        <div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                            <span style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                              {lesson.title}
+                            </span>
+                            {lesson.is_free_preview && (
+                              <span className="badge badge-cyan" style={{ fontSize: '0.65rem' }}>
+                                Free Preview
+                              </span>
+                            )}
+                            {subLessons.length > 0 && (
+                              <span className="badge badge-primary" style={{ fontSize: '0.65rem' }}>
+                                {subLessons.length} {subLessons.length === 1 ? 'sub-lesson' : 'sub-lessons'}
+                              </span>
+                            )}
+                          </div>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                            <Clock size={11} />
+                            {Math.round(lesson.duration_seconds / 60)} mins • {lesson.type.toUpperCase()}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Main Lesson Actions */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                        {/* + Sub-lesson Button */}
+                        <button
+                          onClick={() => handleOpenAddSubLesson(lesson)}
+                          className="btn btn-secondary btn-sm"
+                          style={{
+                            padding: '0.32rem 0.6rem',
+                            fontSize: '0.75rem',
+                            gap: '0.3rem',
+                            background: 'rgba(5, 150, 105, 0.1)',
+                            borderColor: 'rgba(5, 150, 105, 0.25)',
+                            color: 'var(--accent-emerald)',
+                          }}
+                          title="Add a sub-lesson under this main lesson"
+                        >
+                          <Plus size={13} />
+                          <span>Sub-lesson</span>
+                        </button>
+
+                        {/* Edit Main Lesson Button */}
+                        <button
+                          onClick={() => handleOpenEditLesson(lesson)}
+                          className="btn btn-secondary btn-sm"
+                          style={{
+                            padding: '0.32rem 0.6rem',
+                            fontSize: '0.75rem',
+                            gap: '0.3rem',
+                            background: 'rgba(99, 102, 241, 0.1)',
+                            borderColor: 'rgba(99, 102, 241, 0.25)',
+                            color: 'var(--primary)',
+                          }}
+                          title="Edit Lesson Details"
+                        >
+                          <Pencil size={12} />
+                          <span>Edit</span>
+                        </button>
+
+                        {/* Delete Main Lesson Button */}
+                        <button
+                          onClick={() => handleDeleteLesson(activeSec.id, lesson.id)}
+                          style={{
+                            background: 'none',
+                            border: 'none',
+                            color: 'var(--text-muted)',
+                            cursor: 'pointer',
+                            padding: '0.35rem',
+                            borderRadius: '0.4rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            transition: 'color 0.2s ease',
+                          }}
+                          title="Delete Lesson and its Sub-lessons"
+                          onMouseEnter={(e) => (e.currentTarget.style.color = '#ef4444')}
+                          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Sub-lessons Tree Container */}
+                    {isExpanded && subLessons.length > 0 && (
+                      <div style={{
+                        background: 'var(--bg-surface-elevated)',
+                        borderTop: '1px solid var(--border-subtle)',
+                        padding: '0.65rem 1rem 0.75rem 2.5rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.45rem',
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.15rem' }}>
+                          <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                            Sub-lessons ({subLessons.length}):
+                          </span>
+                          <button
+                            onClick={() => handleOpenAddSubLesson(lesson)}
+                            style={{
+                              background: 'none',
+                              border: 'none',
+                              color: 'var(--accent-emerald)',
+                              fontSize: '0.72rem',
+                              fontWeight: 600,
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '0.25rem',
+                              padding: '0.15rem 0.4rem',
+                            }}
+                          >
+                            <Plus size={12} />
+                            <span>Add Another Sub-lesson</span>
+                          </button>
+                        </div>
+
+                        {subLessons.map((sub, sIdx) => (
+                          <div
+                            key={sub.id}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              padding: '0.55rem 0.85rem',
+                              borderRadius: '0.55rem',
+                              background: 'var(--bg-surface)',
+                              border: '1px solid var(--border-subtle)',
+                              gap: '0.5rem',
+                            }}
+                          >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexGrow: 1 }}>
+                              <CornerDownRight size={14} color="var(--accent-emerald)" style={{ flexShrink: 0 }} />
+                              <div style={{
+                                width: '24px',
+                                height: '24px',
+                                borderRadius: '0.35rem',
+                                background: 'var(--bg-surface-elevated)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flexShrink: 0,
+                              }}>
+                                {sub.type === 'video' && <Video size={13} color="var(--primary)" />}
+                                {sub.type === 'article' && <FileText size={13} color="var(--accent-cyan)" />}
+                                {sub.type === 'quiz' && <HelpCircle size={13} color="var(--accent-amber)" />}
+                              </div>
+
+                              <div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
+                                  <span style={{ fontSize: '0.84rem', fontWeight: 500, color: 'var(--text-primary)' }}>
+                                    {sub.title}
+                                  </span>
+                                  {sub.is_free_preview && (
+                                    <span className="badge badge-cyan" style={{ fontSize: '0.6rem', padding: '0.15rem 0.4rem' }}>
+                                      Free Preview
+                                    </span>
+                                  )}
+                                </div>
+                                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                                  <Clock size={10} />
+                                  {Math.round(sub.duration_seconds / 60)} mins • {sub.type.toUpperCase()}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Actions for Sub-lesson */}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                              <button
+                                onClick={() => handleOpenEditSubLesson(sub, lesson)}
+                                className="btn btn-secondary btn-sm"
+                                style={{
+                                  padding: '0.25rem 0.5rem',
+                                  fontSize: '0.72rem',
+                                  gap: '0.25rem',
+                                  background: 'rgba(99, 102, 241, 0.08)',
+                                  borderColor: 'rgba(99, 102, 241, 0.2)',
+                                  color: 'var(--primary)',
+                                }}
+                                title="Edit Sub-lesson"
+                              >
+                                <Pencil size={11} />
+                                <span>Edit</span>
+                              </button>
+
+                              <button
+                                onClick={() => handleDeleteSubLesson(activeSec.id, lesson.id, sub.id)}
+                                style={{
+                                  background: 'none',
+                                  border: 'none',
+                                  color: 'var(--text-muted)',
+                                  cursor: 'pointer',
+                                  padding: '0.25rem',
+                                  borderRadius: '0.35rem',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  transition: 'color 0.2s ease',
+                                }}
+                                title="Delete Sub-lesson"
+                                onMouseEnter={(e) => (e.currentTarget.style.color = '#ef4444')}
+                                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                              >
+                                <Trash2 size={13} />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
 
               {(activeSec.lessons || []).length === 0 && (
                 <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>
@@ -564,7 +901,7 @@ export default function CurriculumEditor({
         </div>
       </div>
 
-      {/* Add / Edit Lesson Modal */}
+      {/* Add / Edit Lesson Modal (Supports Main Lessons & Sub-lessons) */}
       {showLessonModal && (
         <div style={{
           position: 'fixed',
@@ -589,37 +926,40 @@ export default function CurriculumEditor({
                 width: '32px',
                 height: '32px',
                 borderRadius: '0.5rem',
-                background: 'rgba(99, 102, 241, 0.15)',
+                background: parentLessonForSubLesson ? 'rgba(5, 150, 105, 0.15)' : 'rgba(99, 102, 241, 0.15)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: 'var(--primary)',
+                color: parentLessonForSubLesson ? 'var(--accent-emerald)' : 'var(--primary)',
               }}>
                 {editingLesson ? <Pencil size={16} /> : <Plus size={16} />}
               </div>
               <div>
                 <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', lineHeight: 1.2 }}>
-                  {editingLesson ? 'Edit Lesson Details' : `Add Lesson to ${activeSec?.title}`}
+                  {parentLessonForSubLesson
+                    ? (editingLesson ? 'Edit Sub-lesson' : 'Add Sub-lesson')
+                    : (editingLesson ? 'Edit Lesson Details' : `Add Lesson to ${activeSec?.title}`)}
                 </h3>
-                {editingLesson && (
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    Modifying: {editingLesson.title}
-                  </span>
-                )}
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                  {parentLessonForSubLesson
+                    ? `Under Main Lesson: ${parentLessonForSubLesson.title}`
+                    : (editingLesson ? `Modifying: ${editingLesson.title}` : `Creating top-level lesson in ${activeSec?.title}`)}
+                </span>
               </div>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
               <div>
                 <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
-                  Lesson Title
+                  {parentLessonForSubLesson ? 'Sub-lesson Title' : 'Lesson Title'}
                 </label>
                 <input
                   type="text"
-                  placeholder="e.g. 1.3 State Management Principles"
+                  placeholder={parentLessonForSubLesson ? 'e.g. 1.1.1 Microservices Architecture Breakdown' : 'e.g. 1.1 System Architecture'}
                   value={lessonTitle}
                   onChange={(e) => setLessonTitle(e.target.value)}
                   className="form-input"
+                  autoFocus
                 />
               </div>
 
@@ -703,6 +1043,7 @@ export default function CurriculumEditor({
                 onClick={() => {
                   setShowLessonModal(false);
                   setEditingLesson(null);
+                  setParentLessonForSubLesson(null);
                 }}
                 className="btn btn-secondary btn-sm"
               >
@@ -714,7 +1055,11 @@ export default function CurriculumEditor({
                 className="btn btn-primary btn-sm"
               >
                 <Save size={15} />
-                <span>{editingLesson ? 'Save Changes' : 'Create Lesson'}</span>
+                <span>
+                  {parentLessonForSubLesson
+                    ? (editingLesson ? 'Save Sub-lesson' : 'Create Sub-lesson')
+                    : (editingLesson ? 'Save Changes' : 'Create Lesson')}
+                </span>
               </button>
             </div>
           </div>

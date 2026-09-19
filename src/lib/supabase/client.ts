@@ -216,7 +216,9 @@ export class LocalDataService {
       return { totalLessons: 0, completedLessons: 0, percentage: 0 };
     }
 
-    const allLessons = course.sections.flatMap((s) => s.lessons || []);
+    const allLessons = course.sections.flatMap((s) =>
+      (s.lessons || []).flatMap((l) => [l, ...(l.sub_lessons || [])])
+    );
     const userProgress = this.getProgress(userId);
 
     const totalLessons = allLessons.length;

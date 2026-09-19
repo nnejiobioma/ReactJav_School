@@ -70,6 +70,7 @@ export interface Section {
 export interface Lesson {
   id: string;
   section_id: string;
+  parent_lesson_id?: string | null;
   title: string;
   type: 'video' | 'article' | 'quiz';
   video_url?: string | null;
@@ -81,6 +82,7 @@ export interface Lesson {
   is_completed?: boolean;
   last_position_seconds?: number;
   quiz_questions?: QuizQuestion[];
+  sub_lessons?: Lesson[];
 }
 
 export interface Enrollment {

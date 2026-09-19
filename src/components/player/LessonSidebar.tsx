@@ -96,7 +96,8 @@ export default function LessonSidebar({
         {course.sections?.map((section, sIdx) => {
           const isCollapsed = !!collapsedSections[section.id];
           const sectionLessons = section.lessons || [];
-          const completedCount = sectionLessons.filter((l) => progressMap[l.id]).length;
+          const allSecLessons = sectionLessons.flatMap((l) => [l, ...(l.sub_lessons || [])]);
+          const completedCount = allSecLessons.filter((l) => progressMap[l.id]).length;
 
           return (
             <div
@@ -132,7 +133,7 @@ export default function LessonSidebar({
                   </span>
                 </div>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
-                  {completedCount}/{sectionLessons.length}
+                  {completedCount}/{allSecLessons.length}
                 </span>
               </button>
 
@@ -142,82 +143,190 @@ export default function LessonSidebar({
                   {sectionLessons.map((lesson) => {
                     const isActive = lesson.id === currentLessonId;
                     const isCompleted = !!progressMap[lesson.id];
+                    const hasSubLessons = !!(lesson.sub_lessons && lesson.sub_lessons.length > 0);
 
                     return (
-                      <div
-                        key={lesson.id}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          padding: '0.55rem 0.75rem',
-                          borderRadius: '0.5rem',
-                          marginBottom: '0.2rem',
-                          background: isActive ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
-                          border: isActive ? '1px solid var(--border-accent)' : '1px solid transparent',
-                          transition: 'all 0.2s ease',
-                        }}
-                      >
-                        <Link
-                          href={`/learn/${course.id}/${lesson.id}`}
+                      <div key={lesson.id} style={{ marginBottom: '0.25rem' }}>
+                        {/* Main Lesson Row */}
+                        <div
                           style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '0.65rem',
-                            textDecoration: 'none',
-                            color: isActive ? 'var(--primary)' : 'var(--text-primary)',
-                            flexGrow: 1,
-                            overflow: 'hidden',
+                            justifyContent: 'space-between',
+                            padding: '0.55rem 0.75rem',
+                            borderRadius: '0.5rem',
+                            background: isActive ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
+                            border: isActive ? '1px solid var(--border-accent)' : '1px solid transparent',
+                            transition: 'all 0.2s ease',
                           }}
                         >
-                          {getLessonIcon(lesson.type, isCompleted, isActive)}
-                          <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                            <span style={{
-                              fontSize: '0.825rem',
-                              fontWeight: isActive ? 600 : 400,
-                              display: 'block',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              whiteSpace: 'nowrap',
-                            }}>
-                              {lesson.title}
-                            </span>
-                            <span style={{
-                              fontSize: '0.7rem',
-                              color: 'var(--text-muted)',
+                          <Link
+                            href={`/learn/${course.id}/${lesson.id}`}
+                            style={{
                               display: 'flex',
                               alignItems: 'center',
-                              gap: '0.3rem',
-                            }}>
-                              <Clock size={11} />
-                              {formatDuration(lesson.duration_seconds)}
-                              {lesson.is_free_preview && (
-                                <span style={{ color: 'var(--accent-cyan)', fontWeight: 600 }}>• Preview</span>
-                              )}
-                            </span>
-                          </div>
-                        </Link>
+                              gap: '0.65rem',
+                              textDecoration: 'none',
+                              color: isActive ? 'var(--primary)' : 'var(--text-primary)',
+                              flexGrow: 1,
+                              overflow: 'hidden',
+                            }}
+                          >
+                            {getLessonIcon(lesson.type, isCompleted, isActive)}
+                            <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                              <span style={{
+                                fontSize: '0.825rem',
+                                fontWeight: isActive ? 700 : (hasSubLessons ? 600 : 400),
+                                display: 'block',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap',
+                              }}>
+                                {lesson.title}
+                              </span>
+                              <span style={{
+                                fontSize: '0.7rem',
+                                color: 'var(--text-muted)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.3rem',
+                              }}>
+                                <Clock size={11} />
+                                {formatDuration(lesson.duration_seconds)}
+                                {hasSubLessons && (
+                                  <span style={{ color: '#a5b4fc', fontWeight: 600 }}>• {lesson.sub_lessons?.length} sub-lessons</span>
+                                )}
+                                {lesson.is_free_preview && (
+                                  <span style={{ color: 'var(--accent-cyan)', fontWeight: 600 }}>• Preview</span>
+                                )}
+                              </span>
+                            </div>
+                          </Link>
 
-                        {/* Interactive Completion Toggle Checkbox */}
-                        <button
-                          onClick={(e) => onToggleComplete(lesson.id, e)}
-                          title={isCompleted ? 'Mark as Incomplete' : 'Mark as Completed'}
-                          style={{
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
-                            padding: '0.25rem',
+                          {/* Interactive Completion Toggle Checkbox */}
+                          <button
+                            onClick={(e) => onToggleComplete(lesson.id, e)}
+                            title={isCompleted ? 'Mark as Incomplete' : 'Mark as Completed'}
+                            style={{
+                              background: 'none',
+                              border: 'none',
+                              cursor: 'pointer',
+                              padding: '0.25rem',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            {isCompleted ? (
+                              <CheckCircle2 size={18} color="var(--accent-emerald)" />
+                            ) : (
+                              <Circle size={18} color="var(--text-muted)" />
+                            )}
+                          </button>
+                        </div>
+
+                        {/* Sub-lessons nested under main lesson */}
+                        {hasSubLessons && (
+                          <div style={{
+                            marginLeft: '1.25rem',
+                            paddingLeft: '0.65rem',
+                            borderLeft: '2px solid rgba(99, 102, 241, 0.25)',
+                            marginTop: '0.2rem',
+                            marginBottom: '0.35rem',
                             display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          {isCompleted ? (
-                            <CheckCircle2 size={18} color="var(--accent-emerald)" />
-                          ) : (
-                            <Circle size={18} color="var(--text-muted)" />
-                          )}
-                        </button>
+                            flexDirection: 'column',
+                            gap: '0.2rem',
+                          }}>
+                            {lesson.sub_lessons?.map((subLesson) => {
+                              const isSubActive = subLesson.id === currentLessonId;
+                              const isSubCompleted = !!progressMap[subLesson.id];
+
+                              return (
+                                <div
+                                  key={subLesson.id}
+                                  style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    padding: '0.4rem 0.6rem',
+                                    borderRadius: '0.375rem',
+                                    background: isSubActive ? 'rgba(99, 102, 241, 0.2)' : 'rgba(255, 255, 255, 0.02)',
+                                    border: isSubActive ? '1px solid var(--border-accent)' : '1px solid transparent',
+                                    transition: 'all 0.2s ease',
+                                  }}
+                                >
+                                  <Link
+                                    href={`/learn/${course.id}/${subLesson.id}`}
+                                    style={{
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      gap: '0.5rem',
+                                      textDecoration: 'none',
+                                      color: isSubActive ? 'var(--primary)' : 'var(--text-secondary)',
+                                      flexGrow: 1,
+                                      overflow: 'hidden',
+                                    }}
+                                  >
+                                    <span style={{
+                                      width: '6px',
+                                      height: '6px',
+                                      borderRadius: '50%',
+                                      backgroundColor: isSubActive ? 'var(--primary)' : 'var(--text-muted)',
+                                      flexShrink: 0,
+                                    }} />
+                                    {getLessonIcon(subLesson.type, isSubCompleted, isSubActive)}
+                                    <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                      <span style={{
+                                        fontSize: '0.785rem',
+                                        fontWeight: isSubActive ? 600 : 400,
+                                        display: 'block',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap',
+                                        color: isSubActive ? '#ffffff' : 'var(--text-secondary)',
+                                      }}>
+                                        {subLesson.title}
+                                      </span>
+                                      <span style={{
+                                        fontSize: '0.675rem',
+                                        color: 'var(--text-muted)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.25rem',
+                                      }}>
+                                        <Clock size={10} />
+                                        {formatDuration(subLesson.duration_seconds)}
+                                        {subLesson.is_free_preview && (
+                                          <span style={{ color: 'var(--accent-cyan)', fontWeight: 600 }}>• Preview</span>
+                                        )}
+                                      </span>
+                                    </div>
+                                  </Link>
+
+                                  <button
+                                    onClick={(e) => onToggleComplete(subLesson.id, e)}
+                                    title={isSubCompleted ? 'Mark as Incomplete' : 'Mark as Completed'}
+                                    style={{
+                                      background: 'none',
+                                      border: 'none',
+                                      cursor: 'pointer',
+                                      padding: '0.2rem',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
+                                    }}
+                                  >
+                                    {isSubCompleted ? (
+                                      <CheckCircle2 size={16} color="var(--accent-emerald)" />
+                                    ) : (
+                                      <Circle size={16} color="var(--text-muted)" />
+                                    )}
+                                  </button>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
                       </div>
                     );
                   })}

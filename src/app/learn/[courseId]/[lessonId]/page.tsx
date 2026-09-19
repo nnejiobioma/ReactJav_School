@@ -47,8 +47,10 @@ export default function CoursePlayerPage() {
     if (foundCourse) {
       setCourse(foundCourse);
 
-      // Find current lesson
-      const allLessons = foundCourse.sections?.flatMap((s) => s.lessons || []) || [];
+      // Find current lesson (including any nested sub-lessons)
+      const allLessons = foundCourse.sections?.flatMap((s) =>
+        (s.lessons || []).flatMap((l) => [l, ...(l.sub_lessons || [])])
+      ) || [];
       const foundLesson = allLessons.find((l) => l.id === lessonId);
       if (foundLesson) {
         setCurrentLesson(foundLesson);
@@ -95,10 +97,17 @@ export default function CoursePlayerPage() {
     );
   }
 
-  const allLessons = course.sections?.flatMap((s) => s.lessons || []) || [];
+  const allLessons = course.sections?.flatMap((s) =>
+    (s.lessons || []).flatMap((l) => [l, ...(l.sub_lessons || [])])
+  ) || [];
   const currentIdx = allLessons.findIndex((l) => l.id === currentLesson.id);
   const nextLesson = allLessons[currentIdx + 1] || null;
   const prevLesson = allLessons[currentIdx - 1] || null;
+
+  // Find parent lesson if this is a sub-lesson
+  const parentLesson = course.sections
+    ?.flatMap((s) => s.lessons || [])
+    .find((l) => l.sub_lessons?.some((sl) => sl.id === currentLesson.id));
 
   const isCompleted = !!progressMap[currentLesson.id];
 
@@ -145,7 +154,7 @@ export default function CoursePlayerPage() {
         flexWrap: 'wrap',
         gap: '1rem',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
           <Link href={`/courses/${course.slug}`} className="btn btn-secondary btn-sm">
             <ArrowLeft size={16} />
             <span>Course Outline</span>
@@ -154,6 +163,18 @@ export default function CoursePlayerPage() {
           <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
             {course.title}
           </span>
+          {parentLesson && (
+            <>
+              <span style={{ color: 'var(--text-muted)' }}>/</span>
+              <Link
+                href={`/learn/${course.id}/${parentLesson.id}`}
+                style={{ fontSize: '0.875rem', color: 'var(--primary)', textDecoration: 'none' }}
+                title="Go to parent lesson"
+              >
+                {parentLesson.title}
+              </Link>
+            </>
+          )}
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -268,6 +289,15 @@ export default function CoursePlayerPage() {
 
           {/* Lesson Title & Info */}
           <div style={{ marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              {parentLesson ? (
+                <span className="badge badge-indigo" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#a5b4fc', border: '1px solid rgba(99, 102, 241, 0.3)' }}>
+                  Sub-lesson of {parentLesson.title}
+                </span>
+              ) : (
+                <span className="badge badge-primary">Main Lesson</span>
+              )}
+            </div>
             <h1 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.75rem' }}>
               {currentLesson.title}
             </h1>
