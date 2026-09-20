@@ -452,17 +452,18 @@ export default function Navbar() {
           justifySelf: 'end',
           display: 'flex',
           alignItems: 'center',
-          gap: '0.75rem',
+          gap: '0.6rem',
           flexShrink: 0,
         }}>
           {/* 1. Supabase Status Indicator (Compact) */}
           <div
+            className="header-db-pill"
             title={hasSupabase ? 'Supabase Live: Connected to PostgreSQL & Auth' : 'Supabase Demo Mock: Operating with local storage persistence'}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.4rem',
-              padding: '0.42rem 0.75rem',
+              gap: '0.35rem',
+              padding: '0.42rem 0.65rem',
               background: 'var(--bg-surface)',
               borderRadius: '9999px',
               border: '1px solid var(--border-subtle)',
@@ -473,7 +474,7 @@ export default function Navbar() {
             }}
           >
             <Database size={14} color={hasSupabase ? 'var(--accent-emerald)' : 'var(--primary)'} />
-            <span style={{ fontSize: '0.74rem' }}>{hasSupabase ? 'Live DB' : 'Demo DB'}</span>
+            <span className="db-text" style={{ fontSize: '0.74rem' }}>{hasSupabase ? 'Live DB' : 'Demo DB'}</span>
             <span style={{
               width: '6px',
               height: '6px',
@@ -490,7 +491,7 @@ export default function Navbar() {
           <div ref={roleMenuRef} style={{ position: 'relative' }}>
             <button
               onClick={() => setShowRoleMenu(!showRoleMenu)}
-              className="btn btn-secondary btn-sm"
+              className="btn btn-secondary btn-sm header-persona-btn"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -526,15 +527,17 @@ export default function Navbar() {
                   border: '1.5px solid var(--bg-surface)',
                 }} />
               </div>
-              <div style={{ textAlign: 'left', lineHeight: 1.15 }}>
-                <span style={{ fontSize: '0.82rem', fontWeight: 700, display: 'block', color: 'var(--text-primary)' }}>
+              <div className="header-persona-details" style={{ textAlign: 'left', lineHeight: 1.15 }}>
+                <span className="header-persona-name" style={{ fontSize: '0.82rem', fontWeight: 700, display: 'block', color: 'var(--text-primary)' }}>
                   {currentUser?.full_name?.split(' ')[0] || 'Demo User'}
                 </span>
-                <span className={`badge ${roleBadgeStyle}`} style={{ fontSize: '0.6rem', padding: '0.08rem 0.35rem' }}>
+                <span className={`badge ${roleBadgeStyle} header-persona-badge`} style={{ fontSize: '0.6rem', padding: '0.08rem 0.35rem' }}>
                   {currentUser?.role || 'student'}
                 </span>
               </div>
-              <ChevronDown size={14} color="var(--text-muted)" style={{ transform: showRoleMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+              <span className="header-persona-chevron">
+                <ChevronDown size={14} color="var(--text-muted)" style={{ transform: showRoleMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+              </span>
             </button>
 
             {/* Dropdown Menu */}
@@ -730,24 +733,117 @@ export default function Navbar() {
         <div style={{
           background: 'var(--bg-surface)',
           borderBottom: '1px solid var(--border-subtle)',
-          padding: '1.25rem 1.5rem 1.75rem',
+          padding: '1.25rem 1.25rem 2rem',
           display: 'flex',
           flexDirection: 'column',
-          gap: '1rem',
+          gap: '1.25rem',
           boxShadow: 'var(--shadow-lg)',
+          maxHeight: 'calc(100dvh - 5.5rem)',
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
         }}>
+          {/* Mobile User Profile & Persona Card */}
+          <div style={{
+            background: 'var(--bg-surface-elevated)',
+            border: '1px solid var(--border-accent)',
+            borderRadius: '1rem',
+            padding: '1rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.75rem',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <img
+                  src={currentUser?.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
+                  alt={currentUser?.full_name || 'User'}
+                  style={{
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    border: '1.5px solid var(--border-subtle)',
+                  }}
+                />
+                <div>
+                  <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', lineHeight: 1.2 }}>
+                    {currentUser?.full_name || 'Demo User'}
+                  </span>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                    {currentUser?.email}
+                  </span>
+                </div>
+              </div>
+              <span className={`badge ${roleBadgeStyle}`} style={{ fontSize: '0.65rem', padding: '0.15rem 0.45rem' }}>
+                {currentUser?.role || 'student'}
+              </span>
+            </div>
+
+            {/* Mobile Quick Role Switcher */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.4rem', paddingTop: '0.5rem', borderTop: '1px solid var(--border-subtle)' }}>
+              <button
+                onClick={() => handleRoleSwitch('student')}
+                style={{
+                  padding: '0.4rem 0.2rem',
+                  fontSize: '0.72rem',
+                  fontWeight: 600,
+                  borderRadius: '0.5rem',
+                  background: currentUser?.role === 'student' ? 'rgba(99, 102, 241, 0.2)' : 'var(--bg-surface)',
+                  color: currentUser?.role === 'student' ? '#a5b4fc' : 'var(--text-secondary)',
+                  border: currentUser?.role === 'student' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                }}
+              >
+                Student
+              </button>
+              <button
+                onClick={() => handleRoleSwitch('instructor')}
+                style={{
+                  padding: '0.4rem 0.2rem',
+                  fontSize: '0.72rem',
+                  fontWeight: 600,
+                  borderRadius: '0.5rem',
+                  background: currentUser?.role === 'instructor' ? 'rgba(16, 185, 129, 0.2)' : 'var(--bg-surface)',
+                  color: currentUser?.role === 'instructor' ? '#6ee7b7' : 'var(--text-secondary)',
+                  border: currentUser?.role === 'instructor' ? '1px solid var(--accent-emerald)' : '1px solid var(--border-subtle)',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                }}
+              >
+                Instructor
+              </button>
+              <button
+                onClick={() => handleRoleSwitch('admin')}
+                style={{
+                  padding: '0.4rem 0.2rem',
+                  fontSize: '0.72rem',
+                  fontWeight: 600,
+                  borderRadius: '0.5rem',
+                  background: currentUser?.role === 'admin' ? 'rgba(245, 158, 11, 0.2)' : 'var(--bg-surface)',
+                  color: currentUser?.role === 'admin' ? '#fcd34d' : 'var(--text-secondary)',
+                  border: currentUser?.role === 'admin' ? '1px solid var(--accent-amber)' : '1px solid var(--border-subtle)',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                }}
+              >
+                Admin
+              </button>
+            </div>
+          </div>
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
             <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               Academic Offerings
             </span>
-            <Link href="/courses" className="btn btn-secondary btn-sm" style={{ justifyContent: 'flex-start', gap: '0.5rem' }}>
-              <BookOpen size={16} /> Programmes
+            <Link href="/courses" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+              <BookOpen size={17} /> Programmes
             </Link>
-            <Link href="/academy" className="btn btn-secondary btn-sm" style={{ justifyContent: 'flex-start', gap: '0.5rem', color: 'var(--accent-emerald)' }}>
-              <GraduationCap size={16} /> Direct Tutoring (1-on-1)
+            <Link href="/academy" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem', color: 'var(--accent-emerald)' }}>
+              <GraduationCap size={17} /> Direct Tutoring (1-on-1)
             </Link>
-            <Link href="/subscribe" className="btn btn-secondary btn-sm" style={{ justifyContent: 'flex-start', gap: '0.5rem' }}>
-              <Sparkles size={16} /> Tuition & Plans
+            <Link href="/subscribe" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+              <Sparkles size={17} /> Tuition & Plans
             </Link>
           </div>
 
@@ -755,23 +851,23 @@ export default function Navbar() {
             <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               Campus Intranet & Tools
             </span>
-            <Link href="/intranet" className="btn btn-secondary btn-sm" style={{ justifyContent: 'flex-start', gap: '0.5rem' }}>
-              <ShieldCheck size={16} /> Campus Intranet
+            <Link href="/intranet" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+              <ShieldCheck size={17} /> Campus Intranet
             </Link>
-            <Link href="/dashboard" className="btn btn-secondary btn-sm" style={{ justifyContent: 'flex-start', gap: '0.5rem' }}>
-              <LayoutDashboard size={16} /> Student Dashboard
+            <Link href="/dashboard" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+              <LayoutDashboard size={17} /> Student Dashboard
             </Link>
-            <Link href="/intranet/ide" className="btn btn-secondary btn-sm" style={{ justifyContent: 'flex-start', gap: '0.5rem' }}>
-              <Terminal size={16} /> IDE Sandbox
+            <Link href="/intranet/ide" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+              <Terminal size={17} /> IDE Sandbox
             </Link>
-            <Link href="/cbt" className="btn btn-secondary btn-sm" style={{ justifyContent: 'flex-start', gap: '0.5rem' }}>
-              <Timer size={16} /> CBT Exams
+            <Link href="/cbt" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+              <Timer size={17} /> CBT Exams
             </Link>
-            <Link href="/live" className="btn btn-secondary btn-sm" style={{ justifyContent: 'flex-start', gap: '0.5rem' }}>
-              <Video size={16} /> Live Studios
+            <Link href="/live" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+              <Video size={17} /> Live Studios
             </Link>
-            <Link href="/tutoring/attendance" className="btn btn-secondary btn-sm" style={{ justifyContent: 'flex-start', gap: '0.5rem', color: 'var(--accent-emerald)' }}>
-              <CalendarCheck size={16} /> Tutoring Attendance Tracker
+            <Link href="/tutoring/attendance" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem', color: 'var(--accent-emerald)' }}>
+              <CalendarCheck size={17} /> Tutoring Attendance Tracker
             </Link>
           </div>
         </div>

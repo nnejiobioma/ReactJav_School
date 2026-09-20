@@ -218,8 +218,8 @@ export default function CoursesCatalogPage() {
       {filteredCourses.length > 0 ? (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
+          gap: 'clamp(1.25rem, 2.5vw, 2rem)',
           marginBottom: '4rem',
         }}>
           {filteredCourses.map((course) => (

@@ -223,35 +223,18 @@ export default function LessonTabEditorModal({
 
   return (
     <div 
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 9999,
-        background: 'rgba(5, 7, 15, 0.85)',
-        backdropFilter: 'blur(8px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '1.5rem',
-      }}
+      className="responsive-modal-backdrop"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
       <div 
-        className="glass-card"
+        className="glass-card responsive-modal-card"
         style={{
-          width: '100%',
           maxWidth: '900px',
-          maxHeight: '90vh',
-          display: 'flex',
-          flexDirection: 'column',
-          borderRadius: '1.25rem',
           border: '1px solid rgba(99, 102, 241, 0.35)',
           boxShadow: '0 24px 64px rgba(0, 0, 0, 0.6), 0 0 32px rgba(99, 102, 241, 0.15)',
           background: 'linear-gradient(180deg, rgba(20, 24, 39, 0.98) 0%, rgba(13, 16, 28, 0.98) 100%)',
-          overflow: 'hidden',
-          animation: 'fadeIn 0.2s ease-out',
         }}
       >
         {/* Modal Header */}

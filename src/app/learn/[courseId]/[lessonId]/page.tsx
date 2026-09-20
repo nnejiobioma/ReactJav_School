@@ -249,7 +249,7 @@ export default function CoursePlayerPage() {
   const stats = currentUser ? LocalDataService.getCourseStats(course.id, currentUser.id) : { totalLessons: 0, completedLessons: 0, percentage: 0 };
 
   return (
-    <div className="container" style={{ padding: '2rem 1.5rem 4rem' }}>
+    <div className="container" style={{ paddingTop: '1.5rem', paddingBottom: '4rem' }}>
       {/* Top Breadcrumb Navigation */}
       <div style={{
         display: 'flex',
@@ -282,7 +282,7 @@ export default function CoursePlayerPage() {
           )}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
           {prevLesson && (
             <Link
               href={`/learn/${course.id}/${prevLesson.id}`}
@@ -324,12 +324,7 @@ export default function CoursePlayerPage() {
       </div>
 
       {/* Main Layout: Stage on Left, Curriculum Sidebar on Right */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'minmax(0, 1fr) 360px',
-        gap: '2rem',
-        alignItems: 'start',
-      }}>
+      <div className="lesson-player-layout">
         {/* Left Column: Media Stage & Content */}
         <div>
           {/* Lesson Stage */}
@@ -420,14 +415,7 @@ export default function CoursePlayerPage() {
           </div>
 
           {/* Tab Navigation: 4 Explicit Sections */}
-          <div style={{
-            display: 'flex',
-            gap: '0.75rem',
-            borderBottom: '1px solid var(--border-subtle)',
-            marginBottom: '1.5rem',
-            overflowX: 'auto',
-            paddingBottom: '0.25rem',
-          }}>
+          <div className="responsive-tabs-bar">
             <button
               onClick={() => setActiveTab('summary')}
               style={{

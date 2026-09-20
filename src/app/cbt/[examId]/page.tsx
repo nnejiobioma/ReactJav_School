@@ -182,7 +182,7 @@ export default function CBTActiveExamRunnerPage() {
           margin: '0 auto',
           width: '100%',
           flexWrap: 'wrap',
-          gap: '1rem',
+          gap: '0.75rem',
         }}>
           {/* Candidate & Exam details */}
           <div>
@@ -244,19 +244,9 @@ export default function CBTActiveExamRunnerPage() {
       </header>
 
       {/* Main Examination Hall Content */}
-      <div style={{
-        flexGrow: 1,
-        maxWidth: '1400px',
-        margin: '0 auto',
-        width: '100%',
-        padding: '2rem 1.5rem',
-        display: 'grid',
-        gridTemplateColumns: 'minmax(0, 1fr) 340px',
-        gap: '2rem',
-        alignItems: 'start',
-      }}>
+      <div className="cbt-exam-layout">
         {/* Left Column: Current Question Card */}
-        <div className="glass-card" style={{ padding: '2.5rem', border: '1px solid var(--border-subtle)' }}>
+        <div className="glass-card" style={{ padding: 'clamp(1.25rem, 3vw, 2.5rem)', border: '1px solid var(--border-subtle)' }}>
           {/* Question Sub-header */}
           <div style={{
             display: 'flex',

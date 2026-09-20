@@ -186,6 +186,18 @@ body::after {
   z-index: 1;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+}
+
 /* Typography Utilities */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
@@ -504,6 +516,193 @@ h1, h2, h3, h4, h5, h6 {
   .header-logo-text {
     font-size: 1.85rem;
   }
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT & WORKSPACE UTILITIES
+   Smartphones, Tablets, and Desktop Adaptive Classes
+   ========================================================================== */
+
+/* Header Mobile Adaptations */
+@media (max-width: 640px) {
+  .header-db-pill span.db-text {
+    display: none !important;
+  }
+  .header-persona-name,
+  .header-persona-badge,
+  .header-persona-chevron {
+    display: none !important;
+  }
+  .header-persona-btn {
+    padding: 0.35rem !important;
+    gap: 0 !important;
+    border-radius: 9999px !important;
+  }
+}
+
+/* Lesson Player Layout */
+.lesson-player-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .lesson-player-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Lesson Sidebar */
+.lesson-sidebar {
+  width: 100%;
+  max-width: 380px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 7rem);
+  position: sticky;
+  top: 5.5rem;
+}
+
+@media (max-width: 1024px) {
+  .lesson-sidebar {
+    max-width: 100%;
+    height: auto;
+    position: static;
+    margin-top: 1.5rem;
+  }
+}
+
+/* Responsive Horizontal Tabs Bar */
+.responsive-tabs-bar {
+  display: flex;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.25rem;
+  scrollbar-width: thin;
+}
+
+.responsive-tabs-bar::-webkit-scrollbar {
+  height: 4px;
+}
+
+/* CBT Exam Runner Layout */
+.cbt-exam-layout {
+  flex-grow: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .cbt-exam-layout {
+    grid-template-columns: 1fr;
+    padding: 1.25rem 1rem;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cbt-exam-layout {
+    padding: 1rem 0.75rem;
+  }
+}
+
+/* Live Studio Meeting Layout */
+.live-room-layout {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .live-room-layout {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+}
+
+/* Responsive Modal Containers */
+.responsive-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 7, 15, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .responsive-modal-backdrop {
+    padding: 0.5rem;
+  }
+}
+
+.responsive-modal-card {
+  width: 100%;
+  max-width: 1020px;
+  max-height: 92dvh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@media (max-width: 640px) {
+  .responsive-modal-card {
+    max-height: 95dvh;
+    border-radius: 1rem;
+  }
+}
+
+/* Quiz Question Builder Inner Grid */
+.quiz-modal-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .quiz-modal-grid {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+  .quiz-modal-sidebar {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+    max-height: 180px;
+  }
+}
+
+/* Touch-friendly interactive element utilities */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ==========================================================================

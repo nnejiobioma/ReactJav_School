@@ -310,8 +310,8 @@ export default function AcademyPage() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-                gap: 'clamp(2rem, 4vw, 3.5rem)',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+                gap: 'clamp(1.5rem, 4vw, 3.5rem)',
                 alignItems: 'start',
               }}
             >

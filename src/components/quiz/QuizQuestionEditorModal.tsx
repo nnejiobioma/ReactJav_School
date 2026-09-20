@@ -201,35 +201,17 @@ export default function QuizQuestionEditorModal({
 
   return (
     <div 
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 99999,
-        background: 'rgba(5, 7, 15, 0.85)',
-        backdropFilter: 'blur(8px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '1.5rem',
-      }}
+      className="responsive-modal-backdrop"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
       <div 
-        className="glass-card"
+        className="glass-card responsive-modal-card"
         style={{
-          width: '100%',
-          maxWidth: '1020px',
-          maxHeight: '92vh',
-          display: 'flex',
-          flexDirection: 'column',
-          borderRadius: '1.25rem',
           border: '1px solid rgba(245, 158, 11, 0.35)',
           boxShadow: '0 24px 64px rgba(0, 0, 0, 0.7), 0 0 32px rgba(245, 158, 11, 0.15)',
           background: 'linear-gradient(180deg, rgba(20, 24, 39, 0.98) 0%, rgba(13, 16, 28, 0.98) 100%)',
-          overflow: 'hidden',
-          animation: 'fadeIn 0.2s ease-out',
         }}
       >
         {/* Modal Header */}
@@ -325,22 +307,20 @@ export default function QuizQuestionEditorModal({
         )}
 
         {/* Main Body: Two Columns (Left: Question List / Right: Question Editor) */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '280px 1fr',
-          flexGrow: 1,
-          overflow: 'hidden',
-        }}>
+        <div className="quiz-modal-grid">
           {/* Left Column: Questions Sidebar */}
-          <div style={{
-            background: 'rgba(0, 0, 0, 0.25)',
-            borderRight: '1px solid var(--border-subtle)',
-            padding: '1.25rem 1rem',
-            overflowY: 'auto',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.5rem',
-          }}>
+          <div 
+            className="quiz-modal-sidebar"
+            style={{
+              background: 'rgba(0, 0, 0, 0.25)',
+              borderRight: '1px solid var(--border-subtle)',
+              padding: '1rem',
+              overflowY: 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.5rem',
+            }}
+          >
             <div style={{
               display: 'flex',
               alignItems: 'center',

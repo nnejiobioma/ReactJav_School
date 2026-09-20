@@ -177,7 +177,7 @@ export default function SubscribePage() {
         <>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '1.5rem',
             marginBottom: '3.5rem',
           }}>
@@ -190,7 +190,7 @@ export default function SubscribePage() {
                   className="glass-card"
                   style={{
                     cursor: 'pointer',
-                    padding: '2rem',
+                    padding: 'clamp(1.25rem, 3vw, 2rem)',
                     borderRadius: '1.25rem',
                     position: 'relative',
                     border: isSelected ? '2px solid var(--primary)' : '1px solid var(--border-subtle)',
@@ -265,11 +265,11 @@ export default function SubscribePage() {
           <div className="glass-card" style={{
             maxWidth: '720px',
             margin: '0 auto',
-            padding: '2.5rem',
+            padding: 'clamp(1.5rem, 3vw, 2.5rem)',
             borderRadius: '1.5rem',
             border: '1px solid var(--border-accent)',
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
               <div>
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   Selected Plan
@@ -279,7 +279,7 @@ export default function SubscribePage() {
                 </h3>
               </div>
 
-              <div style={{ textAlign: 'right' }}>
+              <div style={{ textAlign: 'left' }}>
                 <span style={{ fontSize: '0.75rem', color: 'var(--accent-emerald)', fontWeight: 600, display: 'block' }}>
                   256-Bit SSL Encrypted
                 </span>
@@ -290,7 +290,7 @@ export default function SubscribePage() {
             </div>
 
             {/* Payment Method Tabs */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.75rem', marginBottom: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))', gap: '0.75rem', marginBottom: '2rem' }}>
               <button
                 type="button"
                 onClick={() => setPaymentMethod('credit_card')}

@@ -52,19 +52,7 @@ export default function LessonSidebar({
   };
 
   return (
-    <aside style={{
-      width: '100%',
-      maxWidth: '380px',
-      background: 'var(--bg-surface)',
-      border: '1px solid var(--border-subtle)',
-      borderRadius: '1rem',
-      overflow: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-      height: 'calc(100vh - 7rem)',
-      position: 'sticky',
-      top: '5.5rem',
-    }}>
+    <aside className="lesson-sidebar">
       {/* Header with Course Progress */}
       <div style={{
         padding: '1.25rem',

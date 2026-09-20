@@ -112,7 +112,7 @@ export default function AdminCourseOutlineModal({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '1rem',
+        padding: 'clamp(0.5rem, 2vw, 1rem)',
         animation: 'fadeIn 0.2s ease',
       }}
       onClick={(e) => {
@@ -126,7 +126,7 @@ export default function AdminCourseOutlineModal({
           borderRadius: '1.25rem',
           width: '100%',
           maxWidth: '1200px',
-          maxHeight: '94vh',
+          maxHeight: '94dvh',
           display: 'flex',
           flexDirection: 'column',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(99, 102, 241, 0.25)',
@@ -136,7 +136,7 @@ export default function AdminCourseOutlineModal({
         {/* Modal Header */}
         <div
           style={{
-            padding: '1.25rem 1.75rem',
+            padding: 'clamp(0.85rem, 2vw, 1.25rem) clamp(1rem, 2vw, 1.75rem)',
             borderBottom: '1px solid var(--border-subtle)',
             background: 'var(--bg-surface-elevated)',
             display: 'flex',

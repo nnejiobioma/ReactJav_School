@@ -200,7 +200,7 @@ export default function StudentRecordModal({
           justifyContent: 'center',
           alignItems: 'flex-start',
           overflowY: 'auto',
-          padding: '2rem 1rem 4rem',
+          padding: 'clamp(0.75rem, 2vw, 2rem) clamp(0.5rem, 1.5vw, 1rem) 3rem',
         }}
       >
         <div 
@@ -223,11 +223,11 @@ export default function StudentRecordModal({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              padding: '1rem 1.75rem',
+              padding: '1rem 1.25rem',
               background: 'var(--bg-surface-elevated)',
               borderBottom: '1px solid var(--border-subtle)',
               flexWrap: 'wrap',
-              gap: '1rem',
+              gap: '0.75rem',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
@@ -253,7 +253,7 @@ export default function StudentRecordModal({
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
               <button 
                 onClick={handlePrint} 
                 className="btn btn-primary btn-sm"
@@ -287,7 +287,7 @@ export default function StudentRecordModal({
           </div>
 
           {/* OFFICIAL TRANSCRIPT DOCUMENT CONTAINER */}
-          <div style={{ padding: '2.5rem 2.25rem 3rem' }}>
+          <div style={{ padding: 'clamp(1rem, 3vw, 2.5rem)' }}>
             
             {/* 1. OFFICIAL UNIVERSITY LETTERHEAD */}
             <div 

@@ -130,13 +130,13 @@ export default function HomePage() {
         >
           <div style={{
             margin: '2.5rem 0 3.5rem',
-            padding: '2rem 2.5rem',
+            padding: 'clamp(1.25rem, 3vw, 2.5rem)',
             borderRadius: '1.5rem',
             background: 'linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-surface-elevated) 100%)',
             border: '1px solid var(--border-accent)',
             boxShadow: 'var(--shadow-xl)',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '2rem',
             alignItems: 'center',
             position: 'relative',
@@ -445,8 +445,8 @@ export default function HomePage() {
       {filteredCourses.length > 0 ? (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
+          gap: 'clamp(1.25rem, 2.5vw, 2rem)',
           marginBottom: '4rem',
         }}>
           {filteredCourses.map((course) => (

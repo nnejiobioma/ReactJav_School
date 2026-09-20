@@ -138,8 +138,8 @@ export default function CourseDetailPage() {
         }}>
         <div className="container" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '3rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+          gap: 'clamp(1.5rem, 3vw, 3rem)',
           alignItems: 'center',
         }}>
           {/* Left Column: Title, Description, Stats */}
@@ -320,7 +320,7 @@ export default function CourseDetailPage() {
           setIsOutlineModalOpen(true);
         }}
       >
-        <section className="container" style={{ padding: '4rem 1.5rem' }}>
+        <section className="container" style={{ padding: '3.5rem 0' }}>
           <div style={{ maxWidth: '850px' }}>
             <div style={{
               display: 'flex',

@@ -1145,18 +1145,13 @@ videoElement.srcObject = displayStream;`,
       )}
 
       {/* Main Workspace Body */}
-      <div style={{
-        flexGrow: 1,
-        display: 'grid',
-        gridTemplateColumns: 'minmax(0, 1fr) 360px',
-        overflow: 'hidden',
-      }}>
+      <div className="live-room-layout">
         {/* Left / Center Stage Area */}
         <div style={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '1.25rem',
+          padding: 'clamp(0.75rem, 2vw, 1.25rem)',
           background: '#0a0d14',
           overflow: 'hidden',
           position: 'relative',
@@ -1169,7 +1164,7 @@ videoElement.srcObject = displayStream;`,
                 width: '100%',
                 height: '100%',
                 display: 'grid',
-                gridTemplateColumns: '2fr 1fr',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
                 gap: '1rem',
                 position: 'relative',
               }}>
