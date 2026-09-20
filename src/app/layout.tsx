@@ -52,6 +52,7 @@ export default function RootLayout({
         <Footer />
         <AdminEditModeBar />
         <ServerSyncProvider />
+        <SpeedInsights />
       </body>
     </html>
   );
