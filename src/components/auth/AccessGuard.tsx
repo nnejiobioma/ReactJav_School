@@ -141,6 +141,62 @@ export default function AccessGuard({
   }
 
   // ==========================================
+  // LEVEL 1.5: CHECK STUDENT REGISTRATION COMPLETION
+  // ==========================================
+  if (currentUser?.role === 'student' && !currentUser.registration_completed) {
+    return (
+      <div className="container" style={{ padding: '4rem 1.5rem 6rem', maxWidth: '680px' }}>
+        <div className="glass-card" style={{ textAlign: 'center', padding: '3.5rem 2rem' }}>
+          <div style={{
+            width: '4.5rem',
+            height: '4.5rem',
+            borderRadius: '1.25rem',
+            background: 'rgba(99, 102, 241, 0.12)',
+            border: '1px solid rgba(99, 102, 241, 0.3)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '1.5rem',
+          }}>
+            <GraduationCap size={36} color="var(--primary)" />
+          </div>
+
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.4rem',
+            padding: '0.3rem 0.8rem',
+            borderRadius: '9999px',
+            background: 'rgba(99, 102, 241, 0.1)',
+            border: '1px solid rgba(99, 102, 241, 0.25)',
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: '#a5b4fc',
+            marginBottom: '1rem',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+          }}>
+            <Sparkles size={13} />
+            <span>Registration Profile Required</span>
+          </div>
+
+          <h1 style={{ fontSize: '1.85rem', color: '#ffffff', marginBottom: '0.75rem' }}>
+            Complete Your Student Registration
+          </h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.6, maxWidth: '480px', margin: '0 auto 2rem' }}>
+            Before accessing academic programmes or campus intranet resources, please fill your student registration profile.
+          </p>
+
+          <Link href="/onboarding" className="btn btn-primary">
+            <span>Fill Registration Details</span>
+            <ArrowRight size={16} />
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // ==========================================
   // LEVEL 2: INSTRUCTOR FACULTY LEVEL
   // ==========================================
   if (level === 'instructor') {
@@ -397,13 +453,13 @@ export default function AccessGuard({
             </p>
 
             <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
-              <Link href="/subscribe" className="btn btn-primary">
-                <span>View Tuition & Clearance Plans</span>
+              <Link href="/courses" className="btn btn-primary" style={{ gap: '0.5rem' }}>
+                <GraduationCap size={16} />
+                <span>Browse Programmes to Enroll & Pay</span>
                 <ArrowRight size={16} />
               </Link>
-              <Link href="/academy" className="btn btn-secondary">
-                <GraduationCap size={16} color="var(--accent-emerald)" />
-                <span>Explore Direct Tutoring</span>
+              <Link href="/subscribe" className="btn btn-secondary">
+                <span>Tuition Clearance Plans</span>
               </Link>
             </div>
 

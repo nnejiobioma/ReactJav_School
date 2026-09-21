@@ -127,11 +127,8 @@ function AuthContent() {
         loadCurrentUser();
 
         setTimeout(() => {
-          if (redirectUrl) {
-            router.push(redirectUrl);
-          } else {
-            router.push('/dashboard');
-          }
+          // New student signups always proceed to complete the student registration form
+          router.push('/onboarding');
         }, 800);
       } else {
         const res = await signInWithSupabase(email.trim(), password);
@@ -145,14 +142,19 @@ function AuthContent() {
         loadCurrentUser();
 
         setTimeout(() => {
-          if (redirectUrl) {
-            router.push(redirectUrl);
-          } else if (res.user?.role === 'instructor') {
-            router.push('/instructor');
+          if (res.user?.role === 'instructor') {
+            router.push(redirectUrl || '/instructor');
           } else if (res.user?.role === 'admin' || res.user?.role === 'super_admin') {
-            router.push('/admin/access');
+            router.push(redirectUrl || '/admin/access');
           } else {
-            router.push('/dashboard');
+            // Student: Check if registration form details have been filled
+            if (!res.user?.registration_completed) {
+              router.push('/onboarding');
+            } else if (redirectUrl) {
+              router.push(redirectUrl);
+            } else {
+              router.push('/courses');
+            }
           }
         }, 800);
       }

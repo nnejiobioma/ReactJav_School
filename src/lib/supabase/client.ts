@@ -296,21 +296,17 @@ export class LocalDataService {
   }
 
   static getEnrollments(userId: string): string[] {
-    if (typeof window === 'undefined') return [INITIAL_COURSES[0].id];
+    if (typeof window === 'undefined' || !userId) return [];
     const stored = localStorage.getItem(STORAGE_KEYS.ENROLLMENTS);
     if (stored) {
       try {
         const map = JSON.parse(stored) as Record<string, string[]>;
-        return map[userId] || [INITIAL_COURSES[0].id];
+        return map[userId] || [];
       } catch {
         // fallback
       }
     }
-    const defaultEnrollments: Record<string, string[]> = {
-      [userId]: [INITIAL_COURSES[0].id],
-    };
-    localStorage.setItem(STORAGE_KEYS.ENROLLMENTS, JSON.stringify(defaultEnrollments));
-    return defaultEnrollments[userId];
+    return [];
   }
 
   static enroll(userId: string, courseId: string): void {
@@ -326,6 +322,156 @@ export class LocalDataService {
   static isEnrolled(userId: string, courseId: string): boolean {
     const list = this.getEnrollments(userId);
     return list.includes(courseId);
+  }
+
+  static updateRegistrationDetails(
+    userId: string,
+    details: {
+      phone: string;
+      country: string;
+      state: string;
+      education_level: string;
+      preferred_track: string;
+      experience_level: string;
+      career_goal: string;
+      emergency_contact?: string;
+      full_name?: string;
+    }
+  ): { success: boolean; profile: Profile } {
+    const profiles = this.getAllProfiles();
+    const index = profiles.findIndex((p) => p.id === userId);
+    const existing = index !== -1 ? profiles[index] : this.getCurrentUser();
+
+    const updatedProfile: Profile = {
+      ...(existing || {
+        id: userId,
+        email: '',
+        full_name: details.full_name || 'Student',
+        avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(details.full_name || 'Student')}`,
+        role: 'student',
+        created_at: new Date().toISOString(),
+      }),
+      full_name: details.full_name || existing?.full_name || 'Student',
+      phone: details.phone,
+      country: details.country,
+      state: details.state,
+      education_level: details.education_level,
+      preferred_track: details.preferred_track,
+      experience_level: details.experience_level,
+      career_goal: details.career_goal,
+      emergency_contact: details.emergency_contact,
+      registration_completed: true,
+    };
+
+    if (index !== -1) {
+      profiles[index] = updatedProfile;
+    } else {
+      profiles.unshift(updatedProfile);
+    }
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
+      this.setCurrentUser(updatedProfile);
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    // Supabase sync
+    const supabase = createClient();
+    if (isSupabaseConfigured() && supabase) {
+      supabase.from('profiles').update({
+        full_name: updatedProfile.full_name,
+        registration_completed: true,
+        phone: details.phone,
+        country: details.country,
+        state: details.state,
+        education_level: details.education_level,
+        preferred_track: details.preferred_track,
+      }).eq('id', userId).then();
+    }
+
+    return { success: true, profile: updatedProfile };
+  }
+
+  static processProgrammePayment(
+    userId: string,
+    courseId: string,
+    amount: number,
+    paymentReference: string = `PAY-${Date.now()}`
+  ): { success: boolean; message: string } {
+    // 1. Enroll the student in the course
+    this.enroll(userId, courseId);
+
+    // 2. Grant intranet clearance
+    const currentUser = this.getCurrentUser();
+    if (currentUser && currentUser.id === userId) {
+      const updatedUser: Profile = {
+        ...currentUser,
+        subscription_status: 'active',
+        subscription_plan: 'term',
+        payment_reference: paymentReference,
+        payment_date: new Date().toISOString(),
+        admin_granted: true,
+        granted_at: new Date().toISOString(),
+      };
+      this.setCurrentUser(updatedUser);
+
+      const profiles = this.getAllProfiles();
+      const pIdx = profiles.findIndex((p) => p.id === userId);
+      if (pIdx !== -1) {
+        profiles[pIdx] = updatedUser;
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
+        }
+      }
+    }
+
+    // 3. Log Intranet access request record as approved
+    const requests = this.getIntranetRequests();
+    const course = this.getCourseById(courseId);
+    requests.unshift({
+      id: `req_${Date.now()}`,
+      user_id: userId,
+      user_name: currentUser?.full_name || 'Enrolled Student',
+      user_email: currentUser?.email || 'student@reactjav.edu',
+      plan_id: 'term',
+      plan_name: course?.title || 'Programme Term Enrollment',
+      amount_paid: amount,
+      payment_method: 'credit_card',
+      payment_reference: paymentReference,
+      payment_date: new Date().toISOString(),
+      status: 'active',
+      admin_granted: true,
+      reviewed_at: new Date().toISOString(),
+      reviewed_by: 'Automated Bursar Clearance Gateway',
+      course_id: courseId,
+      course_title: course?.title || 'Programme Enrolled',
+    });
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.INTRANET_REQUESTS, JSON.stringify(requests));
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    // 4. Supabase sync
+    const supabase = createClient();
+    if (isSupabaseConfigured() && supabase) {
+      supabase.from('enrollments').upsert({
+        user_id: userId,
+        course_id: courseId,
+        enrolled_at: new Date().toISOString(),
+      }).then();
+
+      supabase.from('profiles').update({
+        subscription_status: 'active',
+        subscription_plan: 'term',
+        admin_granted: true,
+        payment_reference: paymentReference,
+      }).eq('id', userId).then();
+    }
+
+    return {
+      success: true,
+      message: `Tuition payment confirmed for ${course?.title || 'Programme'}! You now have full access to your curriculum and the campus intranet.`,
+    };
   }
 
   static getProgress(userId: string): Record<string, LessonProgress> {
@@ -878,14 +1024,16 @@ export class LocalDataService {
       };
     }
 
-    // For students: requires active subscription AND admin grant
+    // For students: requires active enrolled programme OR subscription clearance
+    const enrollments = this.getEnrollments(target.id);
+    const hasPaidProgramme = enrollments.length > 0;
     const status = target.subscription_status || 'none';
 
-    if (status === 'active' && target.admin_granted) {
+    if ((status === 'active' && target.admin_granted) || hasPaidProgramme) {
       return {
         hasAccess: true,
         status: 'active',
-        reason: 'Verified Student Intranet Fellowship clearance.',
+        reason: 'Verified Student Intranet & Programme Fellowship clearance.',
       };
     }
 

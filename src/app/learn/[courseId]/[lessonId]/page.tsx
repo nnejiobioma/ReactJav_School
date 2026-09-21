@@ -13,6 +13,7 @@ import {
   Download, 
   Share2, 
   Lock,
+  CreditCard,
   Printer, 
   Mail, 
   GraduationCap, 
@@ -38,6 +39,7 @@ import LessonTabEditorModal, {
   DEFAULT_QA_ITEMS, 
   DEFAULT_RESOURCES 
 } from '@/components/player/LessonTabEditorModal';
+import ProgrammeCheckoutModal from '@/components/checkout/ProgrammeCheckoutModal';
 
 export default function CoursePlayerPage() {
   const params = useParams();
@@ -57,6 +59,7 @@ export default function CoursePlayerPage() {
   const [editingSection, setEditingSection] = useState<LessonEditorSection | null>(null);
   const [isAskModalOpen, setIsAskModalOpen] = useState(false);
   const [newQuestionText, setNewQuestionText] = useState('');
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
 
   // Load course and progress
   useEffect(() => {
@@ -116,20 +119,77 @@ export default function CoursePlayerPage() {
   const notesContent = currentLesson.lecture_notes || currentLesson.content || DEFAULT_LECTURE_NOTES;
 
   // Check enrollment / preview permission
+  const isFaculty = currentUser?.role === 'admin' || currentUser?.role === 'super_admin' || currentUser?.role === 'instructor';
   const isEnrolled = currentUser ? LocalDataService.isEnrolled(currentUser.id, course.id) : false;
-  if (!isEnrolled && !currentLesson.is_free_preview) {
+
+  if (!isEnrolled && !isFaculty && !currentLesson.is_free_preview) {
     return (
-      <div className="container" style={{ padding: '6rem 0', textAlign: 'center' }}>
-        <div className="glass-card" style={{ maxWidth: '500px', margin: '0 auto', padding: '3rem 2rem' }}>
-          <Lock size={40} color="var(--accent-amber)" style={{ margin: '0 auto 1.5rem' }} />
-          <h2 style={{ marginBottom: '0.75rem', color: '#ffffff' }}>Lesson Locked</h2>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-            This lesson is exclusive to enrolled students. Please enroll in the course to unlock full curriculum access.
+      <div className="container" style={{ padding: '5rem 1.5rem 6rem', maxWidth: '640px' }}>
+        <div className="glass-card" style={{ textAlign: 'center', padding: '3.5rem 2rem' }}>
+          <div style={{
+            width: '4.5rem',
+            height: '4.5rem',
+            borderRadius: '1.25rem',
+            background: 'rgba(245, 158, 11, 0.12)',
+            border: '1px solid rgba(245, 158, 11, 0.3)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '1.5rem',
+          }}>
+            <Lock size={36} color="var(--accent-amber)" />
+          </div>
+
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.4rem',
+            padding: '0.3rem 0.8rem',
+            borderRadius: '9999px',
+            background: 'rgba(245, 158, 11, 0.1)',
+            border: '1px solid rgba(245, 158, 11, 0.25)',
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: '#fbbf24',
+            marginBottom: '1rem',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+          }}>
+            <ShieldCheck size={13} />
+            <span>Programme Tuition Required</span>
+          </div>
+
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.75rem' }}>
+            Lesson Access Locked
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.6, maxWidth: '480px', margin: '0 auto 2rem' }}>
+            Full curriculum access, source code repositories, and interactive sandboxes in <strong>{course.title}</strong> are exclusively available to students who have completed programme enrollment and tuition payment.
           </p>
-          <Link href={`/courses/${course.slug}`} className="btn btn-primary">
-            View Enrollment Options
-          </Link>
+
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={() => setShowCheckoutModal(true)}
+              className="btn btn-primary"
+              style={{ gap: '0.5rem' }}
+            >
+              <CreditCard size={16} />
+              <span>Pay Tuition & Unlock Programme</span>
+            </button>
+            <Link href="/courses" className="btn btn-secondary">
+              <span>View All Programmes</span>
+            </Link>
+          </div>
         </div>
+
+        <ProgrammeCheckoutModal
+          course={course}
+          isOpen={showCheckoutModal}
+          onClose={() => setShowCheckoutModal(false)}
+          onSuccess={() => {
+            window.location.reload();
+          }}
+        />
       </div>
     );
   }

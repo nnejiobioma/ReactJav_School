@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Clock, Calendar, CheckCircle2, ArrowRight, Sparkles, Flame, DollarSign, Laptop, Award } from 'lucide-react';
 import { Course } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
+import ProgrammeCheckoutModal from '@/components/checkout/ProgrammeCheckoutModal';
 
 interface CourseCardProps {
   course: Course;
@@ -13,20 +14,17 @@ interface CourseCardProps {
 }
 
 export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCardProps) {
+  const [showCheckout, setShowCheckout] = useState(false);
   const currentUserId = userId || LocalDataService.getCurrentUser()?.id;
   const isEnrolled = currentUserId ? LocalDataService.isEnrolled(currentUserId, course.id) : false;
 
-  const handleQuickEnroll = (e: React.MouseEvent) => {
+  const handleEnrollClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!currentUserId) {
-      window.location.href = '/auth';
+    if (!currentUserId || currentUserId === 'guest') {
+      window.location.href = `/auth?redirect=/courses/${course.slug}`;
       return;
     }
-    if (!isEnrolled) {
-      LocalDataService.enroll(currentUserId, course.id);
-      if (onEnrollSuccess) onEnrollSuccess();
-      window.dispatchEvent(new Event('storage'));
-    }
+    setShowCheckout(true);
   };
 
   const trackBadgeColors: Record<string, { bg: string; text: string; border: string }> = {
@@ -360,7 +358,7 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
 
           {!isEnrolled ? (
             <button
-              onClick={handleQuickEnroll}
+              onClick={handleEnrollClick}
               className="btn btn-primary btn-sm"
               style={{
                 flex: 1,
@@ -375,7 +373,7 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
             </button>
           ) : (
             <Link
-              href={`/learn/${course.id}`}
+              href={`/learn/${course.id}/${course.sections?.[0]?.lessons?.[0]?.id || 'overview'}`}
               className="btn btn-primary btn-sm"
               style={{
                 flex: 1,
@@ -391,6 +389,16 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
           )}
         </div>
       </div>
+
+      {/* Programme Tuition & Checkout Modal */}
+      <ProgrammeCheckoutModal
+        course={course}
+        isOpen={showCheckout}
+        onClose={() => setShowCheckout(false)}
+        onSuccess={() => {
+          if (onEnrollSuccess) onEnrollSuccess();
+        }}
+      />
     </div>
   );
 }

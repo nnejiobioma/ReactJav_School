@@ -25,6 +25,7 @@ import { LocalDataService } from '@/lib/supabase/client';
 import { formatCurrency, formatDuration } from '@/lib/utils';
 import AdminEditableSection from '@/components/admin/AdminEditableSection';
 import AdminCourseOutlineModal from '@/components/course/AdminCourseOutlineModal';
+import ProgrammeCheckoutModal from '@/components/checkout/ProgrammeCheckoutModal';
 
 export default function CourseDetailPage() {
   const params = useParams();
@@ -35,6 +36,7 @@ export default function CourseDetailPage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrolling, setEnrolling] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
   const [isOutlineModalOpen, setIsOutlineModalOpen] = useState(false);
   const [outlineModalTab, setOutlineModalTab] = useState<'curriculum' | 'details'>('curriculum');
 
@@ -82,18 +84,11 @@ export default function CourseDetailPage() {
   }
 
   const handleEnroll = () => {
-    if (!currentUser) return;
-    setEnrolling(true);
-    setTimeout(() => {
-      LocalDataService.enroll(currentUser.id, course.id);
-      setIsEnrolled(true);
-      setEnrolling(false);
-      // Navigate to first lesson
-      const firstLesson = course.sections?.[0]?.lessons?.[0];
-      if (firstLesson) {
-        router.push(`/learn/${course.id}/${firstLesson.id}`);
-      }
-    }, 800);
+    if (!currentUser || currentUser.id === 'guest') {
+      router.push(`/auth?redirect=/courses/${slug}`);
+      return;
+    }
+    setShowCheckout(true);
   };
 
   const totalLessons = course.sections?.reduce(
@@ -563,6 +558,16 @@ export default function CourseDetailPage() {
         course={course}
         onCourseUpdated={(updated) => setCourse(updated)}
         initialTab={outlineModalTab}
+      />
+
+      {/* Programme Tuition Checkout Modal */}
+      <ProgrammeCheckoutModal
+        course={course}
+        isOpen={showCheckout}
+        onClose={() => setShowCheckout(false)}
+        onSuccess={() => {
+          setIsEnrolled(true);
+        }}
       />
     </div>
   );

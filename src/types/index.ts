@@ -26,6 +26,16 @@ export interface Profile {
   tutoring_enrolled_at?: string;
   tutoring_frequency?: string;
   tutoring_mentor_name?: string;
+  // Student Registration Details
+  registration_completed?: boolean;
+  phone?: string;
+  country?: string;
+  state?: string;
+  education_level?: string;
+  preferred_track?: string;
+  experience_level?: string;
+  career_goal?: string;
+  emergency_contact?: string;
 }
 
 export interface Course {
@@ -118,6 +128,9 @@ export interface Enrollment {
   user_id: string;
   course_id: string;
   enrolled_at: string;
+  payment_status?: 'pending' | 'paid';
+  amount_paid?: number;
+  payment_reference?: string;
   course?: Course;
 }
 
@@ -280,6 +293,8 @@ export interface IntranetAccessRequest {
   reviewed_at?: string;
   reviewed_by?: string;
   rejection_reason?: string;
+  course_id?: string;
+  course_title?: string;
 }
 
 export interface IntranetBulletin {
