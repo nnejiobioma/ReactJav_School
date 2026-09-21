@@ -34,9 +34,13 @@ export async function signUpWithSupabase(
       });
 
       if (error) {
+        let msg = error.message;
+        if (msg.toLowerCase().includes('rate limit') || msg.toLowerCase().includes('over_email_send_rate_limit')) {
+          msg = 'Supabase Email Rate Limit Exceeded: Supabase limits test confirmation emails to 3-4 per hour. To fix this instantly, disable "Confirm email" in your Supabase Dashboard (Authentication -> Providers -> Email -> Toggle OFF "Confirm email").';
+        }
         return {
           success: false,
-          error: error.message,
+          error: msg,
         };
       }
 

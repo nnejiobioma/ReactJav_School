@@ -428,7 +428,10 @@ function AuthContent() {
               <strong>Database Tables & RLS Policies</strong>: If you haven't executed the database schema yet in the Supabase SQL editor, copy <code>supabase/schema.sql</code> to create all tables (<code>profiles</code>, <code>courses</code>, <code>cbt_exams</code>, etc.) and Row Level Security policies.
             </li>
             <li>
-              <strong>Instant Authentication</strong>: Users signing up or signing in will create authenticated sessions with PostgreSQL Row Level Security automatically enforced.
+              <strong>Instant Authentication & Email Rate Limits</strong>: Supabase free tier default mail service restricts confirmation emails to ~3-4 per hour. To eliminate the <em>&quot;email rate limit exceeded&quot;</em> error permanently when registering test accounts, go to your <strong>Supabase Dashboard &rarr; Authentication &rarr; Providers &rarr; Email</strong> and toggle <strong>&quot;Confirm email&quot; to OFF</strong>. Accounts will then be confirmed instantly without sending emails or hitting limits!
+            </li>
+            <li>
+              <strong>Production Custom SMTP</strong>: For production environments sending confirmation emails, configure a custom SMTP provider (e.g. Resend, SendGrid, Mailgun) under <strong>Project Settings &rarr; Authentication &rarr; SMTP Settings</strong> to unlock high volume email sending.
             </li>
             <li>
               <strong>Local Fallback Mode</strong>: If offline or testing specific scenarios, the demo personas (Student, Instructor, Admin) remain instantly accessible.
