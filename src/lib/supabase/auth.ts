@@ -242,3 +242,84 @@ export async function syncSupabaseSession(): Promise<Profile | null> {
     return LocalDataService.getCurrentUser();
   }
 }
+
+/**
+ * Send password reset email link
+ */
+export async function sendPasswordResetEmail(
+  email: string,
+  redirectTo?: string
+): Promise<AuthResponse> {
+  const supabase = createClient();
+
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      const targetRedirect = redirectTo || (typeof window !== 'undefined' ? `${window.location.origin}/auth?mode=reset` : undefined);
+      const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+        redirectTo: targetRedirect,
+      });
+
+      if (error) {
+        let msg = error.message;
+        if (msg.toLowerCase().includes('rate limit') || msg.toLowerCase().includes('over_email_send_rate_limit')) {
+          msg = 'Email Rate Limit Exceeded: Supabase allows only 3-4 emails per hour on default SMTP. Please wait a few minutes or configure custom SMTP in Supabase Settings.';
+        }
+        return {
+          success: false,
+          error: msg,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Password reset link sent! Check your inbox for instructions to reset your password.',
+      };
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Password reset request failed';
+      return { success: false, error: msg };
+    }
+  }
+
+  // Fallback demo/mock
+  return {
+    success: true,
+    message: 'Demo Mode: Password reset link generated for ' + email,
+  };
+}
+
+/**
+ * Update user password (used during password recovery or while logged in)
+ */
+export async function updateUserPassword(
+  newPassword: string
+): Promise<AuthResponse> {
+  const supabase = createClient();
+
+  if (isSupabaseConfigured() && supabase) {
+    try {
+      const { data, error } = await supabase.auth.updateUser({
+        password: newPassword,
+      });
+
+      if (error) {
+        return {
+          success: false,
+          error: error.message,
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Password updated successfully! You can now sign in with your new password.',
+      };
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to update password';
+      return { success: false, error: msg };
+    }
+  }
+
+  return {
+    success: true,
+    message: 'Demo Mode: Password updated successfully.',
+  };
+}
