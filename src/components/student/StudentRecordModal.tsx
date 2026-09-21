@@ -440,7 +440,7 @@ export default function StudentRecordModal({
                     className="print-dark-text"
                     style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)' }}
                   >
-                    {currentUser.full_name || 'Alex Morgan'}
+                    {currentUser.full_name || 'Student'}
                   </span>
                 </div>
 

@@ -92,19 +92,29 @@ const STORAGE_KEYS = {
 // Client-side Local State Store (Local Persistence Fallback)
 export class LocalDataService {
   static getCurrentUser(): Profile | null {
-    if (typeof window === 'undefined') return DEMO_PROFILES.student;
+    if (typeof window === 'undefined') return null;
     const stored = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
-    if (stored === 'guest' || stored === 'null') return null;
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        if (parsed && parsed.id) return parsed;
-      } catch {
-        // fallback
+    if (!stored || stored === 'guest' || stored === 'null') return null;
+    try {
+      const parsed = JSON.parse(stored);
+      if (parsed && parsed.id) {
+        // Clear old legacy demo users from browser cache
+        if (
+          parsed.id === 'usr_student_001' || 
+          parsed.id === 'usr_instructor_001' || 
+          parsed.id === 'usr_admin_001' || 
+          parsed.id === 'usr_super_admin_001' ||
+          parsed.email?.endsWith('@example.com')
+        ) {
+          localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+          return null;
+        }
+        return parsed;
       }
+    } catch {
+      // fallback
     }
-    this.setCurrentUser(DEMO_PROFILES.student);
-    return DEMO_PROFILES.student;
+    return null;
   }
 
   static setCurrentUser(profile: Profile | null): void {
@@ -127,26 +137,31 @@ export class LocalDataService {
     return !!user && user.id !== 'guest';
   }
 
-  static switchDemoRole(role: UserRole): Profile {
-    const profile = DEMO_PROFILES[role] || DEMO_PROFILES.student;
-    this.setCurrentUser(profile);
-    return profile;
+  static switchDemoRole(_role: UserRole): Profile | null {
+    return this.getCurrentUser();
   }
 
   static getAllProfiles(): Profile[] {
-    if (typeof window === 'undefined') return Object.values(DEMO_PROFILES);
+    if (typeof window === 'undefined') return [];
     const stored = localStorage.getItem(STORAGE_KEYS.PROFILES);
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed)) {
+          // Filter out legacy demo profiles
+          return parsed.filter(
+            (p) =>
+              !p.id?.startsWith('usr_student_') &&
+              !p.id?.startsWith('usr_instructor_') &&
+              !p.id?.startsWith('usr_admin_') &&
+              !p.id?.startsWith('usr_super_admin_')
+          );
+        }
       } catch {
         // fallback
       }
     }
-    const defaults = Object.values(DEMO_PROFILES);
-    localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(defaults));
-    return defaults;
+    return [];
   }
 
   static updateUserRole(
@@ -421,25 +436,29 @@ export class LocalDataService {
   }
 
   static getRoomParticipants(roomId: string): LiveParticipant[] {
-    return INITIAL_ROOM_PARTICIPANTS[roomId] || [
+    if (INITIAL_ROOM_PARTICIPANTS[roomId]) {
+      return INITIAL_ROOM_PARTICIPANTS[roomId];
+    }
+    const current = this.getCurrentUser();
+    return [
       {
-        id: 'usr_instructor_001',
-        name: 'Dr. Elena Chen (Host)',
+        id: 'host_instructor',
+        name: 'Faculty Lead (Host)',
         avatar_url: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
         role: 'instructor',
         is_speaking: true,
         is_muted: false,
         is_camera_on: true,
       },
-      {
-        id: 'usr_student_001',
-        name: 'Alex Morgan (You)',
-        avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-        role: 'student',
+      ...(current ? [{
+        id: current.id,
+        name: `${current.full_name || 'Scholar'} (You)`,
+        avatar_url: current.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+        role: current.role,
         is_speaking: false,
         is_muted: true,
         is_camera_on: true,
-      },
+      }] : []),
     ];
   }
 
@@ -499,7 +518,10 @@ export class LocalDataService {
     paymentMethod: 'credit_card' | 'bank_transfer' | 'campus_voucher',
     paymentRef: string
   ): { user: Profile; request: IntranetAccessRequest } {
-    const user = this.getCurrentUser() || DEMO_PROFILES.student;
+    const user = this.getCurrentUser();
+    if (!user) {
+      throw new Error('Authentication required: Please log in or register before submitting clearance payment.');
+    }
     const plans = this.getSubscriptionPlans();
     const selectedPlan = plans.find((p) => p.id === planId) || plans[1];
 
@@ -676,15 +698,21 @@ export class LocalDataService {
       notes?: string;
     }
   ): { success: boolean; user: Profile } {
-    const currentUser = this.getCurrentUser() || DEMO_PROFILES.student;
-    const targetUserId = userId || currentUser.id;
+    const currentUser = this.getCurrentUser();
+    const targetUserId = userId || currentUser?.id || `usr_${Date.now()}`;
     const trackId = track?.id || 'python-engineering';
     const trackName = track?.name || 'Python Engineering';
 
     const updatedUser: Profile = {
-      ...currentUser,
+      ...(currentUser || {
+        id: targetUserId,
+        email: 'fellow@reactjav.io',
+        role: 'student' as const,
+        avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+        created_at: new Date().toISOString(),
+      }),
       id: targetUserId,
-      full_name: details?.learnerName?.trim() || currentUser.full_name || 'Tutoring Scholar',
+      full_name: details?.learnerName?.trim() || currentUser?.full_name || 'Tutoring Scholar',
       tutoring_enrolled: true,
       tutoring_track_id: trackId,
       tutoring_track_name: trackName,
@@ -949,21 +977,21 @@ export class LocalDataService {
     sessionData: Partial<TutoringAttendanceSession>
   ): TutoringAttendanceSession {
     const all = this.getTutoringAttendance();
-    const currentUser = this.getCurrentUser() || DEMO_PROFILES.student;
+    const currentUser = this.getCurrentUser();
     const now = new Date();
     const dateStr = sessionData.session_date || now.toISOString().split('T')[0];
     const month = sessionData.month || dateStr.slice(0, 7);
 
     const newSession: TutoringAttendanceSession = {
       id: sessionData.id || `att_tut_${Date.now()}`,
-      student_id: sessionData.student_id || currentUser.id,
-      student_name: sessionData.student_name || currentUser.full_name || 'Alex Morgan',
-      student_avatar: sessionData.student_avatar || currentUser.avatar_url || undefined,
-      instructor_id: sessionData.instructor_id || 'usr_instructor_001',
+      student_id: sessionData.student_id || currentUser?.id || 'student_id',
+      student_name: sessionData.student_name || currentUser?.full_name || 'Enrolled Student',
+      student_avatar: sessionData.student_avatar || currentUser?.avatar_url || undefined,
+      instructor_id: sessionData.instructor_id || 'faculty_author_001',
       instructor_name: sessionData.instructor_name || 'Dr. Elena Chen',
       instructor_avatar: sessionData.instructor_avatar || 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
-      track_id: sessionData.track_id || currentUser.tutoring_track_id || 'python-engineering',
-      track_name: sessionData.track_name || currentUser.tutoring_track_name || 'Python Engineering',
+      track_id: sessionData.track_id || currentUser?.tutoring_track_id || 'python-engineering',
+      track_name: sessionData.track_name || currentUser?.tutoring_track_name || 'Python Engineering',
       session_date: dateStr,
       session_time: sessionData.session_time || '14:00 - 15:30 GMT',
       session_title: sessionData.session_title || '1-on-1 Direct Tutoring Mentorship Session',

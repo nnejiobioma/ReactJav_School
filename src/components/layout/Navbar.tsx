@@ -76,12 +76,6 @@ export default function Navbar() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  const handleRoleSwitch = (role: UserRole) => {
-    const updated = LocalDataService.switchDemoRole(role);
-    setCurrentUser(updated);
-    setShowRoleMenu(false);
-    window.dispatchEvent(new Event('storage'));
-  };
 
   const roleBadgeStyle = {
     student: 'badge-primary',
@@ -613,94 +607,6 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                {/* Role Switches */}
-                <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', padding: '0.25rem 0.75rem', display: 'block' }}>
-                  SWITCH DEMO ROLE:
-                </span>
-
-                <button
-                  onClick={() => handleRoleSwitch('student')}
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.5rem 0.75rem',
-                    borderRadius: '0.5rem',
-                    background: currentUser?.role === 'student' ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
-                    color: currentUser?.role === 'student' ? '#a5b4fc' : 'var(--text-primary)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontSize: '0.84rem',
-                    textAlign: 'left',
-                  }}
-                >
-                  <UserCheck size={16} />
-                  <span>Student Persona</span>
-                </button>
-
-                <button
-                  onClick={() => handleRoleSwitch('instructor')}
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.5rem 0.75rem',
-                    borderRadius: '0.5rem',
-                    background: currentUser?.role === 'instructor' ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
-                    color: currentUser?.role === 'instructor' ? '#6ee7b7' : 'var(--text-primary)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontSize: '0.84rem',
-                    textAlign: 'left',
-                  }}
-                >
-                  <Sparkles size={16} />
-                  <span>Instructor Persona</span>
-                </button>
-
-                <button
-                  onClick={() => handleRoleSwitch('admin')}
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.5rem 0.75rem',
-                    borderRadius: '0.5rem',
-                    background: currentUser?.role === 'admin' ? 'rgba(245, 158, 11, 0.15)' : 'transparent',
-                    color: currentUser?.role === 'admin' ? '#fcd34d' : 'var(--text-primary)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontSize: '0.84rem',
-                    textAlign: 'left',
-                  }}
-                >
-                  <ShieldCheck size={16} />
-                  <span>Admin Persona</span>
-                </button>
-
-                <button
-                  onClick={() => handleRoleSwitch('super_admin')}
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.5rem 0.75rem',
-                    borderRadius: '0.5rem',
-                    background: currentUser?.role === 'super_admin' ? 'rgba(168, 85, 247, 0.2)' : 'transparent',
-                    color: currentUser?.role === 'super_admin' ? '#d8b4fe' : 'var(--text-primary)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontSize: '0.84rem',
-                    textAlign: 'left',
-                  }}
-                >
-                  <Sparkles size={16} color="#c084fc" />
-                  <span style={{ fontWeight: 600 }}>Super Admin Persona</span>
-                </button>
 
                 <div style={{
                   borderTop: '1px solid var(--border-subtle)',
@@ -839,7 +745,7 @@ export default function Navbar() {
                     />
                     <div>
                       <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', lineHeight: 1.2 }}>
-                        {currentUser?.full_name || 'Demo User'}
+                        {currentUser?.full_name || 'User'}
                       </span>
                       <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                         {currentUser?.email}
@@ -849,74 +755,6 @@ export default function Navbar() {
                   <span className={`badge ${roleBadgeStyle}`} style={{ fontSize: '0.65rem', padding: '0.15rem 0.45rem' }}>
                     {currentUser?.role || 'student'}
                   </span>
-                </div>
-
-                {/* Mobile Quick Role Switcher */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.4rem', paddingTop: '0.5rem', borderTop: '1px solid var(--border-subtle)' }}>
-                  <button
-                    onClick={() => handleRoleSwitch('student')}
-                    style={{
-                      padding: '0.4rem 0.2rem',
-                      fontSize: '0.72rem',
-                      fontWeight: 600,
-                      borderRadius: '0.5rem',
-                      background: currentUser?.role === 'student' ? 'rgba(99, 102, 241, 0.2)' : 'var(--bg-surface)',
-                      color: currentUser?.role === 'student' ? '#a5b4fc' : 'var(--text-secondary)',
-                      border: currentUser?.role === 'student' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
-                      cursor: 'pointer',
-                      textAlign: 'center',
-                    }}
-                  >
-                    Student
-                  </button>
-                  <button
-                    onClick={() => handleRoleSwitch('instructor')}
-                    style={{
-                      padding: '0.4rem 0.2rem',
-                      fontSize: '0.72rem',
-                      fontWeight: 600,
-                      borderRadius: '0.5rem',
-                      background: currentUser?.role === 'instructor' ? 'rgba(16, 185, 129, 0.2)' : 'var(--bg-surface)',
-                      color: currentUser?.role === 'instructor' ? '#6ee7b7' : 'var(--text-secondary)',
-                      border: currentUser?.role === 'instructor' ? '1px solid var(--accent-emerald)' : '1px solid var(--border-subtle)',
-                      cursor: 'pointer',
-                      textAlign: 'center',
-                    }}
-                  >
-                    Instructor
-                  </button>
-                  <button
-                    onClick={() => handleRoleSwitch('admin')}
-                    style={{
-                      padding: '0.4rem 0.2rem',
-                      fontSize: '0.72rem',
-                      fontWeight: 600,
-                      borderRadius: '0.5rem',
-                      background: currentUser?.role === 'admin' ? 'rgba(245, 158, 11, 0.2)' : 'var(--bg-surface)',
-                      color: currentUser?.role === 'admin' ? '#fcd34d' : 'var(--text-secondary)',
-                      border: currentUser?.role === 'admin' ? '1px solid var(--accent-amber)' : '1px solid var(--border-subtle)',
-                      cursor: 'pointer',
-                      textAlign: 'center',
-                    }}
-                  >
-                    Admin
-                  </button>
-                  <button
-                    onClick={() => handleRoleSwitch('super_admin')}
-                    style={{
-                      padding: '0.4rem 0.2rem',
-                      fontSize: '0.72rem',
-                      fontWeight: 600,
-                      borderRadius: '0.5rem',
-                      background: currentUser?.role === 'super_admin' ? 'rgba(168, 85, 247, 0.25)' : 'var(--bg-surface)',
-                      color: currentUser?.role === 'super_admin' ? '#d8b4fe' : 'var(--text-secondary)',
-                      border: currentUser?.role === 'super_admin' ? '1px solid #c084fc' : '1px solid var(--border-subtle)',
-                      cursor: 'pointer',
-                      textAlign: 'center',
-                    }}
-                  >
-                    Super Admin
-                  </button>
                 </div>
 
                 <button

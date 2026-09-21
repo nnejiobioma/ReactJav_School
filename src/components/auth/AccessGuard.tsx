@@ -135,59 +135,6 @@ export default function AccessGuard({
               <span>Browse Catalog</span>
             </Link>
           </div>
-
-          {/* Quick Demo Personas */}
-          <div style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: '1rem',
-            padding: '1.25rem',
-            textAlign: 'left',
-          }}>
-            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.75rem', fontWeight: 700 }}>
-              Or Instant One-Click Login via Demo Personas:
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.6rem' }}>
-              <button
-                type="button"
-                onClick={() => {
-                  LocalDataService.switchDemoRole('student');
-                  evaluateState();
-                }}
-                className="btn btn-secondary btn-sm"
-                style={{ justifyContent: 'flex-start' }}
-              >
-                <UserCheck size={16} color="var(--primary)" />
-                <span>Alex (Student)</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  LocalDataService.switchDemoRole('instructor');
-                  evaluateState();
-                }}
-                className="btn btn-secondary btn-sm"
-                style={{ justifyContent: 'flex-start' }}
-              >
-                <Sparkles size={16} color="var(--accent-emerald)" />
-                <span>Dr. Elena (Instructor)</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  LocalDataService.switchDemoRole('admin');
-                  evaluateState();
-                }}
-                className="btn btn-secondary btn-sm"
-                style={{ justifyContent: 'flex-start' }}
-              >
-                <ShieldCheck size={16} color="var(--accent-amber)" />
-                <span>Admin Dean</span>
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     );
@@ -266,17 +213,6 @@ export default function AccessGuard({
                 <span>Return to Student Dashboard</span>
                 <ArrowRight size={16} />
               </Link>
-              <button
-                type="button"
-                onClick={() => {
-                  LocalDataService.switchDemoRole('instructor');
-                  evaluateState();
-                }}
-                className="btn btn-secondary"
-              >
-                <Sparkles size={16} color="var(--accent-emerald)" />
-                <span>Switch to Instructor Persona (Demo)</span>
-              </button>
             </div>
           </div>
         </div>
@@ -340,17 +276,6 @@ export default function AccessGuard({
                 <span>Return to Dashboard</span>
                 <ArrowRight size={16} />
               </Link>
-              <button
-                type="button"
-                onClick={() => {
-                  LocalDataService.switchDemoRole('admin');
-                  evaluateState();
-                }}
-                className="btn btn-secondary"
-              >
-                <ShieldCheck size={16} color="var(--accent-amber)" />
-                <span>Switch to Admin Persona (Demo)</span>
-              </button>
             </div>
           </div>
         </div>
@@ -414,18 +339,6 @@ export default function AccessGuard({
                 <span>Return to Dashboard</span>
                 <ArrowRight size={16} />
               </Link>
-              <button
-                type="button"
-                onClick={() => {
-                  LocalDataService.switchDemoRole('super_admin');
-                  evaluateState();
-                }}
-                className="btn btn-secondary"
-                style={{ borderColor: 'rgba(168, 85, 247, 0.4)', color: '#d8b4fe' }}
-              >
-                <Sparkles size={16} color="#c084fc" />
-                <span>Switch to Super Admin Persona (Demo)</span>
-              </button>
             </div>
           </div>
         </div>
@@ -494,45 +407,7 @@ export default function AccessGuard({
               </Link>
             </div>
 
-            {/* Quick Demo Bypass for testing */}
-            <div style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: '1rem',
-              padding: '1.25rem',
-              textAlign: 'left',
-            }}>
-              <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.75rem', fontWeight: 700 }}>
-                Demo Verification Bypasses:
-              </p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    LocalDataService.grantIntranetAccess(currentUser.id, 'usr_admin_001');
-                    evaluateState();
-                  }}
-                  className="btn btn-secondary btn-sm"
-                  style={{ justifyContent: 'flex-start' }}
-                >
-                  <ShieldCheck size={15} color="var(--accent-emerald)" />
-                  <span>Grant Instant Student Clearance</span>
-                </button>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    LocalDataService.switchDemoRole('admin');
-                    evaluateState();
-                  }}
-                  className="btn btn-secondary btn-sm"
-                  style={{ justifyContent: 'flex-start' }}
-                >
-                  <Shield size={15} color="var(--accent-amber)" />
-                  <span>Switch to Admin Persona</span>
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       );

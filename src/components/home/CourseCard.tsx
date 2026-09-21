@@ -13,11 +13,15 @@ interface CourseCardProps {
 }
 
 export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCardProps) {
-  const currentUserId = userId || 'usr_student_001';
-  const isEnrolled = LocalDataService.isEnrolled(currentUserId, course.id);
+  const currentUserId = userId || LocalDataService.getCurrentUser()?.id;
+  const isEnrolled = currentUserId ? LocalDataService.isEnrolled(currentUserId, course.id) : false;
 
   const handleQuickEnroll = (e: React.MouseEvent) => {
     e.preventDefault();
+    if (!currentUserId) {
+      window.location.href = '/auth';
+      return;
+    }
     if (!isEnrolled) {
       LocalDataService.enroll(currentUserId, course.id);
       if (onEnrollSuccess) onEnrollSuccess();

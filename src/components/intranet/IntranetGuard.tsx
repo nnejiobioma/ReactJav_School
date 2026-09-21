@@ -36,7 +36,6 @@ export default function IntranetGuard({ children, requiredFeatureTitle }: Intran
     reason: string;
   }>({ hasAccess: false, status: 'none', reason: 'Loading clearance credentials...' });
   const [isLoading, setIsLoading] = useState(true);
-  const [isSimulatingGrant, setIsSimulatingGrant] = useState(false);
 
   const checkAccess = () => {
     const user = LocalDataService.getCurrentUser();
@@ -56,16 +55,6 @@ export default function IntranetGuard({ children, requiredFeatureTitle }: Intran
     window.addEventListener('storage', handleStorageChange);
     return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
-
-  const handleInstantAdminClearance = () => {
-    if (!currentUser) return;
-    setIsSimulatingGrant(true);
-    setTimeout(() => {
-      LocalDataService.grantIntranetAccess(currentUser.id, 'usr_admin_001');
-      checkAccess();
-      setIsSimulatingGrant(false);
-    }, 400);
-  };
 
   if (isLoading) {
     return (
@@ -272,48 +261,6 @@ export default function IntranetGuard({ children, requiredFeatureTitle }: Intran
             </div>
           </div>
 
-          {/* Instant Admin Approval Bypass for Seamless Testing */}
-          <div style={{
-            padding: '1.25rem',
-            borderRadius: '0.875rem',
-            background: 'rgba(99, 102, 241, 0.1)',
-            border: '1px solid rgba(99, 102, 241, 0.3)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '1rem',
-            flexWrap: 'wrap',
-            marginBottom: '1.5rem',
-          }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#c7d2fe', fontWeight: 600, fontSize: '0.85rem' }}>
-                <Zap size={16} color="var(--primary)" />
-                <span>Developer / Evaluator Quick Access</span>
-              </div>
-              <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: '0.2rem 0 0' }}>
-                You can grant clearance instantly with this simulation button, or switch to the <strong>Admin Persona</strong> in the navbar to test the formal Admin Clearance Desk.
-              </p>
-            </div>
-
-            <button
-              onClick={handleInstantAdminClearance}
-              disabled={isSimulatingGrant}
-              className="btn btn-primary btn-sm"
-              style={{ whiteSpace: 'nowrap' }}
-            >
-              {isSimulatingGrant ? (
-                <>
-                  <RefreshCw className="animate-spin" size={14} />
-                  <span>Granting Access...</span>
-                </>
-              ) : (
-                <>
-                  <ShieldCheck size={14} />
-                  <span>Simulate Instant Admin Grant</span>
-                </>
-              )}
-            </button>
-          </div>
 
           {/* Action links */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>

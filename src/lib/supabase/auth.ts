@@ -1,6 +1,5 @@
 import { createClient, isSupabaseConfigured, LocalDataService } from './client';
 import { Profile, UserRole } from '@/types';
-import { DEMO_PROFILES } from './mockData';
 
 export interface AuthResponse {
   success: boolean;
@@ -176,30 +175,10 @@ export async function signInWithSupabase(
     }
   }
 
-  // Check demo personas if matching email
-  const lowerEmail = email.toLowerCase();
-  let matchedPersona = DEMO_PROFILES.student;
-  if (lowerEmail.includes('superadmin') || lowerEmail.includes('root') || lowerEmail.includes('owner')) {
-    matchedPersona = DEMO_PROFILES.super_admin;
-  } else if (lowerEmail.includes('instructor') || lowerEmail.includes('chen')) {
-    matchedPersona = DEMO_PROFILES.instructor;
-  } else if (lowerEmail.includes('admin') || lowerEmail.includes('registrar')) {
-    matchedPersona = DEMO_PROFILES.admin;
-  } else {
-    matchedPersona = {
-      ...DEMO_PROFILES.student,
-      email,
-      full_name: email.split('@')[0],
-    };
-  }
-
-  LocalDataService.setCurrentUser(matchedPersona);
-  window.dispatchEvent(new Event('storage'));
-
+  // Fallback for offline mode when Supabase is not reachable
   return {
-    success: true,
-    user: matchedPersona,
-    message: `Signed in as ${matchedPersona.role.toUpperCase()}`,
+    success: false,
+    error: 'Invalid email or password. Please verify your credentials or register a new account.',
   };
 }
 

@@ -54,22 +54,6 @@ function AuthContent() {
     return () => window.removeEventListener('storage', handleStorage);
   }, []);
 
-  const handlePersonaLogin = (demoRole: UserRole) => {
-    LocalDataService.switchDemoRole(demoRole);
-    setToastMessage(`Switched active session to Demo ${demoRole.toUpperCase()}`);
-    setTimeout(() => {
-      if (redirectUrl) {
-        router.push(redirectUrl);
-      } else if (demoRole === 'instructor') {
-        router.push('/instructor');
-      } else if (demoRole === 'admin' || demoRole === 'super_admin') {
-        router.push('/admin/access');
-      } else {
-        router.push('/dashboard');
-      }
-    }, 500);
-  };
-
   const handleSignOut = async () => {
     await signOutUser();
     setCurrentUser(null);
@@ -317,59 +301,6 @@ function AuthContent() {
       {activeTab !== 'supabase-setup' ? (
         <div className="glass-card">
           {/* Quick Demo Personas Banner */}
-          <div style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: '0.75rem',
-            padding: '1rem',
-            marginBottom: '1.75rem',
-          }}>
-            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.6rem', fontWeight: 700 }}>
-              Quick One-Click Demo Personas:
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.5rem' }}>
-              <button
-                type="button"
-                onClick={() => handlePersonaLogin('student')}
-                className="btn btn-secondary btn-sm"
-                style={{ justifyContent: 'flex-start' }}
-              >
-                <UserCheck size={15} color="var(--primary)" />
-                <span>Alex (Student)</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handlePersonaLogin('instructor')}
-                className="btn btn-secondary btn-sm"
-                style={{ justifyContent: 'flex-start' }}
-              >
-                <Sparkles size={15} color="var(--accent-emerald)" />
-                <span>Dr. Elena (Instructor)</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handlePersonaLogin('admin')}
-                className="btn btn-secondary btn-sm"
-                style={{ justifyContent: 'flex-start' }}
-              >
-                <ShieldCheck size={15} color="var(--accent-amber)" />
-                <span>Admin Dean</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handlePersonaLogin('super_admin')}
-                className="btn btn-secondary btn-sm"
-                style={{ justifyContent: 'flex-start', borderColor: 'rgba(168, 85, 247, 0.4)', color: '#d8b4fe' }}
-              >
-                <Sparkles size={15} color="#c084fc" />
-                <span>Super Admin (Root)</span>
-              </button>
-            </div>
-          </div>
-
           {/* Form */}
           <form onSubmit={handleAuthSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             {activeTab === 'signup' && (

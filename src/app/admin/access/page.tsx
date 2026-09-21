@@ -78,17 +78,6 @@ export default function AdminAccessPage() {
     setTimeout(() => setActionFeedback(null), 3500);
   };
 
-  const handleSwitchToAdmin = () => {
-    LocalDataService.switchDemoRole('admin');
-    loadData();
-    window.dispatchEvent(new Event('storage'));
-  };
-
-  const handleSwitchToSuperAdmin = () => {
-    LocalDataService.switchDemoRole('super_admin');
-    loadData();
-    window.dispatchEvent(new Event('storage'));
-  };
 
   const handleRoleChange = (userId: string, targetName: string, newRole: UserRole) => {
     if (currentUser?.role !== 'super_admin') {
@@ -129,51 +118,6 @@ export default function AdminAccessPage() {
   return (
     <AccessGuard level="admin" pageTitle="Registrar Clearance Desk">
       <div className="container" style={{ padding: '3rem 1rem 6rem' }}>
-      {/* Persona Notice if not Admin or Super Admin */}
-      {currentUser?.role !== 'admin' && currentUser?.role !== 'super_admin' && (
-        <div style={{
-          padding: '1rem 1.5rem',
-          borderRadius: '0.875rem',
-          background: 'rgba(245, 158, 11, 0.12)',
-          border: '1px solid rgba(245, 158, 11, 0.35)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '1rem',
-          flexWrap: 'wrap',
-          marginBottom: '2rem',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <ShieldAlert size={20} color="var(--accent-amber)" />
-            <div>
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', display: 'block' }}>
-                You are currently viewing as: {currentUser?.full_name} ({currentUser?.role})
-              </span>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                This is the Registrar & Platform Governance Desk. Switch to Admin or Super Admin to test administrative features.
-              </span>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            <button
-              onClick={handleSwitchToAdmin}
-              className="btn btn-secondary btn-sm"
-            >
-              <UserCheck size={14} />
-              <span>Switch to Admin</span>
-            </button>
-            <button
-              onClick={handleSwitchToSuperAdmin}
-              className="btn btn-primary btn-sm"
-              style={{ background: 'linear-gradient(135deg, #7c3aed, #ec4899)' }}
-            >
-              <Sparkles size={14} />
-              <span>Switch to Super Admin</span>
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem' }}>
@@ -398,21 +342,6 @@ export default function AdminAccessPage() {
                 </p>
               </div>
             </div>
-
-            {currentUser?.role !== 'super_admin' && (
-              <button
-                onClick={handleSwitchToSuperAdmin}
-                className="btn btn-sm"
-                style={{
-                  background: 'linear-gradient(135deg, #7c3aed, #ec4899)',
-                  color: '#ffffff',
-                  gap: '0.4rem',
-                }}
-              >
-                <Sparkles size={14} />
-                <span>Switch to Super Admin (Demo)</span>
-              </button>
-            )}
           </div>
 
           {/* Action Feedback Toast */}

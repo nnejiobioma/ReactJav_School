@@ -19,22 +19,11 @@ import AccessGuard from '@/components/auth/AccessGuard';
 
 export default function TutoringAttendancePage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
-  const [activePersona, setActivePersona] = useState<UserRole>('student');
 
   useEffect(() => {
     const user = LocalDataService.getCurrentUser();
     setCurrentUser(user);
-    if (user) {
-      setActivePersona(user.role);
-    }
   }, []);
-
-  const handleSwitchPersona = (role: UserRole) => {
-    const updated = LocalDataService.switchDemoRole(role);
-    setCurrentUser(updated);
-    setActivePersona(role);
-    window.dispatchEvent(new Event('storage'));
-  };
 
   return (
     <AccessGuard level="authenticated" pageTitle="Tutoring Attendance Tracker">
@@ -64,85 +53,10 @@ export default function TutoringAttendancePage() {
             Attendance Tracker
           </span>
         </div>
-
-        {/* Demo Persona Switcher for Quick Validation Testing */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.4rem',
-          background: 'var(--bg-surface)',
-          padding: '0.3rem 0.5rem',
-          borderRadius: '0.75rem',
-          border: '1px solid var(--border-subtle)',
-        }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginRight: '0.25rem' }}>
-            Test As:
-          </span>
-          <button
-            onClick={() => handleSwitchPersona('student')}
-            style={{
-              padding: '0.3rem 0.65rem',
-              borderRadius: '0.5rem',
-              border: 'none',
-              background: activePersona === 'student' ? 'rgba(99, 102, 241, 0.2)' : 'transparent',
-              color: activePersona === 'student' ? 'var(--primary)' : 'var(--text-secondary)',
-              fontWeight: 600,
-              fontSize: '0.75rem',
-              cursor: 'pointer',
-            }}
-          >
-            Student
-          </button>
-          <button
-            onClick={() => handleSwitchPersona('instructor')}
-            style={{
-              padding: '0.3rem 0.65rem',
-              borderRadius: '0.5rem',
-              border: 'none',
-              background: activePersona === 'instructor' ? 'rgba(16, 185, 129, 0.2)' : 'transparent',
-              color: activePersona === 'instructor' ? 'var(--accent-emerald)' : 'var(--text-secondary)',
-              fontWeight: 600,
-              fontSize: '0.75rem',
-              cursor: 'pointer',
-            }}
-          >
-            Instructor
-          </button>
-          <button
-            onClick={() => handleSwitchPersona('admin')}
-            style={{
-              padding: '0.3rem 0.65rem',
-              borderRadius: '0.5rem',
-              border: 'none',
-              background: activePersona === 'admin' ? 'rgba(245, 158, 11, 0.2)' : 'transparent',
-              color: activePersona === 'admin' ? 'var(--accent-amber)' : 'var(--text-secondary)',
-              fontWeight: 600,
-              fontSize: '0.75rem',
-              cursor: 'pointer',
-            }}
-          >
-            Admin
-          </button>
-          <button
-            onClick={() => handleSwitchPersona('super_admin')}
-            style={{
-              padding: '0.3rem 0.65rem',
-              borderRadius: '0.5rem',
-              border: 'none',
-              background: activePersona === 'super_admin' ? 'rgba(168, 85, 247, 0.25)' : 'transparent',
-              color: activePersona === 'super_admin' ? '#d8b4fe' : 'var(--text-secondary)',
-              fontWeight: 600,
-              fontSize: '0.75rem',
-              cursor: 'pointer',
-            }}
-          >
-            Super Admin
-          </button>
-        </div>
       </div>
 
       {/* Main Attendance Tracker Component */}
-      <TutoringAttendanceTracker initialRole={activePersona} />
+      <TutoringAttendanceTracker initialRole={currentUser?.role || 'student'} />
     </div>
     </AccessGuard>
   );

@@ -680,7 +680,7 @@ export default function StudentDashboardPage() {
                   Matriculation Dossier
                 </span>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.1rem' }}>
-                  {currentUser?.full_name || 'Alex Morgan'}
+                  {currentUser?.full_name || 'Scholar'}
                 </h3>
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
                   Matric No: RJ-2026-ENG-{(currentUser?.id || 'usr_001').slice(-5).toUpperCase()} • Track: Full-Stack Software Engineering
