@@ -1,14 +1,18 @@
 -- ==============================================================================
--- Supabase Schema for Modern Learning Platform (LMS)
+-- Supabase Schema for Modern Learning Platform (LMS) - ReactJav School
 -- Includes:
 -- 1. Profiles (linked to auth.users with RBAC: student, instructor, admin)
--- 2. Courses, Sections, Lessons (Video, Article, Quiz)
--- 3. Enrollments & Lesson Progress Tracking
--- 4. Quizzes & Submissions
--- 5. Course Reviews & Ratings
--- 6. Row Level Security (RLS) Policies
--- 7. Automatic Profile Creation Trigger on Auth Signup
--- 8. Seed Sample Courses & Lessons
+-- 2. Courses
+-- 3. Enrollments (Created BEFORE lessons to satisfy RLS dependencies)
+-- 4. Sections & Lessons (Video, Article, Quiz)
+-- 5. Lesson Progress Tracking
+-- 6. Quizzes & Submissions
+-- 7. Course Reviews & Ratings
+-- 8. CBT (Computer-Based Testing) Engine
+-- 9. Live Virtual Rooms & Chat
+-- 10. Campus Intranet & Tutoring Attendance Ledger
+-- 11. Row Level Security (RLS) Policies (Idempotent with DROP POLICY IF EXISTS)
+-- 12. Automatic Profile Creation Trigger on Auth Signup
 -- ==============================================================================
 
 -- Enable UUID extension if not already enabled
@@ -24,16 +28,52 @@ create table if not exists public.profiles (
   avatar_url text,
   role text not null default 'student' check (role in ('student', 'instructor', 'admin')),
   bio text,
+  subscription_status text default 'none',
+  subscription_plan text,
+  payment_reference text,
+  payment_date text,
+  admin_granted boolean default false,
+  granted_at text,
+  granted_by text,
+  rejection_reason text,
+  tutoring_enrolled boolean default false,
+  tutoring_track_id text,
+  tutoring_track_name text,
+  tutoring_enrolled_at text,
+  tutoring_frequency text,
+  tutoring_mentor_name text,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
+-- Ensure columns exist if table was partially created in a prior run
+alter table public.profiles add column if not exists subscription_status text default 'none';
+alter table public.profiles add column if not exists subscription_plan text;
+alter table public.profiles add column if not exists payment_reference text;
+alter table public.profiles add column if not exists payment_date text;
+alter table public.profiles add column if not exists admin_granted boolean default false;
+alter table public.profiles add column if not exists granted_at text;
+alter table public.profiles add column if not exists granted_by text;
+alter table public.profiles add column if not exists rejection_reason text;
+alter table public.profiles add column if not exists tutoring_enrolled boolean default false;
+alter table public.profiles add column if not exists tutoring_track_id text;
+alter table public.profiles add column if not exists tutoring_track_name text;
+alter table public.profiles add column if not exists tutoring_enrolled_at text;
+alter table public.profiles add column if not exists tutoring_frequency text;
+alter table public.profiles add column if not exists tutoring_mentor_name text;
+
 -- RLS: Profiles
 alter table public.profiles enable row level security;
 
+drop policy if exists "Public profiles are viewable by everyone." on public.profiles;
 create policy "Public profiles are viewable by everyone." 
   on public.profiles for select using (true);
 
+drop policy if exists "Users can insert their own profile." on public.profiles;
+create policy "Users can insert their own profile."
+  on public.profiles for insert with check (auth.uid() = id);
+
+drop policy if exists "Users can update their own profile." on public.profiles;
 create policy "Users can update their own profile." 
   on public.profiles for update using (auth.uid() = id);
 
@@ -58,9 +98,11 @@ create table if not exists public.courses (
 -- RLS: Courses
 alter table public.courses enable row level security;
 
+drop policy if exists "Anyone can view published courses." on public.courses;
 create policy "Anyone can view published courses." 
   on public.courses for select using (is_published = true or auth.uid() = instructor_id);
 
+drop policy if exists "Instructors can create courses." on public.courses;
 create policy "Instructors can create courses." 
   on public.courses for insert with check (
     auth.uid() = instructor_id and exists (
@@ -68,14 +110,46 @@ create policy "Instructors can create courses."
     )
   );
 
+drop policy if exists "Instructors can update their own courses." on public.courses;
 create policy "Instructors can update their own courses." 
   on public.courses for update using (auth.uid() = instructor_id);
 
+drop policy if exists "Instructors can delete their own courses." on public.courses;
 create policy "Instructors can delete their own courses." 
   on public.courses for delete using (auth.uid() = instructor_id);
 
 -- ------------------------------------------------------------------------------
--- 3. SECTIONS
+-- 3. ENROLLMENTS (Defined BEFORE lessons to satisfy foreign and RLS relations)
+-- ------------------------------------------------------------------------------
+create table if not exists public.enrollments (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid references public.profiles(id) on delete cascade not null,
+  course_id uuid references public.courses(id) on delete cascade not null,
+  enrolled_at timestamp with time zone default timezone('utc'::text, now()) not null,
+  unique (user_id, course_id)
+);
+
+-- RLS: Enrollments
+alter table public.enrollments enable row level security;
+
+drop policy if exists "Users can view their own enrollments." on public.enrollments;
+create policy "Users can view their own enrollments."
+  on public.enrollments for select using (auth.uid() = user_id);
+
+drop policy if exists "Instructors can view enrollments in their courses." on public.enrollments;
+create policy "Instructors can view enrollments in their courses."
+  on public.enrollments for select using (
+    exists (
+      select 1 from public.courses where courses.id = enrollments.course_id and courses.instructor_id = auth.uid()
+    )
+  );
+
+drop policy if exists "Users can enroll themselves into courses." on public.enrollments;
+create policy "Users can enroll themselves into courses."
+  on public.enrollments for insert with check (auth.uid() = user_id);
+
+-- ------------------------------------------------------------------------------
+-- 4. SECTIONS
 -- ------------------------------------------------------------------------------
 create table if not exists public.sections (
   id uuid default gen_random_uuid() primary key,
@@ -88,6 +162,7 @@ create table if not exists public.sections (
 -- RLS: Sections
 alter table public.sections enable row level security;
 
+drop policy if exists "Sections are viewable by anyone who can view the course." on public.sections;
 create policy "Sections are viewable by anyone who can view the course."
   on public.sections for select using (
     exists (
@@ -97,6 +172,7 @@ create policy "Sections are viewable by anyone who can view the course."
     )
   );
 
+drop policy if exists "Instructors can manage sections in their courses." on public.sections;
 create policy "Instructors can manage sections in their courses."
   on public.sections for all using (
     exists (
@@ -106,7 +182,7 @@ create policy "Instructors can manage sections in their courses."
   );
 
 -- ------------------------------------------------------------------------------
--- 4. LESSONS
+-- 5. LESSONS (Now safe to reference public.enrollments in RLS)
 -- ------------------------------------------------------------------------------
 create table if not exists public.lessons (
   id uuid default gen_random_uuid() primary key,
@@ -124,6 +200,7 @@ create table if not exists public.lessons (
 -- RLS: Lessons
 alter table public.lessons enable row level security;
 
+drop policy if exists "Free preview lessons are viewable by anyone." on public.lessons;
 create policy "Free preview lessons are viewable by anyone."
   on public.lessons for select using (
     is_free_preview = true or exists (
@@ -137,6 +214,7 @@ create policy "Free preview lessons are viewable by anyone."
     )
   );
 
+drop policy if exists "Instructors can manage lessons in their courses." on public.lessons;
 create policy "Instructors can manage lessons in their courses."
   on public.lessons for all using (
     exists (
@@ -145,33 +223,6 @@ create policy "Instructors can manage lessons in their courses."
       where sections.id = lessons.section_id and courses.instructor_id = auth.uid()
     )
   );
-
--- ------------------------------------------------------------------------------
--- 5. ENROLLMENTS
--- ------------------------------------------------------------------------------
-create table if not exists public.enrollments (
-  id uuid default gen_random_uuid() primary key,
-  user_id uuid references public.profiles(id) on delete cascade not null,
-  course_id uuid references public.courses(id) on delete cascade not null,
-  enrolled_at timestamp with time zone default timezone('utc'::text, now()) not null,
-  unique (user_id, course_id)
-);
-
--- RLS: Enrollments
-alter table public.enrollments enable row level security;
-
-create policy "Users can view their own enrollments."
-  on public.enrollments for select using (auth.uid() = user_id);
-
-create policy "Instructors can view enrollments in their courses."
-  on public.enrollments for select using (
-    exists (
-      select 1 from public.courses where courses.id = enrollments.course_id and courses.instructor_id = auth.uid()
-    )
-  );
-
-create policy "Users can enroll themselves into courses."
-  on public.enrollments for insert with check (auth.uid() = user_id);
 
 -- ------------------------------------------------------------------------------
 -- 6. LESSON PROGRESS
@@ -189,9 +240,11 @@ create table if not exists public.lesson_progress (
 -- RLS: Lesson Progress
 alter table public.lesson_progress enable row level security;
 
+drop policy if exists "Users can view their own lesson progress." on public.lesson_progress;
 create policy "Users can view their own lesson progress."
   on public.lesson_progress for select using (auth.uid() = user_id);
 
+drop policy if exists "Users can insert/update their own lesson progress." on public.lesson_progress;
 create policy "Users can insert/update their own lesson progress."
   on public.lesson_progress for all using (auth.uid() = user_id);
 
@@ -210,6 +263,7 @@ create table if not exists public.quiz_questions (
 
 alter table public.quiz_questions enable row level security;
 
+drop policy if exists "Students can view quiz questions for lessons they can access." on public.quiz_questions;
 create policy "Students can view quiz questions for lessons they can access."
   on public.quiz_questions for select using (
     exists (
@@ -217,6 +271,7 @@ create policy "Students can view quiz questions for lessons they can access."
     )
   );
 
+drop policy if exists "Instructors can manage quiz questions." on public.quiz_questions;
 create policy "Instructors can manage quiz questions."
   on public.quiz_questions for all using (
     exists (
@@ -239,9 +294,11 @@ create table if not exists public.quiz_submissions (
 
 alter table public.quiz_submissions enable row level security;
 
+drop policy if exists "Users can view their own quiz submissions." on public.quiz_submissions;
 create policy "Users can view their own quiz submissions."
   on public.quiz_submissions for select using (auth.uid() = user_id);
 
+drop policy if exists "Users can insert their own quiz submissions." on public.quiz_submissions;
 create policy "Users can insert their own quiz submissions."
   on public.quiz_submissions for insert with check (auth.uid() = user_id);
 
@@ -260,9 +317,11 @@ create table if not exists public.reviews (
 
 alter table public.reviews enable row level security;
 
+drop policy if exists "Anyone can read reviews." on public.reviews;
 create policy "Anyone can read reviews."
   on public.reviews for select using (true);
 
+drop policy if exists "Enrolled users can leave reviews." on public.reviews;
 create policy "Enrolled users can leave reviews."
   on public.reviews for insert with check (
     auth.uid() = user_id and exists (
@@ -283,7 +342,8 @@ begin
     coalesce(new.raw_user_meta_data->>'full_name', split_part(new.email, '@', 1)),
     coalesce(new.raw_user_meta_data->>'avatar_url', 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'),
     coalesce(new.raw_user_meta_data->>'role', 'student')
-  );
+  )
+  on conflict (id) do nothing;
   return new;
 end;
 $$ language plpgsql security definer;
@@ -348,6 +408,8 @@ create table if not exists public.cbt_exams (
 );
 
 alter table public.cbt_exams enable row level security;
+
+drop policy if exists "Anyone can view available CBT exams." on public.cbt_exams;
 create policy "Anyone can view available CBT exams."
   on public.cbt_exams for select using (true);
 
@@ -363,6 +425,8 @@ create table if not exists public.cbt_questions (
 );
 
 alter table public.cbt_questions enable row level security;
+
+drop policy if exists "Anyone can read CBT questions during active examination." on public.cbt_questions;
 create policy "Anyone can read CBT questions during active examination."
   on public.cbt_questions for select using (true);
 
@@ -383,9 +447,12 @@ create table if not exists public.cbt_attempts (
 );
 
 alter table public.cbt_attempts enable row level security;
+
+drop policy if exists "Users can view their own CBT attempts." on public.cbt_attempts;
 create policy "Users can view their own CBT attempts."
   on public.cbt_attempts for select using (auth.uid() = user_id);
 
+drop policy if exists "Users can record their own CBT attempts." on public.cbt_attempts;
 create policy "Users can record their own CBT attempts."
   on public.cbt_attempts for insert with check (auth.uid() = user_id);
 
@@ -407,9 +474,11 @@ create table if not exists public.live_rooms (
 
 alter table public.live_rooms enable row level security;
 
+drop policy if exists "Anyone can view live rooms." on public.live_rooms;
 create policy "Anyone can view live rooms."
   on public.live_rooms for select using (true);
 
+drop policy if exists "Instructors can create and manage live rooms." on public.live_rooms;
 create policy "Instructors can create and manage live rooms."
   on public.live_rooms for all using (auth.uid() = instructor_id);
 
@@ -424,10 +493,56 @@ create table if not exists public.live_room_messages (
 
 alter table public.live_room_messages enable row level security;
 
+drop policy if exists "Participants can read room messages." on public.live_room_messages;
 create policy "Participants can read room messages."
   on public.live_room_messages for select using (true);
 
+drop policy if exists "Participants can send room messages." on public.live_room_messages;
 create policy "Participants can send room messages."
   on public.live_room_messages for insert with check (auth.uid() = sender_id);
 
+-- ------------------------------------------------------------------------------
+-- 13. CAMPUS INTRANET & TUTORING CLEARANCE AUDIT
+-- ------------------------------------------------------------------------------
 
+create table if not exists public.intranet_access_requests (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid references public.profiles(id) on delete cascade not null,
+  user_name text not null,
+  user_email text not null,
+  user_avatar text,
+  plan_id text not null,
+  plan_name text not null,
+  amount_paid numeric(10, 2) default 0.00,
+  payment_method text not null,
+  payment_reference text not null,
+  payment_date timestamp with time zone default timezone('utc'::text, now()) not null,
+  status text not null default 'pending_approval' check (status in ('pending_approval', 'active', 'rejected', 'expired')),
+  admin_granted boolean default false,
+  reviewed_at timestamp with time zone,
+  reviewed_by text,
+  rejection_reason text,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+alter table public.intranet_access_requests enable row level security;
+
+drop policy if exists "Users can view their own intranet requests." on public.intranet_access_requests;
+create policy "Users can view their own intranet requests."
+  on public.intranet_access_requests for select using (
+    auth.uid() = user_id or exists (
+      select 1 from public.profiles where id = auth.uid() and role in ('admin', 'instructor')
+    )
+  );
+
+drop policy if exists "Users can submit intranet requests." on public.intranet_access_requests;
+create policy "Users can submit intranet requests."
+  on public.intranet_access_requests for insert with check (auth.uid() = user_id);
+
+drop policy if exists "Admins can update intranet requests." on public.intranet_access_requests;
+create policy "Admins can update intranet requests."
+  on public.intranet_access_requests for update using (
+    exists (
+      select 1 from public.profiles where id = auth.uid() and role = 'admin'
+    )
+  );
