@@ -56,9 +56,23 @@ export const createClient = () => {
   return null;
 };
 
+// Role checking helpers
+export const isSuperAdmin = (user?: Profile | null): boolean => {
+  return user?.role === 'super_admin';
+};
+
+export const isAdmin = (user?: Profile | null): boolean => {
+  return user?.role === 'admin' || user?.role === 'super_admin';
+};
+
+export const isFaculty = (user?: Profile | null): boolean => {
+  return user?.role === 'instructor' || user?.role === 'admin' || user?.role === 'super_admin';
+};
+
 // Local storage keys for local demo mode
 const STORAGE_KEYS = {
   CURRENT_USER: 'reactjav_current_user',
+  PROFILES: 'reactjav_user_profiles',
   COURSES: 'reactjav_courses',
   PROGRESS: 'reactjav_lesson_progress',
   ENROLLMENTS: 'reactjav_enrollments',
@@ -117,6 +131,64 @@ export class LocalDataService {
     const profile = DEMO_PROFILES[role] || DEMO_PROFILES.student;
     this.setCurrentUser(profile);
     return profile;
+  }
+
+  static getAllProfiles(): Profile[] {
+    if (typeof window === 'undefined') return Object.values(DEMO_PROFILES);
+    const stored = localStorage.getItem(STORAGE_KEYS.PROFILES);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch {
+        // fallback
+      }
+    }
+    const defaults = Object.values(DEMO_PROFILES);
+    localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(defaults));
+    return defaults;
+  }
+
+  static updateUserRole(
+    userId: string,
+    newRole: UserRole,
+    initiator?: Profile | null
+  ): { success: boolean; message: string } {
+    const currentInitiator = initiator !== undefined ? initiator : this.getCurrentUser();
+    if (currentInitiator?.role !== 'super_admin') {
+      return {
+        success: false,
+        message: 'Access Denied: Only Super Administrators hold governance rights to modify user roles.',
+      };
+    }
+
+    const profiles = this.getAllProfiles();
+    const index = profiles.findIndex((p) => p.id === userId);
+    if (index === -1) {
+      return { success: false, message: 'User profile record not found.' };
+    }
+
+    const targetUser = profiles[index];
+    profiles[index] = { ...targetUser, role: newRole };
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
+      const activeUser = this.getCurrentUser();
+      if (activeUser && activeUser.id === userId) {
+        this.setCurrentUser(profiles[index]);
+      }
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    const supabase = createClient();
+    if (isSupabaseConfigured() && supabase) {
+      supabase.from('profiles').update({ role: newRole }).eq('id', userId).then();
+    }
+
+    return {
+      success: true,
+      message: `User ${targetUser.full_name || targetUser.email} has been updated to ${newRole.toUpperCase().replace('_', ' ')}.`,
+    };
   }
 
   static getCourses(): Course[] {
@@ -713,11 +785,11 @@ export class LocalDataService {
     }
 
     // Faculty & Administrators have direct system-wide clearance
-    if (target.role === 'admin' || target.role === 'instructor') {
+    if (target.role === 'super_admin' || target.role === 'admin' || target.role === 'instructor') {
       return {
         hasAccess: true,
         status: 'active',
-        reason: 'Faculty & Administrative clearance granted.',
+        reason: 'Super Admin, Faculty & Administrative clearance granted.',
       };
     }
 

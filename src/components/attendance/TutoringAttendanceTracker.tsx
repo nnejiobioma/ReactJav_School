@@ -89,7 +89,7 @@ export default function TutoringAttendanceTracker({
   }, [selectedMonth, initialRole, filterStudentId]);
 
   const handleToggleStudentSignoff = (sessionId: string, currentVal: boolean) => {
-    if (activeRole !== 'student' && activeRole !== 'admin') {
+    if (activeRole !== 'student' && activeRole !== 'admin' && activeRole !== 'super_admin') {
       setActionFeedback('Only the enrolled student (or administrator) can sign the student confirmation box.');
       setTimeout(() => setActionFeedback(null), 3000);
       return;
@@ -102,7 +102,7 @@ export default function TutoringAttendanceTracker({
   };
 
   const handleToggleInstructorSignoff = (sessionId: string, currentVal: boolean) => {
-    if (activeRole !== 'instructor' && activeRole !== 'admin') {
+    if (activeRole !== 'instructor' && activeRole !== 'admin' && activeRole !== 'super_admin') {
       setActionFeedback('Only the assigned instructor (or administrator) can sign the teacher verification box.');
       setTimeout(() => setActionFeedback(null), 3000);
       return;
@@ -124,7 +124,7 @@ export default function TutoringAttendanceTracker({
       session_time: newTime,
       topic_summary: newTopic.trim(),
       notes: newNotes.trim(),
-      instructor_checked: activeRole === 'instructor' || activeRole === 'admin',
+      instructor_checked: activeRole === 'instructor' || activeRole === 'admin' || activeRole === 'super_admin',
     });
 
     setShowAddSessionModal(false);
@@ -204,7 +204,7 @@ export default function TutoringAttendanceTracker({
           </div>
 
           <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            {(activeRole === 'instructor' || activeRole === 'admin') && (
+            {(activeRole === 'instructor' || activeRole === 'admin' || activeRole === 'super_admin') && (
               <button
                 onClick={() => setShowAddSessionModal(true)}
                 className="btn btn-primary btn-sm"
@@ -601,19 +601,19 @@ export default function TutoringAttendanceTracker({
                         display: 'flex',
                         alignItems: 'center',
                         gap: '0.5rem',
-                        cursor: (activeRole === 'student' || activeRole === 'admin') ? 'pointer' : 'not-allowed',
+                        cursor: (activeRole === 'student' || activeRole === 'admin' || activeRole === 'super_admin') ? 'pointer' : 'not-allowed',
                         userSelect: 'none',
                       }}>
                         <input
                           type="checkbox"
                           checked={isStudentChecked}
-                          disabled={activeRole !== 'student' && activeRole !== 'admin'}
+                          disabled={activeRole !== 'student' && activeRole !== 'admin' && activeRole !== 'super_admin'}
                           onChange={() => handleToggleStudentSignoff(sess.id, isStudentChecked)}
                           style={{
                             width: '20px',
                             height: '20px',
                             accentColor: '#10b981',
-                            cursor: (activeRole === 'student' || activeRole === 'admin') ? 'pointer' : 'not-allowed',
+                            cursor: (activeRole === 'student' || activeRole === 'admin' || activeRole === 'super_admin') ? 'pointer' : 'not-allowed',
                           }}
                         />
                         <span style={{ fontSize: '0.78rem', fontWeight: 700, color: isStudentChecked ? '#10b981' : 'var(--text-muted)' }}>
@@ -658,19 +658,19 @@ export default function TutoringAttendanceTracker({
                         display: 'flex',
                         alignItems: 'center',
                         gap: '0.5rem',
-                        cursor: (activeRole === 'instructor' || activeRole === 'admin') ? 'pointer' : 'not-allowed',
+                        cursor: (activeRole === 'instructor' || activeRole === 'admin' || activeRole === 'super_admin') ? 'pointer' : 'not-allowed',
                         userSelect: 'none',
                       }}>
                         <input
                           type="checkbox"
                           checked={isInstructorChecked}
-                          disabled={activeRole !== 'instructor' && activeRole !== 'admin'}
+                          disabled={activeRole !== 'instructor' && activeRole !== 'admin' && activeRole !== 'super_admin'}
                           onChange={() => handleToggleInstructorSignoff(sess.id, isInstructorChecked)}
                           style={{
                             width: '20px',
                             height: '20px',
                             accentColor: '#10b981',
-                            cursor: (activeRole === 'instructor' || activeRole === 'admin') ? 'pointer' : 'not-allowed',
+                            cursor: (activeRole === 'instructor' || activeRole === 'admin' || activeRole === 'super_admin') ? 'pointer' : 'not-allowed',
                           }}
                         />
                         <span style={{ fontSize: '0.78rem', fontWeight: 700, color: isInstructorChecked ? '#10b981' : 'var(--text-muted)' }}>

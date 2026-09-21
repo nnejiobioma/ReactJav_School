@@ -179,7 +179,9 @@ export async function signInWithSupabase(
   // Check demo personas if matching email
   const lowerEmail = email.toLowerCase();
   let matchedPersona = DEMO_PROFILES.student;
-  if (lowerEmail.includes('instructor') || lowerEmail.includes('chen')) {
+  if (lowerEmail.includes('superadmin') || lowerEmail.includes('root') || lowerEmail.includes('owner')) {
+    matchedPersona = DEMO_PROFILES.super_admin;
+  } else if (lowerEmail.includes('instructor') || lowerEmail.includes('chen')) {
     matchedPersona = DEMO_PROFILES.instructor;
   } else if (lowerEmail.includes('admin') || lowerEmail.includes('registrar')) {
     matchedPersona = DEMO_PROFILES.admin;

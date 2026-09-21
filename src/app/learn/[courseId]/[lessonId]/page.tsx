@@ -99,8 +99,8 @@ export default function CoursePlayerPage() {
     );
   }
 
-  // Check instructor or admin editing privileges
-  const canEdit = currentUser?.role === 'admin' || currentUser?.role === 'instructor';
+  // Check instructor, admin, or super admin editing privileges
+  const canEdit = currentUser?.role === 'admin' || currentUser?.role === 'super_admin' || currentUser?.role === 'instructor';
 
   // Computed materials
   const qaItems = currentLesson.qa_items && currentLesson.qa_items.length > 0

@@ -1,4 +1,4 @@
-export type UserRole = 'student' | 'instructor' | 'admin';
+export type UserRole = 'student' | 'instructor' | 'admin' | 'super_admin';
 
 export type SubscriptionStatus = 'none' | 'pending_approval' | 'active' | 'rejected' | 'expired';
 
@@ -213,7 +213,7 @@ export interface LiveParticipant {
   id: string;
   name: string;
   avatar_url: string;
-  role: 'instructor' | 'student' | 'admin';
+  role: UserRole;
   is_speaking?: boolean;
   is_muted?: boolean;
   is_camera_on?: boolean;
@@ -226,7 +226,7 @@ export interface LiveChatMessage {
   sender_id: string;
   sender_name: string;
   sender_avatar: string;
-  sender_role: 'instructor' | 'student' | 'admin';
+  sender_role: UserRole;
   message: string;
   timestamp: string;
   is_announcement?: boolean;

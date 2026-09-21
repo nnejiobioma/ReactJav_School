@@ -65,7 +65,7 @@ export default function CourseDetailPage() {
     };
   }, [slug]);
 
-  const isAdmin = currentUser?.role === 'admin' || currentUser?.role === 'instructor';
+  const isAdmin = currentUser?.role === 'admin' || currentUser?.role === 'super_admin' || currentUser?.role === 'instructor';
 
   if (!course) {
     return (

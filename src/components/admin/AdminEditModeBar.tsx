@@ -11,12 +11,12 @@ export default function AdminEditModeBar() {
 
   useEffect(() => {
     const user = LocalDataService.getCurrentUser();
-    setIsAdmin(user?.role === 'admin');
+    setIsAdmin(user?.role === 'admin' || user?.role === 'super_admin');
     setIsEditMode(LocalDataService.isEditModeActive());
 
     const handleUserChange = () => {
       const u = LocalDataService.getCurrentUser();
-      setIsAdmin(u?.role === 'admin');
+      setIsAdmin(u?.role === 'admin' || u?.role === 'super_admin');
     };
 
     const handleEditModeToggle = (e: any) => {

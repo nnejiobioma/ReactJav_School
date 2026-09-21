@@ -62,7 +62,7 @@ function AuthContent() {
         router.push(redirectUrl);
       } else if (demoRole === 'instructor') {
         router.push('/instructor');
-      } else if (demoRole === 'admin') {
+      } else if (demoRole === 'admin' || demoRole === 'super_admin') {
         router.push('/admin/access');
       } else {
         router.push('/dashboard');
@@ -130,7 +130,7 @@ function AuthContent() {
             router.push(redirectUrl);
           } else if (res.user?.role === 'instructor') {
             router.push('/instructor');
-          } else if (res.user?.role === 'admin') {
+          } else if (res.user?.role === 'admin' || res.user?.role === 'super_admin') {
             router.push('/admin/access');
           } else {
             router.push('/dashboard');
@@ -198,8 +198,8 @@ function AuthContent() {
                 <span style={{ fontSize: '0.92rem', fontWeight: 700, color: '#ffffff' }}>
                   {currentUser.full_name || 'Active User'}
                 </span>
-                <span className={`badge ${currentUser.role === 'admin' ? 'badge-amber' : currentUser.role === 'instructor' ? 'badge-emerald' : 'badge-primary'}`} style={{ fontSize: '0.65rem' }}>
-                  {currentUser.role.toUpperCase()}
+                <span className={`badge ${currentUser.role === 'super_admin' ? 'badge-purple' : currentUser.role === 'admin' ? 'badge-amber' : currentUser.role === 'instructor' ? 'badge-emerald' : 'badge-primary'}`} style={{ fontSize: '0.65rem' }}>
+                  {currentUser.role.toUpperCase().replace('_', ' ')}
                 </span>
               </div>
               <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -215,7 +215,7 @@ function AuthContent() {
                 <ArrowRight size={14} />
               </Link>
             ) : (
-              <Link href={currentUser.role === 'instructor' ? '/instructor' : currentUser.role === 'admin' ? '/admin/access' : '/dashboard'} className="btn btn-primary btn-sm">
+              <Link href={currentUser.role === 'instructor' ? '/instructor' : (currentUser.role === 'admin' || currentUser.role === 'super_admin') ? '/admin/access' : '/dashboard'} className="btn btn-primary btn-sm">
                 <span>Open Dashboard</span>
                 <ArrowRight size={14} />
               </Link>
@@ -357,6 +357,16 @@ function AuthContent() {
                 <ShieldCheck size={15} color="var(--accent-amber)" />
                 <span>Admin Dean</span>
               </button>
+
+              <button
+                type="button"
+                onClick={() => handlePersonaLogin('super_admin')}
+                className="btn btn-secondary btn-sm"
+                style={{ justifyContent: 'flex-start', borderColor: 'rgba(168, 85, 247, 0.4)', color: '#d8b4fe' }}
+              >
+                <Sparkles size={15} color="#c084fc" />
+                <span>Super Admin (Root)</span>
+              </button>
             </div>
           </div>
 
@@ -421,6 +431,7 @@ function AuthContent() {
                   <option value="student">Student (Learn courses, CBT exams & progress)</option>
                   <option value="instructor">Instructor (Build courses & host virtual rooms)</option>
                   <option value="admin">Administrator (Tuition verification & admissions)</option>
+                  <option value="super_admin">Super Administrator (Full platform governance & staff management)</option>
                 </select>
               </div>
             )}

@@ -87,7 +87,8 @@ export default function Navbar() {
     student: 'badge-primary',
     instructor: 'badge-emerald',
     admin: 'badge-amber',
-  }[currentUser?.role || 'student'];
+    super_admin: 'badge-purple',
+  }[currentUser?.role || 'student'] || 'badge-primary';
 
   const isIntranetActive =
     pathname.startsWith('/intranet') ||
@@ -418,7 +419,7 @@ export default function Navbar() {
                   </div>
                 </Link>
 
-                {(currentUser?.role === 'admin' || currentUser?.role === 'instructor') && (
+                {(currentUser?.role === 'admin' || currentUser?.role === 'super_admin' || currentUser?.role === 'instructor') && (
                   <Link
                     href="/admin/access"
                     onClick={() => setShowIntranetMenu(false)}
@@ -680,6 +681,27 @@ export default function Navbar() {
                   <span>Admin Persona</span>
                 </button>
 
+                <button
+                  onClick={() => handleRoleSwitch('super_admin')}
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.5rem 0.75rem',
+                    borderRadius: '0.5rem',
+                    background: currentUser?.role === 'super_admin' ? 'rgba(168, 85, 247, 0.2)' : 'transparent',
+                    color: currentUser?.role === 'super_admin' ? '#d8b4fe' : 'var(--text-primary)',
+                    border: 'none',
+                    cursor: 'pointer',
+                    fontSize: '0.84rem',
+                    textAlign: 'left',
+                  }}
+                >
+                  <Sparkles size={16} color="#c084fc" />
+                  <span style={{ fontWeight: 600 }}>Super Admin Persona</span>
+                </button>
+
                 <div style={{
                   borderTop: '1px solid var(--border-subtle)',
                   marginTop: '0.4rem',
@@ -830,7 +852,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Mobile Quick Role Switcher */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.4rem', paddingTop: '0.5rem', borderTop: '1px solid var(--border-subtle)' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.4rem', paddingTop: '0.5rem', borderTop: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={() => handleRoleSwitch('student')}
                     style={{
@@ -878,6 +900,22 @@ export default function Navbar() {
                     }}
                   >
                     Admin
+                  </button>
+                  <button
+                    onClick={() => handleRoleSwitch('super_admin')}
+                    style={{
+                      padding: '0.4rem 0.2rem',
+                      fontSize: '0.72rem',
+                      fontWeight: 600,
+                      borderRadius: '0.5rem',
+                      background: currentUser?.role === 'super_admin' ? 'rgba(168, 85, 247, 0.25)' : 'var(--bg-surface)',
+                      color: currentUser?.role === 'super_admin' ? '#d8b4fe' : 'var(--text-secondary)',
+                      border: currentUser?.role === 'super_admin' ? '1px solid #c084fc' : '1px solid var(--border-subtle)',
+                      cursor: 'pointer',
+                      textAlign: 'center',
+                    }}
+                  >
+                    Super Admin
                   </button>
                 </div>
 

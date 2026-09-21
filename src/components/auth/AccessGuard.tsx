@@ -20,7 +20,7 @@ import {
 import { Profile, UserRole } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 
-export type AccessLevel = 'authenticated' | 'intranet' | 'instructor' | 'admin';
+export type AccessLevel = 'authenticated' | 'intranet' | 'instructor' | 'admin' | 'super_admin';
 
 interface AccessGuardProps {
   children: React.ReactNode;
@@ -197,7 +197,7 @@ export default function AccessGuard({
   // LEVEL 2: INSTRUCTOR FACULTY LEVEL
   // ==========================================
   if (level === 'instructor') {
-    const hasInstructorAccess = currentUser.role === 'instructor' || currentUser.role === 'admin';
+    const hasInstructorAccess = currentUser.role === 'instructor' || currentUser.role === 'admin' || currentUser.role === 'super_admin';
 
     if (!hasInstructorAccess) {
       return (
@@ -288,7 +288,7 @@ export default function AccessGuard({
   // LEVEL 3: ADMINISTRATOR LEVEL
   // ==========================================
   if (level === 'admin') {
-    const hasAdminAccess = currentUser.role === 'admin';
+    const hasAdminAccess = currentUser.role === 'admin' || currentUser.role === 'super_admin';
 
     if (!hasAdminAccess) {
       return (
@@ -350,6 +350,81 @@ export default function AccessGuard({
               >
                 <ShieldCheck size={16} color="var(--accent-amber)" />
                 <span>Switch to Admin Persona (Demo)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  // ==========================================
+  // LEVEL 3.5: SUPER ADMINISTRATOR LEVEL
+  // ==========================================
+  if (level === 'super_admin') {
+    const hasSuperAdminAccess = currentUser.role === 'super_admin';
+
+    if (!hasSuperAdminAccess) {
+      return (
+        <div className="container" style={{ padding: '4rem 1.5rem 6rem', maxWidth: '680px' }}>
+          <div className="glass-card" style={{ textAlign: 'center', padding: '3.5rem 2rem' }}>
+            <div style={{
+              width: '4.5rem',
+              height: '4.5rem',
+              borderRadius: '1.25rem',
+              background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2))',
+              border: '1px solid rgba(168, 85, 247, 0.4)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '1.5rem',
+            }}>
+              <ShieldAlert size={36} color="#c084fc" />
+            </div>
+
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              padding: '0.3rem 0.8rem',
+              borderRadius: '9999px',
+              background: 'rgba(168, 85, 247, 0.12)',
+              border: '1px solid rgba(168, 85, 247, 0.3)',
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              color: '#d8b4fe',
+              marginBottom: '1rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+            }}>
+              <Sparkles size={13} />
+              <span>Super Administrator Clearance Level 5</span>
+            </div>
+
+            <h1 style={{ fontSize: '1.85rem', color: '#ffffff', marginBottom: '0.75rem' }}>
+              Root Executive Console Restricted
+            </h1>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.6, maxWidth: '500px', margin: '0 auto 1.5rem' }}>
+              You are currently authenticated as <strong>{currentUser.full_name || currentUser.email}</strong> ({currentUser.role}).
+              Platform Governance, Staff Role Promotions, and System Overrides strictly require <strong>Super Administrator</strong> authority.
+            </p>
+
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
+              <Link href="/dashboard" className="btn btn-primary">
+                <span>Return to Dashboard</span>
+                <ArrowRight size={16} />
+              </Link>
+              <button
+                type="button"
+                onClick={() => {
+                  LocalDataService.switchDemoRole('super_admin');
+                  evaluateState();
+                }}
+                className="btn btn-secondary"
+                style={{ borderColor: 'rgba(168, 85, 247, 0.4)', color: '#d8b4fe' }}
+              >
+                <Sparkles size={16} color="#c084fc" />
+                <span>Switch to Super Admin Persona (Demo)</span>
               </button>
             </div>
           </div>

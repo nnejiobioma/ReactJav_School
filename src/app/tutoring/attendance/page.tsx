@@ -123,6 +123,21 @@ export default function TutoringAttendancePage() {
           >
             Admin
           </button>
+          <button
+            onClick={() => handleSwitchPersona('super_admin')}
+            style={{
+              padding: '0.3rem 0.65rem',
+              borderRadius: '0.5rem',
+              border: 'none',
+              background: activePersona === 'super_admin' ? 'rgba(168, 85, 247, 0.25)' : 'transparent',
+              color: activePersona === 'super_admin' ? '#d8b4fe' : 'var(--text-secondary)',
+              fontWeight: 600,
+              fontSize: '0.75rem',
+              cursor: 'pointer',
+            }}
+          >
+            Super Admin
+          </button>
         </div>
       </div>
 

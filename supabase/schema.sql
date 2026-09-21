@@ -26,7 +26,7 @@ create table if not exists public.profiles (
   email text not null,
   full_name text,
   avatar_url text,
-  role text not null default 'student' check (role in ('student', 'instructor', 'admin')),
+  role text not null default 'student' check (role in ('student', 'instructor', 'admin', 'super_admin')),
   bio text,
   subscription_status text default 'none',
   subscription_plan text,
@@ -46,6 +46,10 @@ create table if not exists public.profiles (
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
+-- Ensure 4-tier role constraint exists if table was created in a prior run
+alter table public.profiles drop constraint if exists profiles_role_check;
+alter table public.profiles add constraint profiles_role_check check (role in ('student', 'instructor', 'admin', 'super_admin'));
+
 -- Ensure columns exist if table was partially created in a prior run
 alter table public.profiles add column if not exists subscription_status text default 'none';
 alter table public.profiles add column if not exists subscription_plan text;
@@ -62,6 +66,36 @@ alter table public.profiles add column if not exists tutoring_enrolled_at text;
 alter table public.profiles add column if not exists tutoring_frequency text;
 alter table public.profiles add column if not exists tutoring_mentor_name text;
 
+-- ------------------------------------------------------------------------------
+-- RBAC HELPER FUNCTIONS (Security Definer to prevent recursive RLS)
+-- ------------------------------------------------------------------------------
+create or replace function public.is_super_admin(p_user_id uuid)
+returns boolean as $$
+begin
+  return exists (
+    select 1 from public.profiles where id = p_user_id and role = 'super_admin'
+  );
+end;
+$$ language plpgsql security definer;
+
+create or replace function public.is_admin(p_user_id uuid)
+returns boolean as $$
+begin
+  return exists (
+    select 1 from public.profiles where id = p_user_id and role in ('admin', 'super_admin')
+  );
+end;
+$$ language plpgsql security definer;
+
+create or replace function public.is_faculty(p_user_id uuid)
+returns boolean as $$
+begin
+  return exists (
+    select 1 from public.profiles where id = p_user_id and role in ('instructor', 'admin', 'super_admin')
+  );
+end;
+$$ language plpgsql security definer;
+
 -- RLS: Profiles
 alter table public.profiles enable row level security;
 
@@ -76,6 +110,16 @@ create policy "Users can insert their own profile."
 drop policy if exists "Users can update their own profile." on public.profiles;
 create policy "Users can update their own profile." 
   on public.profiles for update using (auth.uid() = id);
+
+drop policy if exists "Super Admins can update any profile." on public.profiles;
+create policy "Super Admins can update any profile."
+  on public.profiles for update using (public.is_super_admin(auth.uid()));
+
+drop policy if exists "Admins can update member profiles." on public.profiles;
+create policy "Admins can update member profiles."
+  on public.profiles for update using (
+    public.is_admin(auth.uid()) and role != 'super_admin'
+  );
 
 -- ------------------------------------------------------------------------------
 -- 2. COURSES
@@ -100,23 +144,21 @@ alter table public.courses enable row level security;
 
 drop policy if exists "Anyone can view published courses." on public.courses;
 create policy "Anyone can view published courses." 
-  on public.courses for select using (is_published = true or auth.uid() = instructor_id);
+  on public.courses for select using (is_published = true or auth.uid() = instructor_id or public.is_admin(auth.uid()));
 
 drop policy if exists "Instructors can create courses." on public.courses;
 create policy "Instructors can create courses." 
   on public.courses for insert with check (
-    auth.uid() = instructor_id and exists (
-      select 1 from public.profiles where id = auth.uid() and role in ('instructor', 'admin')
-    )
+    auth.uid() = instructor_id and public.is_faculty(auth.uid())
   );
 
 drop policy if exists "Instructors can update their own courses." on public.courses;
 create policy "Instructors can update their own courses." 
-  on public.courses for update using (auth.uid() = instructor_id);
+  on public.courses for update using (auth.uid() = instructor_id or public.is_admin(auth.uid()));
 
 drop policy if exists "Instructors can delete their own courses." on public.courses;
 create policy "Instructors can delete their own courses." 
-  on public.courses for delete using (auth.uid() = instructor_id);
+  on public.courses for delete using (auth.uid() = instructor_id or public.is_admin(auth.uid()));
 
 -- ------------------------------------------------------------------------------
 -- 3. ENROLLMENTS (Defined BEFORE lessons to satisfy foreign and RLS relations)
@@ -134,13 +176,14 @@ alter table public.enrollments enable row level security;
 
 drop policy if exists "Users can view their own enrollments." on public.enrollments;
 create policy "Users can view their own enrollments."
-  on public.enrollments for select using (auth.uid() = user_id);
+  on public.enrollments for select using (auth.uid() = user_id or public.is_admin(auth.uid()));
 
 drop policy if exists "Instructors can view enrollments in their courses." on public.enrollments;
 create policy "Instructors can view enrollments in their courses."
   on public.enrollments for select using (
     exists (
-      select 1 from public.courses where courses.id = enrollments.course_id and courses.instructor_id = auth.uid()
+      select 1 from public.courses 
+      where courses.id = enrollments.course_id and (courses.instructor_id = auth.uid() or public.is_admin(auth.uid()))
     )
   );
 
@@ -341,7 +384,11 @@ begin
     new.email,
     coalesce(new.raw_user_meta_data->>'full_name', split_part(new.email, '@', 1)),
     coalesce(new.raw_user_meta_data->>'avatar_url', 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'),
-    coalesce(new.raw_user_meta_data->>'role', 'student')
+    case 
+      when new.raw_user_meta_data->>'role' in ('student', 'instructor', 'admin', 'super_admin') 
+        then new.raw_user_meta_data->>'role'
+      else 'student'
+    end
   )
   on conflict (id) do nothing;
   return new;
@@ -479,8 +526,9 @@ create policy "Anyone can view live rooms."
   on public.live_rooms for select using (true);
 
 drop policy if exists "Instructors can create and manage live rooms." on public.live_rooms;
-create policy "Instructors can create and manage live rooms."
-  on public.live_rooms for all using (auth.uid() = instructor_id);
+drop policy if exists "Instructors and Admins can create and manage live rooms." on public.live_rooms;
+create policy "Instructors and Admins can create and manage live rooms."
+  on public.live_rooms for all using (auth.uid() = instructor_id or public.is_admin(auth.uid()));
 
 create table if not exists public.live_room_messages (
   id uuid default gen_random_uuid() primary key,
@@ -530,9 +578,7 @@ alter table public.intranet_access_requests enable row level security;
 drop policy if exists "Users can view their own intranet requests." on public.intranet_access_requests;
 create policy "Users can view their own intranet requests."
   on public.intranet_access_requests for select using (
-    auth.uid() = user_id or exists (
-      select 1 from public.profiles where id = auth.uid() and role in ('admin', 'instructor')
-    )
+    auth.uid() = user_id or public.is_faculty(auth.uid())
   );
 
 drop policy if exists "Users can submit intranet requests." on public.intranet_access_requests;
@@ -542,7 +588,5 @@ create policy "Users can submit intranet requests."
 drop policy if exists "Admins can update intranet requests." on public.intranet_access_requests;
 create policy "Admins can update intranet requests."
   on public.intranet_access_requests for update using (
-    exists (
-      select 1 from public.profiles where id = auth.uid() and role = 'admin'
-    )
+    public.is_admin(auth.uid())
   );
