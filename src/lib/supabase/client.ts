@@ -123,6 +123,15 @@ export class LocalDataService {
       localStorage.setItem(STORAGE_KEYS.CURRENT_USER, 'guest');
     } else {
       localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(profile));
+      // Keep profiles directory indexed with any active user
+      const profiles = this.getAllProfiles();
+      const existingIdx = profiles.findIndex((p) => p.id === profile.id);
+      if (existingIdx >= 0) {
+        profiles[existingIdx] = { ...profiles[existingIdx], ...profile };
+      } else {
+        profiles.unshift(profile);
+      }
+      localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
     }
   }
 
@@ -162,6 +171,45 @@ export class LocalDataService {
       }
     }
     return [];
+  }
+
+  static async fetchProfilesFromSupabase(): Promise<Profile[]> {
+    const supabase = createClient();
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (!error && data && data.length > 0) {
+          const local = this.getAllProfiles();
+          const map = new Map<string, Profile>();
+          local.forEach((p) => map.set(p.id, p));
+          data.forEach((p: any) => {
+            map.set(p.id, {
+              id: p.id,
+              email: p.email,
+              full_name: p.full_name || 'User',
+              avatar_url: p.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(p.full_name || p.email)}`,
+              role: (p.role as UserRole) || 'student',
+              created_at: p.created_at || new Date().toISOString(),
+              subscription_status: p.subscription_status || 'none',
+              admin_granted: !!p.admin_granted,
+              tutoring_enrolled: !!p.tutoring_enrolled,
+              tutoring_track_name: p.tutoring_track_name,
+            });
+          });
+          const merged = Array.from(map.values());
+          if (typeof window !== 'undefined') {
+            localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(merged));
+          }
+          return merged;
+        }
+      } catch (err) {
+        console.warn('Could not sync profiles from Supabase:', err);
+      }
+    }
+    return this.getAllProfiles();
   }
 
   static updateUserRole(

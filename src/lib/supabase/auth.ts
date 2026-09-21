@@ -15,10 +15,10 @@ export interface AuthResponse {
 export async function signUpWithSupabase(
   email: string,
   password: string,
-  fullName: string,
-  role: UserRole = 'student'
+  fullName: string
 ): Promise<AuthResponse> {
   const supabase = createClient();
+  const assignedRole: UserRole = 'student';
 
   if (isSupabaseConfigured() && supabase) {
     try {
@@ -28,7 +28,7 @@ export async function signUpWithSupabase(
         options: {
           data: {
             full_name: fullName,
-            role,
+            role: assignedRole,
           },
         },
       });
@@ -46,10 +46,10 @@ export async function signUpWithSupabase(
           email: data.user.email || email,
           full_name: fullName,
           avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`,
-          role,
+          role: assignedRole,
           created_at: new Date().toISOString(),
-          subscription_status: role === 'student' ? 'none' : 'active',
-          admin_granted: role !== 'student',
+          subscription_status: 'none',
+          admin_granted: false,
         };
 
         // Try upserting into public.profiles if table is created
@@ -59,7 +59,7 @@ export async function signUpWithSupabase(
             email: newProfile.email,
             full_name: newProfile.full_name,
             avatar_url: newProfile.avatar_url,
-            role: newProfile.role,
+            role: assignedRole,
           });
         } catch {
           // Table might not be migrated yet; local state handles execution
@@ -72,7 +72,7 @@ export async function signUpWithSupabase(
           success: true,
           user: newProfile,
           message: data.session
-            ? 'Account created and authenticated successfully!'
+            ? 'Account created successfully as Student! Staff and administrative access can only be granted by the Super Administrator.'
             : 'Account registered! Please check your email to confirm registration.',
         };
       }
@@ -88,10 +88,10 @@ export async function signUpWithSupabase(
     email,
     full_name: fullName,
     avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`,
-    role,
+    role: assignedRole,
     created_at: new Date().toISOString(),
-    subscription_status: role === 'student' ? 'none' : 'active',
-    admin_granted: role !== 'student',
+    subscription_status: 'none',
+    admin_granted: false,
   };
 
   LocalDataService.setCurrentUser(fallbackProfile);
@@ -100,7 +100,7 @@ export async function signUpWithSupabase(
   return {
     success: true,
     user: fallbackProfile,
-    message: `Account created successfully as ${role.toUpperCase()} (Session active)`,
+    message: 'Account created successfully as Student! Staff and administrative access can only be granted by the Super Administrator.',
   };
 }
 

@@ -112,14 +112,33 @@ create policy "Users can update their own profile."
   on public.profiles for update using (auth.uid() = id);
 
 drop policy if exists "Super Admins can update any profile." on public.profiles;
-create policy "Super Admins can update any profile."
+drop policy if exists "Super Admins can manage all profiles." on public.profiles;
+create policy "Super Admins can manage all profiles."
   on public.profiles for update using (public.is_super_admin(auth.uid()));
 
 drop policy if exists "Admins can update member profiles." on public.profiles;
-create policy "Admins can update member profiles."
-  on public.profiles for update using (
-    public.is_admin(auth.uid()) and role != 'super_admin'
-  );
+
+-- Security Trigger: Guarantee all new user profiles start as 'student', and only super admins can change roles
+create or replace function public.handle_profile_role_security()
+returns trigger as $$
+begin
+  if TG_OP = 'INSERT' then
+    if not (auth.uid() is not null and public.is_super_admin(auth.uid())) then
+      NEW.role := 'student';
+    end if;
+  elsif TG_OP = 'UPDATE' and NEW.role <> OLD.role then
+    if not (auth.uid() is not null and public.is_super_admin(auth.uid())) then
+      raise exception 'Access Denied: Only Super Administrators hold rights to alter user roles.';
+    end if;
+  end if;
+  return NEW;
+end;
+$$ language plpgsql security definer;
+
+drop trigger if exists tr_profile_role_security on public.profiles;
+create trigger tr_profile_role_security
+  before insert or update on public.profiles
+  for each row execute function public.handle_profile_role_security();
 
 -- ------------------------------------------------------------------------------
 -- 2. COURSES

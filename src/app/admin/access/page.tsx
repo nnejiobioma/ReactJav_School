@@ -223,26 +223,26 @@ export default function AdminAccessPage() {
           <span>Direct Tutoring Attendance Audit</span>
         </button>
 
-        <button
-          onClick={() => setActiveTab('governance')}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            padding: '0.75rem 1.25rem',
-            background: 'transparent',
-            border: 'none',
-            borderBottom: activeTab === 'governance' ? '2px solid #a855f7' : '2px solid transparent',
-            color: activeTab === 'governance' ? '#ffffff' : 'var(--text-secondary)',
-            fontWeight: 700,
-            fontSize: '0.95rem',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease',
-          }}
-        >
-          <Users size={18} color={activeTab === 'governance' ? '#c084fc' : 'var(--text-muted)'} />
-          <span>User Roles & Governance</span>
-          {currentUser?.role === 'super_admin' && (
+        {currentUser?.role === 'super_admin' && (
+          <button
+            onClick={() => setActiveTab('governance')}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: '0.75rem 1.25rem',
+              background: 'transparent',
+              border: 'none',
+              borderBottom: activeTab === 'governance' ? '2px solid #a855f7' : '2px solid transparent',
+              color: activeTab === 'governance' ? '#ffffff' : 'var(--text-secondary)',
+              fontWeight: 700,
+              fontSize: '0.95rem',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <Users size={18} color={activeTab === 'governance' ? '#c084fc' : 'var(--text-muted)'} />
+            <span>User Roles & Governance</span>
             <span style={{
               background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(236, 72, 153, 0.25))',
               color: '#d8b4fe',
@@ -254,8 +254,31 @@ export default function AdminAccessPage() {
             }}>
               Super Admin
             </span>
-          )}
-        </button>
+          </button>
+        )}
+
+        {currentUser?.role === 'super_admin' && (
+          <Link
+            href="/admin/super"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: '0.55rem 1rem',
+              marginLeft: 'auto',
+              background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(236, 72, 153, 0.15))',
+              border: '1px solid rgba(168, 85, 247, 0.4)',
+              borderRadius: '0.75rem',
+              color: '#d8b4fe',
+              fontWeight: 700,
+              fontSize: '0.85rem',
+              textDecoration: 'none',
+            }}
+          >
+            <Sparkles size={15} color="#c084fc" />
+            <span>Dedicated Super Admin Console</span>
+          </Link>
+        )}
       </div>
 
       {activeTab === 'attendance' ? (
@@ -288,16 +311,12 @@ export default function AdminAccessPage() {
 
           <TutoringAttendanceTracker initialRole="admin" />
         </div>
-      ) : activeTab === 'governance' ? (
+      ) : (activeTab === 'governance' && currentUser?.role === 'super_admin') ? (
         <div>
           {/* Governance Header Banner */}
           <div style={{
-            background: currentUser?.role === 'super_admin'
-              ? 'linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(236, 72, 153, 0.08))'
-              : 'rgba(245, 158, 11, 0.08)',
-            border: currentUser?.role === 'super_admin'
-              ? '1px solid rgba(168, 85, 247, 0.35)'
-              : '1px solid rgba(245, 158, 11, 0.25)',
+            background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(236, 72, 153, 0.08))',
+            border: '1px solid rgba(168, 85, 247, 0.35)',
             borderRadius: '1rem',
             padding: '1.5rem',
             marginBottom: '2rem',
@@ -312,36 +331,45 @@ export default function AdminAccessPage() {
                 width: '3rem',
                 height: '3rem',
                 borderRadius: '0.75rem',
-                background: currentUser?.role === 'super_admin'
-                  ? 'linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(236, 72, 153, 0.25))'
-                  : 'rgba(245, 158, 11, 0.2)',
+                background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(236, 72, 153, 0.25))',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexShrink: 0,
               }}>
-                {currentUser?.role === 'super_admin' ? (
-                  <Sparkles size={24} color="#c084fc" />
-                ) : (
-                  <ShieldCheck size={24} color="var(--accent-amber)" />
-                )}
+                <Sparkles size={24} color="#c084fc" />
               </div>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.35rem', flexWrap: 'wrap' }}>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
                     Platform User Directory & Role Governance (RBAC)
                   </h3>
-                  <span className={`badge ${currentUser?.role === 'super_admin' ? 'badge-purple' : 'badge-amber'}`} style={{ fontSize: '0.68rem', padding: '0.1rem 0.45rem' }}>
-                    {currentUser?.role === 'super_admin' ? 'Super Admin Authority Active' : 'Admin Read-Only Directory'}
+                  <span className="badge badge-purple" style={{ fontSize: '0.68rem', padding: '0.1rem 0.45rem' }}>
+                    Super Admin Authority Active
                   </span>
                 </div>
                 <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5, maxWidth: '750px' }}>
-                  {currentUser?.role === 'super_admin'
-                    ? 'Super Administrator Authority: You have complete rights to assign or reassign platform roles (Student, Instructor, Admin, Super Admin). Role changes immediately propagate across Supabase RLS and client capabilities.'
-                    : 'Administrator Directory View: Standard administrators can inspect registered user accounts and records. Reassigning staff and administrator roles strictly requires Super Administrator privileges.'}
+                  Super Administrator Authority: You have complete rights to assign or reassign platform roles (Student, Instructor, Admin, Super Admin). Role changes immediately propagate across Supabase RLS and client capabilities.
                 </p>
               </div>
             </div>
+
+            <Link
+              href="/admin/super"
+              className="btn btn-primary btn-sm"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                background: 'linear-gradient(135deg, #a855f7, #ec4899)',
+                color: '#ffffff',
+                fontWeight: 700,
+                boxShadow: '0 4px 14px rgba(168, 85, 247, 0.4)',
+              }}
+            >
+              <Sparkles size={16} />
+              <span>Open Dedicated Access Control Hub</span>
+            </Link>
           </div>
 
           {/* Action Feedback Toast */}

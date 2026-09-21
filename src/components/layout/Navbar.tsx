@@ -90,6 +90,7 @@ export default function Navbar() {
     pathname.startsWith('/live') ||
     pathname.startsWith('/dashboard') ||
     pathname.startsWith('/tutoring/attendance') ||
+    pathname.startsWith('/admin/super') ||
     pathname.startsWith('/admin/access');
 
   return (
@@ -439,6 +440,33 @@ export default function Navbar() {
                     </div>
                   </Link>
                 )}
+
+                {currentUser?.role === 'super_admin' && (
+                  <Link
+                    href="/admin/super"
+                    onClick={() => setShowIntranetMenu(false)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.75rem',
+                      padding: '0.55rem 0.75rem',
+                      borderRadius: '0.55rem',
+                      color: '#d8b4fe',
+                      textDecoration: 'none',
+                      fontSize: '0.85rem',
+                      borderTop: '1px solid rgba(168, 85, 247, 0.25)',
+                      marginTop: '0.25rem',
+                      paddingTop: '0.55rem',
+                      background: pathname.startsWith('/admin/super') ? 'rgba(168, 85, 247, 0.16)' : 'transparent',
+                    }}
+                  >
+                    <Sparkles size={18} color="#c084fc" />
+                    <div>
+                      <span style={{ display: 'block', fontWeight: 700 }}>Super Admin Access Control</span>
+                      <span style={{ fontSize: '0.72rem', color: '#c084fc' }}>Assign roles & user permissions</span>
+                    </div>
+                  </Link>
+                )}
               </div>
             )}
           </div>
@@ -613,6 +641,57 @@ export default function Navbar() {
                   marginTop: '0.4rem',
                   paddingTop: '0.4rem',
                 }}>
+                  {currentUser?.role === 'super_admin' && (
+                    <Link
+                      href="/admin/super"
+                      onClick={() => setShowRoleMenu(false)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '0.45rem 0.75rem',
+                        fontSize: '0.825rem',
+                        color: '#d8b4fe',
+                        textDecoration: 'none',
+                        borderRadius: '0.5rem',
+                        fontWeight: 600,
+                        background: 'rgba(168, 85, 247, 0.12)',
+                        marginBottom: '0.3rem',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                        <Sparkles size={14} color="#c084fc" />
+                        <span>Super Admin Access</span>
+                      </div>
+                      <ExternalLink size={12} />
+                    </Link>
+                  )}
+
+                  {(currentUser?.role === 'admin' || currentUser?.role === 'super_admin') && (
+                    <Link
+                      href="/admin/access"
+                      onClick={() => setShowRoleMenu(false)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '0.45rem 0.75rem',
+                        fontSize: '0.825rem',
+                        color: 'var(--accent-amber)',
+                        textDecoration: 'none',
+                        borderRadius: '0.5rem',
+                        fontWeight: 600,
+                        marginBottom: '0.3rem',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                        <UserCheck size={14} />
+                        <span>Registrar Clearance Desk</span>
+                      </div>
+                      <ExternalLink size={12} />
+                    </Link>
+                  )}
+
                   <Link
                     href="/auth"
                     onClick={() => setShowRoleMenu(false)}
@@ -826,6 +905,32 @@ export default function Navbar() {
               <CalendarCheck size={17} /> Tutoring Attendance Tracker
             </Link>
           </div>
+
+          {(currentUser?.role === 'super_admin' || currentUser?.role === 'admin') && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                Campus Administration
+              </span>
+              {currentUser?.role === 'super_admin' && (
+                <Link
+                  href="/admin/super"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn btn-secondary btn-sm touch-target"
+                  style={{ justifyContent: 'flex-start', gap: '0.6rem', color: '#d8b4fe', background: 'rgba(168, 85, 247, 0.12)' }}
+                >
+                  <Sparkles size={17} color="#c084fc" /> Super Admin Access Control
+                </Link>
+              )}
+              <Link
+                href="/admin/access"
+                onClick={() => setMobileMenuOpen(false)}
+                className="btn btn-secondary btn-sm touch-target"
+                style={{ justifyContent: 'flex-start', gap: '0.6rem', color: 'var(--accent-amber)' }}
+              >
+                <UserCheck size={17} /> Registrar Clearance Desk
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </header>

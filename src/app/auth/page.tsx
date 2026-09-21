@@ -28,13 +28,14 @@ import { UserRole, Profile } from '@/types';
 function AuthContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const modeParam = searchParams.get('mode') || searchParams.get('tab');
   const redirectUrl = searchParams.get('redirect') || searchParams.get('callbackUrl');
-
-  const [activeTab, setActiveTab] = useState<'signin' | 'signup' | 'supabase-setup'>('signin');
+  const [activeTab, setActiveTab] = useState<'signin' | 'signup' | 'supabase-setup'>(
+    modeParam === 'signup' ? 'signup' : 'signin'
+  );
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
-  const [role, setRole] = useState<UserRole>('student');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -79,7 +80,7 @@ function AuthContent() {
           return;
         }
 
-        const res = await signUpWithSupabase(email.trim(), password, fullName.trim(), role);
+        const res = await signUpWithSupabase(email.trim(), password, fullName.trim());
         if (!res.success) {
           setErrorMessage(res.error || 'Registration failed. Please try again.');
           setIsSubmitting(false);
@@ -92,8 +93,6 @@ function AuthContent() {
         setTimeout(() => {
           if (redirectUrl) {
             router.push(redirectUrl);
-          } else if (role === 'instructor') {
-            router.push('/instructor');
           } else {
             router.push('/dashboard');
           }
@@ -350,20 +349,22 @@ function AuthContent() {
             </div>
 
             {activeTab === 'signup' && (
-              <div>
-                <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
-                  Account Role & Clearance Level
-                </label>
-                <select
-                  value={role}
-                  onChange={(e) => setRole(e.target.value as UserRole)}
-                  className="form-input"
-                >
-                  <option value="student">Student (Learn courses, CBT exams & progress)</option>
-                  <option value="instructor">Instructor (Build courses & host virtual rooms)</option>
-                  <option value="admin">Administrator (Tuition verification & admissions)</option>
-                  <option value="super_admin">Super Administrator (Full platform governance & staff management)</option>
-                </select>
+              <div style={{
+                fontSize: '0.8rem',
+                color: 'var(--text-secondary)',
+                background: 'rgba(99, 102, 241, 0.08)',
+                border: '1px solid rgba(99, 102, 241, 0.25)',
+                borderRadius: '0.65rem',
+                padding: '0.75rem 0.9rem',
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '0.5rem',
+                lineHeight: 1.45,
+              }}>
+                <Info size={16} color="var(--primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <span>
+                  All new accounts register as standard <strong>Students</strong>. Administrative, Faculty, or Super User clearance is strictly controlled and assigned by the <strong>Super Administrator</strong>.
+                </span>
               </div>
             )}
 
