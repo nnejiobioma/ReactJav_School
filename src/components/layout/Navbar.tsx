@@ -20,11 +20,13 @@ import {
   CalendarCheck,
   Menu,
   X,
-  ExternalLink
+  ExternalLink,
+  KeyRound
 } from 'lucide-react';
 import ThemeSelector from '@/components/theme/ThemeSelector';
 import { Profile, UserRole } from '@/types';
 import { LocalDataService, isSupabaseConfigured } from '@/lib/supabase/client';
+import { signOutUser } from '@/lib/supabase/auth';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -488,57 +490,58 @@ export default function Navbar() {
           <ThemeSelector />
 
           {/* 3. ACTIVE USER PROFILE & PERSONA SWITCHER */}
-          <div ref={roleMenuRef} style={{ position: 'relative' }}>
-            <button
-              onClick={() => setShowRoleMenu(!showRoleMenu)}
-              className="btn btn-secondary btn-sm header-persona-btn"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.65rem',
-                padding: '0.42rem 0.85rem',
-                borderRadius: '0.95rem',
-                border: '1px solid var(--border-subtle)',
-                background: 'var(--bg-surface)',
-                cursor: 'pointer',
-              }}
-              title="Current Session Profile • Click to switch role"
-            >
-              <div style={{ position: 'relative' }}>
-                <img
-                  src={currentUser?.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
-                  alt={currentUser?.full_name || 'User'}
-                  style={{
-                    width: '32px',
-                    height: '32px',
+          {currentUser && currentUser.id !== 'guest' ? (
+            <div ref={roleMenuRef} style={{ position: 'relative' }}>
+              <button
+                onClick={() => setShowRoleMenu(!showRoleMenu)}
+                className="btn btn-secondary btn-sm header-persona-btn"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.65rem',
+                  padding: '0.42rem 0.85rem',
+                  borderRadius: '0.95rem',
+                  border: '1px solid var(--border-subtle)',
+                  background: 'var(--bg-surface)',
+                  cursor: 'pointer',
+                }}
+                title="Current Session Profile • Click to switch role"
+              >
+                <div style={{ position: 'relative' }}>
+                  <img
+                    src={currentUser?.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
+                    alt={currentUser?.full_name || 'User'}
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '50%',
+                      objectFit: 'cover',
+                      border: '1.5px solid var(--border-subtle)',
+                    }}
+                  />
+                  <span style={{
+                    position: 'absolute',
+                    bottom: '-1px',
+                    right: '-1px',
+                    width: '8px',
+                    height: '8px',
                     borderRadius: '50%',
-                    objectFit: 'cover',
-                    border: '1.5px solid var(--border-subtle)',
-                  }}
-                />
-                <span style={{
-                  position: 'absolute',
-                  bottom: '-1px',
-                  right: '-1px',
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  background: '#10b981',
-                  border: '1.5px solid var(--bg-surface)',
-                }} />
-              </div>
-              <div className="header-persona-details" style={{ textAlign: 'left', lineHeight: 1.15 }}>
-                <span className="header-persona-name" style={{ fontSize: '0.82rem', fontWeight: 700, display: 'block', color: 'var(--text-primary)' }}>
-                  {currentUser?.full_name?.split(' ')[0] || 'Demo User'}
+                    background: '#10b981',
+                    border: '1.5px solid var(--bg-surface)',
+                  }} />
+                </div>
+                <div className="header-persona-details" style={{ textAlign: 'left', lineHeight: 1.15 }}>
+                  <span className="header-persona-name" style={{ fontSize: '0.82rem', fontWeight: 700, display: 'block', color: 'var(--text-primary)' }}>
+                    {currentUser?.full_name?.split(' ')[0] || 'Demo User'}
+                  </span>
+                  <span className={`badge ${roleBadgeStyle} header-persona-badge`} style={{ fontSize: '0.6rem', padding: '0.08rem 0.35rem' }}>
+                    {currentUser?.role || 'student'}
+                  </span>
+                </div>
+                <span className="header-persona-chevron">
+                  <ChevronDown size={14} color="var(--text-muted)" style={{ transform: showRoleMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
                 </span>
-                <span className={`badge ${roleBadgeStyle} header-persona-badge`} style={{ fontSize: '0.6rem', padding: '0.08rem 0.35rem' }}>
-                  {currentUser?.role || 'student'}
-                </span>
-              </div>
-              <span className="header-persona-chevron">
-                <ChevronDown size={14} color="var(--text-muted)" style={{ transform: showRoleMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-              </span>
-            </button>
+              </button>
 
             {/* Dropdown Menu */}
             {showRoleMenu && (
@@ -703,10 +706,55 @@ export default function Navbar() {
                     </div>
                     <ExternalLink size={12} />
                   </Link>
+
+                  <button
+                    onClick={async () => {
+                      await signOutUser();
+                      setCurrentUser(null);
+                      setShowRoleMenu(false);
+                    }}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      padding: '0.5rem 0.75rem',
+                      borderRadius: '0.5rem',
+                      background: 'transparent',
+                      color: '#f87171',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontSize: '0.82rem',
+                      textAlign: 'left',
+                      fontWeight: 600,
+                      marginTop: '0.2rem',
+                    }}
+                  >
+                    <LogOut size={14} />
+                    <span>Sign Out</span>
+                  </button>
                 </div>
               </div>
             )}
           </div>
+          ) : (
+            <Link
+              href="/auth"
+              className="btn btn-primary btn-sm"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                padding: '0.45rem 0.95rem',
+                borderRadius: '0.85rem',
+                fontSize: '0.84rem',
+                fontWeight: 600,
+              }}
+            >
+              <KeyRound size={15} />
+              <span>Sign In</span>
+            </Link>
+          )}
 
           {/* Mobile Menu Toggle Button */}
           <button
@@ -752,84 +800,116 @@ export default function Navbar() {
             flexDirection: 'column',
             gap: '0.75rem',
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <img
-                  src={currentUser?.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
-                  alt={currentUser?.full_name || 'User'}
-                  style={{
-                    width: '38px',
-                    height: '38px',
-                    borderRadius: '50%',
-                    objectFit: 'cover',
-                    border: '1.5px solid var(--border-subtle)',
-                  }}
-                />
-                <div>
-                  <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', lineHeight: 1.2 }}>
-                    {currentUser?.full_name || 'Demo User'}
-                  </span>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    {currentUser?.email}
+            {currentUser && currentUser.id !== 'guest' ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <img
+                      src={currentUser?.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
+                      alt={currentUser?.full_name || 'User'}
+                      style={{
+                        width: '38px',
+                        height: '38px',
+                        borderRadius: '50%',
+                        objectFit: 'cover',
+                        border: '1.5px solid var(--border-subtle)',
+                      }}
+                    />
+                    <div>
+                      <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', lineHeight: 1.2 }}>
+                        {currentUser?.full_name || 'Demo User'}
+                      </span>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                        {currentUser?.email}
+                      </span>
+                    </div>
+                  </div>
+                  <span className={`badge ${roleBadgeStyle}`} style={{ fontSize: '0.65rem', padding: '0.15rem 0.45rem' }}>
+                    {currentUser?.role || 'student'}
                   </span>
                 </div>
-              </div>
-              <span className={`badge ${roleBadgeStyle}`} style={{ fontSize: '0.65rem', padding: '0.15rem 0.45rem' }}>
-                {currentUser?.role || 'student'}
-              </span>
-            </div>
 
-            {/* Mobile Quick Role Switcher */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.4rem', paddingTop: '0.5rem', borderTop: '1px solid var(--border-subtle)' }}>
-              <button
-                onClick={() => handleRoleSwitch('student')}
-                style={{
-                  padding: '0.4rem 0.2rem',
-                  fontSize: '0.72rem',
-                  fontWeight: 600,
-                  borderRadius: '0.5rem',
-                  background: currentUser?.role === 'student' ? 'rgba(99, 102, 241, 0.2)' : 'var(--bg-surface)',
-                  color: currentUser?.role === 'student' ? '#a5b4fc' : 'var(--text-secondary)',
-                  border: currentUser?.role === 'student' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
-                  cursor: 'pointer',
-                  textAlign: 'center',
-                }}
-              >
-                Student
-              </button>
-              <button
-                onClick={() => handleRoleSwitch('instructor')}
-                style={{
-                  padding: '0.4rem 0.2rem',
-                  fontSize: '0.72rem',
-                  fontWeight: 600,
-                  borderRadius: '0.5rem',
-                  background: currentUser?.role === 'instructor' ? 'rgba(16, 185, 129, 0.2)' : 'var(--bg-surface)',
-                  color: currentUser?.role === 'instructor' ? '#6ee7b7' : 'var(--text-secondary)',
-                  border: currentUser?.role === 'instructor' ? '1px solid var(--accent-emerald)' : '1px solid var(--border-subtle)',
-                  cursor: 'pointer',
-                  textAlign: 'center',
-                }}
-              >
-                Instructor
-              </button>
-              <button
-                onClick={() => handleRoleSwitch('admin')}
-                style={{
-                  padding: '0.4rem 0.2rem',
-                  fontSize: '0.72rem',
-                  fontWeight: 600,
-                  borderRadius: '0.5rem',
-                  background: currentUser?.role === 'admin' ? 'rgba(245, 158, 11, 0.2)' : 'var(--bg-surface)',
-                  color: currentUser?.role === 'admin' ? '#fcd34d' : 'var(--text-secondary)',
-                  border: currentUser?.role === 'admin' ? '1px solid var(--accent-amber)' : '1px solid var(--border-subtle)',
-                  cursor: 'pointer',
-                  textAlign: 'center',
-                }}
-              >
-                Admin
-              </button>
-            </div>
+                {/* Mobile Quick Role Switcher */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.4rem', paddingTop: '0.5rem', borderTop: '1px solid var(--border-subtle)' }}>
+                  <button
+                    onClick={() => handleRoleSwitch('student')}
+                    style={{
+                      padding: '0.4rem 0.2rem',
+                      fontSize: '0.72rem',
+                      fontWeight: 600,
+                      borderRadius: '0.5rem',
+                      background: currentUser?.role === 'student' ? 'rgba(99, 102, 241, 0.2)' : 'var(--bg-surface)',
+                      color: currentUser?.role === 'student' ? '#a5b4fc' : 'var(--text-secondary)',
+                      border: currentUser?.role === 'student' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
+                      cursor: 'pointer',
+                      textAlign: 'center',
+                    }}
+                  >
+                    Student
+                  </button>
+                  <button
+                    onClick={() => handleRoleSwitch('instructor')}
+                    style={{
+                      padding: '0.4rem 0.2rem',
+                      fontSize: '0.72rem',
+                      fontWeight: 600,
+                      borderRadius: '0.5rem',
+                      background: currentUser?.role === 'instructor' ? 'rgba(16, 185, 129, 0.2)' : 'var(--bg-surface)',
+                      color: currentUser?.role === 'instructor' ? '#6ee7b7' : 'var(--text-secondary)',
+                      border: currentUser?.role === 'instructor' ? '1px solid var(--accent-emerald)' : '1px solid var(--border-subtle)',
+                      cursor: 'pointer',
+                      textAlign: 'center',
+                    }}
+                  >
+                    Instructor
+                  </button>
+                  <button
+                    onClick={() => handleRoleSwitch('admin')}
+                    style={{
+                      padding: '0.4rem 0.2rem',
+                      fontSize: '0.72rem',
+                      fontWeight: 600,
+                      borderRadius: '0.5rem',
+                      background: currentUser?.role === 'admin' ? 'rgba(245, 158, 11, 0.2)' : 'var(--bg-surface)',
+                      color: currentUser?.role === 'admin' ? '#fcd34d' : 'var(--text-secondary)',
+                      border: currentUser?.role === 'admin' ? '1px solid var(--accent-amber)' : '1px solid var(--border-subtle)',
+                      cursor: 'pointer',
+                      textAlign: 'center',
+                    }}
+                  >
+                    Admin
+                  </button>
+                </div>
+
+                <button
+                  onClick={async () => {
+                    await signOutUser();
+                    setCurrentUser(null);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="btn btn-secondary btn-sm"
+                  style={{ color: '#f87171', justifyContent: 'center', gap: '0.5rem', marginTop: '0.25rem' }}
+                >
+                  <LogOut size={15} />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            ) : (
+              <div style={{ textAlign: 'center', padding: '0.5rem 0' }}>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
+                  Sign in to access your course progress and campus intranet.
+                </p>
+                <Link
+                  href="/auth"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn btn-primary btn-sm"
+                  style={{ width: '100%', justifyContent: 'center', gap: '0.5rem' }}
+                >
+                  <KeyRound size={15} />
+                  <span>Sign In / Register</span>
+                </Link>
+              </div>
+            )}
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>

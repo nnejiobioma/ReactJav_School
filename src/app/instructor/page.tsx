@@ -20,6 +20,7 @@ import { Course, Profile } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { formatCurrency } from '@/lib/utils';
 import TutoringAttendanceTracker from '@/components/attendance/TutoringAttendanceTracker';
+import AccessGuard from '@/components/auth/AccessGuard';
 
 export default function InstructorDashboardPage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
@@ -35,14 +36,8 @@ export default function InstructorDashboardPage() {
   const [description, setDescription] = useState('');
 
   useEffect(() => {
-    // Automatically switch to or load instructor persona
     const user = LocalDataService.getCurrentUser();
-    if (user.role !== 'instructor') {
-      const instructorUser = LocalDataService.switchDemoRole('instructor');
-      setCurrentUser(instructorUser);
-    } else {
-      setCurrentUser(user);
-    }
+    setCurrentUser(user);
     setCourses(LocalDataService.getCourses());
   }, []);
 
@@ -101,7 +96,8 @@ export default function InstructorDashboardPage() {
   const totalRevenue = courses.reduce((acc, c) => acc + (c.enrollments_count || 0) * (c.price || 0), 0);
 
   return (
-    <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
+    <AccessGuard level="instructor" pageTitle="Instructor Studio">
+      <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
       {/* Header */}
       <div style={{
         display: 'flex',
@@ -470,5 +466,6 @@ export default function InstructorDashboardPage() {
         </div>
       )}
     </div>
+    </AccessGuard>
   );
 }

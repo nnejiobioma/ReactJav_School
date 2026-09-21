@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import { Course, Lesson, Profile, LessonQaItem, LessonResourceItem } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
+import AccessGuard from '@/components/auth/AccessGuard';
 import VideoPlayer from '@/components/player/VideoPlayer';
 import LessonSidebar from '@/components/player/LessonSidebar';
 import QuizRunner from '@/components/quiz/QuizRunner';
@@ -61,6 +62,7 @@ export default function CoursePlayerPage() {
   useEffect(() => {
     const user = LocalDataService.getCurrentUser();
     setCurrentUser(user);
+    if (!user) return;
 
     const foundCourse = LocalDataService.getCourseById(courseId);
     if (foundCourse) {
@@ -249,7 +251,8 @@ export default function CoursePlayerPage() {
   const stats = currentUser ? LocalDataService.getCourseStats(course.id, currentUser.id) : { totalLessons: 0, completedLessons: 0, percentage: 0 };
 
   return (
-    <div className="container" style={{ paddingTop: '1.5rem', paddingBottom: '4rem' }}>
+    <AccessGuard level="authenticated" pageTitle="Interactive Learning Classroom">
+      <div className="container" style={{ paddingTop: '1.5rem', paddingBottom: '4rem' }}>
       {/* Top Breadcrumb Navigation */}
       <div style={{
         display: 'flex',
@@ -1088,5 +1091,6 @@ export default function CoursePlayerPage() {
         </div>
       )}
     </div>
+    </AccessGuard>
   );
 }

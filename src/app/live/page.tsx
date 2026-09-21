@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import { LiveRoom, Profile } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
-import IntranetGuard from '@/components/intranet/IntranetGuard';
+import AccessGuard from '@/components/auth/AccessGuard';
 
 export default function VirtualRoomsHubPage() {
   const router = useRouter();
@@ -68,7 +68,8 @@ export default function VirtualRoomsHubPage() {
   const upcomingRooms = rooms.filter((r) => !r.is_active);
 
   return (
-    <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
+    <AccessGuard level="intranet" pageTitle="Live Virtual Classrooms">
+      <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
       {/* Top Banner */}
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div style={{
@@ -472,6 +473,7 @@ export default function VirtualRoomsHubPage() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </AccessGuard>
   );
 }

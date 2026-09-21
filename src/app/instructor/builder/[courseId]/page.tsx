@@ -7,6 +7,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Course } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import CurriculumEditor from '@/components/instructor/CurriculumEditor';
+import AccessGuard from '@/components/auth/AccessGuard';
 
 export default function CourseBuilderPage() {
   const params = useParams();
@@ -22,27 +23,27 @@ export default function CourseBuilderPage() {
     }
   }, [courseId]);
 
-  if (!course) {
-    return (
-      <div className="container" style={{ padding: '6rem 0', textAlign: 'center' }}>
-        <h2 style={{ marginBottom: '1rem', color: '#ffffff' }}>Loading Course Curriculum...</h2>
-      </div>
-    );
-  }
-
   return (
-    <div className="container" style={{ padding: '2.5rem 1.5rem 6rem' }}>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <Link href="/instructor" className="btn btn-secondary btn-sm">
-          <ArrowLeft size={16} />
-          <span>Back to Instructor Studio</span>
-        </Link>
-      </div>
+    <AccessGuard level="instructor" pageTitle="Curriculum Course Builder">
+      {!course ? (
+        <div className="container" style={{ padding: '6rem 0', textAlign: 'center' }}>
+          <h2 style={{ marginBottom: '1rem', color: '#ffffff' }}>Loading Course Curriculum...</h2>
+        </div>
+      ) : (
+        <div className="container" style={{ padding: '2.5rem 1.5rem 6rem' }}>
+          <div style={{ marginBottom: '1.5rem' }}>
+            <Link href="/instructor" className="btn btn-secondary btn-sm">
+              <ArrowLeft size={16} />
+              <span>Back to Instructor Studio</span>
+            </Link>
+          </div>
 
-      <CurriculumEditor
-        course={course}
-        onCourseUpdated={(updated) => setCourse(updated)}
-      />
-    </div>
+          <CurriculumEditor
+            course={course}
+            onCourseUpdated={(updated) => setCourse(updated)}
+          />
+        </div>
+      )}
+    </AccessGuard>
   );
 }

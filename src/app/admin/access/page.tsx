@@ -22,6 +22,7 @@ import {
 import { Profile, IntranetAccessRequest, SubscriptionStatus } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import TutoringAttendanceTracker from '@/components/attendance/TutoringAttendanceTracker';
+import AccessGuard from '@/components/auth/AccessGuard';
 
 export default function AdminAccessPage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
@@ -95,7 +96,8 @@ export default function AdminAccessPage() {
   });
 
   return (
-    <div className="container" style={{ padding: '3rem 1rem 6rem' }}>
+    <AccessGuard level="admin" pageTitle="Registrar Clearance Desk">
+      <div className="container" style={{ padding: '3rem 1rem 6rem' }}>
       {/* Persona Notice if not Admin */}
       {currentUser?.role !== 'admin' && (
         <div style={{
@@ -550,5 +552,6 @@ export default function AdminAccessPage() {
         </>
       )}
     </div>
+    </AccessGuard>
   );
 }

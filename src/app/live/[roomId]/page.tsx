@@ -41,6 +41,7 @@ import {
 } from 'lucide-react';
 import { LiveRoom, LiveParticipant, LiveChatMessage, Profile } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
+import AccessGuard from '@/components/auth/AccessGuard';
 
 export default function VirtualMeetingRoomPage() {
   const params = useParams();
@@ -832,8 +833,9 @@ videoElement.srcObject = displayStream;`,
   }
 
   return (
-    <div style={{
-      height: 'calc(100vh - var(--header-height, 8.75rem))',
+    <AccessGuard level="intranet" pageTitle="Virtual Meeting Classroom">
+      <div style={{
+        height: 'calc(100vh - var(--header-height, 8.75rem))',
       display: 'flex',
       flexDirection: 'column',
       background: 'var(--bg-main)',
@@ -2987,6 +2989,7 @@ videoElement.srcObject = displayStream;`,
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </AccessGuard>
   );
 }

@@ -30,6 +30,7 @@ import { formatDuration } from '@/lib/utils';
 import { ACADEMY_TRACKS } from '@/data/academyTracks';
 import StudentRecordModal from '@/components/student/StudentRecordModal';
 import TutoringAttendanceTracker from '@/components/attendance/TutoringAttendanceTracker';
+import AccessGuard from '@/components/auth/AccessGuard';
 
 export default function StudentDashboardPage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
@@ -41,6 +42,7 @@ export default function StudentDashboardPage() {
   useEffect(() => {
     const user = LocalDataService.getCurrentUser();
     setCurrentUser(user);
+    if (!user) return;
 
     const enrolledIds = LocalDataService.getEnrollments(user.id);
     const allCourses = LocalDataService.getCourses();
@@ -60,19 +62,20 @@ export default function StudentDashboardPage() {
   const totalCertificates = enrolledCourses.filter((c) => c.stats.percentage === 100).length;
 
   return (
-    <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
-      {/* Welcome Banner */}
-      <div className="glass-card" style={{
-        padding: '2rem',
-        marginBottom: '2.5rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '1.5rem',
-        background: 'linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-surface-elevated) 100%)',
-        border: '1px solid var(--border-accent)',
-      }}>
+    <AccessGuard level="authenticated" pageTitle="Student Learning Dashboard">
+      <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
+        {/* Welcome Header */}
+        <div className="glass-card" style={{
+          padding: '2rem',
+          marginBottom: '2.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '1.5rem',
+          background: 'linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-surface-elevated) 100%)',
+          border: '1px solid var(--border-accent)',
+        }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
           <img
             src={currentUser?.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}
@@ -470,7 +473,7 @@ export default function StudentDashboardPage() {
                 gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
                 gap: '0.75rem',
               }}>
-                {tutoringTrack.syllabus.map((mod, idx) => (
+                {tutoringTrack.syllabus.map((mod: any, idx: number) => (
                   <div key={idx} style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -899,12 +902,13 @@ export default function StudentDashboardPage() {
         </div>
       )}
 
-      {/* Student Academic Record & Transcript Modal */}
-      <StudentRecordModal
-        isOpen={isRecordModalOpen}
-        onClose={() => setIsRecordModalOpen(false)}
-        autoPrint={autoPrintRecord}
-      />
-    </div>
+        {/* Student Academic Record & Transcript Modal */}
+        <StudentRecordModal
+          isOpen={isRecordModalOpen}
+          onClose={() => setIsRecordModalOpen(false)}
+          autoPrint={autoPrintRecord}
+        />
+      </div>
+    </AccessGuard>
   );
 }

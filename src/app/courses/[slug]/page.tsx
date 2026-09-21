@@ -46,7 +46,7 @@ export default function CourseDetailPage() {
       const foundCourse = LocalDataService.getCourseBySlug(slug);
       if (foundCourse) {
         setCourse(foundCourse);
-        setIsEnrolled(LocalDataService.isEnrolled(user.id, foundCourse.id));
+        setIsEnrolled(user ? LocalDataService.isEnrolled(user.id, foundCourse.id) : false);
       }
     };
 

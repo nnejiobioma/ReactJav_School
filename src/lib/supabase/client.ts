@@ -34,7 +34,10 @@ import {
 import { DEFAULT_SITE_CONTENT } from './defaultSiteContent';
 import { ACADEMY_TRACKS, AcademyTrack } from '@/data/academyTracks';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const rawSupabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseUrl = rawSupabaseUrl
+  ? rawSupabaseUrl.replace(/\/rest\/v1\/?$/, '').replace(/\/$/, '')
+  : undefined;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 export const isSupabaseConfigured = (): boolean => {
@@ -74,12 +77,14 @@ const STORAGE_KEYS = {
 
 // Client-side Local State Store (Local Persistence Fallback)
 export class LocalDataService {
-  static getCurrentUser(): Profile {
+  static getCurrentUser(): Profile | null {
     if (typeof window === 'undefined') return DEMO_PROFILES.student;
     const stored = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
+    if (stored === 'guest' || stored === 'null') return null;
     if (stored) {
       try {
-        return JSON.parse(stored);
+        const parsed = JSON.parse(stored);
+        if (parsed && parsed.id) return parsed;
       } catch {
         // fallback
       }
@@ -88,9 +93,24 @@ export class LocalDataService {
     return DEMO_PROFILES.student;
   }
 
-  static setCurrentUser(profile: Profile): void {
+  static setCurrentUser(profile: Profile | null): void {
     if (typeof window === 'undefined') return;
-    localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(profile));
+    if (!profile) {
+      localStorage.setItem(STORAGE_KEYS.CURRENT_USER, 'guest');
+    } else {
+      localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(profile));
+    }
+  }
+
+  static logout(): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(STORAGE_KEYS.CURRENT_USER, 'guest');
+    window.dispatchEvent(new Event('storage'));
+  }
+
+  static isAuthenticated(): boolean {
+    const user = this.getCurrentUser();
+    return !!user && user.id !== 'guest';
   }
 
   static switchDemoRole(role: UserRole): Profile {
@@ -407,7 +427,7 @@ export class LocalDataService {
     paymentMethod: 'credit_card' | 'bank_transfer' | 'campus_voucher',
     paymentRef: string
   ): { user: Profile; request: IntranetAccessRequest } {
-    const user = this.getCurrentUser();
+    const user = this.getCurrentUser() || DEMO_PROFILES.student;
     const plans = this.getSubscriptionPlans();
     const selectedPlan = plans.find((p) => p.id === planId) || plans[1];
 
@@ -476,7 +496,7 @@ export class LocalDataService {
 
     // If current user is this student, also update their active profile
     const currentUser = this.getCurrentUser();
-    if (currentUser.id === target.user_id) {
+    if (currentUser && currentUser.id === target.user_id) {
       const updatedUser: Profile = {
         ...currentUser,
         subscription_status: 'active',
@@ -517,7 +537,7 @@ export class LocalDataService {
     this.saveIntranetRequests(requests);
 
     const currentUser = this.getCurrentUser();
-    if (currentUser.id === target.user_id) {
+    if (currentUser && currentUser.id === target.user_id) {
       const updatedUser: Profile = {
         ...currentUser,
         subscription_status: 'rejected',
@@ -544,7 +564,7 @@ export class LocalDataService {
     }
 
     const currentUser = this.getCurrentUser();
-    if (currentUser.id === userId) {
+    if (currentUser && currentUser.id === userId) {
       const updatedUser: Profile = {
         ...currentUser,
         subscription_status: 'none',
@@ -584,7 +604,7 @@ export class LocalDataService {
       notes?: string;
     }
   ): { success: boolean; user: Profile } {
-    const currentUser = this.getCurrentUser();
+    const currentUser = this.getCurrentUser() || DEMO_PROFILES.student;
     const targetUserId = userId || currentUser.id;
     const trackId = track?.id || 'python-engineering';
     const trackName = track?.name || 'Python Engineering';
@@ -857,7 +877,7 @@ export class LocalDataService {
     sessionData: Partial<TutoringAttendanceSession>
   ): TutoringAttendanceSession {
     const all = this.getTutoringAttendance();
-    const currentUser = this.getCurrentUser();
+    const currentUser = this.getCurrentUser() || DEMO_PROFILES.student;
     const now = new Date();
     const dateStr = sessionData.session_date || now.toISOString().split('T')[0];
     const month = sessionData.month || dateStr.slice(0, 7);

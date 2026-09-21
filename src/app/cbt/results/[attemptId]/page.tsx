@@ -23,6 +23,7 @@ import {
 import { CBTAttempt, CBTExam, Profile } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { formatDuration } from '@/lib/utils';
+import AccessGuard from '@/components/auth/AccessGuard';
 
 export default function CBTResultPage() {
   const params = useParams();
@@ -76,7 +77,8 @@ export default function CBTResultPage() {
   }
 
   return (
-    <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
+    <AccessGuard level="authenticated" pageTitle="CBT Examination Result Slip">
+      <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
       {/* Top Breadcrumb */}
       <div style={{ marginBottom: '2rem' }}>
         <Link href="/cbt" className="btn btn-secondary btn-sm">
@@ -482,5 +484,6 @@ export default function CBTResultPage() {
         </div>
       )}
     </div>
-  );
+  </AccessGuard>
+);
 }

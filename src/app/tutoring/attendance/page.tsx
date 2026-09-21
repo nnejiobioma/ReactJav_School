@@ -15,6 +15,7 @@ import {
 import { Profile, UserRole } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import TutoringAttendanceTracker from '@/components/attendance/TutoringAttendanceTracker';
+import AccessGuard from '@/components/auth/AccessGuard';
 
 export default function TutoringAttendancePage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
@@ -23,7 +24,9 @@ export default function TutoringAttendancePage() {
   useEffect(() => {
     const user = LocalDataService.getCurrentUser();
     setCurrentUser(user);
-    setActivePersona(user.role);
+    if (user) {
+      setActivePersona(user.role);
+    }
   }, []);
 
   const handleSwitchPersona = (role: UserRole) => {
@@ -34,7 +37,8 @@ export default function TutoringAttendancePage() {
   };
 
   return (
-    <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
+    <AccessGuard level="authenticated" pageTitle="Tutoring Attendance Tracker">
+      <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
       {/* Top Navigation & Breadcrumbs */}
       <div style={{
         display: 'flex',
@@ -125,5 +129,6 @@ export default function TutoringAttendancePage() {
       {/* Main Attendance Tracker Component */}
       <TutoringAttendanceTracker initialRole={activePersona} />
     </div>
+    </AccessGuard>
   );
 }

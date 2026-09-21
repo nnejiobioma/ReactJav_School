@@ -60,6 +60,7 @@ export default function StudentRecordModal({
 
     const user = LocalDataService.getCurrentUser();
     setCurrentUser(user);
+    if (!user) return;
 
     const enrolledIds = LocalDataService.getEnrollments(user.id);
     const allCourses = LocalDataService.getCourses();

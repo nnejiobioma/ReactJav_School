@@ -41,7 +41,7 @@ export default function SubscribePage() {
   useEffect(() => {
     const user = LocalDataService.getCurrentUser();
     setCurrentUser(user);
-    if (user.full_name) {
+    if (user && user.full_name) {
       setCardHolder(user.full_name);
     }
     setPlans(LocalDataService.getSubscriptionPlans());

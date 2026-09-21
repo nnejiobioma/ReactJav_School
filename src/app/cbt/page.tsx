@@ -21,7 +21,7 @@ import {
 import { CBTExam, CBTAttempt, Profile } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { formatDuration } from '@/lib/utils';
-import IntranetGuard from '@/components/intranet/IntranetGuard';
+import AccessGuard from '@/components/auth/AccessGuard';
 
 export default function CBTExamCenterPage() {
   const router = useRouter();
@@ -34,7 +34,9 @@ export default function CBTExamCenterPage() {
     const user = LocalDataService.getCurrentUser();
     setCurrentUser(user);
     setExams(LocalDataService.getCBTExams());
-    setAttempts(LocalDataService.getCBTAttempts(user.id));
+    if (user) {
+      setAttempts(LocalDataService.getCBTAttempts(user.id));
+    }
   }, []);
 
   const handleStartExam = (examId: string) => {
@@ -48,7 +50,8 @@ export default function CBTExamCenterPage() {
   };
 
   return (
-    <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
+    <AccessGuard level="authenticated" pageTitle="Computer Based Testing Center">
+      <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
       {/* Top Banner */}
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div style={{
@@ -428,6 +431,7 @@ export default function CBTExamCenterPage() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </AccessGuard>
   );
 }

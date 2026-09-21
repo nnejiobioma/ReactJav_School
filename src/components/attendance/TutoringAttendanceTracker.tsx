@@ -59,7 +59,7 @@ export default function TutoringAttendanceTracker({
   const loadData = () => {
     const user = LocalDataService.getCurrentUser();
     setCurrentUser(user);
-    const role = initialRole || user.role;
+    const role = initialRole || user?.role || 'student';
     setActiveRole(role);
 
     const months = LocalDataService.getAvailableAttendanceMonths();
@@ -67,7 +67,7 @@ export default function TutoringAttendanceTracker({
     const currMonth = selectedMonth || (months[0]?.month || new Date().toISOString().slice(0, 7));
     setSelectedMonth(currMonth);
 
-    const studentFilter = filterStudentId || (role === 'student' ? user.id : undefined);
+    const studentFilter = filterStudentId || (role === 'student' ? user?.id : undefined);
     const list = LocalDataService.getTutoringAttendance({
       month: currMonth,
       studentId: studentFilter,
