@@ -357,8 +357,8 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
           </Link>
 
           {!isEnrolled ? (
-            <button
-              onClick={handleEnrollClick}
+            <Link
+              href={`/subscribe?courseId=${course.id}`}
               className="btn btn-primary btn-sm"
               style={{
                 flex: 1,
@@ -370,7 +370,7 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
             >
               <Sparkles size={13} />
               <span>Enroll Now</span>
-            </button>
+            </Link>
           ) : (
             <Link
               href={`/learn/${course.id}/${course.sections?.[0]?.lessons?.[0]?.id || 'overview'}`}

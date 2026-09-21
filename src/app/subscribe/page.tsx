@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   CreditCard,
   ShieldCheck,
@@ -12,21 +12,30 @@ import {
   Lock,
   Building2,
   Ticket,
-  Zap,
   RefreshCw,
-  HelpCircle,
   Clock,
-  BookOpen
+  BookOpen,
+  GraduationCap,
+  Award,
+  ChevronRight,
+  Layers
 } from 'lucide-react';
-import { Profile, SubscriptionPlan } from '@/types';
+import { Profile, SubscriptionPlan, Course } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
+import { formatCurrency } from '@/lib/utils';
 
-export default function SubscribePage() {
+function SubscribeContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const courseId = searchParams.get('courseId') || searchParams.get('course');
+
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
   const [selectedPlanId, setSelectedPlanId] = useState<'term' | 'annual' | 'lifetime'>('annual');
   const [paymentMethod, setPaymentMethod] = useState<'credit_card' | 'bank_transfer' | 'campus_voucher'>('credit_card');
+
+  // Enrolling course state
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
   // Card Form State
   const [cardNumber, setCardNumber] = useState('4242 •••• •••• 4242');
@@ -45,20 +54,48 @@ export default function SubscribePage() {
       setCardHolder(user.full_name);
     }
     setPlans(LocalDataService.getSubscriptionPlans());
-  }, []);
+
+    if (courseId) {
+      const course = LocalDataService.getCourseById(courseId);
+      if (course) {
+        setSelectedCourse(course);
+      }
+    }
+  }, [courseId]);
 
   const selectedPlan = plans.find((p) => p.id === selectedPlanId) || plans[1];
+  const payableAmount = selectedCourse ? selectedCourse.price : (selectedPlan?.price || 99);
+  const firstLessonId = selectedCourse?.sections?.[0]?.lessons?.[0]?.id || 'overview';
 
   const handleSubmitPayment = (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
 
     const randomSuffix = Math.random().toString(36).substring(2, 7).toUpperCase();
-    const prefix = paymentMethod === 'credit_card' ? 'TXN-CARD' : paymentMethod === 'bank_transfer' ? 'TXN-WIRE' : 'VCH-CAMPUS';
+    const prefix = selectedCourse
+      ? 'ENR-PROG'
+      : paymentMethod === 'credit_card'
+      ? 'TXN-CARD'
+      : paymentMethod === 'bank_transfer'
+      ? 'TXN-WIRE'
+      : 'VCH-CAMPUS';
     const txnRef = `${prefix}-${randomSuffix}`;
 
     setTimeout(() => {
-      LocalDataService.submitSubscriptionPayment(selectedPlanId, paymentMethod, txnRef);
+      if (selectedCourse) {
+        // Process Programme tuition payment, auto-enroll student & grant intranet clearance
+        const targetUserId = currentUser?.id || `usr_student_${Date.now()}`;
+        LocalDataService.processProgrammePayment(
+          targetUserId,
+          selectedCourse.id,
+          selectedCourse.price,
+          txnRef
+        );
+      } else {
+        // Submit standard intranet clearance subscription
+        LocalDataService.submitSubscriptionPayment(selectedPlanId, paymentMethod, txnRef);
+      }
+
       setGeneratedRef(txnRef);
       setIsProcessing(false);
       setIsSuccess(true);
@@ -68,7 +105,7 @@ export default function SubscribePage() {
   return (
     <div className="container" style={{ padding: '3.5rem 1rem 6rem' }}>
       {/* Page Title Header */}
-      <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -83,17 +120,21 @@ export default function SubscribePage() {
           marginBottom: '1rem',
         }}>
           <Sparkles size={16} color="var(--primary)" />
-          <span>ReactJav Campus Tuition & Enrollment</span>
+          <span>ReactJav Campus Tuition & Enrollment Desk</span>
         </div>
 
         <h1 style={{
-          fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
+          fontSize: 'clamp(2.1rem, 4vw, 3.1rem)',
           fontWeight: 800,
           letterSpacing: '-0.03em',
           color: 'var(--text-primary)',
-          marginBottom: '1rem',
+          marginBottom: '0.85rem',
         }}>
-          Subscribe to Unlock the <span className="text-gradient">Campus Intranet</span>
+          {selectedCourse ? (
+            <>Complete Programme <span className="text-gradient">Tuition Payment</span></>
+          ) : (
+            <>Tuition Plans & <span className="text-gradient">Intranet Access</span></>
+          )}
         </h1>
 
         <p style={{
@@ -103,11 +144,15 @@ export default function SubscribePage() {
           margin: '0 auto',
           lineHeight: 1.6,
         }}>
-          Gain unrestricted access to internal CBT testing, live virtual classrooms, faculty office hours, and engineering curriculum. All subscriptions undergo rapid Administrator clearance verification.
+          {selectedCourse ? (
+            `Pay tuition to confirm your enrollment in ${selectedCourse.title}. Tuition includes full courseware, virtual classrooms, and unrestricted Campus Intranet privileges.`
+          ) : (
+            'Gain unrestricted access to internal CBT testing, live virtual classrooms, faculty office hours, and engineering curriculum.'
+          )}
         </p>
       </div>
 
-      {/* SUCCESS MODAL / OVERLAY */}
+      {/* SUCCESS CONFIRMATION MODAL / BANNER */}
       {isSuccess && (
         <div style={{
           maxWidth: '680px',
@@ -135,11 +180,20 @@ export default function SubscribePage() {
           </div>
 
           <h2 style={{ fontSize: '1.85rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
-            Payment Successfully Processed!
+            {selectedCourse ? 'Programme Enrollment Confirmed!' : 'Tuition Payment Processed!'}
           </h2>
 
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '520px', margin: '0 auto 1.5rem', lineHeight: 1.6 }}>
-            Your tuition for the <strong style={{ color: 'var(--text-primary)' }}>{selectedPlan?.name}</strong> has been logged. Your application reference has been assigned to the Registrar queue for Administrator clearance grant.
+          <p style={{ color: 'var(--text-secondary)', maxWidth: '540px', margin: '0 auto 1.5rem', lineHeight: 1.6 }}>
+            {selectedCourse ? (
+              <>
+                Your payment of <strong style={{ color: '#ffffff' }}>{formatCurrency(selectedCourse.price)}</strong> for{' '}
+                <strong style={{ color: 'var(--primary)' }}>{selectedCourse.title}</strong> has been received. Your curriculum lessons and Campus Intranet fellowship privileges are now active!
+              </>
+            ) : (
+              <>
+                Your tuition for the <strong style={{ color: 'var(--text-primary)' }}>{selectedPlan?.name}</strong> has been logged. Your application reference has been assigned to the Registrar queue.
+              </>
+            )}
           </p>
 
           <div style={{
@@ -158,22 +212,113 @@ export default function SubscribePage() {
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link href="/intranet" className="btn btn-primary btn-lg">
-              <Clock size={18} />
-              <span>Go to Campus Intranet Waiting Room</span>
-              <ArrowRight size={18} />
-            </Link>
+            {selectedCourse ? (
+              <>
+                <Link href={`/learn/${selectedCourse.id}/${firstLessonId}`} className="btn btn-primary btn-lg">
+                  <BookOpen size={18} />
+                  <span>Start Learning Programme</span>
+                  <ArrowRight size={18} />
+                </Link>
 
-            <Link href="/admin/access" className="btn btn-outline btn-lg">
-              <ShieldCheck size={18} />
-              <span>Review in Admin Clearance Desk</span>
+                <Link href="/intranet" className="btn btn-secondary btn-lg">
+                  <Clock size={18} />
+                  <span>Open Campus Intranet</span>
+                </Link>
+
+                <Link href="/dashboard" className="btn btn-outline btn-lg">
+                  <GraduationCap size={18} />
+                  <span>My Dashboard</span>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/intranet" className="btn btn-primary btn-lg">
+                  <Clock size={18} />
+                  <span>Go to Campus Intranet</span>
+                  <ArrowRight size={18} />
+                </Link>
+
+                <Link href="/courses" className="btn btn-outline btn-lg">
+                  <BookOpen size={18} />
+                  <span>Browse Programmes Catalog</span>
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* SELECTED PROGRAMME TUITION SUMMARY BANNER (IF ENROLLING SPECIFIC COURSE) */}
+      {!isSuccess && selectedCourse && (
+        <div style={{
+          maxWidth: '780px',
+          margin: '0 auto 2.5rem',
+          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%)',
+          border: '1px solid rgba(99, 102, 241, 0.35)',
+          borderRadius: '1.25rem',
+          padding: '1.75rem 2rem',
+          boxShadow: 'var(--shadow-md)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.25rem',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
+                <span className="badge badge-primary">Selected Programme</span>
+                <span className="badge badge-emerald">{selectedCourse.level || 'All Levels'}</span>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{selectedCourse.track || selectedCourse.category}</span>
+              </div>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                {selectedCourse.title}
+              </h2>
+            </div>
+
+            <div style={{ textAlign: 'right' }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block' }}>Tuition Fee</span>
+              <span style={{ fontSize: '2rem', fontWeight: 800, color: '#34d399' }}>
+                {formatCurrency(selectedCourse.price)}
+              </span>
+            </div>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+            gap: '0.75rem',
+            paddingTop: '1rem',
+            borderTop: '1px solid var(--border-subtle)',
+            fontSize: '0.82rem',
+            color: 'var(--text-secondary)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <CheckCircle2 size={16} color="var(--accent-emerald)" />
+              <span>Full Curriculum & Sandboxes</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Award size={16} color="var(--accent-amber)" />
+              <span>Verified Course Certificate</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <ShieldCheck size={16} color="var(--primary)" />
+              <span>Unlocks Campus Intranet Access</span>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.25rem' }}>
+            <Link
+              href="/subscribe"
+              onClick={() => setSelectedCourse(null)}
+              style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textDecoration: 'underline' }}
+            >
+              Or view general subscription options instead
             </Link>
           </div>
         </div>
       )}
 
-      {/* PLAN SELECTOR CARDS */}
-      {!isSuccess && (
+      {/* PLAN SELECTOR CARDS (SHOWN IF NO SPECIFIC COURSE CHOSEN) */}
+      {!isSuccess && !selectedCourse && (
         <>
           <div style={{
             display: 'grid',
@@ -260,243 +405,263 @@ export default function SubscribePage() {
               );
             })}
           </div>
+        </>
+      )}
 
-          {/* CHECKOUT PAYMENT DRAWER */}
-          <div className="glass-card" style={{
-            maxWidth: '720px',
-            margin: '0 auto',
-            padding: 'clamp(1.5rem, 3vw, 2.5rem)',
-            borderRadius: '1.5rem',
-            border: '1px solid var(--border-accent)',
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-              <div>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Selected Plan
-                </span>
-                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                  {selectedPlan?.name} — ${selectedPlan?.price}
-                </h3>
-              </div>
-
-              <div style={{ textAlign: 'left' }}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--accent-emerald)', fontWeight: 600, display: 'block' }}>
-                  256-Bit SSL Encrypted
-                </span>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                  Admin Clearance Workflow
-                </span>
-              </div>
+      {/* CHECKOUT PAYMENT DRAWER */}
+      {!isSuccess && (
+        <div className="glass-card" style={{
+          maxWidth: '720px',
+          margin: '0 auto',
+          padding: 'clamp(1.5rem, 3vw, 2.5rem)',
+          borderRadius: '1.5rem',
+          border: '1px solid var(--border-accent)',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <div>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                {selectedCourse ? 'Programme Enrollment' : 'Selected Plan'}
+              </span>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                {selectedCourse ? selectedCourse.title : selectedPlan?.name} — {formatCurrency(payableAmount)}
+              </h3>
             </div>
 
-            {/* Payment Method Tabs */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))', gap: '0.75rem', marginBottom: '2rem' }}>
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('credit_card')}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem',
-                  padding: '0.75rem',
-                  borderRadius: '0.75rem',
-                  background: paymentMethod === 'credit_card' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.03)',
-                  border: paymentMethod === 'credit_card' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
-                  color: paymentMethod === 'credit_card' ? '#a5b4fc' : 'var(--text-secondary)',
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                  fontSize: '0.85rem',
-                }}
-              >
-                <CreditCard size={16} />
-                <span>Card (Stripe)</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('bank_transfer')}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem',
-                  padding: '0.75rem',
-                  borderRadius: '0.75rem',
-                  background: paymentMethod === 'bank_transfer' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.03)',
-                  border: paymentMethod === 'bank_transfer' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
-                  color: paymentMethod === 'bank_transfer' ? '#a5b4fc' : 'var(--text-secondary)',
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                  fontSize: '0.85rem',
-                }}
-              >
-                <Building2 size={16} />
-                <span>Bank Wire</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('campus_voucher')}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem',
-                  padding: '0.75rem',
-                  borderRadius: '0.75rem',
-                  background: paymentMethod === 'campus_voucher' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.03)',
-                  border: paymentMethod === 'campus_voucher' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
-                  color: paymentMethod === 'campus_voucher' ? '#a5b4fc' : 'var(--text-secondary)',
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                  fontSize: '0.85rem',
-                }}
-              >
-                <Ticket size={16} />
-                <span>Scholar Voucher</span>
-              </button>
+            <div style={{ textAlign: 'left' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--accent-emerald)', fontWeight: 600, display: 'block' }}>
+                256-Bit SSL Encrypted
+              </span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                Instant Access Activation
+              </span>
             </div>
+          </div>
 
-            {/* Payment Fields Form */}
-            <form onSubmit={handleSubmitPayment}>
-              {paymentMethod === 'credit_card' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                  <div>
-                    <label style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
-                      Cardholder Full Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={cardHolder}
-                      onChange={(e) => setCardHolder(e.target.value)}
-                      placeholder="Alex Morgan"
-                      className="form-input"
-                    />
-                  </div>
+          {/* Payment Method Tabs */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))', gap: '0.75rem', marginBottom: '2rem' }}>
+            <button
+              type="button"
+              onClick={() => setPaymentMethod('credit_card')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                padding: '0.75rem',
+                borderRadius: '0.75rem',
+                background: paymentMethod === 'credit_card' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                border: paymentMethod === 'credit_card' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
+                color: paymentMethod === 'credit_card' ? '#a5b4fc' : 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: '0.85rem',
+              }}
+            >
+              <CreditCard size={16} />
+              <span>Card Payment</span>
+            </button>
 
-                  <div>
-                    <label style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
-                      Card Number
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={cardNumber}
-                      onChange={(e) => setCardNumber(e.target.value)}
-                      className="form-input"
-                      style={{ fontFamily: 'monospace' }}
-                    />
-                  </div>
+            <button
+              type="button"
+              onClick={() => setPaymentMethod('bank_transfer')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                padding: '0.75rem',
+                borderRadius: '0.75rem',
+                background: paymentMethod === 'bank_transfer' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                border: paymentMethod === 'bank_transfer' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
+                color: paymentMethod === 'bank_transfer' ? '#a5b4fc' : 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: '0.85rem',
+              }}
+            >
+              <Building2 size={16} />
+              <span>Bank Wire</span>
+            </button>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                    <div>
-                      <label style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
-                        Expiry (MM/YY)
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={expiry}
-                        onChange={(e) => setExpiry(e.target.value)}
-                        placeholder="08/29"
-                        className="form-input"
-                      />
-                    </div>
-                    <div>
-                      <label style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
-                        CVC Security Code
-                      </label>
-                      <input
-                        type="password"
-                        required
-                        maxLength={4}
-                        value={cvc}
-                        onChange={(e) => setCvc(e.target.value)}
-                        placeholder="•••"
-                        className="form-input"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
+            <button
+              type="button"
+              onClick={() => setPaymentMethod('campus_voucher')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                padding: '0.75rem',
+                borderRadius: '0.75rem',
+                background: paymentMethod === 'campus_voucher' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                border: paymentMethod === 'campus_voucher' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
+                color: paymentMethod === 'campus_voucher' ? '#a5b4fc' : 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: '0.85rem',
+              }}
+            >
+              <Ticket size={16} />
+              <span>Scholar Voucher</span>
+            </button>
+          </div>
 
-              {paymentMethod === 'bank_transfer' && (
-                <div style={{
-                  background: 'var(--bg-surface-elevated)',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: '0.75rem',
-                  padding: '1.25rem',
-                  marginBottom: '1rem',
-                  fontSize: '0.85rem',
-                  lineHeight: 1.6,
-                }}>
-                  <p style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>
-                    Campus Bursar Direct Routing Information:
-                  </p>
-                  <p style={{ color: 'var(--text-secondary)' }}>
-                    Bank: <strong>Silicon Valley Academic Trust</strong><br />
-                    Routing Number: <strong>021000089</strong><br />
-                    Account: <strong>94820199201 (ReactJav LMS Campus)</strong><br />
-                    Memo: <strong>{currentUser?.email || 'student-admission'}</strong>
-                  </p>
-                  <p style={{ color: '#fbbf24', fontSize: '0.78rem', marginTop: '0.5rem' }}>
-                    * Wire transfers generate a verification reference and are confirmed by Bursar during admin clearance.
-                  </p>
-                </div>
-              )}
-
-              {paymentMethod === 'campus_voucher' && (
+          {/* Payment Fields Form */}
+          <form onSubmit={handleSubmitPayment}>
+            {paymentMethod === 'credit_card' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
                 <div>
                   <label style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
-                    Department Scholarship Voucher Code
+                    Cardholder Full Name
                   </label>
                   <input
                     type="text"
                     required
-                    value={voucherCode}
-                    onChange={(e) => setVoucherCode(e.target.value)}
-                    placeholder="e.g. CS-DEPT-FELLOWSHIP-2026"
+                    value={cardHolder}
+                    onChange={(e) => setCardHolder(e.target.value)}
+                    placeholder="Alex Morgan"
                     className="form-input"
-                    style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}
                   />
-                  <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.4rem' }}>
-                    Enter scholarship code issued by faculty dean or sponsor.
-                  </p>
                 </div>
-              )}
 
-              <div style={{ marginTop: '2rem' }}>
-                <button
-                  type="submit"
-                  disabled={isProcessing}
-                  className="btn btn-primary btn-lg"
-                  style={{ width: '100%', padding: '0.9rem' }}
-                >
-                  {isProcessing ? (
-                    <>
-                      <RefreshCw className="animate-spin" size={18} />
-                      <span>Transacting with Campus Bursar...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Lock size={18} />
-                      <span>Submit Payment & Request Intranet Clearance (${selectedPlan?.price})</span>
-                    </>
-                  )}
-                </button>
-              </div>
+                <div>
+                  <label style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
+                    Card Number
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={cardNumber}
+                    onChange={(e) => setCardNumber(e.target.value)}
+                    className="form-input"
+                    style={{ fontFamily: 'monospace' }}
+                  />
+                </div>
 
-              <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                  Clearance policy: Subscription will enter <em>Pending Admin Approval</em>. Admin reviews credentials prior to granting campus access.
-                </span>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div>
+                    <label style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
+                      Expiry (MM/YY)
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={expiry}
+                      onChange={(e) => setExpiry(e.target.value)}
+                      placeholder="08/29"
+                      className="form-input"
+                    />
+                  </div>
+                  <div>
+                    <label style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
+                      CVC Security Code
+                    </label>
+                    <input
+                      type="password"
+                      required
+                      maxLength={4}
+                      value={cvc}
+                      onChange={(e) => setCvc(e.target.value)}
+                      placeholder="•••"
+                      className="form-input"
+                    />
+                  </div>
+                </div>
               </div>
-            </form>
-          </div>
-        </>
+            )}
+
+            {paymentMethod === 'bank_transfer' && (
+              <div style={{
+                background: 'var(--bg-surface-elevated)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '0.75rem',
+                padding: '1.25rem',
+                marginBottom: '1rem',
+                fontSize: '0.85rem',
+                lineHeight: 1.6,
+              }}>
+                <p style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>
+                  Campus Bursar Direct Routing Information:
+                </p>
+                <p style={{ color: 'var(--text-secondary)' }}>
+                  Bank: <strong>Silicon Valley Academic Trust</strong><br />
+                  Routing Number: <strong>021000089</strong><br />
+                  Account: <strong>94820199201 (ReactJav LMS Campus)</strong><br />
+                  Memo: <strong>{currentUser?.email || 'student-tuition'}</strong>
+                </p>
+                <p style={{ color: '#fbbf24', fontSize: '0.78rem', marginTop: '0.5rem' }}>
+                  * Wire transfers generate a verification reference and are confirmed by Bursar during admin clearance.
+                </p>
+              </div>
+            )}
+
+            {paymentMethod === 'campus_voucher' && (
+              <div>
+                <label style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.4rem' }}>
+                  Department Scholarship Voucher Code
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={voucherCode}
+                  onChange={(e) => setVoucherCode(e.target.value)}
+                  placeholder="e.g. CS-DEPT-FELLOWSHIP-2026"
+                  className="form-input"
+                  style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}
+                />
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.4rem' }}>
+                  Enter scholarship code issued by faculty dean or sponsor.
+                </p>
+              </div>
+            )}
+
+            <div style={{ marginTop: '2rem' }}>
+              <button
+                type="submit"
+                disabled={isProcessing}
+                className="btn btn-primary btn-lg"
+                style={{ width: '100%', padding: '0.9rem' }}
+              >
+                {isProcessing ? (
+                  <>
+                    <RefreshCw className="animate-spin" size={18} />
+                    <span>Processing Tuition Payment...</span>
+                  </>
+                ) : (
+                  <>
+                    <Lock size={18} />
+                    <span>
+                      {selectedCourse ? (
+                        `Pay Tuition & Unlock Programme (${formatCurrency(payableAmount)})`
+                      ) : (
+                        `Submit Payment & Request Intranet Clearance (${formatCurrency(payableAmount)})`
+                      )}
+                    </span>
+                  </>
+                )}
+              </button>
+            </div>
+
+            <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                Security Guarantee: 256-bit encrypted checkout. Instant activation of curriculum materials and campus tools.
+              </span>
+            </div>
+          </form>
+        </div>
       )}
     </div>
+  );
+}
+
+export default function SubscribePage() {
+  return (
+    <Suspense fallback={
+      <div className="container" style={{ padding: '6rem 0', textAlign: 'center' }}>
+        <p style={{ color: 'var(--text-secondary)' }}>Loading Tuition & Plans...</p>
+      </div>
+    }>
+      <SubscribeContent />
+    </Suspense>
   );
 }

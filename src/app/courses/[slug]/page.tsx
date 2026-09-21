@@ -85,10 +85,10 @@ export default function CourseDetailPage() {
 
   const handleEnroll = () => {
     if (!currentUser || currentUser.id === 'guest') {
-      router.push(`/auth?redirect=/courses/${slug}`);
+      router.push(`/auth?redirect=/subscribe?courseId=${course.id}`);
       return;
     }
-    setShowCheckout(true);
+    router.push(`/subscribe?courseId=${course.id}`);
   };
 
   const totalLessons = course.sections?.reduce(

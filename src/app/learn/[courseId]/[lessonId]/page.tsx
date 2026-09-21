@@ -167,15 +167,14 @@ export default function CoursePlayerPage() {
           </p>
 
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button
-              type="button"
-              onClick={() => setShowCheckoutModal(true)}
+            <Link
+              href={`/subscribe?courseId=${course.id}`}
               className="btn btn-primary"
               style={{ gap: '0.5rem' }}
             >
               <CreditCard size={16} />
               <span>Pay Tuition & Unlock Programme</span>
-            </button>
+            </Link>
             <Link href="/courses" className="btn btn-secondary">
               <span>View All Programmes</span>
             </Link>
