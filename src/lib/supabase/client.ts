@@ -1,4 +1,4 @@
-import { createBrowserClient } from '@supabase/ssr';
+import { createClient as createSupabaseClient, SupabaseClient } from '@supabase/supabase-js';
 import { 
   Course, 
   LessonProgress, 
@@ -34,11 +34,15 @@ import {
 import { DEFAULT_SITE_CONTENT } from './defaultSiteContent';
 import { ACADEMY_TRACKS, AcademyTrack } from '@/data/academyTracks';
 
-const rawSupabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const FALLBACK_SUPABASE_URL = 'https://jfhmqodrjnsabpyxbgnn.supabase.co';
+const FALLBACK_SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmaG1xb2Ryam5zYWJweXhiZ25uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5MDExMzQsImV4cCI6MjEwNTQ3NzEzNH0.ovZdP0xuywAWJUwg2Yx9ilRXhLwCYe8uTw4MSXaUjB0';
+
+const rawSupabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || FALLBACK_SUPABASE_URL;
 const supabaseUrl = rawSupabaseUrl
   ? rawSupabaseUrl.replace(/\/rest\/v1\/?$/, '').replace(/\/$/, '')
-  : undefined;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  : FALLBACK_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || FALLBACK_SUPABASE_ANON_KEY;
 
 export const isSupabaseConfigured = (): boolean => {
   return (
@@ -49,11 +53,20 @@ export const isSupabaseConfigured = (): boolean => {
   );
 };
 
-export const createClient = () => {
-  if (isSupabaseConfigured()) {
-    return createBrowserClient(supabaseUrl!, supabaseAnonKey!);
+let clientInstance: SupabaseClient | null = null;
+
+export const createClient = (): SupabaseClient | null => {
+  if (!isSupabaseConfigured()) return null;
+  if (!clientInstance) {
+    clientInstance = createSupabaseClient(supabaseUrl!, supabaseAnonKey!, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+      },
+    });
   }
-  return null;
+  return clientInstance;
 };
 
 // Role checking helpers

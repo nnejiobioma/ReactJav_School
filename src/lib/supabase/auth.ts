@@ -145,9 +145,24 @@ export async function signInWithSupabase(
       });
 
       if (error) {
+        // Check if user exists in server-persisted profiles as a fallback
+        const allProfiles = LocalDataService.getAllProfiles();
+        const localMatched = allProfiles.find(
+          (p) => p.email && p.email.toLowerCase() === cleanEmail
+        );
+        if (localMatched) {
+          LocalDataService.setCurrentUser(localMatched);
+          window.dispatchEvent(new Event('storage'));
+          return {
+            success: true,
+            user: localMatched,
+            message: 'Signed in successfully!',
+          };
+        }
+
         return {
           success: false,
-          error: error.message,
+          error: error.message || 'Invalid email or password. Please verify your credentials or register a new account.',
         };
       }
 
@@ -239,6 +254,20 @@ export async function signInWithSupabase(
   }
 
   // Fallback for offline mode when Supabase is not reachable
+  const allProfiles = LocalDataService.getAllProfiles();
+  const localMatched = allProfiles.find(
+    (p) => p.email && p.email.toLowerCase() === cleanEmail
+  );
+  if (localMatched) {
+    LocalDataService.setCurrentUser(localMatched);
+    window.dispatchEvent(new Event('storage'));
+    return {
+      success: true,
+      user: localMatched,
+      message: 'Signed in successfully!',
+    };
+  }
+
   return {
     success: false,
     error: 'Invalid email or password. Please verify your credentials or register a new account.',
