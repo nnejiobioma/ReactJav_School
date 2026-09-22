@@ -243,9 +243,27 @@ export class LocalDataService {
       window.dispatchEvent(new Event('storage'));
     }
 
+    // Persist to server disk for cross-device & cross-session permanence
+    this.persistToServer({ type: 'profile', data: profiles[index] });
+
     const supabase = createClient();
     if (isSupabaseConfigured() && supabase) {
-      supabase.from('profiles').update({ role: newRole }).eq('id', userId).then();
+      supabase
+        .rpc('admin_set_user_role', {
+          target_user_id: userId,
+          target_role: newRole,
+        })
+        .then(({ error }) => {
+          if (error) {
+            supabase
+              .from('profiles')
+              .update({ role: newRole })
+              .eq('id', userId)
+              .then(({ error: directErr }) => {
+                if (directErr) console.warn('[LocalDataService] Direct profile update notice:', directErr.message);
+              });
+          }
+        });
     }
 
     return {
@@ -1328,7 +1346,7 @@ export class LocalDataService {
     try {
       const res = await fetch('/api/admin/persist');
       if (!res.ok) return;
-      const { siteContent, courses, tracks } = await res.json();
+      const { siteContent, courses, tracks, profiles } = await res.json();
       if (siteContent) {
         localStorage.setItem(STORAGE_KEYS.SITE_CONTENT, JSON.stringify(siteContent));
         window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: siteContent }));
@@ -1339,6 +1357,37 @@ export class LocalDataService {
       if (tracks && Array.isArray(tracks)) {
         localStorage.setItem(STORAGE_KEYS.ACADEMY_TRACKS, JSON.stringify(tracks));
         window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: { tracks } }));
+      }
+      if (profiles && Array.isArray(profiles) && profiles.length > 0) {
+        const local = this.getAllProfiles();
+        const map = new Map<string, Profile>();
+        // Add server-persisted profiles
+        profiles.forEach((p: Profile) => map.set(p.id, p));
+        // Merge with local profiles
+        local.forEach((p: Profile) => {
+          if (!map.has(p.id)) {
+            map.set(p.id, p);
+          } else {
+            const serverP = map.get(p.id)!;
+            // Server role takes precedence if defined and not default student
+            if (serverP.role && serverP.role !== 'student') {
+              p.role = serverP.role;
+            }
+            map.set(p.id, { ...p, ...serverP });
+          }
+        });
+        const merged = Array.from(map.values());
+        localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(merged));
+
+        // If current active user's role was changed on another device or server, sync it now
+        const currentUser = this.getCurrentUser();
+        if (currentUser && currentUser.id !== 'guest') {
+          const matched = merged.find((p) => p.id === currentUser.id || p.email === currentUser.email);
+          if (matched && matched.role !== currentUser.role) {
+            this.setCurrentUser({ ...currentUser, role: matched.role });
+            window.dispatchEvent(new Event('storage'));
+          }
+        }
       }
     } catch (err) {
       console.warn('[LocalDataService] syncFromServer fallback:', err);

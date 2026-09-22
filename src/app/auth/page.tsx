@@ -109,6 +109,8 @@ function AuthContent() {
     }
 
     try {
+      const cleanEmail = email.trim().toLowerCase();
+
       if (activeTab === 'signup') {
         if (!fullName.trim()) {
           setErrorMessage('Please enter your full name.');
@@ -116,7 +118,7 @@ function AuthContent() {
           return;
         }
 
-        const res = await signUpWithSupabase(email.trim(), password, fullName.trim());
+        const res = await signUpWithSupabase(cleanEmail, password, fullName.trim());
         if (!res.success) {
           setErrorMessage(res.error || 'Registration failed. Please try again.');
           setIsSubmitting(false);
@@ -131,7 +133,7 @@ function AuthContent() {
           router.push('/onboarding');
         }, 800);
       } else {
-        const res = await signInWithSupabase(email.trim(), password);
+        const res = await signInWithSupabase(cleanEmail, password);
         if (!res.success) {
           setErrorMessage(res.error || 'Invalid credentials or user not found.');
           setIsSubmitting(false);
@@ -178,13 +180,15 @@ function AuthContent() {
 
     setIsSubmitting(true);
     try {
-      const res = await sendPasswordResetEmail(email.trim());
-      if (res.success) {
-        setResetSuccess(true);
-        setToastMessage(res.message || 'Password reset link sent to your email!');
-      } else {
-        setErrorMessage(res.error || 'Failed to dispatch password reset email.');
+      const cleanEmail = email.trim().toLowerCase();
+      const res = await sendPasswordResetEmail(cleanEmail);
+      if (!res.success) {
+        setErrorMessage(res.error || 'Unable to send password reset email.');
+        setIsSubmitting(false);
+        return;
       }
+      setResetSuccess(true);
+      setToastMessage(res.message || 'Password reset link sent to your email!');
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Password reset failed';
       setErrorMessage(msg);
@@ -444,6 +448,9 @@ function AuthContent() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="form-input"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      spellCheck={false}
                       required
                     />
                   </div>
@@ -640,6 +647,9 @@ function AuthContent() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="form-input"
+                autoCapitalize="none"
+                autoCorrect="off"
+                spellCheck={false}
                 required
               />
             </div>

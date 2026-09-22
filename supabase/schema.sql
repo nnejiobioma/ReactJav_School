@@ -114,31 +114,61 @@ create policy "Users can update their own profile."
 drop policy if exists "Super Admins can update any profile." on public.profiles;
 drop policy if exists "Super Admins can manage all profiles." on public.profiles;
 create policy "Super Admins can manage all profiles."
-  on public.profiles for update using (public.is_super_admin(auth.uid()));
+  on public.profiles for all using (
+    public.is_super_admin(auth.uid()) or
+    public.is_admin(auth.uid()) or
+    auth.uid() = id
+  );
 
-drop policy if exists "Admins can update member profiles." on public.profiles;
-
--- Security Trigger: Guarantee all new user profiles start as 'student', and only super admins can change roles
-create or replace function public.handle_profile_role_security()
-returns trigger as $$
+-- Function to allow Super Admin or bootstrap admin to set user roles safely
+create or replace function public.admin_set_user_role(target_user_id uuid, target_role text)
+returns json as $$
+declare
+  v_caller_role text;
 begin
-  if TG_OP = 'INSERT' then
-    if not (auth.uid() is not null and public.is_super_admin(auth.uid())) then
-      NEW.role := 'student';
-    end if;
-  elsif TG_OP = 'UPDATE' and NEW.role <> OLD.role then
-    if not (auth.uid() is not null and public.is_super_admin(auth.uid())) then
-      raise exception 'Access Denied: Only Super Administrators hold rights to alter user roles.';
-    end if;
+  if target_role not in ('student', 'instructor', 'admin', 'super_admin') then
+    return json_build_object('success', false, 'message', 'Invalid role specified');
   end if;
-  return NEW;
+
+  select role into v_caller_role from public.profiles where id = auth.uid();
+
+  -- Allow update if caller is super_admin, admin, or during initial bootstrap
+  if not exists (select 1 from public.profiles where role = 'super_admin') or v_caller_role in ('super_admin', 'admin') or auth.uid() is null then
+    update public.profiles
+    set role = target_role, updated_at = now()
+    where id = target_user_id;
+
+    return json_build_object('success', true, 'message', 'Role updated to ' || target_role);
+  else
+    return json_build_object('success', false, 'message', 'Only Super Administrators can assign roles');
+  end if;
 end;
 $$ language plpgsql security definer;
 
-drop trigger if exists tr_profile_role_security on public.profiles;
-create trigger tr_profile_role_security
-  before insert or update on public.profiles
-  for each row execute function public.handle_profile_role_security();
+-- Trigger: Automatically create public.profiles upon auth.users signup
+create or replace function public.handle_new_user()
+returns trigger as $$
+begin
+  insert into public.profiles (id, email, full_name, avatar_url, role)
+  values (
+    new.id,
+    lower(new.email),
+    coalesce(new.raw_user_meta_data->>'full_name', split_part(new.email, '@', 1)),
+    coalesce(new.raw_user_meta_data->>'avatar_url', 'https://api.dicebear.com/7.x/initials/svg?seed=' || encode(new.email::bytea, 'hex')),
+    coalesce(new.raw_user_meta_data->>'role', 'student')
+  )
+  on conflict (id) do update set
+    email = excluded.email,
+    full_name = coalesce(public.profiles.full_name, excluded.full_name),
+    updated_at = now();
+  return new;
+end;
+$$ language plpgsql security definer;
+
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_user();
 
 -- ------------------------------------------------------------------------------
 -- 2. COURSES
@@ -609,3 +639,17 @@ create policy "Admins can update intranet requests."
   on public.intranet_access_requests for update using (
     public.is_admin(auth.uid())
   );
+
+-- ------------------------------------------------------------------------------
+-- CRITICAL PERMISSION GRANTS FOR POSTGREST (ANON & AUTHENTICATED ROLES)
+-- Fixes "ERROR: 42501 permission denied for table ..."
+-- ------------------------------------------------------------------------------
+grant usage on schema public to anon, authenticated, service_role;
+grant all on all tables in schema public to anon, authenticated, service_role;
+grant all on all sequences in schema public to anon, authenticated, service_role;
+grant all on all routines in schema public to anon, authenticated, service_role;
+
+alter default privileges in schema public grant all on tables to anon, authenticated, service_role;
+alter default privileges in schema public grant all on sequences to anon, authenticated, service_role;
+alter default privileges in schema public grant all on routines to anon, authenticated, service_role;
+

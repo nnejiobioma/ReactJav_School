@@ -19,15 +19,16 @@ export async function signUpWithSupabase(
 ): Promise<AuthResponse> {
   const supabase = createClient();
   const assignedRole: UserRole = 'student';
+  const cleanEmail = email.trim().toLowerCase();
 
   if (isSupabaseConfigured() && supabase) {
     try {
       const { data, error } = await supabase.auth.signUp({
-        email,
+        email: cleanEmail,
         password,
         options: {
           data: {
-            full_name: fullName,
+            full_name: fullName.trim(),
             role: assignedRole,
           },
         },
@@ -47,9 +48,9 @@ export async function signUpWithSupabase(
       if (data.user) {
         const newProfile: Profile = {
           id: data.user.id,
-          email: data.user.email || email,
-          full_name: fullName,
-          avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`,
+          email: data.user.email?.toLowerCase() || cleanEmail,
+          full_name: fullName.trim(),
+          avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName.trim())}`,
           role: assignedRole,
           created_at: new Date().toISOString(),
           subscription_status: 'none',
@@ -67,6 +68,17 @@ export async function signUpWithSupabase(
           });
         } catch {
           // Table might not be migrated yet; local state handles execution
+        }
+
+        // Persist to server disk for cross-device access
+        try {
+          await fetch('/api/admin/persist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: 'profile', data: newProfile }),
+          });
+        } catch (err) {
+          console.warn('Server persist profile warning:', err);
         }
 
         LocalDataService.setCurrentUser(newProfile);
@@ -89,9 +101,9 @@ export async function signUpWithSupabase(
   // Fallback local persistence
   const fallbackProfile: Profile = {
     id: `usr_${Date.now()}`,
-    email,
-    full_name: fullName,
-    avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`,
+    email: cleanEmail,
+    full_name: fullName.trim(),
+    avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName.trim())}`,
     role: assignedRole,
     created_at: new Date().toISOString(),
     subscription_status: 'none',
@@ -116,11 +128,19 @@ export async function signInWithSupabase(
   password: string
 ): Promise<AuthResponse> {
   const supabase = createClient();
+  const cleanEmail = email.trim().toLowerCase();
+
+  // Sync server persisted profiles first so latest assigned roles are known across all devices
+  try {
+    await LocalDataService.syncFromServer();
+  } catch {
+    // offline fallback
+  }
 
   if (isSupabaseConfigured() && supabase) {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email,
+        email: cleanEmail,
         password,
       });
 
@@ -132,10 +152,16 @@ export async function signInWithSupabase(
       }
 
       if (data.user) {
-        // Fetch or build profile
-        let userRole: UserRole = (data.user.user_metadata?.role as UserRole) || 'student';
-        let fullName = data.user.user_metadata?.full_name || email.split('@')[0];
-        let avatarUrl = data.user.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`;
+        // Fetch or build profile, giving precedence to any assigned role
+        const allProfiles = LocalDataService.getAllProfiles();
+        const existingProfile = allProfiles.find(
+          (p) => p.id === data.user.id || (p.email && p.email.toLowerCase() === cleanEmail)
+        );
+
+        let userRole: UserRole = existingProfile?.role || (data.user.user_metadata?.role as UserRole) || 'student';
+        let fullName = existingProfile?.full_name || data.user.user_metadata?.full_name || cleanEmail.split('@')[0];
+        let avatarUrl = existingProfile?.avatar_url || data.user.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`;
+        let registrationCompleted = existingProfile?.registration_completed || false;
 
         try {
           const { data: profileRow } = await supabase
@@ -145,24 +171,57 @@ export async function signInWithSupabase(
             .single();
 
           if (profileRow) {
-            userRole = (profileRow.role as UserRole) || userRole;
+            // If Supabase profile has a role, prefer it; otherwise keep existing elevated role
+            if (profileRow.role && profileRow.role !== 'student') {
+              userRole = profileRow.role as UserRole;
+            } else if (existingProfile?.role && existingProfile.role !== 'student') {
+              userRole = existingProfile.role;
+              // Sync the assigned role back to Supabase profiles
+              supabase.from('profiles').update({ role: userRole }).eq('id', data.user.id).then();
+            } else {
+              userRole = (profileRow.role as UserRole) || userRole;
+            }
+
             fullName = profileRow.full_name || fullName;
             avatarUrl = profileRow.avatar_url || avatarUrl;
+            if (profileRow.registration_completed !== undefined) {
+              registrationCompleted = profileRow.registration_completed;
+            }
+          } else {
+            // Table row missing: auto-create with current known role
+            await supabase.from('profiles').upsert({
+              id: data.user.id,
+              email: cleanEmail,
+              full_name: fullName,
+              role: userRole,
+              avatar_url: avatarUrl,
+              registration_completed: registrationCompleted,
+            });
           }
-        } catch {
-          // Ignore profile table query error
+        } catch (err) {
+          console.warn('Profile table check error:', err);
         }
 
         const profile: Profile = {
           id: data.user.id,
-          email: data.user.email || email,
+          email: data.user.email?.toLowerCase() || cleanEmail,
           full_name: fullName,
           avatar_url: avatarUrl,
           role: userRole,
           created_at: data.user.created_at || new Date().toISOString(),
-          subscription_status: userRole === 'student' ? 'active' : 'active',
+          subscription_status: 'active',
           admin_granted: true,
+          registration_completed: registrationCompleted,
         };
+
+        // Persist profile to server disk
+        try {
+          fetch('/api/admin/persist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: 'profile', data: profile }),
+          }).catch(() => {});
+        } catch {}
 
         LocalDataService.setCurrentUser(profile);
         window.dispatchEvent(new Event('storage'));
@@ -220,19 +279,51 @@ export async function syncSupabaseSession(): Promise<Profile | null> {
 
     const { user } = session;
     const existing = LocalDataService.getCurrentUser();
-    if (existing && existing.id === user.id) {
+    if (existing && existing.id === user.id && existing.role && existing.role !== 'student') {
       return existing;
     }
 
+    // Check profiles from server/local cache
+    const allProfiles = LocalDataService.getAllProfiles();
+    const cachedProfile = allProfiles.find(
+      (p) => p.id === user.id || (p.email && p.email.toLowerCase() === user.email?.toLowerCase())
+    );
+    let userRole: UserRole = cachedProfile?.role || (user.user_metadata?.role as UserRole) || 'student';
+    let fullName = cachedProfile?.full_name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'User';
+    let avatarUrl = cachedProfile?.avatar_url || user.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user.email || 'U')}`;
+    let registrationCompleted = cachedProfile?.registration_completed || false;
+
+    // Check Supabase profiles table
+    try {
+      const { data: profileRow } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+      if (profileRow) {
+        if (profileRow.role && profileRow.role !== 'student') {
+          userRole = profileRow.role as UserRole;
+        } else if (cachedProfile?.role && cachedProfile.role !== 'student') {
+          userRole = cachedProfile.role;
+        }
+        fullName = profileRow.full_name || fullName;
+        avatarUrl = profileRow.avatar_url || avatarUrl;
+        if (profileRow.registration_completed !== undefined) {
+          registrationCompleted = profileRow.registration_completed;
+        }
+      }
+    } catch {}
+
     const profile: Profile = {
       id: user.id,
-      email: user.email || '',
-      full_name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
-      avatar_url: user.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user.email || 'U')}`,
-      role: (user.user_metadata?.role as UserRole) || 'student',
+      email: user.email?.toLowerCase() || '',
+      full_name: fullName,
+      avatar_url: avatarUrl,
+      role: userRole,
       created_at: user.created_at || new Date().toISOString(),
       subscription_status: 'active',
       admin_granted: true,
+      registration_completed: registrationCompleted,
     };
 
     LocalDataService.setCurrentUser(profile);
@@ -251,11 +342,12 @@ export async function sendPasswordResetEmail(
   redirectTo?: string
 ): Promise<AuthResponse> {
   const supabase = createClient();
+  const cleanEmail = email.trim().toLowerCase();
 
   if (isSupabaseConfigured() && supabase) {
     try {
       const targetRedirect = redirectTo || (typeof window !== 'undefined' ? `${window.location.origin}/auth?mode=reset` : undefined);
-      const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      const { error } = await supabase.auth.resetPasswordForEmail(cleanEmail, {
         redirectTo: targetRedirect,
       });
 

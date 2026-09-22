@@ -4,13 +4,14 @@ import path from 'path';
 import { DEFAULT_SITE_CONTENT } from '@/lib/supabase/defaultSiteContent';
 import { INITIAL_COURSES } from '@/lib/supabase/mockData';
 import { ACADEMY_TRACKS } from '@/data/academyTracks';
-import { Course } from '@/types';
+import { Course, Profile } from '@/types';
 import { AcademyTrack } from '@/data/academyTracks';
 
 const DATA_DIR = path.join(process.cwd(), 'src', 'data');
 const SITE_CONTENT_FILE = path.join(DATA_DIR, 'persistedSiteContent.json');
 const COURSES_FILE = path.join(DATA_DIR, 'persistedCourses.json');
 const TRACKS_FILE = path.join(DATA_DIR, 'persistedAcademyTracks.json');
+const PROFILES_FILE = path.join(DATA_DIR, 'persistedProfiles.json');
 
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) {
@@ -40,11 +41,13 @@ export async function GET() {
     const siteContent = readJsonFile(SITE_CONTENT_FILE, DEFAULT_SITE_CONTENT);
     const courses = readJsonFile(COURSES_FILE, INITIAL_COURSES);
     const tracks = readJsonFile(TRACKS_FILE, ACADEMY_TRACKS);
+    const profiles = readJsonFile<Profile[]>(PROFILES_FILE, []);
 
     return NextResponse.json({
       siteContent,
       courses,
       tracks,
+      profiles,
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -61,6 +64,25 @@ export async function POST(req: NextRequest) {
     if (type === 'siteContent') {
       writeJsonFile(SITE_CONTENT_FILE, data);
       return NextResponse.json({ success: true, type: 'siteContent' });
+    }
+
+    if (type === 'profiles') {
+      writeJsonFile(PROFILES_FILE, data);
+      return NextResponse.json({ success: true, type: 'profiles' });
+    }
+
+    if (type === 'profile') {
+      const currentProfiles = readJsonFile<Profile[]>(PROFILES_FILE, []);
+      const index = currentProfiles.findIndex(
+        (p) => p.id === data.id || (p.email && data.email && p.email.toLowerCase() === data.email.toLowerCase())
+      );
+      if (index >= 0) {
+        currentProfiles[index] = { ...currentProfiles[index], ...data };
+      } else {
+        currentProfiles.push(data);
+      }
+      writeJsonFile(PROFILES_FILE, currentProfiles);
+      return NextResponse.json({ success: true, type: 'profile', profileId: data.id });
     }
 
     if (type === 'courses') {
