@@ -49,6 +49,11 @@ function SubscribeContent() {
 
   useEffect(() => {
     const user = LocalDataService.getCurrentUser();
+    if (!user || user.id === 'guest') {
+      const returnUrl = courseId ? `/subscribe?courseId=${courseId}` : '/subscribe';
+      router.push(`/auth?mode=signup${courseId ? `&courseId=${courseId}` : ''}&redirect=${encodeURIComponent(returnUrl)}`);
+      return;
+    }
     setCurrentUser(user);
     if (user && user.full_name) {
       setCardHolder(user.full_name);
@@ -61,7 +66,7 @@ function SubscribeContent() {
         setSelectedCourse(course);
       }
     }
-  }, [courseId]);
+  }, [courseId, router]);
 
   const selectedPlan = plans.find((p) => p.id === selectedPlanId) || plans[1];
   const payableAmount = selectedCourse ? selectedCourse.price : (selectedPlan?.price || 99);
@@ -101,6 +106,22 @@ function SubscribeContent() {
       setIsSuccess(true);
     }, 900);
   };
+
+  if (!currentUser || currentUser.id === 'guest') {
+    return (
+      <div className="container" style={{ padding: '6rem 1.5rem', textAlign: 'center', maxWidth: '520px' }}>
+        <div className="glass-card" style={{ padding: '3.5rem 2rem' }}>
+          <RefreshCw className="animate-spin" size={36} style={{ color: 'var(--primary)', margin: '0 auto 1.5rem' }} />
+          <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.65rem' }}>
+            Account Required for Enrollment
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.5, margin: 0 }}>
+            Redirecting to student authentication. Please create an account or sign in to continue with course enrollment...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container" style={{ padding: '3.5rem 1rem 6rem' }}>

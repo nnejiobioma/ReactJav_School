@@ -21,7 +21,7 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
   const handleEnrollClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!currentUserId || currentUserId === 'guest') {
-      window.location.href = `/auth?redirect=/courses/${course.slug}`;
+      window.location.href = `/auth?mode=signup&courseId=${course.id}&redirect=${encodeURIComponent(`/subscribe?courseId=${course.id}`)}`;
       return;
     }
     setShowCheckout(true);
@@ -358,7 +358,11 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
 
           {!isEnrolled ? (
             <Link
-              href={`/subscribe?courseId=${course.id}`}
+              href={
+                !currentUserId || currentUserId === 'guest'
+                  ? `/auth?mode=signup&courseId=${course.id}&redirect=${encodeURIComponent(`/subscribe?courseId=${course.id}`)}`
+                  : `/subscribe?courseId=${course.id}`
+              }
               className="btn btn-primary btn-sm"
               style={{
                 flex: 1,

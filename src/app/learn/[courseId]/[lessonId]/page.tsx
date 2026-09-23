@@ -168,7 +168,11 @@ export default function CoursePlayerPage() {
 
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link
-              href={`/subscribe?courseId=${course.id}`}
+              href={
+                !currentUser || currentUser.id === 'guest'
+                  ? `/auth?mode=signup&courseId=${course.id}&redirect=${encodeURIComponent(`/subscribe?courseId=${course.id}`)}`
+                  : `/subscribe?courseId=${course.id}`
+              }
               className="btn btn-primary"
               style={{ gap: '0.5rem' }}
             >

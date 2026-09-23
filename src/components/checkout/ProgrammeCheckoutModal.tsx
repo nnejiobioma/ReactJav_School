@@ -66,7 +66,7 @@ export default function ProgrammeCheckoutModal({
   const handleCompletePayment = async () => {
     if (!currentUser || currentUser.id === 'guest') {
       onClose();
-      router.push(`/auth?redirect=/courses/${course.slug}`);
+      router.push(`/auth?mode=signup&courseId=${course.id}&redirect=${encodeURIComponent(`/subscribe?courseId=${course.id}`)}`);
       return;
     }
 

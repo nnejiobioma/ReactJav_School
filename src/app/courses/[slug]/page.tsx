@@ -85,7 +85,7 @@ export default function CourseDetailPage() {
 
   const handleEnroll = () => {
     if (!currentUser || currentUser.id === 'guest') {
-      router.push(`/auth?redirect=/subscribe?courseId=${course.id}`);
+      router.push(`/auth?mode=signup&courseId=${course.id}&redirect=${encodeURIComponent(`/subscribe?courseId=${course.id}`)}`);
       return;
     }
     router.push(`/subscribe?courseId=${course.id}`);

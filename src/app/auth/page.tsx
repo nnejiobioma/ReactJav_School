@@ -17,7 +17,9 @@ import {
   User,
   KeyRound,
   ArrowLeft,
-  CheckCircle2
+  CheckCircle2,
+  Sparkles,
+  GraduationCap
 } from 'lucide-react';
 import { LocalDataService, createClient } from '@/lib/supabase/client';
 import { 
@@ -34,9 +36,21 @@ function AuthContent() {
   const searchParams = useSearchParams();
   const modeParam = searchParams.get('mode') || searchParams.get('tab');
   const redirectUrl = searchParams.get('redirect') || searchParams.get('callbackUrl');
+  const courseIdParam = searchParams.get('courseId') || searchParams.get('course');
+
+  // Extract selected course if user came from a course card / enroll action
+  let targetCourseId = courseIdParam;
+  if (!targetCourseId && redirectUrl) {
+    const match = redirectUrl.match(/[?&]courseId=([^&]+)/);
+    if (match) {
+      targetCourseId = decodeURIComponent(match[1]);
+    }
+  }
+  const selectedCourse = targetCourseId ? LocalDataService.getCourseById(targetCourseId) : null;
+  const isEnrolling = !!selectedCourse || !!courseIdParam || (redirectUrl?.includes('subscribe') ?? false);
 
   const [activeTab, setActiveTab] = useState<'signin' | 'signup' | 'forgot' | 'reset'>(
-    modeParam === 'signup' 
+    modeParam === 'signup' || (isEnrolling && modeParam !== 'signin')
       ? 'signup' 
       : modeParam === 'reset' 
         ? 'reset' 
@@ -71,6 +85,8 @@ function AuthContent() {
       const hash = window.location.hash;
       if (hash.includes('type=recovery') || modeParam === 'reset') {
         setActiveTab('reset');
+      } else if (modeParam === 'signup' || (isEnrolling && modeParam !== 'signin')) {
+        setActiveTab('signup');
       }
     }
 
@@ -88,7 +104,7 @@ function AuthContent() {
     }
 
     return () => window.removeEventListener('storage', handleStorage);
-  }, [modeParam]);
+  }, [modeParam, isEnrolling]);
 
   const handleSignOut = async () => {
     await signOutUser();
@@ -130,7 +146,11 @@ function AuthContent() {
 
         setTimeout(() => {
           // New student signups always proceed to complete the student registration form
-          router.push('/onboarding');
+          if (redirectUrl) {
+            router.push(`/onboarding?redirect=${encodeURIComponent(redirectUrl)}`);
+          } else {
+            router.push('/onboarding');
+          }
         }, 800);
       } else {
         const res = await signInWithSupabase(cleanEmail, password);
@@ -151,7 +171,11 @@ function AuthContent() {
           } else {
             // Student: Check if registration form details have been filled
             if (!res.user?.registration_completed) {
-              router.push('/onboarding');
+              if (redirectUrl) {
+                router.push(`/onboarding?redirect=${encodeURIComponent(redirectUrl)}`);
+              } else {
+                router.push('/onboarding');
+              }
             } else if (redirectUrl) {
               router.push(redirectUrl);
             } else {
@@ -246,6 +270,86 @@ function AuthContent() {
           Sign in or create an account to access campus courses and resources.
         </p>
       </div>
+
+      {/* Course Enrollment Notification Banner */}
+      {isEnrolling && (
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.16) 0%, rgba(56, 189, 248, 0.12) 100%)',
+          border: '1px solid rgba(99, 102, 241, 0.45)',
+          borderRadius: '1rem',
+          padding: '1.25rem',
+          marginBottom: '2rem',
+          display: 'flex',
+          gap: '1rem',
+          alignItems: 'center',
+          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.25)',
+        }}>
+          {selectedCourse?.thumbnail_url ? (
+            <img
+              src={selectedCourse.thumbnail_url}
+              alt={selectedCourse.title}
+              style={{
+                width: '68px',
+                height: '68px',
+                borderRadius: '0.65rem',
+                objectFit: 'cover',
+                flexShrink: 0,
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+              }}
+            />
+          ) : (
+            <div style={{
+              width: '56px',
+              height: '56px',
+              borderRadius: '0.75rem',
+              background: 'rgba(99, 102, 241, 0.25)',
+              border: '1px solid rgba(99, 102, 241, 0.4)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              color: '#818cf8',
+            }}>
+              <GraduationCap size={28} />
+            </div>
+          )}
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{
+              fontSize: '0.72rem',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              color: '#38bdf8',
+              marginBottom: '0.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+            }}>
+              <Sparkles size={13} />
+              <span>{selectedCourse?.track || 'Course Selection Action'}</span>
+            </div>
+            <h3 style={{
+              fontSize: '1.05rem',
+              fontWeight: 800,
+              color: '#ffffff',
+              margin: '0 0 0.35rem',
+              lineHeight: 1.3,
+            }}>
+              {selectedCourse ? `Create Account to Enroll: ${selectedCourse.title}` : 'Account Required for Course Enrollment'}
+            </h3>
+            <p style={{
+              fontSize: '0.84rem',
+              color: 'var(--text-secondary)',
+              margin: 0,
+              lineHeight: 1.45,
+            }}>
+              {activeTab === 'signup'
+                ? 'Please create your student account to register for this programme, proceed to tuition payment, and unlock your curriculum access.'
+                : 'Already have an active account? Sign in below to continue with your course enrollment and tuition.'}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* If already logged in, show Current Session Card with Sign Out & Change Password option */}
       {currentUser && (
@@ -720,7 +824,15 @@ function AuthContent() {
                 </>
               ) : (
                 <>
-                  <span>{activeTab === 'signin' ? 'Sign In to ReactJav' : 'Create Account'}</span>
+                  <span>
+                    {isEnrolling
+                      ? activeTab === 'signup'
+                        ? 'Create Account & Continue to Enrollment'
+                        : 'Sign In & Continue to Enrollment'
+                      : activeTab === 'signin'
+                        ? 'Sign In to ReactJav'
+                        : 'Create Account'}
+                  </span>
                   <ArrowRight size={16} />
                 </>
               )}

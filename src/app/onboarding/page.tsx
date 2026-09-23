@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { 
   GraduationCap, 
@@ -23,8 +23,11 @@ import {
 import { Profile } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 
-export default function StudentOnboardingPage() {
+function OnboardingContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get('redirect') || searchParams.get('callbackUrl');
+
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,7 +48,10 @@ export default function StudentOnboardingPage() {
   useEffect(() => {
     const user = LocalDataService.getCurrentUser();
     if (!user || user.id === 'guest') {
-      router.push('/auth?redirect=/onboarding');
+      const authRedirect = redirectUrl 
+        ? `/auth?mode=signup&redirect=${encodeURIComponent(redirectUrl)}`
+        : '/auth?mode=signup&redirect=/onboarding';
+      router.push(authRedirect);
       return;
     }
     setCurrentUser(user);
@@ -90,8 +96,12 @@ export default function StudentOnboardingPage() {
       if (res.success) {
         setSuccess(true);
         setTimeout(() => {
-          // Direct to programmes page to choose and enroll
-          router.push('/courses');
+          // Direct to redirect url if specified, else programmes catalog
+          if (redirectUrl) {
+            router.push(redirectUrl);
+          } else {
+            router.push('/courses');
+          }
         }, 1200);
       } else {
         setErrorMessage('Failed to save registration profile. Please try again.');
@@ -487,5 +497,17 @@ export default function StudentOnboardingPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function StudentOnboardingPage() {
+  return (
+    <Suspense fallback={
+      <div className="container" style={{ padding: '6rem 0', textAlign: 'center' }}>
+        <RefreshCw className="animate-spin" size={28} style={{ margin: '0 auto', color: 'var(--primary)' }} />
+      </div>
+    }>
+      <OnboardingContent />
+    </Suspense>
   );
 }
