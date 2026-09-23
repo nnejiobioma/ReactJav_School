@@ -423,6 +423,70 @@ export class LocalDataService {
     return { success: true, profile: updatedProfile };
   }
 
+  static updateTutoringRegistrationDetails(
+    userId: string,
+    details: {
+      full_name: string;
+      age: number;
+      age_tier: string;
+      tutoring_objective: string;
+      track_id: string;
+      track_name: string;
+      frequency: string;
+      phone: string;
+      parent_name?: string;
+      parent_email?: string;
+      parent_phone?: string;
+      parent_relationship?: string;
+      parental_consent?: boolean;
+      notes?: string;
+    }
+  ): { success: boolean; profile: Profile } {
+    const profiles = this.getAllProfiles();
+    const index = profiles.findIndex((p) => p.id === userId);
+    const existing = index !== -1 ? profiles[index] : this.getCurrentUser();
+
+    const updatedProfile: Profile = {
+      ...(existing || {
+        id: userId,
+        email: '',
+        full_name: details.full_name || 'Tutoring Scholar',
+        avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(details.full_name || 'Scholar')}`,
+        role: 'student',
+        created_at: new Date().toISOString(),
+      }),
+      full_name: details.full_name || existing?.full_name || 'Tutoring Scholar',
+      phone: details.phone,
+      tutoring_age: details.age,
+      tutoring_age_tier: details.age_tier,
+      tutoring_objective: details.tutoring_objective,
+      tutoring_track_id: details.track_id,
+      tutoring_track_name: details.track_name,
+      tutoring_frequency: details.frequency,
+      tutoring_parent_name: details.parent_name,
+      tutoring_parent_email: details.parent_email,
+      tutoring_parent_phone: details.parent_phone,
+      tutoring_parent_relationship: details.parent_relationship,
+      tutoring_parental_consent: details.parental_consent,
+      tutoring_parental_consent_at: details.parental_consent ? new Date().toISOString() : undefined,
+      registration_completed: true,
+    };
+
+    if (index !== -1) {
+      profiles[index] = updatedProfile;
+    } else {
+      profiles.unshift(updatedProfile);
+    }
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
+      this.setCurrentUser(updatedProfile);
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    return { success: true, profile: updatedProfile };
+  }
+
   static processProgrammePayment(
     userId: string,
     courseId: string,
@@ -1044,6 +1108,14 @@ export class LocalDataService {
       learnerName?: string;
       frequency?: string;
       notes?: string;
+      age?: number;
+      ageTier?: string;
+      objective?: string;
+      parentName?: string;
+      parentEmail?: string;
+      parentPhone?: string;
+      parentRelationship?: string;
+      parentalConsent?: boolean;
     }
   ): { success: boolean; message: string; user: Profile } {
     const currentUser = this.getCurrentUser();
@@ -1064,6 +1136,16 @@ export class LocalDataService {
       tutoring_track_name: trackName,
       tutoring_enrolled_at: new Date().toISOString(),
       tutoring_frequency: details?.frequency || '2x per week (Recommended)',
+      tutoring_age: details?.age,
+      tutoring_age_tier: details?.ageTier,
+      tutoring_objective: details?.objective,
+      tutoring_parent_name: details?.parentName,
+      tutoring_parent_email: details?.parentEmail,
+      tutoring_parent_phone: details?.parentPhone,
+      tutoring_parent_relationship: details?.parentRelationship,
+      tutoring_parental_consent: details?.parentalConsent,
+      tutoring_parental_consent_at: details?.parentalConsent ? new Date().toISOString() : undefined,
+      registration_completed: true,
       subscription_status: 'active',
       subscription_plan: 'annual',
       admin_granted: true,

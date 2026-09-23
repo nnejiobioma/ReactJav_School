@@ -35,6 +35,10 @@ function SubscribeContent() {
   const frequencyParam = searchParams.get('frequency') || '';
   const contactParam = searchParams.get('contact') || '';
   const parentNameParam = searchParams.get('parentName') || '';
+  const ageParam = searchParams.get('age') || '';
+  const ageTierParam = searchParams.get('ageTier') || '';
+  const objectiveParam = searchParams.get('objective') || '';
+  const parentConsentParam = searchParams.get('parentConsent') === 'true';
 
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
@@ -51,6 +55,10 @@ function SubscribeContent() {
     frequency: frequencyParam,
     contact: contactParam,
     parentName: parentNameParam,
+    age: ageParam ? Number(ageParam) : undefined,
+    ageTier: ageTierParam,
+    objective: objectiveParam,
+    parentConsent: parentConsentParam,
   });
 
   // Card Form State
@@ -136,6 +144,11 @@ function SubscribeContent() {
             learnerName: tutoringDetails.learnerName || currentUser?.full_name || 'Tutoring Scholar',
             frequency: tutoringDetails.frequency,
             notes: '',
+            age: tutoringDetails.age,
+            ageTier: tutoringDetails.ageTier,
+            objective: tutoringDetails.objective,
+            parentName: tutoringDetails.parentName,
+            parentalConsent: tutoringDetails.parentConsent,
           }
         );
       } else if (selectedCourse) {
@@ -412,9 +425,27 @@ function SubscribeContent() {
                 <span>{selectedTutoringTrack.name}</span>
               </h2>
               {tutoringDetails.learnerName && (
-                <p style={{ margin: '0.4rem 0 0', fontSize: '0.85rem', color: '#93c5fd' }}>
-                  Enrolling Scholar: <strong>{tutoringDetails.learnerName}</strong> • Frequency: <strong>{tutoringDetails.frequency || '2x per week'}</strong>
-                </p>
+                <div style={{ margin: '0.4rem 0 0', fontSize: '0.85rem', color: '#93c5fd', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                  <div>
+                    Enrolling Scholar: <strong style={{ color: '#ffffff' }}>{tutoringDetails.learnerName}</strong>
+                    {tutoringDetails.age && (
+                      <span style={{ color: 'var(--text-muted)' }}> (Age {tutoringDetails.age} • {tutoringDetails.ageTier || selectedTutoringTrack.tier})</span>
+                    )}
+                    {' • '}
+                    Frequency: <strong style={{ color: '#ffffff' }}>{tutoringDetails.frequency || '2x per week'}</strong>
+                  </div>
+                  {tutoringDetails.objective && (
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                      Objective: <span style={{ color: '#c7d2fe' }}>{tutoringDetails.objective}</span>
+                    </div>
+                  )}
+                  {tutoringDetails.parentConsent && tutoringDetails.parentName && (
+                    <div style={{ fontSize: '0.78rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
+                      <ShieldCheck size={14} />
+                      <span>Parental Consent Approved & On File: {tutoringDetails.parentName}</span>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
 

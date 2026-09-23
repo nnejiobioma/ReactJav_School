@@ -26,6 +26,15 @@ export interface Profile {
   tutoring_enrolled_at?: string;
   tutoring_frequency?: string;
   tutoring_mentor_name?: string;
+  tutoring_age?: number;
+  tutoring_age_tier?: string;
+  tutoring_parent_name?: string;
+  tutoring_parent_email?: string;
+  tutoring_parent_phone?: string;
+  tutoring_parent_relationship?: string;
+  tutoring_parental_consent?: boolean;
+  tutoring_parental_consent_at?: string;
+  tutoring_objective?: string;
   // Student Registration Details
   registration_completed?: boolean;
   phone?: string;
