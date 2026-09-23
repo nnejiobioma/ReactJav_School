@@ -8,7 +8,6 @@ import {
   GraduationCap,
   LayoutDashboard,
   Sparkles,
-  Database,
   UserCheck,
   ShieldCheck,
   ChevronDown,
@@ -25,13 +24,12 @@ import {
 } from 'lucide-react';
 import ThemeSelector from '@/components/theme/ThemeSelector';
 import { Profile, UserRole } from '@/types';
-import { LocalDataService, isSupabaseConfigured } from '@/lib/supabase/client';
+import { LocalDataService } from '@/lib/supabase/client';
 import { signOutUser } from '@/lib/supabase/auth';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
-  const [hasSupabase, setHasSupabase] = useState(false);
   const [showRoleMenu, setShowRoleMenu] = useState(false);
   const [showIntranetMenu, setShowIntranetMenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -41,7 +39,6 @@ export default function Navbar() {
 
   const loadUserData = () => {
     setCurrentUser(LocalDataService.getCurrentUser());
-    setHasSupabase(isSupabaseConfigured());
   };
 
   useEffect(() => {
@@ -480,34 +477,7 @@ export default function Navbar() {
           gap: '0.6rem',
           flexShrink: 0,
         }}>
-          {/* 1. Supabase Status Indicator (Compact) */}
-          <div
-            className="header-db-pill"
-            title={hasSupabase ? 'Supabase Live: Connected to PostgreSQL & Auth' : 'Supabase Demo Mock: Operating with local storage persistence'}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              padding: '0.42rem 0.65rem',
-              background: 'var(--bg-surface)',
-              borderRadius: '9999px',
-              border: '1px solid var(--border-subtle)',
-              fontSize: '0.76rem',
-              fontWeight: 600,
-              color: hasSupabase ? 'var(--accent-emerald)' : 'var(--text-muted)',
-              cursor: 'default',
-            }}
-          >
-            <Database size={14} color={hasSupabase ? 'var(--accent-emerald)' : 'var(--primary)'} />
-            <span className="db-text" style={{ fontSize: '0.74rem' }}>{hasSupabase ? 'Live DB' : 'Demo DB'}</span>
-            <span style={{
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              background: hasSupabase ? 'var(--accent-emerald)' : 'var(--primary)',
-              boxShadow: hasSupabase ? '0 0 6px var(--accent-emerald)' : '0 0 6px var(--primary)',
-            }} />
-          </div>
+
 
           {/* 2. Theme Toggle */}
           <ThemeSelector />
