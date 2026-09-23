@@ -8,7 +8,6 @@ import {
   Key, 
   Check, 
   ArrowRight,
-  Info,
   LogOut,
   AlertCircle,
   RefreshCw,
@@ -791,25 +790,6 @@ function AuthContent() {
               />
             </div>
 
-            {activeTab === 'signup' && (
-              <div style={{
-                fontSize: '0.8rem',
-                color: 'var(--text-secondary)',
-                background: 'rgba(99, 102, 241, 0.08)',
-                border: '1px solid rgba(99, 102, 241, 0.25)',
-                borderRadius: '0.65rem',
-                padding: '0.75rem 0.9rem',
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '0.5rem',
-                lineHeight: 1.45,
-              }}>
-                <Info size={16} color="var(--primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                <span>
-                  All new accounts register as standard <strong>Students</strong>. Administrative, Faculty, or Super User clearance is strictly controlled and assigned by the <strong>Super Administrator</strong>.
-                </span>
-              </div>
-            )}
 
             <button 
               type="submit" 
