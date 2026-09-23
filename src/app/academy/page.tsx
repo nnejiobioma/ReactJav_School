@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { 
   ACADEMY_TRACKS, 
   AcademyTrack, 
@@ -11,7 +12,6 @@ import {
 } from '@/data/academyTracks';
 import TrackCard from '@/components/academy/TrackCard';
 import TrackDetailsModal from '@/components/academy/TrackDetailsModal';
-import TutoringBookingModal from '@/components/academy/TutoringBookingModal';
 import AdminEditableSection from '@/components/admin/AdminEditableSection';
 import AdminSectionEditorModal from '@/components/admin/AdminSectionEditorModal';
 import AdminTrackEditorModal from '@/components/academy/AdminTrackEditorModal';
@@ -32,12 +32,11 @@ import {
 } from 'lucide-react';
 
 export default function AcademyPage() {
+  const router = useRouter();
   const [siteContent, setSiteContent] = useState<SiteContentConfig>(DEFAULT_SITE_CONTENT);
   const [tracks, setTracks] = useState<AcademyTrack[]>(ACADEMY_TRACKS);
   const [isAdmin, setIsAdmin] = useState(false);
   const [selectedTrack, setSelectedTrack] = useState<AcademyTrack | null>(null);
-  const [bookingTrack, setBookingTrack] = useState<AcademyTrack | null>(null);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [activeEditModal, setActiveEditModal] = useState<{ key: keyof SiteContentConfig; title: string } | null>(null);
   const [editingTrack, setEditingTrack] = useState<AcademyTrack | null>(null);
 
@@ -73,8 +72,15 @@ export default function AcademyPage() {
   const ctaData = siteContent.tutoring_bottom_cta || DEFAULT_SITE_CONTENT.tutoring_bottom_cta!;
 
   const handleOpenBooking = (track?: AcademyTrack) => {
-    setBookingTrack(track || null);
-    setIsBookingOpen(true);
+    const trackId = track?.id || 'junior-dev-track';
+    const formUrl = `/tutoring/enroll?trackId=${encodeURIComponent(trackId)}`;
+    const currentUser = LocalDataService.getCurrentUser();
+
+    if (!currentUser || currentUser.id === 'guest') {
+      router.push(`/auth?mode=signup&tutoringTrackId=${encodeURIComponent(trackId)}&redirect=${encodeURIComponent(formUrl)}`);
+    } else {
+      router.push(formUrl);
+    }
   };
 
   const getPerkIcon = (iconName: string) => {
@@ -701,12 +707,6 @@ export default function AcademyPage() {
           setSelectedTrack(null);
           handleOpenBooking(track);
         }}
-      />
-
-      <TutoringBookingModal
-        initialTrack={bookingTrack}
-        isOpen={isBookingOpen}
-        onClose={() => setIsBookingOpen(false)}
       />
 
       {/* Admin Section Editor Modal */}

@@ -144,8 +144,10 @@ function AuthContent() {
         loadCurrentUser();
 
         setTimeout(() => {
-          // New student signups always proceed to complete the student registration form
-          if (redirectUrl) {
+          // If destination is specifically tutoring enrollment or checkout, proceed directly there
+          if (redirectUrl && (redirectUrl.includes('/tutoring') || redirectUrl.includes('enroll') || redirectUrl.includes('subscribe'))) {
+            router.push(redirectUrl);
+          } else if (redirectUrl) {
             router.push(`/onboarding?redirect=${encodeURIComponent(redirectUrl)}`);
           } else {
             router.push('/onboarding');
@@ -168,8 +170,10 @@ function AuthContent() {
           } else if (res.user?.role === 'admin' || res.user?.role === 'super_admin') {
             router.push(redirectUrl || '/admin/access');
           } else {
-            // Student: Check if registration form details have been filled
-            if (!res.user?.registration_completed) {
+            // If destination is specifically tutoring enrollment or checkout, proceed directly there
+            if (redirectUrl && (redirectUrl.includes('/tutoring') || redirectUrl.includes('enroll') || redirectUrl.includes('subscribe'))) {
+              router.push(redirectUrl);
+            } else if (!res.user?.registration_completed) {
               if (redirectUrl) {
                 router.push(`/onboarding?redirect=${encodeURIComponent(redirectUrl)}`);
               } else {
