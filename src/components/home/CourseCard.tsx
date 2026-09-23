@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Clock, Calendar, CheckCircle2, ArrowRight, Sparkles, Flame, DollarSign, Laptop, Award } from 'lucide-react';
+import { Clock, Calendar, CheckCircle2, ArrowRight, Sparkles, Flame, Laptop, Award } from 'lucide-react';
 import { Course } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import ProgrammeCheckoutModal from '@/components/checkout/ProgrammeCheckoutModal';
@@ -269,7 +269,7 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
           {/* REACTJav Key Programme Metadata Strip */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '0.65rem',
             padding: '0.85rem',
             background: 'var(--bg-surface-elevated)',
@@ -289,12 +289,6 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-secondary)' }}>
               <Award size={14} color="var(--accent-emerald)" />
               <span>{course.level}</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-secondary)' }}>
-              <DollarSign size={14} color="var(--accent-amber)" />
-              <span style={{ fontWeight: 700, color: 'var(--accent-amber)' }}>
-                {course.sponsorship_note || 'Sponsored / $5/mo'}
-              </span>
             </div>
           </div>
 
