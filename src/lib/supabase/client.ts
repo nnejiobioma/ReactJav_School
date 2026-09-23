@@ -954,6 +954,17 @@ export class LocalDataService {
 
     this.setCurrentUser(updatedUser);
 
+    const profiles = this.getAllProfiles();
+    const pIdx = profiles.findIndex((p) => p.id === targetUserId);
+    if (pIdx !== -1) {
+      profiles[pIdx] = updatedUser;
+    } else {
+      profiles.push(updatedUser);
+    }
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
+    }
+
     // 1. Auto-enroll student into corresponding track courses so studies, lessons, and records are tracked immediately
     const courses = this.getCourses();
     if (courses.length > 0) {
@@ -1021,6 +1032,170 @@ export class LocalDataService {
     }
 
     return { success: true, user: updatedUser };
+  }
+
+  static processTutoringPayment(
+    userId: string,
+    trackId: string,
+    trackName: string,
+    amount: number,
+    paymentReference: string = `TUT-${Date.now()}`,
+    details?: {
+      learnerName?: string;
+      frequency?: string;
+      notes?: string;
+    }
+  ): { success: boolean; message: string; user: Profile } {
+    const currentUser = this.getCurrentUser();
+    const targetUserId = userId || currentUser?.id || `usr_${Date.now()}`;
+
+    const updatedUser: Profile = {
+      ...(currentUser || {
+        id: targetUserId,
+        email: 'scholar@reactjav.io',
+        role: 'student' as const,
+        avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+        created_at: new Date().toISOString(),
+      }),
+      id: targetUserId,
+      full_name: details?.learnerName?.trim() || currentUser?.full_name || 'Tutoring Scholar',
+      tutoring_enrolled: true,
+      tutoring_track_id: trackId,
+      tutoring_track_name: trackName,
+      tutoring_enrolled_at: new Date().toISOString(),
+      tutoring_frequency: details?.frequency || '2x per week (Recommended)',
+      subscription_status: 'active',
+      subscription_plan: 'annual',
+      admin_granted: true,
+      granted_at: new Date().toISOString(),
+      granted_by: 'Academic Lead (Direct Tutoring Clearance Desk)',
+      payment_reference: paymentReference,
+      payment_date: new Date().toISOString(),
+    };
+
+    this.setCurrentUser(updatedUser);
+
+    // 1. Update profiles list in storage
+    const profiles = this.getAllProfiles();
+    const pIdx = profiles.findIndex((p) => p.id === targetUserId);
+    if (pIdx !== -1) {
+      profiles[pIdx] = updatedUser;
+    } else {
+      profiles.push(updatedUser);
+    }
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
+    }
+
+    // 2. Auto-enroll student into corresponding track courses for study tracking
+    const courses = this.getCourses();
+    if (courses.length > 0) {
+      const matchingCourse = courses.find(c => 
+        c.title.toLowerCase().includes(trackName.toLowerCase()) || 
+        (c.track && c.track.toLowerCase().includes(trackName.toLowerCase())) ||
+        (c.category && c.category.toLowerCase().includes(trackName.toLowerCase()))
+      ) || courses[0];
+
+      this.enroll(updatedUser.id, matchingCourse.id);
+      if (courses[1] && courses[1].id !== matchingCourse.id) {
+        this.enroll(updatedUser.id, courses[1].id);
+      }
+    }
+
+    // 3. Auto-provision dedicated 1-on-1 Live Mentoring Room
+    try {
+      const existingRooms = this.getLiveRooms();
+      const tutoringRoomId = `room_tutoring_${trackId}`;
+      const hasRoom = existingRooms.some(r => r.id === tutoringRoomId);
+      if (!hasRoom) {
+        const tutoringRoom: LiveRoom = {
+          id: tutoringRoomId,
+          title: `1-on-1 Mentoring Pod: ${trackName}`,
+          description: `Dedicated 1-on-1 direct tutoring and code pairing room for ${updatedUser.full_name}. Real-time screen share, shared code editor, and interactive whiteboard enabled.`,
+          instructor_id: 'usr_instructor_001',
+          instructor_name: 'Dr. Elena Chen (Faculty Lead)',
+          instructor_avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
+          course_title: trackName,
+          is_active: true,
+          scheduled_time: 'Live On-Demand (Tutoring Session)',
+          participant_count: 2,
+          tags: ['1-on-1 Tutoring', 'Screen Share', 'Code Pairing', trackName],
+          created_at: new Date().toISOString(),
+        };
+        this.createLiveRoom(tutoringRoom);
+      }
+    } catch {
+      // ignore room provision errors
+    }
+
+    // 4. Log Intranet access request record as approved in IntranetRequests
+    const requests = this.getIntranetRequests();
+    requests.unshift({
+      id: `req_tut_${Date.now()}`,
+      user_id: targetUserId,
+      user_name: updatedUser.full_name || 'Tutoring Scholar',
+      user_email: updatedUser.email || 'scholar@reactjav.edu',
+      plan_id: 'annual',
+      plan_name: `1-on-1 Direct Tutoring (${trackName})`,
+      amount_paid: amount,
+      payment_method: 'credit_card',
+      payment_reference: paymentReference,
+      payment_date: new Date().toISOString(),
+      status: 'active',
+      admin_granted: true,
+      reviewed_at: new Date().toISOString(),
+      reviewed_by: 'Automated Bursar Clearance Gateway',
+      course_id: trackId,
+      course_title: trackName,
+    });
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.INTRANET_REQUESTS, JSON.stringify(requests));
+    }
+
+    // 5. Post Campus Intranet Bulletin
+    try {
+      const bulletins = this.getCampusBulletins();
+      const newBulletin: IntranetBulletin = {
+        id: `blt_tut_${Date.now()}`,
+        title: `Direct Tutoring Clearance Activated: ${updatedUser.full_name} (${trackName})`,
+        category: 'Admission',
+        priority: 'high',
+        author: 'Academic Registrar',
+        author_role: 'Office of Direct Tutoring & Mentorship',
+        content: `Academic Clearance and unrestricted Campus Intranet fellowship privileges granted for ${updatedUser.full_name} in the ${trackName} track. CBT certifications, 1-on-1 live rooms, and transcript tracking active.`,
+        created_at: new Date().toISOString(),
+      };
+      bulletins.unshift(newBulletin);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(STORAGE_KEYS.CAMPUS_BULLETINS, JSON.stringify(bulletins));
+      }
+    } catch {
+      // ignore bulletin errors
+    }
+
+    // 6. Supabase sync if configured
+    const supabase = createClient();
+    if (isSupabaseConfigured() && supabase) {
+      supabase.from('profiles').update({
+        tutoring_enrolled: true,
+        tutoring_track_id: trackId,
+        tutoring_track_name: trackName,
+        subscription_status: 'active',
+        subscription_plan: 'annual',
+        admin_granted: true,
+        payment_reference: paymentReference,
+      }).eq('id', targetUserId).then();
+    }
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    return {
+      success: true,
+      message: 'Direct Tutoring tuition processed and Campus Intranet clearance granted.',
+      user: updatedUser,
+    };
   }
 
   static checkIntranetAccess(user?: Profile | null): {

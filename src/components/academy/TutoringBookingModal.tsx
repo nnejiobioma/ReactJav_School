@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { AcademyTrack, ACADEMY_TRACKS, TUTORING_WHATSAPP_NUMBER } from '@/data/academyTracks';
 import { LocalDataService } from '@/lib/supabase/client';
 import { 
@@ -17,7 +18,8 @@ import {
   Send, 
   ShieldCheck, 
   ArrowRight, 
-  LayoutDashboard 
+  LayoutDashboard,
+  CreditCard 
 } from 'lucide-react';
 
 interface TutoringBookingModalProps {
@@ -27,6 +29,7 @@ interface TutoringBookingModalProps {
 }
 
 export default function TutoringBookingModal({ initialTrack, isOpen, onClose }: TutoringBookingModalProps) {
+  const router = useRouter();
   const [selectedTrackId, setSelectedTrackId] = useState<string>(initialTrack?.id || ACADEMY_TRACKS[0].id);
   const [learnerName, setLearnerName] = useState('');
   const [parentName, setParentName] = useState('');
@@ -68,33 +71,37 @@ export default function TutoringBookingModal({ initialTrack, isOpen, onClose }: 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Automatically enroll in Direct Tutoring & grant immediate Campus Intranet clearance!
-    LocalDataService.enrollInDirectTutoring(undefined, currentTrack, {
-      learnerName,
-      frequency,
-      notes,
-    });
-
-    setIsSubmitted(true);
-
-    // Save inquiry to local storage for persistence
+    // 1. Save enrollment request / inquiry to local storage
     try {
       const existing = JSON.parse(localStorage.getItem('reactjav_tutoring_inquiries') || '[]');
       existing.push({
         id: 'inq_' + Date.now(),
         trackId: selectedTrackId,
         trackName: currentTrack.name,
-        learnerName,
-        parentName,
-        contactInfo,
+        learnerName: learnerName.trim(),
+        parentName: parentName.trim(),
+        contactInfo: contactInfo.trim(),
         ageTier,
         frequency,
-        notes,
+        notes: notes.trim(),
+        status: 'pending_payment',
         submittedAt: new Date().toISOString(),
       });
       localStorage.setItem('reactjav_tutoring_inquiries', JSON.stringify(existing));
     } catch {
       // ignore storage errors
+    }
+
+    // 2. Direct user to payment page instead of taking them directly to the course
+    const paymentUrl = `/subscribe?tutoringTrackId=${encodeURIComponent(selectedTrackId)}&learnerName=${encodeURIComponent(learnerName.trim())}&frequency=${encodeURIComponent(frequency)}&contact=${encodeURIComponent(contactInfo.trim())}`;
+
+    onClose();
+
+    const currentUser = LocalDataService.getCurrentUser();
+    if (!currentUser || currentUser.id === 'guest') {
+      router.push(`/auth?mode=signup&redirect=${encodeURIComponent(paymentUrl)}`);
+    } else {
+      router.push(paymentUrl);
     }
   };
 

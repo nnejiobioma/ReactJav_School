@@ -18,16 +18,23 @@ import {
   GraduationCap,
   Award,
   ChevronRight,
-  Layers
+  Layers,
+  Video
 } from 'lucide-react';
 import { Profile, SubscriptionPlan, Course } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { formatCurrency } from '@/lib/utils';
+import { AcademyTrack, ACADEMY_TRACKS } from '@/data/academyTracks';
 
 function SubscribeContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const courseId = searchParams.get('courseId') || searchParams.get('course');
+  const tutoringTrackId = searchParams.get('tutoringTrackId') || searchParams.get('trackId');
+  const learnerNameParam = searchParams.get('learnerName') || '';
+  const frequencyParam = searchParams.get('frequency') || '';
+  const contactParam = searchParams.get('contact') || '';
+  const parentNameParam = searchParams.get('parentName') || '';
 
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
@@ -36,6 +43,15 @@ function SubscribeContent() {
 
   // Enrolling course state
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+
+  // Direct Tutoring state
+  const [selectedTutoringTrack, setSelectedTutoringTrack] = useState<AcademyTrack | null>(null);
+  const [tutoringDetails, setTutoringDetails] = useState({
+    learnerName: learnerNameParam,
+    frequency: frequencyParam,
+    contact: contactParam,
+    parentName: parentNameParam,
+  });
 
   // Card Form State
   const [cardNumber, setCardNumber] = useState('4242 •••• •••• 4242');
@@ -50,7 +66,12 @@ function SubscribeContent() {
   useEffect(() => {
     const user = LocalDataService.getCurrentUser();
     if (!user || user.id === 'guest') {
-      const returnUrl = courseId ? `/subscribe?courseId=${courseId}` : '/subscribe';
+      let returnUrl = '/subscribe';
+      if (tutoringTrackId) {
+        returnUrl = `/subscribe?tutoringTrackId=${encodeURIComponent(tutoringTrackId)}&learnerName=${encodeURIComponent(learnerNameParam)}&frequency=${encodeURIComponent(frequencyParam)}&contact=${encodeURIComponent(contactParam)}&parentName=${encodeURIComponent(parentNameParam)}`;
+      } else if (courseId) {
+        returnUrl = `/subscribe?courseId=${encodeURIComponent(courseId)}`;
+      }
       router.push(`/auth?mode=signup${courseId ? `&courseId=${courseId}` : ''}&redirect=${encodeURIComponent(returnUrl)}`);
       return;
     }
@@ -66,10 +87,22 @@ function SubscribeContent() {
         setSelectedCourse(course);
       }
     }
-  }, [courseId, router]);
+
+    if (tutoringTrackId) {
+      const tracks = LocalDataService.getAcademyTracks();
+      const track = tracks.find((t) => t.id === tutoringTrackId) || ACADEMY_TRACKS.find((t) => t.id === tutoringTrackId);
+      if (track) {
+        setSelectedTutoringTrack(track);
+      }
+    }
+  }, [courseId, tutoringTrackId, learnerNameParam, frequencyParam, contactParam, parentNameParam, router]);
 
   const selectedPlan = plans.find((p) => p.id === selectedPlanId) || plans[1];
-  const payableAmount = selectedCourse ? selectedCourse.price : (selectedPlan?.price || 99);
+  const payableAmount = selectedTutoringTrack
+    ? 149
+    : selectedCourse
+    ? selectedCourse.price
+    : (selectedPlan?.price || 99);
   const firstLessonId = selectedCourse?.sections?.[0]?.lessons?.[0]?.id || 'overview';
 
   const handleSubmitPayment = (e: React.FormEvent) => {
@@ -77,7 +110,9 @@ function SubscribeContent() {
     setIsProcessing(true);
 
     const randomSuffix = Math.random().toString(36).substring(2, 7).toUpperCase();
-    const prefix = selectedCourse
+    const prefix = selectedTutoringTrack
+      ? 'TUT-FELLOW'
+      : selectedCourse
       ? 'ENR-PROG'
       : paymentMethod === 'credit_card'
       ? 'TXN-CARD'
@@ -87,9 +122,24 @@ function SubscribeContent() {
     const txnRef = `${prefix}-${randomSuffix}`;
 
     setTimeout(() => {
-      if (selectedCourse) {
+      const targetUserId = currentUser?.id || `usr_student_${Date.now()}`;
+
+      if (selectedTutoringTrack) {
+        // Process 1-on-1 Direct Tutoring tuition payment & grant immediate campus intranet clearance
+        LocalDataService.processTutoringPayment(
+          targetUserId,
+          selectedTutoringTrack.id,
+          selectedTutoringTrack.name,
+          payableAmount,
+          txnRef,
+          {
+            learnerName: tutoringDetails.learnerName || currentUser?.full_name || 'Tutoring Scholar',
+            frequency: tutoringDetails.frequency,
+            notes: '',
+          }
+        );
+      } else if (selectedCourse) {
         // Process Programme tuition payment, auto-enroll student & grant intranet clearance
-        const targetUserId = currentUser?.id || `usr_student_${Date.now()}`;
         LocalDataService.processProgrammePayment(
           targetUserId,
           selectedCourse.id,
@@ -116,7 +166,7 @@ function SubscribeContent() {
             Account Required for Enrollment
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.5, margin: 0 }}>
-            Redirecting to student authentication. Please create an account or sign in to continue with course enrollment...
+            Redirecting to student authentication. Please create an account or sign in to continue with enrollment...
           </p>
         </div>
       </div>
@@ -141,7 +191,11 @@ function SubscribeContent() {
           marginBottom: '1rem',
         }}>
           <Sparkles size={16} color="var(--primary)" />
-          <span>ReactJav Campus Tuition & Enrollment Desk</span>
+          <span>
+            {selectedTutoringTrack
+              ? 'ReactJav Academy • 1-on-1 Direct Tutoring Desk'
+              : 'ReactJav Campus Tuition & Enrollment Desk'}
+          </span>
         </div>
 
         <h1 style={{
@@ -151,7 +205,9 @@ function SubscribeContent() {
           color: 'var(--text-primary)',
           marginBottom: '0.85rem',
         }}>
-          {selectedCourse ? (
+          {selectedTutoringTrack ? (
+            <>1-on-1 Direct Tutoring <span className="text-gradient">Tuition & Intranet Access</span></>
+          ) : selectedCourse ? (
             <>Complete Programme <span className="text-gradient">Tuition Payment</span></>
           ) : (
             <>Tuition Plans & <span className="text-gradient">Intranet Access</span></>
@@ -165,7 +221,9 @@ function SubscribeContent() {
           margin: '0 auto',
           lineHeight: 1.6,
         }}>
-          {selectedCourse ? (
+          {selectedTutoringTrack ? (
+            `Pay tuition to confirm your 1-on-1 Direct Tutoring enrollment for ${selectedTutoringTrack.name} (${selectedTutoringTrack.tier}). Tuition grants unrestricted Campus Intranet privileges, dedicated live mentoring room, and CBT certification.`
+          ) : selectedCourse ? (
             `Pay tuition to confirm your enrollment in ${selectedCourse.title}. Tuition includes full courseware, virtual classrooms, and unrestricted Campus Intranet privileges.`
           ) : (
             'Gain unrestricted access to internal CBT testing, live virtual classrooms, faculty office hours, and engineering curriculum.'
@@ -200,12 +258,37 @@ function SubscribeContent() {
             <CheckCircle2 size={36} color="var(--accent-emerald)" />
           </div>
 
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.45rem',
+            padding: '0.35rem 0.9rem',
+            borderRadius: '9999px',
+            background: 'rgba(16, 185, 129, 0.15)',
+            color: 'var(--accent-emerald)',
+            fontSize: '0.8rem',
+            fontWeight: 700,
+            marginBottom: '0.75rem',
+          }}>
+            <ShieldCheck size={14} />
+            <span>CAMPUS INTRANET CLEARANCE ACTIVATED</span>
+          </div>
+
           <h2 style={{ fontSize: '1.85rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
-            {selectedCourse ? 'Programme Enrollment Confirmed!' : 'Tuition Payment Processed!'}
+            {selectedTutoringTrack
+              ? 'Direct Tutoring Enrolment Confirmed!'
+              : selectedCourse
+              ? 'Programme Enrollment Confirmed!'
+              : 'Tuition Payment Processed!'}
           </h2>
 
           <p style={{ color: 'var(--text-secondary)', maxWidth: '540px', margin: '0 auto 1.5rem', lineHeight: 1.6 }}>
-            {selectedCourse ? (
+            {selectedTutoringTrack ? (
+              <>
+                Your tuition payment of <strong style={{ color: '#ffffff' }}>{formatCurrency(payableAmount)}</strong> for{' '}
+                <strong style={{ color: 'var(--accent-emerald)' }}>{selectedTutoringTrack.name}</strong> 1-on-1 Direct Tutoring has been confirmed. Full fellowship access to the Campus Intranet, CBT certifications, and your personal 1-on-1 Mentoring Pod has been granted!
+              </>
+            ) : selectedCourse ? (
               <>
                 Your payment of <strong style={{ color: '#ffffff' }}>{formatCurrency(selectedCourse.price)}</strong> for{' '}
                 <strong style={{ color: 'var(--primary)' }}>{selectedCourse.title}</strong> has been received. Your curriculum lessons and Campus Intranet fellowship privileges are now active!
@@ -233,7 +316,38 @@ function SubscribeContent() {
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            {selectedCourse ? (
+            {selectedTutoringTrack ? (
+              <>
+                <Link
+                  href="/intranet"
+                  className="btn btn-primary btn-lg"
+                  style={{
+                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                    gap: '0.5rem',
+                    textDecoration: 'none',
+                    fontWeight: 700,
+                  }}
+                >
+                  <ShieldCheck size={18} />
+                  <span>Enter Campus Intranet</span>
+                  <ArrowRight size={18} />
+                </Link>
+
+                <Link
+                  href={`/live?room=room_tutoring_${selectedTutoringTrack.id}`}
+                  className="btn btn-secondary btn-lg"
+                  style={{ gap: '0.5rem', textDecoration: 'none', fontWeight: 600 }}
+                >
+                  <Video size={18} color="var(--accent-emerald)" />
+                  <span>1-on-1 Mentoring Pod</span>
+                </Link>
+
+                <Link href="/dashboard" className="btn btn-outline btn-lg" style={{ textDecoration: 'none', fontWeight: 600 }}>
+                  <GraduationCap size={18} />
+                  <span>My Dashboard</span>
+                </Link>
+              </>
+            ) : selectedCourse ? (
               <>
                 <Link href={`/learn/${selectedCourse.id}/${firstLessonId}`} className="btn btn-primary btn-lg">
                   <BookOpen size={18} />
@@ -269,8 +383,87 @@ function SubscribeContent() {
         </div>
       )}
 
+      {/* SELECTED TUTORING TRACK SUMMARY BANNER */}
+      {!isSuccess && selectedTutoringTrack && (
+        <div style={{
+          maxWidth: '780px',
+          margin: '0 auto 2.5rem',
+          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.9) 100%)',
+          border: '1px solid rgba(16, 185, 129, 0.4)',
+          borderRadius: '1.25rem',
+          padding: '1.75rem 2rem',
+          boxShadow: 'var(--shadow-md)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.25rem',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
+                <span className="badge badge-emerald" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <Sparkles size={12} />
+                  1-on-1 Direct Tutoring
+                </span>
+                <span className="badge badge-primary">{selectedTutoringTrack.tier}</span>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{selectedTutoringTrack.zoneName}</span>
+              </div>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span>{selectedTutoringTrack.icon}</span>
+                <span>{selectedTutoringTrack.name}</span>
+              </h2>
+              {tutoringDetails.learnerName && (
+                <p style={{ margin: '0.4rem 0 0', fontSize: '0.85rem', color: '#93c5fd' }}>
+                  Enrolling Scholar: <strong>{tutoringDetails.learnerName}</strong> • Frequency: <strong>{tutoringDetails.frequency || '2x per week'}</strong>
+                </p>
+              )}
+            </div>
+
+            <div style={{ textAlign: 'right' }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block' }}>Tutoring Tuition Fee</span>
+              <span style={{ fontSize: '2rem', fontWeight: 800, color: '#34d399' }}>
+                {formatCurrency(payableAmount)}
+              </span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block' }}>Monthly / Term Fellowship</span>
+            </div>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+            gap: '0.75rem',
+            paddingTop: '1rem',
+            borderTop: '1px solid var(--border-subtle)',
+            fontSize: '0.82rem',
+            color: 'var(--text-secondary)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <CheckCircle2 size={16} color="var(--accent-emerald)" />
+              <span>Dedicated 1-on-1 Mentoring Pod</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <ShieldCheck size={16} color="var(--accent-emerald)" />
+              <span>Unrestricted Campus Intranet Access</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Award size={16} color="var(--accent-amber)" />
+              <span>Dual Sign-Off Study Transcript</span>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.25rem' }}>
+            <Link
+              href="/subscribe"
+              onClick={() => setSelectedTutoringTrack(null)}
+              style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textDecoration: 'underline' }}
+            >
+              Or view general subscription options instead
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* SELECTED PROGRAMME TUITION SUMMARY BANNER (IF ENROLLING SPECIFIC COURSE) */}
-      {!isSuccess && selectedCourse && (
+      {!isSuccess && !selectedTutoringTrack && selectedCourse && (
         <div style={{
           maxWidth: '780px',
           margin: '0 auto 2.5rem',
@@ -338,8 +531,8 @@ function SubscribeContent() {
         </div>
       )}
 
-      {/* PLAN SELECTOR CARDS (SHOWN IF NO SPECIFIC COURSE CHOSEN) */}
-      {!isSuccess && !selectedCourse && (
+      {/* PLAN SELECTOR CARDS (SHOWN IF NO SPECIFIC COURSE OR TUTORING CHOSEN) */}
+      {!isSuccess && !selectedCourse && !selectedTutoringTrack && (
         <>
           <div style={{
             display: 'grid',
@@ -441,10 +634,18 @@ function SubscribeContent() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
             <div>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                {selectedCourse ? 'Programme Enrollment' : 'Selected Plan'}
+                {selectedTutoringTrack
+                  ? '1-on-1 Direct Tutoring Tuition'
+                  : selectedCourse
+                  ? 'Programme Enrollment'
+                  : 'Selected Plan'}
               </span>
               <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                {selectedCourse ? selectedCourse.title : selectedPlan?.name} — {formatCurrency(payableAmount)}
+                {selectedTutoringTrack
+                  ? `${selectedTutoringTrack.name} (1-on-1 Mentorship)`
+                  : selectedCourse
+                  ? selectedCourse.title
+                  : selectedPlan?.name} — {formatCurrency(payableAmount)}
               </h3>
             </div>
 
@@ -652,7 +853,9 @@ function SubscribeContent() {
                   <>
                     <Lock size={18} />
                     <span>
-                      {selectedCourse ? (
+                      {selectedTutoringTrack ? (
+                        `Pay Tutoring Tuition & Unlock Intranet (${formatCurrency(payableAmount)})`
+                      ) : selectedCourse ? (
                         `Pay Tuition & Unlock Programme (${formatCurrency(payableAmount)})`
                       ) : (
                         `Submit Payment & Request Intranet Clearance (${formatCurrency(payableAmount)})`
