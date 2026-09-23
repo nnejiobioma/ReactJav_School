@@ -29,7 +29,8 @@ import {
   SUBSCRIPTION_PLANS,
   SAMPLE_INTRANET_REQUESTS,
   CAMPUS_BULLETINS,
-  INITIAL_TUTORING_ATTENDANCE
+  INITIAL_TUTORING_ATTENDANCE,
+  DEFAULT_ACTIVE_TUTORING_STUDENTS
 } from './mockData';
 import { DEFAULT_SITE_CONTENT } from './defaultSiteContent';
 import { ACADEMY_TRACKS, AcademyTrack } from '@/data/academyTracks';
@@ -1352,6 +1353,74 @@ export class LocalDataService {
   // Direct Tutoring Attendance & Dual Sign-off System
   // ==========================================
 
+  static getActiveTutoringStudents(): Profile[] {
+    const all = this.getAllProfiles();
+    const enrolledStudents = all.filter(
+      (p) => (p.tutoring_enrolled === true || !!p.tutoring_track_id) && p.role === 'student'
+    );
+
+    const map = new Map<string, Profile>();
+
+    // Add explicitly enrolled students from profiles
+    enrolledStudents.forEach((s) => map.set(s.id, s));
+
+    // Also include current user if enrolled in direct tutoring
+    const currentUser = this.getCurrentUser();
+    if (currentUser && (currentUser.tutoring_enrolled || currentUser.tutoring_track_id) && currentUser.role === 'student') {
+      map.set(currentUser.id, currentUser);
+    }
+
+    // Include inquiry submissions if any were registered
+    if (typeof window !== 'undefined') {
+      try {
+        const storedInquiries = localStorage.getItem('reactjav_tutoring_inquiries');
+        if (storedInquiries) {
+          const inquiries = JSON.parse(storedInquiries);
+          if (Array.isArray(inquiries)) {
+            inquiries.forEach((inq: any) => {
+              if (inq.learnerName && !Array.from(map.values()).some((s) => s.full_name?.toLowerCase() === inq.learnerName.toLowerCase())) {
+                const inqId = inq.id || `inq_stud_${Date.now()}`;
+                map.set(inqId, {
+                  id: inqId,
+                  email: inq.contactInfo || inq.parentEmail || 'scholar@student.reactjav.io',
+                  full_name: inq.learnerName,
+                  avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(inq.learnerName)}`,
+                  role: 'student',
+                  tutoring_enrolled: true,
+                  tutoring_track_id: inq.trackId,
+                  tutoring_track_name: inq.trackName,
+                  tutoring_age: inq.age,
+                  tutoring_age_tier: inq.ageTier,
+                  tutoring_objective: inq.objective,
+                  tutoring_parent_name: inq.parentName,
+                  tutoring_parent_email: inq.parentEmail,
+                  tutoring_parent_phone: inq.parentPhone,
+                  tutoring_parent_relationship: inq.parentRelationship,
+                  tutoring_parental_consent: inq.parentalConsentApproved,
+                  tutoring_frequency: inq.frequency,
+                  subscription_status: 'active',
+                  admin_granted: true,
+                  created_at: inq.submittedAt || new Date().toISOString(),
+                });
+              }
+            });
+          }
+        }
+      } catch {
+        // ignore inquiry parsing errors
+      }
+    }
+
+    // Add default verified tutoring scholars for immediate selection & testing
+    DEFAULT_ACTIVE_TUTORING_STUDENTS.forEach((d) => {
+      if (!map.has(d.id) && !Array.from(map.values()).some((s) => s.email === d.email)) {
+        map.set(d.id, d);
+      }
+    });
+
+    return Array.from(map.values());
+  }
+
   static getTutoringAttendance(filter?: {
     month?: string;
     studentId?: string;
@@ -1466,16 +1535,19 @@ export class LocalDataService {
     const dateStr = sessionData.session_date || now.toISOString().split('T')[0];
     const month = sessionData.month || dateStr.slice(0, 7);
 
+    const isStudentUser = currentUser?.role === 'student';
+    const isFacultyUser = currentUser?.role === 'instructor' || currentUser?.role === 'admin' || currentUser?.role === 'super_admin';
+
     const newSession: TutoringAttendanceSession = {
       id: sessionData.id || `att_tut_${Date.now()}`,
-      student_id: sessionData.student_id || currentUser?.id || 'student_id',
-      student_name: sessionData.student_name || currentUser?.full_name || 'Enrolled Student',
-      student_avatar: sessionData.student_avatar || currentUser?.avatar_url || undefined,
-      instructor_id: sessionData.instructor_id || 'faculty_author_001',
-      instructor_name: sessionData.instructor_name || 'Dr. Elena Chen',
-      instructor_avatar: sessionData.instructor_avatar || 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
-      track_id: sessionData.track_id || currentUser?.tutoring_track_id || 'python-engineering',
-      track_name: sessionData.track_name || currentUser?.tutoring_track_name || 'Python Engineering',
+      student_id: sessionData.student_id || (isStudentUser ? (currentUser?.id || 'tut_student_david_eze') : 'tut_student_david_eze'),
+      student_name: sessionData.student_name || (isStudentUser ? (currentUser?.full_name || 'Enrolled Student') : 'David Eze') || 'Enrolled Student',
+      student_avatar: sessionData.student_avatar || (isStudentUser ? (currentUser?.avatar_url || undefined) : undefined) || undefined,
+      instructor_id: sessionData.instructor_id || (isFacultyUser ? (currentUser?.id || 'faculty_author_001') : 'faculty_author_001'),
+      instructor_name: sessionData.instructor_name || (isFacultyUser ? (currentUser?.full_name || 'Dr. Elena Chen') : 'Dr. Elena Chen') || 'Dr. Elena Chen',
+      instructor_avatar: sessionData.instructor_avatar || (isFacultyUser ? (currentUser?.avatar_url || undefined) : 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80') || undefined,
+      track_id: sessionData.track_id || (isStudentUser ? (currentUser?.tutoring_track_id || undefined) : undefined) || 'python-engineering',
+      track_name: sessionData.track_name || (isStudentUser ? (currentUser?.tutoring_track_name || undefined) : undefined) || 'Python Engineering & Algorithmic Thinking',
       session_date: dateStr,
       session_time: sessionData.session_time || '14:00 - 15:30 GMT',
       session_title: sessionData.session_title || '1-on-1 Direct Tutoring Mentorship Session',

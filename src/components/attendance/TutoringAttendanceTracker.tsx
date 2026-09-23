@@ -22,7 +22,8 @@ import {
   Check, 
   ArrowRight,
   RefreshCw,
-  FileCheck
+  FileCheck,
+  Users
 } from 'lucide-react';
 import { TutoringAttendanceSession, MonthlyAttendanceSummary, Profile, UserRole } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
@@ -49,6 +50,11 @@ export default function TutoringAttendanceTracker({
   const [actionFeedback, setActionFeedback] = useState<string | null>(null);
   const [showAddSessionModal, setShowAddSessionModal] = useState(false);
 
+  // Active Direct Tutoring Students state
+  const [activeTutoringStudents, setActiveTutoringStudents] = useState<Profile[]>([]);
+  const [selectedStudentId, setSelectedStudentId] = useState<string>('');
+  const [viewStudentFilter, setViewStudentFilter] = useState<string>('all');
+
   // New session form states
   const [newTitle, setNewTitle] = useState('');
   const [newDate, setNewDate] = useState(new Date().toISOString().split('T')[0]);
@@ -62,12 +68,24 @@ export default function TutoringAttendanceTracker({
     const role = initialRole || user?.role || 'student';
     setActiveRole(role);
 
+    const tutoringStudents = LocalDataService.getActiveTutoringStudents();
+    setActiveTutoringStudents(tutoringStudents);
+
+    // Initial student selection for the form if none selected
+    if (tutoringStudents.length > 0) {
+      setSelectedStudentId((prev) => {
+        if (prev && tutoringStudents.some((s) => s.id === prev)) return prev;
+        if (filterStudentId && tutoringStudents.some((s) => s.id === filterStudentId)) return filterStudentId;
+        return tutoringStudents[0].id;
+      });
+    }
+
     const months = LocalDataService.getAvailableAttendanceMonths();
     setAvailableMonths(months);
     const currMonth = selectedMonth || (months[0]?.month || new Date().toISOString().slice(0, 7));
     setSelectedMonth(currMonth);
 
-    const studentFilter = filterStudentId || (role === 'student' ? user?.id : undefined);
+    const studentFilter = filterStudentId || (role === 'student' ? user?.id : (viewStudentFilter !== 'all' ? viewStudentFilter : undefined));
     const list = LocalDataService.getTutoringAttendance({
       month: currMonth,
       studentId: studentFilter,
@@ -86,7 +104,28 @@ export default function TutoringAttendanceTracker({
     };
     window.addEventListener('storage', handleStorage);
     return () => window.removeEventListener('storage', handleStorage);
-  }, [selectedMonth, initialRole, filterStudentId]);
+  }, [selectedMonth, initialRole, filterStudentId, viewStudentFilter]);
+
+  const handleOpenAddSessionModal = () => {
+    const students = activeTutoringStudents.length > 0 
+      ? activeTutoringStudents 
+      : LocalDataService.getActiveTutoringStudents();
+    
+    // Choose default student: current filter student if set, else first student
+    let defaultId = selectedStudentId;
+    if (viewStudentFilter !== 'all' && students.some(s => s.id === viewStudentFilter)) {
+      defaultId = viewStudentFilter;
+    } else if (!defaultId || !students.some(s => s.id === defaultId)) {
+      defaultId = students[0]?.id || '';
+    }
+    
+    setSelectedStudentId(defaultId);
+    const chosen = students.find(s => s.id === defaultId);
+    if (chosen && (!newTitle || newTitle.startsWith('1-on-1 Mentorship:'))) {
+      setNewTitle(`1-on-1 Mentorship: ${chosen.full_name} (${chosen.tutoring_track_name || 'Direct Track'})`);
+    }
+    setShowAddSessionModal(true);
+  };
 
   const handleToggleStudentSignoff = (sessionId: string, currentVal: boolean) => {
     if (activeRole !== 'student' && activeRole !== 'admin' && activeRole !== 'super_admin') {
@@ -118,12 +157,22 @@ export default function TutoringAttendanceTracker({
     e.preventDefault();
     if (!newTitle.trim()) return;
 
+    const targetStudent = activeTutoringStudents.find((s) => s.id === selectedStudentId);
+
     LocalDataService.addTutoringAttendanceSession({
+      student_id: targetStudent?.id,
+      student_name: targetStudent?.full_name || 'Direct Tutoring Student',
+      student_avatar: targetStudent?.avatar_url || undefined,
+      track_id: targetStudent?.tutoring_track_id || 'python-engineering',
+      track_name: targetStudent?.tutoring_track_name || 'Python Engineering & Algorithmic Thinking',
       session_title: newTitle.trim(),
       session_date: newDate,
       session_time: newTime,
       topic_summary: newTopic.trim(),
       notes: newNotes.trim(),
+      instructor_id: currentUser?.id || 'faculty_author_001',
+      instructor_name: currentUser?.full_name || 'Dr. Elena Chen',
+      instructor_avatar: currentUser?.avatar_url || undefined,
       instructor_checked: activeRole === 'instructor' || activeRole === 'admin' || activeRole === 'super_admin',
     });
 
@@ -132,7 +181,7 @@ export default function TutoringAttendanceTracker({
     setNewTopic('');
     setNewNotes('');
     loadData();
-    setActionFeedback('New 1-on-1 tutoring session scheduled into the monthly attendance ledger.');
+    setActionFeedback(`New 1-on-1 tutoring session scheduled for ${targetStudent?.full_name || 'enrolled student'} in the monthly ledger.`);
     setTimeout(() => setActionFeedback(null), 3500);
   };
 
@@ -206,7 +255,7 @@ export default function TutoringAttendanceTracker({
           <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center' }}>
             {(activeRole === 'instructor' || activeRole === 'admin' || activeRole === 'super_admin') && (
               <button
-                onClick={() => setShowAddSessionModal(true)}
+                onClick={handleOpenAddSessionModal}
                 className="btn btn-primary btn-sm"
                 style={{
                   background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
@@ -274,6 +323,38 @@ export default function TutoringAttendanceTracker({
               </button>
             ))}
           </div>
+
+          {/* Student Filter Dropdown (Instructors & Admins) */}
+          {activeRole !== 'student' && activeTutoringStudents.length > 0 && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginLeft: '0.5rem', fontSize: '0.8rem' }}>
+              <span style={{ color: 'var(--text-secondary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                <Users size={14} color="var(--primary)" />
+                <span>Student:</span>
+              </span>
+              <select
+                value={viewStudentFilter}
+                onChange={(e) => setViewStudentFilter(e.target.value)}
+                style={{
+                  fontSize: '0.8rem',
+                  padding: '0.35rem 0.75rem',
+                  borderRadius: '0.6rem',
+                  cursor: 'pointer',
+                  background: 'var(--bg-surface-elevated)',
+                  border: '1px solid var(--border-subtle)',
+                  color: 'var(--text-primary)',
+                  fontWeight: 600,
+                  outline: 'none',
+                }}
+              >
+                <option value="all">All Direct Tutoring Students ({activeTutoringStudents.length})</option>
+                {activeTutoringStudents.map((st) => (
+                  <option key={st.id} value={st.id}>
+                    {st.full_name} ({st.tutoring_track_name || 'Direct Track'})
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
         </div>
 
         {/* Dual Signoff Legend Badge */}
@@ -724,6 +805,108 @@ export default function TutoringAttendanceTracker({
             </p>
 
             <form onSubmit={handleCreateSession} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {/* Field to select existing active students who have enrolled through Direct Tutoring */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                  <label style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <Users size={14} color="var(--primary)" />
+                    <span>Select Active Direct Tutoring Student *</span>
+                  </label>
+                  <span style={{ fontSize: '0.72rem', color: '#10b981', fontWeight: 700, background: 'rgba(16, 185, 129, 0.1)', padding: '0.15rem 0.5rem', borderRadius: '9999px', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
+                    {activeTutoringStudents.length} Active Scholars
+                  </span>
+                </div>
+
+                <select
+                  required
+                  value={selectedStudentId}
+                  onChange={(e) => {
+                    const sid = e.target.value;
+                    setSelectedStudentId(sid);
+                    const chosen = activeTutoringStudents.find(s => s.id === sid);
+                    if (chosen && (!newTitle || newTitle.startsWith('1-on-1 Mentorship:'))) {
+                      setNewTitle(`1-on-1 Mentorship: ${chosen.full_name} (${chosen.tutoring_track_name || 'Direct Track'})`);
+                    }
+                  }}
+                  className="input-field"
+                  style={{
+                    width: '100%',
+                    cursor: 'pointer',
+                    background: 'var(--bg-surface-elevated)',
+                    border: '1.5px solid var(--border-subtle)',
+                    padding: '0.65rem 0.85rem',
+                    fontSize: '0.86rem',
+                    borderRadius: '0.65rem',
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  {activeTutoringStudents.length === 0 ? (
+                    <option value="" disabled>No active direct tutoring students found</option>
+                  ) : (
+                    activeTutoringStudents.map((st) => (
+                      <option key={st.id} value={st.id}>
+                        {st.full_name} — {st.tutoring_track_name || 'Direct Tutoring'} {st.tutoring_age_tier ? `(${st.tutoring_age_tier})` : ''}
+                      </option>
+                    ))
+                  )}
+                </select>
+
+                {/* Selected Student Profile Preview Card */}
+                {(() => {
+                  const selectedStudent = activeTutoringStudents.find(s => s.id === selectedStudentId);
+                  if (!selectedStudent) return null;
+                  return (
+                    <div style={{
+                      marginTop: '0.6rem',
+                      padding: '0.75rem 0.9rem',
+                      background: 'rgba(99, 102, 241, 0.05)',
+                      border: '1px solid rgba(99, 102, 241, 0.25)',
+                      borderRadius: '0.65rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.75rem',
+                    }}>
+                      <img
+                        src={selectedStudent.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}
+                        alt={selectedStudent.full_name || 'Student'}
+                        style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--primary)', flexShrink: 0 }}
+                      />
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
+                          <span style={{ fontSize: '0.86rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                            {selectedStudent.full_name}
+                          </span>
+                          <span className="badge badge-primary" style={{ fontSize: '0.65rem', padding: '0.1rem 0.45rem' }}>
+                            {selectedStudent.tutoring_track_name || 'Direct Track'}
+                          </span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.73rem', color: 'var(--text-secondary)', marginTop: '0.2rem', flexWrap: 'wrap' }}>
+                          <span>{selectedStudent.email}</span>
+                          {selectedStudent.tutoring_age && (
+                            <>
+                              <span>•</span>
+                              <span>Age {selectedStudent.tutoring_age}</span>
+                            </>
+                          )}
+                          {selectedStudent.tutoring_parent_name && (
+                            <>
+                              <span>•</span>
+                              <span>Parent: {selectedStudent.tutoring_parent_name}</span>
+                            </>
+                          )}
+                          {selectedStudent.tutoring_frequency && (
+                            <>
+                              <span>•</span>
+                              <span style={{ color: '#10b981', fontWeight: 600 }}>{selectedStudent.tutoring_frequency}</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+
               <div>
                 <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.3rem' }}>
                   Session Title *
