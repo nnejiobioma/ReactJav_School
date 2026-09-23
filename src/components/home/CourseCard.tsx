@@ -84,7 +84,7 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
       }}
     >
       {/* Visual Image Header */}
-      <div style={{ position: 'relative', width: '100%', height: '180px', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', width: '100%', height: '210px', overflow: 'hidden' }}>
         <img
           src={course.thumbnail_url}
           alt={course.title}
@@ -232,7 +232,7 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
 
       {/* Card Body */}
       <div style={{
-        padding: '1.4rem',
+        padding: '1.65rem 1.6rem 1.5rem',
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,
@@ -245,10 +245,10 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
             <h3 style={{
-              fontSize: '1.2rem',
+              fontSize: '1.26rem',
               fontWeight: 800,
               lineHeight: 1.35,
-              marginBottom: '0.65rem',
+              marginBottom: '0.75rem',
               color: 'var(--text-primary)',
               letterSpacing: '-0.015em',
             }}>
@@ -258,10 +258,15 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
 
           {/* Outcome Statement (REACTJav style punchy career hook) */}
           <p style={{
-            fontSize: '0.88rem',
+            fontSize: '0.9rem',
             color: 'var(--text-secondary)',
-            lineHeight: 1.55,
-            marginBottom: '1.25rem',
+            lineHeight: 1.6,
+            marginBottom: '1.35rem',
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+            minHeight: '4.2rem',
           }}>
             {course.outcome_hook || course.description}
           </p>
@@ -270,25 +275,31 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '0.65rem',
-            padding: '0.85rem',
+            gap: '0.5rem',
+            padding: '0.9rem 0.85rem',
             background: 'var(--bg-surface-elevated)',
             borderRadius: '0.75rem',
             border: '1px solid var(--border-subtle)',
-            marginBottom: '1.2rem',
-            fontSize: '0.78rem',
+            marginBottom: '1.35rem',
+            fontSize: '0.82rem',
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-secondary)' }}>
-              <Clock size={14} color="var(--accent-cyan)" />
-              <span>{course.duration_weeks ? `${course.duration_weeks} Weeks` : 'Self-Paced'}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-secondary)', minWidth: 0 }}>
+              <Clock size={15} color="var(--accent-cyan)" style={{ flexShrink: 0 }} />
+              <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {course.duration_weeks ? `${course.duration_weeks} Weeks` : 'Self-Paced'}
+              </span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-secondary)' }}>
-              <Laptop size={14} color="var(--accent-purple)" />
-              <span>{course.weekly_hours || '20 hrs/week'}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-secondary)', minWidth: 0 }}>
+              <Laptop size={15} color="var(--accent-purple)" style={{ flexShrink: 0 }} />
+              <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {course.weekly_hours || '20 hrs/week'}
+              </span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-secondary)' }}>
-              <Award size={14} color="var(--accent-emerald)" />
-              <span>{course.level}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--text-secondary)', minWidth: 0 }}>
+              <Award size={15} color="var(--accent-emerald)" style={{ flexShrink: 0 }} />
+              <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {course.level}
+              </span>
             </div>
           </div>
 
@@ -297,18 +308,18 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
             <div style={{
               display: 'flex',
               flexWrap: 'wrap',
-              gap: '0.35rem',
-              marginBottom: '1.4rem',
+              gap: '0.4rem',
+              marginBottom: '1.5rem',
             }}>
               {course.skills.slice(0, 4).map((skill) => (
                 <span
                   key={skill}
                   style={{
-                    fontSize: '0.72rem',
+                    fontSize: '0.75rem',
                     color: 'var(--text-secondary)',
                     background: 'var(--bg-surface-elevated)',
-                    padding: '0.2rem 0.55rem',
-                    borderRadius: '0.35rem',
+                    padding: '0.25rem 0.6rem',
+                    borderRadius: '0.4rem',
                     border: '1px solid var(--border-subtle)',
                     fontWeight: 500,
                   }}
@@ -318,9 +329,9 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
               ))}
               {course.skills.length > 4 && (
                 <span style={{
-                  fontSize: '0.72rem',
+                  fontSize: '0.75rem',
                   color: 'var(--text-muted)',
-                  padding: '0.2rem 0.35rem',
+                  padding: '0.25rem 0.4rem',
                 }}>
                   +{course.skills.length - 4} more
                 </span>
@@ -332,8 +343,8 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
         {/* Action Buttons: View Curriculum & Quick Enroll */}
         <div style={{
           display: 'flex',
-          gap: '0.65rem',
-          paddingTop: '0.85rem',
+          gap: '0.75rem',
+          paddingTop: '1rem',
           borderTop: '1px solid var(--border-subtle)',
         }}>
           <Link
@@ -342,12 +353,12 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
             style={{
               flex: 1,
               justifyContent: 'center',
-              fontSize: '0.82rem',
-              padding: '0.55rem 0.75rem',
+              fontSize: '0.86rem',
+              padding: '0.65rem 0.85rem',
             }}
           >
             <span>View Syllabus</span>
-            <ArrowRight size={13} />
+            <ArrowRight size={14} />
           </Link>
 
           {!isEnrolled ? (
@@ -361,12 +372,12 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
               style={{
                 flex: 1,
                 justifyContent: 'center',
-                fontSize: '0.82rem',
-                padding: '0.55rem 0.75rem',
+                fontSize: '0.86rem',
+                padding: '0.65rem 0.85rem',
                 background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)',
               }}
             >
-              <Sparkles size={13} />
+              <Sparkles size={14} />
               <span>Enroll Now</span>
             </Link>
           ) : (
@@ -376,13 +387,13 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
               style={{
                 flex: 1,
                 justifyContent: 'center',
-                fontSize: '0.82rem',
-                padding: '0.55rem 0.75rem',
+                fontSize: '0.86rem',
+                padding: '0.65rem 0.85rem',
                 background: 'linear-gradient(135deg, #059669 0%, #10b981 100%)',
               }}
             >
               <span>Resume</span>
-              <ArrowRight size={13} />
+              <ArrowRight size={14} />
             </Link>
           )}
         </div>
