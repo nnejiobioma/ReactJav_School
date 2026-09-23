@@ -12,6 +12,7 @@ const SITE_CONTENT_FILE = path.join(DATA_DIR, 'persistedSiteContent.json');
 const COURSES_FILE = path.join(DATA_DIR, 'persistedCourses.json');
 const TRACKS_FILE = path.join(DATA_DIR, 'persistedAcademyTracks.json');
 const PROFILES_FILE = path.join(DATA_DIR, 'persistedProfiles.json');
+const INQUIRIES_FILE = path.join(DATA_DIR, 'persistedTutoringInquiries.json');
 
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) {
@@ -42,12 +43,14 @@ export async function GET() {
     const courses = readJsonFile(COURSES_FILE, INITIAL_COURSES);
     const tracks = readJsonFile(TRACKS_FILE, ACADEMY_TRACKS);
     const profiles = readJsonFile<Profile[]>(PROFILES_FILE, []);
+    const inquiries = readJsonFile<any[]>(INQUIRIES_FILE, []);
 
     return NextResponse.json({
       siteContent,
       courses,
       tracks,
       profiles,
+      inquiries,
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -83,6 +86,18 @@ export async function POST(req: NextRequest) {
       }
       writeJsonFile(PROFILES_FILE, currentProfiles);
       return NextResponse.json({ success: true, type: 'profile', profileId: data.id });
+    }
+
+    if (type === 'inquiry') {
+      const currentInquiries = readJsonFile<any[]>(INQUIRIES_FILE, []);
+      const index = currentInquiries.findIndex((i) => i.id === data.id);
+      if (index >= 0) {
+        currentInquiries[index] = data;
+      } else {
+        currentInquiries.unshift(data);
+      }
+      writeJsonFile(INQUIRIES_FILE, currentInquiries);
+      return NextResponse.json({ success: true, type: 'inquiry', inquiryId: data.id });
     }
 
     if (type === 'courses') {

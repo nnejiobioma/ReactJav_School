@@ -168,53 +168,65 @@ export default function DirectTutoringEnrollmentForm({
         ? `${parentPhone} (${parentName} - ${parentRelationship})`
         : learnerPhone || learnerEmail;
 
-      // 1. Save enrollment inquiry record in localStorage
-      const existingInquiries = JSON.parse(
-        localStorage.getItem('reactjav_tutoring_inquiries') || '[]'
-      );
-      existingInquiries.push({
-        id: 'inq_' + Date.now(),
+      // 1. Prepare student contact and inquiry details
+      const inquiryId = 'inq_' + Date.now();
+      const studentEmail = learnerEmail.trim() || (isMinor ? parentEmail.trim() : `${learnerName.trim().toLowerCase().replace(/\s+/g, '.')}@student.reactjav.io`);
+      const studentPhone = isMinor ? parentPhone.trim() : learnerPhone.trim();
+
+      const newInquiry = {
+        id: inquiryId,
         trackId: selectedTrackId,
         trackName: currentTrack.name,
         learnerName: learnerName.trim(),
+        learnerEmail: studentEmail,
+        learnerPhone: studentPhone,
         age: Number(age),
         ageTier,
         objective,
         frequency,
         preferredTime,
         parentName: isMinor ? parentName.trim() : 'Self (Adult)',
-        parentEmail: isMinor ? parentEmail.trim() : learnerEmail.trim(),
-        parentPhone: isMinor ? parentPhone.trim() : learnerPhone.trim(),
+        parentEmail: isMinor ? parentEmail.trim() : studentEmail,
+        parentPhone: isMinor ? parentPhone.trim() : studentPhone,
         parentRelationship: isMinor ? parentRelationship : 'Self',
         parentalConsentApproved: isMinor ? parentalConsentApproved : true,
         parentalConsentAt: isMinor ? new Date().toISOString() : undefined,
         contactInfo: activeContact,
         notes: notes.trim(),
-        status: 'pending_payment',
+        status: 'enrolled',
         submittedAt: new Date().toISOString(),
-      });
-      localStorage.setItem('reactjav_tutoring_inquiries', JSON.stringify(existingInquiries));
+      };
 
-      // 2. Update user profile registration details if authenticated
+      // Save inquiry in localStorage
+      const existingInquiries = JSON.parse(
+        localStorage.getItem('reactjav_tutoring_inquiries') || '[]'
+      );
+      const filteredInquiries = existingInquiries.filter(
+        (inq: any) => inq.learnerName?.toLowerCase().trim() !== learnerName.trim().toLowerCase()
+      );
+      filteredInquiries.unshift(newInquiry);
+      localStorage.setItem('reactjav_tutoring_inquiries', JSON.stringify(filteredInquiries));
+
+      // 2. Immediately register student profile in LocalDataService so they are listed in Tutoring Attendance Tracker
       const currentUser = LocalDataService.getCurrentUser();
-      if (currentUser && currentUser.id !== 'guest') {
-        LocalDataService.updateTutoringRegistrationDetails(currentUser.id, {
-          full_name: learnerName.trim(),
-          age: Number(age),
-          age_tier: ageTier,
-          tutoring_objective: objective,
-          track_id: selectedTrackId,
-          track_name: currentTrack.name,
-          frequency,
-          phone: isMinor ? parentPhone.trim() : learnerPhone.trim(),
-          parent_name: isMinor ? parentName.trim() : undefined,
-          parent_email: isMinor ? parentEmail.trim() : undefined,
-          parent_phone: isMinor ? parentPhone.trim() : undefined,
-          parent_relationship: isMinor ? parentRelationship : undefined,
-          parental_consent: isMinor ? parentalConsentApproved : true,
-          notes: notes.trim(),
-        });
-      }
+      LocalDataService.registerDirectTutoringEnrollment({
+        userId: currentUser && currentUser.id !== 'guest' ? currentUser.id : `tut_stud_${Date.now()}`,
+        full_name: learnerName.trim(),
+        email: studentEmail,
+        phone: studentPhone,
+        age: Number(age),
+        age_tier: ageTier,
+        tutoring_objective: objective,
+        track_id: selectedTrackId,
+        track_name: currentTrack.name,
+        frequency,
+        parent_name: isMinor ? parentName.trim() : undefined,
+        parent_email: isMinor ? parentEmail.trim() : undefined,
+        parent_phone: isMinor ? parentPhone.trim() : undefined,
+        parent_relationship: isMinor ? parentRelationship : undefined,
+        parental_consent: isMinor ? parentalConsentApproved : true,
+        notes: notes.trim(),
+      });
 
       // 3. Construct destination payment URL
       const paymentUrl = `/subscribe?tutoringTrackId=${encodeURIComponent(

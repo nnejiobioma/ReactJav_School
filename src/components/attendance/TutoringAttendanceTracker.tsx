@@ -97,6 +97,9 @@ export default function TutoringAttendanceTracker({
   };
 
   useEffect(() => {
+    LocalDataService.syncFromServer().then(() => {
+      loadData();
+    });
     loadData();
 
     const handleStorage = () => {
@@ -107,9 +110,8 @@ export default function TutoringAttendanceTracker({
   }, [selectedMonth, initialRole, filterStudentId, viewStudentFilter]);
 
   const handleOpenAddSessionModal = () => {
-    const students = activeTutoringStudents.length > 0 
-      ? activeTutoringStudents 
-      : LocalDataService.getActiveTutoringStudents();
+    const students = LocalDataService.getActiveTutoringStudents();
+    setActiveTutoringStudents(students);
     
     // Choose default student: current filter student if set, else first student
     let defaultId = selectedStudentId;

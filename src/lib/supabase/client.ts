@@ -458,6 +458,8 @@ export class LocalDataService {
       }),
       full_name: details.full_name || existing?.full_name || 'Tutoring Scholar',
       phone: details.phone,
+      tutoring_enrolled: true,
+      tutoring_enrolled_at: new Date().toISOString(),
       tutoring_age: details.age,
       tutoring_age_tier: details.age_tier,
       tutoring_objective: details.tutoring_objective,
@@ -471,6 +473,8 @@ export class LocalDataService {
       tutoring_parental_consent: details.parental_consent,
       tutoring_parental_consent_at: details.parental_consent ? new Date().toISOString() : undefined,
       registration_completed: true,
+      subscription_status: 'active',
+      admin_granted: true,
     };
 
     if (index !== -1) {
@@ -484,6 +488,87 @@ export class LocalDataService {
       this.setCurrentUser(updatedProfile);
       window.dispatchEvent(new Event('storage'));
     }
+
+    this.persistToServer({ type: 'profile', data: updatedProfile });
+
+    return { success: true, profile: updatedProfile };
+  }
+
+  static registerDirectTutoringEnrollment(details: {
+    userId?: string;
+    full_name: string;
+    email?: string;
+    age: number;
+    age_tier: string;
+    tutoring_objective: string;
+    track_id: string;
+    track_name: string;
+    frequency: string;
+    phone?: string;
+    parent_name?: string;
+    parent_email?: string;
+    parent_phone?: string;
+    parent_relationship?: string;
+    parental_consent?: boolean;
+    notes?: string;
+  }): { success: boolean; profile: Profile } {
+    const profiles = this.getAllProfiles();
+    const currentUser = this.getCurrentUser();
+    const effectiveUserId = details.userId || (currentUser && currentUser.id !== 'guest' ? currentUser.id : `tut_stud_${Date.now()}`);
+
+    const index = profiles.findIndex(
+      (p) => p.id === effectiveUserId || (details.email && p.email && p.email.toLowerCase() === details.email.toLowerCase())
+    );
+    const existing = index !== -1 ? profiles[index] : (currentUser && currentUser.id !== 'guest' ? currentUser : null);
+
+    const updatedProfile: Profile = {
+      ...(existing || {
+        id: effectiveUserId,
+        email: details.email || `${details.full_name.toLowerCase().replace(/\s+/g, '.')}@student.reactjav.io`,
+        full_name: details.full_name,
+        avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(details.full_name)}`,
+        role: 'student',
+        created_at: new Date().toISOString(),
+      }),
+      full_name: details.full_name || existing?.full_name || 'Tutoring Scholar',
+      email: details.email || existing?.email || `${details.full_name.toLowerCase().replace(/\s+/g, '.')}@student.reactjav.io`,
+      phone: details.phone || existing?.phone,
+      tutoring_enrolled: true,
+      tutoring_track_id: details.track_id,
+      tutoring_track_name: details.track_name,
+      tutoring_enrolled_at: new Date().toISOString(),
+      tutoring_age: details.age,
+      tutoring_age_tier: details.age_tier,
+      tutoring_objective: details.tutoring_objective,
+      tutoring_frequency: details.frequency,
+      tutoring_parent_name: details.parent_name,
+      tutoring_parent_email: details.parent_email,
+      tutoring_parent_phone: details.parent_phone,
+      tutoring_parent_relationship: details.parent_relationship,
+      tutoring_parental_consent: details.parental_consent !== undefined ? details.parental_consent : true,
+      tutoring_parental_consent_at: details.parental_consent ? new Date().toISOString() : undefined,
+      registration_completed: true,
+      subscription_status: 'active',
+      admin_granted: true,
+      granted_at: new Date().toISOString(),
+      granted_by: 'Direct Tutoring Desk',
+    };
+
+    if (index !== -1) {
+      profiles[index] = updatedProfile;
+    } else {
+      profiles.unshift(updatedProfile);
+    }
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
+      if (!currentUser || currentUser.id === 'guest' || currentUser.id === effectiveUserId) {
+        this.setCurrentUser(updatedProfile);
+      }
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    this.persistToServer({ type: 'profile', data: updatedProfile });
 
     return { success: true, profile: updatedProfile };
   }
@@ -1355,22 +1440,41 @@ export class LocalDataService {
 
   static getActiveTutoringStudents(): Profile[] {
     const all = this.getAllProfiles();
-    const enrolledStudents = all.filter(
-      (p) => (p.tutoring_enrolled === true || !!p.tutoring_track_id) && p.role === 'student'
-    );
-
     const map = new Map<string, Profile>();
 
-    // Add explicitly enrolled students from profiles
-    enrolledStudents.forEach((s) => map.set(s.id, s));
+    const resolveTrackName = (trackId?: string, fallbackName?: string): string => {
+      if (!trackId) return fallbackName || 'Junior Dev Track';
+      const found = ACADEMY_TRACKS.find((t) => t.id === trackId);
+      return found?.name || fallbackName || 'Junior Dev Track';
+    };
 
-    // Also include current user if enrolled in direct tutoring
+    // 1. Add all profiles with tutoring_enrolled or tutoring_track_id
+    all.forEach((p) => {
+      const isTutoringEnrolled = p.tutoring_enrolled === true || !!p.tutoring_track_id || !!p.tutoring_track_name || p.preferred_track === 'junior-dev-track';
+      if (isTutoringEnrolled && (p.role === 'student' || !p.role)) {
+        map.set(p.id, {
+          ...p,
+          role: 'student',
+          tutoring_enrolled: true,
+          tutoring_track_id: p.tutoring_track_id || 'junior-dev-track',
+          tutoring_track_name: resolveTrackName(p.tutoring_track_id, p.tutoring_track_name),
+        });
+      }
+    });
+
+    // 2. Also check current user if enrolled in direct tutoring
     const currentUser = this.getCurrentUser();
-    if (currentUser && (currentUser.tutoring_enrolled || currentUser.tutoring_track_id) && currentUser.role === 'student') {
-      map.set(currentUser.id, currentUser);
+    if (currentUser && (currentUser.tutoring_enrolled || currentUser.tutoring_track_id)) {
+      map.set(currentUser.id, {
+        ...currentUser,
+        role: currentUser.role === 'student' ? 'student' : currentUser.role,
+        tutoring_enrolled: true,
+        tutoring_track_id: currentUser.tutoring_track_id || 'junior-dev-track',
+        tutoring_track_name: resolveTrackName(currentUser.tutoring_track_id, currentUser.tutoring_track_name),
+      });
     }
 
-    // Include inquiry submissions if any were registered
+    // 3. Include inquiry submissions (from the Direct Tutoring enrollment form)
     if (typeof window !== 'undefined') {
       try {
         const storedInquiries = localStorage.getItem('reactjav_tutoring_inquiries');
@@ -1378,42 +1482,59 @@ export class LocalDataService {
           const inquiries = JSON.parse(storedInquiries);
           if (Array.isArray(inquiries)) {
             inquiries.forEach((inq: any) => {
-              if (inq.learnerName && !Array.from(map.values()).some((s) => s.full_name?.toLowerCase() === inq.learnerName.toLowerCase())) {
-                const inqId = inq.id || `inq_stud_${Date.now()}`;
-                map.set(inqId, {
-                  id: inqId,
-                  email: inq.contactInfo || inq.parentEmail || 'scholar@student.reactjav.io',
-                  full_name: inq.learnerName,
-                  avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(inq.learnerName)}`,
+              if (inq.learnerName && inq.learnerName.trim()) {
+                const cleanName = inq.learnerName.trim();
+                const matchedExisting = Array.from(map.values()).find(
+                  (s) => s.full_name?.toLowerCase().trim() === cleanName.toLowerCase() ||
+                         (inq.contactInfo && s.email && s.email.toLowerCase() === inq.contactInfo.toLowerCase()) ||
+                         (inq.parentEmail && s.email && s.email.toLowerCase() === inq.parentEmail.toLowerCase()) ||
+                         (inq.learnerEmail && s.email && s.email.toLowerCase() === inq.learnerEmail.toLowerCase())
+                );
+
+                const inqTrackId = inq.trackId || 'junior-dev-track';
+                const inqTrackName = inq.trackName || resolveTrackName(inqTrackId, 'Junior Dev Track');
+                const studentId = matchedExisting ? matchedExisting.id : (inq.id || `tut_stud_${Date.now()}`);
+
+                const studentRecord: Profile = {
+                  ...(matchedExisting || {}),
+                  id: studentId,
+                  email: matchedExisting?.email || inq.learnerEmail || inq.contactInfo || inq.parentEmail || `${cleanName.toLowerCase().replace(/\s+/g, '.')}@student.reactjav.io`,
+                  full_name: cleanName,
+                  avatar_url: matchedExisting?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(cleanName)}`,
                   role: 'student',
                   tutoring_enrolled: true,
-                  tutoring_track_id: inq.trackId,
-                  tutoring_track_name: inq.trackName,
-                  tutoring_age: inq.age,
-                  tutoring_age_tier: inq.ageTier,
-                  tutoring_objective: inq.objective,
-                  tutoring_parent_name: inq.parentName,
-                  tutoring_parent_email: inq.parentEmail,
-                  tutoring_parent_phone: inq.parentPhone,
-                  tutoring_parent_relationship: inq.parentRelationship,
-                  tutoring_parental_consent: inq.parentalConsentApproved,
-                  tutoring_frequency: inq.frequency,
+                  tutoring_track_id: inqTrackId,
+                  tutoring_track_name: inqTrackName,
+                  tutoring_age: inq.age || matchedExisting?.tutoring_age,
+                  tutoring_age_tier: inq.ageTier || matchedExisting?.tutoring_age_tier || 'Foundation (Ages 5–10)',
+                  tutoring_objective: inq.objective || matchedExisting?.tutoring_objective,
+                  tutoring_parent_name: inq.parentName || matchedExisting?.tutoring_parent_name,
+                  tutoring_parent_email: inq.parentEmail || matchedExisting?.tutoring_parent_email,
+                  tutoring_parent_phone: inq.parentPhone || matchedExisting?.tutoring_parent_phone,
+                  tutoring_parent_relationship: inq.parentRelationship || matchedExisting?.tutoring_parent_relationship,
+                  tutoring_parental_consent: inq.parentalConsentApproved !== undefined ? inq.parentalConsentApproved : true,
+                  tutoring_frequency: inq.frequency || matchedExisting?.tutoring_frequency || '2x per week (45–60 mins recommended)',
                   subscription_status: 'active',
                   admin_granted: true,
-                  created_at: inq.submittedAt || new Date().toISOString(),
-                });
+                  created_at: inq.submittedAt || matchedExisting?.created_at || new Date().toISOString(),
+                };
+
+                map.set(studentId, studentRecord);
               }
             });
           }
         }
-      } catch {
-        // ignore inquiry parsing errors
+      } catch (err) {
+        console.warn('Error reading tutoring inquiries for attendance:', err);
       }
     }
 
-    // Add default verified tutoring scholars for immediate selection & testing
+    // 4. Add default verified tutoring scholars for immediate selection & testing
     DEFAULT_ACTIVE_TUTORING_STUDENTS.forEach((d) => {
-      if (!map.has(d.id) && !Array.from(map.values()).some((s) => s.email === d.email)) {
+      const alreadyHas = Array.from(map.values()).some(
+        (s) => s.id === d.id || s.email?.toLowerCase() === d.email?.toLowerCase() || s.full_name?.toLowerCase() === d.full_name?.toLowerCase()
+      );
+      if (!alreadyHas) {
         map.set(d.id, d);
       }
     });
@@ -1688,7 +1809,7 @@ export class LocalDataService {
     try {
       const res = await fetch('/api/admin/persist');
       if (!res.ok) return;
-      const { siteContent, courses, tracks, profiles } = await res.json();
+      const { siteContent, courses, tracks, profiles, inquiries } = await res.json();
       if (siteContent) {
         localStorage.setItem(STORAGE_KEYS.SITE_CONTENT, JSON.stringify(siteContent));
         window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: siteContent }));
@@ -1699,6 +1820,19 @@ export class LocalDataService {
       if (tracks && Array.isArray(tracks)) {
         localStorage.setItem(STORAGE_KEYS.ACADEMY_TRACKS, JSON.stringify(tracks));
         window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: { tracks } }));
+      }
+      if (inquiries && Array.isArray(inquiries) && inquiries.length > 0) {
+        try {
+          const localInquiries = JSON.parse(localStorage.getItem('reactjav_tutoring_inquiries') || '[]');
+          const inqMap = new Map<string, any>();
+          inquiries.forEach((inq: any) => inqMap.set(inq.id, inq));
+          localInquiries.forEach((inq: any) => {
+            if (!inqMap.has(inq.id)) inqMap.set(inq.id, inq);
+          });
+          localStorage.setItem('reactjav_tutoring_inquiries', JSON.stringify(Array.from(inqMap.values())));
+        } catch {
+          // ignore
+        }
       }
       if (profiles && Array.isArray(profiles) && profiles.length > 0) {
         const local = this.getAllProfiles();
