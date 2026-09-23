@@ -25,8 +25,8 @@ export const DEFAULT_SITE_CONTENT: SiteContentConfig = {
     description: 'Master production database design, Row-Level Security policies, and scalable cloud synchronization with Supabase and Next.js App Router.',
     next_intake: 'April 2026',
     duration: '12 Weeks',
-    sponsorship: '100% Sponsored (Mastercard Foundation)',
-    partner_badge: 'Mastercard Foundation Partnered',
+    sponsorship: '100% Sponsored (Scholarship Grant)',
+    partner_badge: 'Industry Partnered',
     enrolled_count_text: '8,400+ Enrolled',
     cta_primary_text: 'Explore Full Syllabus',
     cta_secondary_text: 'Check Eligibility & Grants',
@@ -147,7 +147,7 @@ export const DEFAULT_SITE_CONTENT: SiteContentConfig = {
     items: [
       {
         id: 'faq_1',
-        question: 'Who is eligible for Mastercard Foundation sponsorship grants?',
+        question: 'Who is eligible for scholarship and sponsorship grants?',
         answer: 'Applicants demonstrating strong commitment to tech leadership and problem-solving within their communities can qualify for 100% subsidized tuition. Check eligibility via the Tuition & Plans page.',
       },
       {
@@ -178,7 +178,7 @@ export const DEFAULT_SITE_CONTENT: SiteContentConfig = {
     brand_tagline: 'World-class tech and leadership academy powered by REACTJav. Built to empower over 350,000 learners with project-first engineering and accessible education.',
     mission_badge: 'DO HARD THINGS',
     copyright_text: '© 2026 REACTJav Academy. All rights reserved. • Global Quality, Accessible Education.',
-    alliance_1: 'Mastercard Foundation Partner',
+    alliance_1: 'Global Tech Education Partner',
     alliance_2: '54 City Hubs (Lagos, Nairobi, Kigali, Casablanca...)',
     alliance_3: 'Enterprise Verified Credentials',
   },

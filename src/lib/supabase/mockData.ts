@@ -539,7 +539,7 @@ This pattern allows executive stakeholders to track subscriber lifetime value an
     duration_weeks: 16,
     weekly_hours: '15-20 hrs/week',
     skills: ['Lean Startup', 'Customer Discovery', 'Unit Economics', 'Pitch Decks', 'Seed Fundraising'],
-    sponsorship_note: 'Mastercard Foundation Sponsored',
+    sponsorship_note: 'Scholarship Grant Sponsored',
     is_now_open: true,
     is_popular: true,
     cohort_date: 'April 2026',

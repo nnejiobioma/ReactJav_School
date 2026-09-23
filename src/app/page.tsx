@@ -284,7 +284,7 @@ export default function HomePage() {
                 justifyContent: 'space-between',
               }}>
                 <span className="badge badge-emerald">
-                  {siteContent.flagship?.partner_badge || 'Mastercard Foundation Partnered'}
+                  {siteContent.flagship?.partner_badge || 'Industry Partnered'}
                 </span>
                 <span style={{ fontSize: '0.75rem', color: '#ffffff', fontWeight: 600 }}>
                   {siteContent.flagship?.enrolled_count_text || '8,400+ Enrolled'}
