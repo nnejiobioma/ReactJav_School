@@ -47,6 +47,9 @@ export default function CourseDetailPage() {
 
       const foundCourse = LocalDataService.getCourseBySlug(slug);
       if (foundCourse) {
+        if (foundCourse.slug && foundCourse.slug !== slug && foundCourse.id !== slug) {
+          router.replace(`/courses/${foundCourse.slug}`);
+        }
         setCourse(foundCourse);
         setIsEnrolled(user ? LocalDataService.isEnrolled(user.id, foundCourse.id) : false);
       }
@@ -65,7 +68,7 @@ export default function CourseDetailPage() {
       window.removeEventListener('reactjav-site-content-updated', handleUpdate);
       window.removeEventListener('storage', handleUpdate);
     };
-  }, [slug]);
+  }, [slug, router]);
 
   const isAdmin = currentUser?.role === 'admin' || currentUser?.role === 'super_admin' || currentUser?.role === 'instructor';
 

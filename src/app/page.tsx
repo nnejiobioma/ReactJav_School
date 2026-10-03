@@ -69,6 +69,7 @@ export default function HomePage() {
     'Software Engineering',
     'Creative & Design',
     'Entrepreneurship',
+    'Game Development',
   ];
 
   const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced'];

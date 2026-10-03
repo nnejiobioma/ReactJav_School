@@ -19,6 +19,23 @@ import { Course } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import CurriculumEditor from '@/components/instructor/CurriculumEditor';
 
+const COURSE_CATEGORIES = [
+  'AI & Data',
+  'Software Engineering',
+  'Creative & Design',
+  'Entrepreneurship',
+  'Game Development',
+];
+
+const slugify = (text: string): string =>
+  text
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
 interface AdminCourseOutlineModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -37,6 +54,23 @@ export default function AdminCourseOutlineModal({
   const [activeTab, setActiveTab] = useState<'curriculum' | 'details'>(initialTab);
   const [formData, setFormData] = useState<Partial<Course>>({});
   const [isSaved, setIsSaved] = useState(false);
+  const [slugTouched, setSlugTouched] = useState(false);
+  const [slugError, setSlugError] = useState<string | null>(null);
+
+  const findSlugConflict = (slug: string): boolean =>
+    LocalDataService.getCourses().some(
+      (c) => c.id !== course?.id && (c.slug === slug || c.previous_slugs?.includes(slug))
+    );
+
+  const uniqueSlug = (base: string): string => {
+    if (!base) return base;
+    let candidate = base;
+    let n = 2;
+    while (findSlugConflict(candidate)) {
+      candidate = `${base}-${n++}`;
+    }
+    return candidate;
+  };
 
   useEffect(() => {
     if (course) {
@@ -51,6 +85,9 @@ export default function AdminCourseOutlineModal({
         weekly_hours: course.weekly_hours,
         outcome_hook: course.outcome_hook,
       });
+      // Auto-follow the title only if the stored slug was itself derived from the title
+      setSlugTouched(course.slug !== slugify(course.title));
+      setSlugError(null);
     }
   }, [course]);
 
@@ -74,13 +111,49 @@ export default function AdminCourseOutlineModal({
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
+  const handleTitleChange = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      title: value,
+      ...(slugTouched ? {} : { slug: uniqueSlug(slugify(value)) }),
+    }));
+    if (!slugTouched) setSlugError(null);
+  };
+
+  const handleSlugChange = (value: string) => {
+    setSlugTouched(true);
+    const cleaned = slugify(value);
+    setFormData((prev) => ({ ...prev, slug: cleaned }));
+    setSlugError(cleaned && findSlugConflict(cleaned) ? 'This slug is already used by another course.' : null);
+  };
+
+  const handleRegenerateSlug = () => {
+    const generated = uniqueSlug(slugify(formData.title || course.title));
+    setSlugTouched(false);
+    setSlugError(null);
+    setFormData((prev) => ({ ...prev, slug: generated }));
+  };
+
   const handleSaveDetails = (e: React.FormEvent) => {
     e.preventDefault();
+    const newSlug = slugify(formData.slug || '') || course.slug;
+    if (findSlugConflict(newSlug)) {
+      setSlugError('This slug is already used by another course. Choose a different one.');
+      return;
+    }
+    setSlugError(null);
+
+    // Keep old slugs so existing links redirect to the new URL
+    const previous = new Set<string>(course.previous_slugs || []);
+    if (newSlug !== course.slug) previous.add(course.slug);
+    previous.delete(newSlug);
+
     const updatedCourse: Course = {
       ...course,
       ...formData,
       title: formData.title || course.title,
-      slug: formData.slug || course.slug,
+      slug: newSlug,
+      previous_slugs: Array.from(previous),
       description: formData.description || course.description,
       category: formData.category || course.category,
       track: formData.track || course.track,
@@ -324,18 +397,38 @@ export default function AdminCourseOutlineModal({
                     required
                     className="form-input"
                     value={formData.title || ''}
-                    onChange={(e) => handleMetadataChange('title', e.target.value)}
+                    onChange={(e) => handleTitleChange(e.target.value)}
                   />
                 </div>
                 <div>
-                  <label className="form-label">URL Slug</label>
+                  <label className="form-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>URL Slug</span>
+                    <button
+                      type="button"
+                      onClick={handleRegenerateSlug}
+                      style={{ background: 'none', border: 'none', color: 'var(--primary)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}
+                    >
+                      Regenerate from title
+                    </button>
+                  </label>
                   <input
                     type="text"
                     required
                     className="form-input"
                     value={formData.slug || ''}
-                    onChange={(e) => handleMetadataChange('slug', e.target.value)}
+                    onChange={(e) => handleSlugChange(e.target.value)}
+                    style={slugError ? { borderColor: '#ef4444' } : undefined}
                   />
+                  {slugError && (
+                    <span style={{ color: '#ef4444', fontSize: '0.75rem', display: 'block', marginTop: '0.25rem' }}>
+                      {slugError}
+                    </span>
+                  )}
+                  {!slugError && formData.slug && formData.slug !== course.slug && (
+                    <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'block', marginTop: '0.25rem' }}>
+                      /courses/{formData.slug} — the old link will redirect here.
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -354,21 +447,33 @@ export default function AdminCourseOutlineModal({
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
                 <div>
                   <label className="form-label">Category</label>
-                  <input
-                    type="text"
+                  <select
                     className="form-input"
                     value={formData.category || ''}
                     onChange={(e) => handleMetadataChange('category', e.target.value)}
-                  />
+                  >
+                    {formData.category && !COURSE_CATEGORIES.includes(formData.category) && (
+                      <option value={formData.category}>{formData.category}</option>
+                    )}
+                    {COURSE_CATEGORIES.map((c) => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                   <label className="form-label">Track</label>
-                  <input
-                    type="text"
+                  <select
                     className="form-input"
                     value={formData.track || ''}
                     onChange={(e) => handleMetadataChange('track', e.target.value)}
-                  />
+                  >
+                    {formData.track && !COURSE_CATEGORIES.includes(formData.track) && (
+                      <option value={formData.track}>{formData.track}</option>
+                    )}
+                    {COURSE_CATEGORIES.map((c) => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                   <label className="form-label">Difficulty Level</label>

@@ -52,6 +52,8 @@ export interface Course {
   instructor_id: string;
   title: string;
   slug: string;
+  /** Former URL slugs; visiting one redirects to the current slug. */
+  previous_slugs?: string[];
   description: string;
   category: string;
   level: 'Beginner' | 'Intermediate' | 'Advanced' | 'All Levels';

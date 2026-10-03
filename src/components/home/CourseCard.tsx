@@ -48,6 +48,11 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
       text: '#fbbf24',
       border: 'rgba(245, 158, 11, 0.3)',
     },
+    'Game Development': {
+      bg: 'rgba(16, 185, 129, 0.12)',
+      text: '#34d399',
+      border: 'rgba(16, 185, 129, 0.3)',
+    },
   };
 
   const trackStyle = trackBadgeColors[course.track || 'Software Engineering'] || {

@@ -305,7 +305,10 @@ export class LocalDataService {
 
   static getCourseBySlug(slug: string): Course | undefined {
     const courses = this.getCourses();
-    return courses.find((c) => c.slug === slug || c.id === slug);
+    return (
+      courses.find((c) => c.slug === slug || c.id === slug) ||
+      courses.find((c) => c.previous_slugs?.includes(slug))
+    );
   }
 
   static getCourseById(id: string): Course | undefined {
