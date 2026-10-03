@@ -1,5 +1,102 @@
 [
   {
+    "id": "crs_1791024305502",
+    "instructor_id": "2c30aeaf-83f2-49bb-ae14-950eb56ce89f",
+    "title": "Game Development with AI",
+    "slug": "game-development-with-ai-5502",
+    "description": "This course focuses on game Character development with AI tool",
+    "category": "Game Development",
+    "level": "Beginner",
+    "price": 0,
+    "thumbnail_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
+    "is_published": false,
+    "created_at": "2026-10-03T10:45:05.502Z",
+    "enrollments_count": 0,
+    "average_rating": 5,
+    "reviews_count": 0,
+    "instructor": {
+      "id": "2c30aeaf-83f2-49bb-ae14-950eb56ce89f",
+      "email": "nneji.obioma@gmail.com",
+      "full_name": "Nneji Obioma",
+      "avatar_url": "https://api.dicebear.com/7.x/initials/svg?seed=Nneji%20Obioma",
+      "role": "super_admin",
+      "created_at": "2026-09-21T15:41:48.622708Z",
+      "subscription_status": "active",
+      "admin_granted": true
+    },
+    "sections": [
+      {
+        "id": "sec_1791024305502_1",
+        "course_id": "crs_1791024305502",
+        "title": "Module 1: Foundations & Architecture",
+        "position": 1,
+        "lessons": [
+          {
+            "id": "les_1791024305502_1",
+            "section_id": "sec_1791024305502_1",
+            "title": "1.1 Introduction & Course Objectives",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+            "duration_seconds": 300,
+            "position": 1,
+            "is_free_preview": true
+          }
+        ]
+      }
+    ],
+    "track": "Game Development",
+    "duration_weeks": 4,
+    "weekly_hours": "8 - 10",
+    "outcome_hook": "You will learn game character development and how AI can assist you work faster as a game developer ",
+    "previous_slugs": []
+  },
+  {
+    "id": "crs_1791024124742",
+    "instructor_id": "2c30aeaf-83f2-49bb-ae14-950eb56ce89f",
+    "title": "Game Development  With AI",
+    "slug": "game-development-with-ai-4742",
+    "description": "The course is focused on how to use AI for game development",
+    "category": "Web Development",
+    "level": "Beginner",
+    "price": 0,
+    "thumbnail_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
+    "is_published": false,
+    "created_at": "2026-10-03T10:42:04.742Z",
+    "enrollments_count": 0,
+    "average_rating": 5,
+    "reviews_count": 0,
+    "instructor": {
+      "id": "2c30aeaf-83f2-49bb-ae14-950eb56ce89f",
+      "email": "nneji.obioma@gmail.com",
+      "full_name": "Nneji Obioma",
+      "avatar_url": "https://api.dicebear.com/7.x/initials/svg?seed=Nneji%20Obioma",
+      "role": "super_admin",
+      "created_at": "2026-09-21T15:41:48.622708Z",
+      "subscription_status": "active",
+      "admin_granted": true
+    },
+    "sections": [
+      {
+        "id": "sec_1791024124742_1",
+        "course_id": "crs_1791024124742",
+        "title": "Module 1: Foundations & Architecture",
+        "position": 1,
+        "lessons": [
+          {
+            "id": "les_1791024124742_1",
+            "section_id": "sec_1791024124742_1",
+            "title": "1.1 Introduction & Course Objectives",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+            "duration_seconds": 300,
+            "position": 1,
+            "is_free_preview": true
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "crs_nextjs_supabase_01",
     "instructor_id": "usr_instructor_001",
     "title": "Full-Stack Modern Web Engineering with Next.js 15 & Supabase",
