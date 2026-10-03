@@ -1793,14 +1793,83 @@ export class LocalDataService {
 
   private static async persistToServer(payload: { type: string; data: any }): Promise<void> {
     if (typeof window === 'undefined') return;
+    let fileOk = false;
     try {
-      await fetch('/api/admin/persist', {
+      const res = await fetch('/api/admin/persist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
+      fileOk = res.ok;
+      if (!res.ok) {
+        console.warn('[LocalDataService] File persist unavailable (', res.status, ') - using Supabase.');
+      }
     } catch (err) {
       console.warn('[LocalDataService] Server persist offline fallback:', err);
+    }
+    // Deployed hosts have a read-only filesystem: store in Supabase instead.
+    if (!fileOk) {
+      await this.persistToSupabase(payload);
+    }
+  }
+
+  private static async persistToSupabase(payload: { type: string; data: any }): Promise<void> {
+    const supabase = createClient();
+    if (!isSupabaseConfigured() || !supabase) return;
+    const readLocal = (key: string) => {
+      try {
+        return JSON.parse(localStorage.getItem(key) || 'null');
+      } catch {
+        return null;
+      }
+    };
+    const rows: { key: string; data: any }[] = [];
+    const deletes: string[] = [];
+    if (payload.type === 'siteContent') {
+      rows.push({ key: 'siteContent', data: payload.data });
+    } else if (payload.type === 'course' || payload.type === 'courses') {
+      const courses = readLocal(STORAGE_KEYS.COURSES);
+      if (Array.isArray(courses)) rows.push({ key: 'courses', data: courses });
+    } else if (payload.type === 'track' || payload.type === 'tracks') {
+      const tracks = readLocal(STORAGE_KEYS.ACADEMY_TRACKS);
+      if (Array.isArray(tracks)) rows.push({ key: 'tracks', data: tracks });
+    } else if (payload.type === 'reset') {
+      const target = payload.data?.target;
+      if (target === 'siteContent' || !target) deletes.push('siteContent');
+      if (target === 'courses' || !target) deletes.push('courses');
+      if (target === 'tracks' || !target) deletes.push('tracks');
+    } else {
+      return;
+    }
+    try {
+      if (rows.length) {
+        const { error } = await supabase
+          .from('site_data')
+          .upsert(rows.map((r) => ({ ...r, updated_at: new Date().toISOString() })));
+        if (error) console.error('[LocalDataService] Supabase persist FAILED:', error.message);
+      }
+      if (deletes.length) {
+        const { error } = await supabase.from('site_data').delete().in('key', deletes);
+        if (error) console.error('[LocalDataService] Supabase reset FAILED:', error.message);
+      }
+    } catch (err) {
+      console.error('[LocalDataService] Supabase persist error:', err);
+    }
+  }
+
+  private static async fetchSupabaseSiteData(): Promise<Record<string, any>> {
+    const supabase = createClient();
+    if (!isSupabaseConfigured() || !supabase) return {};
+    try {
+      const { data, error } = await supabase.from('site_data').select('key, data');
+      if (error || !data) return {};
+      const out: Record<string, any> = {};
+      data.forEach((r: any) => {
+        out[r.key] = r.data;
+      });
+      return out;
+    } catch {
+      return {};
     }
   }
 
@@ -1808,8 +1877,13 @@ export class LocalDataService {
     if (typeof window === 'undefined') return;
     try {
       const res = await fetch('/api/admin/persist');
-      if (!res.ok) return;
-      const { siteContent, courses, tracks, profiles, inquiries } = await res.json();
+      const base = res.ok ? await res.json() : {};
+      const remote = await this.fetchSupabaseSiteData();
+      const { profiles, inquiries } = base;
+      // Supabase edits (made on the deployed site) take priority over bundled files
+      const siteContent = remote.siteContent || base.siteContent;
+      const courses = remote.courses || base.courses;
+      const tracks = remote.tracks || base.tracks;
       if (siteContent) {
         localStorage.setItem(STORAGE_KEYS.SITE_CONTENT, JSON.stringify(siteContent));
         window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: siteContent }));
