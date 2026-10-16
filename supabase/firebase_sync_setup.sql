@@ -125,5 +125,3 @@ begin
   where id = target_user_id or firebase_uid = target_user_id;
 end;
 $$ language plpgsql security definer;
-
-
