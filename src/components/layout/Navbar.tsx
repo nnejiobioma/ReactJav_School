@@ -90,6 +90,15 @@ export default function Navbar() {
     pathname.startsWith('/admin/super') ||
     pathname.startsWith('/admin/access');
 
+  const hasIntranetAccess = Boolean(
+    currentUser && (
+      currentUser.admin_granted ||
+      currentUser.tutoring_enrolled ||
+      currentUser.subscription_status === 'active' ||
+      currentUser.role !== 'student'
+    )
+  );
+
   return (
     <header style={{
       position: 'sticky',
@@ -207,12 +216,14 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div style={{ width: '1px', height: '28px', background: 'var(--border-subtle)', margin: '0 0.25rem' }} />
+          {hasIntranetAccess && (
+            <>
+              <div style={{ width: '1px', height: '28px', background: 'var(--border-subtle)', margin: '0 0.25rem' }} />
 
-          {/* Collapsed Campus Intranet Dropdown */}
-          <div ref={intranetMenuRef} style={{ position: 'relative' }}>
-            <button
-              onClick={() => setShowIntranetMenu(!showIntranetMenu)}
+              {/* Collapsed Campus Intranet Dropdown */}
+              <div ref={intranetMenuRef} style={{ position: 'relative' }}>
+                <button
+                  onClick={() => setShowIntranetMenu(!showIntranetMenu)}
               className="btn btn-sm"
               style={{
                 background: isIntranetActive ? 'rgba(79, 70, 229, 0.16)' : 'var(--bg-surface)',
@@ -467,7 +478,9 @@ export default function Navbar() {
               </div>
             )}
           </div>
-        </nav>
+        </>
+      )}
+    </nav>
 
         {/* ================= COLUMN 3: RIGHT ACTIONS & PROMINENT LOGIN SECTION ================= */}
         <div style={{
@@ -852,29 +865,31 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Campus Intranet & Tools
-            </span>
-            <Link href="/intranet" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
-              <ShieldCheck size={17} /> Campus Intranet
-            </Link>
-            <Link href="/dashboard" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
-              <LayoutDashboard size={17} /> Student Dashboard
-            </Link>
-            <Link href="/intranet/ide" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
-              <Terminal size={17} /> IDE Sandbox
-            </Link>
-            <Link href="/cbt" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
-              <Timer size={17} /> CBT Exams
-            </Link>
-            <Link href="/live" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
-              <Video size={17} /> Live Studios
-            </Link>
-            <Link href="/tutoring/attendance" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem', color: 'var(--accent-emerald)' }}>
-              <CalendarCheck size={17} /> Tutoring Attendance Tracker
-            </Link>
-          </div>
+          {hasIntranetAccess && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                Campus Intranet & Tools
+              </span>
+              <Link href="/intranet" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+                <ShieldCheck size={17} /> Campus Intranet
+              </Link>
+              <Link href="/dashboard" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+                <LayoutDashboard size={17} /> Student Dashboard
+              </Link>
+              <Link href="/intranet/ide" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+                <Terminal size={17} /> IDE Sandbox
+              </Link>
+              <Link href="/cbt" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+                <Timer size={17} /> CBT Exams
+              </Link>
+              <Link href="/live" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+                <Video size={17} /> Live Studios
+              </Link>
+              <Link href="/tutoring/attendance" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem', color: 'var(--accent-emerald)' }}>
+                <CalendarCheck size={17} /> Tutoring Attendance Tracker
+              </Link>
+            </div>
+          )}
 
           {(currentUser?.role === 'super_admin' || currentUser?.role === 'admin') && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
