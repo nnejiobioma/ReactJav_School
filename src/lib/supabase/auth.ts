@@ -214,6 +214,7 @@ export async function signInWithSupabase(
         let userRole: UserRole = existingProfile?.role || (data.user.user_metadata?.role as UserRole) || 'student';
         let fullName = existingProfile?.full_name || data.user.user_metadata?.full_name || cleanEmail.split('@')[0];
         let avatarUrl = existingProfile?.avatar_url || data.user.user_metadata?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`;
+        let remoteProfile: Record<string, any> | null = null;
         let registrationCompleted = existingProfile?.registration_completed || false;
 
         try {
@@ -224,6 +225,7 @@ export async function signInWithSupabase(
             .single();
 
           if (profileRow) {
+            remoteProfile = profileRow;
             // If Supabase profile has a role, prefer it; otherwise keep existing elevated role
             if (profileRow.role && profileRow.role !== 'student') {
               userRole = profileRow.role as UserRole;
@@ -265,6 +267,18 @@ export async function signInWithSupabase(
           subscription_status: 'active',
           admin_granted: true,
           registration_completed: registrationCompleted,
+          privacy_accepted: remoteProfile?.privacy_accepted !== undefined 
+            ? remoteProfile.privacy_accepted 
+            : existingProfile?.privacy_accepted !== undefined 
+              ? existingProfile.privacy_accepted 
+              : data.user.user_metadata?.privacy_accepted === true,
+          privacy_accepted_at: remoteProfile?.privacy_accepted_at || existingProfile?.privacy_accepted_at || data.user.user_metadata?.privacy_accepted_at,
+          terms_accepted: remoteProfile?.terms_accepted !== undefined 
+            ? remoteProfile.terms_accepted 
+            : existingProfile?.terms_accepted !== undefined 
+              ? existingProfile.terms_accepted 
+              : data.user.user_metadata?.terms_accepted === true,
+          terms_accepted_at: remoteProfile?.terms_accepted_at || existingProfile?.terms_accepted_at || data.user.user_metadata?.terms_accepted_at,
         };
 
         // Persist profile to server disk

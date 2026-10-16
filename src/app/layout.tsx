@@ -4,6 +4,8 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import AdminEditModeBar from '@/components/admin/AdminEditModeBar';
 import ServerSyncProvider from '@/components/common/ServerSyncProvider';
+import CookieConsentBanner from '@/components/common/CookieConsentBanner';
+import PrivacyPolicyPopup from '@/components/auth/PrivacyPolicyPopup';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
@@ -52,6 +54,8 @@ export default function RootLayout({
         <Footer />
         <AdminEditModeBar />
         <ServerSyncProvider />
+        <CookieConsentBanner />
+        <PrivacyPolicyPopup />
       </body>
     </html>
   );

@@ -207,7 +207,16 @@ export default function Footer() {
                 >
                   Terms of Service
                 </Link>
-                <span>Cookie Policy</span>
+                <Link
+                  href="/cookies"
+                  style={{
+                    color: 'var(--primary)',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                  }}
+                >
+                  Cookie Policy
+                </Link>
               </div>
             </div>
           </div>

@@ -29,6 +29,7 @@ import {
   updateUserPassword 
 } from '@/lib/supabase/auth';
 import { Profile } from '@/types';
+import { hasAcceptedCookies, acceptCookies } from '@/lib/cookies';
 
 function AuthContent() {
   const router = useRouter();
@@ -70,6 +71,7 @@ function AuthContent() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [acceptedCookiesOnLogin, setAcceptedCookiesOnLogin] = useState(false);
 
   const loadCurrentUser = () => {
     setCurrentUser(LocalDataService.getCurrentUser());
@@ -77,6 +79,7 @@ function AuthContent() {
 
   useEffect(() => {
     loadCurrentUser();
+    setAcceptedCookiesOnLogin(hasAcceptedCookies());
 
     const handleStorage = () => loadCurrentUser();
     window.addEventListener('storage', handleStorage);
@@ -168,6 +171,14 @@ function AuthContent() {
           }
         }, 800);
       } else {
+        if (!acceptedCookiesOnLogin) {
+          setErrorMessage('Access not granted: You must accept session cookies to sign in to ReactJav.');
+          setIsSubmitting(false);
+          return;
+        }
+
+        acceptCookies(true);
+
         const res = await signInWithSupabase(cleanEmail, password);
         if (!res.success) {
           setErrorMessage(res.error || 'Invalid credentials or user not found.');
@@ -177,6 +188,12 @@ function AuthContent() {
 
         setToastMessage(res.message || 'Signed in successfully!');
         loadCurrentUser();
+
+        // If existing user has not accepted the Privacy Policy, let the PrivacyPolicyPopup appear immediately
+        if (res.user && res.user.privacy_accepted !== true) {
+          setIsSubmitting(false);
+          return;
+        }
 
         setTimeout(() => {
           if (res.user?.role === 'instructor') {
@@ -807,6 +824,60 @@ function AuthContent() {
                 required
               />
             </div>
+
+            {activeTab === 'signin' && (
+              <div style={{
+                background: 'rgba(99, 102, 241, 0.08)',
+                border: '1px solid rgba(129, 140, 248, 0.25)',
+                borderRadius: '0.75rem',
+                padding: '0.85rem 1rem',
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '0.75rem',
+              }}>
+                <input
+                  type="checkbox"
+                  id="cookieConsentSigninCheckbox"
+                  checked={acceptedCookiesOnLogin}
+                  onChange={(e) => setAcceptedCookiesOnLogin(e.target.checked)}
+                  style={{
+                    width: '18px',
+                    height: '18px',
+                    accentColor: '#6366f1',
+                    marginTop: '2px',
+                    cursor: 'pointer',
+                    flexShrink: 0,
+                  }}
+                  required
+                />
+                <label
+                  htmlFor="cookieConsentSigninCheckbox"
+                  style={{
+                    fontSize: '0.8rem',
+                    color: 'var(--text-secondary)',
+                    lineHeight: 1.45,
+                    cursor: 'pointer',
+                    userSelect: 'none',
+                  }}
+                >
+                  I accept the use of session & functional cookies to authenticate my login session and remember my course progress. (
+                  <Link
+                    href="/cookies"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: '#a5b4fc',
+                      fontWeight: 700,
+                      textDecoration: 'underline',
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Cookie Policy
+                  </Link>
+                  )
+                </label>
+              </div>
+            )}
 
             {activeTab === 'signup' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
