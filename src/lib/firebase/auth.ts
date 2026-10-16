@@ -492,9 +492,17 @@ export function isAdmin(user: Profile | null): boolean {
 }
 
 /**
+ * Validates whether the user has Instructor or higher privileges
+ */
+export function isInstructor(user: Profile | null): boolean {
+  return !!user && (user.role === 'instructor' || user.role === 'admin' || user.role === 'super_admin');
+}
+
+/**
  * Validates whether the user holds standard Student privileges
  */
 export function isStudent(user: Profile | null): boolean {
   return !!user && user.role === 'student';
 }
+
 

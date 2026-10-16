@@ -119,6 +119,7 @@ export function buildClaimsForRole(role: UserRole): FirebaseCustomClaims {
     privileges,
     isAdmin: role === 'admin' || role === 'super_admin',
     isSuperAdmin: role === 'super_admin',
+    isInstructor: role === 'instructor' || role === 'admin' || role === 'super_admin',
     isStudent: role === 'student',
     updated_at: new Date().toISOString(),
   };

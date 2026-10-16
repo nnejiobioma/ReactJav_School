@@ -72,8 +72,16 @@ export async function GET(request: NextRequest) {
         privileges: ROLE_PRIVILEGES.student,
       },
       {
+        id: 'instructor',
+        title: 'Instructor (Faculty & Course Author)',
+        role: 'instructor',
+        badgeColor: '#10b981',
+        description: 'Faculty clearance. Authors courses and interactive curricula, creates CBT quizzes, tracks cohort attendance, and mentors students.',
+        privileges: ROLE_PRIVILEGES.instructor,
+      },
+      {
         id: 'admin',
-        title: 'Administrator (Faculty & Registrar)',
+        title: 'Administrator (Staff & Registrar)',
         role: 'admin',
         badgeColor: '#fbbf24',
         description: 'Academic staff clearance. Manages curriculum authoring, student performance reviews, CBT examinations, attendance, and tuition clearance.',
@@ -84,7 +92,7 @@ export async function GET(request: NextRequest) {
         title: 'Super Administrator (Root Governance)',
         role: 'super_admin',
         badgeColor: '#c084fc',
-        description: 'Complete unconstrained institutional control. Holds exclusive authority to grant or revoke Admin and Super Admin privileges, manage Firebase claims, and govern platform security.',
+        description: 'Complete unconstrained institutional control. Holds exclusive authority to grant or revoke Instructor, Admin, and Super Admin privileges, manage Firebase claims, and govern platform security.',
         privileges: ROLE_PRIVILEGES.super_admin,
       },
     ];

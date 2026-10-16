@@ -32,6 +32,7 @@ export const ROLE_PRIVILEGES: Record<UserRole, Privilege[]> = {
     'courses:create',
     'courses:edit',
     'cbt:manage',
+    'students:view',
     'attendance:manage',
   ],
   admin: [
@@ -73,6 +74,7 @@ export interface FirebaseCustomClaims {
   privileges: Privilege[];
   isAdmin: boolean;
   isSuperAdmin: boolean;
+  isInstructor: boolean;
   isStudent: boolean;
   updated_at?: string;
   [key: string]: any;

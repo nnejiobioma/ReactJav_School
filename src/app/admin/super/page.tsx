@@ -312,7 +312,7 @@ export default function SuperAdminGovernancePage() {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
             gap: '1.25rem',
           }}>
             {/* 1. Student Card */}
@@ -346,30 +346,61 @@ export default function SuperAdminGovernancePage() {
               </div>
             </div>
 
-            {/* 2. Admin Card */}
-            <div className="glass-card" style={{ padding: '1.5rem', borderRadius: '1.1rem', border: '1px solid rgba(245, 158, 11, 0.35)' }}>
+            {/* 2. Instructor Card */}
+            <div className="glass-card" style={{ padding: '1.5rem', borderRadius: '1.1rem', border: '1px solid rgba(16, 185, 129, 0.35)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                <span className="badge badge-amber" style={{ fontSize: '0.75rem', fontWeight: 800 }}>
-                  2. Administrator
+                <span className="badge badge-emerald" style={{ fontSize: '0.75rem', fontWeight: 800 }}>
+                  2. Instructor
                 </span>
-                <span style={{ fontSize: '0.72rem', color: 'var(--accent-amber)', fontWeight: 700 }}>Faculty & Staff</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--accent-emerald)', fontWeight: 700 }}>Faculty Lead</span>
               </div>
-              <h3 style={{ fontSize: '1.05rem', color: '#ffffff', margin: '0 0 0.35rem', fontWeight: 700 }}>Faculty & Registrar</h3>
+              <h3 style={{ fontSize: '1.05rem', color: '#ffffff', margin: '0 0 0.35rem', fontWeight: 700 }}>Faculty & Course Author</h3>
               <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1.1rem' }}>
-                Operational clearance for course managers, instructors, and registrars. Manages learning content and clearance desks.
+                Academic authoring clearance. Designs curricula, builds CBT questions, hosts live classes, and tracks student progress.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.78rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
                   <CheckCircle2 size={13} /> <span>All Student Privileges Included</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
-                  <CheckCircle2 size={13} /> <span>Curriculum Studio & Course Authoring</span>
+                  <CheckCircle2 size={13} /> <span>Curriculum Studio & Course Builder</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
-                  <CheckCircle2 size={13} /> <span>CBT Quiz & Examination Builder</span>
+                  <CheckCircle2 size={13} /> <span>CBT Quiz & Examination Authoring</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Enrolled Student Directory & Attendance</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#f87171' }}>
+                  <XCircle size={13} /> <span>No Financial Review or Role Assignment</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 3. Admin Card */}
+            <div className="glass-card" style={{ padding: '1.5rem', borderRadius: '1.1rem', border: '1px solid rgba(245, 158, 11, 0.35)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                <span className="badge badge-amber" style={{ fontSize: '0.75rem', fontWeight: 800 }}>
+                  3. Administrator
+                </span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--accent-amber)', fontWeight: 700 }}>Staff & Registrar</span>
+              </div>
+              <h3 style={{ fontSize: '1.05rem', color: '#ffffff', margin: '0 0 0.35rem', fontWeight: 700 }}>Operations & Registrar</h3>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1.1rem' }}>
+                Operational clearance for course managers, instructors, and registrars. Manages learning content and clearance desks.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.78rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>All Student & Faculty Privileges</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Curriculum & Course Management</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
                   <CheckCircle2 size={13} /> <span>Registrar Desk & Tuition Approval</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Student Audit & Cohort Performance</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#f87171' }}>
                   <XCircle size={13} /> <span>Cannot Modify System Roles or Root Access</span>
@@ -377,7 +408,7 @@ export default function SuperAdminGovernancePage() {
               </div>
             </div>
 
-            {/* 3. Super Admin Card */}
+            {/* 4. Super Admin Card */}
             <div className="glass-card" style={{
               padding: '1.5rem',
               borderRadius: '1.1rem',
@@ -386,7 +417,7 @@ export default function SuperAdminGovernancePage() {
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
                 <span className="badge badge-purple" style={{ fontSize: '0.75rem', fontWeight: 800 }}>
-                  3. Super Administrator
+                  4. Super Administrator
                 </span>
                 <span style={{ fontSize: '0.72rem', color: '#d8b4fe', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>ALL PRIVILEGES</span>
               </div>
