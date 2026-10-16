@@ -7,6 +7,10 @@ import {
   updatePassword,
   updateProfile,
   onAuthStateChanged,
+  confirmPasswordReset,
+  verifyPasswordResetCode,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
   User as FirebaseUser
 } from 'firebase/auth';
 import { auth, googleProvider, isFirebaseConfigured } from './config';
@@ -382,17 +386,70 @@ export async function sendPasswordResetFirebase(email: string): Promise<Firebase
 }
 
 /**
- * Update authenticated user password
+ * Update authenticated user password with support for re-authentication and oobCode reset
  */
-export async function updatePasswordFirebase(newPassword: string): Promise<FirebaseAuthResponse> {
+export async function updatePasswordFirebase(
+  newPassword: string,
+  currentPassword?: string,
+  oobCode?: string
+): Promise<FirebaseAuthResponse> {
+  // If an out-of-band email reset code is present, use confirmPasswordReset
+  if (oobCode && isFirebaseConfigured() && auth) {
+    try {
+      await confirmPasswordReset(auth, oobCode, newPassword);
+      return {
+        success: true,
+        message: 'Password reset successfully! You can now sign in with your new password.',
+      };
+    } catch (err: any) {
+      let msg = err?.message || 'Failed to reset password.';
+      if (err?.code === 'auth/expired-action-code') {
+        msg = 'This password reset link has expired. Please request a new password reset link.';
+      } else if (err?.code === 'auth/invalid-action-code') {
+        msg = 'This password reset link is invalid or has already been used. Please request a new one.';
+      } else if (err?.code === 'auth/weak-password') {
+        msg = 'Password is too weak. Please use at least 6 characters.';
+      }
+      return {
+        success: false,
+        error: msg,
+      };
+    }
+  }
+
   if (isFirebaseConfigured() && auth && auth.currentUser) {
     try {
+      // If current password provided, re-authenticate first to satisfy Firebase security requirement
+      if (currentPassword && auth.currentUser.email) {
+        try {
+          const credential = EmailAuthProvider.credential(auth.currentUser.email, currentPassword);
+          await reauthenticateWithCredential(auth.currentUser, credential);
+        } catch (reauthErr: any) {
+          if (reauthErr?.code === 'auth/wrong-password' || reauthErr?.code === 'auth/invalid-credential') {
+            return {
+              success: false,
+              error: 'Current password is incorrect. Please verify your current password.',
+            };
+          }
+          return {
+            success: false,
+            error: reauthErr?.message || 'Re-authentication failed.',
+          };
+        }
+      }
+
       await updatePassword(auth.currentUser, newPassword);
       return {
         success: true,
         message: 'Password updated successfully in Firebase Auth!',
       };
     } catch (err: any) {
+      if (err?.code === 'auth/requires-recent-login') {
+        return {
+          success: false,
+          error: 'auth/requires-recent-login',
+        };
+      }
       return {
         success: false,
         error: err?.message || 'Failed to update password.',
@@ -404,6 +461,64 @@ export async function updatePasswordFirebase(newPassword: string): Promise<Fireb
     success: true,
     message: 'Password updated successfully!',
   };
+}
+
+/**
+ * Confirm password reset using the action code from an email link
+ */
+export async function confirmPasswordResetFirebase(
+  oobCode: string,
+  newPassword: string
+): Promise<FirebaseAuthResponse> {
+  if (isFirebaseConfigured() && auth) {
+    try {
+      await confirmPasswordReset(auth, oobCode, newPassword);
+      return {
+        success: true,
+        message: 'Password has been reset successfully! You can now log in.',
+      };
+    } catch (err: any) {
+      let msg = err?.message || 'Password reset failed.';
+      if (err?.code === 'auth/expired-action-code') {
+        msg = 'The password reset link has expired. Please request a fresh reset link.';
+      } else if (err?.code === 'auth/invalid-action-code') {
+        msg = 'The password reset link is invalid or has already been used. Please request a fresh reset link.';
+      } else if (err?.code === 'auth/weak-password') {
+        msg = 'Password is too weak. Please use at least 6 characters.';
+      }
+      return {
+        success: false,
+        error: msg,
+      };
+    }
+  }
+  return {
+    success: true,
+    message: 'Password reset successfully!',
+  };
+}
+
+/**
+ * Verifies a password reset action code from an email and returns the associated email address
+ */
+export async function verifyPasswordResetCodeFirebase(
+  oobCode: string
+): Promise<{ success: boolean; email?: string; error?: string }> {
+  if (isFirebaseConfigured() && auth) {
+    try {
+      const email = await verifyPasswordResetCode(auth, oobCode);
+      return { success: true, email };
+    } catch (err: any) {
+      let msg = err?.message || 'Invalid or expired reset code.';
+      if (err?.code === 'auth/expired-action-code') {
+        msg = 'This password reset link has expired.';
+      } else if (err?.code === 'auth/invalid-action-code') {
+        msg = 'This password reset link is invalid or has already been used.';
+      }
+      return { success: false, error: msg };
+    }
+  }
+  return { success: false, error: 'Firebase Auth is not configured.' };
 }
 
 /**

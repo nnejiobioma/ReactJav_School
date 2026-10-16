@@ -36,6 +36,8 @@ import {
   signInWithGoogleFirebase,
   sendPasswordResetFirebase, 
   updatePasswordFirebase, 
+  confirmPasswordResetFirebase,
+  verifyPasswordResetCodeFirebase,
   onFirebaseAuthStateChange 
 } from '@/lib/firebase/auth';
 import { isFirebaseConfigured } from '@/lib/firebase/config';
@@ -44,6 +46,7 @@ function AuthContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const modeParam = searchParams.get('mode') || searchParams.get('tab');
+  const oobCodeParam = searchParams.get('oobCode');
   const redirectUrl = searchParams.get('redirect') || searchParams.get('callbackUrl');
   const courseIdParam = searchParams.get('courseId') || searchParams.get('course');
 
@@ -59,10 +62,10 @@ function AuthContent() {
   const isEnrolling = !!selectedCourse || !!courseIdParam || (redirectUrl?.includes('subscribe') ?? false);
 
   const [activeTab, setActiveTab] = useState<'signin' | 'signup' | 'forgot' | 'reset'>(
-    modeParam === 'signup' || (isEnrolling && modeParam !== 'signin')
-      ? 'signup' 
-      : modeParam === 'reset' 
-        ? 'reset' 
+    oobCodeParam || modeParam === 'resetPassword' || modeParam === 'reset'
+      ? 'reset'
+      : modeParam === 'signup' || (isEnrolling && modeParam !== 'signin')
+        ? 'signup' 
         : modeParam === 'forgot'
           ? 'forgot'
           : 'signin'
@@ -70,6 +73,7 @@ function AuthContent() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [fullName, setFullName] = useState('');
@@ -77,6 +81,9 @@ function AuthContent() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [resetSuccess, setResetSuccess] = useState(false);
+  const [requiresRecentLogin, setRequiresRecentLogin] = useState(false);
+  const [verifiedResetEmail, setVerifiedResetEmail] = useState<string | null>(null);
+  const [isSendingResetEmail, setIsSendingResetEmail] = useState(false);
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
@@ -93,10 +100,22 @@ function AuthContent() {
     const handleStorage = () => loadCurrentUser();
     window.addEventListener('storage', handleStorage);
 
+    // If an action code is in the URL from a Firebase password reset email
+    if (oobCodeParam) {
+      setActiveTab('reset');
+      verifyPasswordResetCodeFirebase(oobCodeParam).then((res) => {
+        if (res.success && res.email) {
+          setVerifiedResetEmail(res.email);
+        } else if (res.error) {
+          setErrorMessage(res.error);
+        }
+      });
+    }
+
     // Detect recovery token from hash or query param
     if (typeof window !== 'undefined') {
       const hash = window.location.hash;
-      if (hash.includes('type=recovery') || modeParam === 'reset') {
+      if (hash.includes('type=recovery') || modeParam === 'reset' || modeParam === 'resetPassword') {
         setActiveTab('reset');
       } else if (modeParam === 'signup' || (isEnrolling && modeParam !== 'signin')) {
         setActiveTab('signup');
@@ -290,24 +309,60 @@ function AuthContent() {
 
     setIsSubmitting(true);
     try {
-      const res = await updatePasswordFirebase(newPassword);
+      const res = await updatePasswordFirebase(newPassword, currentPassword || undefined, oobCodeParam || undefined);
       if (res.success) {
-        setToastMessage('Password updated successfully!');
+        setToastMessage(res.message || 'Password updated successfully!');
         setResetSuccess(true);
+        setRequiresRecentLogin(false);
         setTimeout(() => {
           setActiveTab('signin');
           setResetSuccess(false);
           setNewPassword('');
           setConfirmPassword('');
-        }, 1500);
+          setCurrentPassword('');
+        }, 1800);
       } else {
-        setErrorMessage(res.error || 'Failed to update password.');
+        if (res.error === 'auth/requires-recent-login' || (res.error && res.error.includes('requires-recent-login'))) {
+          setRequiresRecentLogin(true);
+          setErrorMessage('Security Verification Required: For your protection, Firebase requires recent confirmation before updating your password. Please enter your current password below to confirm, or click the button below to send a secure reset link to your email.');
+        } else {
+          setErrorMessage(res.error || 'Failed to update password.');
+        }
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Password update failed';
-      setErrorMessage(msg);
+      if (msg.includes('requires-recent-login')) {
+        setRequiresRecentLogin(true);
+        setErrorMessage('Security Verification Required: Please enter your current password below to confirm, or send a reset link to your email.');
+      } else {
+        setErrorMessage(msg);
+      }
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleSendEmailResetInstead = async () => {
+    const targetEmail = (email || verifiedResetEmail || currentUser?.email || '').trim().toLowerCase();
+    if (!targetEmail) {
+      setActiveTab('forgot');
+      setErrorMessage('Please enter your account email address to receive a secure password reset link.');
+      return;
+    }
+    setIsSendingResetEmail(true);
+    try {
+      const res = await sendPasswordResetFirebase(targetEmail);
+      if (res.success) {
+        setToastMessage(`Password reset link sent to ${targetEmail}! Check your inbox.`);
+        setActiveTab('forgot');
+        setResetSuccess(true);
+      } else {
+        setErrorMessage(res.error || 'Failed to send reset email.');
+      }
+    } catch (err: any) {
+      setErrorMessage(err?.message || 'Failed to send reset email.');
+    } finally {
+      setIsSendingResetEmail(false);
     }
   };
 
@@ -766,6 +821,41 @@ function AuthContent() {
               </div>
             ) : (
               <form onSubmit={handleResetSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {verifiedResetEmail && (
+                  <div style={{
+                    padding: '0.75rem 1rem',
+                    borderRadius: '0.65rem',
+                    background: 'rgba(99, 102, 241, 0.12)',
+                    border: '1px solid rgba(99, 102, 241, 0.25)',
+                    fontSize: '0.82rem',
+                    color: '#c7d2fe',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                  }}>
+                    <Mail size={15} color="#818cf8" />
+                    <span>Resetting password for: <strong>{verifiedResetEmail}</strong></span>
+                  </div>
+                )}
+
+                {/* Current password for re-authentication when required */}
+                {(requiresRecentLogin || (!oobCodeParam && !!currentUser)) && (
+                  <div>
+                    <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
+                      Current Password {requiresRecentLogin && <span style={{ color: '#fbbf24', fontWeight: 600 }}>* (Required to verify identity)</span>}
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="Enter your current password"
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                      className="form-input"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                    />
+                  </div>
+                )}
+
                 <div>
                   <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
                     New Password (min. 6 characters)
@@ -814,6 +904,36 @@ function AuthContent() {
                     </>
                   )}
                 </button>
+
+                {/* Fallback option if user doesn't remember current password */}
+                {requiresRecentLogin && (
+                  <div style={{
+                    padding: '1rem',
+                    borderRadius: '0.75rem',
+                    background: 'rgba(245, 158, 11, 0.1)',
+                    border: '1px solid rgba(245, 158, 11, 0.3)',
+                    fontSize: '0.82rem',
+                    marginTop: '0.25rem',
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: '#fbbf24', marginBottom: '0.35rem' }}>
+                      <AlertCircle size={15} />
+                      <span>Don't know your current password?</span>
+                    </div>
+                    <p style={{ margin: '0 0 0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                      No problem. We can send a secure, 1-click password reset link directly to your registered email inbox so you don't need your old password.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleSendEmailResetInstead}
+                      disabled={isSendingResetEmail}
+                      className="btn btn-secondary btn-sm"
+                      style={{ gap: '0.4rem', borderColor: '#fbbf24', color: '#fbbf24', width: '100%', justifyContent: 'center' }}
+                    >
+                      <Mail size={14} />
+                      <span>{isSendingResetEmail ? 'Sending Reset Link...' : 'Send Password Reset Email Link Instead'}</span>
+                    </button>
+                  </div>
+                )}
               </form>
             )}
 
