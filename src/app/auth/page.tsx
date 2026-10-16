@@ -68,6 +68,7 @@ function AuthContent() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [resetSuccess, setResetSuccess] = useState(false);
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
+  const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
 
   const loadCurrentUser = () => {
     setCurrentUser(LocalDataService.getCurrentUser());
@@ -133,7 +134,13 @@ function AuthContent() {
           return;
         }
 
-        const res = await signUpWithSupabase(cleanEmail, password, fullName.trim());
+        if (!acceptedPrivacy) {
+          setErrorMessage('Access not granted: You must accept the Privacy Policy before your account can be created.');
+          setIsSubmitting(false);
+          return;
+        }
+
+        const res = await signUpWithSupabase(cleanEmail, password, fullName.trim(), acceptedPrivacy);
         if (!res.success) {
           setErrorMessage(res.error || 'Registration failed. Please try again.');
           setIsSubmitting(false);
@@ -793,6 +800,60 @@ function AuthContent() {
                 required
               />
             </div>
+
+            {activeTab === 'signup' && (
+              <div style={{
+                background: 'rgba(99, 102, 241, 0.08)',
+                border: '1px solid rgba(129, 140, 248, 0.25)',
+                borderRadius: '0.75rem',
+                padding: '0.85rem 1rem',
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '0.75rem',
+              }}>
+                <input
+                  type="checkbox"
+                  id="privacyPolicyCheckbox"
+                  checked={acceptedPrivacy}
+                  onChange={(e) => setAcceptedPrivacy(e.target.checked)}
+                  style={{
+                    width: '18px',
+                    height: '18px',
+                    accentColor: '#6366f1',
+                    marginTop: '2px',
+                    cursor: 'pointer',
+                    flexShrink: 0,
+                  }}
+                  required
+                />
+                <label
+                  htmlFor="privacyPolicyCheckbox"
+                  style={{
+                    fontSize: '0.8rem',
+                    color: 'var(--text-secondary)',
+                    lineHeight: 1.45,
+                    cursor: 'pointer',
+                    userSelect: 'none',
+                  }}
+                >
+                  I have read and accept the{' '}
+                  <Link
+                    href="/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: '#a5b4fc',
+                      fontWeight: 700,
+                      textDecoration: 'underline',
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    ReactJav Privacy Policy
+                  </Link>
+                  . I understand that access to courses, proctored examinations, and the student intranet is not granted without accepting these terms.
+                </label>
+              </div>
+            )}
 
 
             <button 

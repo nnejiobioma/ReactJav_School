@@ -141,6 +141,76 @@ export default function AccessGuard({
   }
 
   // ==========================================
+  // LEVEL 1.25: CHECK PRIVACY POLICY ACCEPTANCE
+  // ==========================================
+  if (currentUser && currentUser.privacy_accepted === false) {
+    return (
+      <div className="container" style={{ padding: '4rem 1.5rem 6rem', maxWidth: '680px' }}>
+        <div className="glass-card" style={{ textAlign: 'center', padding: '3.5rem 2rem' }}>
+          <div style={{
+            width: '4.5rem',
+            height: '4.5rem',
+            borderRadius: '1.25rem',
+            background: 'rgba(239, 68, 68, 0.12)',
+            border: '1px solid rgba(239, 68, 68, 0.3)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '1.5rem',
+          }}>
+            <ShieldAlert size={36} color="#ef4444" />
+          </div>
+
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.4rem',
+            padding: '0.3rem 0.8rem',
+            borderRadius: '9999px',
+            background: 'rgba(239, 68, 68, 0.1)',
+            border: '1px solid rgba(239, 68, 68, 0.25)',
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: '#f87171',
+            marginBottom: '1rem',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+          }}>
+            <Shield size={13} />
+            <span>Privacy Policy Acceptance Required</span>
+          </div>
+
+          <h1 style={{ fontSize: '1.85rem', color: '#ffffff', marginBottom: '0.75rem' }}>
+            Access Not Granted
+          </h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.6, maxWidth: '500px', margin: '0 auto 2rem' }}>
+            In accordance with ReactJav academic and data governance standards, all students and members must read and accept the Privacy Policy before access to learning materials, intranet, and coursework is granted.
+          </p>
+
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <Link href="/privacy" className="btn btn-secondary">
+              <span>Read Privacy Policy</span>
+              <ExternalLink size={16} />
+            </Link>
+            <button
+              onClick={() => {
+                if (currentUser?.id) {
+                  LocalDataService.acceptPrivacyPolicy(currentUser.id);
+                  evaluateState();
+                }
+              }}
+              className="btn btn-primary"
+            >
+              <span>Accept Terms & Grant Access</span>
+              <ArrowRight size={16} />
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ==========================================
   // LEVEL 1.5: CHECK STUDENT REGISTRATION COMPLETION
   // ==========================================
   if (currentUser?.role === 'student' && !currentUser.registration_completed) {

@@ -427,6 +427,56 @@ export class LocalDataService {
     return { success: true, profile: updatedProfile };
   }
 
+  static acceptPrivacyPolicy(userId: string): { success: boolean; profile: Profile } {
+    const profiles = this.getAllProfiles();
+    const index = profiles.findIndex((p) => p.id === userId);
+    const existing = index !== -1 ? profiles[index] : this.getCurrentUser();
+
+    const timestamp = new Date().toISOString();
+    const updatedProfile: Profile = {
+      ...(existing || {
+        id: userId,
+        email: '',
+        full_name: 'Student',
+        avatar_url: 'https://api.dicebear.com/7.x/initials/svg?seed=Student',
+        role: 'student',
+        created_at: timestamp,
+      }),
+      privacy_accepted: true,
+      privacy_accepted_at: timestamp,
+    };
+
+    if (index !== -1) {
+      profiles[index] = updatedProfile;
+    } else {
+      profiles.unshift(updatedProfile);
+    }
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
+      this.setCurrentUser(updatedProfile);
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    try {
+      fetch('/api/admin/persist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'profile', data: updatedProfile }),
+      }).catch(() => {});
+    } catch {}
+
+    const supabase = createClient();
+    if (isSupabaseConfigured() && supabase) {
+      supabase.from('profiles').update({
+        privacy_accepted: true,
+        privacy_accepted_at: timestamp,
+      }).eq('id', userId).then();
+    }
+
+    return { success: true, profile: updatedProfile };
+  }
+
   static updateTutoringRegistrationDetails(
     userId: string,
     details: {

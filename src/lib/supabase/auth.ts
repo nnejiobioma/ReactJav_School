@@ -15,11 +15,20 @@ export interface AuthResponse {
 export async function signUpWithSupabase(
   email: string,
   password: string,
-  fullName: string
+  fullName: string,
+  acceptedPrivacyPolicy: boolean = false
 ): Promise<AuthResponse> {
+  if (!acceptedPrivacyPolicy) {
+    return {
+      success: false,
+      error: 'Access not granted: You must accept the Privacy Policy before creating an account.',
+    };
+  }
+
   const supabase = createClient();
   const assignedRole: UserRole = 'student';
   const cleanEmail = email.trim().toLowerCase();
+  const acceptanceTimestamp = new Date().toISOString();
 
   if (isSupabaseConfigured() && supabase) {
     try {
@@ -30,6 +39,8 @@ export async function signUpWithSupabase(
           data: {
             full_name: fullName.trim(),
             role: assignedRole,
+            privacy_accepted: true,
+            privacy_accepted_at: acceptanceTimestamp,
           },
         },
       });
@@ -52,9 +63,11 @@ export async function signUpWithSupabase(
           full_name: fullName.trim(),
           avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName.trim())}`,
           role: assignedRole,
-          created_at: new Date().toISOString(),
+          created_at: acceptanceTimestamp,
           subscription_status: 'none',
           admin_granted: false,
+          privacy_accepted: true,
+          privacy_accepted_at: acceptanceTimestamp,
         };
 
         // Try upserting into public.profiles if table is created
@@ -65,6 +78,8 @@ export async function signUpWithSupabase(
             full_name: newProfile.full_name,
             avatar_url: newProfile.avatar_url,
             role: assignedRole,
+            privacy_accepted: true,
+            privacy_accepted_at: acceptanceTimestamp,
           });
         } catch {
           // Table might not be migrated yet; local state handles execution
@@ -105,9 +120,11 @@ export async function signUpWithSupabase(
     full_name: fullName.trim(),
     avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName.trim())}`,
     role: assignedRole,
-    created_at: new Date().toISOString(),
+    created_at: acceptanceTimestamp,
     subscription_status: 'none',
     admin_granted: false,
+    privacy_accepted: true,
+    privacy_accepted_at: acceptanceTimestamp,
   };
 
   LocalDataService.setCurrentUser(fallbackProfile);

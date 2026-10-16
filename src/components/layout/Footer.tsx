@@ -187,7 +187,16 @@ export default function Footer() {
                 {footerContent.copyright_text}
               </div>
               <div style={{ display: 'flex', gap: '1.5rem' }}>
-                <span>Privacy Policy</span>
+                <Link
+                  href="/privacy"
+                  style={{
+                    color: 'var(--primary)',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                  }}
+                >
+                  Privacy Policy
+                </Link>
                 <span>Terms of Service</span>
                 <span>Cookie Policy</span>
               </div>

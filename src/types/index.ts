@@ -45,6 +45,9 @@ export interface Profile {
   experience_level?: string;
   career_goal?: string;
   emergency_contact?: string;
+  // Privacy Policy Acceptance & Compliance
+  privacy_accepted?: boolean;
+  privacy_accepted_at?: string;
 }
 
 export interface Course {
