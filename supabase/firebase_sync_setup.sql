@@ -110,3 +110,20 @@ create policy "Allow lesson progress upsert"
 create index if not exists idx_lesson_progress_user on public.lesson_progress(user_id);
 create index if not exists idx_lesson_progress_lesson on public.lesson_progress(lesson_id);
 
+-- 6. ROLE CONSTRAINTS & ADMIN ROLE RPC:
+-- Ensure role supports all 4 tiers: student, instructor, admin, super_admin
+alter table public.profiles drop constraint if exists profiles_role_check;
+alter table public.profiles add constraint profiles_role_check 
+  check (role in ('student', 'instructor', 'admin', 'super_admin'));
+
+-- Stored procedure to reliably update user roles across IDs & Firebase UIDs
+create or replace function public.admin_set_user_role(target_user_id text, target_role text)
+returns void as $$
+begin
+  update public.profiles
+  set role = target_role
+  where id = target_user_id or firebase_uid = target_user_id;
+end;
+$$ language plpgsql security definer;
+
+
