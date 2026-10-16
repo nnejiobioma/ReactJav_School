@@ -84,6 +84,9 @@ function AuthContent() {
   const [requiresRecentLogin, setRequiresRecentLogin] = useState(false);
   const [verifiedResetEmail, setVerifiedResetEmail] = useState<string | null>(null);
   const [isSendingResetEmail, setIsSendingResetEmail] = useState(false);
+  const [directResetLink, setDirectResetLink] = useState<string | null>(null);
+  const [directOobCode, setDirectOobCode] = useState<string | null>(null);
+  const [isCopiedLink, setIsCopiedLink] = useState(false);
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
@@ -276,7 +279,28 @@ function AuthContent() {
     setIsSubmitting(true);
     try {
       const cleanEmail = email.trim().toLowerCase();
+      
+      // 1. Dispatch reset email via Firebase Auth client
       const res = await sendPasswordResetFirebase(cleanEmail);
+
+      // 2. Query server API to generate direct reset token if Admin credentials are present
+      try {
+        const directRes = await fetch('/api/auth/reset-link', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: cleanEmail }),
+        });
+        const directData = await directRes.json();
+        if (directData?.success && directData?.link) {
+          setDirectResetLink(directData.link);
+          if (directData.oobCode) {
+            setDirectOobCode(directData.oobCode);
+          }
+        }
+      } catch (directErr) {
+        console.warn('Direct reset link generation notice:', directErr);
+      }
+
       if (!res.success) {
         setErrorMessage(res.error || 'Unable to send password reset email.');
         setIsSubmitting(false);
@@ -309,7 +333,8 @@ function AuthContent() {
 
     setIsSubmitting(true);
     try {
-      const res = await updatePasswordFirebase(newPassword, currentPassword || undefined, oobCodeParam || undefined);
+      const effectiveCode = directOobCode || oobCodeParam;
+      const res = await updatePasswordFirebase(newPassword, currentPassword || undefined, effectiveCode || undefined);
       if (res.success) {
         setToastMessage(res.message || 'Password updated successfully!');
         setResetSuccess(true);
@@ -320,6 +345,8 @@ function AuthContent() {
           setNewPassword('');
           setConfirmPassword('');
           setCurrentPassword('');
+          setDirectOobCode(null);
+          setDirectResetLink(null);
         }, 1800);
       } else {
         if (res.error === 'auth/requires-recent-login' || (res.error && res.error.includes('requires-recent-login'))) {
@@ -351,6 +378,22 @@ function AuthContent() {
     }
     setIsSendingResetEmail(true);
     try {
+      // Also request direct link
+      try {
+        const directRes = await fetch('/api/auth/reset-link', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: targetEmail }),
+        });
+        const directData = await directRes.json();
+        if (directData?.success && directData?.link) {
+          setDirectResetLink(directData.link);
+          if (directData.oobCode) {
+            setDirectOobCode(directData.oobCode);
+          }
+        }
+      } catch {}
+
       const res = await sendPasswordResetFirebase(targetEmail);
       if (res.success) {
         setToastMessage(`Password reset link sent to ${targetEmail}! Check your inbox.`);
@@ -691,26 +734,131 @@ function AuthContent() {
             </div>
 
             {resetSuccess ? (
-              <div style={{
-                padding: '1.25rem',
-                borderRadius: '0.75rem',
-                background: 'rgba(16, 185, 129, 0.12)',
-                border: '1px solid rgba(16, 185, 129, 0.35)',
-                color: '#34d399',
-                fontSize: '0.88rem',
-                lineHeight: 1.5,
-                marginBottom: '1.5rem',
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '0.75rem',
-              }}>
-                <CheckCircle2 size={20} style={{ flexShrink: 0, marginTop: '2px' }} />
-                <div>
-                  <strong style={{ display: 'block', color: '#ffffff', marginBottom: '0.25rem' }}>
-                    Password Reset Link Sent!
-                  </strong>
-                  Check your inbox at <strong>{email}</strong> for instructions to reset your password. Once you receive the link, click it to set a new password.
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '1.5rem' }}>
+                <div style={{
+                  padding: '1.25rem',
+                  borderRadius: '0.75rem',
+                  background: 'rgba(16, 185, 129, 0.12)',
+                  border: '1px solid rgba(16, 185, 129, 0.35)',
+                  color: '#34d399',
+                  fontSize: '0.88rem',
+                  lineHeight: 1.5,
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '0.75rem',
+                }}>
+                  <CheckCircle2 size={20} style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <div>
+                    <strong style={{ display: 'block', color: '#ffffff', marginBottom: '0.25rem' }}>
+                      Password Reset Initiated
+                    </strong>
+                    A password recovery email has been requested for <strong>{email}</strong> via Firebase Authentication.
+                  </div>
                 </div>
+
+                {/* Detailed Email Delivery Guidance */}
+                <div style={{
+                  padding: '1.1rem 1.25rem',
+                  borderRadius: '0.75rem',
+                  background: 'rgba(245, 158, 11, 0.08)',
+                  border: '1px solid rgba(245, 158, 11, 0.25)',
+                  fontSize: '0.82rem',
+                  lineHeight: 1.55,
+                  color: '#fef3c7',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: '#fbbf24', marginBottom: '0.5rem' }}>
+                    <AlertCircle size={16} />
+                    <span>If the reset email does not appear in your inbox:</span>
+                  </div>
+                  <ul style={{ margin: 0, paddingLeft: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                    <li>
+                      <strong>Check your Spam or Junk folder:</strong> Firebase sends emails from <em>noreply@reactjav-6531c.firebaseapp.com</em>, which email providers (Gmail, Outlook) often categorize as Spam or Promotions.
+                    </li>
+                    <li>
+                      <strong>Verify the exact email:</strong> Due to Firebase Security (Email Enumeration Protection), if an email is not yet registered in Firebase Authentication, Firebase returns success but silently does not dispatch an email.
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Instant Direct Reset Bypass Button (when available) */}
+                {directOobCode ? (
+                  <div style={{
+                    padding: '1.15rem',
+                    borderRadius: '0.75rem',
+                    background: 'rgba(99, 102, 241, 0.12)',
+                    border: '1px solid rgba(99, 102, 241, 0.4)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.75rem',
+                  }}>
+                    <div style={{ fontSize: '0.84rem', color: '#e0e7ff', lineHeight: 1.4 }}>
+                      <strong style={{ color: '#ffffff' }}>⚡ Instant Reset Available:</strong><br />
+                      No need to wait for email delivery. You can reset your password immediately below:
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setVerifiedResetEmail(email);
+                        setActiveTab('reset');
+                      }}
+                      className="btn btn-primary"
+                      style={{
+                        width: '100%',
+                        justifyContent: 'center',
+                        gap: '0.5rem',
+                        fontWeight: 700,
+                        background: 'linear-gradient(135deg, #4f46e5, #7c3aed)',
+                        padding: '0.75rem 1rem',
+                      }}
+                    >
+                      <KeyRound size={16} />
+                      <span>Reset Password Directly Now</span>
+                    </button>
+                    {directResetLink && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText(directResetLink);
+                          setIsCopiedLink(true);
+                          setTimeout(() => setIsCopiedLink(false), 2000);
+                        }}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: '#a5b4fc',
+                          fontSize: '0.78rem',
+                          cursor: 'pointer',
+                          textDecoration: 'underline',
+                          textAlign: 'center',
+                          padding: '0.2rem',
+                        }}
+                      >
+                        {isCopiedLink ? '✓ Direct Link Copied to Clipboard!' : 'Copy Direct Reset Link'}
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
+                    <button
+                      type="button"
+                      onClick={() => setResetSuccess(false)}
+                      className="btn btn-secondary"
+                      style={{ fontSize: '0.82rem', padding: '0.5rem 1rem' }}
+                    >
+                      <RefreshCw size={14} />
+                      <span>Try Another Email</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setActiveTab('signup'); setResetSuccess(false); }}
+                      className="btn btn-secondary"
+                      style={{ fontSize: '0.82rem', padding: '0.5rem 1rem' }}
+                    >
+                      <User size={14} />
+                      <span>Create New Account</span>
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <form onSubmit={handleForgotSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -839,7 +987,7 @@ function AuthContent() {
                 )}
 
                 {/* Current password for re-authentication when required */}
-                {(requiresRecentLogin || (!oobCodeParam && !!currentUser)) && (
+                {(requiresRecentLogin || (!(directOobCode || oobCodeParam) && !!currentUser)) && (
                   <div>
                     <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
                       Current Password {requiresRecentLogin && <span style={{ color: '#fbbf24', fontWeight: 600 }}>* (Required to verify identity)</span>}

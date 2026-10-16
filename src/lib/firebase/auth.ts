@@ -366,15 +366,42 @@ export async function sendPasswordResetFirebase(email: string): Promise<Firebase
 
   if (isFirebaseConfigured() && auth) {
     try {
-      await sendPasswordResetEmail(auth, cleanEmail);
+      const actionCodeSettings = typeof window !== 'undefined' ? {
+        url: `${window.location.origin}/auth?mode=resetPassword`,
+        handleCodeInApp: true,
+      } : undefined;
+
+      try {
+        if (actionCodeSettings) {
+          await sendPasswordResetEmail(auth, cleanEmail, actionCodeSettings);
+        } else {
+          await sendPasswordResetEmail(auth, cleanEmail);
+        }
+      } catch (settingsErr: any) {
+        // Fall back to standard send without ActionCodeSettings if domain is not yet whitelisted in Firebase
+        if (settingsErr?.code === 'auth/unauthorized-continue-uri' || settingsErr?.code === 'auth/invalid-continue-uri') {
+          await sendPasswordResetEmail(auth, cleanEmail);
+        } else {
+          throw settingsErr;
+        }
+      }
+
       return {
         success: true,
         message: 'Password reset link sent to your email via Firebase.',
       };
     } catch (err: any) {
+      let msg = err?.message || 'Failed to send password reset email.';
+      if (err?.code === 'auth/user-not-found') {
+        msg = 'No Firebase account found with this email. Please verify spelling or register a new account.';
+      } else if (err?.code === 'auth/too-many-requests') {
+        msg = 'Too many attempts. Please wait a few minutes before requesting another reset email.';
+      } else if (err?.code === 'auth/invalid-email') {
+        msg = 'Please enter a valid email address.';
+      }
       return {
         success: false,
-        error: err?.message || 'Failed to send password reset email.',
+        error: msg,
       };
     }
   }
@@ -455,6 +482,13 @@ export async function updatePasswordFirebase(
         error: err?.message || 'Failed to update password.',
       };
     }
+  }
+
+  if (isFirebaseConfigured() && auth && !auth.currentUser && !oobCode) {
+    return {
+      success: false,
+      error: 'Password reset link expired or missing. Please request a fresh password reset link from the "Forgot Password" tab.',
+    };
   }
 
   return {

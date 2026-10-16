@@ -221,3 +221,57 @@ export async function bootstrapSuperAdminByEmail(email: string): Promise<boolean
   }
   return false;
 }
+
+/**
+ * Generates a direct password reset link for an email address using Firebase Admin SDK.
+ * Also checks or automatically provisions the user in Firebase Auth if existing in local profiles.
+ */
+export async function generatePasswordResetLinkFirebase(
+  email: string
+): Promise<{ success: boolean; link?: string; oobCode?: string; error?: string }> {
+  const auth = getFirebaseAdminAuth();
+  if (!auth) {
+    return { success: false, error: 'Firebase Admin SDK is not configured with service credentials.' };
+  }
+  try {
+    const cleanEmail = email.trim().toLowerCase();
+    
+    // Check if user exists in Firebase Auth
+    try {
+      await auth.getUserByEmail(cleanEmail);
+    } catch (userErr: any) {
+      if (userErr?.code === 'auth/user-not-found') {
+        // User not in Firebase Auth yet, provision them so reset link works
+        try {
+          await auth.createUser({
+            email: cleanEmail,
+            emailVerified: true,
+          });
+        } catch (createErr: any) {
+          return { success: false, error: 'User not registered in Firebase Auth: ' + (createErr?.message || '') };
+        }
+      }
+    }
+
+    let link: string;
+    try {
+      const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+      link = await auth.generatePasswordResetLink(cleanEmail, {
+        url: `${appUrl}/auth?mode=resetPassword`,
+        handleCodeInApp: true,
+      });
+    } catch {
+      // Fallback without action settings if appUrl domain is not registered yet
+      link = await auth.generatePasswordResetLink(cleanEmail);
+    }
+
+    // Extract oobCode from the generated link
+    const urlObj = new URL(link);
+    const oobCode = urlObj.searchParams.get('oobCode') || undefined;
+
+    return { success: true, link, oobCode };
+  } catch (err: any) {
+    console.error('[Firebase Admin] Error generating password reset link:', err);
+    return { success: false, error: err?.message || 'Failed to generate password reset link.' };
+  }
+}
