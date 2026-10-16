@@ -99,6 +99,8 @@ export default function Navbar() {
     )
   );
 
+  const isAuthenticated = Boolean(currentUser && currentUser.id && currentUser.id !== 'guest');
+
   return (
     <header style={{
       position: 'sticky',
@@ -196,24 +198,26 @@ export default function Navbar() {
               </span>
             </Link>
 
-            <Link
-              href="/subscribe"
-              className="btn btn-sm"
-              style={{
-                background: pathname === '/subscribe' ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
-                color: pathname === '/subscribe' ? 'var(--primary)' : 'var(--text-secondary)',
-                fontSize: '0.86rem',
-                padding: '0.52rem 0.85rem',
-                fontWeight: 600,
-                borderRadius: '0.75rem',
-                gap: '0.45rem',
-                display: 'inline-flex',
-                alignItems: 'center',
-              }}
-            >
-              <Sparkles size={16} color="var(--primary)" />
-              <span>Tuition & Plans</span>
-            </Link>
+            {isAuthenticated && (
+              <Link
+                href="/subscribe"
+                className="btn btn-sm"
+                style={{
+                  background: pathname === '/subscribe' ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
+                  color: pathname === '/subscribe' ? 'var(--primary)' : 'var(--text-secondary)',
+                  fontSize: '0.86rem',
+                  padding: '0.52rem 0.85rem',
+                  fontWeight: 600,
+                  borderRadius: '0.75rem',
+                  gap: '0.45rem',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Sparkles size={16} color="var(--primary)" />
+                <span>Tuition & Plans</span>
+              </Link>
+            )}
           </div>
 
           {hasIntranetAccess && (
@@ -676,6 +680,29 @@ export default function Navbar() {
                   )}
 
                   <Link
+                    href="/subscribe"
+                    onClick={() => setShowRoleMenu(false)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.45rem 0.75rem',
+                      fontSize: '0.825rem',
+                      color: 'var(--primary)',
+                      textDecoration: 'none',
+                      borderRadius: '0.5rem',
+                      fontWeight: 600,
+                      marginBottom: '0.3rem',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                      <Sparkles size={14} color="var(--primary)" />
+                      <span>Tuition & Plans</span>
+                    </div>
+                    <ExternalLink size={12} />
+                  </Link>
+
+                  <Link
                     href="/auth"
                     onClick={() => setShowRoleMenu(false)}
                     style={{
@@ -860,9 +887,11 @@ export default function Navbar() {
             <Link href="/academy" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem', color: 'var(--accent-emerald)' }}>
               <GraduationCap size={17} /> Direct Tutoring (1-on-1)
             </Link>
-            <Link href="/subscribe" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
-              <Sparkles size={17} /> Tuition & Plans
-            </Link>
+            {isAuthenticated && (
+              <Link href="/subscribe" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+                <Sparkles size={17} /> Tuition & Plans
+              </Link>
+            )}
           </div>
 
           {hasIntranetAccess && (

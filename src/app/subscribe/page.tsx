@@ -25,6 +25,7 @@ import { Profile, SubscriptionPlan, Course } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { formatCurrency } from '@/lib/utils';
 import { AcademyTrack, ACADEMY_TRACKS } from '@/data/academyTracks';
+import AccessGuard from '@/components/auth/AccessGuard';
 
 function SubscribeContent() {
   const router = useRouter();
@@ -916,7 +917,13 @@ export default function SubscribePage() {
         <p style={{ color: 'var(--text-secondary)' }}>Loading Tuition & Plans...</p>
       </div>
     }>
-      <SubscribeContent />
+      <AccessGuard
+        level="authenticated"
+        pageTitle="Tuition & Plans Portal"
+        customDescription="Tuition schedules, subscription plans, and bursar payment processing are restricted to authenticated students and registered applicants. Please sign in to access your tuition plan."
+      >
+        <SubscribeContent />
+      </AccessGuard>
     </Suspense>
   );
 }
