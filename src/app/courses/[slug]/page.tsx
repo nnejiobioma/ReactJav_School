@@ -260,12 +260,12 @@ export default function CourseDetailPage() {
 
               {isEnrolled ? (
                 <Link
-                  href={`/learn/${course.id}/${course.sections?.[0]?.lessons?.[0]?.id || 'les_01_01'}`}
+                  href={`/learn/${course.id}/${LocalDataService.getNextOrLastLessonId(course.id, currentUser?.id || '')}`}
                   className="btn btn-success btn-lg"
                   style={{ width: '100%', marginBottom: '1rem' }}
                 >
                   <CheckCircle2 size={18} />
-                  <span>You are Enrolled • Continue Learning</span>
+                  <span>You are Enrolled • Resume Where You Stopped</span>
                 </Link>
               ) : (
                 <button

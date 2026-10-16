@@ -212,6 +212,30 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, type: 'profile', profileId: data.id });
     }
 
+    if (type === 'lesson_progress') {
+      if (supabase && data) {
+        try {
+          const validUid = toValidUuid(data.user_id);
+          await supabase.from('lesson_progress').upsert(
+            {
+              id: data.id || `prog_${validUid}_${data.lesson_id}`,
+              user_id: validUid,
+              lesson_id: data.lesson_id,
+              course_id: data.course_id || null,
+              is_completed: !!data.is_completed,
+              last_position_seconds: Math.floor(data.last_position_seconds || 0),
+              user_notes: data.user_notes || null,
+              updated_at: new Date().toISOString(),
+            },
+            { onConflict: 'id' }
+          );
+        } catch (dbErr) {
+          console.warn('[Persist API] Supabase progress upsert error:', dbErr);
+        }
+      }
+      return NextResponse.json({ success: true, type: 'lesson_progress' });
+    }
+
     if (type === 'inquiry') {
       const currentInquiries = readJsonFile<any[]>(INQUIRIES_FILE, []);
       const index = currentInquiries.findIndex((i) => i.id === data.id);

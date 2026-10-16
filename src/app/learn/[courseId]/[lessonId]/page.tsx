@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { formatTimeMMSS } from '@/lib/utils';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -53,6 +54,9 @@ export default function CoursePlayerPage() {
   const [currentLesson, setCurrentLesson] = useState<Lesson | null>(null);
   const [progressMap, setProgressMap] = useState<Record<string, boolean>>({});
   const [lastPosition, setLastPosition] = useState<number>(0);
+  const [showResumeBanner, setShowResumeBanner] = useState<boolean>(false);
+  const [studentNotes, setStudentNotes] = useState<string>('');
+  const [notesSaveStatus, setNotesSaveStatus] = useState<'saved' | 'saving' | 'idle'>('idle');
   const [activeTab, setActiveTab] = useState<'summary' | 'notes' | 'qa' | 'resources'>('summary');
   const [isRecordModalOpen, setIsRecordModalOpen] = useState(false);
   const [autoPrintRecord, setAutoPrintRecord] = useState(false);
@@ -61,7 +65,11 @@ export default function CoursePlayerPage() {
   const [newQuestionText, setNewQuestionText] = useState('');
   const [showCheckoutModal, setShowCheckoutModal] = useState(false);
 
-  // Load course and progress
+  const latestPositionRef = useRef<number>(0);
+  const isCompletedRef = useRef<boolean>(false);
+  const studentNotesRef = useRef<string>('');
+
+  // Load course, progress, and student workspace
   useEffect(() => {
     const user = LocalDataService.getCurrentUser();
     setCurrentUser(user);
@@ -80,7 +88,7 @@ export default function CoursePlayerPage() {
         setCurrentLesson(foundLesson);
       }
 
-      // Load progress
+      // Load cached progress
       const userProg = LocalDataService.getProgress(user.id);
       const map: Record<string, boolean> = {};
       Object.keys(userProg).forEach((lid) => {
@@ -88,11 +96,69 @@ export default function CoursePlayerPage() {
       });
       setProgressMap(map);
 
-      if (userProg[lessonId]) {
-        setLastPosition(userProg[lessonId].last_position_seconds || 0);
+      const savedPos = userProg[lessonId]?.last_position_seconds || 0;
+      if (savedPos > 0) {
+        setLastPosition(savedPos);
+        latestPositionRef.current = savedPos;
+        setShowResumeBanner(true);
       }
+
+      // Load student personal notes
+      const savedNotes = LocalDataService.getStudentNotes(user.id, lessonId);
+      setStudentNotes(savedNotes);
+      studentNotesRef.current = savedNotes;
+
+      // Sync from Supabase database to guarantee multi-device state
+      LocalDataService.fetchProgressFromSupabase(user.id).then((cloudProg) => {
+        if (cloudProg && cloudProg[lessonId]) {
+          const cloudPos = cloudProg[lessonId].last_position_seconds || 0;
+          if (cloudPos > savedPos) {
+            setLastPosition(cloudPos);
+            latestPositionRef.current = cloudPos;
+            setShowResumeBanner(true);
+          }
+          if (cloudProg[lessonId].user_notes && !savedNotes) {
+            setStudentNotes(cloudProg[lessonId].user_notes || '');
+            studentNotesRef.current = cloudProg[lessonId].user_notes || '';
+          }
+        }
+      });
     }
   }, [courseId, lessonId]);
+
+  // Keep refs synchronized for unload save
+  useEffect(() => {
+    isCompletedRef.current = !!progressMap[lessonId];
+  }, [progressMap, lessonId]);
+
+  useEffect(() => {
+    latestPositionRef.current = lastPosition;
+  }, [lastPosition]);
+
+  useEffect(() => {
+    studentNotesRef.current = studentNotes;
+  }, [studentNotes]);
+
+  // Automatically save progress checkpoint on window exit / tab navigation
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (currentUser && lessonId && courseId) {
+        LocalDataService.updateLessonProgress(
+          currentUser.id,
+          lessonId,
+          isCompletedRef.current,
+          latestPositionRef.current,
+          courseId,
+          studentNotesRef.current
+        );
+      }
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      handleBeforeUnload();
+    };
+  }, [currentUser, lessonId, courseId]);
 
   if (!course || !currentLesson) {
     return (
@@ -213,25 +279,26 @@ export default function CoursePlayerPage() {
 
   const handleToggleComplete = (targetLessonId: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    if (!currentUser) return;
+    if (!currentUser || !course) return;
 
     const nextState = !progressMap[targetLessonId];
-    LocalDataService.updateLessonProgress(currentUser.id, targetLessonId, nextState, lastPosition);
+    LocalDataService.updateLessonProgress(currentUser.id, targetLessonId, nextState, lastPosition, course.id, studentNotesRef.current);
     setProgressMap((prev) => ({ ...prev, [targetLessonId]: nextState }));
   };
 
   const handleTimeUpdate = (currentTime: number) => {
-    if (!currentUser) return;
+    if (!currentUser || !course) return;
     setLastPosition(currentTime);
-    // Persist position checkpoint every 5 seconds
-    if (Math.floor(currentTime) % 5 === 0) {
-      LocalDataService.updateLessonProgress(currentUser.id, currentLesson.id, isCompleted, currentTime);
+    latestPositionRef.current = currentTime;
+    // Persist position checkpoint continuously every 3 seconds
+    if (Math.floor(currentTime) % 3 === 0) {
+      LocalDataService.updateLessonProgress(currentUser.id, currentLesson.id, isCompleted, currentTime, course.id, studentNotesRef.current);
     }
   };
 
   const handleLessonAutoCompleted = () => {
-    if (!currentUser) return;
-    LocalDataService.updateLessonProgress(currentUser.id, currentLesson.id, true, lastPosition);
+    if (!currentUser || !course) return;
+    LocalDataService.updateLessonProgress(currentUser.id, currentLesson.id, true, lastPosition, course.id, studentNotesRef.current);
     setProgressMap((prev) => ({ ...prev, [currentLesson.id]: true }));
   };
 
@@ -395,6 +462,56 @@ export default function CoursePlayerPage() {
         <div>
           {/* Lesson Stage */}
           <div style={{ marginBottom: '2rem' }}>
+            {/* Auto-Resume / Save State Notification Banner */}
+            {showResumeBanner && lastPosition > 10 && !isCompleted && (
+              <div style={{
+                marginBottom: '1rem',
+                padding: '0.75rem 1.25rem',
+                borderRadius: '0.75rem',
+                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%)',
+                border: '1px solid rgba(99, 102, 241, 0.35)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: '0.75rem',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                  <span style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: '#10b981',
+                    boxShadow: '0 0 8px #10b981',
+                  }} />
+                  <span style={{ fontSize: '0.875rem', color: '#ffffff', fontWeight: 600 }}>
+                    Resuming playback at <span style={{ color: '#a5b4fc', fontFamily: 'monospace' }}>{formatTimeMMSS(lastPosition)}</span> where you stopped.
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                  <button
+                    onClick={() => {
+                      setLastPosition(0);
+                      setShowResumeBanner(false);
+                      if (currentUser && course) {
+                        LocalDataService.updateLessonProgress(currentUser.id, currentLesson.id, false, 0, course.id, studentNotes);
+                      }
+                    }}
+                    className="btn btn-secondary btn-sm"
+                    style={{ fontSize: '0.75rem', padding: '0.3rem 0.65rem' }}
+                  >
+                    Restart from 00:00
+                  </button>
+                  <button
+                    onClick={() => setShowResumeBanner(false)}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '0.2rem' }}
+                  >
+                    <X size={15} />
+                  </button>
+                </div>
+              </div>
+            )}
+
             {currentLesson.type === 'video' && currentLesson.video_url && (
               <VideoPlayer
                 videoUrl={currentLesson.video_url}
@@ -648,6 +765,67 @@ export default function CoursePlayerPage() {
                 whiteSpace: 'pre-line',
               }}>
                 {notesContent}
+              </div>
+
+              {/* Personal Student Study Notebook */}
+              <div style={{
+                marginTop: '2.5rem',
+                paddingTop: '1.75rem',
+                borderTop: '1px solid var(--border-subtle)',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <BookOpen size={17} color="var(--primary)" />
+                    <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff', margin: 0 }}>
+                      My Personal Study Notes & Workspace
+                    </h4>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      fontSize: '0.75rem',
+                      color: notesSaveStatus === 'saving' ? 'var(--accent-amber)' : 'var(--accent-emerald)',
+                      fontWeight: 600,
+                    }}>
+                      <span style={{
+                        width: '7px',
+                        height: '7px',
+                        borderRadius: '50%',
+                        background: notesSaveStatus === 'saving' ? 'var(--accent-amber)' : 'var(--accent-emerald)',
+                      }} />
+                      {notesSaveStatus === 'saving' ? 'Saving changes...' : 'Auto-saved to Cloud & Local State'}
+                    </span>
+                  </div>
+                </div>
+                <textarea
+                  value={studentNotes}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setStudentNotes(val);
+                    setNotesSaveStatus('saving');
+                    if (currentUser && course) {
+                      LocalDataService.saveStudentNotes(currentUser.id, currentLesson.id, val, course.id);
+                      setTimeout(() => setNotesSaveStatus('saved'), 600);
+                    }
+                  }}
+                  placeholder="Jot down personal key concepts, code snippets, questions, or ideas while studying this lecture. Everything is saved automatically and preserved whenever you return..."
+                  rows={6}
+                  style={{
+                    width: '100%',
+                    padding: '1rem',
+                    background: 'rgba(10, 13, 20, 0.7)',
+                    border: '1px solid var(--border-subtle)',
+                    borderRadius: '0.75rem',
+                    color: 'var(--text-primary)',
+                    fontSize: '0.9rem',
+                    lineHeight: 1.6,
+                    resize: 'vertical',
+                    outline: 'none',
+                    fontFamily: 'inherit',
+                  }}
+                />
               </div>
             </div>
           )}

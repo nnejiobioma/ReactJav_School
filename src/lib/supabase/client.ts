@@ -2,6 +2,7 @@ import { createClient as createSupabaseClient, SupabaseClient } from '@supabase/
 import { 
   Course, 
   LessonProgress, 
+  LearningCheckpoint,
   Profile, 
   QuizSubmission, 
   UserRole, 
@@ -102,6 +103,8 @@ const STORAGE_KEYS = {
   SITE_CONTENT: 'reactjav_site_content',
   ADMIN_EDIT_MODE: 'reactjav_admin_edit_mode',
   ACADEMY_TRACKS: 'reactjav_academy_tracks',
+  LAST_ACCESSED: 'reactjav_last_accessed_learning',
+  STUDENT_NOTES: 'reactjav_student_notes',
 };
 
 // Client-side Local State Store (Local Persistence Fallback)
@@ -959,27 +962,249 @@ export class LocalDataService {
     return {};
   }
 
+  static async fetchProgressFromSupabase(userId: string): Promise<Record<string, LessonProgress>> {
+    const supabase = createClient();
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        const { data, error } = await supabase
+          .from('lesson_progress')
+          .select('*')
+          .or(`user_id.eq.${toValidUuid(userId)},user_id.eq.${userId}`);
+
+        if (!error && data && data.length > 0) {
+          const stored = localStorage.getItem(STORAGE_KEYS.PROGRESS);
+          const all = stored ? JSON.parse(stored) : {};
+          if (!all[userId]) all[userId] = {};
+
+          data.forEach((row: any) => {
+            all[userId][row.lesson_id] = {
+              id: row.id,
+              user_id: userId,
+              lesson_id: row.lesson_id,
+              course_id: row.course_id || undefined,
+              is_completed: !!row.is_completed,
+              last_position_seconds: row.last_position_seconds || 0,
+              user_notes: row.user_notes || undefined,
+              updated_at: row.updated_at || new Date().toISOString(),
+            };
+          });
+
+          if (typeof window !== 'undefined') {
+            localStorage.setItem(STORAGE_KEYS.PROGRESS, JSON.stringify(all));
+          }
+          return all[userId];
+        }
+      } catch (err) {
+        console.warn('[LocalDataService] Progress sync from Supabase notice:', err);
+      }
+    }
+    return this.getProgress(userId);
+  }
+
   static updateLessonProgress(
     userId: string,
     lessonId: string,
     isCompleted: boolean,
-    lastPositionSeconds: number = 0
+    lastPositionSeconds: number = 0,
+    courseId?: string,
+    userNotes?: string
   ): void {
     if (typeof window === 'undefined') return;
     const stored = localStorage.getItem(STORAGE_KEYS.PROGRESS);
     const all = stored ? JSON.parse(stored) : {};
     if (!all[userId]) all[userId] = {};
 
-    all[userId][lessonId] = {
+    const progressRecord: LessonProgress = {
       id: `prog_${userId}_${lessonId}`,
       user_id: userId,
       lesson_id: lessonId,
+      course_id: courseId,
       is_completed: isCompleted,
       last_position_seconds: Math.floor(lastPositionSeconds),
+      user_notes: userNotes || all[userId]?.[lessonId]?.user_notes,
       updated_at: new Date().toISOString(),
     };
 
+    all[userId][lessonId] = progressRecord;
     localStorage.setItem(STORAGE_KEYS.PROGRESS, JSON.stringify(all));
+
+    // Update Last Accessed Learning Checkpoint
+    if (courseId) {
+      const course = this.getCourseById(courseId);
+      const allLessons = course?.sections?.flatMap((s) =>
+        (s.lessons || []).flatMap((l) => [l, ...(l.sub_lessons || [])])
+      ) || [];
+      const currentLesson = allLessons.find((l) => l.id === lessonId);
+
+      const checkpoint: LearningCheckpoint = {
+        user_id: userId,
+        course_id: courseId,
+        course_title: course?.title || 'Active Course',
+        lesson_id: lessonId,
+        lesson_title: currentLesson?.title || 'Current Lesson',
+        last_position_seconds: Math.floor(lastPositionSeconds),
+        duration: currentLesson?.duration_seconds,
+        is_completed: isCompleted,
+        updated_at: new Date().toISOString(),
+      };
+
+      const checkpointsStored = localStorage.getItem(STORAGE_KEYS.LAST_ACCESSED);
+      const checkpointsMap: Record<string, Record<string, LearningCheckpoint>> = checkpointsStored
+        ? JSON.parse(checkpointsStored)
+        : {};
+      if (!checkpointsMap[userId]) checkpointsMap[userId] = {};
+      checkpointsMap[userId][courseId] = checkpoint;
+      checkpointsMap[userId]['_latest'] = checkpoint;
+      localStorage.setItem(STORAGE_KEYS.LAST_ACCESSED, JSON.stringify(checkpointsMap));
+    }
+
+    // Server-side disk persistence fallback
+    try {
+      fetch('/api/admin/persist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'lesson_progress', data: progressRecord }),
+      }).catch(() => {});
+    } catch {}
+
+    // Direct Supabase database sync
+    const supabase = createClient();
+    if (isSupabaseConfigured() && supabase) {
+      const validUid = toValidUuid(userId);
+      supabase
+        .from('lesson_progress')
+        .upsert(
+          {
+            id: `prog_${validUid}_${lessonId}`,
+            user_id: validUid,
+            lesson_id: lessonId,
+            course_id: courseId || null,
+            is_completed: isCompleted,
+            last_position_seconds: Math.floor(lastPositionSeconds),
+            user_notes: progressRecord.user_notes || null,
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: 'id' }
+        )
+        .then();
+    }
+  }
+
+  static getLastAccessedLesson(userId: string, courseId?: string): LearningCheckpoint | null {
+    if (typeof window === 'undefined') return null;
+    const stored = localStorage.getItem(STORAGE_KEYS.LAST_ACCESSED);
+    if (stored) {
+      try {
+        const map = JSON.parse(stored);
+        if (map[userId]) {
+          if (courseId && map[userId][courseId]) {
+            return map[userId][courseId];
+          }
+          if (!courseId && map[userId]['_latest']) {
+            return map[userId]['_latest'];
+          }
+        }
+      } catch {}
+    }
+
+    // Fallback: derive from progress records
+    const progress = this.getProgress(userId);
+    const progressKeys = Object.keys(progress);
+    if (progressKeys.length === 0) return null;
+
+    const allCourses = this.getCourses();
+    const candidateCourses = courseId ? allCourses.filter((c) => c.id === courseId) : allCourses;
+
+    for (const c of candidateCourses) {
+      const allLessons = c.sections?.flatMap((s) =>
+        (s.lessons || []).flatMap((l) => [l, ...(l.sub_lessons || [])])
+      ) || [];
+
+      const inProgress = allLessons.find((l) => progress[l.id] && !progress[l.id].is_completed);
+      const targetLesson = inProgress || allLessons.find((l) => progress[l.id]);
+
+      if (targetLesson) {
+        return {
+          user_id: userId,
+          course_id: c.id,
+          course_title: c.title,
+          lesson_id: targetLesson.id,
+          lesson_title: targetLesson.title,
+          last_position_seconds: progress[targetLesson.id]?.last_position_seconds || 0,
+          duration: targetLesson.duration_seconds,
+          is_completed: !!progress[targetLesson.id]?.is_completed,
+          updated_at: progress[targetLesson.id]?.updated_at || new Date().toISOString(),
+        };
+      }
+    }
+
+    return null;
+  }
+
+  static getNextOrLastLessonId(courseId: string, userId: string): string {
+    const course = this.getCourseById(courseId);
+    if (!course || !course.sections) return 'les_01_01';
+
+    const allLessons = course.sections.flatMap((s) =>
+      (s.lessons || []).flatMap((l) => [l, ...(l.sub_lessons || [])])
+    );
+    if (allLessons.length === 0) return 'les_01_01';
+
+    // 1. Check last accessed checkpoint for this course
+    const checkpoint = this.getLastAccessedLesson(userId, courseId);
+    if (checkpoint && allLessons.some((l) => l.id === checkpoint.lesson_id)) {
+      if (checkpoint.is_completed) {
+        const currIdx = allLessons.findIndex((l) => l.id === checkpoint.lesson_id);
+        if (currIdx >= 0 && currIdx < allLessons.length - 1) {
+          return allLessons[currIdx + 1].id;
+        }
+      } else {
+        return checkpoint.lesson_id;
+      }
+    }
+
+    // 2. Find the first uncompleted lesson
+    const progress = this.getProgress(userId);
+    const firstUncompleted = allLessons.find((l) => !progress[l.id]?.is_completed);
+    if (firstUncompleted) return firstUncompleted.id;
+
+    // 3. Fallback to first lesson
+    return allLessons[0]?.id || 'les_01_01';
+  }
+
+  static getStudentNotes(userId: string, lessonId: string): string {
+    if (typeof window === 'undefined') return '';
+    const stored = localStorage.getItem(STORAGE_KEYS.STUDENT_NOTES);
+    if (stored) {
+      try {
+        const map = JSON.parse(stored);
+        if (map[`${userId}_${lessonId}`]) {
+          return map[`${userId}_${lessonId}`];
+        }
+      } catch {}
+    }
+    const progress = this.getProgress(userId);
+    return progress[lessonId]?.user_notes || '';
+  }
+
+  static saveStudentNotes(userId: string, lessonId: string, notes: string, courseId?: string): void {
+    if (typeof window === 'undefined') return;
+    const stored = localStorage.getItem(STORAGE_KEYS.STUDENT_NOTES);
+    const map = stored ? JSON.parse(stored) : {};
+    map[`${userId}_${lessonId}`] = notes;
+    localStorage.setItem(STORAGE_KEYS.STUDENT_NOTES, JSON.stringify(map));
+
+    // Also update in lesson progress
+    const progress = this.getProgress(userId);
+    const currentProg = progress[lessonId];
+    this.updateLessonProgress(
+      userId,
+      lessonId,
+      currentProg?.is_completed || false,
+      currentProg?.last_position_seconds || 0,
+      courseId,
+      notes
+    );
   }
 
   static saveQuizSubmission(submission: QuizSubmission): void {

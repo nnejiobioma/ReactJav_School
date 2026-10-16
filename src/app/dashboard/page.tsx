@@ -22,11 +22,12 @@ import {
   Timer,
   Building,
   Check,
-  Calendar
+  Calendar,
+  PlayCircle
 } from 'lucide-react';
-import { Course, Profile } from '@/types';
+import { Course, Profile, LearningCheckpoint } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
-import { formatDuration } from '@/lib/utils';
+import { formatDuration, formatTimeMMSS } from '@/lib/utils';
 import { ACADEMY_TRACKS } from '@/data/academyTracks';
 import StudentRecordModal from '@/components/student/StudentRecordModal';
 import TutoringAttendanceTracker from '@/components/attendance/TutoringAttendanceTracker';
@@ -36,6 +37,7 @@ export default function StudentDashboardPage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [enrolledCourses, setEnrolledCourses] = useState<{ course: Course; stats: { totalLessons: number; completedLessons: number; percentage: number } }[]>([]);
   const [selectedCertificateCourse, setSelectedCertificateCourse] = useState<Course | null>(null);
+  const [lastCheckpoint, setLastCheckpoint] = useState<LearningCheckpoint | null>(null);
   const [isRecordModalOpen, setIsRecordModalOpen] = useState(false);
   const [autoPrintRecord, setAutoPrintRecord] = useState(false);
 
@@ -43,6 +45,16 @@ export default function StudentDashboardPage() {
     const user = LocalDataService.getCurrentUser();
     setCurrentUser(user);
     if (!user) return;
+
+    // Load last accessed checkpoint for quick resumption
+    const checkpoint = LocalDataService.getLastAccessedLesson(user.id);
+    setLastCheckpoint(checkpoint);
+
+    // Background sync progress from Supabase
+    LocalDataService.fetchProgressFromSupabase(user.id).then(() => {
+      const updatedCp = LocalDataService.getLastAccessedLesson(user.id);
+      if (updatedCp) setLastCheckpoint(updatedCp);
+    });
 
     const enrolledIds = LocalDataService.getEnrollments(user.id);
     const allCourses = LocalDataService.getCourses();
@@ -178,6 +190,75 @@ export default function StudentDashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Resume Where You Stopped Hero Banner */}
+      {lastCheckpoint && (
+        <div style={{
+          marginBottom: '2.5rem',
+          padding: '1.5rem 1.75rem',
+          borderRadius: '1rem',
+          background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%)',
+          border: '1px solid rgba(99, 102, 241, 0.3)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '1.25rem',
+          boxShadow: 'var(--shadow-sm)',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <div style={{
+              width: '46px',
+              height: '46px',
+              borderRadius: '50%',
+              background: 'rgba(99, 102, 241, 0.2)',
+              border: '1px solid var(--primary)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--primary)',
+              flexShrink: 0,
+            }}>
+              <PlayCircle size={24} />
+            </div>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem', flexWrap: 'wrap' }}>
+                <span className="badge badge-primary" style={{ fontSize: '0.7rem' }}>
+                  Pick Up Where You Left Off
+                </span>
+                <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                  {lastCheckpoint.course_title}
+                </span>
+              </div>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
+                {lastCheckpoint.lesson_title}
+              </h3>
+              {lastCheckpoint.last_position_seconds > 0 && !lastCheckpoint.is_completed && (
+                <span style={{ fontSize: '0.8rem', color: '#a5b4fc', marginTop: '0.25rem', display: 'inline-block' }}>
+                  Stopped at playback position: <span style={{ fontFamily: 'monospace', fontWeight: 700 }}>{formatTimeMMSS(lastCheckpoint.last_position_seconds)}</span>
+                </span>
+              )}
+            </div>
+          </div>
+
+          <Link
+            href={`/learn/${lastCheckpoint.course_id}/${lastCheckpoint.lesson_id}`}
+            className="btn btn-primary btn-md"
+            style={{
+              padding: '0.7rem 1.4rem',
+              fontWeight: 700,
+              gap: '0.5rem',
+              borderRadius: '0.75rem',
+              background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%)',
+              boxShadow: '0 4px 14px rgba(99, 102, 241, 0.4)',
+            }}
+          >
+            <PlayCircle size={18} />
+            <span>Resume Learning Session</span>
+            <ArrowRight size={16} />
+          </Link>
+        </div>
+      )}
 
       {/* 1-on-1 Direct Tutoring Fellow Track & Intranet Study Tracking */}
       {currentUser?.tutoring_enrolled && (() => {
@@ -531,7 +612,7 @@ export default function StudentDashboardPage() {
             gap: '2rem',
           }}>
             {enrolledCourses.map(({ course, stats }) => {
-              const firstLessonId = course.sections?.[0]?.lessons?.[0]?.id || 'les_01_01';
+              const targetLessonId = LocalDataService.getNextOrLastLessonId(course.id, currentUser?.id || '');
               const isCompleted = stats.percentage === 100;
 
               return (
@@ -582,11 +663,11 @@ export default function StudentDashboardPage() {
 
                       <div style={{ display: 'flex', gap: '0.5rem' }}>
                         <Link
-                          href={`/learn/${course.id}/${firstLessonId}`}
+                          href={`/learn/${course.id}/${targetLessonId}`}
                           className={`btn btn-sm ${isCompleted ? 'btn-secondary' : 'btn-primary'}`}
                           style={{ flexGrow: 1 }}
                         >
-                          <span>{isCompleted ? 'Review Material' : 'Continue Learning'}</span>
+                          <span>{isCompleted ? 'Review Material' : 'Resume Where You Stopped'}</span>
                           <ArrowRight size={14} />
                         </Link>
 

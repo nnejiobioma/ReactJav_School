@@ -79,3 +79,34 @@ create policy "Anyone can read enrollments."
 drop policy if exists "Allow enrollments upsert" on public.enrollments;
 create policy "Allow enrollments upsert"
   on public.enrollments for all using (true);
+
+-- 5. LESSON PROGRESS & LEARNING SAVE STATE:
+-- Tracks completion, playback seconds, and personal student notes
+create table if not exists public.lesson_progress (
+  id text primary key,
+  user_id uuid,
+  lesson_id text not null,
+  course_id text,
+  is_completed boolean default false,
+  last_position_seconds integer default 0,
+  user_notes text,
+  updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- Relax any foreign key constraint to internal auth.users
+alter table public.lesson_progress drop constraint if exists lesson_progress_user_id_fkey;
+alter table public.lesson_progress drop constraint if exists lesson_progress_lesson_id_fkey;
+
+alter table public.lesson_progress enable row level security;
+
+drop policy if exists "Anyone can read their own lesson progress." on public.lesson_progress;
+create policy "Anyone can read their own lesson progress."
+  on public.lesson_progress for select using (true);
+
+drop policy if exists "Allow lesson progress upsert" on public.lesson_progress;
+create policy "Allow lesson progress upsert"
+  on public.lesson_progress for all using (true);
+
+create index if not exists idx_lesson_progress_user on public.lesson_progress(user_id);
+create index if not exists idx_lesson_progress_lesson on public.lesson_progress(lesson_id);
+

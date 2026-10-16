@@ -155,8 +155,22 @@ export interface LessonProgress {
   id: string;
   user_id: string;
   lesson_id: string;
+  course_id?: string;
   is_completed: boolean;
   last_position_seconds: number;
+  user_notes?: string;
+  updated_at: string;
+}
+
+export interface LearningCheckpoint {
+  user_id: string;
+  course_id: string;
+  course_title: string;
+  lesson_id: string;
+  lesson_title: string;
+  last_position_seconds: number;
+  duration?: number;
+  is_completed: boolean;
   updated_at: string;
 }
 
