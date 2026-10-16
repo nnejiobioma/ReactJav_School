@@ -16,12 +16,25 @@ export async function signUpWithSupabase(
   email: string,
   password: string,
   fullName: string,
-  acceptedPrivacyPolicy: boolean = false
+  acceptedPrivacyPolicy: boolean = false,
+  acceptedTermsOfService: boolean = false
 ): Promise<AuthResponse> {
+  if (!acceptedPrivacyPolicy && !acceptedTermsOfService) {
+    return {
+      success: false,
+      error: 'Access not granted: You must accept both the Privacy Policy and Terms of Service before creating an account.',
+    };
+  }
   if (!acceptedPrivacyPolicy) {
     return {
       success: false,
       error: 'Access not granted: You must accept the Privacy Policy before creating an account.',
+    };
+  }
+  if (!acceptedTermsOfService) {
+    return {
+      success: false,
+      error: 'Access not granted: You must accept the Terms of Service before creating an account.',
     };
   }
 
@@ -41,6 +54,8 @@ export async function signUpWithSupabase(
             role: assignedRole,
             privacy_accepted: true,
             privacy_accepted_at: acceptanceTimestamp,
+            terms_accepted: true,
+            terms_accepted_at: acceptanceTimestamp,
           },
         },
       });
@@ -68,6 +83,8 @@ export async function signUpWithSupabase(
           admin_granted: false,
           privacy_accepted: true,
           privacy_accepted_at: acceptanceTimestamp,
+          terms_accepted: true,
+          terms_accepted_at: acceptanceTimestamp,
         };
 
         // Try upserting into public.profiles if table is created
@@ -80,6 +97,8 @@ export async function signUpWithSupabase(
             role: assignedRole,
             privacy_accepted: true,
             privacy_accepted_at: acceptanceTimestamp,
+            terms_accepted: true,
+            terms_accepted_at: acceptanceTimestamp,
           });
         } catch {
           // Table might not be migrated yet; local state handles execution
@@ -125,6 +144,8 @@ export async function signUpWithSupabase(
     admin_granted: false,
     privacy_accepted: true,
     privacy_accepted_at: acceptanceTimestamp,
+    terms_accepted: true,
+    terms_accepted_at: acceptanceTimestamp,
   };
 
   LocalDataService.setCurrentUser(fallbackProfile);

@@ -141,9 +141,12 @@ export default function AccessGuard({
   }
 
   // ==========================================
-  // LEVEL 1.25: CHECK PRIVACY POLICY ACCEPTANCE
+  // LEVEL 1.25: CHECK LEGAL TERMS & PRIVACY ACCEPTANCE
   // ==========================================
-  if (currentUser && currentUser.privacy_accepted === false) {
+  if (currentUser && (currentUser.privacy_accepted === false || currentUser.terms_accepted === false)) {
+    const missingTerms = currentUser.terms_accepted === false;
+    const missingPrivacy = currentUser.privacy_accepted === false;
+
     return (
       <div className="container" style={{ padding: '4rem 1.5rem 6rem', maxWidth: '680px' }}>
         <div className="glass-card" style={{ textAlign: 'center', padding: '3.5rem 2rem' }}>
@@ -177,34 +180,50 @@ export default function AccessGuard({
             letterSpacing: '0.05em',
           }}>
             <Shield size={13} />
-            <span>Privacy Policy Acceptance Required</span>
+            <span>
+              {missingTerms && missingPrivacy
+                ? 'Terms & Privacy Acceptance Required'
+                : missingTerms
+                  ? 'Terms of Service Acceptance Required'
+                  : 'Privacy Policy Acceptance Required'}
+            </span>
           </div>
 
           <h1 style={{ fontSize: '1.85rem', color: '#ffffff', marginBottom: '0.75rem' }}>
             Access Not Granted
           </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.6, maxWidth: '500px', margin: '0 auto 2rem' }}>
-            In accordance with ReactJav academic and data governance standards, all students and members must read and accept the Privacy Policy before access to learning materials, intranet, and coursework is granted.
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.6, maxWidth: '520px', margin: '0 auto 2rem' }}>
+            In accordance with ReactJav academic integrity policies and legal governance, all students, instructors, and members must read and accept our Terms of Service and Privacy Policy before access to learning materials, intranet, and examinations is granted.
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link href="/privacy" className="btn btn-secondary">
-              <span>Read Privacy Policy</span>
-              <ExternalLink size={16} />
-            </Link>
-            <button
-              onClick={() => {
-                if (currentUser?.id) {
-                  LocalDataService.acceptPrivacyPolicy(currentUser.id);
-                  evaluateState();
-                }
-              }}
-              className="btn btn-primary"
-            >
-              <span>Accept Terms & Grant Access</span>
-              <ArrowRight size={16} />
-            </button>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+            {missingTerms && (
+              <Link href="/terms" target="_blank" className="btn btn-secondary btn-sm">
+                <span>Review Terms of Service</span>
+                <ExternalLink size={14} />
+              </Link>
+            )}
+            {missingPrivacy && (
+              <Link href="/privacy" target="_blank" className="btn btn-secondary btn-sm">
+                <span>Review Privacy Policy</span>
+                <ExternalLink size={14} />
+              </Link>
+            )}
           </div>
+
+          <button
+            onClick={() => {
+              if (currentUser?.id) {
+                LocalDataService.acceptAllLegalTerms(currentUser.id);
+                evaluateState();
+              }
+            }}
+            className="btn btn-primary"
+            style={{ width: '100%', maxWidth: '360px', margin: '0 auto' }}
+          >
+            <span>Accept All Terms & Grant Access</span>
+            <ArrowRight size={16} />
+          </button>
         </div>
       </div>
     );
