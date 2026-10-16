@@ -134,10 +134,10 @@ export default function TuitionSponsorshipSection() {
               borderRadius: '1.5rem',
               padding: '2.25rem 2rem',
               background: tier.highlighted 
-                ? 'linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, var(--bg-surface) 100%)' 
+                ? 'linear-gradient(135deg, rgba(124, 58, 237, 0.12) 0%, var(--bg-surface) 100%)' 
                 : 'var(--bg-surface)',
               border: tier.highlighted ? '2px solid var(--primary)' : '1px solid var(--border-subtle)',
-              boxShadow: tier.highlighted ? '0 16px 40px -10px rgba(37, 99, 235, 0.3)' : 'var(--shadow-sm)',
+              boxShadow: tier.highlighted ? '0 16px 40px -10px rgba(124, 58, 237, 0.35)' : 'var(--shadow-sm)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -152,7 +152,7 @@ export default function TuitionSponsorshipSection() {
                 top: '-0.85rem',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)',
+                background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
                 color: '#ffffff',
                 fontSize: '0.75rem',
                 fontWeight: 800,
@@ -160,7 +160,7 @@ export default function TuitionSponsorshipSection() {
                 letterSpacing: '0.06em',
                 padding: '0.3rem 1rem',
                 borderRadius: '9999px',
-                boxShadow: '0 4px 12px rgba(37, 99, 235, 0.4)',
+                boxShadow: '0 4px 14px rgba(124, 58, 237, 0.45)',
               }}>
                 Recommended For Certified Fellows
               </div>
@@ -176,7 +176,7 @@ export default function TuitionSponsorshipSection() {
                   letterSpacing: '0.05em',
                   padding: '0.25rem 0.65rem',
                   borderRadius: '9999px',
-                  background: tier.highlighted ? 'rgba(37, 99, 235, 0.12)' : 'var(--bg-surface-elevated)',
+                  background: tier.highlighted ? 'rgba(124, 58, 237, 0.15)' : 'var(--bg-surface-elevated)',
                   color: tier.highlighted ? 'var(--primary)' : 'var(--text-muted)',
                   border: '1px solid var(--border-subtle)',
                 }}>

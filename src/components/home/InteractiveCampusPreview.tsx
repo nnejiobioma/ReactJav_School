@@ -63,11 +63,11 @@ export default function InteractiveCampusPreview() {
       margin: '5rem 0',
       padding: '3rem 2rem',
       borderRadius: '2rem',
-      background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%)',
-      border: '1px solid var(--border-accent)',
+      background: 'linear-gradient(135deg, rgba(22, 25, 56, 0.85) 0%, rgba(14, 16, 38, 0.98) 100%)',
+      border: '1px solid rgba(139, 92, 246, 0.35)',
       position: 'relative',
       overflow: 'hidden',
-      boxShadow: 'var(--shadow-xl)',
+      boxShadow: 'var(--shadow-xl), 0 0 50px rgba(124, 58, 237, 0.15)',
     }}>
       {/* Background Ambient Glow */}
       <div style={{
@@ -76,7 +76,7 @@ export default function InteractiveCampusPreview() {
         right: '20%',
         width: '450px',
         height: '450px',
-        background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 70%)',
         filter: 'blur(70px)',
         pointerEvents: 'none',
       }} />
@@ -89,16 +89,16 @@ export default function InteractiveCampusPreview() {
           gap: '0.45rem',
           padding: '0.3rem 0.85rem',
           borderRadius: '9999px',
-          background: 'rgba(56, 189, 248, 0.12)',
-          border: '1px solid rgba(56, 189, 248, 0.35)',
-          color: '#38bdf8',
+          background: 'rgba(168, 85, 247, 0.15)',
+          border: '1px solid rgba(168, 85, 247, 0.4)',
+          color: '#d8b4fe',
           fontSize: '0.78rem',
           fontWeight: 700,
           marginBottom: '1rem',
           textTransform: 'uppercase',
           letterSpacing: '0.08em',
         }}>
-          <Sparkles size={13} />
+          <Sparkles size={13} color="#c084fc" />
           <span>Interactive Campus Facility Preview</span>
         </div>
 
@@ -109,7 +109,7 @@ export default function InteractiveCampusPreview() {
           lineHeight: 1.15,
           letterSpacing: '-0.025em',
         }}>
-          Step Inside the <span style={{ color: '#38bdf8' }}>Campus Intranet</span>
+          Step Inside the <span style={{ color: '#a855f7' }}>Campus Intranet</span>
         </h2>
 
         <p style={{

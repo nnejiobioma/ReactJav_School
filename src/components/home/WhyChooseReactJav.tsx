@@ -306,7 +306,7 @@ export default function WhyChooseReactJav() {
       <div style={{
         padding: '1.5rem 2rem',
         borderRadius: '1.25rem',
-        background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%)',
+        background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.12) 0%, rgba(168, 85, 247, 0.08) 50%, rgba(16, 185, 129, 0.08) 100%)',
         border: '1px solid var(--border-accent)',
         display: 'flex',
         alignItems: 'center',

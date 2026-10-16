@@ -43,7 +43,7 @@ export default function LandingHero({
         transform: 'translateX(-50%)',
         width: 'min(900px, 90vw)',
         height: '450px',
-        background: 'radial-gradient(ellipse at center, rgba(37, 99, 235, 0.18) 0%, rgba(99, 102, 241, 0.08) 50%, transparent 75%)',
+        background: 'radial-gradient(ellipse at center, rgba(139, 92, 246, 0.28) 0%, rgba(79, 70, 229, 0.16) 45%, rgba(217, 70, 239, 0.06) 70%, transparent 85%)',
         filter: 'blur(70px)',
         pointerEvents: 'none',
         zIndex: 0,
@@ -65,25 +65,25 @@ export default function LandingHero({
           gap: '0.6rem',
           padding: '0.45rem 1.25rem',
           borderRadius: '9999px',
-          background: 'linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, rgba(99, 102, 241, 0.12) 100%)',
-          border: '1px solid rgba(239, 68, 68, 0.35)',
+          background: 'linear-gradient(90deg, rgba(139, 92, 246, 0.16) 0%, rgba(79, 70, 229, 0.16) 100%)',
+          border: '1px solid rgba(168, 85, 247, 0.4)',
           marginBottom: '1.75rem',
           fontSize: '0.85rem',
-          color: '#fca5a5',
+          color: '#d8b4fe',
           fontWeight: 600,
-          boxShadow: '0 0 25px rgba(239, 68, 68, 0.15)',
+          boxShadow: '0 0 25px rgba(139, 92, 246, 0.2)',
         }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: '0.35rem',
-            color: '#f87171',
+            color: '#c084fc',
             fontWeight: 700,
             textTransform: 'uppercase',
             fontSize: '0.75rem',
             letterSpacing: '0.05em',
           }}>
-            <Flame size={14} color="#ef4444" />
+            <Sparkles size={14} color="#a855f7" />
             <span>{content.announcement_badge}</span>
           </div>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>•</span>
@@ -93,7 +93,7 @@ export default function LandingHero({
           <Link
             href="/subscribe"
             style={{
-              color: '#38bdf8',
+              color: '#a855f7',
               textDecoration: 'none',
               fontWeight: 700,
               display: 'inline-flex',
@@ -113,14 +113,14 @@ export default function LandingHero({
           letterSpacing: '0.12em',
           fontSize: '0.85rem',
           fontWeight: 800,
-          color: 'var(--accent-cyan)',
+          color: 'var(--accent-purple)',
           marginBottom: '1rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           gap: '0.5rem',
         }}>
-          <Sparkles size={16} color="var(--accent-cyan)" />
+          <Sparkles size={16} color="var(--accent-purple)" />
           <span>{content.eyebrow}</span>
         </div>
 
@@ -136,7 +136,7 @@ export default function LandingHero({
         }}>
           {content.title_prefix}{' '}
           <span style={{
-            background: 'linear-gradient(135deg, #0284c7 0%, #6366f1 50%, #db2777 100%)',
+            background: 'linear-gradient(135deg, #818cf8 0%, #a855f7 40%, #ec4899 80%, #38bdf8 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }}>
@@ -173,7 +173,7 @@ export default function LandingHero({
               fontWeight: 800,
               gap: '0.6rem',
               borderRadius: '9999px',
-              boxShadow: '0 8px 25px -4px rgba(37, 99, 235, 0.45)',
+              boxShadow: '0 8px 25px -4px rgba(124, 58, 237, 0.55)',
             }}
           >
             <span>Explore Programmes</span>
@@ -192,7 +192,7 @@ export default function LandingHero({
               background: 'var(--bg-surface)',
             }}
           >
-            <Sparkles size={17} color="var(--accent-amber)" />
+            <Sparkles size={17} color="var(--accent-purple)" />
             <span>Apply For Sponsorship</span>
           </Link>
         </div>
@@ -253,9 +253,9 @@ export default function LandingHero({
           position: 'relative',
           borderRadius: '1.5rem',
           padding: '1rem',
-          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%)',
-          border: '1px solid var(--border-accent)',
-          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.5), 0 0 40px rgba(99, 102, 241, 0.15)',
+          background: 'linear-gradient(180deg, rgba(124, 58, 237, 0.08) 0%, rgba(14, 16, 38, 0.5) 100%)',
+          border: '1px solid rgba(139, 92, 246, 0.35)',
+          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.65), 0 0 50px rgba(124, 58, 237, 0.22)',
           marginBottom: '4rem',
         }}>
           {/* Top Window Bar */}

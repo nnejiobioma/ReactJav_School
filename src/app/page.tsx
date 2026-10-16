@@ -108,7 +108,7 @@ export default function HomePage() {
               right: 0,
               width: '380px',
               height: '380px',
-              background: 'radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, rgba(99, 102, 241, 0.1) 50%, transparent 70%)',
               filter: 'blur(55px)',
               pointerEvents: 'none',
             }} />
@@ -639,12 +639,12 @@ export default function HomePage() {
           marginTop: '5rem',
           padding: 'clamp(2.5rem, 5vw, 4rem) 2rem',
           borderRadius: '1.75rem',
-          background: 'linear-gradient(135deg, rgba(37, 99, 248, 0.1) 0%, rgba(139, 92, 246, 0.1) 50%, rgba(244, 63, 94, 0.08) 100%)',
+          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.16) 0%, rgba(139, 92, 246, 0.14) 50%, rgba(217, 70, 239, 0.1) 100%)',
           border: '1px solid var(--border-accent)',
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
-          boxShadow: 'var(--shadow-xl)',
+          boxShadow: 'var(--shadow-xl), 0 0 50px rgba(124, 58, 237, 0.12)',
         }}>
           <h2 style={{
             fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
@@ -655,7 +655,11 @@ export default function HomePage() {
             lineHeight: 1.15,
           }}>
             {siteContent.bottom_cta?.title_prefix || 'Ready to'}{' '}
-            <span style={{ color: '#f43f5e' }}>
+            <span style={{
+              background: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>
               {siteContent.bottom_cta?.title_highlight || 'Do Hard Things'}
             </span>?
           </h2>
@@ -678,8 +682,8 @@ export default function HomePage() {
                 fontWeight: 800,
                 gap: '0.55rem',
                 borderRadius: '9999px',
-                background: 'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)',
-                boxShadow: '0 8px 25px -4px rgba(37, 99, 235, 0.45)',
+                background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
+                boxShadow: '0 8px 25px -4px rgba(124, 58, 237, 0.5)',
               }}
             >
               <Sparkles size={17} />
