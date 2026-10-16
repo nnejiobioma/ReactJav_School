@@ -10,7 +10,7 @@ import {
   User as FirebaseUser
 } from 'firebase/auth';
 import { auth, googleProvider, isFirebaseConfigured } from './config';
-import { Profile, UserRole } from '@/types';
+import { Profile, UserRole, Privilege, ROLE_PRIVILEGES, FirebaseCustomClaims } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { setCookie } from '@/lib/cookies';
 
@@ -37,6 +37,7 @@ export function mapFirebaseUserToProfile(
   const timestamp = new Date().toISOString();
   const fullName = extra?.full_name || fbUser.displayName || existing?.full_name || cleanEmail.split('@')[0] || 'Learner';
   const role: UserRole = extra?.role || existing?.role || 'student';
+  const privileges: Privilege[] = extra?.privileges || existing?.privileges || ROLE_PRIVILEGES[role] || ROLE_PRIVILEGES.student;
 
   const profile: Profile = {
     id: existing?.id || fbUser.uid,
@@ -45,6 +46,8 @@ export function mapFirebaseUserToProfile(
     full_name: fullName,
     avatar_url: fbUser.photoURL || existing?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`,
     role,
+    privileges,
+    custom_claims: extra?.custom_claims || existing?.custom_claims,
     created_at: existing?.created_at || timestamp,
     subscription_status: extra?.subscription_status || existing?.subscription_status || 'none',
     subscription_plan: extra?.subscription_plan || existing?.subscription_plan,
@@ -198,11 +201,27 @@ export async function signInWithFirebase(
     try {
       const credential = await signInWithEmailAndPassword(auth, cleanEmail, password);
       
+      // Extract Firebase custom claims from ID token
+      let tokenRole: UserRole | undefined;
+      let tokenClaims: FirebaseCustomClaims | undefined;
+      try {
+        const idTokenResult = await credential.user.getIdTokenResult(true);
+        if (idTokenResult?.claims?.role) {
+          tokenRole = idTokenResult.claims.role as UserRole;
+          tokenClaims = idTokenResult.claims as unknown as FirebaseCustomClaims;
+        }
+      } catch (claimsErr) {
+        console.warn('Notice: ID token claims lookup:', claimsErr);
+      }
+
       // Fetch user's profile from Supabase database
       const dbProfile = await LocalDataService.getProfileByEmailOrId(cleanEmail, credential.user.uid);
+      const effectiveRole: UserRole = tokenRole || dbProfile?.role || 'student';
 
       const profile = mapFirebaseUserToProfile(credential.user, {
-        role: dbProfile?.role,
+        role: effectiveRole,
+        privileges: ROLE_PRIVILEGES[effectiveRole],
+        custom_claims: tokenClaims,
         subscription_status: dbProfile?.subscription_status,
         subscription_plan: dbProfile?.subscription_plan,
         payment_reference: dbProfile?.payment_reference,
@@ -276,11 +295,27 @@ export async function signInWithGoogleFirebase(
     const cleanEmail = (credential.user.email || '').trim().toLowerCase();
     const timestamp = new Date().toISOString();
 
+    // Extract Firebase custom claims from ID token
+    let tokenRole: UserRole | undefined;
+    let tokenClaims: FirebaseCustomClaims | undefined;
+    try {
+      const idTokenResult = await credential.user.getIdTokenResult(true);
+      if (idTokenResult?.claims?.role) {
+        tokenRole = idTokenResult.claims.role as UserRole;
+        tokenClaims = idTokenResult.claims as unknown as FirebaseCustomClaims;
+      }
+    } catch (claimsErr) {
+      console.warn('Notice: Google sign-in ID token claims lookup:', claimsErr);
+    }
+
     // Query Supabase database for existing record
     const dbProfile = await LocalDataService.getProfileByEmailOrId(cleanEmail, credential.user.uid);
+    const effectiveRole: UserRole = tokenRole || dbProfile?.role || 'student';
 
     const profile = mapFirebaseUserToProfile(credential.user, {
-      role: dbProfile?.role,
+      role: effectiveRole,
+      privileges: ROLE_PRIVILEGES[effectiveRole],
+      custom_claims: tokenClaims,
       subscription_status: dbProfile?.subscription_status,
       subscription_plan: dbProfile?.subscription_plan,
       payment_reference: dbProfile?.payment_reference,
@@ -396,3 +431,70 @@ export function onFirebaseAuthStateChange(callback: (user: FirebaseUser | null) 
   }
   return () => {};
 }
+
+/**
+ * Force refresh user's Firebase token to pull the latest Custom User Claims
+ */
+export async function refreshFirebaseCustomClaims(): Promise<{
+  role: UserRole;
+  privileges: Privilege[];
+  claims?: any;
+} | null> {
+  if (isFirebaseConfigured() && auth && auth.currentUser) {
+    try {
+      const idTokenResult = await auth.currentUser.getIdTokenResult(true);
+      const role = (idTokenResult?.claims?.role as UserRole) || 'student';
+      const currentUser = LocalDataService.getCurrentUser();
+      if (currentUser) {
+        const updatedUser: Profile = {
+          ...currentUser,
+          role,
+          privileges: ROLE_PRIVILEGES[role],
+          custom_claims: idTokenResult.claims as unknown as FirebaseCustomClaims,
+        };
+        LocalDataService.setCurrentUser(updatedUser);
+        window.dispatchEvent(new Event('storage'));
+        return {
+          role,
+          privileges: ROLE_PRIVILEGES[role],
+          claims: idTokenResult.claims,
+        };
+      }
+    } catch (err) {
+      console.warn('Could not refresh Firebase custom claims:', err);
+    }
+  }
+  return null;
+}
+
+/**
+ * Checks whether an authenticated user holds a specific privilege
+ */
+export function hasPrivilege(user: Profile | null, privilege: Privilege): boolean {
+  if (!user) return false;
+  if (user.role === 'super_admin') return true;
+  const userPrivileges = user.privileges || ROLE_PRIVILEGES[user.role] || [];
+  return userPrivileges.includes(privilege);
+}
+
+/**
+ * Validates whether the user is a Super Administrator (All Privileges)
+ */
+export function isSuperAdmin(user: Profile | null): boolean {
+  return !!user && user.role === 'super_admin';
+}
+
+/**
+ * Validates whether the user has Administrator or higher privileges
+ */
+export function isAdmin(user: Profile | null): boolean {
+  return !!user && (user.role === 'admin' || user.role === 'super_admin');
+}
+
+/**
+ * Validates whether the user holds standard Student privileges
+ */
+export function isStudent(user: Profile | null): boolean {
+  return !!user && user.role === 'student';
+}
+

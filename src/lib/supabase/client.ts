@@ -17,7 +17,8 @@ import {
   SubscriptionStatus,
   TutoringAttendanceSession,
   MonthlyAttendanceSummary,
-  SiteContentConfig
+  SiteContentConfig,
+  ROLE_PRIVILEGES
 } from '@/types';
 import { 
   DEMO_PROFILES, 
@@ -381,7 +382,11 @@ export class LocalDataService {
     }
 
     const targetUser = profiles[index];
-    profiles[index] = { ...targetUser, role: newRole };
+    profiles[index] = { 
+      ...targetUser, 
+      role: newRole,
+      privileges: ROLE_PRIVILEGES[newRole] || ROLE_PRIVILEGES.student,
+    };
 
     if (typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
@@ -394,6 +399,19 @@ export class LocalDataService {
 
     // Persist to server disk for cross-device & cross-session permanence
     this.persistToServer({ type: 'profile', data: profiles[index] });
+
+    // Dispatch to Node.js backend for Firebase Admin Custom Claims sync
+    try {
+      fetch('/api/admin/privileges', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          targetUserId: userId,
+          targetRole: newRole,
+          initiatorId: currentInitiator?.id,
+        }),
+      }).catch((err) => console.warn('[LocalDataService] Firebase claims sync notice:', err));
+    } catch {}
 
     const supabase = createClient();
     if (isSupabaseConfigured() && supabase) {

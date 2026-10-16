@@ -1,5 +1,83 @@
 export type UserRole = 'student' | 'instructor' | 'admin' | 'super_admin';
 
+export type Privilege =
+  | 'learning:read'
+  | 'learning:save_state'
+  | 'cbt:take'
+  | 'notes:manage'
+  | 'courses:create'
+  | 'courses:edit'
+  | 'courses:delete'
+  | 'cbt:manage'
+  | 'students:view'
+  | 'attendance:manage'
+  | 'tuition:review'
+  | 'tuition:approve'
+  | 'governance:audit'
+  | 'roles:assign'
+  | 'system:full_control';
+
+export const ROLE_PRIVILEGES: Record<UserRole, Privilege[]> = {
+  student: [
+    'learning:read',
+    'learning:save_state',
+    'cbt:take',
+    'notes:manage',
+  ],
+  instructor: [
+    'learning:read',
+    'learning:save_state',
+    'cbt:take',
+    'notes:manage',
+    'courses:create',
+    'courses:edit',
+    'cbt:manage',
+    'attendance:manage',
+  ],
+  admin: [
+    'learning:read',
+    'learning:save_state',
+    'cbt:take',
+    'notes:manage',
+    'courses:create',
+    'courses:edit',
+    'courses:delete',
+    'cbt:manage',
+    'students:view',
+    'attendance:manage',
+    'tuition:review',
+    'tuition:approve',
+    'governance:audit',
+  ],
+  super_admin: [
+    'learning:read',
+    'learning:save_state',
+    'cbt:take',
+    'notes:manage',
+    'courses:create',
+    'courses:edit',
+    'courses:delete',
+    'cbt:manage',
+    'students:view',
+    'attendance:manage',
+    'tuition:review',
+    'tuition:approve',
+    'governance:audit',
+    'roles:assign',
+    'system:full_control',
+  ],
+};
+
+export interface FirebaseCustomClaims {
+  role: UserRole;
+  privileges: Privilege[];
+  isAdmin: boolean;
+  isSuperAdmin: boolean;
+  isStudent: boolean;
+  updated_at?: string;
+  [key: string]: any;
+}
+
 export type SubscriptionStatus = 'none' | 'pending_approval' | 'active' | 'rejected' | 'expired';
 
 export interface Profile {
@@ -9,6 +87,8 @@ export interface Profile {
   full_name: string | null;
   avatar_url: string | null;
   role: UserRole;
+  privileges?: Privilege[];
+  custom_claims?: FirebaseCustomClaims;
   bio?: string | null;
   created_at: string;
   // Intranet & Subscription Clearance

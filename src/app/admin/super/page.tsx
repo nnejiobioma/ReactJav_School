@@ -20,9 +20,10 @@ import {
   Crown,
   UserX,
   Building,
-  Calendar
+  Calendar,
+  XCircle
 } from 'lucide-react';
-import { Profile, UserRole } from '@/types';
+import { Profile, UserRole, ROLE_PRIVILEGES } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import AccessGuard from '@/components/auth/AccessGuard';
 
@@ -32,6 +33,8 @@ export default function SuperAdminGovernancePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
   const [isSyncing, setIsSyncing] = useState(false);
+  const [isFirebaseSyncing, setIsFirebaseSyncing] = useState(false);
+  const [isFirebaseAdminActive, setIsFirebaseAdminActive] = useState<boolean | null>(null);
   const [feedback, setFeedback] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   
   // Modal state for confirmation
@@ -40,10 +43,39 @@ export default function SuperAdminGovernancePage() {
     targetRole: UserRole;
   } | null>(null);
 
+  const checkFirebaseAdmin = async () => {
+    try {
+      const res = await fetch('/api/admin/privileges');
+      const data = await res.json();
+      if (data?.success) {
+        setIsFirebaseAdminActive(!!data.isFirebaseAdminConfigured);
+      }
+    } catch {}
+  };
+
   const loadProfiles = async () => {
     setCurrentUser(LocalDataService.getCurrentUser());
     const local = LocalDataService.getAllProfiles();
     setProfiles(local);
+  };
+
+  const handleSyncFirebaseClaims = async () => {
+    setIsFirebaseSyncing(true);
+    try {
+      const res = await fetch('/api/admin/privileges', { method: 'PUT' });
+      const data = await res.json();
+      if (data.success) {
+        setFeedback({ message: data.message, type: 'success' });
+      } else {
+        setFeedback({ message: data.message || data.error || 'Failed to sync Firebase claims.', type: 'error' });
+      }
+      setTimeout(() => setFeedback(null), 5000);
+    } catch (err: any) {
+      setFeedback({ message: 'Error triggering Firebase custom claims sync: ' + err.message, type: 'error' });
+      setTimeout(() => setFeedback(null), 5000);
+    } finally {
+      setIsFirebaseSyncing(false);
+    }
   };
 
   const handleSyncSupabase = async () => {
@@ -64,6 +96,7 @@ export default function SuperAdminGovernancePage() {
   useEffect(() => {
     loadProfiles();
     handleSyncSupabase();
+    checkFirebaseAdmin();
 
     const handleStorage = () => loadProfiles();
     window.addEventListener('storage', handleStorage);
@@ -75,17 +108,38 @@ export default function SuperAdminGovernancePage() {
     setPendingAction({ user, targetRole });
   };
 
-  const confirmRoleChange = () => {
+  const confirmRoleChange = async () => {
     if (!pendingAction || !currentUser) return;
     const { user, targetRole } = pendingAction;
 
-    const res = LocalDataService.updateUserRole(user.id, targetRole, currentUser);
-    if (res.success) {
+    try {
+      const apiRes = await fetch('/api/admin/privileges', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          targetUserId: user.id,
+          targetRole,
+          initiatorId: currentUser.id,
+        }),
+      });
+      const apiData = await apiRes.json();
+      
+      const res = LocalDataService.updateUserRole(user.id, targetRole, currentUser);
+      if (res.success) {
+        loadProfiles();
+        const note = apiData?.success 
+          ? (apiData.firebaseConfigured ? ' (Firebase Custom Claims active)' : ' (Database & local state updated)')
+          : '';
+        setFeedback({ message: res.message + note, type: 'success' });
+        setTimeout(() => setFeedback(null), 4500);
+      } else {
+        setFeedback({ message: res.message, type: 'error' });
+        setTimeout(() => setFeedback(null), 4000);
+      }
+    } catch {
+      const res = LocalDataService.updateUserRole(user.id, targetRole, currentUser);
       loadProfiles();
-      setFeedback({ message: res.message, type: 'success' });
-      setTimeout(() => setFeedback(null), 4000);
-    } else {
-      setFeedback({ message: res.message, type: 'error' });
+      setFeedback({ message: res.message, type: res.success ? 'success' : 'error' });
       setTimeout(() => setFeedback(null), 4000);
     }
     setPendingAction(null);
@@ -182,6 +236,16 @@ export default function SuperAdminGovernancePage() {
 
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
             <button
+              onClick={handleSyncFirebaseClaims}
+              disabled={isFirebaseSyncing}
+              className="btn btn-secondary btn-sm"
+              style={{ gap: '0.4rem', borderColor: 'rgba(99, 102, 241, 0.4)', color: '#a5b4fc' }}
+              title="Push roles and custom claims to Firebase Authentication"
+            >
+              <ShieldCheck size={14} className={isFirebaseSyncing ? 'animate-spin' : ''} />
+              <span>{isFirebaseSyncing ? 'Syncing Claims...' : 'Sync Firebase Claims'}</span>
+            </button>
+            <button
               onClick={handleSyncSupabase}
               disabled={isSyncing}
               className="btn btn-secondary btn-sm"
@@ -217,6 +281,139 @@ export default function SuperAdminGovernancePage() {
             <span>{feedback.message}</span>
           </div>
         )}
+
+        {/* Privilege & Authority Matrix (3 Categories: Student, Admin, Super Admin) */}
+        <div style={{ marginBottom: '2.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <ShieldCheck size={20} color="#c084fc" />
+              <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                Privilege & Authority Architecture (Firebase & Node.js Custom Claims)
+              </h2>
+            </div>
+            {isFirebaseAdminActive !== null && (
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                fontSize: '0.75rem',
+                padding: '0.25rem 0.65rem',
+                borderRadius: '9999px',
+                background: isFirebaseAdminActive ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)',
+                border: isFirebaseAdminActive ? '1px solid rgba(16, 185, 129, 0.35)' : '1px solid rgba(245, 158, 11, 0.35)',
+                color: isFirebaseAdminActive ? '#34d399' : '#fbbf24',
+                fontWeight: 600,
+              }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: isFirebaseAdminActive ? '#34d399' : '#fbbf24' }}></span>
+                <span>{isFirebaseAdminActive ? 'Firebase Admin Node.js Engine Active' : 'Firebase Admin: Local Mode (Configure Service Key in .env.local)'}</span>
+              </div>
+            )}
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '1.25rem',
+          }}>
+            {/* 1. Student Card */}
+            <div className="glass-card" style={{ padding: '1.5rem', borderRadius: '1.1rem', border: '1px solid rgba(56, 189, 248, 0.3)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                <span className="badge badge-primary" style={{ fontSize: '0.75rem', fontWeight: 800 }}>
+                  1. Student
+                </span>
+                <span style={{ fontSize: '0.72rem', color: '#38bdf8', fontWeight: 700 }}>Default Signup Tier</span>
+              </div>
+              <h3 style={{ fontSize: '1.05rem', color: '#ffffff', margin: '0 0 0.35rem', fontWeight: 700 }}>Learner & Candidate</h3>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1.1rem' }}>
+                Standard academic tier assigned automatically to all new users. Accesses lectures, quizzes, and personal study workspace.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.78rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Curriculum & Interactive Video Lectures</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Video Playback Save State & Auto-Resume</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Personal Study Notes & Cloud Workspace</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>CBT Examinations & Performance Records</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#f87171' }}>
+                  <XCircle size={13} /> <span>No Course Authoring or Staff Access</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 2. Admin Card */}
+            <div className="glass-card" style={{ padding: '1.5rem', borderRadius: '1.1rem', border: '1px solid rgba(245, 158, 11, 0.35)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                <span className="badge badge-amber" style={{ fontSize: '0.75rem', fontWeight: 800 }}>
+                  2. Administrator
+                </span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--accent-amber)', fontWeight: 700 }}>Faculty & Staff</span>
+              </div>
+              <h3 style={{ fontSize: '1.05rem', color: '#ffffff', margin: '0 0 0.35rem', fontWeight: 700 }}>Faculty & Registrar</h3>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1.1rem' }}>
+                Operational clearance for course managers, instructors, and registrars. Manages learning content and clearance desks.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.78rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>All Student Privileges Included</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Curriculum Studio & Course Authoring</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>CBT Quiz & Examination Builder</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Registrar Desk & Tuition Approval</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#f87171' }}>
+                  <XCircle size={13} /> <span>Cannot Modify System Roles or Root Access</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 3. Super Admin Card */}
+            <div className="glass-card" style={{
+              padding: '1.5rem',
+              borderRadius: '1.1rem',
+              border: '1px solid rgba(168, 85, 247, 0.6)',
+              background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(236, 72, 153, 0.08))',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                <span className="badge badge-purple" style={{ fontSize: '0.75rem', fontWeight: 800 }}>
+                  3. Super Administrator
+                </span>
+                <span style={{ fontSize: '0.72rem', color: '#d8b4fe', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>ALL PRIVILEGES</span>
+              </div>
+              <h3 style={{ fontSize: '1.05rem', color: '#ffffff', margin: '0 0 0.35rem', fontWeight: 700 }}>Root Platform Governance</h3>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1.1rem' }}>
+                Holds absolute authority over the institutional ecosystem, Firebase Custom Claims, security governance, and role assignment.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', fontSize: '0.78rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Full Unrestricted Platform Access</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Exclusive Authority to Assign & Revoke Roles</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Node.js Firebase Custom Claims Engine</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Tuition & Subscription Clearance Overrides</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#34d399' }}>
+                  <CheckCircle2 size={13} /> <span>Database Synchronization & Root Governance</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Metric Cards */}
         <div style={{
