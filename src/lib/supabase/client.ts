@@ -34,6 +34,7 @@ import {
 } from './mockData';
 import { DEFAULT_SITE_CONTENT } from './defaultSiteContent';
 import { ACADEMY_TRACKS, AcademyTrack } from '@/data/academyTracks';
+import { toValidUuid } from '@/lib/utils';
 
 const FALLBACK_SUPABASE_URL = 'https://jfhmqodrjnsabpyxbgnn.supabase.co';
 const FALLBACK_SUPABASE_ANON_KEY =
@@ -187,6 +188,146 @@ export class LocalDataService {
     return [];
   }
 
+  static mapSupabaseRowToProfile(p: any): Profile {
+    const fullName = p.full_name || p.email?.split('@')[0] || 'Learner';
+    return {
+      id: p.id,
+      firebase_uid: p.firebase_uid || undefined,
+      email: p.email,
+      full_name: fullName,
+      avatar_url: p.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`,
+      role: (p.role as UserRole) || 'student',
+      bio: p.bio || null,
+      created_at: p.created_at || new Date().toISOString(),
+      subscription_status: p.subscription_status || 'none',
+      subscription_plan: p.subscription_plan || undefined,
+      payment_reference: p.payment_reference || undefined,
+      payment_date: p.payment_date || undefined,
+      admin_granted: !!p.admin_granted,
+      granted_at: p.granted_at || undefined,
+      granted_by: p.granted_by || undefined,
+      rejection_reason: p.rejection_reason || undefined,
+      tutoring_enrolled: !!p.tutoring_enrolled,
+      tutoring_track_id: p.tutoring_track_id || undefined,
+      tutoring_track_name: p.tutoring_track_name || undefined,
+      tutoring_enrolled_at: p.tutoring_enrolled_at || undefined,
+      tutoring_frequency: p.tutoring_frequency || undefined,
+      tutoring_mentor_name: p.tutoring_mentor_name || undefined,
+      registration_completed: !!p.registration_completed,
+      phone: p.phone || undefined,
+      country: p.country || undefined,
+      state: p.state || undefined,
+      education_level: p.education_level || undefined,
+      preferred_track: p.preferred_track || undefined,
+      experience_level: p.experience_level || undefined,
+      privacy_accepted: p.privacy_accepted !== undefined ? !!p.privacy_accepted : false,
+      privacy_accepted_at: p.privacy_accepted_at || undefined,
+      terms_accepted: p.terms_accepted !== undefined ? !!p.terms_accepted : false,
+      terms_accepted_at: p.terms_accepted_at || undefined,
+    };
+  }
+
+  static async getProfileByEmailOrId(email: string, id?: string): Promise<Profile | null> {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const supabase = createClient();
+
+    // 1. Query Supabase database
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        if (cleanEmail) {
+          const { data, error } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('email', cleanEmail)
+            .maybeSingle();
+
+          if (!error && data) {
+            const mapped = this.mapSupabaseRowToProfile(data);
+            const local = this.getAllProfiles();
+            const idx = local.findIndex((p) => p.email && p.email.toLowerCase() === cleanEmail);
+            if (idx >= 0) local[idx] = mapped;
+            else local.unshift(mapped);
+            if (typeof window !== 'undefined') {
+              localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(local));
+            }
+            return mapped;
+          }
+        }
+
+        if (id) {
+          const validId = toValidUuid(id);
+          const { data, error } = await supabase
+            .from('profiles')
+            .select('*')
+            .or(`id.eq.${validId},id.eq.${id}`)
+            .maybeSingle();
+
+          if (!error && data) {
+            const mapped = this.mapSupabaseRowToProfile(data);
+            return mapped;
+          }
+        }
+      } catch (err) {
+        console.warn('[LocalDataService] Supabase profile query error:', err);
+      }
+    }
+
+    // 2. Check local profiles cache
+    const local = this.getAllProfiles();
+    const found = local.find(
+      (p) =>
+        (cleanEmail && p.email && p.email.toLowerCase() === cleanEmail) ||
+        (id && (p.id === id || p.firebase_uid === id))
+    );
+    if (found) return found;
+
+    return null;
+  }
+
+  static async syncProfileToSupabaseAndLocal(profile: Profile): Promise<void> {
+    if (typeof window === 'undefined') return;
+    this.setCurrentUser(profile);
+
+    // Persist via server route (which writes to Supabase server-side)
+    try {
+      await fetch('/api/admin/persist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'profile', data: profile }),
+      });
+    } catch {}
+
+    // Direct client-side Supabase upsert
+    const supabase = createClient();
+    if (isSupabaseConfigured() && supabase) {
+      try {
+        const payload: Record<string, any> = {
+          id: toValidUuid(profile.id),
+          email: profile.email.toLowerCase(),
+          full_name: profile.full_name,
+          avatar_url: profile.avatar_url,
+          role: profile.role || 'student',
+          subscription_status: profile.subscription_status || 'none',
+          subscription_plan: profile.subscription_plan || null,
+          payment_reference: profile.payment_reference || null,
+          admin_granted: !!profile.admin_granted,
+          tutoring_enrolled: !!profile.tutoring_enrolled,
+          tutoring_track_id: profile.tutoring_track_id || null,
+          tutoring_track_name: profile.tutoring_track_name || null,
+          registration_completed: !!profile.registration_completed,
+          privacy_accepted: profile.privacy_accepted !== undefined ? !!profile.privacy_accepted : false,
+          privacy_accepted_at: profile.privacy_accepted_at || null,
+          terms_accepted: profile.terms_accepted !== undefined ? !!profile.terms_accepted : false,
+          terms_accepted_at: profile.terms_accepted_at || null,
+          updated_at: new Date().toISOString(),
+        };
+        await supabase.from('profiles').upsert(payload, { onConflict: 'id' });
+      } catch (err) {
+        console.warn('[LocalDataService] Direct profile upsert notice:', err);
+      }
+    }
+  }
+
   static async fetchProfilesFromSupabase(): Promise<Profile[]> {
     const supabase = createClient();
     if (isSupabaseConfigured() && supabase) {
@@ -200,20 +341,11 @@ export class LocalDataService {
           const map = new Map<string, Profile>();
           local.forEach((p) => map.set(p.id, p));
           data.forEach((p: any) => {
-            map.set(p.id, {
-              id: p.id,
-              email: p.email,
-              full_name: p.full_name || 'User',
-              avatar_url: p.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(p.full_name || p.email)}`,
-              role: (p.role as UserRole) || 'student',
-              created_at: p.created_at || new Date().toISOString(),
-              subscription_status: p.subscription_status || 'none',
-              admin_granted: !!p.admin_granted,
-              tutoring_enrolled: !!p.tutoring_enrolled,
-              tutoring_track_name: p.tutoring_track_name,
-            });
+            const mapped = this.mapSupabaseRowToProfile(p);
+            map.set(mapped.id, mapped);
+            if (mapped.email) map.set(mapped.email.toLowerCase(), mapped);
           });
-          const merged = Array.from(map.values());
+          const merged = Array.from(new Set(map.values()));
           if (typeof window !== 'undefined') {
             localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(merged));
           }
@@ -421,7 +553,7 @@ export class LocalDataService {
         state: details.state,
         education_level: details.education_level,
         preferred_track: details.preferred_track,
-      }).eq('id', userId).then();
+      }).or(`id.eq.${toValidUuid(userId)},email.eq.${updatedProfile.email || ''}`).then();
     }
 
     return { success: true, profile: updatedProfile };
@@ -471,7 +603,7 @@ export class LocalDataService {
       supabase.from('profiles').update({
         privacy_accepted: true,
         privacy_accepted_at: timestamp,
-      }).eq('id', userId).then();
+      }).or(`id.eq.${toValidUuid(userId)},email.eq.${updatedProfile.email || ''}`).then();
     }
 
     return { success: true, profile: updatedProfile };
@@ -521,7 +653,7 @@ export class LocalDataService {
       supabase.from('profiles').update({
         terms_accepted: true,
         terms_accepted_at: timestamp,
-      }).eq('id', userId).then();
+      }).or(`id.eq.${toValidUuid(userId)},email.eq.${updatedProfile.email || ''}`).then();
     }
 
     return { success: true, profile: updatedProfile };
@@ -575,7 +707,7 @@ export class LocalDataService {
         privacy_accepted_at: timestamp,
         terms_accepted: true,
         terms_accepted_at: timestamp,
-      }).eq('id', userId).then();
+      }).or(`id.eq.${toValidUuid(userId)},email.eq.${updatedProfile.email || ''}`).then();
     }
 
     return { success: true, profile: updatedProfile };
@@ -792,8 +924,9 @@ export class LocalDataService {
     // 4. Supabase sync
     const supabase = createClient();
     if (isSupabaseConfigured() && supabase) {
+      const validUserId = toValidUuid(userId);
       supabase.from('enrollments').upsert({
-        user_id: userId,
+        user_id: validUserId,
         course_id: courseId,
         enrolled_at: new Date().toISOString(),
       }).then();
@@ -803,7 +936,7 @@ export class LocalDataService {
         subscription_plan: 'term',
         admin_granted: true,
         payment_reference: paymentReference,
-      }).eq('id', userId).then();
+      }).or(`id.eq.${validUserId},email.eq.${currentUser?.email || ''}`).then();
     }
 
     return {
@@ -1509,7 +1642,7 @@ export class LocalDataService {
         subscription_plan: 'annual',
         admin_granted: true,
         payment_reference: paymentReference,
-      }).eq('id', targetUserId).then();
+      }).or(`id.eq.${toValidUuid(targetUserId)},email.eq.${updatedUser.email || ''}`).then();
     }
 
     if (typeof window !== 'undefined') {

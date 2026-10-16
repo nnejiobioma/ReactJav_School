@@ -31,22 +31,25 @@ export function mapFirebaseUserToProfile(
   const cleanEmail = (fbUser.email || '').trim().toLowerCase();
   const allProfiles = LocalDataService.getAllProfiles();
   const existing = allProfiles.find(
-    (p) => p.id === fbUser.uid || (p.email && p.email.toLowerCase() === cleanEmail)
+    (p) => p.id === fbUser.uid || p.firebase_uid === fbUser.uid || (p.email && p.email.toLowerCase() === cleanEmail)
   );
 
   const timestamp = new Date().toISOString();
   const fullName = extra?.full_name || fbUser.displayName || existing?.full_name || cleanEmail.split('@')[0] || 'Learner';
-  const role: UserRole = existing?.role || extra?.role || 'student';
+  const role: UserRole = extra?.role || existing?.role || 'student';
 
   const profile: Profile = {
-    id: fbUser.uid,
+    id: existing?.id || fbUser.uid,
+    firebase_uid: fbUser.uid,
     email: cleanEmail,
     full_name: fullName,
     avatar_url: fbUser.photoURL || existing?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`,
     role,
     created_at: existing?.created_at || timestamp,
-    subscription_status: existing?.subscription_status || 'none',
-    admin_granted: existing?.admin_granted || false,
+    subscription_status: extra?.subscription_status || existing?.subscription_status || 'none',
+    subscription_plan: extra?.subscription_plan || existing?.subscription_plan,
+    payment_reference: extra?.payment_reference || existing?.payment_reference,
+    admin_granted: extra?.admin_granted !== undefined ? extra.admin_granted : (existing?.admin_granted || false),
     registration_completed: existing?.registration_completed || false,
     privacy_accepted: extra?.privacy_accepted !== undefined 
       ? extra.privacy_accepted 
@@ -122,18 +125,9 @@ export async function signUpWithFirebase(
         terms_accepted_at: timestamp,
       });
 
-      // Persist profile locally and to server disk
-      LocalDataService.setCurrentUser(profile);
+      // Persist profile locally and to Supabase database
+      await LocalDataService.syncProfileToSupabaseAndLocal(profile);
       setCookie('reactjav_privacy_accepted', 'true', 365);
-      
-      try {
-        await fetch('/api/admin/persist', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'profile', data: profile }),
-        });
-      } catch {}
-
       window.dispatchEvent(new Event('storage'));
 
       return {
@@ -174,7 +168,7 @@ export async function signUpWithFirebase(
     terms_accepted_at: timestamp,
   };
 
-  LocalDataService.setCurrentUser(fallbackProfile);
+  await LocalDataService.syncProfileToSupabaseAndLocal(fallbackProfile);
   setCookie('reactjav_privacy_accepted', 'true', 365);
   window.dispatchEvent(new Event('storage'));
 
@@ -187,6 +181,7 @@ export async function signUpWithFirebase(
 
 /**
  * Sign in using Firebase Authentication with email & password.
+ * Synchronizes with Supabase database for role & tuition subscription status.
  */
 export async function signInWithFirebase(
   email: string,
@@ -202,9 +197,25 @@ export async function signInWithFirebase(
   if (isFirebaseConfigured() && auth) {
     try {
       const credential = await signInWithEmailAndPassword(auth, cleanEmail, password);
-      const profile = mapFirebaseUserToProfile(credential.user);
+      
+      // Fetch user's profile from Supabase database
+      const dbProfile = await LocalDataService.getProfileByEmailOrId(cleanEmail, credential.user.uid);
 
-      LocalDataService.setCurrentUser(profile);
+      const profile = mapFirebaseUserToProfile(credential.user, {
+        role: dbProfile?.role,
+        subscription_status: dbProfile?.subscription_status,
+        subscription_plan: dbProfile?.subscription_plan,
+        payment_reference: dbProfile?.payment_reference,
+        admin_granted: dbProfile?.admin_granted,
+        full_name: dbProfile?.full_name || credential.user.displayName || undefined,
+        avatar_url: credential.user.photoURL || dbProfile?.avatar_url || undefined,
+        privacy_accepted: dbProfile?.privacy_accepted,
+        privacy_accepted_at: dbProfile?.privacy_accepted_at,
+        terms_accepted: dbProfile?.terms_accepted,
+        terms_accepted_at: dbProfile?.terms_accepted_at,
+      });
+
+      await LocalDataService.syncProfileToSupabaseAndLocal(profile);
       window.dispatchEvent(new Event('storage'));
 
       return {
@@ -227,18 +238,14 @@ export async function signInWithFirebase(
     }
   }
 
-  // Local fallback
-  const allProfiles = LocalDataService.getAllProfiles();
-  const localMatched = allProfiles.find(
-    (p) => p.email && p.email.toLowerCase() === cleanEmail
-  );
-
-  if (localMatched) {
-    LocalDataService.setCurrentUser(localMatched);
+  // Local / offline fallback
+  const dbProfile = await LocalDataService.getProfileByEmailOrId(cleanEmail);
+  if (dbProfile) {
+    LocalDataService.setCurrentUser(dbProfile);
     window.dispatchEvent(new Event('storage'));
     return {
       success: true,
-      user: localMatched,
+      user: dbProfile,
       message: 'Signed in successfully!',
     };
   }
@@ -250,7 +257,8 @@ export async function signInWithFirebase(
 }
 
 /**
- * Single-click Google Sign-in with Firebase
+ * Single-click Google Sign-in with Firebase.
+ * Preserves Supabase permissions, roles, and tuition clearance.
  */
 export async function signInWithGoogleFirebase(
   acceptedPrivacy: boolean = true,
@@ -265,26 +273,30 @@ export async function signInWithGoogleFirebase(
 
   try {
     const credential = await signInWithPopup(auth, googleProvider);
+    const cleanEmail = (credential.user.email || '').trim().toLowerCase();
     const timestamp = new Date().toISOString();
+
+    // Query Supabase database for existing record
+    const dbProfile = await LocalDataService.getProfileByEmailOrId(cleanEmail, credential.user.uid);
+
     const profile = mapFirebaseUserToProfile(credential.user, {
-      privacy_accepted: acceptedPrivacy,
-      privacy_accepted_at: acceptedPrivacy ? timestamp : undefined,
-      terms_accepted: acceptedTerms,
-      terms_accepted_at: acceptedTerms ? timestamp : undefined,
+      role: dbProfile?.role,
+      subscription_status: dbProfile?.subscription_status,
+      subscription_plan: dbProfile?.subscription_plan,
+      payment_reference: dbProfile?.payment_reference,
+      admin_granted: dbProfile?.admin_granted,
+      full_name: dbProfile?.full_name || credential.user.displayName || undefined,
+      avatar_url: credential.user.photoURL || dbProfile?.avatar_url || undefined,
+      privacy_accepted: dbProfile?.privacy_accepted !== undefined ? dbProfile.privacy_accepted : acceptedPrivacy,
+      privacy_accepted_at: dbProfile?.privacy_accepted_at || (acceptedPrivacy ? timestamp : undefined),
+      terms_accepted: dbProfile?.terms_accepted !== undefined ? dbProfile.terms_accepted : acceptedTerms,
+      terms_accepted_at: dbProfile?.terms_accepted_at || (acceptedTerms ? timestamp : undefined),
     });
 
-    LocalDataService.setCurrentUser(profile);
-    if (acceptedPrivacy) {
+    await LocalDataService.syncProfileToSupabaseAndLocal(profile);
+    if (profile.privacy_accepted) {
       setCookie('reactjav_privacy_accepted', 'true', 365);
     }
-
-    try {
-      await fetch('/api/admin/persist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'profile', data: profile }),
-      });
-    } catch {}
 
     window.dispatchEvent(new Event('storage'));
 

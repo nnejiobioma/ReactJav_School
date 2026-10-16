@@ -4,6 +4,7 @@ export type SubscriptionStatus = 'none' | 'pending_approval' | 'active' | 'rejec
 
 export interface Profile {
   id: string;
+  firebase_uid?: string;
   email: string;
   full_name: string | null;
   avatar_url: string | null;
