@@ -330,6 +330,13 @@ export async function signInWithSupabase(
  * Sign out current session
  */
 export async function signOutUser(): Promise<void> {
+  try {
+    const { signOutFirebase } = await import('@/lib/firebase/auth');
+    await signOutFirebase();
+  } catch (err) {
+    console.warn('Firebase sign out error:', err);
+  }
+
   const supabase = createClient();
   if (isSupabaseConfigured() && supabase) {
     try {

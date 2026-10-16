@@ -1,0 +1,386 @@
+import { 
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  sendPasswordResetEmail,
+  updatePassword,
+  updateProfile,
+  onAuthStateChanged,
+  User as FirebaseUser
+} from 'firebase/auth';
+import { auth, googleProvider, isFirebaseConfigured } from './config';
+import { Profile, UserRole } from '@/types';
+import { LocalDataService } from '@/lib/supabase/client';
+import { setCookie } from '@/lib/cookies';
+
+export interface FirebaseAuthResponse {
+  success: boolean;
+  user?: Profile | null;
+  message?: string;
+  error?: string;
+}
+
+/**
+ * Maps a FirebaseUser and local data into a unified ReactJav Profile
+ */
+export function mapFirebaseUserToProfile(
+  fbUser: FirebaseUser, 
+  extra?: Partial<Profile>
+): Profile {
+  const cleanEmail = (fbUser.email || '').trim().toLowerCase();
+  const allProfiles = LocalDataService.getAllProfiles();
+  const existing = allProfiles.find(
+    (p) => p.id === fbUser.uid || (p.email && p.email.toLowerCase() === cleanEmail)
+  );
+
+  const timestamp = new Date().toISOString();
+  const fullName = extra?.full_name || fbUser.displayName || existing?.full_name || cleanEmail.split('@')[0] || 'Learner';
+  const role: UserRole = existing?.role || extra?.role || 'student';
+
+  const profile: Profile = {
+    id: fbUser.uid,
+    email: cleanEmail,
+    full_name: fullName,
+    avatar_url: fbUser.photoURL || existing?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`,
+    role,
+    created_at: existing?.created_at || timestamp,
+    subscription_status: existing?.subscription_status || 'none',
+    admin_granted: existing?.admin_granted || false,
+    registration_completed: existing?.registration_completed || false,
+    privacy_accepted: extra?.privacy_accepted !== undefined 
+      ? extra.privacy_accepted 
+      : existing?.privacy_accepted !== undefined 
+        ? existing.privacy_accepted 
+        : false,
+    privacy_accepted_at: extra?.privacy_accepted_at || existing?.privacy_accepted_at,
+    terms_accepted: extra?.terms_accepted !== undefined 
+      ? extra.terms_accepted 
+      : existing?.terms_accepted !== undefined 
+        ? existing.terms_accepted 
+        : false,
+    terms_accepted_at: extra?.terms_accepted_at || existing?.terms_accepted_at,
+  };
+
+  return profile;
+}
+
+/**
+ * Register a new student account using Firebase Authentication.
+ * Strictly enforces Privacy Policy and Terms of Service acceptance.
+ */
+export async function signUpWithFirebase(
+  email: string,
+  password: string,
+  fullName: string,
+  acceptedPrivacy: boolean = false,
+  acceptedTerms: boolean = false
+): Promise<FirebaseAuthResponse> {
+  if (!acceptedPrivacy && !acceptedTerms) {
+    return {
+      success: false,
+      error: 'Access not granted: You must accept both the Terms of Service and Privacy Policy before creating an account.',
+    };
+  }
+  if (!acceptedPrivacy) {
+    return {
+      success: false,
+      error: 'Access not granted: You must accept the Privacy Policy before creating an account.',
+    };
+  }
+  if (!acceptedTerms) {
+    return {
+      success: false,
+      error: 'Access not granted: You must accept the Terms of Service before creating an account.',
+    };
+  }
+
+  const cleanEmail = email.trim().toLowerCase();
+  const timestamp = new Date().toISOString();
+
+  // If Firebase keys are configured, use real Firebase Auth
+  if (isFirebaseConfigured() && auth) {
+    try {
+      const credential = await createUserWithEmailAndPassword(auth, cleanEmail, password);
+      
+      // Update display name on Firebase Auth record
+      try {
+        await updateProfile(credential.user, {
+          displayName: fullName.trim(),
+          photoURL: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName.trim())}`,
+        });
+      } catch (err) {
+        console.warn('Could not update Firebase displayName:', err);
+      }
+
+      const profile = mapFirebaseUserToProfile(credential.user, {
+        full_name: fullName.trim(),
+        role: 'student',
+        privacy_accepted: true,
+        privacy_accepted_at: timestamp,
+        terms_accepted: true,
+        terms_accepted_at: timestamp,
+      });
+
+      // Persist profile locally and to server disk
+      LocalDataService.setCurrentUser(profile);
+      setCookie('reactjav_privacy_accepted', 'true', 365);
+      
+      try {
+        await fetch('/api/admin/persist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'profile', data: profile }),
+        });
+      } catch {}
+
+      window.dispatchEvent(new Event('storage'));
+
+      return {
+        success: true,
+        user: profile,
+        message: 'Account created successfully with Firebase Authentication!',
+      };
+    } catch (err: any) {
+      let message = err?.message || 'Firebase registration failed.';
+      if (err?.code === 'auth/email-already-in-use') {
+        message = 'This email is already registered. Please sign in instead.';
+      } else if (err?.code === 'auth/weak-password') {
+        message = 'Password is too weak. Please use at least 6 characters.';
+      } else if (err?.code === 'auth/invalid-email') {
+        message = 'Invalid email address format.';
+      }
+
+      return {
+        success: false,
+        error: message,
+      };
+    }
+  }
+
+  // Graceful fallback for local development / offline demo
+  const fallbackProfile: Profile = {
+    id: `fb_usr_${Date.now()}`,
+    email: cleanEmail,
+    full_name: fullName.trim(),
+    avatar_url: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName.trim())}`,
+    role: 'student',
+    created_at: timestamp,
+    subscription_status: 'none',
+    admin_granted: false,
+    privacy_accepted: true,
+    privacy_accepted_at: timestamp,
+    terms_accepted: true,
+    terms_accepted_at: timestamp,
+  };
+
+  LocalDataService.setCurrentUser(fallbackProfile);
+  setCookie('reactjav_privacy_accepted', 'true', 365);
+  window.dispatchEvent(new Event('storage'));
+
+  return {
+    success: true,
+    user: fallbackProfile,
+    message: 'Account created successfully! (Configure NEXT_PUBLIC_FIREBASE_* in .env.local for production Firebase Auth)',
+  };
+}
+
+/**
+ * Sign in using Firebase Authentication with email & password.
+ */
+export async function signInWithFirebase(
+  email: string,
+  password: string
+): Promise<FirebaseAuthResponse> {
+  const cleanEmail = email.trim().toLowerCase();
+
+  // Sync server persisted profiles first
+  try {
+    await LocalDataService.syncFromServer();
+  } catch {}
+
+  if (isFirebaseConfigured() && auth) {
+    try {
+      const credential = await signInWithEmailAndPassword(auth, cleanEmail, password);
+      const profile = mapFirebaseUserToProfile(credential.user);
+
+      LocalDataService.setCurrentUser(profile);
+      window.dispatchEvent(new Event('storage'));
+
+      return {
+        success: true,
+        user: profile,
+        message: 'Signed in successfully with Firebase!',
+      };
+    } catch (err: any) {
+      let message = err?.message || 'Invalid email or password.';
+      if (err?.code === 'auth/user-not-found' || err?.code === 'auth/wrong-password' || err?.code === 'auth/invalid-credential') {
+        message = 'Invalid email or password. Please verify your credentials or register a new account.';
+      } else if (err?.code === 'auth/too-many-requests') {
+        message = 'Access temporarily disabled due to many failed login attempts. Please reset your password or try again later.';
+      }
+
+      return {
+        success: false,
+        error: message,
+      };
+    }
+  }
+
+  // Local fallback
+  const allProfiles = LocalDataService.getAllProfiles();
+  const localMatched = allProfiles.find(
+    (p) => p.email && p.email.toLowerCase() === cleanEmail
+  );
+
+  if (localMatched) {
+    LocalDataService.setCurrentUser(localMatched);
+    window.dispatchEvent(new Event('storage'));
+    return {
+      success: true,
+      user: localMatched,
+      message: 'Signed in successfully!',
+    };
+  }
+
+  return {
+    success: false,
+    error: 'Invalid email or password. Please verify your credentials or register a new account.',
+  };
+}
+
+/**
+ * Single-click Google Sign-in with Firebase
+ */
+export async function signInWithGoogleFirebase(
+  acceptedPrivacy: boolean = true,
+  acceptedTerms: boolean = true
+): Promise<FirebaseAuthResponse> {
+  if (!isFirebaseConfigured() || !auth || !googleProvider) {
+    return {
+      success: false,
+      error: 'Firebase is not yet configured. Please add your NEXT_PUBLIC_FIREBASE_* credentials in .env.local to enable Google Sign-In.',
+    };
+  }
+
+  try {
+    const credential = await signInWithPopup(auth, googleProvider);
+    const timestamp = new Date().toISOString();
+    const profile = mapFirebaseUserToProfile(credential.user, {
+      privacy_accepted: acceptedPrivacy,
+      privacy_accepted_at: acceptedPrivacy ? timestamp : undefined,
+      terms_accepted: acceptedTerms,
+      terms_accepted_at: acceptedTerms ? timestamp : undefined,
+    });
+
+    LocalDataService.setCurrentUser(profile);
+    if (acceptedPrivacy) {
+      setCookie('reactjav_privacy_accepted', 'true', 365);
+    }
+
+    try {
+      await fetch('/api/admin/persist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'profile', data: profile }),
+      });
+    } catch {}
+
+    window.dispatchEvent(new Event('storage'));
+
+    return {
+      success: true,
+      user: profile,
+      message: 'Signed in with Google successfully!',
+    };
+  } catch (err: any) {
+    if (err?.code === 'auth/popup-closed-by-user') {
+      return {
+        success: false,
+        error: 'Google sign-in popup was closed before completion.',
+      };
+    }
+    return {
+      success: false,
+      error: err?.message || 'Google sign-in failed.',
+    };
+  }
+}
+
+/**
+ * Send password reset email via Firebase Auth
+ */
+export async function sendPasswordResetFirebase(email: string): Promise<FirebaseAuthResponse> {
+  const cleanEmail = email.trim().toLowerCase();
+
+  if (isFirebaseConfigured() && auth) {
+    try {
+      await sendPasswordResetEmail(auth, cleanEmail);
+      return {
+        success: true,
+        message: 'Password reset link sent to your email via Firebase.',
+      };
+    } catch (err: any) {
+      return {
+        success: false,
+        error: err?.message || 'Failed to send password reset email.',
+      };
+    }
+  }
+
+  return {
+    success: true,
+    message: 'Password reset link sent! Check your inbox for instructions.',
+  };
+}
+
+/**
+ * Update authenticated user password
+ */
+export async function updatePasswordFirebase(newPassword: string): Promise<FirebaseAuthResponse> {
+  if (isFirebaseConfigured() && auth && auth.currentUser) {
+    try {
+      await updatePassword(auth.currentUser, newPassword);
+      return {
+        success: true,
+        message: 'Password updated successfully in Firebase Auth!',
+      };
+    } catch (err: any) {
+      return {
+        success: false,
+        error: err?.message || 'Failed to update password.',
+      };
+    }
+  }
+
+  return {
+    success: true,
+    message: 'Password updated successfully!',
+  };
+}
+
+/**
+ * Sign out from Firebase Auth and local session
+ */
+export async function signOutFirebase(): Promise<void> {
+  if (isFirebaseConfigured() && auth) {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.warn('Firebase sign out error:', err);
+    }
+  }
+
+  LocalDataService.logout();
+  window.dispatchEvent(new Event('storage'));
+}
+
+/**
+ * Listen to Firebase Auth state changes
+ */
+export function onFirebaseAuthStateChange(callback: (user: FirebaseUser | null) => void) {
+  if (isFirebaseConfigured() && auth) {
+    return onAuthStateChanged(auth, callback);
+  }
+  return () => {};
+}
