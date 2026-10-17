@@ -5,46 +5,46 @@
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Color Palette - Bright, Clean & Modern */
-  --bg-main: #f8fafc;
+  /* Color Palette - Modern High-Tech Slate (Linear & Stripe Inspired) */
+  --bg-main: #f4f6fb;
   --bg-surface: #ffffff;
-  --bg-surface-elevated: #f1f5f9;
-  --bg-glass: rgba(255, 255, 255, 0.95);
-  --bg-glass-hover: rgba(241, 245, 249, 0.98);
+  --bg-surface-elevated: #eef2f8;
+  --bg-glass: rgba(255, 255, 255, 0.94);
+  --bg-glass-hover: rgba(238, 242, 248, 0.96);
   
-  --border-subtle: rgba(15, 23, 42, 0.12);
-  --border-focus: rgba(29, 78, 216, 0.5);
-  --border-accent: rgba(29, 78, 216, 0.25);
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-focus: rgba(37, 99, 235, 0.55);
+  --border-accent: rgba(37, 99, 235, 0.22);
 
-  --text-primary: #0f172a; /* Deepest black/slate */
-  --text-secondary: #1e293b; /* High-contrast dark slate */
-  --text-muted: #334155; /* Readable dark slate */
+  --text-primary: #0a0f1d; /* Deepest midnight-slate for ultra-sharp readability */
+  --text-secondary: #334155; /* High-contrast slate-700 for comfortable long reading */
+  --text-muted: #64748b; /* Balanced slate-500 for secondary tags and dates */
   --text-inverse: #ffffff;
 
-  /* Brand Accents - Electric Violet & Indigo Theme */
-  --primary: #4f46e5; /* Electric Indigo */
-  --primary-hover: #4338ca;
-  --primary-glow: rgba(79, 70, 229, 0.25);
+  /* Brand Accents - Modern High-Tech Royal Cobalt & Sapphire */
+  --primary: #2563eb; /* Vibrant Royal Cobalt */
+  --primary-hover: #1d4ed8;
+  --primary-glow: rgba(37, 99, 235, 0.18);
   
   --accent-purple: #7c3aed;
   --accent-pink: #ec4899;
-  --accent-cyan: #06b6d4;
+  --accent-cyan: #0284c7;
   --accent-emerald: #059669;
   --accent-amber: #d97706;
   --accent-rose: #f43f5e;
 
   /* Gradients */
-  --grad-primary: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #9333ea 100%);
-  --grad-glow: linear-gradient(135deg, rgba(79, 70, 229, 0.16) 0%, rgba(124, 58, 237, 0.16) 100%);
-  --grad-surface: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  --grad-primary: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #4f46e5 100%);
+  --grad-glow: linear-gradient(135deg, rgba(37, 99, 235, 0.14) 0%, rgba(79, 70, 229, 0.12) 100%);
+  --grad-surface: linear-gradient(180deg, #ffffff 0%, #f4f6fb 100%);
   --grad-emerald: linear-gradient(135deg, #059669 0%, #047857 100%);
   --grad-amber: linear-gradient(135deg, #d97706 0%, #b45309 100%);
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.05);
-  --shadow-md: 0 4px 16px -2px rgba(79, 70, 229, 0.12), 0 2px 6px -2px rgba(15, 23, 42, 0.05);
-  --shadow-lg: 0 12px 32px -4px rgba(79, 70, 229, 0.15), 0 4px 12px -2px rgba(15, 23, 42, 0.06);
-  --shadow-glow: 0 0 28px rgba(79, 70, 229, 0.22);
+  /* Shadows - Crisp, multi-layered, non-muddy shadows */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 12px 30px -4px rgba(15, 23, 42, 0.10), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  --shadow-glow: 0 0 24px rgba(37, 99, 235, 0.18);
 
   /* Layout Dimensions */
   --header-height: 8.75rem;
@@ -156,7 +156,7 @@ body::before {
   left: 20%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, rgba(248, 250, 252, 0) 70%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, rgba(244, 246, 251, 0) 70%);
   filter: blur(80px);
   pointer-events: none;
   z-index: 0;
@@ -173,7 +173,7 @@ body::after {
   right: 15%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(219, 39, 119, 0.06) 0%, rgba(248, 250, 252, 0) 70%);
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.04) 0%, rgba(244, 246, 251, 0) 70%);
   filter: blur(90px);
   pointer-events: none;
   z-index: 0;
@@ -266,11 +266,11 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary {
   background: var(--grad-primary);
   color: #ffffff;
-  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.35);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.55);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.42);
   transform: translateY(-1px);
 }
 
@@ -295,7 +295,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-outline:hover {
   border-color: var(--primary);
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(37, 99, 235, 0.06);
 }
 
 .btn-success {
@@ -349,30 +349,36 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .badge-primary {
-  background: rgba(79, 70, 229, 0.1);
+  background: rgba(37, 99, 235, 0.08);
   color: var(--primary);
-  border: 1px solid rgba(79, 70, 229, 0.25);
+  border: 1px solid rgba(37, 99, 235, 0.22);
 }
 
 .badge-emerald {
-  background: rgba(5, 150, 105, 0.1);
+  background: rgba(5, 150, 105, 0.08);
   color: var(--accent-emerald);
-  border: 1px solid rgba(5, 150, 105, 0.25);
+  border: 1px solid rgba(5, 150, 105, 0.22);
 }
 
 .badge-amber {
-  background: rgba(217, 119, 6, 0.12);
+  background: rgba(217, 119, 6, 0.09);
   color: var(--accent-amber);
-  border: 1px solid rgba(217, 119, 6, 0.25);
+  border: 1px solid rgba(217, 119, 6, 0.22);
 }
 
 .badge-cyan {
-  background: rgba(2, 132, 199, 0.1);
+  background: rgba(2, 132, 199, 0.08);
   color: var(--accent-cyan);
-  border: 1px solid rgba(2, 132, 199, 0.25);
+  border: 1px solid rgba(2, 132, 199, 0.22);
 }
 
 .badge-purple {
+  background: rgba(124, 58, 237, 0.08);
+  color: var(--accent-purple);
+  border: 1px solid rgba(124, 58, 237, 0.22);
+}
+
+[data-theme="dark"] .badge-purple {
   background: linear-gradient(135deg, rgba(168, 85, 247, 0.16), rgba(236, 72, 153, 0.16));
   color: #c084fc;
   border: 1px solid rgba(168, 85, 247, 0.35);
