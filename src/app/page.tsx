@@ -91,9 +91,9 @@ export default function HomePage() {
             margin: '4rem 0',
             padding: 'clamp(1.5rem, 3vw, 2.75rem)',
             borderRadius: '1.75rem',
-            background: 'linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-surface-elevated) 100%)',
-            border: '1px solid var(--border-accent)',
-            boxShadow: 'var(--shadow-xl)',
+            background: 'var(--bg-surface)',
+            border: '1px solid var(--border-subtle)',
+            boxShadow: 'var(--shadow-md)',
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
             gap: '2.5rem',
@@ -108,8 +108,8 @@ export default function HomePage() {
               right: 0,
               width: '380px',
               height: '380px',
-              background: 'radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, rgba(99, 102, 241, 0.1) 50%, transparent 70%)',
-              filter: 'blur(55px)',
+              background: 'radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, rgba(79, 70, 229, 0.03) 50%, transparent 70%)',
+              filter: 'blur(60px)',
               pointerEvents: 'none',
             }} />
 
@@ -120,16 +120,16 @@ export default function HomePage() {
                 gap: '0.4rem',
                 padding: '0.35rem 0.85rem',
                 borderRadius: '9999px',
-                background: 'rgba(239, 68, 68, 0.15)',
-                border: '1px solid rgba(239, 68, 68, 0.35)',
-                color: '#f87171',
+                background: 'rgba(239, 68, 68, 0.1)',
+                border: '1px solid rgba(239, 68, 68, 0.25)',
+                color: '#dc2626',
                 fontSize: '0.75rem',
                 fontWeight: 800,
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
                 marginBottom: '1rem',
               }}>
-                <Flame size={13} color="#ef4444" />
+                <Flame size={13} color="#dc2626" />
                 <span>{siteContent.flagship?.badge || 'Flagship Programme • High Demand'}</span>
               </div>
 
@@ -176,7 +176,7 @@ export default function HomePage() {
                 <div style={{ width: '1px', background: 'var(--border-subtle)' }} />
                 <div>
                   <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.75rem' }}>Sponsorship</span>
-                  <span style={{ color: '#34d399', fontWeight: 700 }}>
+                  <span style={{ color: '#059669', fontWeight: 800 }}>
                     {siteContent.flagship?.sponsorship || flagshipCourse.sponsorship_note || 'Sponsored'}
                   </span>
                 </div>
@@ -271,9 +271,9 @@ export default function HomePage() {
           margin: '4.5rem 0',
           padding: '2.5rem',
           borderRadius: '1.5rem',
-          background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, var(--bg-surface) 100%)',
-          border: '1px solid var(--border-accent)',
-          boxShadow: 'var(--shadow-xl)',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-subtle)',
+          boxShadow: 'var(--shadow-md)',
         }}>
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
             <span style={{
@@ -376,8 +376,8 @@ export default function HomePage() {
 
             {/* Partition 2: Campus Intranet */}
             <div style={{
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, var(--bg-surface-elevated) 100%)',
-              border: '1px solid rgba(16, 185, 129, 0.35)',
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-subtle)',
               borderRadius: '1.25rem',
               padding: '2rem 1.75rem',
               display: 'flex',
@@ -472,8 +472,8 @@ export default function HomePage() {
           margin: '5rem 0',
           padding: 'clamp(2rem, 4vw, 3.75rem) clamp(1.5rem, 3vw, 2.75rem)',
           borderRadius: '1.75rem',
-          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(79, 70, 229, 0.08) 100%)',
-          border: '1px solid var(--border-accent)',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-subtle)',
           position: 'relative',
           overflow: 'hidden',
           boxShadow: 'var(--shadow-md)',
@@ -639,12 +639,12 @@ export default function HomePage() {
           marginTop: '5rem',
           padding: 'clamp(2.5rem, 5vw, 4rem) 2rem',
           borderRadius: '1.75rem',
-          background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.16) 0%, rgba(139, 92, 246, 0.14) 50%, rgba(217, 70, 239, 0.1) 100%)',
-          border: '1px solid var(--border-accent)',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-subtle)',
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
-          boxShadow: 'var(--shadow-xl), 0 0 50px rgba(124, 58, 237, 0.12)',
+          boxShadow: 'var(--shadow-lg)',
         }}>
           <h2 style={{
             fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',

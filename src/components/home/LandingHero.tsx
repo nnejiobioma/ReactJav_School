@@ -43,8 +43,8 @@ export default function LandingHero({
         transform: 'translateX(-50%)',
         width: 'min(900px, 90vw)',
         height: '450px',
-        background: 'radial-gradient(ellipse at center, rgba(139, 92, 246, 0.28) 0%, rgba(79, 70, 229, 0.16) 45%, rgba(217, 70, 239, 0.06) 70%, transparent 85%)',
-        filter: 'blur(70px)',
+        background: 'radial-gradient(ellipse at center, rgba(37, 99, 235, 0.1) 0%, rgba(79, 70, 229, 0.05) 45%, transparent 75%)',
+        filter: 'blur(80px)',
         pointerEvents: 'none',
         zIndex: 0,
       }} />
@@ -65,35 +65,35 @@ export default function LandingHero({
           gap: '0.6rem',
           padding: '0.45rem 1.25rem',
           borderRadius: '9999px',
-          background: 'linear-gradient(90deg, rgba(139, 92, 246, 0.16) 0%, rgba(79, 70, 229, 0.16) 100%)',
-          border: '1px solid rgba(168, 85, 247, 0.4)',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-accent)',
           marginBottom: '1.75rem',
           fontSize: '0.85rem',
-          color: '#d8b4fe',
+          color: 'var(--text-secondary)',
           fontWeight: 600,
-          boxShadow: '0 0 25px rgba(139, 92, 246, 0.2)',
+          boxShadow: 'var(--shadow-sm)',
         }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: '0.35rem',
-            color: '#c084fc',
-            fontWeight: 700,
+            color: 'var(--primary)',
+            fontWeight: 800,
             textTransform: 'uppercase',
             fontSize: '0.75rem',
             letterSpacing: '0.05em',
           }}>
-            <Sparkles size={14} color="#a855f7" />
+            <Sparkles size={14} color="var(--primary)" />
             <span>{content.announcement_badge}</span>
           </div>
-          <span style={{ color: 'rgba(255,255,255,0.2)' }}>•</span>
+          <span style={{ color: 'var(--border-focus)' }}>•</span>
           <span style={{ color: 'var(--text-secondary)' }}>
             {content.announcement_text}
           </span>
           <Link
             href="/subscribe"
             style={{
-              color: '#a855f7',
+              color: 'var(--primary)',
               textDecoration: 'none',
               fontWeight: 700,
               display: 'inline-flex',
@@ -253,9 +253,9 @@ export default function LandingHero({
           position: 'relative',
           borderRadius: '1.5rem',
           padding: '1rem',
-          background: 'linear-gradient(180deg, rgba(124, 58, 237, 0.08) 0%, rgba(14, 16, 38, 0.5) 100%)',
-          border: '1px solid rgba(139, 92, 246, 0.35)',
-          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.65), 0 0 50px rgba(124, 58, 237, 0.22)',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-subtle)',
+          boxShadow: 'var(--shadow-lg)',
           marginBottom: '4rem',
         }}>
           {/* Top Window Bar */}
@@ -285,10 +285,10 @@ export default function LandingHero({
                 alignItems: 'center',
                 gap: '0.35rem',
                 fontSize: '0.75rem',
-                color: '#34d399',
-                fontWeight: 600,
+                color: '#059669',
+                fontWeight: 700,
               }}>
-                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
+                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#059669', display: 'inline-block' }} />
                 Dual-Partition Online
               </span>
               <Link
@@ -331,7 +331,7 @@ export default function LandingHero({
                 <span className="badge badge-emerald" style={{ fontSize: '0.7rem' }}>
                   <Timer size={12} /> CBT Engine • Proctored
                 </span>
-                <span style={{ fontSize: '0.78rem', color: '#f59e0b', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                <span style={{ fontSize: '0.78rem', color: '#d97706', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>
                   54:12 REMAINING
                 </span>
               </div>
@@ -342,10 +342,10 @@ export default function LandingHero({
                 <div style={{
                   padding: '0.45rem 0.75rem',
                   borderRadius: '0.5rem',
-                  background: 'rgba(16, 185, 129, 0.12)',
-                  border: '1px solid rgba(16, 185, 129, 0.35)',
-                  color: '#10b981',
-                  fontWeight: 600,
+                  background: 'rgba(5, 150, 105, 0.1)',
+                  border: '1px solid rgba(5, 150, 105, 0.3)',
+                  color: '#059669',
+                  fontWeight: 700,
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.4rem',
@@ -358,7 +358,7 @@ export default function LandingHero({
                   borderRadius: '0.5rem',
                   background: 'var(--bg-surface)',
                   border: '1px solid var(--border-subtle)',
-                  color: 'var(--text-muted)',
+                  color: 'var(--text-secondary)',
                 }}>
                   <code>SET SECURITY POLICY ON records;</code>
                 </div>
@@ -382,13 +382,14 @@ export default function LandingHero({
                 </span>
               </div>
               <div style={{
-                background: 'rgba(0, 0, 0, 0.3)',
-                padding: '0.75rem',
+                background: '#0a0d1a',
+                padding: '0.85rem',
                 borderRadius: '0.5rem',
                 fontSize: '0.76rem',
-                lineHeight: 1.5,
-                color: '#e2e8f0',
+                lineHeight: 1.55,
+                color: '#f8fafc',
                 overflowX: 'auto',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
               }}>
                 <span style={{ color: '#818cf8' }}>const</span> supabase = createServerClient(<br />
                 &nbsp;&nbsp;process.env.NEXT_PUBLIC_SUPABASE_URL,<br />
@@ -398,7 +399,7 @@ export default function LandingHero({
               </div>
               <div style={{ marginTop: '0.6rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
                 <span>Build Status: Passing (100%)</span>
-                <span style={{ color: '#38bdf8' }}>350+ Fellows Coding Live</span>
+                <span style={{ color: 'var(--primary)', fontWeight: 700 }}>350+ Fellows Coding Live</span>
               </div>
             </div>
           </div>

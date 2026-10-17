@@ -133,11 +133,9 @@ export default function TuitionSponsorshipSection() {
             style={{
               borderRadius: '1.5rem',
               padding: '2.25rem 2rem',
-              background: tier.highlighted 
-                ? 'linear-gradient(135deg, rgba(124, 58, 237, 0.12) 0%, var(--bg-surface) 100%)' 
-                : 'var(--bg-surface)',
+              background: 'var(--bg-surface)',
               border: tier.highlighted ? '2px solid var(--primary)' : '1px solid var(--border-subtle)',
-              boxShadow: tier.highlighted ? '0 16px 40px -10px rgba(124, 58, 237, 0.35)' : 'var(--shadow-sm)',
+              boxShadow: tier.highlighted ? 'var(--shadow-lg)' : 'var(--shadow-sm)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
