@@ -61,22 +61,22 @@ export default function InteractiveCampusPreview() {
   return (
     <section style={{
       margin: '5rem 0',
-      padding: '3rem 2rem',
+      padding: 'clamp(2rem, 4vw, 3.5rem) clamp(1rem, 2.5vw, 2.25rem)',
       borderRadius: '2rem',
-      background: 'linear-gradient(135deg, rgba(22, 25, 56, 0.85) 0%, rgba(14, 16, 38, 0.98) 100%)',
-      border: '1px solid rgba(139, 92, 246, 0.35)',
+      background: 'var(--bg-surface)',
+      border: '1px solid var(--border-subtle)',
       position: 'relative',
       overflow: 'hidden',
-      boxShadow: 'var(--shadow-xl), 0 0 50px rgba(124, 58, 237, 0.15)',
+      boxShadow: 'var(--shadow-md)',
     }}>
       {/* Background Ambient Glow */}
       <div style={{
         position: 'absolute',
         top: 0,
-        right: '20%',
-        width: '450px',
-        height: '450px',
-        background: 'radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 70%)',
+        right: '15%',
+        width: '400px',
+        height: '400px',
+        background: 'radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, rgba(79, 70, 229, 0.04) 50%, transparent 70%)',
         filter: 'blur(70px)',
         pointerEvents: 'none',
       }} />
@@ -87,34 +87,34 @@ export default function InteractiveCampusPreview() {
           display: 'inline-flex',
           alignItems: 'center',
           gap: '0.45rem',
-          padding: '0.3rem 0.85rem',
+          padding: '0.35rem 0.9rem',
           borderRadius: '9999px',
-          background: 'rgba(168, 85, 247, 0.15)',
-          border: '1px solid rgba(168, 85, 247, 0.4)',
-          color: '#d8b4fe',
+          background: 'rgba(37, 99, 235, 0.08)',
+          border: '1px solid rgba(37, 99, 235, 0.22)',
+          color: 'var(--primary)',
           fontSize: '0.78rem',
           fontWeight: 700,
           marginBottom: '1rem',
           textTransform: 'uppercase',
           letterSpacing: '0.08em',
         }}>
-          <Sparkles size={13} color="#c084fc" />
+          <Sparkles size={13} color="var(--primary)" />
           <span>Interactive Campus Facility Preview</span>
         </div>
 
         <h2 style={{
           fontSize: 'clamp(2rem, 4vw, 2.85rem)',
           fontWeight: 900,
-          color: '#ffffff',
+          color: 'var(--text-primary)',
           lineHeight: 1.15,
           letterSpacing: '-0.025em',
         }}>
-          Step Inside the <span style={{ color: '#a855f7' }}>Campus Intranet</span>
+          Step Inside the <span className="text-gradient">Campus Intranet</span>
         </h2>
 
         <p style={{
           fontSize: '1rem',
-          color: '#cbd5e1',
+          color: 'var(--text-secondary)',
           marginTop: '0.85rem',
           lineHeight: 1.6,
         }}>
@@ -128,11 +128,12 @@ export default function InteractiveCampusPreview() {
           gap: '0.5rem',
           padding: '0.4rem',
           borderRadius: '9999px',
-          background: 'rgba(15, 23, 42, 0.8)',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
+          background: 'var(--bg-surface-elevated)',
+          border: '1px solid var(--border-subtle)',
           marginTop: '1.75rem',
           flexWrap: 'wrap',
           justifyContent: 'center',
+          boxShadow: 'var(--shadow-sm)',
         }}>
           <button
             onClick={() => setActiveTab('cbt')}
@@ -145,10 +146,10 @@ export default function InteractiveCampusPreview() {
               fontSize: '0.88rem',
               fontWeight: 700,
               cursor: 'pointer',
-              border: activeTab === 'cbt' ? '1px solid #10b981' : '1px solid transparent',
-              background: activeTab === 'cbt' ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)' : 'transparent',
-              color: '#ffffff',
-              boxShadow: activeTab === 'cbt' ? '0 4px 15px rgba(16, 185, 129, 0.4)' : 'none',
+              border: activeTab === 'cbt' ? '1px solid #059669' : '1px solid transparent',
+              background: activeTab === 'cbt' ? 'linear-gradient(135deg, #059669 0%, #047857 100%)' : 'transparent',
+              color: activeTab === 'cbt' ? '#ffffff' : 'var(--text-secondary)',
+              boxShadow: activeTab === 'cbt' ? '0 4px 14px rgba(5, 150, 105, 0.3)' : 'none',
               transition: 'all 0.2s ease',
             }}
           >
@@ -167,10 +168,10 @@ export default function InteractiveCampusPreview() {
               fontSize: '0.88rem',
               fontWeight: 700,
               cursor: 'pointer',
-              border: activeTab === 'ide' ? '1px solid #6366f1' : '1px solid transparent',
-              background: activeTab === 'ide' ? 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)' : 'transparent',
-              color: '#ffffff',
-              boxShadow: activeTab === 'ide' ? '0 4px 15px rgba(99, 102, 241, 0.4)' : 'none',
+              border: activeTab === 'ide' ? '1px solid var(--primary)' : '1px solid transparent',
+              background: activeTab === 'ide' ? 'var(--grad-primary)' : 'transparent',
+              color: activeTab === 'ide' ? '#ffffff' : 'var(--text-secondary)',
+              boxShadow: activeTab === 'ide' ? '0 4px 14px rgba(37, 99, 235, 0.3)' : 'none',
               transition: 'all 0.2s ease',
             }}
           >
@@ -189,10 +190,10 @@ export default function InteractiveCampusPreview() {
               fontSize: '0.88rem',
               fontWeight: 700,
               cursor: 'pointer',
-              border: activeTab === 'live' ? '1px solid #ec4899' : '1px solid transparent',
-              background: activeTab === 'live' ? 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)' : 'transparent',
-              color: '#ffffff',
-              boxShadow: activeTab === 'live' ? '0 4px 15px rgba(236, 72, 153, 0.4)' : 'none',
+              border: activeTab === 'live' ? '1px solid #db2777' : '1px solid transparent',
+              background: activeTab === 'live' ? 'linear-gradient(135deg, #db2777 0%, #be185d 100%)' : 'transparent',
+              color: activeTab === 'live' ? '#ffffff' : 'var(--text-secondary)',
+              boxShadow: activeTab === 'live' ? '0 4px 14px rgba(219, 39, 119, 0.3)' : 'none',
               transition: 'all 0.2s ease',
             }}
           >
@@ -208,18 +209,18 @@ export default function InteractiveCampusPreview() {
         zIndex: 1,
         borderRadius: '1.25rem',
         overflow: 'hidden',
-        border: '1px solid rgba(255, 255, 255, 0.15)',
-        background: '#090d16',
-        boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6)',
+        border: '1px solid var(--border-subtle)',
+        background: 'var(--bg-surface-elevated)',
+        boxShadow: 'var(--shadow-md)',
       }}>
         {/* Top Window Chrome */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '0.75rem 1.5rem',
-          background: 'rgba(15, 23, 42, 0.95)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          padding: '0.85rem 1.5rem',
+          background: 'var(--bg-surface)',
+          borderBottom: '1px solid var(--border-subtle)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ef4444' }} />
@@ -227,9 +228,10 @@ export default function InteractiveCampusPreview() {
             <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#10b981' }} />
             <span style={{
               marginLeft: '0.75rem',
-              color: '#94a3b8',
+              color: 'var(--text-muted)',
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.78rem',
+              fontSize: '0.8rem',
+              fontWeight: 600,
               letterSpacing: '0.02em',
             }}>
               reactjav-intranet // {activeTab === 'cbt' ? 'cbt-examination-engine' : activeTab === 'ide' ? 'cloud-workspace' : 'pair-meeting-room'}
@@ -239,23 +241,24 @@ export default function InteractiveCampusPreview() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <span style={{
               fontSize: '0.75rem',
-              color: '#34d399',
-              background: 'rgba(16, 185, 129, 0.15)',
-              padding: '0.2rem 0.65rem',
+              color: '#059669',
+              background: 'rgba(5, 150, 105, 0.1)',
+              border: '1px solid rgba(5, 150, 105, 0.22)',
+              padding: '0.25rem 0.75rem',
               borderRadius: '9999px',
-              fontWeight: 600,
+              fontWeight: 700,
               display: 'flex',
               alignItems: 'center',
               gap: '0.35rem',
             }}>
-              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981' }} />
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#059669' }} />
               Live Simulated Session
             </span>
             <Link
               href="/intranet"
               style={{
-                fontSize: '0.78rem',
-                color: '#38bdf8',
+                fontSize: '0.8rem',
+                color: 'var(--primary)',
                 fontWeight: 700,
                 textDecoration: 'none',
                 display: 'flex',
@@ -271,7 +274,7 @@ export default function InteractiveCampusPreview() {
 
         {/* Tab 1: Timed CBT Examination Center */}
         {activeTab === 'cbt' && (
-          <div style={{ padding: 'clamp(1.25rem, 3vw, 2.25rem)', color: '#f8fafc' }}>
+          <div style={{ padding: 'clamp(1.25rem, 3vw, 2.25rem)', color: 'var(--text-primary)', background: 'var(--bg-surface)' }}>
             {/* Exam Header Bar */}
             <div style={{
               display: 'flex',
@@ -279,35 +282,35 @@ export default function InteractiveCampusPreview() {
               justifyContent: 'space-between',
               flexWrap: 'wrap',
               gap: '1rem',
-              padding: '1rem 1.25rem',
+              padding: '1.1rem 1.35rem',
               borderRadius: '0.85rem',
-              background: 'rgba(30, 41, 59, 0.6)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
+              background: 'var(--bg-surface-elevated)',
+              border: '1px solid var(--border-subtle)',
               marginBottom: '1.75rem',
             }}>
               <div>
-                <span style={{ fontSize: '0.72rem', color: '#10b981', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                <span style={{ fontSize: '0.72rem', color: '#059669', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   Proctored Certification Assessment
                 </span>
-                <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', margin: '0.15rem 0 0' }}>
+                <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', margin: '0.2rem 0 0' }}>
                   {cbtQuestion.title}
                 </h4>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
                 <div style={{ textAlign: 'right' }}>
-                  <span style={{ fontSize: '0.7rem', color: '#94a3b8', display: 'block' }}>Question Progress</span>
-                  <span style={{ fontSize: '0.9rem', fontWeight: 800, color: '#ffffff' }}>18 of 40 (45%)</span>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'block', fontWeight: 600 }}>Question Progress</span>
+                  <span style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--text-primary)' }}>18 of 40 (45%)</span>
                 </div>
                 <div style={{
                   padding: '0.45rem 0.95rem',
                   borderRadius: '0.65rem',
-                  background: 'rgba(239, 68, 68, 0.15)',
-                  border: '1px solid rgba(239, 68, 68, 0.35)',
-                  color: '#f87171',
+                  background: 'rgba(239, 68, 68, 0.1)',
+                  border: '1px solid rgba(239, 68, 68, 0.25)',
+                  color: '#dc2626',
                   fontWeight: 800,
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.9rem',
+                  fontSize: '0.85rem',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.4rem',
@@ -320,26 +323,27 @@ export default function InteractiveCampusPreview() {
 
             {/* Question Box */}
             <div style={{ marginBottom: '1.5rem' }}>
-              <div style={{ fontSize: '0.85rem', color: '#38bdf8', fontWeight: 700, marginBottom: '0.5rem' }}>
+              <div style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 800, marginBottom: '0.5rem', letterSpacing: '0.03em' }}>
                 QUESTION 18 • DATABASE ACCESS CONTROL
               </div>
-              <p style={{ fontSize: '1.05rem', fontWeight: 600, color: '#ffffff', lineHeight: 1.5, marginBottom: '1rem' }}>
+              <p style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.5, marginBottom: '1rem' }}>
                 {cbtQuestion.prompt}
               </p>
 
               {/* Code Snippet Box */}
               <div style={{
-                background: 'rgba(0, 0, 0, 0.5)',
-                padding: '1rem',
-                borderRadius: '0.65rem',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                background: 'var(--bg-surface-elevated)',
+                padding: '1.15rem',
+                borderRadius: '0.75rem',
+                border: '1px solid var(--border-subtle)',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.825rem',
-                color: '#38bdf8',
+                fontSize: '0.85rem',
+                color: 'var(--text-primary)',
                 marginBottom: '1.5rem',
-                lineHeight: 1.5,
+                lineHeight: 1.6,
+                fontWeight: 600,
               }}>
-                <pre style={{ margin: 0 }}>{cbtQuestion.codeSnippet}</pre>
+                <pre style={{ margin: 0, color: 'var(--text-primary)' }}>{cbtQuestion.codeSnippet}</pre>
               </div>
 
               {/* Multiple Choice Options */}
@@ -357,14 +361,15 @@ export default function InteractiveCampusPreview() {
                         setIsAnswerSubmitted(true);
                       }}
                       style={{
-                        padding: '1rem 1.25rem',
-                        borderRadius: '0.75rem',
+                        padding: '1.1rem 1.35rem',
+                        borderRadius: '0.85rem',
                         background: isSelected 
-                          ? (isCorrectOption ? 'rgba(16, 185, 129, 0.12)' : 'rgba(239, 68, 68, 0.12)')
-                          : 'rgba(15, 23, 42, 0.6)',
+                          ? (isCorrectOption ? 'rgba(5, 150, 105, 0.08)' : 'rgba(239, 68, 68, 0.08)')
+                          : 'var(--bg-surface)',
                         border: isSelected
-                          ? (isCorrectOption ? '1px solid #10b981' : '1px solid #ef4444')
-                          : '1px solid rgba(255, 255, 255, 0.08)',
+                          ? (isCorrectOption ? '2px solid #059669' : '2px solid #dc2626')
+                          : '1px solid var(--border-subtle)',
+                        boxShadow: isSelected ? 'var(--shadow-sm)' : 'none',
                         cursor: 'pointer',
                         transition: 'all 0.2s ease',
                         display: 'flex',
@@ -374,30 +379,31 @@ export default function InteractiveCampusPreview() {
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                         <div style={{
-                          width: '26px',
-                          height: '26px',
+                          width: '28px',
+                          height: '28px',
                           borderRadius: '50%',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          fontSize: '0.8rem',
+                          fontSize: '0.82rem',
                           fontWeight: 800,
                           background: isSelected 
-                            ? (isCorrectOption ? '#10b981' : '#ef4444')
-                            : 'rgba(255, 255, 255, 0.1)',
-                          color: '#ffffff',
+                            ? (isCorrectOption ? '#059669' : '#dc2626')
+                            : 'var(--bg-surface-elevated)',
+                          color: isSelected ? '#ffffff' : 'var(--text-primary)',
+                          border: isSelected ? 'none' : '1px solid var(--border-subtle)',
                           flexShrink: 0,
                         }}>
                           {String.fromCharCode(65 + idx)}
                         </div>
-                        <code style={{ fontSize: '0.85rem', color: isSelected ? '#ffffff' : '#cbd5e1' }}>
+                        <code style={{ fontSize: '0.88rem', fontWeight: 600, color: isSelected ? (isCorrectOption ? '#047857' : '#b91c1c') : 'var(--text-primary)' }}>
                           {option.text}
                         </code>
                       </div>
 
                       {showCorrectness && (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', fontWeight: 700, color: isCorrectOption ? '#10b981' : '#ef4444' }}>
-                          {isCorrectOption ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', fontWeight: 800, color: isCorrectOption ? '#059669' : '#dc2626' }}>
+                          {isCorrectOption ? <CheckCircle2 size={17} /> : <AlertCircle size={17} />}
                           <span>{isCorrectOption ? 'VERIFIED CORRECT' : 'INCORRECT'}</span>
                         </div>
                       )}
@@ -409,20 +415,20 @@ export default function InteractiveCampusPreview() {
               {/* Feedback Explanation Banner */}
               {selectedOption !== null && (
                 <div style={{
-                  padding: '1rem 1.25rem',
-                  borderRadius: '0.75rem',
-                  background: cbtQuestion.options[selectedOption].isCorrect ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-                  border: cbtQuestion.options[selectedOption].isCorrect ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid rgba(239, 68, 68, 0.3)',
-                  color: '#e2e8f0',
-                  fontSize: '0.85rem',
-                  lineHeight: 1.5,
+                  padding: '1.1rem 1.35rem',
+                  borderRadius: '0.85rem',
+                  background: cbtQuestion.options[selectedOption].isCorrect ? 'rgba(5, 150, 105, 0.08)' : 'rgba(239, 68, 68, 0.08)',
+                  border: cbtQuestion.options[selectedOption].isCorrect ? '1px solid rgba(5, 150, 105, 0.25)' : '1px solid rgba(239, 68, 68, 0.25)',
+                  color: 'var(--text-secondary)',
+                  fontSize: '0.9rem',
+                  lineHeight: 1.55,
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.75rem',
+                  gap: '0.85rem',
                 }}>
-                  <ShieldCheck size={20} color={cbtQuestion.options[selectedOption].isCorrect ? '#10b981' : '#ef4444'} style={{ flexShrink: 0 }} />
+                  <ShieldCheck size={22} color={cbtQuestion.options[selectedOption].isCorrect ? '#059669' : '#dc2626'} style={{ flexShrink: 0 }} />
                   <div>
-                    <strong style={{ color: cbtQuestion.options[selectedOption].isCorrect ? '#34d399' : '#f87171' }}>
+                    <strong style={{ color: cbtQuestion.options[selectedOption].isCorrect ? '#047857' : '#b91c1c' }}>
                       {cbtQuestion.options[selectedOption].isCorrect ? 'Automated Grading Explanation: ' : 'Review Note: '}
                     </strong>
                     {cbtQuestion.options[selectedOption].explanation}
@@ -437,20 +443,20 @@ export default function InteractiveCampusPreview() {
               alignItems: 'center',
               justifyContent: 'space-between',
               paddingTop: '1.25rem',
-              borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+              borderTop: '1px solid var(--border-subtle)',
               flexWrap: 'wrap',
               gap: '1rem',
             }}>
-              <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', fontWeight: 500 }}>
                 Tip: Click any option above to experience the instant proctored test evaluation.
               </span>
               <div style={{ display: 'flex', gap: '0.75rem' }}>
                 <Link
                   href="/cbt"
                   className="btn btn-primary btn-sm"
-                  style={{ gap: '0.4rem', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: '#ffffff' }}
+                  style={{ gap: '0.45rem', padding: '0.65rem 1.35rem' }}
                 >
-                  <Timer size={14} />
+                  <Timer size={15} />
                   <span>Launch CBT Exam Hall</span>
                 </Link>
               </div>
@@ -469,44 +475,44 @@ export default function InteractiveCampusPreview() {
           }}>
             {/* File Tree Sidebar */}
             <div style={{
-              background: 'rgba(15, 23, 42, 0.75)',
-              borderRight: '1px solid rgba(255, 255, 255, 0.08)',
+              background: 'var(--bg-surface)',
+              borderRight: '1px solid var(--border-subtle)',
               padding: '1rem',
               fontSize: '0.78rem',
             }}>
-              <div style={{ color: '#94a3b8', fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+              <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', marginBottom: '0.75rem' }}>
                 PROJECT EXPLORER
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#38bdf8', fontWeight: 600 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--primary)', fontWeight: 700 }}>
                   <FileCode size={14} />
                   <span>auth/route.ts</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#cbd5e1' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)' }}>
                   <FileCode size={14} />
                   <span>supabase/client.ts</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#cbd5e1' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)' }}>
                   <FileCode size={14} />
                   <span>migrations/rls.sql</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#cbd5e1' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)' }}>
                   <FileCode size={14} />
                   <span>package.json</span>
                 </div>
               </div>
 
-              <div style={{ marginTop: '2.5rem', paddingTop: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                <span style={{ fontSize: '0.7rem', color: '#94a3b8', display: 'block' }}>GIT BRANCH</span>
-                <span style={{ color: '#10b981', fontWeight: 700, fontSize: '0.75rem' }}>feature/supabase-rls</span>
+              <div style={{ marginTop: '2.5rem', paddingTop: '1rem', borderTop: '1px solid var(--border-subtle)' }}>
+                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>GIT BRANCH</span>
+                <span style={{ color: '#059669', fontWeight: 700, fontSize: '0.75rem' }}>feature/supabase-rls</span>
               </div>
             </div>
 
             {/* Code Viewport & Simulated Terminal */}
-            <div style={{ display: 'flex', flexDirection: 'column', background: 'rgba(10, 13, 22, 0.95)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', background: '#0a0d1a' }}>
               {/* Code Lines */}
-              <div style={{ padding: '1.25rem', fontSize: '0.8rem', lineHeight: 1.6, flex: 1, overflowX: 'auto' }}>
-                <div style={{ color: '#64748b' }}>// Next.js 16 App Router - Server-Side RLS Authentication Handler</div>
+              <div style={{ padding: '1.25rem', fontSize: '0.8rem', lineHeight: 1.6, flex: 1, overflowX: 'auto', color: '#f8fafc' }}>
+                <div style={{ color: '#94a3b8' }}>// Next.js 16 App Router - Server-Side RLS Authentication Handler</div>
                 <div><span style={{ color: '#f43f5e' }}>import</span> {'{ createServerClient }'} <span style={{ color: '#f43f5e' }}>from</span> <span style={{ color: '#a7f3d0' }}>'@supabase/ssr'</span>;</div>
                 <div><span style={{ color: '#f43f5e' }}>import</span> {'{ cookies }'} <span style={{ color: '#f43f5e' }}>from</span> <span style={{ color: '#a7f3d0' }}>'next/headers'</span>;</div>
                 <br />
@@ -520,7 +526,7 @@ export default function InteractiveCampusPreview() {
 
               {/* Terminal Output */}
               <div style={{
-                background: 'rgba(5, 7, 12, 0.95)',
+                background: '#05070f',
                 borderTop: '1px solid rgba(255, 255, 255, 0.1)',
                 padding: '0.85rem 1.25rem',
                 fontSize: '0.75rem',
@@ -542,7 +548,7 @@ export default function InteractiveCampusPreview() {
 
         {/* Tab 3: 1080p Live Mentor Pods */}
         {activeTab === 'live' && (
-          <div style={{ padding: 'clamp(1.25rem, 3vw, 2.25rem)', color: '#f8fafc' }}>
+          <div style={{ padding: 'clamp(1.25rem, 3vw, 2.25rem)', color: 'var(--text-primary)', background: 'var(--bg-surface)' }}>
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -553,8 +559,8 @@ export default function InteractiveCampusPreview() {
               <div style={{
                 borderRadius: '1rem',
                 overflow: 'hidden',
-                background: 'rgba(15, 23, 42, 0.9)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
+                background: '#090d16',
+                border: '1px solid var(--border-subtle)',
                 position: 'relative',
               }}>
                 <img
@@ -605,30 +611,30 @@ export default function InteractiveCampusPreview() {
 
               {/* Live Room Info & Chat Feed */}
               <div style={{
-                background: 'rgba(15, 23, 42, 0.75)',
+                background: 'var(--bg-surface)',
                 padding: '1.25rem',
                 borderRadius: '1rem',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                border: '1px solid var(--border-subtle)',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1rem',
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '0.75rem' }}>
-                  <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#ffffff' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem' }}>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                     Active Participants (4/6)
                   </span>
-                  <span style={{ fontSize: '0.72rem', color: '#10b981', fontWeight: 600 }}>
+                  <span style={{ fontSize: '0.75rem', color: '#059669', fontWeight: 700 }}>
                     Dual-Audio Latency 14ms
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.78rem' }}>
-                  <div style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '0.5rem 0.75rem', borderRadius: '0.5rem' }}>
-                    <strong style={{ color: '#38bdf8' }}>Mentor Obioma: </strong>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.82rem' }}>
+                  <div style={{ background: 'var(--bg-surface-elevated)', padding: '0.65rem 0.85rem', borderRadius: '0.5rem', color: 'var(--text-primary)' }}>
+                    <strong style={{ color: 'var(--primary)' }}>Mentor Obioma: </strong>
                     <span>"Notice how line 14 validates the bearer token before running the database query."</span>
                   </div>
-                  <div style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '0.5rem 0.75rem', borderRadius: '0.5rem' }}>
-                    <strong style={{ color: '#f59e0b' }}>Fellow Amara: </strong>
+                  <div style={{ background: 'var(--bg-surface-elevated)', padding: '0.65rem 0.85rem', borderRadius: '0.5rem', color: 'var(--text-primary)' }}>
+                    <strong style={{ color: '#d97706' }}>Fellow Amara: </strong>
                     <span>"Got it! That completely avoids race conditions on multi-tenant queries."</span>
                   </div>
                 </div>
@@ -639,8 +645,6 @@ export default function InteractiveCampusPreview() {
                   style={{
                     gap: '0.45rem',
                     justifyContent: 'center',
-                    background: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
-                    color: '#ffffff',
                     fontWeight: 700,
                   }}
                 >
