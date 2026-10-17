@@ -69,8 +69,8 @@
   --border-accent: rgba(139, 92, 246, 0.38);
 
   --text-primary: #f8fafc;
-  --text-secondary: #a5b4fc;
-  --text-muted: #6b7280;
+  --text-secondary: #c7d2fe;
+  --text-muted: #94a3b8;
   --text-inverse: #070814;
 
   /* Brand Accents - Electric Violet & Neon Accents */
@@ -388,7 +388,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Inputs & Form Controls */
 .form-input {
   width: 100%;
-  background: var(--bg-surface);
+  background: var(--bg-surface-elevated);
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
   padding: 0.75rem 1rem;
@@ -397,6 +397,11 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.925rem;
   transition: all 0.2s ease;
   outline: none;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.85;
 }
 
 .form-input:focus {

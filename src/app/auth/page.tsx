@@ -461,7 +461,7 @@ function AuthContent() {
     <div className="container" style={{ padding: 'clamp(2rem, 5vw, 3.5rem) clamp(0.75rem, 3vw, 1.5rem) 6rem', maxWidth: '600px' }}>
       {/* Brand Header */}
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2rem', color: '#ffffff', marginBottom: '0.5rem', fontWeight: 800 }}>
+        <h1 style={{ fontSize: '2rem', color: 'var(--text-primary)', marginBottom: '0.5rem', fontWeight: 800 }}>
           Authentication & Access Control
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
@@ -475,7 +475,7 @@ function AuthContent() {
           borderRadius: '9999px',
           background: isFirebaseConfigured() ? 'rgba(16, 185, 129, 0.12)' : 'rgba(245, 158, 11, 0.12)',
           border: isFirebaseConfigured() ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid rgba(245, 158, 11, 0.3)',
-          color: isFirebaseConfigured() ? '#34d399' : '#fbbf24',
+          color: isFirebaseConfigured() ? '#10b981' : '#fbbf24',
           fontSize: '0.72rem',
           fontWeight: 700,
           marginTop: '0.75rem',
@@ -490,15 +490,15 @@ function AuthContent() {
       {/* Course Enrollment Notification Banner */}
       {isEnrolling && (
         <div style={{
-          background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.16) 0%, rgba(56, 189, 248, 0.12) 100%)',
-          border: '1px solid rgba(99, 102, 241, 0.45)',
+          background: 'var(--bg-surface-elevated)',
+          border: '1px solid var(--border-accent)',
           borderRadius: '1rem',
           padding: '1.25rem',
           marginBottom: '2rem',
           display: 'flex',
           gap: '1rem',
           alignItems: 'center',
-          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.25)',
+          boxShadow: 'var(--shadow-md)',
         }}>
           {selectedCourse?.thumbnail_url ? (
             <img
@@ -510,7 +510,7 @@ function AuthContent() {
                 borderRadius: '0.65rem',
                 objectFit: 'cover',
                 flexShrink: 0,
-                border: '1px solid rgba(255, 255, 255, 0.15)',
+                border: '1px solid var(--border-subtle)',
               }}
             />
           ) : (
@@ -524,7 +524,7 @@ function AuthContent() {
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
-              color: '#818cf8',
+              color: 'var(--primary)',
             }}>
               <GraduationCap size={28} />
             </div>
@@ -535,7 +535,7 @@ function AuthContent() {
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
-              color: '#38bdf8',
+              color: 'var(--primary)',
               marginBottom: '0.25rem',
               display: 'flex',
               alignItems: 'center',
@@ -547,7 +547,7 @@ function AuthContent() {
             <h3 style={{
               fontSize: '1.05rem',
               fontWeight: 800,
-              color: '#ffffff',
+              color: 'var(--text-primary)',
               margin: '0 0 0.35rem',
               lineHeight: 1.3,
             }}>
@@ -589,7 +589,7 @@ function AuthContent() {
             />
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span style={{ fontSize: '0.92rem', fontWeight: 700, color: '#ffffff' }}>
+                <span style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                   {currentUser.full_name || 'Active User'}
                 </span>
                 <span className={`badge ${currentUser.role === 'super_admin' ? 'badge-purple' : currentUser.role === 'admin' ? 'badge-amber' : currentUser.role === 'instructor' ? 'badge-emerald' : 'badge-primary'}`} style={{ fontSize: '0.65rem' }}>
@@ -619,7 +619,7 @@ function AuthContent() {
               onClick={() => { setActiveTab('reset'); setErrorMessage(null); setResetSuccess(false); }}
               className="btn btn-secondary btn-sm"
               title="Change Password"
-              style={{ color: '#d8b4fe' }}
+              style={{ color: 'var(--text-primary)' }}
             >
               <KeyRound size={14} />
               <span>Change Password</span>
@@ -629,7 +629,7 @@ function AuthContent() {
               onClick={handleSignOut}
               className="btn btn-secondary btn-sm"
               title="Sign Out"
-              style={{ color: '#f87171' }}
+              style={{ color: '#ef4444' }}
             >
               <LogOut size={14} />
               <span>Sign Out</span>
@@ -642,7 +642,7 @@ function AuthContent() {
       {(activeTab === 'signin' || activeTab === 'signup') && (
         <div style={{
           display: 'flex',
-          background: 'var(--bg-surface)',
+          background: 'var(--bg-surface-elevated)',
           borderRadius: '0.75rem',
           padding: '0.35rem',
           marginBottom: '2rem',
@@ -654,9 +654,10 @@ function AuthContent() {
               flex: 1,
               padding: '0.65rem',
               borderRadius: '0.5rem',
-              background: activeTab === 'signin' ? 'var(--bg-surface-elevated)' : 'transparent',
-              color: activeTab === 'signin' ? '#ffffff' : 'var(--text-muted)',
+              background: activeTab === 'signin' ? 'var(--bg-surface)' : 'transparent',
+              color: activeTab === 'signin' ? 'var(--text-primary)' : 'var(--text-muted)',
               border: activeTab === 'signin' ? '1px solid var(--border-subtle)' : 'none',
+              boxShadow: activeTab === 'signin' ? 'var(--shadow-sm)' : 'none',
               fontWeight: 700,
               fontSize: '0.9rem',
               cursor: 'pointer',
@@ -672,9 +673,10 @@ function AuthContent() {
               flex: 1,
               padding: '0.65rem',
               borderRadius: '0.5rem',
-              background: activeTab === 'signup' ? 'var(--bg-surface-elevated)' : 'transparent',
-              color: activeTab === 'signup' ? '#ffffff' : 'var(--text-muted)',
+              background: activeTab === 'signup' ? 'var(--bg-surface)' : 'transparent',
+              color: activeTab === 'signup' ? 'var(--text-primary)' : 'var(--text-muted)',
               border: activeTab === 'signup' ? '1px solid var(--border-subtle)' : 'none',
+              boxShadow: activeTab === 'signup' ? 'var(--shadow-sm)' : 'none',
               fontWeight: 700,
               fontSize: '0.9rem',
               cursor: 'pointer',
@@ -724,7 +726,7 @@ function AuthContent() {
                 <KeyRound size={20} />
               </div>
               <div>
-                <h3 style={{ fontSize: '1.2rem', color: '#ffffff', fontWeight: 700, margin: 0 }}>
+                <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800, margin: 0 }}>
                   Reset Your Password
                 </h3>
                 <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: '0.2rem 0 0' }}>
@@ -740,7 +742,7 @@ function AuthContent() {
                   borderRadius: '0.75rem',
                   background: 'rgba(16, 185, 129, 0.12)',
                   border: '1px solid rgba(16, 185, 129, 0.35)',
-                  color: '#34d399',
+                  color: '#10b981',
                   fontSize: '0.88rem',
                   lineHeight: 1.5,
                   display: 'flex',
@@ -749,10 +751,10 @@ function AuthContent() {
                 }}>
                   <CheckCircle2 size={20} style={{ flexShrink: 0, marginTop: '2px' }} />
                   <div>
-                    <strong style={{ display: 'block', color: '#ffffff', marginBottom: '0.25rem' }}>
+                    <strong style={{ display: 'block', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
                       Password Reset Initiated
                     </strong>
-                    A password recovery email has been requested for <strong>{email}</strong> via Firebase Authentication.
+                    A password recovery email has been requested for <strong style={{ color: 'var(--text-primary)' }}>{email}</strong> via Firebase Authentication.
                   </div>
                 </div>
 
@@ -764,18 +766,18 @@ function AuthContent() {
                   border: '1px solid rgba(245, 158, 11, 0.25)',
                   fontSize: '0.82rem',
                   lineHeight: 1.55,
-                  color: '#fef3c7',
+                  color: 'var(--text-secondary)',
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: '#fbbf24', marginBottom: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: '#d97706', marginBottom: '0.5rem' }}>
                     <AlertCircle size={16} />
                     <span>If the reset email does not appear in your inbox:</span>
                   </div>
                   <ul style={{ margin: 0, paddingLeft: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                     <li>
-                      <strong>Check your Spam or Junk folder:</strong> Firebase sends emails from <em>noreply@reactjav-6531c.firebaseapp.com</em>, which email providers (Gmail, Outlook) often categorize as Spam or Promotions.
+                      <strong style={{ color: 'var(--text-primary)' }}>Check your Spam or Junk folder:</strong> Firebase sends emails from <em>noreply@reactjav-6531c.firebaseapp.com</em>, which email providers (Gmail, Outlook) often categorize as Spam or Promotions.
                     </li>
                     <li>
-                      <strong>Verify the exact email:</strong> Due to Firebase Security (Email Enumeration Protection), if an email is not yet registered in Firebase Authentication, Firebase returns success but silently does not dispatch an email.
+                      <strong style={{ color: 'var(--text-primary)' }}>Verify the exact email:</strong> Due to Firebase Security (Email Enumeration Protection), if an email is not yet registered in Firebase Authentication, Firebase returns success but silently does not dispatch an email.
                     </li>
                   </ul>
                 </div>
@@ -785,14 +787,14 @@ function AuthContent() {
                   <div style={{
                     padding: '1.15rem',
                     borderRadius: '0.75rem',
-                    background: 'rgba(99, 102, 241, 0.12)',
-                    border: '1px solid rgba(99, 102, 241, 0.4)',
+                    background: 'var(--bg-surface-elevated)',
+                    border: '1px solid var(--border-subtle)',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '0.75rem',
                   }}>
-                    <div style={{ fontSize: '0.84rem', color: '#e0e7ff', lineHeight: 1.4 }}>
-                      <strong style={{ color: '#ffffff' }}>⚡ Instant Reset Available:</strong><br />
+                    <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+                      <strong style={{ color: 'var(--text-primary)' }}>⚡ Instant Reset Available:</strong><br />
                       No need to wait for email delivery. You can reset your password immediately below:
                     </div>
                     <button
@@ -825,12 +827,13 @@ function AuthContent() {
                         style={{
                           background: 'none',
                           border: 'none',
-                          color: '#a5b4fc',
+                          color: 'var(--primary)',
                           fontSize: '0.78rem',
                           cursor: 'pointer',
                           textDecoration: 'underline',
                           textAlign: 'center',
                           padding: '0.2rem',
+                          fontWeight: 700,
                         }}
                       >
                         {isCopiedLink ? '✓ Direct Link Copied to Clipboard!' : 'Copy Direct Reset Link'}
@@ -863,7 +866,7 @@ function AuthContent() {
             ) : (
               <form onSubmit={handleForgotSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.4rem' }}>
                     Account Email Address
                   </label>
                   <div style={{ position: 'relative' }}>
@@ -909,7 +912,7 @@ function AuthContent() {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: 'var(--text-muted)',
+                  color: 'var(--text-secondary)',
                   fontSize: '0.85rem',
                   cursor: 'pointer',
                   display: 'inline-flex',
@@ -937,12 +940,12 @@ function AuthContent() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#c084fc',
+                color: 'var(--accent-purple)',
               }}>
                 <Lock size={20} />
               </div>
               <div>
-                <h3 style={{ fontSize: '1.2rem', color: '#ffffff', fontWeight: 700, margin: 0 }}>
+                <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 800, margin: 0 }}>
                   Set New Password
                 </h3>
                 <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: '0.2rem 0 0' }}>
@@ -957,7 +960,7 @@ function AuthContent() {
                 borderRadius: '0.75rem',
                 background: 'rgba(16, 185, 129, 0.12)',
                 border: '1px solid rgba(16, 185, 129, 0.35)',
-                color: '#34d399',
+                color: '#10b981',
                 fontSize: '0.88rem',
                 marginBottom: '1.5rem',
                 display: 'flex',
@@ -973,24 +976,24 @@ function AuthContent() {
                   <div style={{
                     padding: '0.75rem 1rem',
                     borderRadius: '0.65rem',
-                    background: 'rgba(99, 102, 241, 0.12)',
-                    border: '1px solid rgba(99, 102, 241, 0.25)',
+                    background: 'var(--bg-surface-elevated)',
+                    border: '1px solid var(--border-subtle)',
                     fontSize: '0.82rem',
-                    color: '#c7d2fe',
+                    color: 'var(--text-secondary)',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.5rem',
                   }}>
-                    <Mail size={15} color="#818cf8" />
-                    <span>Resetting password for: <strong>{verifiedResetEmail}</strong></span>
+                    <Mail size={15} color="var(--primary)" />
+                    <span>Resetting password for: <strong style={{ color: 'var(--text-primary)' }}>{verifiedResetEmail}</strong></span>
                   </div>
                 )}
 
                 {/* Current password for re-authentication when required */}
                 {(requiresRecentLogin || (!(directOobCode || oobCodeParam) && !!currentUser)) && (
                   <div>
-                    <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
-                      Current Password {requiresRecentLogin && <span style={{ color: '#fbbf24', fontWeight: 600 }}>* (Required to verify identity)</span>}
+                    <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.4rem' }}>
+                      Current Password {requiresRecentLogin && <span style={{ color: '#d97706', fontWeight: 700 }}>* (Required to verify identity)</span>}
                     </label>
                     <input
                       type="password"
@@ -1005,7 +1008,7 @@ function AuthContent() {
                 )}
 
                 <div>
-                  <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.4rem' }}>
                     New Password (min. 6 characters)
                   </label>
                   <input
@@ -1020,7 +1023,7 @@ function AuthContent() {
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.4rem' }}>
                     Confirm New Password
                   </label>
                   <input
@@ -1063,7 +1066,7 @@ function AuthContent() {
                     fontSize: '0.82rem',
                     marginTop: '0.25rem',
                   }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: '#fbbf24', marginBottom: '0.35rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, color: '#d97706', marginBottom: '0.35rem' }}>
                       <AlertCircle size={15} />
                       <span>Don't know your current password?</span>
                     </div>
@@ -1075,7 +1078,7 @@ function AuthContent() {
                       onClick={handleSendEmailResetInstead}
                       disabled={isSendingResetEmail}
                       className="btn btn-secondary btn-sm"
-                      style={{ gap: '0.4rem', borderColor: '#fbbf24', color: '#fbbf24', width: '100%', justifyContent: 'center' }}
+                      style={{ gap: '0.4rem', borderColor: 'var(--border-subtle)', color: 'var(--text-primary)', width: '100%', justifyContent: 'center' }}
                     >
                       <Mail size={14} />
                       <span>{isSendingResetEmail ? 'Sending Reset Link...' : 'Send Password Reset Email Link Instead'}</span>
@@ -1092,7 +1095,7 @@ function AuthContent() {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: 'var(--text-muted)',
+                  color: 'var(--text-secondary)',
                   fontSize: '0.85rem',
                   cursor: 'pointer',
                   display: 'inline-flex',
@@ -1121,10 +1124,12 @@ function AuthContent() {
                 width: '100%',
                 justifyContent: 'center',
                 gap: '0.65rem',
-                padding: '0.65rem 1rem',
-                fontSize: '0.9rem',
+                padding: '0.75rem 1rem',
+                fontSize: '0.925rem',
                 fontWeight: 600,
-                borderColor: 'var(--border-subtle)',
+                background: 'var(--bg-surface-elevated)',
+                border: '1px solid var(--border-subtle)',
+                color: 'var(--text-primary)',
               }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24">
@@ -1143,7 +1148,7 @@ function AuthContent() {
               margin: '0.1rem 0',
             }}>
               <div style={{ flex: 1, height: '1px', background: 'var(--border-subtle)' }} />
-              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 600 }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700 }}>
                 Or with email
               </span>
               <div style={{ flex: 1, height: '1px', background: 'var(--border-subtle)' }} />
@@ -1151,7 +1156,7 @@ function AuthContent() {
 
             {activeTab === 'signup' && (
               <div>
-                <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.4rem' }}>
                   Full Name
                 </label>
                 <input
@@ -1166,7 +1171,7 @@ function AuthContent() {
             )}
 
             <div>
-              <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
+              <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.4rem' }}>
                 Email Address
               </label>
               <input
@@ -1183,8 +1188,8 @@ function AuthContent() {
             </div>
 
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>
                   Password
                 </label>
                 {activeTab === 'signin' && (
@@ -1195,10 +1200,10 @@ function AuthContent() {
                       background: 'none',
                       border: 'none',
                       color: 'var(--primary)',
-                      fontSize: '0.78rem',
+                      fontSize: '0.8rem',
                       cursor: 'pointer',
                       padding: 0,
-                      fontWeight: 600,
+                      fontWeight: 700,
                     }}
                   >
                     Forgot password?
@@ -1217,8 +1222,8 @@ function AuthContent() {
 
             {activeTab === 'signin' && (
               <div style={{
-                background: 'rgba(99, 102, 241, 0.08)',
-                border: '1px solid rgba(129, 140, 248, 0.25)',
+                background: 'var(--bg-surface-elevated)',
+                border: '1px solid var(--border-subtle)',
                 borderRadius: '0.75rem',
                 padding: '0.85rem 1rem',
                 display: 'flex',
@@ -1233,7 +1238,7 @@ function AuthContent() {
                   style={{
                     width: '18px',
                     height: '18px',
-                    accentColor: '#6366f1',
+                    accentColor: 'var(--primary)',
                     marginTop: '2px',
                     cursor: 'pointer',
                     flexShrink: 0,
@@ -1243,11 +1248,12 @@ function AuthContent() {
                 <label
                   htmlFor="cookieConsentSigninCheckbox"
                   style={{
-                    fontSize: '0.8rem',
-                    color: 'var(--text-secondary)',
-                    lineHeight: 1.45,
+                    fontSize: '0.825rem',
+                    color: 'var(--text-primary)',
+                    lineHeight: 1.5,
                     cursor: 'pointer',
                     userSelect: 'none',
+                    fontWeight: 500,
                   }}
                 >
                   I accept the use of session & functional cookies to authenticate my login session and remember my course progress. (
@@ -1256,7 +1262,7 @@ function AuthContent() {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
-                      color: '#a5b4fc',
+                      color: 'var(--primary)',
                       fontWeight: 700,
                       textDecoration: 'underline',
                     }}
@@ -1272,8 +1278,8 @@ function AuthContent() {
             {activeTab === 'signup' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <div style={{
-                  background: 'rgba(99, 102, 241, 0.08)',
-                  border: '1px solid rgba(129, 140, 248, 0.25)',
+                  background: 'var(--bg-surface-elevated)',
+                  border: '1px solid var(--border-subtle)',
                   borderRadius: '0.75rem',
                   padding: '0.85rem 1rem',
                   display: 'flex',
@@ -1288,7 +1294,7 @@ function AuthContent() {
                     style={{
                       width: '18px',
                       height: '18px',
-                      accentColor: '#6366f1',
+                      accentColor: 'var(--primary)',
                       marginTop: '2px',
                       cursor: 'pointer',
                       flexShrink: 0,
@@ -1298,11 +1304,12 @@ function AuthContent() {
                   <label
                     htmlFor="termsOfServiceCheckbox"
                     style={{
-                      fontSize: '0.8rem',
-                      color: 'var(--text-secondary)',
-                      lineHeight: 1.45,
+                      fontSize: '0.825rem',
+                      color: 'var(--text-primary)',
+                      lineHeight: 1.5,
                       cursor: 'pointer',
                       userSelect: 'none',
+                      fontWeight: 500,
                     }}
                   >
                     I have read and agree to the{' '}
@@ -1311,7 +1318,7 @@ function AuthContent() {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
-                        color: '#a5b4fc',
+                        color: 'var(--primary)',
                         fontWeight: 700,
                         textDecoration: 'underline',
                       }}
@@ -1324,8 +1331,8 @@ function AuthContent() {
                 </div>
 
                 <div style={{
-                  background: 'rgba(99, 102, 241, 0.08)',
-                  border: '1px solid rgba(129, 140, 248, 0.25)',
+                  background: 'var(--bg-surface-elevated)',
+                  border: '1px solid var(--border-subtle)',
                   borderRadius: '0.75rem',
                   padding: '0.85rem 1rem',
                   display: 'flex',
@@ -1340,7 +1347,7 @@ function AuthContent() {
                     style={{
                       width: '18px',
                       height: '18px',
-                      accentColor: '#6366f1',
+                      accentColor: 'var(--primary)',
                       marginTop: '2px',
                       cursor: 'pointer',
                       flexShrink: 0,
@@ -1350,11 +1357,12 @@ function AuthContent() {
                   <label
                     htmlFor="privacyPolicyCheckbox"
                     style={{
-                      fontSize: '0.8rem',
-                      color: 'var(--text-secondary)',
-                      lineHeight: 1.45,
+                      fontSize: '0.825rem',
+                      color: 'var(--text-primary)',
+                      lineHeight: 1.5,
                       cursor: 'pointer',
                       userSelect: 'none',
+                      fontWeight: 500,
                     }}
                   >
                     I have read and accept the{' '}
@@ -1363,7 +1371,7 @@ function AuthContent() {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
-                        color: '#a5b4fc',
+                        color: 'var(--primary)',
                         fontWeight: 700,
                         textDecoration: 'underline',
                       }}
