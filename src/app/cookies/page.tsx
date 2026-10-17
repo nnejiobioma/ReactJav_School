@@ -328,9 +328,10 @@ export default function CookiePolicyPage() {
               background: 'var(--bg-surface)',
               borderRadius: '0.75rem',
               border: '1px solid var(--border-subtle)',
-              overflow: 'hidden',
+              overflowX: 'auto',
+              WebkitOverflowScrolling: 'touch',
             }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem', textAlign: 'left' }}>
+              <table style={{ width: '100%', minWidth: '480px', borderCollapse: 'collapse', fontSize: '0.82rem', textAlign: 'left' }}>
                 <thead>
                   <tr style={{ background: 'rgba(255, 255, 255, 0.03)', borderBottom: '1px solid var(--border-subtle)' }}>
                     <th style={{ padding: '0.75rem 1rem', color: '#ffffff', fontWeight: 600 }}>Cookie Identifier</th>

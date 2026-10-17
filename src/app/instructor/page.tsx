@@ -194,11 +194,11 @@ export default function InstructorDashboardPage() {
         <>
           {/* Analytics Metric Cards */}
           <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-        gap: '1.5rem',
-        marginBottom: '3rem',
-      }}>
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
+            gap: 'clamp(1rem, 2vw, 1.5rem)',
+            marginBottom: '3rem',
+          }}>
         <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <div style={{
             width: '3rem',
@@ -300,7 +300,7 @@ export default function InstructorDashboardPage() {
                 padding: '1.25rem 1.5rem',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexGrow: 1, minWidth: '280px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexGrow: 1, minWidth: 'min(100%, 280px)' }}>
                 <img
                   src={course.thumbnail_url}
                   alt={course.title}

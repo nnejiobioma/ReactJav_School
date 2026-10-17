@@ -269,7 +269,8 @@ export default function CampusIDEPage() {
           {/* Collapsible Challenge Instructions Sidebar */}
           {showInstructions && (
             <aside style={{
-              width: '320px',
+              width: 'clamp(260px, 30vw, 320px)',
+              maxWidth: '90vw',
               background: 'var(--bg-surface)',
               borderRight: '1px solid var(--border-subtle)',
               overflowY: 'auto',

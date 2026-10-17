@@ -75,10 +75,10 @@ export default function StudentDashboardPage() {
 
   return (
     <AccessGuard level="authenticated" pageTitle="Student Learning Dashboard">
-      <div className="container" style={{ padding: '3rem 1.5rem 6rem' }}>
+      <div className="container" style={{ padding: 'clamp(1.5rem, 4vw, 3rem) clamp(0.75rem, 2.5vw, 1.5rem) 6rem' }}>
         {/* Welcome Header */}
         <div className="glass-card" style={{
-          padding: '2rem',
+          padding: 'clamp(1.2rem, 3vw, 2rem)',
           marginBottom: '2.5rem',
           display: 'flex',
           alignItems: 'center',
@@ -551,7 +551,7 @@ export default function StudentDashboardPage() {
 
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
                 gap: '0.75rem',
               }}>
                 {tutoringTrack.syllabus.map((mod: any, idx: number) => (
@@ -608,8 +608,8 @@ export default function StudentDashboardPage() {
         {enrolledCourses.length > 0 ? (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))',
+            gap: 'clamp(1rem, 2.5vw, 2rem)',
           }}>
             {enrolledCourses.map(({ course, stats }) => {
               const targetLessonId = LocalDataService.getNextOrLastLessonId(course.id, currentUser?.id || '');

@@ -237,7 +237,7 @@ export default function CourseCard({ course, userId, onEnrollSuccess }: CourseCa
 
       {/* Card Body */}
       <div style={{
-        padding: '1.65rem 1.6rem 1.5rem',
+        padding: 'clamp(1.15rem, 2.5vw, 1.6rem)',
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,

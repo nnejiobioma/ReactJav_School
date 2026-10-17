@@ -302,8 +302,8 @@ export default function HomePage() {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '1.75rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: 'clamp(1rem, 2.5vw, 1.75rem)',
           }}>
             {/* Partition 1: Public Catalog */}
             <div style={{

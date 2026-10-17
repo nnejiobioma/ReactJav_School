@@ -641,7 +641,7 @@ export default function TutoringAttendanceTracker({
                   {/* Dual Sign-off Boxes Grid */}
                   <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
                     gap: '1rem',
                     background: 'var(--bg-surface-elevated)',
                     border: '1px solid var(--border-subtle)',

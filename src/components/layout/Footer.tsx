@@ -186,7 +186,7 @@ export default function Footer() {
               <div>
                 {footerContent.copyright_text}
               </div>
-              <div style={{ display: 'flex', gap: '1.5rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem 1.5rem' }}>
                 <Link
                   href="/privacy"
                   style={{

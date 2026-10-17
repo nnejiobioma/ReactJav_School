@@ -249,7 +249,7 @@ export default function TermsOfServicePage() {
         </span>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
           gap: '0.5rem 1.5rem',
         }}>
           {sections.map((sec) => (
@@ -356,7 +356,7 @@ export default function TermsOfServicePage() {
             </p>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
               gap: '1rem',
               marginBottom: '1rem',
             }}>
@@ -542,7 +542,7 @@ export default function TermsOfServicePage() {
             </p>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
               gap: '1rem',
               padding: '1.25rem',
               background: 'var(--bg-surface)',

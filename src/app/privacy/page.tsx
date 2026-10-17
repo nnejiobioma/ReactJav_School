@@ -213,7 +213,7 @@ export default function PrivacyPolicyPage() {
         </h3>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))',
           gap: '0.65rem',
           fontSize: '0.85rem',
         }}>
@@ -286,7 +286,7 @@ export default function PrivacyPolicyPage() {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '1rem',
             marginTop: '1rem',
           }}>
@@ -442,7 +442,7 @@ export default function PrivacyPolicyPage() {
           <p>As a ReactJav scholar or parent, you enjoy comprehensive data protection rights:</p>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
             gap: '1rem',
             marginTop: '1rem',
           }}>

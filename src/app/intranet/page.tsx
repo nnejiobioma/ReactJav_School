@@ -294,7 +294,7 @@ export default function IntranetHubPage() {
 
                 <div style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
                   gap: '0.6rem',
                 }}>
                   {trackData.syllabus.map((mod, i) => (
@@ -342,8 +342,8 @@ export default function IntranetHubPage() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: '1.5rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
+          gap: 'clamp(1rem, 2.5vw, 1.5rem)',
           marginBottom: '3rem',
         }}>
           {/* Card 1: CBT Center */}
@@ -555,11 +555,11 @@ export default function IntranetHubPage() {
         {/* Two-Column Section: Campus Bulletins & Internal Academic Library */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+          gap: 'clamp(1rem, 2.5vw, 2rem)',
         }}>
           {/* Column A: Campus Bulletin Board */}
-          <div className="glass-card" style={{ padding: '2rem', borderRadius: '1.25rem' }}>
+          <div className="glass-card" style={{ padding: 'clamp(1.2rem, 3vw, 2rem)', borderRadius: '1.25rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '1rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Bell size={18} color="var(--accent-amber)" />

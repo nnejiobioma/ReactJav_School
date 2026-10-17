@@ -211,8 +211,8 @@ export default function VirtualRoomsHubPage() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
+          gap: 'clamp(1rem, 2.5vw, 2rem)',
         }}>
           {activeRooms.map((room) => (
             <div
