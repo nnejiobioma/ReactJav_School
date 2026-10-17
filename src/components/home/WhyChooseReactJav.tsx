@@ -23,7 +23,7 @@ export default function WhyChooseReactJav() {
   const features = [
     {
       id: 1,
-      icon: <Layers size={24} color="#38bdf8" />,
+      icon: <Layers size={24} color="#0284c7" />,
       badge: 'Production-Grade',
       title: 'Real Engineering, Not Tutorial Hell',
       tagline: 'Ship live, production-grade applications that withstand actual traffic.',
@@ -34,13 +34,13 @@ export default function WhyChooseReactJav() {
         'Live production deployments to cloud',
       ],
       metric: '100% Deployed Portfolios',
-      color: '#38bdf8',
-      accentBg: 'rgba(56, 189, 248, 0.1)',
-      borderAccent: 'rgba(56, 189, 248, 0.35)',
+      color: '#0284c7',
+      accentBg: 'rgba(2, 132, 199, 0.08)',
+      borderAccent: 'rgba(2, 132, 199, 0.22)',
     },
     {
       id: 2,
-      icon: <Timer size={24} color="#f59e0b" />,
+      icon: <Timer size={24} color="#d97706" />,
       badge: 'Certified Rigor',
       title: 'Timed CBT Examination Engine',
       tagline: 'Validate true engineering competency under realistic test conditions.',
@@ -51,13 +51,13 @@ export default function WhyChooseReactJav() {
         'Zero open-book shortcuts or guessing',
       ],
       metric: 'Enterprise-Grade Testing',
-      color: '#f59e0b',
-      accentBg: 'rgba(245, 158, 11, 0.1)',
-      borderAccent: 'rgba(245, 158, 11, 0.35)',
+      color: '#d97706',
+      accentBg: 'rgba(217, 119, 6, 0.08)',
+      borderAccent: 'rgba(217, 119, 6, 0.22)',
     },
     {
       id: 3,
-      icon: <Users size={24} color="#10b981" />,
+      icon: <Users size={24} color="#059669" />,
       badge: '1-on-1 Screen Pairing',
       title: 'Dedicated Senior Mentorship',
       tagline: 'Never get stuck for hours. Screen-pair directly with senior practitioners.',
@@ -68,13 +68,13 @@ export default function WhyChooseReactJav() {
         'Tailored from age 5 to working adults',
       ],
       metric: 'Direct Mentor Signoff',
-      color: '#10b981',
-      accentBg: 'rgba(16, 185, 129, 0.1)',
-      borderAccent: 'rgba(16, 185, 129, 0.35)',
+      color: '#059669',
+      accentBg: 'rgba(5, 150, 105, 0.08)',
+      borderAccent: 'rgba(5, 150, 105, 0.22)',
     },
     {
       id: 4,
-      icon: <Building size={24} color="#818cf8" />,
+      icon: <Building size={24} color="#2563eb" />,
       badge: 'Campus Architecture',
       title: 'Dual Partition Platform Experience',
       tagline: 'Transparent public catalog meets gated campus intranet facility.',
@@ -85,13 +85,13 @@ export default function WhyChooseReactJav() {
         'Role-governed student & instructor suites',
       ],
       metric: 'Zero-Friction Access',
-      color: '#818cf8',
-      accentBg: 'rgba(129, 140, 248, 0.1)',
-      borderAccent: 'rgba(129, 140, 248, 0.35)',
+      color: '#2563eb',
+      accentBg: 'rgba(37, 99, 235, 0.08)',
+      borderAccent: 'rgba(37, 99, 235, 0.22)',
     },
     {
       id: 5,
-      icon: <HeartHandshake size={24} color="#ec4899" />,
+      icon: <HeartHandshake size={24} color="#db2777" />,
       badge: 'Global Sponsorships',
       title: 'Foundation Grants & $0 Upfront',
       tagline: 'Financial background will never stand between talent and opportunity.',
@@ -102,13 +102,13 @@ export default function WhyChooseReactJav() {
         'Equitable access across 54+ nations',
       ],
       metric: '$0 Upfront Grants',
-      color: '#ec4899',
-      accentBg: 'rgba(236, 72, 153, 0.1)',
-      borderAccent: 'rgba(236, 72, 153, 0.35)',
+      color: '#db2777',
+      accentBg: 'rgba(219, 39, 119, 0.08)',
+      borderAccent: 'rgba(219, 39, 119, 0.22)',
     },
     {
       id: 6,
-      icon: <GraduationCap size={24} color="#a855f7" />,
+      icon: <GraduationCap size={24} color="#7c3aed" />,
       badge: 'Industry Verified',
       title: 'Permanent Verifiable Credentials',
       tagline: 'Credentials employers can instantly trust and verify with one click.',
@@ -119,9 +119,9 @@ export default function WhyChooseReactJav() {
         'Verified project milestone showcase',
       ],
       metric: '350,000+ Verified Issued',
-      color: '#a855f7',
-      accentBg: 'rgba(168, 85, 247, 0.1)',
-      borderAccent: 'rgba(168, 85, 247, 0.35)',
+      color: '#7c3aed',
+      accentBg: 'rgba(124, 58, 237, 0.08)',
+      borderAccent: 'rgba(124, 58, 237, 0.22)',
     },
   ];
 
@@ -182,13 +182,11 @@ export default function WhyChooseReactJav() {
               key={feat.id}
               onClick={() => setActiveFeature(index)}
               style={{
-                background: isSelected 
-                  ? `linear-gradient(135deg, ${feat.accentBg} 0%, var(--bg-surface) 100%)` 
-                  : 'var(--bg-surface)',
+                background: 'var(--bg-surface)',
                 border: isSelected ? `2px solid ${feat.color}` : '1px solid var(--border-subtle)',
                 borderRadius: '1.25rem',
                 padding: '2rem 1.75rem',
-                boxShadow: isSelected ? `0 12px 30px -8px ${feat.color}35` : 'var(--shadow-sm)',
+                boxShadow: isSelected ? `0 12px 28px -6px ${feat.color}25` : 'var(--shadow-sm)',
                 cursor: 'pointer',
                 transition: 'all 0.25s ease',
                 display: 'flex',
@@ -239,19 +237,19 @@ export default function WhyChooseReactJav() {
                 </h3>
 
                 <p style={{
-                  fontSize: '0.875rem',
-                  fontWeight: 600,
+                  fontSize: '0.9rem',
+                  fontWeight: 700,
                   color: feat.color,
                   marginBottom: '0.85rem',
-                  lineHeight: 1.4,
+                  lineHeight: 1.45,
                 }}>
                   {feat.tagline}
                 </p>
 
                 <p style={{
-                  fontSize: '0.9rem',
+                  fontSize: '0.925rem',
                   color: 'var(--text-secondary)',
-                  lineHeight: 1.55,
+                  lineHeight: 1.6,
                   marginBottom: '1.25rem',
                 }}>
                   {feat.description}
@@ -261,13 +259,13 @@ export default function WhyChooseReactJav() {
                 <div style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '0.45rem',
+                  gap: '0.5rem',
                   marginBottom: '1.5rem',
-                  fontSize: '0.825rem',
+                  fontSize: '0.85rem',
                 }}>
                   {feat.highlights.map((item, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)' }}>
-                      <CheckCircle2 size={14} color={feat.color} style={{ flexShrink: 0 }} />
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'var(--text-primary)', fontWeight: 600 }}>
+                      <CheckCircle2 size={15} color={feat.color} style={{ flexShrink: 0 }} />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -304,10 +302,11 @@ export default function WhyChooseReactJav() {
 
       {/* Trust & Guarantee Banner */}
       <div style={{
-        padding: '1.5rem 2rem',
+        padding: '1.75rem 2rem',
         borderRadius: '1.25rem',
-        background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.12) 0%, rgba(168, 85, 247, 0.08) 50%, rgba(16, 185, 129, 0.08) 100%)',
-        border: '1px solid var(--border-accent)',
+        background: 'var(--bg-surface)',
+        border: '1px solid var(--border-subtle)',
+        boxShadow: 'var(--shadow-sm)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -316,22 +315,23 @@ export default function WhyChooseReactJav() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <div style={{
-            width: '2.75rem',
-            height: '2.75rem',
+            width: '3rem',
+            height: '3rem',
             borderRadius: '50%',
-            background: 'rgba(16, 185, 129, 0.2)',
+            background: 'rgba(5, 150, 105, 0.1)',
+            border: '1px solid rgba(5, 150, 105, 0.25)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexShrink: 0,
           }}>
-            <ShieldCheck size={22} color="#10b981" />
+            <ShieldCheck size={22} color="#059669" />
           </div>
           <div>
-            <h4 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+            <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
               The ReactJav 100% Competency Assurance
             </h4>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: '0.2rem 0 0' }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '0.3rem 0 0', lineHeight: 1.5 }}>
               If you don't pass your timed CBT certification after completing your project milestones, your mentor stays with you at zero additional cost until you certify.
             </p>
           </div>
@@ -339,11 +339,11 @@ export default function WhyChooseReactJav() {
 
         <Link
           href="/subscribe"
-          className="btn btn-primary btn-sm"
-          style={{ whiteSpace: 'nowrap', gap: '0.4rem', padding: '0.65rem 1.4rem' }}
+          className="btn btn-primary"
+          style={{ whiteSpace: 'nowrap', gap: '0.5rem', padding: '0.75rem 1.6rem' }}
         >
           <span>Explore Tuition & Sponsorships</span>
-          <ArrowRight size={14} />
+          <ArrowRight size={15} />
         </Link>
       </div>
     </section>
