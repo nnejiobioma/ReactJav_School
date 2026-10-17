@@ -11,6 +11,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 export const metadata: Metadata = {
   title: 'ReactJav • Modern LMS with Supabase & Next.js',
   description: 'Production-ready Learning Management Platform with PostgreSQL, Row Level Security, Resumable Video Streaming, and Interactive Quizzes.',
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({

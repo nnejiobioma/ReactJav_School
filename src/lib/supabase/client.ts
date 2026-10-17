@@ -48,6 +48,18 @@ const supabaseUrl = rawSupabaseUrl
   : FALLBACK_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || FALLBACK_SUPABASE_ANON_KEY;
 
+// Clean up any stale Supabase auth tokens in browser localStorage that cause 401 Unauthorized errors
+if (typeof window !== 'undefined') {
+  try {
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith('sb-') && k.endsWith('-auth-token')) {
+        localStorage.removeItem(k);
+      }
+    }
+  } catch {}
+}
+
 export const isSupabaseConfigured = (): boolean => {
   return (
     !!supabaseUrl &&
@@ -64,9 +76,16 @@ export const createClient = (): SupabaseClient | null => {
   if (!clientInstance) {
     clientInstance = createSupabaseClient(supabaseUrl!, supabaseAnonKey!, {
       auth: {
-        persistSession: true,
-        autoRefreshToken: true,
-        detectSessionInUrl: true,
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+        storageKey: 'reactjav_sb_isolated',
+      },
+      global: {
+        headers: {
+          apikey: supabaseAnonKey!,
+          Authorization: `Bearer ${supabaseAnonKey!}`,
+        },
       },
     });
   }
@@ -2411,12 +2430,14 @@ export class LocalDataService {
     try {
       const res = await fetch('/api/admin/persist');
       const base = res.ok ? await res.json() : {};
-      const remote = await this.fetchSupabaseSiteData();
+      // /api/admin/persist already queries Supabase site_data server-side.
+      // Only query Supabase from client if server didn't provide site data
+      const remote = (base.siteContent || base.courses) ? {} : await this.fetchSupabaseSiteData();
       const { profiles, inquiries } = base;
-      // Supabase edits (made on the deployed site) take priority over bundled files
-      const siteContent = remote.siteContent || base.siteContent;
-      const courses = remote.courses || base.courses;
-      const tracks = remote.tracks || base.tracks;
+      // Supabase edits take priority over bundled files
+      const siteContent = base.siteContent || remote.siteContent;
+      const courses = base.courses || remote.courses;
+      const tracks = base.tracks || remote.tracks;
       if (siteContent) {
         localStorage.setItem(STORAGE_KEYS.SITE_CONTENT, JSON.stringify(siteContent));
         window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: siteContent }));
