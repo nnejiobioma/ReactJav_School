@@ -458,7 +458,7 @@ function AuthContent() {
   };
 
   return (
-    <div className="container" style={{ padding: 'clamp(2rem, 5vw, 3.5rem) clamp(0.75rem, 3vw, 1.5rem) 6rem', maxWidth: '600px' }}>
+    <div className="container" style={{ padding: 'clamp(2.5rem, 5vw, 3.5rem) clamp(0.75rem, 3vw, 1.5rem) clamp(2.5rem, 4vw, 3.5rem)', maxWidth: '600px' }}>
       {/* Brand Header */}
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <h1 style={{ fontSize: '2rem', color: 'var(--text-primary)', marginBottom: '0.5rem', fontWeight: 800 }}>
@@ -708,7 +708,7 @@ function AuthContent() {
       )}
 
       {/* MAIN AUTH CONTAINER */}
-      <div className="glass-card">
+      <div className="glass-card" style={{ padding: 'clamp(1.25rem, 3.5vw, 2.25rem)' }}>
         {/* ================= MODE 1: FORGOT PASSWORD ================= */}
         {activeTab === 'forgot' && (
           <div>
