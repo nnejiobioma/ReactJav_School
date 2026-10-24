@@ -90,6 +90,15 @@ export async function GET() {
               email: p.email,
               full_name: p.full_name || p.email?.split('@')[0] || 'Learner',
               avatar_url: p.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(p.full_name || p.email)}`,
+              bio: p.bio || undefined,
+              phone: p.phone || undefined,
+              country: p.country || undefined,
+              state: p.state || undefined,
+              education_level: p.education_level || undefined,
+              preferred_track: p.preferred_track || undefined,
+              experience_level: p.experience_level || undefined,
+              career_goal: p.career_goal || undefined,
+              emergency_contact: p.emergency_contact || undefined,
               role: p.role || 'student',
               subscription_status: p.subscription_status || 'none',
               subscription_plan: p.subscription_plan || undefined,
@@ -181,11 +190,12 @@ export async function POST(req: NextRequest) {
       // Persist directly to Supabase profiles table
       if (supabase && data.email) {
         try {
+          const cleanEmail = data.email.toLowerCase().trim();
           const profileId = toValidUuid(data.id);
           const payload: Record<string, any> = {
             id: profileId,
             firebase_uid: data.firebase_uid || data.id,
-            email: data.email.toLowerCase(),
+            email: cleanEmail,
             full_name: data.full_name || 'Learner',
             avatar_url: data.avatar_url || null,
             bio: data.bio || null,
@@ -212,7 +222,31 @@ export async function POST(req: NextRequest) {
             terms_accepted_at: data.terms_accepted_at || null,
             updated_at: new Date().toISOString(),
           };
-          await supabase.from('profiles').upsert(payload, { onConflict: 'id' });
+
+          // 1. Try to update existing record matching by email first
+          const { data: updatedRows, error: updateErr } = await supabase
+            .from('profiles')
+            .update({
+              full_name: payload.full_name,
+              avatar_url: payload.avatar_url,
+              bio: payload.bio,
+              phone: payload.phone,
+              country: payload.country,
+              state: payload.state,
+              education_level: payload.education_level,
+              preferred_track: payload.preferred_track,
+              experience_level: payload.experience_level,
+              career_goal: payload.career_goal,
+              emergency_contact: payload.emergency_contact,
+              updated_at: new Date().toISOString(),
+            })
+            .eq('email', cleanEmail)
+            .select('id');
+
+          // 2. If no record was updated, insert or upsert by id
+          if (updateErr || !updatedRows || updatedRows.length === 0) {
+            await supabase.from('profiles').upsert(payload, { onConflict: 'id' });
+          }
         } catch (dbErr) {
           console.warn('[Persist API] Supabase profile upsert error:', dbErr);
         }

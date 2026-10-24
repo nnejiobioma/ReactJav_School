@@ -232,29 +232,34 @@ export async function signInWithFirebase(
         console.warn('Notice: ID token claims lookup:', claimsErr);
       }
 
-      // Fetch user's profile from Supabase database
+      // Fetch user's profile from Supabase database and local storage fallback
       const dbProfile = await LocalDataService.getProfileByEmailOrId(cleanEmail, credential.user.uid);
-      const effectiveRole: UserRole = tokenRole || dbProfile?.role || 'student';
+      const localProfile = LocalDataService.getAllProfiles().find(
+        (p) => p.email && p.email.toLowerCase() === cleanEmail
+      );
+      const effectiveRole: UserRole = tokenRole || dbProfile?.role || localProfile?.role || 'student';
+      const effectiveAvatar = dbProfile?.avatar_url || localProfile?.avatar_url || credential.user.photoURL || undefined;
+      const effectiveName = dbProfile?.full_name || localProfile?.full_name || credential.user.displayName || undefined;
 
       const profile = mapFirebaseUserToProfile(credential.user, {
         role: effectiveRole,
         privileges: ROLE_PRIVILEGES[effectiveRole],
         custom_claims: tokenClaims,
-        subscription_status: dbProfile?.subscription_status,
-        subscription_plan: dbProfile?.subscription_plan,
-        payment_reference: dbProfile?.payment_reference,
-        admin_granted: dbProfile?.admin_granted,
-        full_name: dbProfile?.full_name || credential.user.displayName || undefined,
-        avatar_url: dbProfile?.avatar_url || credential.user.photoURL || undefined,
-        bio: dbProfile?.bio || undefined,
-        phone: dbProfile?.phone || undefined,
-        country: dbProfile?.country || undefined,
-        state: dbProfile?.state || undefined,
-        emergency_contact: dbProfile?.emergency_contact || undefined,
-        education_level: dbProfile?.education_level || undefined,
-        preferred_track: dbProfile?.preferred_track || undefined,
-        experience_level: dbProfile?.experience_level || undefined,
-        career_goal: dbProfile?.career_goal || undefined,
+        subscription_status: dbProfile?.subscription_status || localProfile?.subscription_status,
+        subscription_plan: dbProfile?.subscription_plan || localProfile?.subscription_plan,
+        payment_reference: dbProfile?.payment_reference || localProfile?.payment_reference,
+        admin_granted: dbProfile?.admin_granted !== undefined ? dbProfile.admin_granted : localProfile?.admin_granted,
+        full_name: effectiveName,
+        avatar_url: effectiveAvatar,
+        bio: dbProfile?.bio || localProfile?.bio || undefined,
+        phone: dbProfile?.phone || localProfile?.phone || undefined,
+        country: dbProfile?.country || localProfile?.country || undefined,
+        state: dbProfile?.state || localProfile?.state || undefined,
+        emergency_contact: dbProfile?.emergency_contact || localProfile?.emergency_contact || undefined,
+        education_level: dbProfile?.education_level || localProfile?.education_level || undefined,
+        preferred_track: dbProfile?.preferred_track || localProfile?.preferred_track || undefined,
+        experience_level: dbProfile?.experience_level || localProfile?.experience_level || undefined,
+        career_goal: dbProfile?.career_goal || localProfile?.career_goal || undefined,
         privacy_accepted: dbProfile?.privacy_accepted,
         privacy_accepted_at: dbProfile?.privacy_accepted_at,
         terms_accepted: dbProfile?.terms_accepted,
@@ -335,29 +340,34 @@ export async function signInWithGoogleFirebase(
       console.warn('Notice: Google sign-in ID token claims lookup:', claimsErr);
     }
 
-    // Query Supabase database for existing record
+    // Query Supabase database for existing record with local cache fallback
     const dbProfile = await LocalDataService.getProfileByEmailOrId(cleanEmail, credential.user.uid);
-    const effectiveRole: UserRole = tokenRole || dbProfile?.role || 'student';
+    const localProfile = LocalDataService.getAllProfiles().find(
+      (p) => p.email && p.email.toLowerCase() === cleanEmail
+    );
+    const effectiveRole: UserRole = tokenRole || dbProfile?.role || localProfile?.role || 'student';
+    const effectiveAvatar = dbProfile?.avatar_url || localProfile?.avatar_url || credential.user.photoURL || undefined;
+    const effectiveName = dbProfile?.full_name || localProfile?.full_name || credential.user.displayName || undefined;
 
     const profile = mapFirebaseUserToProfile(credential.user, {
       role: effectiveRole,
       privileges: ROLE_PRIVILEGES[effectiveRole],
       custom_claims: tokenClaims,
-      subscription_status: dbProfile?.subscription_status,
-      subscription_plan: dbProfile?.subscription_plan,
-      payment_reference: dbProfile?.payment_reference,
-      admin_granted: dbProfile?.admin_granted,
-      full_name: dbProfile?.full_name || credential.user.displayName || undefined,
-      avatar_url: dbProfile?.avatar_url || credential.user.photoURL || undefined,
-      bio: dbProfile?.bio || undefined,
-      phone: dbProfile?.phone || undefined,
-      country: dbProfile?.country || undefined,
-      state: dbProfile?.state || undefined,
-      emergency_contact: dbProfile?.emergency_contact || undefined,
-      education_level: dbProfile?.education_level || undefined,
-      preferred_track: dbProfile?.preferred_track || undefined,
-      experience_level: dbProfile?.experience_level || undefined,
-      career_goal: dbProfile?.career_goal || undefined,
+      subscription_status: dbProfile?.subscription_status || localProfile?.subscription_status,
+      subscription_plan: dbProfile?.subscription_plan || localProfile?.subscription_plan,
+      payment_reference: dbProfile?.payment_reference || localProfile?.payment_reference,
+      admin_granted: dbProfile?.admin_granted !== undefined ? dbProfile.admin_granted : localProfile?.admin_granted,
+      full_name: effectiveName,
+      avatar_url: effectiveAvatar,
+      bio: dbProfile?.bio || localProfile?.bio || undefined,
+      phone: dbProfile?.phone || localProfile?.phone || undefined,
+      country: dbProfile?.country || localProfile?.country || undefined,
+      state: dbProfile?.state || localProfile?.state || undefined,
+      emergency_contact: dbProfile?.emergency_contact || localProfile?.emergency_contact || undefined,
+      education_level: dbProfile?.education_level || localProfile?.education_level || undefined,
+      preferred_track: dbProfile?.preferred_track || localProfile?.preferred_track || undefined,
+      experience_level: dbProfile?.experience_level || localProfile?.experience_level || undefined,
+      career_goal: dbProfile?.career_goal || localProfile?.career_goal || undefined,
       privacy_accepted: dbProfile?.privacy_accepted !== undefined ? dbProfile.privacy_accepted : acceptedPrivacy,
       privacy_accepted_at: dbProfile?.privacy_accepted_at || (acceptedPrivacy ? timestamp : undefined),
       terms_accepted: dbProfile?.terms_accepted !== undefined ? dbProfile.terms_accepted : acceptedTerms,

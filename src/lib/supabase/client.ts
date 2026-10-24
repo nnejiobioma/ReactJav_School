@@ -163,7 +163,9 @@ export class LocalDataService {
       localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(profile));
       // Keep profiles directory indexed with any active user
       const profiles = this.getAllProfiles();
-      const existingIdx = profiles.findIndex((p) => p.id === profile.id);
+      const existingIdx = profiles.findIndex(
+        (p) => p.id === profile.id || (p.email && profile.email && p.email.toLowerCase() === profile.email.toLowerCase())
+      );
       if (existingIdx >= 0) {
         profiles[existingIdx] = { ...profiles[existingIdx], ...profile };
       } else {
@@ -262,10 +264,11 @@ export class LocalDataService {
             .from('profiles')
             .select('*')
             .eq('email', cleanEmail)
-            .maybeSingle();
+            .order('updated_at', { ascending: false })
+            .limit(1);
 
-          if (!error && data) {
-            const mapped = this.mapSupabaseRowToProfile(data);
+          if (!error && data && data.length > 0) {
+            const mapped = this.mapSupabaseRowToProfile(data[0]);
             const local = this.getAllProfiles();
             const idx = local.findIndex((p) => p.email && p.email.toLowerCase() === cleanEmail);
             if (idx >= 0) local[idx] = mapped;
@@ -353,7 +356,39 @@ export class LocalDataService {
           terms_accepted_at: profile.terms_accepted_at || null,
           updated_at: new Date().toISOString(),
         };
-        await supabase.from('profiles').upsert(payload, { onConflict: 'id' });
+        // 1. Try updating existing row matching by email first
+        const cleanEmail = profile.email ? profile.email.toLowerCase().trim() : '';
+        let updated = false;
+
+        if (cleanEmail) {
+          const { data: updatedRows, error: updateErr } = await supabase
+            .from('profiles')
+            .update({
+              full_name: payload.full_name,
+              avatar_url: payload.avatar_url,
+              bio: payload.bio,
+              phone: payload.phone,
+              country: payload.country,
+              state: payload.state,
+              education_level: payload.education_level,
+              preferred_track: payload.preferred_track,
+              experience_level: payload.experience_level,
+              career_goal: payload.career_goal,
+              emergency_contact: payload.emergency_contact,
+              updated_at: new Date().toISOString(),
+            })
+            .eq('email', cleanEmail)
+            .select('id');
+
+          if (!updateErr && updatedRows && updatedRows.length > 0) {
+            updated = true;
+          }
+        }
+
+        // 2. Fall back to upsert if not updated
+        if (!updated) {
+          await supabase.from('profiles').upsert(payload, { onConflict: 'id' });
+        }
       } catch (err) {
         console.warn('[LocalDataService] Direct profile upsert notice:', err);
       }
@@ -613,8 +648,12 @@ export class LocalDataService {
     updates: Partial<Profile>
   ): Promise<{ success: boolean; profile: Profile; error?: string }> {
     const profiles = this.getAllProfiles();
-    const index = profiles.findIndex((p) => p.id === userId || (p.firebase_uid && p.firebase_uid === userId));
-    const existing = index !== -1 ? profiles[index] : this.getCurrentUser();
+    const existingUser = this.getCurrentUser();
+    const targetEmail = updates.email || existingUser?.email;
+    const index = profiles.findIndex(
+      (p) => p.id === userId || (p.firebase_uid && p.firebase_uid === userId) || (targetEmail && p.email && p.email.toLowerCase() === targetEmail.toLowerCase())
+    );
+    const existing = index !== -1 ? profiles[index] : existingUser;
 
     if (!existing) {
       return { success: false, profile: {} as Profile, error: 'User profile not found.' };
@@ -2511,28 +2550,34 @@ export class LocalDataService {
       if (profiles && Array.isArray(profiles) && profiles.length > 0) {
         const local = this.getAllProfiles();
         const map = new Map<string, Profile>();
-        // Add server-persisted profiles
-        profiles.forEach((p: Profile) => map.set(p.id, p));
+        // Add server-persisted profiles keyed by email and id
+        profiles.forEach((p: Profile) => {
+          if (p.id) map.set(p.id, p);
+          if (p.email) map.set(p.email.toLowerCase(), p);
+        });
         // Merge with local profiles
         local.forEach((p: Profile) => {
-          if (!map.has(p.id)) {
-            map.set(p.id, p);
+          const key = p.email ? p.email.toLowerCase() : p.id;
+          if (!map.has(key)) {
+            map.set(key, p);
           } else {
-            const serverP = map.get(p.id)!;
-            // Server role takes precedence if defined and not default student
+            const serverP = map.get(key)!;
+            // Preserve user-customized profile photo and name
+            const mergedAvatar = p.avatar_url || serverP.avatar_url;
+            const mergedName = p.full_name || serverP.full_name;
             if (serverP.role && serverP.role !== 'student') {
               p.role = serverP.role;
             }
-            map.set(p.id, { ...p, ...serverP });
+            map.set(key, { ...serverP, ...p, avatar_url: mergedAvatar, full_name: mergedName });
           }
         });
-        const merged = Array.from(map.values());
+        const merged = Array.from(new Set(map.values()));
         localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(merged));
 
         // If current active user's role was changed on another device or server, sync it now
         const currentUser = this.getCurrentUser();
         if (currentUser && currentUser.id !== 'guest') {
-          const matched = merged.find((p) => p.id === currentUser.id || p.email === currentUser.email);
+          const matched = merged.find((p) => p.id === currentUser.id || (p.email && currentUser.email && p.email.toLowerCase() === currentUser.email.toLowerCase()));
           if (matched && matched.role !== currentUser.role) {
             this.setCurrentUser({ ...currentUser, role: matched.role });
             window.dispatchEvent(new Event('storage'));
