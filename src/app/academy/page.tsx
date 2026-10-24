@@ -46,7 +46,8 @@ export default function AcademyPage() {
       setSiteContent(LocalDataService.getSiteContent());
       setTracks(LocalDataService.getAcademyTracks());
       const user = LocalDataService.getCurrentUser();
-      setIsAdmin((user?.role === 'admin' || user?.role === 'super_admin') && LocalDataService.isEditModeActive());
+      const hasFacultyRights = user?.role === 'admin' || user?.role === 'super_admin' || user?.role === 'instructor';
+      setIsAdmin(Boolean(hasFacultyRights && LocalDataService.isEditModeActive()));
     };
 
     loadData();

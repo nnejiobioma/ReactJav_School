@@ -2222,7 +2222,25 @@ export class LocalDataService {
       }
     }
 
-    // 4. Add default verified tutoring scholars for immediate selection & testing
+    // 4. Also include all registered student accounts so instructors can schedule attendance for any student
+    all.forEach((p) => {
+      if ((p.role === 'student' || !p.role) && !map.has(p.id)) {
+        const alreadyHas = Array.from(map.values()).some(
+          (s) => s.id === p.id || (p.email && s.email && s.email.toLowerCase() === p.email.toLowerCase())
+        );
+        if (!alreadyHas) {
+          map.set(p.id, {
+            ...p,
+            role: 'student',
+            tutoring_enrolled: p.tutoring_enrolled || true,
+            tutoring_track_id: p.tutoring_track_id || 'junior-dev-track',
+            tutoring_track_name: resolveTrackName(p.tutoring_track_id, p.tutoring_track_name),
+          });
+        }
+      }
+    });
+
+    // 5. Add default verified tutoring scholars for immediate selection & testing
     DEFAULT_ACTIVE_TUTORING_STUDENTS.forEach((d) => {
       const alreadyHas = Array.from(map.values()).some(
         (s) => s.id === d.id || s.email?.toLowerCase() === d.email?.toLowerCase() || s.full_name?.toLowerCase() === d.full_name?.toLowerCase()
