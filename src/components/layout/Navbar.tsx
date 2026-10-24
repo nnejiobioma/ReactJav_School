@@ -22,7 +22,8 @@ import {
   ExternalLink,
   KeyRound,
   User,
-  ArrowRight
+  ArrowRight,
+  Mail
 } from 'lucide-react';
 import ThemeSelector from '@/components/theme/ThemeSelector';
 import { Profile, UserRole } from '@/types';
@@ -237,6 +238,24 @@ export default function Navbar() {
               }}
             >
               <span>About</span>
+            </Link>
+
+            <Link
+              href="/contact"
+              className="btn btn-sm"
+              style={{
+                background: pathname === '/contact' ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
+                color: pathname === '/contact' ? 'var(--primary)' : 'var(--text-secondary)',
+                fontSize: '0.86rem',
+                padding: '0.52rem 0.85rem',
+                fontWeight: 600,
+                borderRadius: '0.75rem',
+                gap: '0.45rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+              }}
+            >
+              <span>Contact</span>
             </Link>
           </div>
 
@@ -951,6 +970,9 @@ export default function Navbar() {
             )}
             <Link href="/about" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
               <BookOpen size={17} /> About ReactJav
+            </Link>
+            <Link href="/contact" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+              <Mail size={17} /> Contact Admissions
             </Link>
           </div>
 

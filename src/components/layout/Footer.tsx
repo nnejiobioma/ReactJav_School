@@ -148,6 +148,11 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
+                    <Link href="/contact" style={{ color: 'inherit', textDecoration: 'none' }}>
+                      Contact Admissions
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/subscribe" style={{ color: 'inherit', textDecoration: 'none' }}>
                       Tuition & Sponsorship Grants
                     </Link>
@@ -200,7 +205,17 @@ export default function Footer() {
                     fontWeight: 600,
                   }}
                 >
-                  About ReactJav
+                  About
+                </Link>
+                <Link
+                  href="/contact"
+                  style={{
+                    color: 'var(--primary)',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                  }}
+                >
+                  Contact
                 </Link>
                 <Link
                   href="/privacy"
