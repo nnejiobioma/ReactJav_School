@@ -39,16 +39,30 @@ export function mapFirebaseUserToProfile(
   );
 
   const timestamp = new Date().toISOString();
-  const fullName = extra?.full_name || fbUser.displayName || existing?.full_name || cleanEmail.split('@')[0] || 'Learner';
+  // Name precedence: explicit extra -> saved database profile -> Firebase Auth displayName -> email prefix fallback
+  const fullName = extra?.full_name || existing?.full_name || fbUser.displayName || cleanEmail.split('@')[0] || 'Learner';
   const role: UserRole = extra?.role || existing?.role || 'student';
   const privileges: Privilege[] = extra?.privileges || existing?.privileges || ROLE_PRIVILEGES[role] || ROLE_PRIVILEGES.student;
 
+  // Avatar precedence: explicit extra -> saved database profile avatar -> Firebase photoURL -> generated initials fallback
+  const avatarUrl = extra?.avatar_url || existing?.avatar_url || fbUser.photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`;
+
   const profile: Profile = {
+    ...existing,
     id: existing?.id || fbUser.uid,
     firebase_uid: fbUser.uid,
     email: cleanEmail,
     full_name: fullName,
-    avatar_url: fbUser.photoURL || existing?.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`,
+    avatar_url: avatarUrl,
+    bio: extra?.bio !== undefined ? extra.bio : (existing?.bio || null),
+    phone: extra?.phone !== undefined ? extra.phone : existing?.phone,
+    country: extra?.country !== undefined ? extra.country : existing?.country,
+    state: extra?.state !== undefined ? extra.state : existing?.state,
+    emergency_contact: extra?.emergency_contact !== undefined ? extra.emergency_contact : existing?.emergency_contact,
+    education_level: extra?.education_level !== undefined ? extra.education_level : existing?.education_level,
+    preferred_track: extra?.preferred_track !== undefined ? extra.preferred_track : existing?.preferred_track,
+    experience_level: extra?.experience_level !== undefined ? extra.experience_level : existing?.experience_level,
+    career_goal: extra?.career_goal !== undefined ? extra.career_goal : existing?.career_goal,
     role,
     privileges,
     custom_claims: extra?.custom_claims || existing?.custom_claims,
@@ -231,7 +245,16 @@ export async function signInWithFirebase(
         payment_reference: dbProfile?.payment_reference,
         admin_granted: dbProfile?.admin_granted,
         full_name: dbProfile?.full_name || credential.user.displayName || undefined,
-        avatar_url: credential.user.photoURL || dbProfile?.avatar_url || undefined,
+        avatar_url: dbProfile?.avatar_url || credential.user.photoURL || undefined,
+        bio: dbProfile?.bio || undefined,
+        phone: dbProfile?.phone || undefined,
+        country: dbProfile?.country || undefined,
+        state: dbProfile?.state || undefined,
+        emergency_contact: dbProfile?.emergency_contact || undefined,
+        education_level: dbProfile?.education_level || undefined,
+        preferred_track: dbProfile?.preferred_track || undefined,
+        experience_level: dbProfile?.experience_level || undefined,
+        career_goal: dbProfile?.career_goal || undefined,
         privacy_accepted: dbProfile?.privacy_accepted,
         privacy_accepted_at: dbProfile?.privacy_accepted_at,
         terms_accepted: dbProfile?.terms_accepted,
@@ -325,7 +348,16 @@ export async function signInWithGoogleFirebase(
       payment_reference: dbProfile?.payment_reference,
       admin_granted: dbProfile?.admin_granted,
       full_name: dbProfile?.full_name || credential.user.displayName || undefined,
-      avatar_url: credential.user.photoURL || dbProfile?.avatar_url || undefined,
+      avatar_url: dbProfile?.avatar_url || credential.user.photoURL || undefined,
+      bio: dbProfile?.bio || undefined,
+      phone: dbProfile?.phone || undefined,
+      country: dbProfile?.country || undefined,
+      state: dbProfile?.state || undefined,
+      emergency_contact: dbProfile?.emergency_contact || undefined,
+      education_level: dbProfile?.education_level || undefined,
+      preferred_track: dbProfile?.preferred_track || undefined,
+      experience_level: dbProfile?.experience_level || undefined,
+      career_goal: dbProfile?.career_goal || undefined,
       privacy_accepted: dbProfile?.privacy_accepted !== undefined ? dbProfile.privacy_accepted : acceptedPrivacy,
       privacy_accepted_at: dbProfile?.privacy_accepted_at || (acceptedPrivacy ? timestamp : undefined),
       terms_accepted: dbProfile?.terms_accepted !== undefined ? dbProfile.terms_accepted : acceptedTerms,
@@ -564,9 +596,14 @@ export async function updateUserProfileFirebase(updates: {
 }): Promise<FirebaseAuthResponse> {
   if (isFirebaseConfigured() && auth && auth.currentUser) {
     try {
+      // Firebase Auth photoURL only accepts standard URI strings (< 2048 chars), not huge base64 data URLs
+      const safePhotoUrl = updates.photoURL && !updates.photoURL.startsWith('data:') && updates.photoURL.length <= 2000
+        ? updates.photoURL
+        : undefined;
+
       await updateProfile(auth.currentUser, {
         displayName: updates.displayName,
-        photoURL: updates.photoURL,
+        ...(safePhotoUrl ? { photoURL: safePhotoUrl } : {}),
       });
       return { success: true };
     } catch (err: any) {
