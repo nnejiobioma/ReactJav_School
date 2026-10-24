@@ -220,6 +220,24 @@ export default function Navbar() {
                 <span>Tuition & Plans</span>
               </Link>
             )}
+
+            <Link
+              href="/about"
+              className="btn btn-sm"
+              style={{
+                background: pathname === '/about' ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
+                color: pathname === '/about' ? 'var(--primary)' : 'var(--text-secondary)',
+                fontSize: '0.86rem',
+                padding: '0.52rem 0.85rem',
+                fontWeight: 600,
+                borderRadius: '0.75rem',
+                gap: '0.45rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+              }}
+            >
+              <span>About</span>
+            </Link>
           </div>
 
           {hasIntranetAccess && (
@@ -931,6 +949,9 @@ export default function Navbar() {
                 <Sparkles size={17} /> Tuition & Plans
               </Link>
             )}
+            <Link href="/about" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+              <BookOpen size={17} /> About ReactJav
+            </Link>
           </div>
 
           {hasIntranetAccess && (
