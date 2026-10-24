@@ -20,7 +20,9 @@ import {
   Menu,
   X,
   ExternalLink,
-  KeyRound
+  KeyRound,
+  User,
+  ArrowRight
 } from 'lucide-react';
 import ThemeSelector from '@/components/theme/ThemeSelector';
 import { Profile, UserRole } from '@/types';
@@ -628,6 +630,31 @@ export default function Navbar() {
                   marginTop: '0.4rem',
                   paddingTop: '0.4rem',
                 }}>
+                  {/* Direct Edit Profile & Avatar Link */}
+                  <Link
+                    href="/profile"
+                    onClick={() => setShowRoleMenu(false)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.48rem 0.75rem',
+                      fontSize: '0.825rem',
+                      color: pathname === '/profile' ? 'var(--primary)' : 'var(--text-primary)',
+                      textDecoration: 'none',
+                      borderRadius: '0.5rem',
+                      fontWeight: 700,
+                      background: pathname === '/profile' ? 'rgba(99, 102, 241, 0.16)' : 'rgba(99, 102, 241, 0.08)',
+                      border: '1px solid var(--border-accent)',
+                      marginBottom: '0.35rem',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                      <User size={14} color="var(--primary)" />
+                      <span>Edit Profile & Avatar</span>
+                    </div>
+                    <ArrowRight size={12} color="var(--primary)" />
+                  </Link>
                   {currentUser?.role === 'super_admin' && (
                     <Link
                       href="/admin/super"
@@ -846,18 +873,30 @@ export default function Navbar() {
                   </span>
                 </div>
 
-                <button
-                  onClick={async () => {
-                    await signOutUser();
-                    setCurrentUser(null);
-                    setMobileMenuOpen(false);
-                  }}
-                  className="btn btn-secondary btn-sm"
-                  style={{ color: '#f87171', justifyContent: 'center', gap: '0.5rem', marginTop: '0.25rem' }}
-                >
-                  <LogOut size={15} />
-                  <span>Sign Out</span>
-                </button>
+                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.35rem' }}>
+                  <Link
+                    href="/profile"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="btn btn-primary btn-sm"
+                    style={{ flex: 1, justifyContent: 'center', gap: '0.45rem', fontSize: '0.82rem' }}
+                  >
+                    <User size={14} />
+                    <span>Edit Profile</span>
+                  </Link>
+
+                  <button
+                    onClick={async () => {
+                      await signOutUser();
+                      setCurrentUser(null);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="btn btn-secondary btn-sm"
+                    style={{ color: '#f87171', justifyContent: 'center', gap: '0.45rem', fontSize: '0.82rem' }}
+                  >
+                    <LogOut size={14} />
+                    <span>Sign Out</span>
+                  </button>
+                </div>
               </div>
             ) : (
               <div style={{ textAlign: 'center', padding: '0.5rem 0' }}>

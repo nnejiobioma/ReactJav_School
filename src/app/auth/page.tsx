@@ -615,6 +615,16 @@ function AuthContent() {
               </Link>
             )}
 
+            <Link
+              href="/profile"
+              className="btn btn-secondary btn-sm"
+              title="Edit Profile & Avatar"
+              style={{ color: 'var(--text-primary)', gap: '0.4rem' }}
+            >
+              <User size={14} />
+              <span>Edit Profile</span>
+            </Link>
+
             <button
               onClick={() => { setActiveTab('reset'); setErrorMessage(null); setResetSuccess(false); }}
               className="btn btn-secondary btn-sm"

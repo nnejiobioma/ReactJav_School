@@ -329,6 +329,15 @@ export class LocalDataService {
           email: profile.email.toLowerCase(),
           full_name: profile.full_name,
           avatar_url: profile.avatar_url,
+          bio: profile.bio || null,
+          phone: profile.phone || null,
+          country: profile.country || null,
+          state: profile.state || null,
+          education_level: profile.education_level || null,
+          preferred_track: profile.preferred_track || null,
+          experience_level: profile.experience_level || null,
+          career_goal: profile.career_goal || null,
+          emergency_contact: profile.emergency_contact || null,
           role: profile.role || 'student',
           subscription_status: profile.subscription_status || 'none',
           subscription_plan: profile.subscription_plan || null,
@@ -595,6 +604,43 @@ export class LocalDataService {
         preferred_track: details.preferred_track,
       }).or(`id.eq.${toValidUuid(userId)},email.eq.${updatedProfile.email || ''}`).then();
     }
+
+    return { success: true, profile: updatedProfile };
+  }
+
+  static async updateUserProfile(
+    userId: string,
+    updates: Partial<Profile>
+  ): Promise<{ success: boolean; profile: Profile; error?: string }> {
+    const profiles = this.getAllProfiles();
+    const index = profiles.findIndex((p) => p.id === userId || (p.firebase_uid && p.firebase_uid === userId));
+    const existing = index !== -1 ? profiles[index] : this.getCurrentUser();
+
+    if (!existing) {
+      return { success: false, profile: {} as Profile, error: 'User profile not found.' };
+    }
+
+    const updatedProfile: Profile = {
+      ...existing,
+      ...updates,
+      id: existing.id,
+      email: existing.email,
+    };
+
+    if (index !== -1) {
+      profiles[index] = updatedProfile;
+    } else {
+      profiles.unshift(updatedProfile);
+    }
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
+      this.setCurrentUser(updatedProfile);
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    // Persist via sync method (Supabase + API)
+    await this.syncProfileToSupabaseAndLocal(updatedProfile);
 
     return { success: true, profile: updatedProfile };
   }

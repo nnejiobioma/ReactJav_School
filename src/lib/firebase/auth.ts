@@ -556,6 +556,28 @@ export async function verifyPasswordResetCodeFirebase(
 }
 
 /**
+ * Update current authenticated user's display name and photoURL in Firebase Auth
+ */
+export async function updateUserProfileFirebase(updates: {
+  displayName?: string;
+  photoURL?: string;
+}): Promise<FirebaseAuthResponse> {
+  if (isFirebaseConfigured() && auth && auth.currentUser) {
+    try {
+      await updateProfile(auth.currentUser, {
+        displayName: updates.displayName,
+        photoURL: updates.photoURL,
+      });
+      return { success: true };
+    } catch (err: any) {
+      console.warn('Firebase updateProfile notice:', err);
+      return { success: false, error: err?.message };
+    }
+  }
+  return { success: true };
+}
+
+/**
  * Sign out from Firebase Auth and local session
  */
 export async function signOutFirebase(): Promise<void> {

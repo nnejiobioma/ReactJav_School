@@ -23,7 +23,8 @@ import {
   Building,
   Check,
   Calendar,
-  PlayCircle
+  PlayCircle,
+  User
 } from 'lucide-react';
 import { Course, Profile, LearningCheckpoint } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
@@ -111,6 +112,14 @@ export default function StudentDashboardPage() {
               Keep advancing your curriculum milestones. Your progress is synced securely.
             </p>
             <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+              <Link
+                href="/profile"
+                className="btn btn-secondary btn-sm"
+                style={{ gap: '0.45rem' }}
+              >
+                <User size={15} />
+                <span>Edit Profile & Avatar</span>
+              </Link>
               <button
                 onClick={() => {
                   setAutoPrintRecord(false);
