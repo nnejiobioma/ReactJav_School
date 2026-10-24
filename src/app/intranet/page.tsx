@@ -346,6 +346,49 @@ export default function IntranetHubPage() {
           gap: 'clamp(1rem, 2.5vw, 1.5rem)',
           marginBottom: '3rem',
         }}>
+          {/* Card 0: Instructor Studio (Faculty Only) */}
+          {(currentUser?.role === 'instructor' || currentUser?.role === 'admin' || currentUser?.role === 'super_admin') && (
+            <Link href="/instructor" style={{ textDecoration: 'none' }} className="glass-card">
+              <div style={{ padding: '1.75rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid rgba(16, 185, 129, 0.4)' }}>
+                <div>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '1rem',
+                  }}>
+                    <div style={{
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '0.75rem',
+                      background: 'rgba(16, 185, 129, 0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                      <GraduationCap size={22} color="var(--accent-emerald)" />
+                    </div>
+                    <span className="badge badge-emerald">
+                      Faculty Studio
+                    </span>
+                  </div>
+
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
+                    Instructor Studio & Builder
+                  </h3>
+                  <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1rem' }}>
+                    Design curriculum modules, author lessons, build interactive quizzes, and sign direct tutoring attendance.
+                  </p>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--accent-emerald)', fontSize: '0.85rem', fontWeight: 600 }}>
+                  <span>Enter Studio</span>
+                  <ArrowRight size={14} />
+                </div>
+              </div>
+            </Link>
+          )}
+
           {/* Card 1: CBT Center */}
           <Link href="/cbt" style={{ textDecoration: 'none' }} className="glass-card">
             <div style={{ padding: '1.75rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>

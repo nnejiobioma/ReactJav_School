@@ -90,6 +90,7 @@ export default function Navbar() {
     pathname.startsWith('/live') ||
     pathname.startsWith('/dashboard') ||
     pathname.startsWith('/tutoring/attendance') ||
+    pathname.startsWith('/instructor') ||
     pathname.startsWith('/admin/super') ||
     pathname.startsWith('/admin/access');
 
@@ -465,7 +466,37 @@ export default function Navbar() {
                   </div>
                 </Link>
 
-                {(currentUser?.role === 'admin' || currentUser?.role === 'super_admin' || currentUser?.role === 'instructor') && (
+                {(currentUser?.role === 'instructor' || currentUser?.role === 'admin' || currentUser?.role === 'super_admin') && (
+                  <Link
+                    href="/instructor"
+                    onClick={() => setShowIntranetMenu(false)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.75rem',
+                      padding: '0.55rem 0.75rem',
+                      borderRadius: '0.55rem',
+                      color: pathname.startsWith('/instructor') ? 'var(--accent-emerald)' : 'var(--text-primary)',
+                      textDecoration: 'none',
+                      fontSize: '0.85rem',
+                      borderTop: '1px solid var(--border-subtle)',
+                      marginTop: '0.25rem',
+                      paddingTop: '0.55rem',
+                      background: pathname.startsWith('/instructor') ? 'rgba(16, 185, 129, 0.14)' : 'transparent',
+                    }}
+                  >
+                    <GraduationCap size={18} color="var(--accent-emerald)" />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <span style={{ fontWeight: 700 }}>Instructor Studio</span>
+                        <span className="badge badge-emerald" style={{ fontSize: '0.62rem', padding: '0.08rem 0.35rem' }}>Faculty</span>
+                      </div>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Curricula builder, course management & attendance</span>
+                    </div>
+                  </Link>
+                )}
+
+                {(currentUser?.role === 'admin' || currentUser?.role === 'super_admin') && (
                   <Link
                     href="/admin/access"
                     onClick={() => setShowIntranetMenu(false)}
@@ -713,6 +744,32 @@ export default function Navbar() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
                         <Sparkles size={14} color="#c084fc" />
                         <span>Super Admin Access</span>
+                      </div>
+                      <ExternalLink size={12} />
+                    </Link>
+                  )}
+
+                  {(currentUser?.role === 'instructor' || currentUser?.role === 'admin' || currentUser?.role === 'super_admin') && (
+                    <Link
+                      href="/instructor"
+                      onClick={() => setShowRoleMenu(false)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '0.45rem 0.75rem',
+                        fontSize: '0.825rem',
+                        color: 'var(--accent-emerald)',
+                        textDecoration: 'none',
+                        borderRadius: '0.5rem',
+                        fontWeight: 600,
+                        background: 'rgba(16, 185, 129, 0.1)',
+                        marginBottom: '0.3rem',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                        <GraduationCap size={14} color="var(--accent-emerald)" />
+                        <span>Instructor Studio</span>
                       </div>
                       <ExternalLink size={12} />
                     </Link>
@@ -1002,11 +1059,21 @@ export default function Navbar() {
             </div>
           )}
 
-          {(currentUser?.role === 'super_admin' || currentUser?.role === 'admin') && (
+          {(currentUser?.role === 'super_admin' || currentUser?.role === 'admin' || currentUser?.role === 'instructor') && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                Campus Administration
+                Faculty & Administration
               </span>
+              {(currentUser?.role === 'instructor' || currentUser?.role === 'admin' || currentUser?.role === 'super_admin') && (
+                <Link
+                  href="/instructor"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn btn-secondary btn-sm touch-target"
+                  style={{ justifyContent: 'flex-start', gap: '0.6rem', color: 'var(--accent-emerald)', background: 'rgba(16, 185, 129, 0.12)' }}
+                >
+                  <GraduationCap size={17} color="var(--accent-emerald)" /> Instructor Studio & Curricula
+                </Link>
+              )}
               {currentUser?.role === 'super_admin' && (
                 <Link
                   href="/admin/super"
@@ -1017,14 +1084,16 @@ export default function Navbar() {
                   <Sparkles size={17} color="#c084fc" /> Super Admin Access Control
                 </Link>
               )}
-              <Link
-                href="/admin/access"
-                onClick={() => setMobileMenuOpen(false)}
-                className="btn btn-secondary btn-sm touch-target"
-                style={{ justifyContent: 'flex-start', gap: '0.6rem', color: 'var(--accent-amber)' }}
-              >
-                <UserCheck size={17} /> Registrar Clearance Desk
-              </Link>
+              {(currentUser?.role === 'super_admin' || currentUser?.role === 'admin') && (
+                <Link
+                  href="/admin/access"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn btn-secondary btn-sm touch-target"
+                  style={{ justifyContent: 'flex-start', gap: '0.6rem', color: 'var(--accent-amber)' }}
+                >
+                  <UserCheck size={17} /> Registrar Clearance Desk
+                </Link>
+              )}
             </div>
           )}
         </div>

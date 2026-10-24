@@ -610,7 +610,7 @@ function AuthContent() {
               </Link>
             ) : (
               <Link href={currentUser.role === 'instructor' ? '/instructor' : (currentUser.role === 'admin' || currentUser.role === 'super_admin') ? '/admin/access' : '/dashboard'} className="btn btn-primary btn-sm">
-                <span>Dashboard</span>
+                <span>{currentUser.role === 'instructor' ? 'Instructor Studio' : (currentUser.role === 'admin' || currentUser.role === 'super_admin') ? 'Admin Clearance' : 'Student Dashboard'}</span>
                 <ArrowRight size={14} />
               </Link>
             )}

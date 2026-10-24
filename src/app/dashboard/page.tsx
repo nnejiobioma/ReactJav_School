@@ -106,12 +106,40 @@ export default function StudentDashboardPage() {
               <h1 style={{ fontSize: '1.75rem', color: 'var(--text-primary)' }}>
                 Welcome back, {currentUser?.full_name?.split(' ')[0] || 'Scholar'}!
               </h1>
-              <span className="badge badge-primary">Student Portal</span>
+              <span className={`badge ${
+                currentUser?.role === 'instructor'
+                  ? 'badge-emerald'
+                  : currentUser?.role === 'admin'
+                    ? 'badge-amber'
+                    : currentUser?.role === 'super_admin'
+                      ? 'badge-purple'
+                      : 'badge-primary'
+              }`}>
+                {currentUser?.role === 'instructor'
+                  ? 'Faculty Instructor'
+                  : currentUser?.role === 'admin'
+                    ? 'Academic Administrator'
+                    : currentUser?.role === 'super_admin'
+                      ? 'Super Administrator'
+                      : 'Student Portal'}
+              </span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '0.75rem' }}>
-              Keep advancing your curriculum milestones. Your progress is synced securely.
+              {currentUser?.role === 'instructor'
+                ? 'Faculty Clearance Active: Manage courses, author curricula in builder, and audit tutoring attendances.'
+                : 'Keep advancing your curriculum milestones. Your progress is synced securely.'}
             </p>
             <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+              {(currentUser?.role === 'instructor' || currentUser?.role === 'admin' || currentUser?.role === 'super_admin') && (
+                <Link
+                  href="/instructor"
+                  className="btn btn-primary btn-sm"
+                  style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', gap: '0.45rem', fontWeight: 700 }}
+                >
+                  <GraduationCap size={15} />
+                  <span>Open Instructor Studio</span>
+                </Link>
+              )}
               <Link
                 href="/profile"
                 className="btn btn-secondary btn-sm"

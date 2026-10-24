@@ -12,32 +12,75 @@ import {
 } from '@/lib/firebase/admin';
 import { createClient } from '@supabase/supabase-js';
 
-const DATA_FILE = path.join(process.cwd(), 'src', 'data', 'mockData.json');
+const PROFILES_FILE = path.join(process.cwd(), 'src', 'data', 'persistedProfiles.json');
 
 /**
- * Loads mockData.json safely
+ * Loads persisted profiles safely from disk and Supabase
  */
-function loadData(): any {
+async function loadPersistedProfiles(): Promise<Profile[]> {
+  let list: Profile[] = [];
   try {
-    if (fs.existsSync(DATA_FILE)) {
-      const content = fs.readFileSync(DATA_FILE, 'utf-8');
-      return JSON.parse(content);
+    if (fs.existsSync(PROFILES_FILE)) {
+      const content = fs.readFileSync(PROFILES_FILE, 'utf-8');
+      list = JSON.parse(content);
     }
   } catch (err) {
-    console.error('[API Privileges] Error reading mock data:', err);
+    console.error('[API Privileges] Error reading persisted profiles:', err);
   }
-  return {};
+
+  // Enhance from Supabase if available
+  const supabase = getSupabaseAdmin();
+  if (supabase) {
+    try {
+      const { data: dbProfiles, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!error && dbProfiles && dbProfiles.length > 0) {
+        const map = new Map<string, Profile>();
+        list.forEach((p) => map.set(p.id, p));
+        dbProfiles.forEach((p: any) => {
+          const profile: Profile = {
+            id: p.id,
+            firebase_uid: p.firebase_uid || p.id,
+            email: p.email,
+            full_name: p.full_name || p.email?.split('@')[0] || 'Learner',
+            avatar_url: p.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(p.full_name || p.email)}`,
+            role: (p.role as UserRole) || 'student',
+            privileges: ROLE_PRIVILEGES[(p.role as UserRole) || 'student'] || ROLE_PRIVILEGES.student,
+            created_at: p.created_at || new Date().toISOString(),
+            subscription_status: p.subscription_status || 'none',
+            admin_granted: !!p.admin_granted,
+            tutoring_enrolled: !!p.tutoring_enrolled,
+            registration_completed: !!p.registration_completed,
+            privacy_accepted: p.privacy_accepted !== undefined ? !!p.privacy_accepted : false,
+            terms_accepted: p.terms_accepted !== undefined ? !!p.terms_accepted : false,
+          };
+          map.set(profile.id, profile);
+          if (profile.email) map.set(profile.email.toLowerCase(), profile);
+        });
+        list = Array.from(new Set(map.values()));
+      }
+    } catch (err) {
+      console.warn('[API Privileges] Supabase profiles query notice:', err);
+    }
+  }
+
+  return list;
 }
 
 /**
- * Saves mockData.json safely
+ * Saves persisted profiles safely
  */
-function saveData(data: any): boolean {
+function savePersistedProfiles(profiles: Profile[]): boolean {
   try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8');
+    const dir = path.dirname(PROFILES_FILE);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(PROFILES_FILE, JSON.stringify(profiles, null, 2), 'utf-8');
     return true;
   } catch (err) {
-    console.error('[API Privileges] Error writing mock data:', err);
+    console.error('[API Privileges] Error writing persisted profiles:', err);
     return false;
   }
 }
@@ -46,8 +89,8 @@ function saveData(data: any): boolean {
  * Optional Supabase admin client for server-side updates
  */
 function getSupabaseAdmin() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://jfhmqodrjnsabpyxbgnn.supabase.co';
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmaG1xb2Ryam5zYWJweXhiZ25uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5MDExMzQsImV4cCI6MjEwNTQ3NzEzNH0.ovZdP0xuywAWJUwg2Yx9ilRXhLwCYe8uTw4MSXaUjB0';
   if (!url || !key) return null;
   return createClient(url, key);
 }
@@ -57,8 +100,7 @@ function getSupabaseAdmin() {
  */
 export async function GET(request: NextRequest) {
   try {
-    const data = loadData();
-    const profiles: Profile[] = data.profiles || [];
+    const profiles = await loadPersistedProfiles();
     const isConfigured = isFirebaseAdminConfigured();
 
     // Privilege category definitions
@@ -146,12 +188,50 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Load data
-    const data = loadData();
-    const profiles: Profile[] = data.profiles || [];
-    const targetIndex = profiles.findIndex(
-      (p) => p.id === targetUserId || p.firebase_uid === targetUserId || p.email.toLowerCase() === targetUserId.toLowerCase()
+    // Load profiles from persisted disk and database
+    let profiles = await loadPersistedProfiles();
+    let targetIndex = profiles.findIndex(
+      (p) => p.id === targetUserId || p.firebase_uid === targetUserId || (p.email && p.email.toLowerCase() === targetUserId.toLowerCase())
     );
+
+    // If not found in loaded list, attempt direct lookup from Firebase Admin or Supabase
+    if (targetIndex === -1) {
+      const fbAdmin = getFirebaseAdminAuth();
+      if (fbAdmin) {
+        try {
+          let fbUserRecord: any = null;
+          try {
+            fbUserRecord = await fbAdmin.getUser(targetUserId);
+          } catch {
+            if (targetUserId.includes('@')) {
+              fbUserRecord = await fbAdmin.getUserByEmail(targetUserId.toLowerCase().trim());
+            }
+          }
+          if (fbUserRecord) {
+            const newProfile: Profile = {
+              id: fbUserRecord.uid,
+              firebase_uid: fbUserRecord.uid,
+              email: fbUserRecord.email || targetUserId,
+              full_name: fbUserRecord.displayName || targetUserId.split('@')[0] || 'User',
+              avatar_url: fbUserRecord.photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fbUserRecord.email || targetUserId)}`,
+              role: 'student',
+              privileges: ROLE_PRIVILEGES.student,
+              created_at: new Date().toISOString(),
+              subscription_status: 'none',
+              admin_granted: false,
+              tutoring_enrolled: false,
+              registration_completed: false,
+              privacy_accepted: true,
+              terms_accepted: true,
+            };
+            profiles.push(newProfile);
+            targetIndex = profiles.length - 1;
+          }
+        } catch (lookupErr) {
+          console.warn('[API Privileges] Direct Firebase user lookup notice:', lookupErr);
+        }
+      }
+    }
 
     if (targetIndex === -1) {
       return NextResponse.json(
@@ -225,8 +305,7 @@ export async function POST(request: NextRequest) {
       custom_claims: firebaseResult.claims,
     };
     profiles[targetIndex] = updatedUser;
-    data.profiles = profiles;
-    saveData(data);
+    savePersistedProfiles(profiles);
 
     // 3. Update Supabase database
     const supabase = getSupabaseAdmin();
@@ -276,8 +355,7 @@ export async function PUT(request: NextRequest) {
       });
     }
 
-    const data = loadData();
-    const profiles: Profile[] = data.profiles || [];
+    const profiles = await loadPersistedProfiles();
     let syncedCount = 0;
 
     for (const profile of profiles) {

@@ -117,9 +117,9 @@ export default function SuperAdminGovernancePage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          targetUserId: user.id,
+          targetUserId: user.firebase_uid || user.id,
           targetRole,
-          initiatorId: currentUser.id,
+          initiatorId: currentUser.firebase_uid || currentUser.id,
         }),
       });
       const apiData = await apiRes.json();
