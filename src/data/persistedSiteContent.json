@@ -104,7 +104,7 @@
     "zone_3_title": "Bespoke Custom Roadmaps",
     "zone_3_desc": "Build-your-own track tailored for school syllabus, hackathons, or career milestones.",
     "cta_primary_text": "Explore Academy Tracks & Pathways",
-    "cta_whatsapp_text": "Chat With Academy Team",
+    "cta_whatsapp_text": "Contact for Direct Tutoring",
     "whatsapp_number": "+358 0465695068"
   },
   "testimonials": {
@@ -187,7 +187,7 @@
     "subtitle": "From foundational logic to professional-grade deployment, our tiered tracks ensure students don’t just learn to code—they learn to engineer the future with private, expert-led 1-on-1 mentorship.",
     "cta_primary_text": "Book 1-on-1 Discovery Chat",
     "cta_secondary_text": "Explore Learning Zones",
-    "cta_whatsapp_text": "WhatsApp Direct",
+    "cta_whatsapp_text": "Contact for Tutoring",
     "whatsapp_number": "+358 0465695068"
   },
   "tutoring_zones": {
@@ -229,7 +229,7 @@
     "title": "Request Your Personalized Roadmap & Quote",
     "subtitle": "Every journey begins with a complimentary 20-minute discovery chat. We evaluate current experience, discuss passions, and design a customized 1-on-1 learning plan.",
     "cta_primary_text": "Book Discovery Chat",
-    "cta_whatsapp_text": "Chat on WhatsApp",
+    "cta_whatsapp_text": "Contact for Tutoring",
     "whatsapp_number": "+358 0465695068"
   }
 }

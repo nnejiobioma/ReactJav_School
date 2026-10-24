@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import Link from 'next/link';
 import { AcademyTrack, getTutoringWhatsAppUrl } from '@/data/academyTracks';
-import { X, Sparkles, CheckCircle2, Award, Laptop, Clock, MessageSquare, ArrowRight } from 'lucide-react';
+import { X, Sparkles, CheckCircle2, Award, Laptop, Clock, MessageSquare, ArrowRight, Mail } from 'lucide-react';
 
 interface TrackDetailsModalProps {
   track: AcademyTrack | null;
@@ -289,10 +290,9 @@ export default function TrackDetailsModal({ track, onClose, onBookTutoring }: Tr
             zIndex: 10,
           }}
         >
-          <a
-            href={getTutoringWhatsAppUrl(track.name)}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={`/contact?department=tutoring&track=${encodeURIComponent(track.name)}`}
+            onClick={onClose}
             className="btn btn-secondary"
             style={{
               padding: '0.75rem 1.25rem',
@@ -301,11 +301,13 @@ export default function TrackDetailsModal({ track, onClose, onBookTutoring }: Tr
               gap: '0.5rem',
               borderRadius: '0.75rem',
               textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
             }}
           >
-            <MessageSquare size={16} color="var(--accent-emerald)" />
-            <span>Chat on WhatsApp</span>
-          </a>
+            <Mail size={16} color="var(--accent-emerald)" />
+            <span>Contact for This Track</span>
+          </Link>
 
           <button
             onClick={() => {

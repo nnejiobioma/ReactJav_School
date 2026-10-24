@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { AcademyTrack, getTutoringWhatsAppUrl } from '@/data/academyTracks';
+import { AcademyTrack } from '@/data/academyTracks';
 import { ArrowRight, BookOpen, MessageSquare, Sparkles, CheckCircle2, Pencil } from 'lucide-react';
 
 interface TrackCardProps {

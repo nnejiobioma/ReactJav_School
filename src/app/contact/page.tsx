@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import {
   Mail,
   MessageSquare,
@@ -27,15 +28,42 @@ import {
 } from 'lucide-react';
 import { getTutoringWhatsAppUrl, TUTORING_WHATSAPP_DISPLAY } from '@/data/academyTracks';
 
-export default function ContactPage() {
+function ContactPageContent() {
+  const searchParams = useSearchParams();
+  const queryDept = searchParams.get('department') || 'admissions';
+  const queryTrack = searchParams.get('track') || '';
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    department: 'admissions',
-    subject: '',
-    message: '',
+    department: queryDept === 'tutoring' ? 'tutoring' : queryDept,
+    subject: queryTrack
+      ? `1-on-1 Direct Tutoring Inquiry: ${queryTrack}`
+      : (queryDept === 'tutoring' ? '1-on-1 Direct Tutoring Consultation' : ''),
+    message: queryTrack
+      ? `Hello, I would like to inquire about enrolling in the 1-on-1 Direct Tutoring track for ${queryTrack}. Please share details regarding curriculum pacing, mentor assignment, and scheduling.`
+      : (queryDept === 'tutoring'
+        ? 'Hello, I am interested in 1-on-1 Direct Tutoring. Please share details on scheduling, mentor match, and customized roadmap configuration.'
+        : ''),
   });
+
+  useEffect(() => {
+    if (queryDept || queryTrack) {
+      setFormData((prev) => ({
+        ...prev,
+        department: queryDept === 'tutoring' ? 'tutoring' : (queryDept || prev.department),
+        subject: queryTrack
+          ? `1-on-1 Direct Tutoring Inquiry: ${queryTrack}`
+          : (queryDept === 'tutoring' && !prev.subject ? '1-on-1 Direct Tutoring Consultation' : prev.subject),
+        message: queryTrack
+          ? `Hello, I would like to inquire about enrolling in the 1-on-1 Direct Tutoring track for ${queryTrack}. Please share details regarding curriculum pacing, mentor assignment, and scheduling.`
+          : (queryDept === 'tutoring' && !prev.message
+            ? 'Hello, I am interested in 1-on-1 Direct Tutoring. Please share details on scheduling, mentor match, and customized roadmap configuration.'
+            : prev.message),
+      }));
+    }
+  }, [queryDept, queryTrack]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -414,6 +442,24 @@ export default function ContactPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {formData.department === 'tutoring' && (
+                  <div style={{
+                    padding: '0.85rem 1.15rem',
+                    borderRadius: '0.85rem',
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    border: '1px solid rgba(16, 185, 129, 0.3)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.65rem',
+                    fontSize: '0.86rem',
+                    color: 'var(--text-primary)',
+                  }}>
+                    <GraduationCap size={18} color="var(--accent-emerald)" style={{ flexShrink: 0 }} />
+                    <span>
+                      You are requesting a personalized roadmap for <strong>1-on-1 Direct Tutoring</strong>. Our faculty team will review your learning goals and reach out promptly.
+                    </span>
+                  </div>
+                )}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem' }}>
                   <div>
                     <label htmlFor="contact-name" style={{ display: 'block', fontSize: '0.84rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
@@ -852,5 +898,17 @@ export default function ContactPage() {
       </section>
 
     </div>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={
+      <div className="container" style={{ padding: '6rem 0', textAlign: 'center', color: 'var(--text-secondary)' }}>
+        Loading Contact Form...
+      </div>
+    }>
+      <ContactPageContent />
+    </Suspense>
   );
 }

@@ -28,7 +28,8 @@ import {
   FolderGit2, 
   CalendarClock, 
   ShieldCheck, 
-  CheckCircle2 
+  CheckCircle2,
+  Mail 
 } from 'lucide-react';
 
 export default function AcademyPage() {
@@ -283,10 +284,8 @@ export default function AcademyPage() {
                 <ArrowRight size={16} />
               </a>
 
-              <a
-                href={getTutoringWhatsAppUrl(undefined, heroData.whatsapp_number)}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/contact?department=tutoring"
                 className="btn btn-secondary"
                 style={{
                   padding: '0.9rem 1.5rem',
@@ -299,9 +298,9 @@ export default function AcademyPage() {
                   textDecoration: 'none',
                 }}
               >
-                <MessageSquare size={17} color="var(--accent-emerald)" />
-                <span>{heroData.cta_whatsapp_text}</span>
-              </a>
+                <Mail size={17} color="var(--accent-emerald)" />
+                <span>{heroData.cta_whatsapp_text === 'WhatsApp Direct' ? 'Contact for Tutoring' : (heroData.cta_whatsapp_text || 'Contact for Tutoring')}</span>
+              </Link>
             </div>
           </div>
         </AdminEditableSection>
@@ -675,10 +674,8 @@ export default function AcademyPage() {
                 <span>{ctaData.cta_primary_text}</span>
               </button>
 
-              <a
-                href={getTutoringWhatsAppUrl(undefined, ctaData.whatsapp_number)}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/contact?department=tutoring"
                 className="btn btn-secondary"
                 style={{
                   padding: '0.9rem 1.75rem',
@@ -691,9 +688,9 @@ export default function AcademyPage() {
                   textDecoration: 'none',
                 }}
               >
-                <MessageSquare size={17} color="var(--accent-emerald)" />
-                <span>{ctaData.cta_whatsapp_text}</span>
-              </a>
+                <Mail size={17} color="var(--accent-emerald)" />
+                <span>{ctaData.cta_whatsapp_text === 'Chat on WhatsApp' ? 'Contact for Tutoring' : (ctaData.cta_whatsapp_text || 'Contact for Tutoring')}</span>
+              </Link>
             </div>
           </div>
         </AdminEditableSection>

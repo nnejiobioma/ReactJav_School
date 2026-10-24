@@ -23,7 +23,8 @@ import {
   BookOpen, 
   ShieldCheck, 
   Building, 
-  MessageSquare 
+  MessageSquare,
+  Mail 
 } from 'lucide-react';
 import { getTutoringWhatsAppUrl } from '@/data/academyTracks';
 
@@ -584,10 +585,8 @@ export default function HomePage() {
                 <span>{siteContent.direct_tutoring?.cta_primary_text || 'Explore Academy Tracks & Pathways'}</span>
               </Link>
 
-              <a
-                href={getTutoringWhatsAppUrl(undefined, siteContent.direct_tutoring?.whatsapp_number)}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/contact?department=tutoring"
                 className="btn btn-secondary"
                 style={{
                   padding: '0.85rem 1.5rem',
@@ -600,9 +599,9 @@ export default function HomePage() {
                   textDecoration: 'none',
                 }}
               >
-                <MessageSquare size={16} color="var(--accent-emerald)" />
-                <span>{siteContent.direct_tutoring?.cta_whatsapp_text || 'Chat With Academy Team'}</span>
-              </a>
+                <Mail size={16} color="var(--accent-emerald)" />
+                <span>{siteContent.direct_tutoring?.cta_whatsapp_text === 'Chat With Academy Team' ? 'Contact for Direct Tutoring' : (siteContent.direct_tutoring?.cta_whatsapp_text || 'Contact for Direct Tutoring')}</span>
+              </Link>
             </div>
           </div>
         </div>
