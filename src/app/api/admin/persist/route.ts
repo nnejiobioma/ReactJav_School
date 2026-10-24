@@ -230,6 +230,7 @@ export async function POST(req: NextRequest) {
               full_name: payload.full_name,
               avatar_url: payload.avatar_url,
               bio: payload.bio,
+              role: payload.role || 'student',
               phone: payload.phone,
               country: payload.country,
               state: payload.state,
@@ -253,6 +254,7 @@ export async function POST(req: NextRequest) {
                 full_name: payload.full_name,
                 avatar_url: payload.avatar_url,
                 bio: payload.bio,
+                role: payload.role || 'student',
                 updated_at: new Date().toISOString(),
               })
               .eq('email', cleanEmail)

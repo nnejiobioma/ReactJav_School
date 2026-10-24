@@ -222,6 +222,7 @@ export class LocalDataService {
       full_name: fullName,
       avatar_url: p.avatar_url || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`,
       role: (p.role as UserRole) || 'student',
+      privileges: ROLE_PRIVILEGES[(p.role as UserRole) || 'student'] || ROLE_PRIVILEGES.student,
       bio: p.bio || null,
       created_at: p.created_at || new Date().toISOString(),
       subscription_status: p.subscription_status || 'none',
@@ -367,6 +368,7 @@ export class LocalDataService {
               full_name: payload.full_name,
               avatar_url: payload.avatar_url,
               bio: payload.bio,
+              role: payload.role || 'student',
               phone: payload.phone,
               country: payload.country,
               state: payload.state,
@@ -390,6 +392,7 @@ export class LocalDataService {
                 full_name: payload.full_name,
                 avatar_url: payload.avatar_url,
                 bio: payload.bio,
+                role: payload.role || 'student',
                 updated_at: new Date().toISOString(),
               })
               .eq('email', cleanEmail)
@@ -443,6 +446,15 @@ export class LocalDataService {
           const merged = Array.from(new Set(map.values()));
           if (typeof window !== 'undefined') {
             localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(merged));
+            const activeUser = this.getCurrentUser();
+            if (activeUser && activeUser.email) {
+              const freshActive = merged.find(
+                (p) => p.email && p.email.toLowerCase() === activeUser.email.toLowerCase()
+              );
+              if (freshActive && freshActive.role !== activeUser.role) {
+                this.setCurrentUser(freshActive);
+              }
+            }
           }
           return merged;
         }
@@ -467,7 +479,9 @@ export class LocalDataService {
     }
 
     const profiles = this.getAllProfiles();
-    const index = profiles.findIndex((p) => p.id === userId);
+    const index = profiles.findIndex(
+      (p) => p.id === userId || p.firebase_uid === userId || (p.email && p.email.toLowerCase() === userId.toLowerCase())
+    );
     if (index === -1) {
       return { success: false, message: 'User profile record not found.' };
     }
@@ -482,7 +496,10 @@ export class LocalDataService {
     if (typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEYS.PROFILES, JSON.stringify(profiles));
       const activeUser = this.getCurrentUser();
-      if (activeUser && activeUser.id === userId) {
+      if (
+        activeUser && 
+        (activeUser.id === targetUser.id || (activeUser.email && activeUser.email.toLowerCase() === targetUser.email.toLowerCase()))
+      ) {
         this.setCurrentUser(profiles[index]);
       }
       window.dispatchEvent(new Event('storage'));
@@ -497,7 +514,7 @@ export class LocalDataService {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          targetUserId: userId,
+          targetUserId: targetUser.id,
           targetRole: newRole,
           initiatorId: currentInitiator?.id,
         }),
@@ -506,17 +523,28 @@ export class LocalDataService {
 
     const supabase = createClient();
     if (isSupabaseConfigured() && supabase) {
+      const cleanEmail = targetUser.email ? targetUser.email.toLowerCase().trim() : '';
+      if (cleanEmail) {
+        supabase
+          .from('profiles')
+          .update({ role: newRole, updated_at: new Date().toISOString() })
+          .eq('email', cleanEmail)
+          .then(({ error: emailErr }) => {
+            if (emailErr) console.warn('[LocalDataService] Direct role update by email notice:', emailErr.message);
+          });
+      }
+
       supabase
         .rpc('admin_set_user_role', {
-          target_user_id: userId,
+          target_user_id: targetUser.id,
           target_role: newRole,
         })
         .then(({ error }) => {
           if (error) {
             supabase
               .from('profiles')
-              .update({ role: newRole })
-              .eq('id', userId)
+              .update({ role: newRole, updated_at: new Date().toISOString() })
+              .eq('id', targetUser.id)
               .then(({ error: directErr }) => {
                 if (directErr) console.warn('[LocalDataService] Direct profile update notice:', directErr.message);
               });

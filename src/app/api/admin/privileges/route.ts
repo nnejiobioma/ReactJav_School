@@ -232,9 +232,16 @@ export async function POST(request: NextRequest) {
     const supabase = getSupabaseAdmin();
     if (supabase) {
       try {
+        const cleanEmail = targetUser.email ? targetUser.email.toLowerCase().trim() : '';
+        if (cleanEmail) {
+          await supabase
+            .from('profiles')
+            .update({ role: targetRole, updated_at: new Date().toISOString() })
+            .eq('email', cleanEmail);
+        }
         await supabase
           .from('profiles')
-          .update({ role: targetRole })
+          .update({ role: targetRole, updated_at: new Date().toISOString() })
           .or(`id.eq.${targetUser.id},firebase_uid.eq.${firebaseUid}`);
       } catch (dbErr) {
         console.warn('[API Privileges] Supabase profile sync notice:', dbErr);
