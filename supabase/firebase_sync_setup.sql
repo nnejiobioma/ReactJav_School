@@ -24,6 +24,14 @@ alter table public.profiles add column if not exists admin_granted boolean defau
 alter table public.profiles add column if not exists tutoring_enrolled boolean default false;
 alter table public.profiles add column if not exists tutoring_track_id text;
 alter table public.profiles add column if not exists tutoring_track_name text;
+alter table public.profiles add column if not exists phone text;
+alter table public.profiles add column if not exists country text;
+alter table public.profiles add column if not exists state text;
+alter table public.profiles add column if not exists education_level text;
+alter table public.profiles add column if not exists preferred_track text;
+alter table public.profiles add column if not exists experience_level text;
+alter table public.profiles add column if not exists career_goal text;
+alter table public.profiles add column if not exists emergency_contact text;
 
 -- Fast index lookups by email and Firebase UID
 create index if not exists idx_profiles_email_lower on public.profiles(lower(email));

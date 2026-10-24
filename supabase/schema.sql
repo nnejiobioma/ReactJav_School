@@ -65,6 +65,14 @@ alter table public.profiles add column if not exists tutoring_track_name text;
 alter table public.profiles add column if not exists tutoring_enrolled_at text;
 alter table public.profiles add column if not exists tutoring_frequency text;
 alter table public.profiles add column if not exists tutoring_mentor_name text;
+alter table public.profiles add column if not exists phone text;
+alter table public.profiles add column if not exists country text;
+alter table public.profiles add column if not exists state text;
+alter table public.profiles add column if not exists education_level text;
+alter table public.profiles add column if not exists preferred_track text;
+alter table public.profiles add column if not exists experience_level text;
+alter table public.profiles add column if not exists career_goal text;
+alter table public.profiles add column if not exists emergency_contact text;
 
 -- ------------------------------------------------------------------------------
 -- RBAC HELPER FUNCTIONS (Security Definer to prevent recursive RLS)

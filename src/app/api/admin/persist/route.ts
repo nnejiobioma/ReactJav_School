@@ -243,9 +243,41 @@ export async function POST(req: NextRequest) {
             .eq('email', cleanEmail)
             .select('id');
 
+          let updated = !updateErr && updatedRows && updatedRows.length > 0;
+
+          if (!updated) {
+            // Fallback retry with core columns if optional extended columns don't exist in Supabase table
+            const { data: coreRows, error: coreErr } = await supabase
+              .from('profiles')
+              .update({
+                full_name: payload.full_name,
+                avatar_url: payload.avatar_url,
+                bio: payload.bio,
+                updated_at: new Date().toISOString(),
+              })
+              .eq('email', cleanEmail)
+              .select('id');
+
+            if (!coreErr && coreRows && coreRows.length > 0) {
+              updated = true;
+            }
+          }
+
           // 2. If no record was updated, insert or upsert by id
-          if (updateErr || !updatedRows || updatedRows.length === 0) {
-            await supabase.from('profiles').upsert(payload, { onConflict: 'id' });
+          if (!updated) {
+            const { error: upsertErr } = await supabase.from('profiles').upsert(payload, { onConflict: 'id' });
+            if (upsertErr) {
+              await supabase.from('profiles').upsert({
+                id: payload.id,
+                email: payload.email,
+                full_name: payload.full_name,
+                avatar_url: payload.avatar_url,
+                bio: payload.bio,
+                role: payload.role || 'student',
+                subscription_status: payload.subscription_status || 'none',
+                updated_at: payload.updated_at,
+              }, { onConflict: 'id' });
+            }
           }
         } catch (dbErr) {
           console.warn('[Persist API] Supabase profile upsert error:', dbErr);
