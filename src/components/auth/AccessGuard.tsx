@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useSession, signIn } from 'next-auth/react';
 import { 
   ShieldAlert, 
   ShieldCheck, 
@@ -36,6 +37,7 @@ export default function AccessGuard({
   customDescription,
 }: AccessGuardProps) {
   const router = useRouter();
+  const { status: keycloakStatus } = useSession();
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -54,9 +56,9 @@ export default function AccessGuard({
 
     window.addEventListener('storage', handleStorage);
     return () => window.removeEventListener('storage', handleStorage);
-  }, []);
+  }, [keycloakStatus]);
 
-  if (isLoading) {
+  if (isLoading || (keycloakStatus === 'loading' && !currentUser)) {
     return (
       <div className="container" style={{ padding: '6rem 0', textAlign: 'center' }}>
         <div style={{
@@ -127,8 +129,17 @@ export default function AccessGuard({
           </p>
 
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
-            <Link href="/auth" className="btn btn-primary">
-              <span>Sign In to Your Account</span>
+            <button
+              type="button"
+              onClick={() => signIn('keycloak')}
+              className="btn btn-primary"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+            >
+              <Shield size={16} />
+              <span>Sign In with Keycloak SSO</span>
+            </button>
+            <Link href="/auth" className="btn btn-secondary">
+              <span>Sign In / Register</span>
               <ArrowRight size={16} />
             </Link>
             <Link href="/courses" className="btn btn-secondary">
