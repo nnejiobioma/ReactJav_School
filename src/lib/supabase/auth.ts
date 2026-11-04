@@ -331,6 +331,13 @@ export async function signInWithSupabase(
  */
 export async function signOutUser(): Promise<void> {
   try {
+    const { signOutFromKeycloak } = await import('@/lib/keycloak/client');
+    await signOutFromKeycloak();
+  } catch (err) {
+    console.warn('Keycloak sign out error:', err);
+  }
+
+  try {
     const { signOutFirebase } = await import('@/lib/firebase/auth');
     await signOutFirebase();
   } catch (err) {

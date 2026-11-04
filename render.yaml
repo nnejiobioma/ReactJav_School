@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: reactjav-keycloak
+    runtime: docker
+    dockerfilePath: ./keycloak/Dockerfile
+    dockerContext: ./keycloak
+    plan: starter
+    envVars:
+      - key: KC_BOOTSTRAP_ADMIN_USERNAME
+        value: admin
+      - key: KC_BOOTSTRAP_ADMIN_PASSWORD
+        generateValue: true
+      - key: KC_DB
+        value: postgres
+      - key: KC_DB_URL_HOST
+        fromDatabase:
+          name: reactjav-keycloak-db
+          property: host
+      - key: KC_DB_URL_PORT
+        fromDatabase:
+          name: reactjav-keycloak-db
+          property: port
+      - key: KC_DB_URL_DATABASE
+        fromDatabase:
+          name: reactjav-keycloak-db
+          property: database
+      - key: KC_DB_USERNAME
+        fromDatabase:
+          name: reactjav-keycloak-db
+          property: user
+      - key: KC_DB_PASSWORD
+        fromDatabase:
+          name: reactjav-keycloak-db
+          property: password
+
+databases:
+  - name: reactjav-keycloak-db
+    databaseName: keycloak
+    user: keycloak
+    plan: basic-256mb
+

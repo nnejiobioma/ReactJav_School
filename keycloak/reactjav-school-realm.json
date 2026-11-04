@@ -1,0 +1,211 @@
+{
+  "id": "reactjav-school",
+  "realm": "reactjav-school",
+  "displayName": "ReactJav School IAM",
+  "displayNameHtml": "<div class=\"kc-logo-text\"><span>ReactJav School</span></div>",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": false,
+  "rememberMe": true,
+  "verifyEmail": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "defaultRole": {
+    "name": "default-roles-reactjav-school",
+    "description": "${role_default-roles}",
+    "composite": true,
+    "clientRole": false
+  },
+  "roles": {
+    "realm": [
+      {
+        "name": "default-roles-reactjav-school",
+        "description": "${role_default-roles}",
+        "composite": true,
+        "composites": {
+          "realm": [
+            "student",
+            "offline_access",
+            "uma_authorization"
+          ]
+        }
+      },
+      {
+        "name": "student",
+        "description": "Standard ReactJav Scholar — access to courses, CBT exams, and personal study workspace."
+      },
+      {
+        "name": "instructor",
+        "description": "Faculty & Course Author — access to Instructor Studio, Curriculum Builder, and attendance tracking.",
+        "composite": true,
+        "composites": {
+          "realm": ["student"]
+        }
+      },
+      {
+        "name": "admin",
+        "description": "Academic Administrator & Registrar — manages tuition clearance, courses, and attendance audits.",
+        "composite": true,
+        "composites": {
+          "realm": ["instructor", "student"]
+        }
+      },
+      {
+        "name": "super_admin",
+        "description": "Super Administrator — full unrestricted institutional governance and system access.",
+        "composite": true,
+        "composites": {
+          "realm": ["admin", "instructor", "student"]
+        }
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "reactjav-web",
+      "name": "ReactJav LMS Web Application",
+      "description": "Next.js App Router OIDC Client for ReactJav School",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "reactjav-keycloak-secret-2026",
+      "redirectUris": [
+        "http://localhost:3000/*",
+        "http://127.0.0.1:3000/*",
+        "https://*"
+      ],
+      "webOrigins": [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "+"
+      ],
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "fullScopeAllowed": true,
+      "attributes": {
+        "post.logout.redirect.uris": "http://localhost:3000/*##https://*"
+      },
+      "protocolMappers": [
+        {
+          "name": "realm-roles-mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "multivalued": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "realm_access.roles",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "name": "client-roles-mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-client-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "multivalued": "true",
+            "userinfo.token.claim": "true",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "resource_access.${client_id}.roles",
+            "jsonType.label": "String"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "superadmin",
+      "email": "superadmin@reactjav.school",
+      "firstName": "Root",
+      "lastName": "Administrator",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "ReactJav2026!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "default-roles-reactjav-school",
+        "super_admin",
+        "admin",
+        "instructor",
+        "student"
+      ]
+    },
+    {
+      "username": "registrar",
+      "email": "admin@reactjav.school",
+      "firstName": "Academic",
+      "lastName": "Registrar",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "ReactJav2026!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "default-roles-reactjav-school",
+        "admin",
+        "instructor",
+        "student"
+      ]
+    },
+    {
+      "username": "instructor",
+      "email": "instructor@reactjav.school",
+      "firstName": "Faculty",
+      "lastName": "Instructor",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "ReactJav2026!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "default-roles-reactjav-school",
+        "instructor",
+        "student"
+      ]
+    },
+    {
+      "username": "student",
+      "email": "student@reactjav.school",
+      "firstName": "Alex",
+      "lastName": "Scholar",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "ReactJav2026!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "default-roles-reactjav-school",
+        "student"
+      ]
+    }
+  ]
+}
+

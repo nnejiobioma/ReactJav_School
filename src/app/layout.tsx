@@ -6,6 +6,7 @@ import AdminEditModeBar from '@/components/admin/AdminEditModeBar';
 import ServerSyncProvider from '@/components/common/ServerSyncProvider';
 import CookieConsentBanner from '@/components/common/CookieConsentBanner';
 import PrivacyPolicyPopup from '@/components/auth/PrivacyPolicyPopup';
+import KeycloakSessionProvider from '@/components/auth/KeycloakSessionProvider';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
@@ -53,15 +54,17 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Navbar />
-        <main style={{ minHeight: 'calc(100vh - var(--header-height, 8.75rem))', width: '100%', maxWidth: '100vw', overflowX: 'clip' }}>
-          {children}
-        </main>
-        <Footer />
-        <AdminEditModeBar />
-        <ServerSyncProvider />
-        <CookieConsentBanner />
-        <PrivacyPolicyPopup />
+        <KeycloakSessionProvider>
+          <Navbar />
+          <main style={{ minHeight: 'calc(100vh - var(--header-height, 8.75rem))', width: '100%', maxWidth: '100vw', overflowX: 'clip' }}>
+            {children}
+          </main>
+          <Footer />
+          <AdminEditModeBar />
+          <ServerSyncProvider />
+          <CookieConsentBanner />
+          <PrivacyPolicyPopup />
+        </KeycloakSessionProvider>
       </body>
     </html>
   );

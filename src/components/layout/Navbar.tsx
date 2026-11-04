@@ -29,6 +29,7 @@ import ThemeSelector from '@/components/theme/ThemeSelector';
 import { Profile, UserRole } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { signOutUser } from '@/lib/supabase/auth';
+import { getKeycloakAdminConsoleUrl } from '@/lib/keycloak/client';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -720,6 +721,34 @@ export default function Navbar() {
                       </div>
                       <ExternalLink size={12} />
                     </Link>
+                  )}
+
+                  {(currentUser?.role === 'admin' || currentUser?.role === 'super_admin') && (
+                    <a
+                      href={getKeycloakAdminConsoleUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setShowRoleMenu(false)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '0.45rem 0.75rem',
+                        fontSize: '0.825rem',
+                        color: '#d8b4fe',
+                        textDecoration: 'none',
+                        borderRadius: '0.5rem',
+                        fontWeight: 600,
+                        background: 'rgba(168, 85, 247, 0.12)',
+                        marginBottom: '0.3rem',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                        <KeyRound size={14} color="#c084fc" />
+                        <span>Keycloak IAM Console</span>
+                      </div>
+                      <ExternalLink size={12} />
+                    </a>
                   )}
 
                   {(currentUser?.role === 'admin' || currentUser?.role === 'super_admin') && (

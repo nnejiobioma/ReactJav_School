@@ -41,6 +41,7 @@ import {
   onFirebaseAuthStateChange 
 } from '@/lib/firebase/auth';
 import { isFirebaseConfigured } from '@/lib/firebase/config';
+import { signInWithKeycloak } from '@/lib/keycloak/client';
 
 function AuthContent() {
   const router = useRouter();
@@ -49,6 +50,7 @@ function AuthContent() {
   const oobCodeParam = searchParams.get('oobCode');
   const redirectUrl = searchParams.get('redirect') || searchParams.get('callbackUrl');
   const courseIdParam = searchParams.get('courseId') || searchParams.get('course');
+  const nextAuthError = searchParams.get('error');
 
   // Extract selected course if user came from a course card / enroll action
   let targetCourseId = courseIdParam;
@@ -99,6 +101,16 @@ function AuthContent() {
   useEffect(() => {
     loadCurrentUser();
     setAcceptedCookiesOnLogin(hasAcceptedCookies());
+
+    if (nextAuthError) {
+      if (nextAuthError === 'OAuthSignin' || nextAuthError === 'OAuthCallback') {
+        setErrorMessage(
+          'Keycloak SSO server is currently unreachable. Ensure Keycloak is running (e.g. docker compose up -d) and KEYCLOAK_ISSUER is configured, or sign in with Email/Google below during migration.'
+        );
+      } else {
+        setErrorMessage(`Keycloak authentication error (${nextAuthError}). Please try again.`);
+      }
+    }
 
     const handleStorage = () => loadCurrentUser();
     window.addEventListener('storage', handleStorage);
@@ -453,6 +465,30 @@ function AuthContent() {
     } catch (err: any) {
       setErrorMessage(err?.message || 'Google sign-in error.');
     } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleKeycloakSignIn = async () => {
+    setErrorMessage(null);
+
+    if (activeTab === 'signin' && !acceptedCookiesOnLogin) {
+      setErrorMessage('Access not granted: You must accept session cookies to sign in to ReactJav.');
+      return;
+    }
+
+    if (activeTab === 'signup' && (!acceptedPrivacy || !acceptedTerms)) {
+      setErrorMessage('Access not granted: You must accept both the Terms of Service and Privacy Policy before continuing with Keycloak SSO.');
+      return;
+    }
+
+    acceptCookies(true);
+    setIsSubmitting(true);
+
+    try {
+      await signInWithKeycloak(redirectUrl || '/dashboard');
+    } catch (err: any) {
+      setErrorMessage(err?.message || 'Failed to launch Keycloak SSO login.');
       setIsSubmitting(false);
     }
   };
@@ -1124,6 +1160,29 @@ function AuthContent() {
         {/* ================= MODE 3: SIGN IN / SIGN UP ================= */}
         {(activeTab === 'signin' || activeTab === 'signup') && (
           <form onSubmit={handleAuthSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            {/* Primary Keycloak OIDC SSO Button */}
+            <button
+              type="button"
+              onClick={handleKeycloakSignIn}
+              disabled={isSubmitting}
+              className="btn btn-primary"
+              style={{
+                width: '100%',
+                justifyContent: 'center',
+                gap: '0.65rem',
+                padding: '0.8rem 1rem',
+                fontSize: '0.925rem',
+                fontWeight: 700,
+                background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
+                border: '1px solid rgba(124, 58, 237, 0.5)',
+                color: '#ffffff',
+                boxShadow: '0 4px 16px rgba(79, 70, 229, 0.3)',
+              }}
+            >
+              <ShieldCheck size={18} />
+              <span>{activeTab === 'signup' ? 'Register with Keycloak SSO (IAM)' : 'Continue with Keycloak SSO (IAM)'}</span>
+            </button>
+
             {/* Google Authentication Button via Firebase */}
             <button
               type="button"
