@@ -1,6 +1,5 @@
 import { initializeApp, getApps, cert, App } from 'firebase-admin/app';
 import { getAuth, Auth, DecodedIdToken, UserRecord } from 'firebase-admin/auth';
-import { UserRole, Privilege, ROLE_PRIVILEGES, FirebaseCustomClaims } from '@/types';
 
 /**
  * Singleton instance of Firebase Admin App
@@ -110,58 +109,6 @@ export function getFirebaseAdminAuth(): Auth | null {
 }
 
 /**
- * Builds standard custom claims object based on the user's role
- */
-export function buildClaimsForRole(role: UserRole): FirebaseCustomClaims {
-  const privileges: Privilege[] = ROLE_PRIVILEGES[role] || ROLE_PRIVILEGES.student;
-  return {
-    role,
-    privileges,
-    isAdmin: role === 'admin' || role === 'super_admin',
-    isSuperAdmin: role === 'super_admin',
-    isInstructor: role === 'instructor' || role === 'admin' || role === 'super_admin',
-    isStudent: role === 'student',
-    updated_at: new Date().toISOString(),
-  };
-}
-
-/**
- * Sets custom user claims for a user in Firebase Auth.
- * Enables server-enforced role and privilege checks.
- */
-export async function setFirebaseRoleAndClaims(
-  uid: string, 
-  role: UserRole
-): Promise<{ success: boolean; claims: FirebaseCustomClaims; message: string }> {
-  const claims = buildClaimsForRole(role);
-  const auth = getFirebaseAdminAuth();
-
-  if (!auth) {
-    return {
-      success: false,
-      claims,
-      message: 'Firebase Admin SDK is not configured with service account credentials. Role updated in database & local state only.',
-    };
-  }
-
-  try {
-    await auth.setCustomUserClaims(uid, claims);
-    return {
-      success: true,
-      claims,
-      message: `Firebase custom claims successfully assigned: ${role.toUpperCase().replace('_', ' ')}.`,
-    };
-  } catch (err: any) {
-    console.error(`[Firebase Admin] Failed setting claims for UID ${uid}:`, err);
-    return {
-      success: false,
-      claims,
-      message: `Failed to set Firebase custom claims: ${err.message || 'Unknown error'}`,
-    };
-  }
-}
-
-/**
  * Verifies a Firebase ID token and returns the decoded claims
  */
 export async function verifyFirebaseToken(idToken: string): Promise<DecodedIdToken | null> {
@@ -201,25 +148,6 @@ export async function listAllFirebaseUsers(maxResults = 100): Promise<UserRecord
     console.error('[Firebase Admin] Error listing users:', err);
     return [];
   }
-}
-
-/**
- * Bootstraps a Super Admin user by email if specified in SUPER_ADMIN_EMAILS
- */
-export async function bootstrapSuperAdminByEmail(email: string): Promise<boolean> {
-  const auth = getFirebaseAdminAuth();
-  if (!auth) return false;
-  try {
-    const user = await auth.getUserByEmail(email.toLowerCase().trim());
-    if (user && user.uid) {
-      await setFirebaseRoleAndClaims(user.uid, 'super_admin');
-      console.log(`[Firebase Admin] Bootstrapped ${email} (${user.uid}) as Super Admin.`);
-      return true;
-    }
-  } catch (err) {
-    console.warn(`[Firebase Admin] Bootstrap notice for ${email}:`, err);
-  }
-  return false;
 }
 
 /**

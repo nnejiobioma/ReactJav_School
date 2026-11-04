@@ -218,33 +218,19 @@ export async function signInWithFirebase(
   if (isFirebaseConfigured() && auth) {
     try {
       const credential = await signInWithEmailAndPassword(auth, cleanEmail, password);
-      
-      // Extract Firebase custom claims from ID token
-      let tokenRole: UserRole | undefined;
-      let tokenClaims: FirebaseCustomClaims | undefined;
-      try {
-        const idTokenResult = await credential.user.getIdTokenResult(true);
-        if (idTokenResult?.claims?.role) {
-          tokenRole = idTokenResult.claims.role as UserRole;
-          tokenClaims = idTokenResult.claims as unknown as FirebaseCustomClaims;
-        }
-      } catch (claimsErr) {
-        console.warn('Notice: ID token claims lookup:', claimsErr);
-      }
 
       // Fetch user's profile from Supabase database and local storage fallback
       const dbProfile = await LocalDataService.getProfileByEmailOrId(cleanEmail, credential.user.uid);
       const localProfile = LocalDataService.getAllProfiles().find(
         (p) => p.email && p.email.toLowerCase() === cleanEmail
       );
-      const effectiveRole: UserRole = tokenRole || dbProfile?.role || localProfile?.role || 'student';
+      const effectiveRole: UserRole = dbProfile?.role || localProfile?.role || 'student';
       const effectiveAvatar = dbProfile?.avatar_url || localProfile?.avatar_url || credential.user.photoURL || undefined;
       const effectiveName = dbProfile?.full_name || localProfile?.full_name || credential.user.displayName || undefined;
 
       const profile = mapFirebaseUserToProfile(credential.user, {
         role: effectiveRole,
         privileges: ROLE_PRIVILEGES[effectiveRole],
-        custom_claims: tokenClaims,
         subscription_status: dbProfile?.subscription_status || localProfile?.subscription_status,
         subscription_plan: dbProfile?.subscription_plan || localProfile?.subscription_plan,
         payment_reference: dbProfile?.payment_reference || localProfile?.payment_reference,
@@ -327,32 +313,18 @@ export async function signInWithGoogleFirebase(
     const cleanEmail = (credential.user.email || '').trim().toLowerCase();
     const timestamp = new Date().toISOString();
 
-    // Extract Firebase custom claims from ID token
-    let tokenRole: UserRole | undefined;
-    let tokenClaims: FirebaseCustomClaims | undefined;
-    try {
-      const idTokenResult = await credential.user.getIdTokenResult(true);
-      if (idTokenResult?.claims?.role) {
-        tokenRole = idTokenResult.claims.role as UserRole;
-        tokenClaims = idTokenResult.claims as unknown as FirebaseCustomClaims;
-      }
-    } catch (claimsErr) {
-      console.warn('Notice: Google sign-in ID token claims lookup:', claimsErr);
-    }
-
     // Query Supabase database for existing record with local cache fallback
     const dbProfile = await LocalDataService.getProfileByEmailOrId(cleanEmail, credential.user.uid);
     const localProfile = LocalDataService.getAllProfiles().find(
       (p) => p.email && p.email.toLowerCase() === cleanEmail
     );
-    const effectiveRole: UserRole = tokenRole || dbProfile?.role || localProfile?.role || 'student';
+    const effectiveRole: UserRole = dbProfile?.role || localProfile?.role || 'student';
     const effectiveAvatar = dbProfile?.avatar_url || localProfile?.avatar_url || credential.user.photoURL || undefined;
     const effectiveName = dbProfile?.full_name || localProfile?.full_name || credential.user.displayName || undefined;
 
     const profile = mapFirebaseUserToProfile(credential.user, {
       role: effectiveRole,
       privileges: ROLE_PRIVILEGES[effectiveRole],
-      custom_claims: tokenClaims,
       subscription_status: dbProfile?.subscription_status || localProfile?.subscription_status,
       subscription_plan: dbProfile?.subscription_plan || localProfile?.subscription_plan,
       payment_reference: dbProfile?.payment_reference || localProfile?.payment_reference,
@@ -648,41 +620,6 @@ export function onFirebaseAuthStateChange(callback: (user: FirebaseUser | null) 
     return onAuthStateChanged(auth, callback);
   }
   return () => {};
-}
-
-/**
- * Force refresh user's Firebase token to pull the latest Custom User Claims
- */
-export async function refreshFirebaseCustomClaims(): Promise<{
-  role: UserRole;
-  privileges: Privilege[];
-  claims?: any;
-} | null> {
-  if (isFirebaseConfigured() && auth && auth.currentUser) {
-    try {
-      const idTokenResult = await auth.currentUser.getIdTokenResult(true);
-      const role = (idTokenResult?.claims?.role as UserRole) || 'student';
-      const currentUser = LocalDataService.getCurrentUser();
-      if (currentUser) {
-        const updatedUser: Profile = {
-          ...currentUser,
-          role,
-          privileges: ROLE_PRIVILEGES[role],
-          custom_claims: idTokenResult.claims as unknown as FirebaseCustomClaims,
-        };
-        LocalDataService.setCurrentUser(updatedUser);
-        window.dispatchEvent(new Event('storage'));
-        return {
-          role,
-          privileges: ROLE_PRIVILEGES[role],
-          claims: idTokenResult.claims,
-        };
-      }
-    } catch (err) {
-      console.warn('Could not refresh Firebase custom claims:', err);
-    }
-  }
-  return null;
 }
 
 /**

@@ -91,7 +91,6 @@ export default function Navbar() {
     pathname.startsWith('/dashboard') ||
     pathname.startsWith('/tutoring/attendance') ||
     pathname.startsWith('/instructor') ||
-    pathname.startsWith('/admin/super') ||
     pathname.startsWith('/admin/access');
 
   const hasIntranetAccess = Boolean(
@@ -522,33 +521,6 @@ export default function Navbar() {
                     </div>
                   </Link>
                 )}
-
-                {currentUser?.role === 'super_admin' && (
-                  <Link
-                    href="/admin/super"
-                    onClick={() => setShowIntranetMenu(false)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.75rem',
-                      padding: '0.55rem 0.75rem',
-                      borderRadius: '0.55rem',
-                      color: '#d8b4fe',
-                      textDecoration: 'none',
-                      fontSize: '0.85rem',
-                      borderTop: '1px solid rgba(168, 85, 247, 0.25)',
-                      marginTop: '0.25rem',
-                      paddingTop: '0.55rem',
-                      background: pathname.startsWith('/admin/super') ? 'rgba(168, 85, 247, 0.16)' : 'transparent',
-                    }}
-                  >
-                    <Sparkles size={18} color="#c084fc" />
-                    <div>
-                      <span style={{ display: 'block', fontWeight: 700 }}>Super Admin Access Control</span>
-                      <span style={{ fontSize: '0.72rem', color: '#c084fc' }}>Assign roles & user permissions</span>
-                    </div>
-                  </Link>
-                )}
               </div>
             )}
           </div>
@@ -723,31 +695,6 @@ export default function Navbar() {
                     </div>
                     <ArrowRight size={12} color="var(--primary)" />
                   </Link>
-                  {currentUser?.role === 'super_admin' && (
-                    <Link
-                      href="/admin/super"
-                      onClick={() => setShowRoleMenu(false)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        padding: '0.45rem 0.75rem',
-                        fontSize: '0.825rem',
-                        color: '#d8b4fe',
-                        textDecoration: 'none',
-                        borderRadius: '0.5rem',
-                        fontWeight: 600,
-                        background: 'rgba(168, 85, 247, 0.12)',
-                        marginBottom: '0.3rem',
-                      }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                        <Sparkles size={14} color="#c084fc" />
-                        <span>Super Admin Access</span>
-                      </div>
-                      <ExternalLink size={12} />
-                    </Link>
-                  )}
 
                   {(currentUser?.role === 'instructor' || currentUser?.role === 'admin' || currentUser?.role === 'super_admin') && (
                     <Link
@@ -1072,16 +1019,6 @@ export default function Navbar() {
                   style={{ justifyContent: 'flex-start', gap: '0.6rem', color: 'var(--accent-emerald)', background: 'rgba(16, 185, 129, 0.12)' }}
                 >
                   <GraduationCap size={17} color="var(--accent-emerald)" /> Instructor Studio & Curricula
-                </Link>
-              )}
-              {currentUser?.role === 'super_admin' && (
-                <Link
-                  href="/admin/super"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="btn btn-secondary btn-sm touch-target"
-                  style={{ justifyContent: 'flex-start', gap: '0.6rem', color: '#d8b4fe', background: 'rgba(168, 85, 247, 0.12)' }}
-                >
-                  <Sparkles size={17} color="#c084fc" /> Super Admin Access Control
                 </Link>
               )}
               {(currentUser?.role === 'super_admin' || currentUser?.role === 'admin') && (
