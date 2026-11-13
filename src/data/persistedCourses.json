@@ -561,10 +561,10 @@
           {
             "id": "les_aif_02_01",
             "section_id": "sec_aif_02",
-            "title": "2.1 Written Lesson: How AI Learns & “Garbage In, Garbage Out”",
+            "title": "2.1 Written Lesson & Reading: How AI Learns & “Garbage In, Garbage Out”",
             "type": "article",
-            "summary": "Understand data, training, models, and predictions through a plain-language fruit-recognition analogy, three learning types, the Data → Training → Model → Prediction diagram, and why data quality matters.",
-            "content": "> **What you will learn:** How an AI system turns examples (data) into a trained model that makes predictions—and why bad or skewed data leads to bad AI.\n\n---\n\n### 1. The Fruit-Recognition Analogy\nImagine teaching a young child to tell **apples** apart from **oranges**. You do not hand the child a geometry textbook with equations for spheres and stem angles. Instead, you hold up dozens of real apples and oranges and say, *\"This is an apple. That is an orange.\"*\n\nSoon, the child notices patterns on their own—color, skin texture, and shape. When you hold up a brand-new fruit they have never seen before, they can make a **prediction**: *\"That’s an orange!\"*\n\nMachine Learning works the same way:\n1. **Data**: We gather thousands of labeled fruit photos.\n2. **Training**: The computer studies those examples and adjusts internal numbers whenever it guesses wrong.\n3. **Model**: After training finishes, we save that learned pattern-recognition recipe as a **model**.\n4. **Prediction**: When a user shows the model a new photo, it outputs its best guess.\n\n---\n\n### 2. The Machine Learning Flow Diagram\n```\n[ 1. DATA ]  ──►  [ 2. TRAINING ]  ──►  [ 3. MODEL ]  ──►  [ 4. PREDICTION ]\n(Examples)      (Spots patterns &      (Saved pattern       (Output on a brand-\n                 reduces errors)        recipe)              new input)\n```\n\n> **Diagram Alt Text:** *A four-step left-to-right flow diagram. Box 1 is \"Data (labeled or unlabeled examples),\" pointing right to Box 2 \"Training (algorithm adjusts itself to reduce errors),\" pointing right to Box 3 \"Model (the finished pattern-recognition system),\" pointing right to Box 4 \"Prediction (the model's output on a new, unseen input).\"*\n\n---\n\n### 3. Three Ways AI Can Learn\n| Learning Style | How It Works | Everyday Example |\n| :--- | :--- | :--- |\n| **Supervised Learning** | Learns from examples that already have the right answer attached (like flashcards). | An email spam filter trained on emails labeled `Spam` or `Not Spam`. |\n| **Unsupervised Learning** | Looks through unlabeled data to find natural groups or clusters on its own. | A music app grouping songs with similar tempo and mood without pre-set labels. |\n| **Reinforcement Learning** | Learns by trial and error, earning rewards for good moves and penalties for mistakes. | A game-playing AI learning chess or a robot learning to walk without falling. |\n\n---\n\n### 4. Reading: “Garbage In, Garbage Out”\nBecause a model only knows what it saw during training, **data quality matters more than almost anything else**. For example, if you train a fruit detector *only* on red apples and orange oranges, it will fail when someone shows it a green Granny Smith apple!\n\nIn the real world, **unrepresentative data** causes serious harm:\n- If a face-recognition tool is trained mostly on photos of one group of people, it performs worse for people who were underrepresented in the data.\n- If a hiring tool is trained on 10 years of biased past hiring decisions, it learns to repeat that same bias.\n\n---\n\n> **Key takeaways:**\n> - AI learns in four steps: **Data → Training → Model → Prediction**.\n> - **Supervised learning** uses labeled flashcards, **unsupervised learning** finds hidden groups, and **reinforcement learning** learns from trial and error.\n> - **Garbage in, garbage out**: incomplete or skewed training data produces inaccurate or unfair predictions.\n\n#### New Words\n| Term | Plain-Language Meaning |\n| :--- | :--- |\n| **Data** | Examples (photos, text, numbers) used to train or test an AI system. |\n| **Training** | The process where an AI algorithm adjusts itself across examples to reduce errors. |\n| **Model** | The finished pattern-recognition system produced after training. |\n| **Prediction** | The output a trained model gives for a new input it has not seen before. |\n| **Bias** | Systematic, unfair errors caused by skewed or unrepresentative training data. |",
+            "summary": "Learn the 4 steps of machine learning (data, training, model, prediction), the 3 ways machines learn (supervised, unsupervised, reinforcement), and the 8-minute reading “Garbage In, Garbage Out.”",
+            "content": "> **What you will learn:** By the end of this lesson, you will be able to explain how a machine learning system learns from examples. You will know the four steps (data, training, model, prediction), and you will be able to name the three main ways machines learn.\n\n---\n\n### Part A: The Lesson (12 Minutes)\n\n#### 1. Learning from examples\nFirst, think about how a child learns what an apple is. Nobody gives the child a long list of rules, such as *“round, red or green, with a stem on top.”* Instead, you show the child many apples and say, *“This is an apple.”* After a while, the child can recognize an apple they have never seen before, even if it is a different color or size.\n\nMachine learning works in a similar way. In other words, instead of writing rules for the computer, we show it many examples, and the computer finds the patterns by itself. This is why machine learning is so useful. Some problems, like recognizing a face or a spoken word, are too complicated for anyone to write down as rules.\n\n#### 2. The four steps: data, training, model, prediction\nEvery machine learning system follows the same four steps:\n\n| 1. DATA | 2. TRAINING | 3. MODEL | 4. PREDICTION |\n| :--- | :--- | :--- | :--- |\n| Examples are collected | The computer studies the examples to find patterns | The patterns it learned are saved | The model makes a guess about something new |\n| *Spam example:* thousands of emails marked “spam” or “not spam” | The computer compares the spam emails with the normal ones | It saves patterns, such as pressure words, strange links, and requests for money | A new email arrives and is marked “probably spam” |\n\n> **Diagram Alt Text:** *A four-column left-to-right flow table showing the four steps of machine learning: 1. Data (examples collected), 2. Training (computer studies examples to find patterns), 3. Model (learned patterns saved), 4. Prediction (model makes a guess about something new), illustrated with an email spam filter example.*\n\n- **Step 1, Data:** Data is information, such as pictures, words, numbers, or sounds. The examples we use for learning are called **training data**.\n- **Step 2, Training:** Next, the computer studies the training data again and again. Each time, it adjusts itself to make fewer mistakes. This process is called **training**.\n- **Step 3, Model:** After training, what the computer has learned is saved as a **model**. You can think of the model as the “learned experience” of the system.\n- **Step 4, Prediction:** Finally, we give the model something new, and it makes a **prediction**. For example, it says, *“This email is probably spam,”* or *“This photo shows a cat.”*\n\n> **Remember:** The model is not a list of rules written by a person. It is a set of patterns that the computer found by itself.\n\n#### 3. Why predictions can be wrong\nBecause a model works with patterns, it makes a best guess, not a perfect answer. For instance, a spam filter may say an email is probably spam, but sometimes a normal email gets caught. Similarly, it may miss a new kind of spam that looks different from anything it has seen.\n\nTherefore, we should never think of AI as always right. Instead, we should think of it as very good at patterns it has seen before, and less reliable when something is new or unusual.\n\n#### 4. Three ways machines learn\nThere is more than one way to teach a machine. Fortunately, the three main ways are easy to picture with everyday examples:\n\n| Way of learning | Everyday picture | Example |\n| :--- | :--- | :--- |\n| **Supervised learning** | Studying with an answer key. Each example comes with the correct answer, called a **label**. | A spam filter learns from emails labeled “spam” or “not spam.” A photo tool learns from pictures labeled “cat” or “dog.” |\n| **Unsupervised learning** | Sorting a box of mixed buttons into piles. Nobody tells you the piles, so you group the buttons by how they look. | A shop groups customers with similar buying habits, without being told the groups in advance. |\n| **Reinforcement learning** | Training a dog with treats, or learning a video game by playing. You try something, get a reward or a penalty, and improve. | A program learns to play a game by trying moves and earning points. A robot learns to walk by trial and error. |\n\nIn short, supervised learning has answers, unsupervised learning finds groups, and reinforcement learning uses rewards.\n\n> **Key takeaways:**\n> - Machine learning means the computer finds patterns from examples instead of following only written rules.\n> - The four steps are **data → training → model → prediction**.\n> - A model makes best guesses, so it can be wrong, especially with new or unusual cases.\n> - The three main ways to learn are **supervised**, **unsupervised**, and **reinforcement learning**.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Data** | Information such as pictures, words, numbers, or sounds |\n| **Training data** | The examples a system learns from |\n| **Label** | The correct answer attached to an example, such as “spam” or “cat” |\n| **Training** | The process of studying examples to find patterns |\n| **Model** | What the system has learned, saved as patterns it can use |\n| **Prediction** | The model’s best guess about something new |\n| **Supervised learning** | Learning from examples that come with correct answers |\n| **Unsupervised learning** | Finding groups or patterns in data without answers |\n| **Reinforcement learning** | Learning by trial and error with rewards |\n\n---\n\n### Part B: Reading (8 Minutes): “Garbage In, Garbage Out”\nComputer experts have a short saying: **“garbage in, garbage out.”** It means that if the information we give a computer is poor, the results will be poor too. This idea is very important for AI, because a model is only as good as the data it learned from.\n\n#### Three questions to ask about data\n1. **Is there enough of it?** A child who has seen only one apple may not recognize a different apple. In the same way, a model with too few examples may not learn the pattern well.\n2. **Is it correct?** If many photos in the training data have the wrong label—for instance, dogs labeled as cats—the model will learn the wrong lesson.\n3. **Does it cover everyone and everything?** This is called being **representative**. If the data leaves out some groups or situations, the model will not work well for them.\n\n- **Example 1: The daylight camera** — Imagine a model that learns to recognize street signs, but all of its training photos were taken on sunny days. As a result, it may work well at noon, but it may make many mistakes at night or in the rain. The problem is not the computer. The problem is that the data did not show those situations.\n- **Example 2: Unfair results** — Now imagine a face recognition tool trained mostly on photos of one group of people. Because the data was not representative, the tool will probably work worse for people from other groups. This kind of unfair result is called **bias**. Importantly, bias often does not come from bad intentions; it often comes from data that is incomplete or unbalanced. Similarly, if a model learns from past decisions that were unfair, it can repeat those unfair patterns.\n\n#### What can we do?\n- Use data that is large, correct, and varied.\n- Test the model on different groups and situations before using it.\n- Keep a person in charge of important decisions, such as hiring or health.\n\n> **In short:** Better data leads to better AI. Poor or unbalanced data leads to poor or unfair results.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
@@ -573,10 +573,10 @@
           {
             "id": "les_aif_02_02",
             "section_id": "sec_aif_02",
-            "title": "2.2 Activity: “Be the Algorithm” (10 Labeled Emails + Skewed Set)",
+            "title": "2.2 Activity: “Be the Algorithm” (Round 1 Good Data vs. Round 2 Poor Data)",
             "type": "article",
-            "summary": "Inspect 10 labeled email examples (Spam vs. Not Spam), predict labels for 5 new emails, and then repeat with a skewed training set to see how bias causes errors.",
-            "content": "> **What you will learn:** How a supervised learning model spots clues in training data—and how a skewed training set tricks it into making mistakes.\n\n### Part 1: Study the 10 Labeled Training Examples (5 min)\nPretend you are a brand-new spam filter. Study these **10 labeled emails**:\n\n| # | Email Subject & Preview | Label |\n| :--- | :--- | :--- |\n| **1** | *\"URGENT: Claim your FREE $1,000 gift card now!! Click here\"* | **Spam** |\n| **2** | *\"Team meeting moved to Thursday at 2 PM — Agenda attached\"* | **Not Spam** |\n| **3** | *\"You won a brand-new phone! Verify your bank PIN today\"* | **Spam** |\n| **4** | *\"Your library book 'Intro to Astronomy' is due Friday\"* | **Not Spam** |\n| **5** | *\"CONGRATULATIONS! Wire $50 fee to unlock your inheritance\"* | **Spam** |\n| **6** | *\"Mom: Don't forget Aunt Clara's birthday dinner on Sunday\"* | **Not Spam** |\n| **7** | *\"Act fast!! 90% OFF miracle pills — limited time only\"* | **Spam** |\n| **8** | *\"Receipt for your water bill payment of $42.10\"* | **Not Spam** |\n| **9** | *\"Account suspended!! Click bit.ly/verify-now immediately\"* | **Spam** |\n| **10** | *\"School newsletter: Spring science fair sign-up sheet\"* | **Not Spam** |\n\n---\n\n### Part 2: Predict Labels for 5 New Emails (5 min)\nUsing the patterns you learned above, label these **5 unseen emails** in your **Personal Study Notes**:\n- **Email A**: *\"URGENT: Click here to claim your FREE cruise prize!!\"*\n- **Email B**: *\"Dentist reminder: Your checkup is Tuesday at 10:30 AM\"*\n- **Email C**: *\"Verify your bank password immediately or lose access!!\"*\n- **Email D**: *\"Invoice #408 for your monthly internet service\"*\n- **Email E**: *\"Hi! Here are the photos from our weekend hike\"*\n\n*(Expected predictions: A = Spam, B = Not Spam, C = Spam, D = Not Spam, E = Not Spam.)*\n\n---\n\n### Part 3: Repeat with a Skewed Example Set (5 min)\nNow imagine the training data was **skewed**: every single **Spam** example happened to contain the word **\"FREE\"**, and **every Not Spam email** happened to be short (under 8 words), while a legitimate email arrives saying:\n- **Email F**: *\"Community Center: FREE coding workshop for beginners this Saturday at 10 AM — register on our official town website.\"*\n\n**Reflection Question:** If your model learned the shortcut `\"FREE\" = Spam`, what mistake does it make on Email F?\n- **Answer:** It flags a helpful, legitimate community workshop as **Spam** (a *false positive*) because its training data was too narrow and skewed!",
+            "summary": "Act like a machine learning system: study 10 labeled email subject lines, predict labels for 5 new messages, and repeat with a narrow “FREE = spam” dataset.",
+            "content": "> **What you will learn:** How a machine learning model learns patterns from training data—and how a narrow, skewed dataset causes avoidable mistakes.\n\n**Your goal:** Act like a machine learning system. You will learn from examples, make predictions, and then see what happens when the examples are poor.\n\n---\n\n### Round 1: Learn from good examples (7 minutes)\nFirst, study these **10 labeled email subject lines**. This is your training data. Look for patterns:\n\n| # | Subject line (training data) | Label |\n| :--- | :--- | :--- |\n| **1** | WIN a FREE prize now!!! | **Spam** |\n| **2** | Claim your reward: click here today | **Spam** |\n| **3** | Cheap pills, no prescription needed | **Spam** |\n| **4** | You have been selected: send your bank details | **Spam** |\n| **5** | Last chance: double your money in 24 hours | **Spam** |\n| **6** | Meeting moved to 3 pm tomorrow | **Not spam** |\n| **7** | Your library book is due Friday | **Not spam** |\n| **8** | Photos from the weekend trip | **Not spam** |\n| **9** | Invoice for October attached | **Not spam** |\n| **10** | Can you review my draft report? | **Not spam** |\n\nIn your **Personal Study Notes**, write in 1–2 sentences what the spam messages have in common, then predict the label and clue for these **5 new messages**:\n1. *Urgent: verify your password at this link*\n2. *Lunch on Thursday?*\n3. *Congratulations! You won a free vacation*\n4. *Notes from today’s class*\n5. *Free parking available at the venue*\n\n---\n\n### Round 2: Learn from poor examples (8 minutes)\nNow imagine a different system. It was trained on a much narrower set of examples. In this set, every spam message contained the word **“FREE,”** and no normal message did. Because of this, the system learned only one pattern: **“FREE = spam.”**\n\nUse only that rule and predict the labels for the same **5 messages** again, then reflect:\n- Which messages did the narrow system get wrong?\n- Why did the narrow system make those mistakes?\n- What kind of examples would you add to improve it?\n\n---\n\n### Answer Guide\n| # | New message | Best label (Round 1) | “FREE = spam” result | Right? |\n| :--- | :--- | :--- | :--- | :--- |\n| **1** | Urgent: verify your password at this link | **Spam** | Not spam | **Wrong** |\n| **2** | Lunch on Thursday? | **Not spam** | Not spam | Right |\n| **3** | Congratulations! You won a free vacation | **Spam** | Spam | Right |\n| **4** | Notes from today’s class | **Not spam** | Not spam | Right |\n| **5** | Free parking available at the venue | **Not spam** | Spam | **Wrong** |\n\n- **Round 1 pattern:** The spam messages use pressure and promises, such as *“now,” “last chance,” “click here,” “prize,”* and requests for money or private details. The normal messages are calm and about ordinary tasks. Message 5 is the tricky one: it contains *“free,”* but it is not spam.\n- **Round 2 lesson:** The narrow system missed message 1 because it did not contain *“free,”* and it wrongly blocked message 5 because it did. The problem was poor and narrow data, not a bad computer. Adding varied examples—including normal messages with *“free”* and spam without it—would improve the system.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
@@ -587,7 +587,7 @@
             "section_id": "sec_aif_02",
             "title": "2.3 Module 2 Knowledge Check (5 Questions from 10-Question Bank)",
             "type": "quiz",
-            "summary": "5 questions randomly drawn from a 10-question Module 2 bank with instant feedback.",
+            "summary": "5 questions randomly drawn from the 10-question Module 2 bank with instant feedback.",
             "duration_seconds": 600,
             "position": 3,
             "is_free_preview": false,
@@ -596,141 +596,139 @@
               {
                 "id": "q_aif_02_1",
                 "lesson_id": "les_aif_02_03",
-                "question": "A face-recognition tool was trained mostly on photos of one group of people. What problem is most likely?",
+                "question": "Which order shows the four steps of machine learning?",
                 "options": [
-                  "It performs worse for people who were underrepresented in the data",
-                  "It runs twice as fast for everyone",
-                  "It automatically deletes blurry photos",
-                  "It refuses to work indoors"
+                  "Prediction → model → training → data",
+                  "Data → training → model → prediction",
+                  "Model → data → prediction → training",
+                  "Training → prediction → data → model"
                 ],
-                "correct_option_index": 0,
-                "explanation": "When training data underrepresents certain groups, the model has fewer examples to learn from and makes more errors for those groups.",
+                "correct_option_index": 1,
+                "explanation": "First we collect data, then the system trains on it, the result is saved as a model, and finally the model makes predictions.",
                 "position": 1
               },
               {
                 "id": "q_aif_02_2",
                 "lesson_id": "les_aif_02_03",
-                "question": "What is the correct order of the four steps in how Machine Learning works?",
+                "question": "What is training data?",
                 "options": [
-                  "Data → Training → Model → Prediction",
-                  "Prediction → Model → Data → Training",
-                  "Model → Data → Prediction → Training",
-                  "Training → Prediction → Data → Model"
+                  "The examples a system learns from",
+                  "The final answer the model gives",
+                  "A list of rules written by a person",
+                  "The screen of the computer"
                 ],
                 "correct_option_index": 0,
-                "explanation": "First we gather Data, then run Training to build a Model, and finally use the model to make Predictions on new inputs.",
+                "explanation": "Training data is the set of examples used to teach the system.",
                 "position": 2
               },
               {
                 "id": "q_aif_02_3",
                 "lesson_id": "les_aif_02_03",
-                "question": "Which learning style is like studying flashcards where every example already has the right answer label attached?",
+                "question": "In machine learning, what is a “model”?",
                 "options": [
-                  "Supervised Learning",
-                  "Unsupervised Learning",
-                  "Reinforcement Learning",
-                  "Fixed-rule calculation"
+                  "A person who tests the system",
+                  "A photo used as an example",
+                  "What the system has learned, saved as patterns it can use",
+                  "A type of computer"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Supervised learning trains on labeled examples such as emails marked Spam or Not Spam.",
+                "correct_option_index": 2,
+                "explanation": "The model holds the patterns learned during training. It is used to make predictions.",
                 "position": 3
               },
               {
                 "id": "q_aif_02_4",
                 "lesson_id": "les_aif_02_03",
-                "question": "A music app groups millions of songs by tempo and mood without any pre-existing labels. Which learning style is this?",
+                "question": "Learning from examples that come with the correct answers is called…",
                 "options": [
-                  "Unsupervised Learning",
-                  "Supervised Learning",
-                  "Manual rule typing",
-                  "Reinforcement Learning"
+                  "Supervised learning",
+                  "Unsupervised learning",
+                  "Reinforcement learning",
+                  "Random learning"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Unsupervised learning discovers natural clusters inside unlabeled data.",
+                "explanation": "Supervised learning uses labeled examples, like studying with an answer key.",
                 "position": 4
               },
               {
                 "id": "q_aif_02_5",
                 "lesson_id": "les_aif_02_03",
-                "question": "Which everyday example best illustrates Reinforcement Learning?",
+                "question": "A shop wants to group customers with similar buying habits without telling the computer the groups in advance. Which type of learning fits best?",
                 "options": [
-                  "A game-playing AI improving through trial and error with rewards for winning moves",
-                  "A calculator adding two numbers",
-                  "Sorting emails that already have Spam labels",
-                  "Opening a door when someone walks in front of a sensor"
+                  "Supervised learning",
+                  "Unsupervised learning",
+                  "Reinforcement learning",
+                  "No learning"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Reinforcement learning improves by trying actions and receiving rewards or penalties.",
+                "correct_option_index": 1,
+                "explanation": "Unsupervised learning finds groups in data without being given answers.",
                 "position": 5
               },
               {
                 "id": "q_aif_02_6",
                 "lesson_id": "les_aif_02_03",
-                "question": "What does \"Garbage in, garbage out\" warn us about?",
+                "question": "A program learns to play a game by trying moves and earning points for good ones. This is…",
                 "options": [
-                  "Flawed, incomplete, or skewed training data leads to flawed or biased predictions",
-                  "Old computers cannot run AI software",
-                  "Models should never be tested on new inputs",
-                  "Training data should be deleted before training starts"
+                  "Supervised learning",
+                  "Unsupervised learning",
+                  "Reinforcement learning",
+                  "A fixed rule"
                 ],
-                "correct_option_index": 0,
-                "explanation": "A model can only be as reliable and fair as the data it was trained on.",
+                "correct_option_index": 2,
+                "explanation": "Reinforcement learning improves through trial and error with rewards.",
                 "position": 6
               },
               {
                 "id": "q_aif_02_7",
                 "lesson_id": "les_aif_02_03",
-                "question": "If you train a fruit classifier ONLY on red apples and orange oranges, what happens when you show it a green apple?",
+                "question": "What does “garbage in, garbage out” mean?",
                 "options": [
-                  "It will likely misclassify the green apple because green apples were missing from its training data",
-                  "It will immediately invent a new category on its own with 100% accuracy",
-                  "It will shut down the camera",
-                  "It will ask a human to repaint the apple red"
+                  "Computers cannot store data",
+                  "Poor data leads to poor results",
+                  "Old computers should be thrown away",
+                  "AI always cleans its own data"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Missing variety in training data causes errors on real-world edge cases.",
+                "correct_option_index": 1,
+                "explanation": "A model is only as good as the data it learned from.",
                 "position": 7
               },
               {
                 "id": "q_aif_02_8",
                 "lesson_id": "les_aif_02_03",
-                "question": "In our \"Be the Algorithm\" spam activity, why did a skewed training set cause errors on legitimate emails?",
+                "question": "A face recognition tool was trained mostly on photos of one group of people. What is the most likely problem?",
                 "options": [
-                  "The model relied on a narrow shortcut (like the word FREE) because it never saw legitimate emails containing that word",
-                  "The emails were too short to read",
-                  "Spam filters cannot read subject lines",
-                  "The computer ran out of storage space"
+                  "It will work equally well for everyone",
+                  "It will probably work worse for people who were underrepresented in the data",
+                  "It will stop working",
+                  "It will become faster"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Skewed training examples teach the model brittle shortcuts that fail on real-world messages.",
+                "correct_option_index": 1,
+                "explanation": "Data that is not representative can lead to bias and unfair results.",
                 "position": 8
               },
               {
                 "id": "q_aif_02_9",
                 "lesson_id": "les_aif_02_03",
-                "question": "In Machine Learning, what is a \"Prediction\"?",
+                "question": "True or false: A machine learning model understands the meaning of data the way a person does.",
                 "options": [
-                  "The output or best guess a trained model makes on a new input it has not seen before",
-                  "The list of rules a human typed before collecting data",
-                  "The price of the computer hardware",
-                  "The number of photos in the training folder"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "After training, a model produces predictions whenever it evaluates new inputs.",
+                "correct_option_index": 1,
+                "explanation": "A model finds patterns in data. It does not understand meaning like a person.",
                 "position": 9
               },
               {
                 "id": "q_aif_02_10",
                 "lesson_id": "les_aif_02_03",
-                "question": "Why does a hiring AI trained on 10 years of biased past hiring decisions become biased itself?",
+                "question": "A model learned to read street signs from photos taken only in daylight. What will probably happen at night?",
                 "options": [
-                  "It learns and repeats the historical patterns present in its training data",
-                  "It reads news articles about bias",
-                  "It randomly flips a coin for every applicant",
-                  "It has personal prejudices of its own"
+                  "It will make more mistakes, because the data did not show night conditions",
+                  "It will work perfectly",
+                  "It will refuse to start",
+                  "It will turn into a different model"
                 ],
                 "correct_option_index": 0,
-                "explanation": "ML models mirror patterns in historical training data, including human biases.",
+                "explanation": "The model has not seen night conditions, so it is less reliable there. The training data was not varied enough.",
                 "position": 10
               }
             ]
