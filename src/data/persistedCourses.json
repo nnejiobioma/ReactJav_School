@@ -744,10 +744,10 @@
           {
             "id": "les_aif_03_01",
             "section_id": "sec_aif_03",
-            "title": "3.1 Written Lesson: Generative AI, Chatbots & The 4-Step Verification Habit",
+            "title": "3.1 Written Lesson & Reading: Generative AI, Chatbots & The Verification Habit",
             "type": "article",
-            "summary": "How LLMs predict likely next words, how image generators work at a high level, strengths and limits of chatbots, and the 4-Step Verification Habit.",
-            "content": "> **What you will learn:** How chatbots and image generators create new content, what they are great at, why they hallucinate, and the four-step habit for checking their output.\n\n---\n\n### 1. How Language Models Generate Text\nWhen you type a prompt into a chatbot like ChatGPT, Gemini, or Claude, it does **not** search a verified encyclopedia and copy-paste a guaranteed truth. Instead, a **Large Language Model (LLM)** works like an ultra-advanced autocomplete: it reads your prompt and predicts the **most statistically likely next word** (or word-piece), one step at a time.\n\nFor example, if you type *\"The capital of France is...\"*, the word *\"Paris\"* has appeared next to that phrase millions of times in its training text, so the model predicts *\"Paris\"*.\n\n---\n\n### 2. How Image Generators Work (High Level)\nImage generators (like DALL·E, Midjourney, or Imagen) learn patterns linking text descriptions to pixels across millions of captioned images. When you ask for *\"a watercolor painting of a red bicycle in the rain,\"* the model starts from random visual noise and gradually refines the pixels until they match the patterns for *watercolor*, *red bicycle*, and *rain*.\n\n---\n\n### 3. Strengths vs. Limits of Generative AI\n| What Generative AI Does Well (Strengths) | Where Generative AI Fails (Limits) |\n| :--- | :--- |\n| **Drafting**: Writing first-draft emails, outlines, and letters | **Hallucinations**: Inventing false facts, quotes, or fake citations |\n| **Summarizing**: Condensing long articles or meeting notes | **Outdated Knowledge**: Missing recent events after training |\n| **Translating**: Converting plain text across languages | **Bias**: Repeating stereotypes from web training data |\n| **Brainstorming**: Generating ideas, analogies, and study quizzes | **No Guarantee of Truth & Privacy Risks**: Anything you paste may be logged |\n\n> **Diagram Alt Text:** *A two-column comparison table titled \"Strengths vs. Limits of Generative AI.\" The left column lists Drafting, Summarizing, Translating, and Brainstorming. The right column lists Hallucinations, Outdated Knowledge, Bias, No Guarantee of Truth, and Privacy Risks.*\n\n---\n\n### 4. Reading: The Verification Habit in Four Steps\nBecause chatbots sound confident even when they are completely wrong, build this **4-Step Verification Habit** every time you rely on AI output:\n1. **Check it**: Read the answer critically—does anything look suspicious, vague, or too convenient?\n2. **Cross-check with a trusted source**: Confirm important facts (health, law, finance, dates) on an official website, textbook, or reputable news source.\n3. **Ask for sources and verify they exist**: If the chatbot gives you a book title, study, or link, search for it yourself to confirm the source exists *and* actually says what the chatbot claims.\n4. **Never paste in private information**: Keep passwords, bank details, medical records, and confidential work files out of public chatbots.\n\n---\n\n> **Key takeaways:**\n> - LLMs generate fluent text by predicting the most likely next word—not by checking facts.\n> - Chatbots excel at drafting, summarizing, translating, and brainstorming, because those tasks do not require perfect factual memory.\n> - Always apply the **4-Step Verification Habit**: Check it, Cross-check with a trusted source, Verify sources exist, and Never paste private info.\n\n#### New Words\n| Term | Plain-Language Meaning |\n| :--- | :--- |\n| **Generative AI** | AI that creates new text, images, or audio from patterns it learned. |\n| **Large Language Model (LLM)** | An AI model trained on massive text collections to predict and generate human-like language. |\n| **Hallucination** | A confident-sounding AI answer or citation that is factually false or invented. |",
+            "summary": "Learn what generative AI does, how chatbots and image generators work, 6 strengths, 5 limits, and the 4-step Verification Habit.",
+            "content": "> **What you will learn:** By the end of this lesson, you will be able to explain what generative AI does and how a chatbot writes its answers. You will know where it is strong, where it goes wrong, and why you should check what it tells you.\n\n---\n\n### Part A: The Lesson (12 Minutes)\n\n#### 1. What is generative AI?\nFirst, let’s remember the AI family from Module 1. Some AI tools recognize or sort things. For example, a spam filter decides whether an email is spam. In contrast, **generative AI** creates something new, such as a paragraph, a picture, a song, or a piece of computer code.\n\nFor example, you can type, *“Write a friendly message to invite my neighbors to a garden party,”* and a chatbot will write a new message for you. Similarly, you can describe a picture in words, and an image tool will draw it. This is why generative AI feels so different from older tools, and why so many people are talking about it.\n\n#### 2. How does a chatbot write its answers?\nNow we come to the key question. How does a chatbot produce text that sounds so natural?\n\nThink about the suggestions on your phone keyboard. When you type *“Good,”* the keyboard may suggest *“morning.”* It does this because, in the text it learned from, *“morning”* often follows *“Good.”* A chatbot works in a similar way, but on a much larger scale.\n\nIn other words, a chatbot is built on a **language model**. During training, the model studied huge amounts of text and learned which words and phrases usually go together. Then, when you send a request, called a **prompt**, the model builds its answer one small piece at a time. At each step, it predicts the most likely next piece.\n\n> **Remember:** A chatbot is designed to write text that sounds right. It is not designed to guarantee that the text is true.\n\nBecause of this, a chatbot does not “look up” facts like a library catalog by default. Instead, it generates likely-sounding text from patterns. Some tools can also search the web, which can help. However, you should still check important answers.\n\n#### 3. How do image generators work?\nImage tools follow a similar idea. During training, they studied very many pictures together with the words that describe them. As a result, they learned patterns that connect words and images. When you describe a picture, the tool creates a new image that fits those patterns. Notice that the image is newly made, not copied from a single photo, but it can still contain mistakes, such as strange hands or text that is spelled wrongly.\n\n#### 4. What generative AI does well\nGenerative AI is a useful helper for many everyday tasks:\n\n| Task | How it helps |\n| :--- | :--- |\n| **Drafting** | Writes a first version of an email, letter, or post, which you then improve |\n| **Summarizing** | Shortens a long text into the main points |\n| **Translating** | Gives a quick translation that you can check or polish |\n| **Brainstorming** | Suggests ideas, names, or approaches when you feel stuck |\n| **Explaining** | Describes a hard idea in simpler words or with an example |\n| **Practicing** | Acts as a partner for practicing a language or an interview |\n\nIn all of these tasks, the AI gives you a starting point. Then, you review and decide.\n\n#### 5. Where generative AI goes wrong\nHowever, generative AI also has important limits. It is better to know them before you rely on it:\n\n| Limit | What it means |\n| :--- | :--- |\n| **Hallucinations** | The AI gives an answer that sounds confident but is false or made up. For example, it may invent a book title, a statistic, or a web link that looks real but does not exist |\n| **Outdated knowledge** | A model learned from information up to a certain date, called its **knowledge cutoff**. Unless the tool can search the web, it may not know about recent events |\n| **Bias** | The model learned from human writing, which can be unbalanced or unfair. As a result, its answers can reflect those patterns |\n| **No real understanding** | The AI finds patterns in language. It does not understand or feel like a person, even when it sounds friendly |\n| **Privacy risks** | What you type may be stored or used by the tool, depending on its settings. Therefore, you should never share private information |\n\n> **Diagram Alt Text:** *Two reference tables for Generative AI: the first lists six strengths (Drafting, Summarizing, Translating, Brainstorming, Explaining, Practicing) and how each helps; the second lists five limits (Hallucinations, Outdated knowledge, Bias, No real understanding, Privacy risks) and what each means.*\n\n> **Key takeaways:**\n> - Generative AI creates new content, such as text, images, sound, and code.\n> - A chatbot builds answers by predicting likely next words from patterns it learned.\n> - It is useful for drafting, summarizing, translating, brainstorming, and explaining.\n> - It can hallucinate, be outdated, show bias, and put your privacy at risk.\n> - A confident answer is not always a correct answer, so check what matters.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Generative AI** | AI that creates new content, such as text, images, or sound |\n| **Chatbot** | A program you talk to by typing or speaking |\n| **Language model** | An AI model that learned patterns in language from large amounts of text |\n| **Prompt** | The request or question you give to an AI tool |\n| **Hallucination** | A confident answer that is false or made up |\n| **Knowledge cutoff** | The date after which a model has not learned new information |\n| **Bias** | An unfair or unbalanced tendency in results, often from the data |\n\n---\n\n### Part B: Reading (6 Minutes): The Verification Habit\nBecause AI can sound sure even when it is wrong, we need a habit that protects us. The habit has four steps. Fortunately, it only takes a few minutes.\n\n1. **Step 1: Check it** — Look at the answer and ask, *“What can be checked?”* Names, dates, numbers, quotes, and web links are easy to check. Be extra careful when the answer sounds very exact or very perfect.\n2. **Step 2: Cross-check with a trusted source** — Look for the same fact in a trusted place (official websites, well-known encyclopedias, respected news organizations). If two independent trusted sources agree, you can feel more confident. If you cannot find the fact anywhere, treat it as unverified.\n3. **Step 3: Ask for sources, then verify them** — You can ask the chatbot, *“What sources can I check for this?”* However, do not stop there, because chatbots can invent sources. Open each link, or search for the title, and confirm that it exists and really says what the chatbot claimed.\n4. **Step 4: Protect your privacy** — Think about what you are typing. Never share passwords, bank details, ID numbers, private documents, or other people’s personal information. If you are not sure how a tool uses your data, check its privacy settings first.\n\n#### How careful should I be?\n| Situation | How much checking? |\n| :--- | :--- |\n| **Low stakes**, such as brainstorming party names | A quick look is enough |\n| **Medium stakes**, such as a school or work document | Check every fact, name, and number |\n| **High stakes**, such as health, money, law, or safety | Cross-check with trusted sources and ask a qualified person before acting |\n\n*Helpful prompt ideas:* *“Tell me if you are not sure.”* and *“Give me sources I can check.”* These can help, but they never replace your own checking.",
             "duration_seconds": 1080,
             "position": 1,
             "is_free_preview": false,
@@ -756,10 +756,10 @@
           {
             "id": "les_aif_03_02",
             "section_id": "sec_aif_03",
-            "title": "3.2 Activity: “Spot the Hallucination” (3 AI Answers — 1 Made-Up Claim)",
+            "title": "3.2 Activity: “Spot the Hallucination” (Eiffel Tower, Marie Curie & Pacific Ocean)",
             "type": "article",
-            "summary": "Inspect 3 AI chatbot answers where one contains a subtle made-up claim, investigate using web search, and explain how you caught it.",
-            "content": "> **What you will learn:** How to investigate AI answers using search and spot a convincing hallucination hidden among accurate answers.\n\n### Your Task (17 Minutes)\nRead the **three AI answers** below. **Two are accurate**, and **one contains a made-up claim (a hallucination)**. Use a trusted search engine or reference site to investigate all three, then write in your **Personal Study Notes** which one is false and how you verified it.\n\n- **AI Answer A (Space History):**\n  *\"Apollo 11 landed on the Moon on July 20, 1969. Neil Armstrong and Buzz Aldrin walked on the lunar surface while Michael Collins piloted the command module in lunar orbit.\"*\n- **AI Answer B (Health & Nutrition):**\n  *\"Vitamin C helps support the immune system and aids in iron absorption. Common food sources include citrus fruits, bell peppers, strawberries, and broccoli.\"*\n- **AI Answer C (Literature Citation):**\n  *\"In his 1954 essay 'Why Machines Cannot Dream,' published in The Atlantic Monthly (Vol. 193, pp. 42–48), Alan Turing argued that computers would never write poetry.\"*\n\n---\n\n### Answer Key & Verification Notes\n- **AI Answer C is the Hallucination!**\n  - *How to verify:* Searching for *\"Why Machines Cannot Dream\"* by Alan Turing in *The Atlantic Monthly* (1954) turns up zero matching articles—the essay title, volume, and page numbers were completely fabricated! (In fact, Turing's famous paper was *\"Computing Machinery and Intelligence\"* in *Mind*, 1950, and he actually argued *for* machine intelligence, not against it.)\n- **AI Answer A & Answer B** are verified as accurate against NASA mission records and standard nutrition references.",
+            "summary": "Use the 4-step verification habit on three AI-written answers (Eiffel Tower, Marie Curie, Pacific Ocean) to catch the one containing a made-up claim.",
+            "content": "> **What you will learn:** How a hallucination can hide inside an answer that is mostly true—and how to catch it with a web browser.\n\n**Your goal:** Three AI-written answers are shown below. Two are accurate and one contains a made-up claim. Use the verification habit to find it. *(No chatbot account needed—just a web browser!)*\n\n---\n\n### Step 1: Read (3 minutes)\nRead the three answers carefully. Note any facts you could check, such as names, dates, and numbers:\n\n| Answer | Text (written by an AI chatbot) |\n| :--- | :--- |\n| **Answer A** *(Topic: Eiffel Tower)* | *The Eiffel Tower is in Paris, France. It was completed in 1889 for the World’s Fair, and it was designed by the engineering company of Gustave Eiffel. It was the tallest man-made structure in the world until 1930.* |\n| **Answer B** *(Topic: Marie Curie)* | *Marie Curie was born in Warsaw, Poland. She won Nobel Prizes in both Physics and Chemistry, and she was the first person to win two Nobel Prizes. She also won a third Nobel Prize, in Medicine, in 1921.* |\n| **Answer C** *(Topic: Pacific Ocean)* | *The Pacific Ocean is the largest and deepest ocean on Earth. Its deepest point is the Mariana Trench, which is about 11,000 meters deep. The Pacific covers roughly one third of the Earth’s surface.* |\n\n---\n\n### Step 2–4: Investigate, Record & Reflect (14 minutes)\n1. **Investigate (8 min):** Use a search engine or an online encyclopedia to check the facts in Answers A, B, and C against at least one trusted source.\n2. **Record (4 min):** In your **Personal Study Notes**, note for A, B, and C: *Claim checked → True or false? → Source used*.\n3. **Reflect (2 min):**\n   - Which answer contained the made-up claim, and how did you find it?\n   - Why was it hard to notice by reading alone?\n   - What will you do next time a chatbot gives you a fact?\n\n---\n\n### Answer Guide\n| Answer | Result |\n| :--- | :--- |\n| **A** | **Accurate.** The tower is in Paris, was completed in 1889 for the World’s Fair, and was designed by Gustave Eiffel’s company. It was the world’s tallest man-made structure until the Chrysler Building was completed in 1930. |\n| **B** | **Contains the made-up claim.** Marie Curie was born in Warsaw, won the Nobel Prize in Physics (1903) and in Chemistry (1911), and was the first person to win two Nobel Prizes. She **did not** win a third prize—the claim about a Nobel Prize in Medicine in 1921 is invented. |\n| **C** | **Accurate.** The Pacific is the largest and deepest ocean, the Mariana Trench is about 11,000 meters deep, and the Pacific covers roughly one third of the Earth’s surface. |\n\n> **Key lesson to repeat:** A hallucination can sit inside an answer that is mostly correct, and it sounds just as confident as the true parts.",
             "duration_seconds": 1020,
             "position": 2,
             "is_free_preview": false,
@@ -770,7 +770,7 @@
             "section_id": "sec_aif_03",
             "title": "3.3 Module 3 Knowledge Check (5 Questions from 10-Question Bank)",
             "type": "quiz",
-            "summary": "5 questions randomly drawn from a 10-question Module 3 bank with instant feedback.",
+            "summary": "5 questions randomly drawn from the 10-question Module 3 bank with instant feedback.",
             "duration_seconds": 600,
             "position": 3,
             "is_free_preview": false,
@@ -779,141 +779,139 @@
               {
                 "id": "q_aif_03_1",
                 "lesson_id": "les_aif_03_03",
-                "question": "A chatbot gives you a confident answer with a citation. What should you do before relying on it?",
+                "question": "Generative AI is best described as AI that…",
                 "options": [
-                  "Confirm the source exists and says what the chatbot claims",
-                  "Assume it is true because the citation has page numbers",
-                  "Ask the chatbot if it promises it is telling the truth",
-                  "Share it immediately without checking"
+                  "Only sorts and recognizes things",
+                  "Creates new content, such as text, images, or sound",
+                  "Only works on the internet",
+                  "Replaces all computers"
                 ],
-                "correct_option_index": 0,
-                "explanation": "LLMs can invent realistic-looking titles, authors, and page numbers. Always verify the source exists and supports the claim.",
+                "correct_option_index": 1,
+                "explanation": "Generative AI creates new content. Other AI tools, like a spam filter, only recognize or sort.",
                 "position": 1
               },
               {
                 "id": "q_aif_03_2",
                 "lesson_id": "les_aif_03_03",
-                "question": "How does a Large Language Model (LLM) generate a sentence?",
+                "question": "How does a chatbot mainly produce its answers?",
                 "options": [
-                  "By predicting the most statistically likely next word (or token) based on patterns in its training text",
-                  "By copying and pasting from a live human chat agent",
-                  "By consulting a guaranteed-true internal fact table",
-                  "By understanding the world consciously like a human"
+                  "By looking up one correct answer in a book",
+                  "By predicting likely next words from patterns it learned in large amounts of text",
+                  "By asking a person in another room",
+                  "By copying one web page exactly"
                 ],
-                "correct_option_index": 0,
-                "explanation": "LLMs are next-word prediction models trained on huge text datasets.",
+                "correct_option_index": 1,
+                "explanation": "A language model builds answers one small piece at a time by predicting what is likely to come next.",
                 "position": 2
               },
               {
                 "id": "q_aif_03_3",
                 "lesson_id": "les_aif_03_03",
-                "question": "Which task is Generative AI generally STRONGEST at?",
+                "question": "What is a hallucination in AI?",
                 "options": [
-                  "Drafting, summarizing, translating, and brainstorming ideas",
-                  "Guaranteeing 100% accurate medical diagnoses without a doctor",
-                  "Providing real-time stock prices without web access",
-                  "Keeping your pasted passwords completely offline"
+                  "A picture that is too bright",
+                  "A confident answer that is false or made up",
+                  "A slow computer",
+                  "A message that is too short"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Chatbots shine at language tasks like drafting, summarizing, and brainstorming, where a human reviews the output.",
+                "correct_option_index": 1,
+                "explanation": "A hallucination sounds sure but is wrong, such as an invented book title or statistic.",
                 "position": 3
               },
               {
                 "id": "q_aif_03_4",
                 "lesson_id": "les_aif_03_03",
-                "question": "What is Step 4 of the Verification Habit?",
+                "question": "Which is a sensible use of a chatbot?",
                 "options": [
-                  "Never paste in private or confidential information",
-                  "Always paste your bank PIN for faster verification",
-                  "Delete your browser history after every prompt",
-                  "Only use AI on Tuesdays"
+                  "Writing a first draft of a letter that you then review and improve",
+                  "Making a final medical decision without asking anyone",
+                  "Sharing your bank password to get help",
+                  "Copying its answer into an exam without checking"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Protecting privacy means never pasting passwords, private documents, or sensitive personal data into public chatbots.",
+                "explanation": "Drafting is a strength of chatbots, as long as you review the result yourself.",
                 "position": 4
               },
               {
                 "id": "q_aif_03_5",
                 "lesson_id": "les_aif_03_03",
-                "question": "Why do AI hallucinations happen?",
+                "question": "A chatbot gives you a surprising statistic. What should you do first?",
                 "options": [
-                  "Because LLMs predict words that sound plausible together rather than checking whether a claim is true",
-                  "Because the internet is broken",
-                  "Because chatbots want to trick users on purpose",
-                  "Because the screen resolution is too low"
+                  "Share it right away",
+                  "Cross-check it with a trusted source",
+                  "Ask the chatbot to repeat it louder",
+                  "Ignore the rest of the answer"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Fluency is not truth: next-word prediction can produce smooth, confident falsehoods.",
+                "correct_option_index": 1,
+                "explanation": "Surprising or exact numbers are a good reason to cross-check with a trusted source before using them.",
                 "position": 5
               },
               {
                 "id": "q_aif_03_6",
                 "lesson_id": "les_aif_03_03",
-                "question": "At a high level, how does an AI image generator create a new picture from a text prompt?",
+                "question": "A chatbot gives you a web link as its source. What is the best next step?",
                 "options": [
-                  "It refines visual noise step by step into pixels that match patterns it learned from captioned images",
-                  "It hires an artist behind the scenes",
-                  "It takes a live screenshot of your webcam",
-                  "It copies one single existing photo without changing anything"
+                  "Trust it because it looks real",
+                  "Open the link and confirm it exists and says what the chatbot claims",
+                  "Delete the answer",
+                  "Ask the chatbot to make the link shorter"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Image generators learn text-to-pixel patterns and refine noise into an image matching the prompt.",
+                "correct_option_index": 1,
+                "explanation": "Chatbots can invent links and sources, so you must open them and confirm.",
                 "position": 6
               },
               {
                 "id": "q_aif_03_7",
                 "lesson_id": "les_aif_03_03",
-                "question": "Which of these is a known LIMIT of standard chatbots?",
+                "question": "Which information should you never paste into a chatbot?",
                 "options": [
-                  "Outdated knowledge if not connected to live search, plus hallucinations and bias",
-                  "Inability to write in complete sentences",
-                  "Inability to translate between English and Spanish",
-                  "Refusal to summarize short paragraphs"
+                  "A question about a recipe",
+                  "A request to explain photosynthesis",
+                  "Passwords, ID numbers, or private documents",
+                  "A request for party ideas"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Standard LLMs have training cutoff dates, can hallucinate, and can reflect biases from web data.",
+                "correct_option_index": 2,
+                "explanation": "Private information may be stored or used by the tool, so keep it out of chatbots.",
                 "position": 7
               },
               {
                 "id": "q_aif_03_8",
                 "lesson_id": "les_aif_03_03",
-                "question": "What is the best way to cross-check an AI answer about a medical or legal rule?",
+                "question": "True or false: If a chatbot sounds confident, its answer must be correct.",
                 "options": [
-                  "Check an official government, medical, or legal primary source independently",
-                  "Ask the same chatbot a second time",
-                  "Trust the answer if it uses bullet points",
-                  "Assume longer answers are always verified"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "High-stakes claims must be verified against trusted primary sources.",
+                "correct_option_index": 1,
+                "explanation": "Chatbots can sound very sure even when they are wrong. Always check important facts.",
                 "position": 8
               },
               {
                 "id": "q_aif_03_9",
                 "lesson_id": "les_aif_03_03",
-                "question": "In \"Spot the Hallucination,\" how can you catch a fake journal or magazine citation?",
+                "question": "Why might a chatbot not know about very recent events?",
                 "options": [
-                  "Search for the exact title, author, and volume/date on a trusted search engine or library catalog",
-                  "Count the number of commas in the citation",
-                  "Ask a friend if the title sounds academic",
-                  "Check whether the font is bold"
+                  "It is switched off at night",
+                  "Its learning data stops at a certain date, called a knowledge cutoff, unless it can search the web",
+                  "It dislikes the news",
+                  "Recent events are never written down"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Searching the exact title and publication quickly reveals whether a citation is real or fabricated.",
+                "correct_option_index": 1,
+                "explanation": "A model only knows what was in its training data. Some tools add web search, but checking is still wise.",
                 "position": 9
               },
               {
                 "id": "q_aif_03_10",
                 "lesson_id": "les_aif_03_03",
-                "question": "Why should you avoid pasting confidential client or family records into a free public chatbot?",
+                "question": "Why can a chatbot’s answers show bias?",
                 "options": [
-                  "Prompts may be stored or used for future model review and training, creating privacy risks",
-                  "The chatbot will run out of battery",
-                  "Private documents cannot be read by computers",
-                  "It makes the chatbot talk slower"
+                  "Because it learned from human writing that can be unbalanced or unfair",
+                  "Because it has opinions like a person",
+                  "Because it is too fast",
+                  "Because it uses too much electricity"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Public AI tools often log prompts, so sensitive personal or work data should never be pasted in.",
+                "explanation": "A model learns patterns from its data. If the data is unbalanced, the answers can reflect that.",
                 "position": 10
               }
             ]
