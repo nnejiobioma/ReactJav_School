@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import confetti from 'canvas-confetti';
-import { HelpCircle, CheckCircle2, XCircle, RotateCcw, Award, ArrowRight, Edit3, Plus } from 'lucide-react';
+import { HelpCircle, CheckCircle2, XCircle, RotateCcw, Award, ArrowRight, Edit3, Plus, Shuffle } from 'lucide-react';
 import { QuizQuestion } from '@/types';
 import QuizQuestionEditorModal from '@/components/quiz/QuizQuestionEditorModal';
 
@@ -14,6 +14,18 @@ interface QuizRunnerProps {
   onUpdateQuestions?: (questions: QuizQuestion[]) => void;
 }
 
+const MAX_QUESTIONS_PER_ATTEMPT = 5;
+
+function sampleQuestionBank(bank: QuizQuestion[], count: number): QuizQuestion[] {
+  if (!bank || bank.length <= count) return bank || [];
+  const shuffled = [...bank];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, count);
+}
+
 export default function QuizRunner({
   questions,
   lessonTitle,
@@ -21,12 +33,33 @@ export default function QuizRunner({
   canEdit = false,
   onUpdateQuestions,
 }: QuizRunnerProps) {
+  const [activeQuestions, setActiveQuestions] = useState<QuizQuestion[]>(() =>
+    sampleQuestionBank(questions, MAX_QUESTIONS_PER_ATTEMPT)
+  );
+  const [attemptNumber, setAttemptNumber] = useState(1);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
   const [isFinished, setIsFinished] = useState(false);
   const [isEditingQuestions, setIsEditingQuestions] = useState(false);
+
+  const drawNewAttemptQuestions = useCallback(
+    (sourceBank: QuizQuestion[]) => {
+      setActiveQuestions(sampleQuestionBank(sourceBank, MAX_QUESTIONS_PER_ATTEMPT));
+      setCurrentIdx(0);
+      setSelectedOption(null);
+      setShowExplanation(false);
+      setUserAnswers({});
+      setIsFinished(false);
+    },
+    []
+  );
+
+  useEffect(() => {
+    drawNewAttemptQuestions(questions);
+    setAttemptNumber(1);
+  }, [questions, lessonTitle, drawNewAttemptQuestions]);
 
   if (!questions || questions.length === 0) {
     return (
@@ -75,7 +108,9 @@ export default function QuizRunner({
     );
   }
 
-  const currentQ = questions[currentIdx];
+  const isQuestionBank = questions.length > MAX_QUESTIONS_PER_ATTEMPT;
+  const quizQuestions = activeQuestions.length > 0 ? activeQuestions : questions;
+  const currentQ = quizQuestions[currentIdx] || quizQuestions[0];
 
   const handleSelectOption = (index: number) => {
     if (showExplanation) return; // Prevent changing after revealing
@@ -89,7 +124,7 @@ export default function QuizRunner({
   };
 
   const handleNext = () => {
-    if (currentIdx + 1 < questions.length) {
+    if (currentIdx + 1 < quizQuestions.length) {
       setCurrentIdx(currentIdx + 1);
       setSelectedOption(null);
       setShowExplanation(false);
@@ -102,13 +137,13 @@ export default function QuizRunner({
 
   const calculateResults = () => {
     let correctCount = 0;
-    questions.forEach((q, idx) => {
+    quizQuestions.forEach((q, idx) => {
       if (userAnswers[idx] === q.correct_option_index) {
         correctCount++;
       }
     });
 
-    const percent = Math.round((correctCount / questions.length) * 100);
+    const percent = Math.round((correctCount / quizQuestions.length) * 100);
     if (percent >= 70) {
       // Passed! Trigger confetti celebration
       try {
@@ -125,18 +160,15 @@ export default function QuizRunner({
   };
 
   const handleRestart = () => {
-    setCurrentIdx(0);
-    setSelectedOption(null);
-    setShowExplanation(false);
-    setUserAnswers({});
-    setIsFinished(false);
+    drawNewAttemptQuestions(questions);
+    setAttemptNumber((n) => n + 1);
   };
 
   // Score calculations if finished
-  const totalCorrect = questions.filter(
+  const totalCorrect = quizQuestions.filter(
     (q, idx) => userAnswers[idx] === q.correct_option_index
   ).length;
-  const scorePercent = Math.round((totalCorrect / questions.length) * 100);
+  const scorePercent = Math.round((totalCorrect / quizQuestions.length) * 100);
   const isPassed = scorePercent >= 70;
 
   if (isFinished) {
@@ -163,16 +195,22 @@ export default function QuizRunner({
           {isPassed ? 'Knowledge Check Passed!' : 'Review Recommended'}
         </h2>
 
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: '1rem' }}>
           {isPassed
-            ? `Fantastic work! You scored ${scorePercent}% (${totalCorrect}/${questions.length} correct). This lesson is now marked completed.`
-            : `You scored ${scorePercent}% (${totalCorrect}/${questions.length} correct). A score of 70% or higher is required to master this module.`}
+            ? `Fantastic work! You scored ${scorePercent}% (${totalCorrect}/${quizQuestions.length} correct). This lesson is now marked completed.`
+            : `You scored ${scorePercent}% (${totalCorrect}/${quizQuestions.length} correct). A score of 70% or higher is required to master this module.`}
         </p>
+
+        {isQuestionBank && (
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', marginBottom: '1.5rem' }}>
+            Question Bank Active ({questions.length} total questions in pool) — clicking Retake draws a fresh 5-question variation.
+          </p>
+        )}
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
           <button onClick={handleRestart} className="btn btn-secondary">
             <RotateCcw size={16} />
-            <span>Retake Assessment</span>
+            <span>{isQuestionBank ? 'Retake Assessment (New Question Set)' : 'Retake Assessment'}</span>
           </button>
         </div>
       </div>
@@ -195,8 +233,28 @@ export default function QuizRunner({
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
           <HelpCircle size={20} color="var(--accent-amber)" />
           <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-            Checkpoint Assessment
+            5-Question Knowledge Check
           </span>
+          {isQuestionBank && (
+            <span
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.3rem',
+                fontSize: '0.72rem',
+                fontWeight: 600,
+                padding: '0.2rem 0.55rem',
+                borderRadius: '9999px',
+                background: 'rgba(99, 102, 241, 0.12)',
+                color: '#a5b4fc',
+                border: '1px solid rgba(99, 102, 241, 0.3)',
+              }}
+              title="Questions are randomly drawn from a larger module question bank so retakes vary"
+            >
+              <Shuffle size={11} />
+              <span>Bank Pool: {quizQuestions.length} of {questions.length} (Attempt #{attemptNumber})</span>
+            </span>
+          )}
           {canEdit && onUpdateQuestions && (
             <button
               onClick={() => setIsEditingQuestions(true)}
@@ -215,7 +273,7 @@ export default function QuizRunner({
               title="Edit Checkpoint Assessment questions"
             >
               <Edit3 size={13} />
-              <span>Edit Questions ({questions.length})</span>
+              <span>Edit Bank ({questions.length})</span>
             </button>
           )}
         </div>
@@ -226,7 +284,7 @@ export default function QuizRunner({
           padding: '0.2rem 0.6rem',
           borderRadius: '9999px',
         }}>
-          Question {currentIdx + 1} of {questions.length}
+          Question {currentIdx + 1} of {quizQuestions.length}
         </span>
       </div>
 
@@ -324,7 +382,7 @@ export default function QuizRunner({
           </button>
         ) : (
           <button onClick={handleNext} className="btn btn-primary">
-            <span>{currentIdx + 1 === questions.length ? 'View Results' : 'Next Question'}</span>
+            <span>{currentIdx + 1 === quizQuestions.length ? 'View Results' : 'Next Question'}</span>
             <ArrowRight size={16} />
           </button>
         )}
@@ -340,11 +398,7 @@ export default function QuizRunner({
           onSave={(newQuestions) => {
             onUpdateQuestions(newQuestions);
             setIsEditingQuestions(false);
-            setCurrentIdx(0);
-            setSelectedOption(null);
-            setShowExplanation(false);
-            setUserAnswers({});
-            setIsFinished(false);
+            drawNewAttemptQuestions(newQuestions);
           }}
         />
       )}

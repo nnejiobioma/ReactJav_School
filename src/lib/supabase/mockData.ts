@@ -191,28 +191,28 @@ When rewriting a suboptimal AI response during annotation, annotators craft a **
   {
     id: 'crs_ai_basics_02',
     instructor_id: 'usr_instructor_001',
-    title: 'AI Basics - Getting Started with AI',
+    title: 'AI Foundations: Getting Started with AI',
     slug: 'ai-basics-getting-started-with-ai',
-    previous_slugs: ['data-analytics-career-accelerator'],
-    description: 'Your complete foundational launchpad into Artificial Intelligence. Understand how AI and machine learning work, explore generative AI tools across text, image, and audio, and build practical AI-powered workflows from scratch with zero prior coding required.',
+    previous_slugs: ['ai-foundations', 'data-analytics-career-accelerator'],
+    description: 'After this course, anyone can explain what AI is, how it learns, what it can and can’t do, and how to use it responsibly. Features 4 structured modules with question-bank knowledge checks, a 1-hour no-code Guided Lab, and the 2-hour “AI in My Life” Authentic Assessment with Open Badge credentials.',
     category: 'AI Foundations',
     track: 'AI Foundations',
     level: 'Beginner',
-    outcome_hook: 'Build rock-solid AI literacy, master everyday generative AI tools, and automate real-world workflows from day one.',
-    duration_weeks: 6,
-    weekly_hours: '8-12 hrs/week',
+    outcome_hook: 'After this course, anyone can explain what AI is, how it learns, what it can and can’t do, and how to use it responsibly.',
+    duration_weeks: 1,
+    weekly_hours: '7 hours total (No Coding | No Prerequisites)',
     skills: [
-      'AI Literacy',
-      'Machine Learning Basics',
-      'Generative AI Tools',
-      'AI Workflow Automation',
+      'AI vs. ML vs. DL vs. GenAI',
+      'How AI Learns from Data',
+      'Everyday AI Systems Audit',
+      'LLM Hallucination Verification',
       'Responsible AI & Ethics',
-      'Problem Solving with AI',
+      'No-Code Image Classification',
     ],
-    sponsorship_note: 'Fully Funded / Free Access',
+    sponsorship_note: 'Fully Funded / Free Access (No-Login Tools)',
     is_now_open: true,
     is_popular: true,
-    cohort_date: 'Rolling Admissions',
+    cohort_date: 'Self-Paced (7 Hours)',
     price: 0.00,
     thumbnail_url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
     is_published: true,
@@ -223,103 +223,1293 @@ When rewriting a suboptimal AI response during annotation, annotators craft a **
     instructor: DEFAULT_INSTRUCTOR_PROFILE,
     sections: [
       {
-        id: 'sec_aib_01',
+        id: 'sec_aif_00',
         course_id: 'crs_ai_basics_02',
-        title: 'Module 1: Demystifying Artificial Intelligence & Machine Learning',
+        title: 'Segment 1: Orientation and Self-Check (0.5h)',
         position: 1,
         lessons: [
           {
-            id: 'les_aib_01_01',
-            section_id: 'sec_aib_01',
-            title: '1.1 What is Artificial Intelligence? From Rule-Based Systems to Generative AI',
-            type: 'video',
-            video_url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-            content: 'Clear, jargon-free breakdown of Artificial Intelligence, Machine Learning, Deep Learning, and Generative AI—and how they power modern applications.',
-            duration_seconds: 480,
+            id: 'les_aif_00_01',
+            section_id: 'sec_aif_00',
+            title: '0.1 Course Map, Learning Outcomes, Grading & Core Glossary',
+            type: 'article',
+            summary: 'Welcome to AI Foundations! Review the 7-hour course map, the 5 core learning outcomes, the mixed-model grading structure (70% to pass, 90% for Distinction), and the foundational glossary of AI terms.',
+            implementation_tip: 'Bookmark the Glossary of Key Terms in this lesson—your Authentic Assessment explainer is automatically checked for at least 5 of these core terms.',
+            content: `### Welcome to Course 1: AI Foundations
+**Level:** Beginner | **Length:** 7 Hours | **Coding Required:** None | **Prerequisites:** None
+
+> **Course Promise:** *After this course, anyone can explain what AI is, how it learns, what it can and can’t do, and how to use it responsibly.*
+
+---
+
+### Learning Outcomes
+By the end of this course, you will be able to:
+1. **Define AI** and distinguish between Artificial Intelligence (AI), Machine Learning (ML), Deep Learning (DL), and Generative AI (GenAI).
+2. **Explain in plain language** how an AI system learns from data to make predictions.
+3. **Identify AI systems in everyday life** and describe their inputs, outputs, benefits, and risks.
+4. **Describe what large language models (LLMs) do well**, where they fail (hallucinations, bias), and how to check their output.
+5. **Make informed decisions** about when and how to use AI responsibly.
+
+---
+
+### 7-Hour Course Time Plan
+| Segment | Time | What You Will Do |
+| :--- | :--- | :--- |
+| **Orientation & Self-Check** | **0.5h (30m)** | Course map, a short "What do I already know?" quiz, and a glossary of key terms |
+| **Module 1: What is AI?** | **0.75h (45m)** | Short history, definitions, the AI/ML/DL/GenAI map, common myths + Activity + 5-Question Check |
+| **Module 2: How AI Learns** | **0.75h (45m)** | Data, training, models, prediction, and why data quality matters, with simple analogies + Activity + 5-Question Check |
+| **Module 3: Generative AI & Chatbots** | **0.75h (45m)** | How LLMs generate text and images, strengths, limits, hallucinations + Activity + 5-Question Check |
+| **Module 4: AI in Society** | **0.75h (45m)** | Everyday and industry uses, bias, privacy, jobs and careers, where to go next + Activity + 5-Question Check |
+| **Guided Lab** | **1.0h (60m)** | Train a simple image classifier with a free no-code tool, then test a chatbot on easy and tricky questions |
+| **Authentic Assessment** | **2.0h (120m)** | **"AI in My Life" Audit** (5 systems audit, 3-question hallucination test, plain-language explainer or model card critique, and reflection) |
+| **Reflection & Review** | **0.5h (30m)** | Short reflection, feedback survey, Certificate of Completion, and Open Badge |
+
+*Each of the 4 core modules follows the same predictable rhythm: a **Reading**, a **Short Activity**, and a **5-Question Knowledge Check** with instant feedback drawn from a randomized question bank.*
+
+---
+
+### Mixed-Model Grading & Credentials
+Your grade combines **Automated Checks (50%)** and a **4-Level Rubric (50%)**:
+- **Automated Checks (50% total)**:
+  - **Module Knowledge Checks (25%)**: Drawn from a module question bank so retakes vary.
+  - **Submission Validation (25%)**: Confirms all 5 everyday AI systems have every field filled, the hallucination test includes screenshot references and a verification note, glossary terms appear in your explainer, and your explainer & reflection meet length/duration limits.
+- **4-Level Rubric (50% total — Beginning, Developing, Proficient, Advanced)**:
+  - **Accuracy of AI concepts**: Definitions and explanations are correct, with AI/ML/GenAI distinctions clear.
+  - **Clarity for the audience**: A non-technical reader could understand the explainer without extra help.
+  - **Critical thinking about risks**: Risks are specific to each system, not generic, and verification of chatbot output is credible.
+  - **Reflection**: Connects learning to personal decisions about future AI use.
+- **Pass Rule**: Score **70% or higher in BOTH** the automated and rubric components (students who fall short can revise and resubmit).
+- **Certificate with Distinction**: Score **90% or higher in BOTH** components.
+- **Credentials Earned**:
+  - **Certificate**: *"AI Foundations: Certificate of Completion"*
+  - **Open Badge**: *"AI Foundations"* Open Badge v3.0 containing your verified skills and assessment evidence metadata for LinkedIn or your CV.
+
+---
+
+### Glossary of Key Terms
+1. **Artificial Intelligence (AI)**: Any computer system designed to perform tasks that typically require human intelligence—such as recognizing speech, making decisions, translating languages, or spotting visual patterns.
+2. **Algorithm**: A step-by-step set of rules or mathematical instructions a computer follows to solve a problem or make a calculation.
+3. **Machine Learning (ML)**: A subset of AI where computers learn patterns from data examples rather than following hand-written \`if/then\` rules programmed by humans.
+4. **Training Data**: The collection of examples (text, photos, numbers, audio) fed into a machine learning algorithm so it can discover patterns.
+5. **Training**: The process where an algorithm adjusts its internal mathematical settings over thousands or millions of examples to minimize errors.
+6. **Model**: The finished mathematical "engine" produced after training is complete, capable of making predictions on brand-new inputs.
+7. **Prediction (Inference)**: The output a trained AI model produces when given a new input it hasn't seen before (e.g., predicting whether an email is spam, or predicting the next word in a sentence).
+8. **Deep Learning (DL)**: A specialized subset of Machine Learning inspired by the human brain's structure, using multi-layered **Artificial Neural Networks** to learn complex patterns from massive datasets (like raw images, voice, and natural language).
+9. **Generative AI (GenAI)**: A subset of Deep Learning that creates *brand-new* content—such as text, images, audio, or video—rather than simply classifying or labeling existing data.
+10. **Large Language Model (LLM)**: A Generative AI system trained on vast amounts of text that generates human-like writing by predicting the most statistically likely next word (token) in a sequence.
+11. **Token**: A chunk of text (roughly three-quarters of a word, a whole word, or a punctuation mark) that an LLM reads and generates one step at a time.
+12. **Hallucination**: When a Generative AI model confidently fabricates false facts, nonexistent quotes, or fake citations because those words sound statistically plausible together.
+13. **Algorithmic Bias**: Systematic and unfair errors in an AI system's output caused by unrepresentative, skewed, or historically prejudiced training data.
+14. **Model Card**: A standardized documentation sheet published alongside an AI model that transparently explains what data it was trained on, its intended uses, its known limitations, and its safety evaluations.`,
+            duration_seconds: 1200,
             position: 1,
             is_free_preview: true,
             is_completed: false,
+            resources: [
+              {
+                id: 'res_aif_glossary',
+                name: 'AI_Foundations_Glossary_and_Course_Map.txt',
+                size: '24 KB',
+                type: 'TXT',
+                description: 'Complete AI Foundations Glossary (14 key terms), 7-hour study planner, and mixed-model grading checklist.',
+              },
+            ],
           },
           {
-            id: 'les_aib_01_02',
-            section_id: 'sec_aib_01',
-            title: '1.2 How Machines Learn: Supervised, Unsupervised & Reinforcement Learning',
-            type: 'article',
-            content: `### How Do Machines Actually Learn from Data?
-
-Unlike traditional software where a programmer writes explicit \`if/else\` rules for every scenario, **Machine Learning (ML)** systems discover patterns directly from examples.
-
-#### The 3 Core Paradigms of Machine Learning:
-1. **Supervised Learning**: Learning from labeled examples (e.g., training a spam filter on 100,000 emails labeled \`spam\` or \`not spam\`).
-2. **Unsupervised Learning**: Discovering hidden structure in unlabeled data (e.g., grouping customers with similar purchasing habits into clusters).
-3. **Reinforcement Learning**: Learning through trial, error, and reward signals—the same principle used to align conversational AI assistants with human preferences.
-
-#### Why Generative AI Changed Everything:
-Traditional ML models *classify* or *predict* a number. **Generative AI** models create brand-new text, code, images, and audio by learning the deep statistical structure of human knowledge.`,
-            duration_seconds: 390,
-            position: 2,
-            is_free_preview: true,
-            is_completed: false,
-          },
-          {
-            id: 'les_aib_01_03',
-            section_id: 'sec_aib_01',
-            title: '1.3 Checkpoint Quiz: Core AI Concepts',
+            id: 'les_aif_00_02',
+            section_id: 'sec_aif_00',
+            title: '0.2 Self-Check: “What Do I Already Know?” Diagnostic Quiz',
             type: 'quiz',
-            duration_seconds: 240,
-            position: 3,
+            duration_seconds: 600,
+            position: 2,
             is_free_preview: true,
             is_completed: false,
             quiz_questions: [
               {
-                id: 'q_aib_01',
-                lesson_id: 'les_aib_01_03',
-                question: 'What distinguishes Machine Learning from traditional rule-based programming?',
+                id: 'q_aif_00_1',
+                lesson_id: 'les_aif_00_02',
+                question: 'Which statement best describes the relationship between Artificial Intelligence (AI), Machine Learning (ML), and Generative AI?',
                 options: [
-                  'Machine Learning algorithms learn patterns from data rather than relying solely on hand-coded if/else rules',
-                  'Machine Learning only runs on quantum computers',
-                  'Machine Learning does not use any data inputs',
-                  'Traditional programming cannot run on web servers',
+                  'Machine Learning is a subset of AI, and Generative AI is a specialized subset within Machine Learning and Deep Learning',
+                  'Generative AI was invented in the 1950s and Machine Learning was invented in 2022',
+                  'AI, Machine Learning, and Generative AI are three completely unrelated technologies',
+                  'All AI systems are chatbots that generate text',
                 ],
                 correct_option_index: 0,
-                explanation: 'Instead of hard-coding every rule, Machine Learning models infer patterns from training data to generalize to unseen inputs.',
+                explanation: 'Think of them as nesting dolls: AI is the broadest field, Machine Learning is a subset that learns from data, Deep Learning uses neural networks inside ML, and Generative AI is a subset of Deep Learning that creates new content.',
                 position: 1,
+              },
+              {
+                id: 'q_aif_00_2',
+                lesson_id: 'les_aif_00_02',
+                question: 'How does a Machine Learning spam filter learn to block unwanted emails?',
+                options: [
+                  'By analyzing thousands of example emails labeled "spam" or "not spam" to discover statistical patterns',
+                  'A human employee reads every incoming email in real time before it reaches your inbox',
+                  'It understands human emotions and feels annoyed by sales pitches',
+                  'It blocks all emails that contain more than 50 words',
+                ],
+                correct_option_index: 0,
+                explanation: 'Machine learning systems learn from training data—in this case, thousands of historical emails labeled spam or legitimate—to predict how to classify new messages.',
+                position: 2,
+              },
+              {
+                id: 'q_aif_00_3',
+                lesson_id: 'les_aif_00_02',
+                question: 'In the context of chatbots and Large Language Models (LLMs), what is a "hallucination"?',
+                options: [
+                  'When the AI confidently generates false or fabricated information that sounds believable',
+                  'When the computer screen flickers due to a graphics card bug',
+                  'When an AI model becomes self-aware and dreams',
+                  'When a user types a typo into the chat box',
+                ],
+                correct_option_index: 0,
+                explanation: 'Because LLMs predict the next plausible-sounding word rather than looking up verified facts in a database, they can invent fake facts, dates, or citations with complete confidence.',
+                position: 3,
+              },
+              {
+                id: 'q_aif_00_4',
+                lesson_id: 'les_aif_00_02',
+                question: 'Which of the following everyday tools relies on AI to personalize its output for you?',
+                options: [
+                  'All of these: video streaming recommendations, GPS traffic routing, and phone face unlock',
+                  'A standard pocket calculator multiplying 12 by 15',
+                  'A static printed restaurant menu',
+                  'A basic kitchen timer counting down 5 minutes',
+                ],
+                correct_option_index: 0,
+                explanation: 'Streaming recommendations, live GPS route prediction, and biometric face recognition all use trained machine learning models to make predictions from data.',
+                position: 4,
+              },
+              {
+                id: 'q_aif_00_5',
+                lesson_id: 'les_aif_00_02',
+                question: 'Which practice is essential when using a public AI chatbot for work or study?',
+                options: [
+                  'Never paste sensitive personal data (like medical records, passwords, or private client info) and always verify important factual claims',
+                  'Trust every citation and statistic the chatbot provides without checking outside sources',
+                  'Share your private banking passwords so the chatbot can verify your identity',
+                  'Copy and paste AI outputs directly as legal or medical advice',
+                ],
+                correct_option_index: 0,
+                explanation: 'Responsible AI use requires protecting private data and keeping a human in the loop to verify facts, citations, and high-stakes decisions.',
+                position: 5,
               },
             ],
           },
         ],
       },
       {
-        id: 'sec_aib_02',
+        id: 'sec_aif_01',
         course_id: 'crs_ai_basics_02',
-        title: 'Module 2: Practical AI Workflows, Safety & Responsible AI',
+        title: 'Module 1: What is AI? (0.75h)',
         position: 2,
         lessons: [
           {
-            id: 'les_aib_02_01',
-            section_id: 'sec_aib_02',
-            title: '2.1 Building Your Daily AI Copilot Stack for Research, Writing & Analysis',
-            type: 'video',
-            video_url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
-            content: 'Hands-on walkthrough of combining conversational AI, document synthesis, and verification workflows to multiply your daily output.',
-            duration_seconds: 510,
+            id: 'les_aif_01_01',
+            section_id: 'sec_aif_01',
+            title: '1.1 Reading: Short History, Definitions, the AI/ML/DL/GenAI Map & Common Myths',
+            type: 'article',
+            summary: 'Explore the 70-year journey of Artificial Intelligence, master the nesting-doll map of AI, Machine Learning, Deep Learning, and Generative AI, and separate science-fiction myths from real-world technology.',
+            implementation_tip: 'When explaining AI to a non-technical friend, use the Russian nesting-doll analogy: AI is the outer doll, Machine Learning is inside it, Deep Learning is inside ML, and Generative AI is the innermost doll.',
+            content: `### Module 1 Reading: What is Artificial Intelligence?
+
+#### 1. A Plain-Language Definition of AI
+**Artificial Intelligence (AI)** is an umbrella term for any computer software that performs tasks that previously required human intelligence—such as recognizing faces, translating spoken languages, spotting fraud, or drafting an email.
+
+Crucially, **not all software is AI**:
+- **Traditional Rule-Based Software (Not AI / Classic Automation)**: A payroll spreadsheet that calculates \`Hours Worked × Hourly Rate = Paycheck\` is following strict, fixed formulas written by a human programmer. It never adapts or learns from experience.
+- **AI Systems**: Systems that either apply complex decision logic or—in almost all modern AI—**learn patterns directly from data** so they can handle messy, real-world inputs (like a blurry photo of a stop sign in the rain).
+
+---
+
+#### 2. A Short History of AI: From Rules to Generative AI
+- **1950s – The Birth of AI**: Alan Turing proposes the famous question *"Can machines think?"* (1950), and John McCarthy coins the term **"Artificial Intelligence"** at the 1956 Dartmouth Workshop. Early pioneers believed human-level AI was just a decade away.
+- **1960s–1980s – Symbolic AI ("Good Old-Fashioned AI") & AI Winters**: Early AI relied on **Expert Systems**—thousands of hand-written \`IF/THEN\` rules crafted by human doctors or engineers. When these brittle rulebooks failed to handle the messy real world, funding dried up during periods known as **AI Winters**.
+- **1990s–2000s – The Rise of Machine Learning**: Instead of writing rules by hand, researchers fed large datasets into statistical algorithms so computers could discover patterns themselves. In 1997, IBM's Deep Blue defeated world chess champion Garry Kasparov.
+- **2010s – The Deep Learning Revolution**: Powered by massive internet datasets and fast graphics chips (GPUs), multi-layered **Artificial Neural Networks (Deep Learning)** achieved breakthroughs in image recognition, voice assistants (Siri, Alexa), and real-time translation.
+- **2020s – Generative AI Goes Mainstream**: With the invention of the **Transformer** architecture (2017) and the launch of consumer chatbots and image generators, AI shifted from merely *classifying* existing data to *generating* brand-new essays, code, art, and audio.
+
+---
+
+#### 3. The AI / ML / DL / GenAI Map (The 4 Concentric Circles)
+People often use "AI," "Machine Learning," and "ChatGPT" as if they mean the exact same thing. In reality, they fit inside one another like four concentric circles:
+
+\`\`\`
++-------------------------------------------------------------------+
+| 1. ARTIFICIAL INTELLIGENCE (AI)                                   |
+|    Any system that mimics human tasks (including rule systems)    |
+|  +-------------------------------------------------------------+  |
+|  | 2. MACHINE LEARNING (ML)                                    |  |
+|  |    Systems that learn statistical patterns from DATA        |  |
+|  |    (e.g., Spam filters, Netflix recommendations, Fraud)     |  |
+|  |  +-------------------------------------------------------+  |  |
+|  |  | 3. DEEP LEARNING (DL)                                 |  |  |
+|  |  |    ML using multi-layered Neural Networks             |  |  |
+|  |  |    (e.g., Face ID, Medical scan diagnostics, Voice)   |  |  |
+|  |  |  +-------------------------------------------------+  |  |  |
+|  |  |  | 4. GENERATIVE AI (GenAI)                        |  |  |  |
+|  |  |  |    DL models that CREATE new text, images, code |  |  |  |
+|  |  |  |    (e.g., ChatGPT, Claude, Gemini, Midjourney)  |  |  |  |
+|  |  |  +-------------------------------------------------+  |  |  |
+|  |  +-------------------------------------------------------+  |  |
+|  +-------------------------------------------------------------+  |
++-------------------------------------------------------------------+
+\`\`\`
+
+---
+
+#### 4. Busting 4 Common Myths About AI
+| Common Myth | The Reality |
+| :--- | :--- |
+| **Myth 1: "AI thinks and feels like a human brain."** | **Reality:** AI has zero consciousness, feelings, beliefs, or intentions. It is a high-speed mathematical pattern-matching engine. |
+| **Myth 2: "All AI is Generative AI (like ChatGPT)."** | **Reality:** Most AI you interact with daily is *predictive* or *classification* ML—like credit card fraud alerts, GPS route timing, and spam filters—not chatbots. |
+| **Myth 3: "Because AI uses math, it is 100% objective and unbiased."** | **Reality:** AI learns from human-created data. If historical data contains human biases or gaps, the AI will learn and amplify those exact biases. |
+| **Myth 4: "AI is always right if it sounds confident."** | **Reality:** Generative AI is designed to produce fluent, confident-sounding language even when it is completely guessing (**hallucinating**). |
+
+---
+
+#### Accessible Video Companion Transcript (Captions & Audio Text)
+> **[Transcript – "The 3-Minute Map of AI"]**: *"Imagine teaching a child to recognize a dog. You don't hand them a geometry textbook measuring ear angles; you show them hundreds of dogs at the park until they spot the pattern. That shift—from rigid rulebooks to learning from examples—is how modern Machine Learning works..."*`,
+            duration_seconds: 1200,
+            position: 1,
+            is_free_preview: true,
+            is_completed: false,
+          },
+          {
+            id: 'les_aif_01_02',
+            section_id: 'sec_aif_01',
+            title: '1.2 Short Activity: Sorting Everyday Tech & Myth-Busting Scenarios',
+            type: 'article',
+            summary: 'Hands-on 15-minute classification activity: sort 6 real-world tools into Traditional Software, Predictive Machine Learning, Deep Learning, or Generative AI.',
+            implementation_tip: 'Ask yourself two questions to classify any tool: (1) Did it learn from data examples, or does it follow fixed rules? (2) Does it output a label/score (Predictive ML) or create brand-new content (Generative AI)?',
+            content: `### Module 1 Short Activity (15 Minutes): Sort the Technology!
+
+Before taking the Module 1 Knowledge Check, complete this quick sorting exercise in your study notes or mentally check your answers against the key below.
+
+#### Part A: Which Circle on the Map Does Each Tool Belong To?
+For each of the 6 tools below, decide whether it is:
+- **(A) Traditional Rule-Based Software (Not AI)**
+- **(B) Predictive / Classification Machine Learning (ML)**
+- **(C) Deep Learning (DL) for Perception**
+- **(D) Generative AI (GenAI)**
+
+1. **A digital thermostat set to turn on the heater whenever the room drops below 68°F (20°C).**
+2. **Your bank's fraud detector that flags an unusual card swipe in another country based on millions of past transactions.**
+3. **A smartphone camera feature that unlocks the screen by recognizing your 3D facial features even when you wear glasses.**
+4. **An AI assistant that writes a 3-paragraph cover letter and creates a custom illustration from a text prompt.**
+5. **An Excel spreadsheet formula \`=SUM(A1:A50)\` that totals your monthly grocery receipts.**
+6. **A music app's "Discover Weekly" playlist that predicts which songs you'll enjoy based on listening patterns of millions of users.**
+
+---
+
+#### Part B: Instant Self-Check Answer Key
+1. **Thermostat → (A) Traditional Rule-Based Software**: It follows a single fixed rule (\`IF temp < 68 THEN heat ON\`). It does not learn from data.
+2. **Bank Fraud Detector → (B) Predictive Machine Learning**: It analyzes historical transaction data to output a probability score ("94% likely fraud").
+3. **Smartphone Face Unlock → (C) Deep Learning**: It uses multi-layered neural networks to process raw pixel and depth sensor data.
+4. **Cover Letter & Illustration Creator → (D) Generative AI**: It generates brand-new text and pixels that did not previously exist.
+5. **Excel \`=SUM()\` Formula → (A) Traditional Rule-Based Software**: Pure deterministic arithmetic—no learning involved.
+6. **Music Recommendation Engine → (B) Predictive Machine Learning**: It predicts which existing songs match your taste profile.`,
+            duration_seconds: 900,
+            position: 2,
+            is_free_preview: true,
+            is_completed: false,
+          },
+          {
+            id: 'les_aif_01_03',
+            section_id: 'sec_aif_01',
+            title: '1.3 Module 1 Knowledge Check (5 Questions Drawn from Question Bank)',
+            type: 'quiz',
+            duration_seconds: 600,
+            position: 3,
+            is_free_preview: true,
+            is_completed: false,
+            quiz_questions: [
+              {
+                id: 'q_aif_01_1',
+                lesson_id: 'les_aif_01_03',
+                question: 'What is the key difference between traditional rule-based software and Machine Learning (ML)?',
+                options: [
+                  'Traditional software follows explicit rules written by programmers, while ML discovers patterns from example data',
+                  'Traditional software only runs on desktop computers, while ML only runs on phones',
+                  'Machine Learning never uses math, whereas traditional software uses math',
+                  'Traditional software can write original poetry, while ML only adds numbers',
+                ],
+                correct_option_index: 0,
+                explanation: 'In traditional programming, humans write the rules. In Machine Learning, humans provide example data and the algorithm learns the patterns.',
+                position: 1,
+              },
+              {
+                id: 'q_aif_01_2',
+                lesson_id: 'les_aif_01_03',
+                question: 'In the AI/ML/DL/GenAI map, how does Generative AI differ from traditional predictive Machine Learning?',
+                options: [
+                  'Generative AI creates brand-new content (text, images, audio), whereas predictive ML labels, scores, or classifies existing data',
+                  'Generative AI was created in 1956, whereas predictive ML was created last year',
+                  'Predictive ML requires no data at all, while Generative AI uses no electricity',
+                  'Generative AI is the outer circle that contains all of computer science',
+                ],
+                correct_option_index: 0,
+                explanation: 'Predictive ML answers questions like "Is this email spam?" (a label), while Generative AI creates new artifacts like an original paragraph or image.',
+                position: 2,
+              },
+              {
+                id: 'q_aif_01_3',
+                lesson_id: 'les_aif_01_03',
+                question: 'Which of the following is an example of Traditional Software (NOT Artificial Intelligence)?',
+                options: [
+                  'A spreadsheet formula that calculates 15% sales tax on a list of prices',
+                  'A voice assistant transcribing your spoken words into a text message',
+                  'An email filter that adapts to new types of phishing scams',
+                  'A chatbot summarizing a 20-page PDF report',
+                ],
+                correct_option_index: 0,
+                explanation: 'A fixed arithmetic formula (price × 0.15) does not learn from data or adapt to patterns—it is classic deterministic software.',
+                position: 3,
+              },
+              {
+                id: 'q_aif_01_4',
+                lesson_id: 'les_aif_01_03',
+                question: 'What is Deep Learning (DL)?',
+                options: [
+                  'A subset of Machine Learning that uses multi-layered artificial neural networks to learn complex patterns from large datasets',
+                  'When a human student studies late at night for an exam',
+                  'A database that stores files at the bottom of the ocean',
+                  'Any computer program written before 1970',
+                ],
+                correct_option_index: 0,
+                explanation: 'Deep Learning gets the word "deep" from the many stacked layers of artificial neural networks used to process complex inputs like images, audio, and text.',
+                position: 4,
+              },
+              {
+                id: 'q_aif_01_5',
+                lesson_id: 'les_aif_01_03',
+                question: 'Why did early "Expert Systems" of the 1970s and 1980s struggle with tasks like recognizing objects in photos?',
+                options: [
+                  'Because humans could not manually write enough IF/THEN rules to cover every lighting angle, background, and variation in the real world',
+                  'Because cameras had not been invented yet',
+                  'Because computers refused to follow IF/THEN rules',
+                  'Because Expert Systems were only allowed to play chess',
+                ],
+                correct_option_index: 0,
+                explanation: 'Real-world perception has too many variations for hand-coded rulebooks; it required Machine Learning and Deep Learning to learn visual features directly from millions of photos.',
+                position: 5,
+              },
+              {
+                id: 'q_aif_01_6',
+                lesson_id: 'les_aif_01_03',
+                question: 'Which statement accurately busts a common myth about Artificial Intelligence?',
+                options: [
+                  'AI does not possess human feelings, consciousness, or personal beliefs—it is a mathematical pattern-recognition system',
+                  'Because AI runs on computers, its decisions are guaranteed to be 100% free of bias',
+                  'If an AI chatbot states a fact in a confident tone, that fact is guaranteed to be true',
+                  'Every AI system in the world is a Large Language Model',
+                ],
+                correct_option_index: 0,
+                explanation: 'Even when an AI chatbot uses polite or conversational words like "I think," it has no consciousness or feelings—it is calculating statistical word patterns.',
+                position: 6,
+              },
+              {
+                id: 'q_aif_01_7',
+                lesson_id: 'les_aif_01_03',
+                question: 'When Netflix or YouTube recommends a video you might like, which category of AI is primarily at work?',
+                options: [
+                  'Machine Learning (specifically a recommendation/prediction model)',
+                  'A 1970s hand-coded calculator',
+                  'A human employee manually picking videos for your account',
+                  'Hardware cooling automation',
+                ],
+                correct_option_index: 0,
+                explanation: 'Recommendation engines use Machine Learning to analyze viewing histories and predict which existing videos you are most likely to watch next.',
+                position: 7,
+              },
+              {
+                id: 'q_aif_01_8',
+                lesson_id: 'les_aif_01_03',
+                question: 'Where was the term "Artificial Intelligence" first coined in 1956?',
+                options: [
+                  'At the Dartmouth Summer Research Project workshop led by John McCarthy and colleagues',
+                  'At the launch of the first iPhone in 2007',
+                  'During the release of ChatGPT in 2022',
+                  'In an ancient Roman mathematics scroll',
+                ],
+                correct_option_index: 0,
+                explanation: 'John McCarthy and fellow researchers coined "Artificial Intelligence" for the 1956 Dartmouth conference, launching AI as an academic field.',
+                position: 8,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec_aif_02',
+        course_id: 'crs_ai_basics_02',
+        title: 'Module 2: How AI Learns (0.75h)',
+        position: 3,
+        lessons: [
+          {
+            id: 'les_aif_02_01',
+            section_id: 'sec_aif_02',
+            title: '2.1 Reading: Data, Training, Models, Prediction & Why Data Quality Matters',
+            type: 'article',
+            summary: 'Understand the 4-stage lifecycle of how AI learns (Data → Training → Model → Prediction), compare Supervised, Unsupervised, and Reinforcement Learning using kitchen-table analogies, and see why data quality makes or breaks any AI system.',
+            implementation_tip: 'Remember the Cooking Analogy: Training Data = raw ingredients, Training = practicing the recipe in the kitchen, the Model = the perfected recipe card, and Prediction = serving a dish to a new guest.',
+            content: `### Module 2 Reading: How AI Learns from Data
+
+#### 1. The 4-Step Loop of Machine Learning
+How does a computer go from knowing nothing to recognizing speech or predicting housing prices? Every machine learning system follows a four-step pipeline:
+
+1. **Data (The Examples)**: We gather thousands or millions of examples—such as past house sales (square footage, neighborhood, bedrooms, and final sale price) or labeled photos of cats and dogs.
+2. **Training (Finding the Pattern)**: During **training**, the learning algorithm looks at the examples, makes an initial guess, checks how far off its guess was, and slightly adjusts its internal mathematical dials (**weights/parameters**). It repeats this millions of times until its guesses become highly accurate.
+3. **Model (The Saved Pattern Engine)**: Once training finishes, we freeze those tuned mathematical dials into a file called a **Model**. Training takes massive time and computing power, but once the model is saved, it is ready to use.
+4. **Prediction / Inference (Using the Model)**: When you give the trained **model** a brand-new input it has never seen before (e.g., a photo you just snapped with your phone), it runs the input through its learned patterns and outputs a **prediction** (e.g., *"98% Golden Retriever"*).
+
+---
+
+#### 2. A Simple Everyday Analogy: Learning to Spot Ripe Avocados
+Imagine learning how to pick a ripe avocado at the grocery store:
+- **Data**: Over a year, you squeeze 100 avocados (firmness, skin color, stem) and cut them open at home to see if they were unripe, perfect, or overripe.
+- **Training**: Each time you cut one open, your brain updates its mental rule of thumb (*"Dark green with a gentle yield = ripe; mushy = overripe"*).
+- **Model**: Your seasoned intuition after 100 avocados is your mental **model**.
+- **Prediction**: Next Tuesday at the store, you pick up a brand-new avocado you've never seen before, feel its firmness, and **predict** it is ready for guacamole tonight.
+
+---
+
+#### 3. The Three Main Ways Machines Learn
+| Learning Style | Simple Analogy | How It Works | Everyday Example |
+| :--- | :--- | :--- | :--- |
+| **1. Supervised Learning** | **Flashcards with an Answer Key** | Every training example comes with a human-verified **label** (the right answer). The AI learns to map inputs to labels. | Email spam filters (\`spam\` vs. \`not spam\`), medical X-ray classifiers. |
+| **2. Unsupervised Learning** | **Sorting a Box of Mixed Lego Bricks without Instructions** | The data has **no labels**. The AI groups items together based on hidden similarities or spots unusual outliers. | Grouping shoppers with similar buying habits; spotting abnormal network traffic. |
+| **3. Reinforcement Learning** | **Training a Puppy with Treats** | The AI learns by trial and error in an environment, receiving a **reward** (+1) for good moves and a **penalty** (-1) for mistakes. | Game-playing AI (AlphaGo), warehouse robotics, and tuning chatbots via human thumbs-up/thumbs-down feedback (RLHF). |
+
+---
+
+#### 4. Why Data Quality Matters: "Garbage In, Garbage Out"
+An AI model is only as good as the data it learned from. Four common data traps cause AI models to fail in the real world:
+1. **Too Little Data**: Training an image recognizer on only 5 photos of dogs means it will fail the moment it sees a different breed.
+2. **Unrepresentative / Biased Data**: Imagine training a voice recognition system using only recordings of adults in quiet rooms. When a child speaks or someone uses it on a noisy bus, the system fails.
+3. **Mislabeled Data**: If human annotators accidentally label blurry photos of muffins as Chihuahuas, the model learns the wrong pattern.
+4. **Overfitting ("Memorizing the Practice Test")**: If a student memorizes the exact order of answers (*A, C, B, D*) on a practice sheet without understanding the math, they score 100% in practice but fail the real exam. When an AI memorizes noise in its training data instead of learning the real pattern, we call it **overfitting** (for example, an AI trained to spot wolves that only looks for *snow in the background* because every wolf photo in the training set happened to be taken in winter!).
+
+---
+
+#### Accessible Video Companion Transcript
+> **[Transcript – "The Wolf in the Snow Trap"]**: *"In a famous computer vision experiment, researchers trained a model to tell Huskies apart from Wolves. It got 90% accuracy—until they inspected what the model actually looked at. Every wolf photo had snow in the background, and every husky photo was on grass. They hadn't built a wolf detector; they had accidentally built a snow detector! That is why diverse, high-quality training data matters..."*`,
+            duration_seconds: 1200,
             position: 1,
             is_free_preview: false,
             is_completed: false,
           },
           {
-            id: 'les_aib_02_02',
-            section_id: 'sec_aib_02',
-            title: '2.2 AI Ethics, Data Privacy & Mitigating Bias',
+            id: 'les_aif_02_02',
+            section_id: 'sec_aif_02',
+            title: '2.2 Short Activity: Spot the Dataset Flaw & Build Your Own Analogy',
             type: 'article',
-            content: `### Using AI Responsibly and Safely
+            summary: 'Practice diagnosing why 3 flawed AI training datasets fail in the real world, and draft a plain-language analogy you can reuse in your Authentic Assessment.',
+            implementation_tip: 'The plain-language analogy you draft in Part B of this activity can be pasted directly into Part 3 of your Authentic Assessment explainer!',
+            content: `### Module 2 Short Activity (15 Minutes): Diagnose the Dataset Flaw
 
-As AI becomes central to work and education, understanding its limitations is a critical professional skill:
-- **Never Input Sensitive PII or Secrets**: Avoid pasting private credentials, medical records, or proprietary customer data into public consumer AI tools.
-- **Verify Critical Outputs (Human-in-the-Loop)**: Always cross-check citations, legal claims, and calculations generated by AI models.
-- **Recognize Dataset Bias**: AI models reflect biases present in their training data; thoughtful prompting and auditing keep outputs fair and inclusive.`,
-            duration_seconds: 360,
+#### Part A: Why Did These 3 AI Models Fail?
+Read each scenario below and identify: **(1) What was wrong with the training data?** and **(2) How would you fix it?**
+
+- **Scenario 1 (The Sunny-Day Self-Driving Camera)**: A company trains a pedestrian-detection camera using 500,000 street photos taken exclusively in Phoenix, Arizona at noon in clear summer weather. When deployed in Seattle during a rainy November evening, the camera misses pedestrians holding umbrellas.
+- **Scenario 2 (The Resume Screening Bot)**: A tech company trains an AI hiring tool on 10 years of past resumes hired by the company. Because 85% of past hires were men from three specific universities, the AI automatically downgrades qualified women and graduates from community colleges.
+- **Scenario 3 (The Plant Disease App)**: A gardening app trains an AI to spot sick tomato leaves. All "sick leaf" photos were taken indoors on a white kitchen counter, while all "healthy leaf" photos were taken outdoors in soil. Users take photos of healthy leaves on their kitchen counter, and the app declares every single one diseased.
+
+---
+
+#### Answer Key for Part A
+- **Scenario 1 Diagnosis**: **Unrepresentative Data (Lack of environmental diversity)**. Fix: Collect balanced training photos across rain, fog, snow, night glare, and diverse clothing/umbrellas.
+- **Scenario 2 Diagnosis**: **Historical Bias in Training Data**. Fix: Audit and rebalance the training data, remove proxy features linked to gender or school prestige, and test outcomes across demographic groups.
+- **Scenario 3 Diagnosis**: **Shortcut Learning / Spurious Correlation (Overfitting to the background)**. Just like the "Wolf in the Snow," the model learned \`White Counter = Sick\` instead of leaf spots! Fix: Photograph both healthy and sick leaves across identical indoor and outdoor backgrounds.
+
+---
+
+#### Part B: Draft Your 2-Sentence Plain-Language Analogy
+In your **Personal Study Notes** tab below, write a 2-sentence analogy comparing **Data → Training → Model → Prediction** to an everyday skill (such as learning to bake bread, learning to hit a baseball, or learning a friend's handwriting). You will use this in your final explainer!`,
+            duration_seconds: 900,
             position: 2,
+            is_free_preview: false,
+            is_completed: false,
+          },
+          {
+            id: 'les_aif_02_03',
+            section_id: 'sec_aif_02',
+            title: '2.3 Module 2 Knowledge Check (5 Questions Drawn from Question Bank)',
+            type: 'quiz',
+            duration_seconds: 600,
+            position: 3,
+            is_free_preview: false,
+            is_completed: false,
+            quiz_questions: [
+              {
+                id: 'q_aif_02_1',
+                lesson_id: 'les_aif_02_03',
+                question: 'In Machine Learning, what is the difference between "Training" and "Prediction (Inference)"?',
+                options: [
+                  'Training is the process of learning patterns from example data; Prediction is using the finished model to evaluate a new, unseen input',
+                  'Training happens after the user deletes the app; Prediction happens before any data is collected',
+                  'Training and Prediction mean the exact same thing',
+                  'Prediction requires rewriting the computer operating system by hand',
+                ],
+                correct_option_index: 0,
+                explanation: 'During training, the algorithm learns from examples to build a model. During prediction (inference), the trained model is used on new inputs.',
+                position: 1,
+              },
+              {
+                id: 'q_aif_02_2',
+                lesson_id: 'les_aif_02_03',
+                question: 'Which learning method is like studying with flashcards where every training example has a verified "right answer" label attached?',
+                options: [
+                  'Supervised Learning',
+                  'Unsupervised Learning',
+                  'Reinforcement Learning',
+                  'Manual Calculator Mode',
+                ],
+                correct_option_index: 0,
+                explanation: 'Supervised learning trains a model on labeled examples (e.g., photos labeled "cat" or "dog") so it learns to predict labels for new inputs.',
+                position: 2,
+              },
+              {
+                id: 'q_aif_02_3',
+                lesson_id: 'les_aif_02_03',
+                question: 'An AI model trained to detect wolves vs. huskies accidentally learns to look only for snow in the background. What is this flaw called?',
+                options: [
+                  'Overfitting / learning a spurious shortcut from biased training data',
+                  'Perfect generalization',
+                  'Quantum encryption',
+                  'Hardware overheating',
+                ],
+                correct_option_index: 0,
+                explanation: 'When a model memorizes an accidental quirk of its training set (like snow in wolf photos) instead of the true subject, it overfits and fails on real-world photos.',
+                position: 3,
+              },
+              {
+                id: 'q_aif_02_4',
+                lesson_id: 'les_aif_02_03',
+                question: 'An online store uses AI to group millions of shoppers into clusters based on purchasing habits, without any pre-existing labels. What type of learning is this?',
+                options: [
+                  'Unsupervised Learning',
+                  'Supervised Learning',
+                  'Rule-based IF/THEN programming',
+                  'Spell-checking',
+                ],
+                correct_option_index: 0,
+                explanation: 'Discovering hidden groups or clusters in unlabeled data is the hallmark of Unsupervised Learning.',
+                position: 4,
+              },
+              {
+                id: 'q_aif_02_5',
+                lesson_id: 'les_aif_02_03',
+                question: 'How does Reinforcement Learning train an AI system?',
+                options: [
+                  'Through trial and error, receiving reward signals for desirable actions and penalties for mistakes',
+                  'By only reading dictionary definitions in alphabetical order',
+                  'By copying and pasting spreadsheets without feedback',
+                  'By turning off the computer monitor',
+                ],
+                correct_option_index: 0,
+                explanation: 'Reinforcement Learning agents interact with an environment and optimize their behavior to maximize cumulative rewards—just like training with treats.',
+                position: 5,
+              },
+              {
+                id: 'q_aif_02_6',
+                lesson_id: 'les_aif_02_03',
+                question: 'What does the phrase "Garbage In, Garbage Out" mean in AI development?',
+                options: [
+                  'If an AI is trained on inaccurate, biased, or low-quality data, its predictions will also be inaccurate or biased',
+                  'AI models can only be used to sort recycling bins',
+                  'Even if training data is completely wrong, a bigger computer chip will automatically fix all errors',
+                  'You should delete your training data immediately after collecting it',
+                ],
+                correct_option_index: 0,
+                explanation: 'Because ML models learn patterns directly from their training data, flawed or unrepresentative input data inevitably produces flawed outputs.',
+                position: 6,
+              },
+              {
+                id: 'q_aif_02_7',
+                lesson_id: 'les_aif_02_03',
+                question: 'In our cooking analogy for Machine Learning, what does the finished "Model" represent?',
+                options: [
+                  'The perfected recipe / trained mathematical engine that is ready to produce predictions on new inputs',
+                  'The raw unwashed vegetables at the farm',
+                  'The grocery store receipt',
+                  'The kitchen sink',
+                ],
+                correct_option_index: 0,
+                explanation: 'Training data is the raw ingredients, training is practicing in the kitchen, the Model is the perfected recipe, and prediction is serving the dish.',
+                position: 7,
+              },
+              {
+                id: 'q_aif_02_8',
+                lesson_id: 'les_aif_02_03',
+                question: 'If a voice assistant is trained only on recordings of adults speaking in quiet offices, what is most likely to happen in the real world?',
+                options: [
+                  'It will struggle to accurately understand children, diverse accents, or people speaking in noisy environments',
+                  'It will work equally well for every person and environment on Earth',
+                  'It will automatically record its own training data of children without needing updates',
+                  'It will refuse to turn on in quiet offices',
+                ],
+                correct_option_index: 0,
+                explanation: 'Models perform poorly on data distributions they never saw during training—a classic example of unrepresentative training data.',
+                position: 8,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec_aif_03',
+        course_id: 'crs_ai_basics_02',
+        title: 'Module 3: Generative AI and Chatbots (0.75h)',
+        position: 4,
+        lessons: [
+          {
+            id: 'les_aif_03_01',
+            section_id: 'sec_aif_03',
+            title: '3.1 Reading: How LLMs Generate Text & Images, Strengths, Limits & Hallucinations',
+            type: 'article',
+            summary: 'Demystify how Large Language Models (next-token prediction) and image diffusion models actually work, where chatbots shine, why they hallucinate, and how to verify their outputs.',
+            implementation_tip: 'Never ask a chatbot "Are you sure?" to verify a fact—it will often apologize or double down with another hallucination! Always verify claims using an external search engine or primary source.',
+            content: `### Module 3 Reading: Generative AI and Chatbots
+
+#### 1. How Large Language Models (LLMs) Actually Generate Text
+When you type a question into a chatbot like ChatGPT, Claude, or Gemini, it feels like you are talking to a person looking up facts in an encyclopedia. **That is not what is happening.**
+
+An LLM is a **Next-Token Prediction Engine**:
+1. **Breaking Text into Tokens**: The model breaks your prompt into small chunks called **tokens** (words or word pieces, like \`"un"\` + \`"believ"\` + \`"able"\`).
+2. **Calculating Probabilities**: Based on patterns learned from reading billions of web pages, books, and articles during training, the model asks a single mathematical question: *"Given the words written so far, what is the most statistically likely next token?"*
+   - Example: If the prompt is *"Peanut butter and ___"*, the model calculates: \`jelly (89%)\`, \`jam (6%)\`, \`banana (3%)\`, \`honey (2%)\`.
+3. **One Token at a Time**: Once it picks a token, it adds that word to the sentence and repeats the calculation for the *next* token, hundreds of times per second.
+
+> **Key Takeaway**: An LLM is like the autocomplete bar on your smartphone keyboard—scaled up a million times so it can track context across whole books rather than just the last two words.
+
+---
+
+#### 2. How AI Image Generators Work (Diffusion in Plain Language)
+How do tools like Midjourney, DALL-E, or Imagen create a picture of *"an astronaut riding a bicycle on Mars in watercolor style"*?
+- During **training**, researchers take millions of captioned images and gradually add static **noise** (like television snow) until the picture is pure random dots.
+- The AI model learns to reverse that process (**denoising / diffusion**).
+- When you type a text prompt, the model starts with a canvas of random static and sculpts away the noise step-by-step until the image matches the visual patterns of *"astronaut"* + *"bicycle"* + *"Mars"* + *"watercolor"*.
+
+---
+
+#### 3. What LLMs Do Well vs. Where They Fail
+| What LLMs Do Exceptionally Well (Strengths) | Where LLMs Struggle or Fail (Limits) |
+| :--- | :--- |
+| **Summarization & Rewriting**: Condensing a long article you paste into bullet points or changing tone from casual to professional. | **Factual Recall on Niche/Recent Topics**: Inventing dates, biographies, or obscure court cases when they don't know the answer. |
+| **Brainstorming & Drafting**: Generating 10 project ideas, email templates, or interview practice questions. | **Exact Counting & Multi-Step Math**: Counting letters in a word (like how many \`r\`s are in *"strawberry"*) because they read in token chunks, not individual letters! |
+| **Translation & Explaining Concepts**: Explaining complex jargon at a 5th-grade reading level or translating between languages. | **Fake Citations & URLs**: Fabricating plausible-looking academic paper titles, authors, and web links that do not exist. |
+| **Formatting & Pattern Transformation**: Turning messy meeting notes into a clean table or checklist. | **Biased Stereotypes**: Defaulting to cultural or gender stereotypes present in internet training text. |
+
+---
+
+#### 4. Why Do Chatbots "Hallucinate"?
+A **hallucination** occurs when an AI states a falsehood with total confidence. Why does this happen?
+Because the model's goal is **statistical plausibility**, not **truth verification**. It does not have an internal truth meter that distinguishes a real 2019 Supreme Court case from a fake case name that *sounds* exactly like a real legal citation.
+
+#### 5. The 3-Step Verification Habit (How to Check AI Output)
+Whenever an AI gives you a factual claim, date, statistic, quote, or legal/medical statement:
+1. **Spot Check Specifics**: Highlight every proper noun, number, quote, URL, and date.
+2. **Search Outside the Chatbot**: Open a separate search engine, library database, or official website (do *not* just ask the chatbot *"Is that true?"*).
+3. **Provide Grounding Text**: Instead of asking the AI to recall facts from memory, **paste the trusted source article directly into your prompt** and say: *"Using ONLY the text below, summarize the 3 main findings."*
+
+---
+
+#### Accessible Video Companion Transcript
+> **[Transcript – "Why Autocomplete on Steroids Invents Fake Books"]**: *"If you ask an LLM for five books by a real author, it might know three famous ones and—because you asked for five—assemble two fake book titles out of words that author frequently uses. It isn't lying to trick you; it is completing the pattern you asked for..."*`,
+            duration_seconds: 1200,
+            position: 1,
+            is_free_preview: false,
+            is_completed: false,
+          },
+          {
+            id: 'les_aif_03_02',
+            section_id: 'sec_aif_03',
+            title: '3.2 Short Activity: Hallucination Detective & Output Verification',
+            type: 'article',
+            summary: 'Practice spotting hidden hallucinations in a realistic chatbot response and decide which tasks are safe to delegate to an LLM vs. which require strict verification.',
+            implementation_tip: 'Notice how hallucinations blend 80% real facts with 20% invented details. That mixture is what makes them tricky to spot without external verification!',
+            content: `### Module 3 Short Activity (15 Minutes): Hallucination Detective
+
+#### Part A: Spot the 3 Red Flags in This Chatbot Response
+A student asked a chatbot: *"Give me a short paragraph with a published study and URL about the history of the Eiffel Tower."*
+The chatbot replied:
+> *"The Eiffel Tower was completed in Paris in 1889 for the World's Fair and stands roughly 330 meters tall today. However, in 1927 it was temporarily disassembled and shipped to London for six months to celebrate the Anglo-French Engineering Treaty, as documented in Dr. Henri Moreau's landmark paper 'Iron Across the Channel' (Journal of European Monuments, 1998, https://www.europeanmonuments.org/articles/1998/eiffel-london-transfer.pdf)."*
+
+**Questions to Answer:**
+1. Which facts in the response are **true**?
+2. Which claims are **hallucinations** (or suspicious red flags)?
+3. How would you verify this in 30 seconds?
+
+---
+
+#### Answer Key for Part A
+1. **True Facts**: Completed in Paris in 1889 for the World's Fair; stands roughly 330 meters tall today.
+2. **Hallucinations & Red Flags**:
+   - **Fake Historical Event**: The Eiffel Tower was *never* disassembled and shipped to London in 1927!
+   - **Fabricated Citation**: "Dr. Henri Moreau's *Iron Across the Channel* (1998)" is an invented paper title designed to sound academic.
+   - **Fabricated URL**: LLMs routinely invent realistic-looking URLs (\`/articles/1998/eiffel-london-transfer.pdf\`) that lead to \`404 Not Found\`.
+3. **Verification Method**: Search \`"Eiffel Tower shipped to London 1927"\` and \`"Iron Across the Channel" "Henri Moreau"\` in a standard web search engine and check the official Eiffel Tower history archive (\`toureiffel.paris\`).`,
+            duration_seconds: 900,
+            position: 2,
+            is_free_preview: false,
+            is_completed: false,
+          },
+          {
+            id: 'les_aif_03_03',
+            section_id: 'sec_aif_03',
+            title: '3.3 Module 3 Knowledge Check (5 Questions Drawn from Question Bank)',
+            type: 'quiz',
+            duration_seconds: 600,
+            position: 3,
+            is_free_preview: false,
+            is_completed: false,
+            quiz_questions: [
+              {
+                id: 'q_aif_03_1',
+                lesson_id: 'les_aif_03_03',
+                question: 'How does a Large Language Model (LLM) generate a response to your prompt?',
+                options: [
+                  'By predicting the most statistically likely next token (word piece) one step at a time based on patterns learned during training',
+                  'By emailing a team of human writers in the background',
+                  'By copying and pasting an entire web page verbatim from a live library catalog',
+                  'By consciously pondering the philosophical meaning of your question',
+                ],
+                correct_option_index: 0,
+                explanation: 'LLMs are next-token prediction engines that generate text sequentially based on statistical probabilities learned from vast text datasets.',
+                position: 1,
+              },
+              {
+                id: 'q_aif_03_2',
+                lesson_id: 'les_aif_03_03',
+                question: 'Why do Large Language Models sometimes "hallucinate" fake facts or nonexistent book citations?',
+                options: [
+                  'Because they are designed to generate statistically plausible-sounding word sequences rather than verifying facts against a truth database',
+                  'Because the AI is intentionally trying to prank the user',
+                  'Because the user typed the prompt too slowly',
+                  'Because hallucinations only happen when the battery is below 10%',
+                ],
+                correct_option_index: 0,
+                explanation: 'An LLM optimizes for fluent, probable-sounding language. If it lacks exact knowledge, it strings together words that sound like a real citation or fact.',
+                position: 2,
+              },
+              {
+                id: 'q_aif_03_3',
+                lesson_id: 'les_aif_03_03',
+                question: 'What is the most reliable way to verify a specific statistic, quote, or citation produced by a chatbot?',
+                options: [
+                  'Cross-check the claim outside the chatbot using an independent search engine, official website, or primary source document',
+                  'Ask the chatbot "Are you 100% sure that is true?" and trust it if it says yes',
+                  'Assume it is accurate if the grammar and formatting look professional',
+                  'Ask the same chatbot to repeat the answer in bold font',
+                ],
+                correct_option_index: 0,
+                explanation: 'Asking a chatbot to verify itself can produce another confident hallucination. Always verify facts using external primary sources.',
+                position: 3,
+              },
+              {
+                id: 'q_aif_03_4',
+                lesson_id: 'les_aif_03_03',
+                question: 'Which task is a Large Language Model generally BEST suited for without risking factual hallucinations?',
+                options: [
+                  'Rewriting a rough draft email you wrote to make it more polite and concise',
+                  'Providing unverified medical dosages for a prescription drug',
+                  'Generating a list of 10 real court case citations from memory without web search',
+                  'Predicting next week’s exact lottery numbers',
+                ],
+                correct_option_index: 0,
+                explanation: 'Transforming, summarizing, or polishing text that you provide directly in the prompt plays to an LLM’s core strength in language patterns.',
+                position: 4,
+              },
+              {
+                id: 'q_aif_03_5',
+                lesson_id: 'les_aif_03_03',
+                question: 'Why do standard LLMs sometimes miscount the number of letters in a word (like counting the letter "r" in "strawberry")?',
+                options: [
+                  'Because LLMs process text in chunks called "tokens" rather than seeing individual letters one by one like humans do',
+                  'Because LLMs are programmed to ignore the letter R',
+                  'Because "strawberry" is a secret password that disables AI',
+                  'Because computers cannot store words longer than 5 letters',
+                ],
+                correct_option_index: 0,
+                explanation: 'Tokenization groups common sub-words together into numeric IDs, meaning the model does not naturally inspect character-by-character spelling unless prompted to spell it out.',
+                position: 5,
+              },
+              {
+                id: 'q_aif_03_6',
+                lesson_id: 'les_aif_03_03',
+                question: 'How do AI diffusion image generators (like Midjourney or Imagen) create an image from a text prompt?',
+                options: [
+                  'They start with random static noise and iteratively refine (denoise) the pixels to match visual patterns associated with the words in your prompt',
+                  'They search Google Images and crop a single photograph without changing a pixel',
+                  'They hire a freelance illustrator to draw the picture in 5 seconds',
+                  'They only change the brightness of your computer wallpaper',
+                ],
+                correct_option_index: 0,
+                explanation: 'Diffusion models learn to reverse visual noise step-by-step, guided by the text prompt, until a coherent image emerges.',
+                position: 6,
+              },
+              {
+                id: 'q_aif_03_7',
+                lesson_id: 'les_aif_03_03',
+                question: 'What is "grounding" when prompting a chatbot?',
+                options: [
+                  'Pasting the trusted source text directly into your prompt and instructing the AI to answer using only that provided text',
+                  'Plugging your laptop into a wall outlet',
+                  'Asking the chatbot to make up a fictional story',
+                  'Deleting your browser history',
+                ],
+                correct_option_index: 0,
+                explanation: 'Supplying the reference document directly in your prompt (grounding) dramatically reduces hallucinations because the model does not have to rely on memory.',
+                position: 7,
+              },
+              {
+                id: 'q_aif_03_8',
+                lesson_id: 'les_aif_03_03',
+                question: 'What is a "token" in the context of Large Language Models?',
+                options: [
+                  'A chunk of text (such as a word, part of a word, or punctuation mark) that the model reads and generates one step at a time',
+                  'A physical brass coin you insert into a computer USB port',
+                  'A verified government ID card',
+                  'A type of computer monitor cable',
+                ],
+                correct_option_index: 0,
+                explanation: 'LLMs break input and output text into tokens—on average, 1 token is roughly 3/4 of an English word.',
+                position: 8,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec_aif_04',
+        course_id: 'crs_ai_basics_02',
+        title: 'Module 4: AI in Society (0.75h)',
+        position: 5,
+        lessons: [
+          {
+            id: 'les_aif_04_01',
+            section_id: 'sec_aif_04',
+            title: '4.1 Reading: Everyday & Industry Uses, Bias, Privacy, Jobs & Where to Go Next',
+            type: 'article',
+            summary: 'Examine how AI operates across everyday apps and major industries, analyze real risks (bias, privacy, deepfakes, environmental & workplace impacts), and learn a 4-question framework for using AI responsibly.',
+            implementation_tip: 'When identifying risks for your Authentic Assessment, avoid generic phrases like "it might go wrong." Name the specific harm—for example, "GPS routing might send heavy commuter traffic down a narrow school zone street."',
+            content: `### Module 4 Reading: AI in Society & Responsible Use
+
+#### 1. AI in Your Everyday Life (Inputs, Outputs, Benefits & Risks)
+Before you even open a chatbot, you likely interact with half a dozen AI systems before breakfast:
+
+| Everyday AI System | Input Data It Uses | Output / Prediction | Key Benefit | Specific Risk to Watch |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. GPS Navigation (Google Maps / Waze)** | Live GPS speeds from phones, historical traffic by hour, road closures | Fastest route & estimated arrival time (ETA) | Saves commute time and routes around accidents | Can divert heavy commuter traffic onto quiet residential streets or fail when offline |
+| **2. Email Spam & Phishing Filter** | Sender reputation, message text patterns, links, your past spam reports | Classifies email as \`Inbox\`, \`Promotions\`, or \`Spam\` | Blocks 99%+ of scams and malware automatically | **False positives**: A critical job offer or medical bill gets silently buried in the Spam folder |
+| **3. Streaming Recommendations (Netflix / Spotify / YouTube)** | Watch/listen history, pause/skip behavior, similar user profiles | Ranked feed of videos or songs you are likely to click | Helps discover new music or shows from millions of options | **Filter bubbles / rabbit holes**: Optimizes for screen time and outrage rather than balance |
+| **4. Phone Face Unlock & Photo Search** | 3D infrared depth map or camera library pixels | Unlocks phone or finds all photos of "beach" or "dog" | Fast biometric security and instant photo organization | Biometric privacy concerns; historical accuracy gaps across skin tones if poorly trained |
+| **5. Voice Assistants & Autocorrect** | Spoken audio waveforms or typing keystrokes | Transcribed text, smart home action, or next-word suggestion | Hands-free accessibility for users with visual or motor impairments | Accidental audio recording of private conversations; embarrassing autocorrect substitutions |
+
+---
+
+#### 2. How Industries Use AI Today
+- **Healthcare**: Spotting early-stage tumors in radiology scans, predicting hospital readmission risk, and accelerating drug molecule discovery (*always paired with a licensed doctor reviewing the scan*).
+- **Finance**: Real-time credit card fraud detection and algorithmic loan underwriting (*heavily regulated to prevent discriminatory lending*).
+- **Agriculture & Climate**: Satellite crop health monitoring, precision watering that cuts water waste by 30%, and extreme weather forecasting.
+- **Education & Accessibility**: Real-time closed captioning for deaf/hard-of-hearing learners, screen-reader image descriptions for blind users, and personalized practice tutors.
+
+---
+
+#### 3. Four Critical Societal Challenges: Bias, Privacy, Truth & Work
+1. **Algorithmic Bias & Fairness**: When AI systems are used in high-stakes decisions—hiring, credit scores, healthcare triage, or policing—biased training data can systematically disadvantage underrepresented groups.
+2. **Data Privacy & Confidentiality**: Many free consumer AI tools use the prompts you type to train future models unless you opt out. **Never paste private medical records, passwords, student grades, confidential company financials, or someone else's personal information into a public AI tool.**
+3. **Misinformation & Deepfakes**: Generative AI makes it cheap and fast to create realistic fake audio clones, synthetic photos, and automated spam accounts. Verifying source provenance is now a civic survival skill.
+4. **Jobs, Careers & Human Agency**: AI rarely replaces an entire profession overnight; instead, it **reshapes specific tasks** (drafting, summarizing, routine coding, data entry). Workers who understand *when to delegate to AI*, *how to verify its output*, and *when human empathy and judgment are irreplaceable* hold a major career advantage.
+
+---
+
+#### 4. The 4-Question Responsible AI Checklist
+Before using AI for any task at work, school, or home, ask:
+1. **Privacy**: *Does my prompt contain private, confidential, or sensitive personal data?* (If yes → do not paste it into a public tool.)
+2. **Stakes**: *What happens if the AI is wrong?* (Low stakes: brainstorming dinner recipes. High stakes: medical, legal, financial, or grading decisions → require human expert control.)
+3. **Verification**: *Can I independently verify the output before sharing or acting on it?* (Always check facts, links, and calculations.)
+4. **Transparency**: *Should I disclose that AI assisted with this work?* (Follow your school, workplace, or client disclosure norms honestly.)
+
+---
+
+#### 5. Where to Go Next After AI Foundations
+- **Next Recommended Courses on REACTJav**:
+  - **AI Prompting and Data Annotation**: Master structured prompting frameworks and how human evaluators train and score LLMs.
+  - **Generative AI and Prompt Engineering**: Deepen your command of multi-step workflows, system prompts, and multimodal AI.
+  - **AI Ethics, Safety, and Responsible Use**: Dive deeper into governance, model cards, red-teaming, and regulatory compliance.
+
+---
+
+#### Accessible Video Companion Transcript
+> **[Transcript – "Human-in-the-Loop is Not Optional"]**: *"Think of AI as an eager, fast-reading intern who works at lightning speed but has zero real-world accountability. You wouldn't let an intern sign a legal contract or diagnose a patient without reviewing their work line by line. Keeping a knowledgeable human in the loop is the foundation of responsible AI..."*`,
+            duration_seconds: 1200,
+            position: 1,
+            is_free_preview: false,
+            is_completed: false,
+          },
+          {
+            id: 'les_aif_04_02',
+            section_id: 'sec_aif_04',
+            title: '4.2 Short Activity: The Responsible AI Decision Matrix',
+            type: 'article',
+            summary: 'Apply the 4-Question Responsible AI Checklist to 4 real-world workplace and personal dilemmas.',
+            implementation_tip: 'Notice how the right answer isn’t always "Never use AI" or "Always use AI"—often it is "Use AI with anonymized data and strict human verification."',
+            content: `### Module 4 Short Activity (15 Minutes): Responsible AI Decision Matrix
+
+For each of the 4 scenarios below, decide whether the proposed AI use is:
+- **GREEN LIGHT (Safe & Effective as proposed)**
+- **YELLOW LIGHT (Safe ONLY if modified—state what must change)**
+- **RED LIGHT (Unsafe / Unethical—do not use AI this way)**
+
+#### The 4 Scenarios
+1. **The Clinic Receptionist**: A medical receptionist wants to paste a patient's full name, date of birth, and lab test results into a free public chatbot to draft a friendly explanation letter for the patient.
+2. **The Job Seeker**: A graduate pastes a public job description and their own resume skills (with phone number/address removed) into a chatbot and asks for 5 practice interview questions tailored to the role.
+3. **The Small Business Owner**: A bakery owner uses an AI image tool to brainstorm 3 poster layout ideas for a weekend croissant sale, then checks that all prices and allergen labels on the final poster are typed by hand.
+4. **The Hiring Manager**: A manager configures an unverified AI script to automatically reject job applicants without human review based on their zip code and the acoustic tone of their voice in a recorded video.
+
+---
+
+#### Self-Check Answer Key
+1. **Scenario 1 → RED / YELLOW LIGHT**: Never paste Protected Health Information (patient name, DOB, lab results) into a public consumer chatbot (**Privacy violation**). *Safe modification*: Ask the chatbot for a generic template explaining what a standard cholesterol test measures using zero patient data, then have the doctor review it.
+2. **Scenario 2 → GREEN LIGHT**: Removing personal contact details and using a public job post to generate practice interview questions is a low-risk, high-benefit use of Generative AI.
+3. **Scenario 3 → GREEN LIGHT**: Creative layout brainstorming combined with human control over critical safety facts (allergens and prices) is responsible AI use.
+4. **Scenario 4 → RED LIGHT**: High-stakes automated rejection using zip codes (a well-known proxy for race/income) and voice tone without human review or validation is discriminatory and unsafe.`,
+            duration_seconds: 900,
+            position: 2,
+            is_free_preview: false,
+            is_completed: false,
+          },
+          {
+            id: 'les_aif_04_03',
+            section_id: 'sec_aif_04',
+            title: '4.3 Module 4 Knowledge Check (5 Questions Drawn from Question Bank)',
+            type: 'quiz',
+            duration_seconds: 600,
+            position: 3,
+            is_free_preview: false,
+            is_completed: false,
+            quiz_questions: [
+              {
+                id: 'q_aif_04_1',
+                lesson_id: 'les_aif_04_03',
+                question: 'What is a specific, realistic risk of relying on an AI email spam filter?',
+                options: [
+                  'False positives: an important legitimate email (like a job interview invite or bill) can be mistakenly routed to the Spam folder',
+                  'The spam filter will physically unplug your keyboard',
+                  'The spam filter will delete your operating system if you receive a newsletter',
+                  'Spam filters never use any training data',
+                ],
+                correct_option_index: 0,
+                explanation: 'Every classification model balances catching bad items against falsely flagging good items (false positives), which is why checking your spam folder periodically matters.',
+                position: 1,
+              },
+              {
+                id: 'q_aif_04_2',
+                lesson_id: 'les_aif_04_03',
+                question: 'Why should you avoid pasting private customer records, medical data, or passwords into a free public chatbot?',
+                options: [
+                  'Public consumer AI tools may log inputs for human review or future model training, creating a serious privacy and security risk',
+                  'Because chatbots cannot read numbers or names',
+                  'Because typing more than 20 words breaks the internet',
+                  'Because chatbots charge $100 per password typed',
+                ],
+                correct_option_index: 0,
+                explanation: 'Unless you are using an enterprise-approved tool with zero-data-retention guarantees, inputs to public chatbots can be stored and used for training.',
+                position: 2,
+              },
+              {
+                id: 'q_aif_04_3',
+                lesson_id: 'les_aif_04_03',
+                question: 'How does "Algorithmic Bias" typically enter an AI system?',
+                options: [
+                  'From historical inequities, unrepresentative samples, or human prejudices present in the data used to train the model',
+                  'From cosmic rays hitting the computer monitor',
+                  'From the AI consciously choosing to dislike certain people',
+                  'Only when the computer is older than 5 years',
+                ],
+                correct_option_index: 0,
+                explanation: 'AI models learn statistical patterns from their training data; if the data underrepresents a group or reflects past biased decisions, the model reproduces that bias.',
+                position: 3,
+              },
+              {
+                id: 'q_aif_04_4',
+                lesson_id: 'les_aif_04_03',
+                question: 'What does keeping a "Human-in-the-Loop" mean when using AI in healthcare, law, or finance?',
+                options: [
+                  'A qualified human professional reviews, verifies, and takes final accountability for high-stakes decisions rather than letting AI act unchecked',
+                  'A human must sit inside the server room 24 hours a day',
+                  'Humans must write all code in binary zeros and ones',
+                  'AI is banned from even summarizing a public article',
+                ],
+                correct_option_index: 0,
+                explanation: 'In high-stakes domains, AI can assist with pattern detection or drafting, but a qualified human must verify accuracy and make the final decision.',
+                position: 4,
+              },
+              {
+                id: 'q_aif_04_5',
+                lesson_id: 'les_aif_04_03',
+                question: 'What is a specific risk of AI recommendation algorithms on social media and video platforms?',
+                options: [
+                  'Filter bubbles: optimizing solely for watch time can trap users in narrow or polarizing content loops',
+                  'They force every user in the world to watch the exact same video at the same time',
+                  'They erase videos from the creator’s hard drive',
+                  'They only work on black-and-white screens',
+                ],
+                correct_option_index: 0,
+                explanation: 'Recommendation models trained to maximize engagement often amplify sensational content and narrow the range of viewpoints a user sees.',
+                position: 5,
+              },
+              {
+                id: 'q_aif_04_6',
+                lesson_id: 'les_aif_04_03',
+                question: 'What is a "Model Card" in responsible AI documentation?',
+                options: [
+                  'A standardized transparency report explaining what data an AI model was trained on, its intended use cases, and its known limitations and risks',
+                  'A gift card used to buy computer monitors',
+                  'A business card printed by a fashion agency',
+                  'A graphics card plugged into a gaming PC',
+                ],
+                correct_option_index: 0,
+                explanation: 'Model Cards provide essential transparency so users and auditors understand where a model works well and where it should not be used.',
+                position: 6,
+              },
+              {
+                id: 'q_aif_04_7',
+                lesson_id: 'les_aif_04_03',
+                question: 'How is AI most accurately affecting most jobs and careers today?',
+                options: [
+                  'It automates or speeds up specific tasks (like drafting, summarizing, or sorting data), making human judgment, verification, and domain expertise even more important',
+                  'It has completely eliminated the need for humans in healthcare, education, and engineering',
+                  'It has zero impact on any office or creative task',
+                  'It only affects astronauts',
+                ],
+                correct_option_index: 0,
+                explanation: 'Most jobs are bundles of tasks. AI transforms how routine drafting and analysis tasks are done while elevating human oversight, ethics, and problem-solving.',
+                position: 7,
+              },
+              {
+                id: 'q_aif_04_8',
+                lesson_id: 'les_aif_04_03',
+                question: 'Before submitting work that was drafted or assisted by Generative AI at school or work, what is the responsible practice?',
+                options: [
+                  'Verify all facts yourself, ensure no confidential data was leaked, and follow your organization’s policy on disclosing AI assistance',
+                  'Hide the use of AI even if your school or client explicitly requires disclosure',
+                  'Leave any hallucinated citations in the document so you can blame the computer later',
+                  'Never read the draft before hitting send',
+                ],
+                correct_option_index: 0,
+                explanation: 'Responsible AI use combines privacy protection, human verification of every claim, and honest transparency about how AI was used.',
+                position: 8,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec_aif_05',
+        course_id: 'crs_ai_basics_02',
+        title: 'Segment 6: Guided Lab — No-Code Image Classifier & Chatbot Test (1.0h)',
+        position: 6,
+        lessons: [
+          {
+            id: 'les_aif_05_01',
+            section_id: 'sec_aif_05',
+            title: '5.1 Guided Lab Part 1 (30m): Train a Simple Image Classifier with a Free No-Code Tool',
+            type: 'article',
+            summary: 'Experience Data → Training → Model → Prediction firsthand in 30 minutes using Google Teachable Machine (100% free, runs in your browser, no login or coding required).',
+            implementation_tip: 'Try holding your object in a shadow or against a different background during Step 4. Seeing the confidence bar drop in real time is the clearest way to understand why diverse training data matters!',
+            content: `### Guided Lab Part 1 (30 Minutes): Train Your Own Image Classifier (No Coding, No Login)
+
+In Module 2, you read about **Data → Training → Model → Prediction**. Now you will build and test a working Machine Learning image classifier yourself in under 30 minutes!
+
+- **Tool Used**: [Google Teachable Machine](https://teachablemachine.withgoogle.com/train/image) (100% free, runs locally in your browser, **no account or login required**, and images stay on your device).
+- **Accessibility / No-Webcam Alternative**: If you do not have a webcam or prefer not to use one, you can drag-and-drop sample image files or use the **Audio Project** mode (clapping vs. snapping vs. background noise).
+
+---
+
+#### Step-by-Step Lab Instructions
+
+##### Step 1: Collect Your Training Data (10 Minutes)
+1. Open [teachablemachine.withgoogle.com/train/image](https://teachablemachine.withgoogle.com/train/image) and choose **Standard Image Model**.
+2. Rename **Class 1** to \`Thumbs Up\` (or \`Coffee Mug\`) and **Class 2** to \`Open Palm\` (or \`Pen / Notebook\`).
+3. Click **Webcam** (or **Upload**) under **Class 1** and record **25–30 sample images** of your object or hand gesture at slightly different angles.
+4. Repeat for **Class 2** with **25–30 sample images** of your second object or gesture.
+
+##### Step 2: Train the Model (5 Minutes)
+1. Click the **"Train Model"** button in the middle column.
+2. Keep the browser tab open for 15–30 seconds while your computer adjusts the neural network weights across your training examples.
+3. Once finished, you have created a trained **Model**!
+
+##### Step 3: Test Predictions on New Inputs (5 Minutes)
+1. Look at the **Preview (Output)** panel on the right.
+2. Hold up Class 1, then Class 2. Watch the confidence bars (e.g., \`99% Thumbs Up\` vs. \`1% Open Palm\`). That live bar is your model's **Prediction**!
+
+##### Step 4: Deliberately Break Your Model & Fix It! (10 Minutes)
+1. **The Edge-Case Test**: Hold the object much closer/farther away, tilt it upside down, or move to a dimmer corner of the room. Does the model get confused?
+2. **Why It Happened**: Your training data only showed one distance and lighting condition!
+3. **Fix the Dataset**: Add 15 new images to Class 1 and Class 2 at different distances and angles, click **Train Model** again, and observe how much more reliable your predictions become.
+
+Record 2–3 sentences in your **Personal Study Notes** tab below about what tricked your classifier before you retrained it.`,
+            duration_seconds: 1800,
+            position: 1,
+            is_free_preview: false,
+            is_completed: false,
+            resources: [
+              {
+                id: 'res_aif_lab_guide',
+                name: 'Guided_Lab_Teachable_Machine_and_Chatbot_Worksheet.txt',
+                size: '18 KB',
+                type: 'TXT',
+                description: 'Step-by-step worksheet for training your no-code image classifier and recording your 3-question chatbot stress test.',
+                url: 'https://teachablemachine.withgoogle.com/train/image',
+              },
+            ],
+          },
+          {
+            id: 'les_aif_05_02',
+            section_id: 'sec_aif_05',
+            title: '5.2 Guided Lab Part 2 (30m): Test a Chatbot on Easy and Tricky Questions',
+            type: 'article',
+            summary: 'Test a free chatbot on 3 easy questions and 3 tricky edge-case prompts (letter counting, false-premise questions, and citation checks) to prepare directly for Part 2 of your Authentic Assessment.',
+            implementation_tip: 'Save your screenshots and verification notes from this lab—you can use your 3 favorite test questions directly in Part 2 of the Authentic Assessment in the next segment!',
+            content: `### Guided Lab Part 2 (30 Minutes): Test a Chatbot on Easy & Tricky Questions
+
+Now that you have trained a predictive classifier, let's stress-test a **Generative AI Chatbot**!
+- **Free, No-Login Tools You Can Use**: DuckDuckGo AI Chat ([duck.ai](https://duck.ai) — free, private, no account required), HuggingChat, Perplexity, ChatGPT Free, Claude, or Google Gemini.
+
+---
+
+#### Round 1: 2 "Easy" Questions (Where LLMs Shine — 10 Minutes)
+Ask the chatbot these two prompts and observe how well it handles them:
+1. **Summarization & Tone Shift**: *"Explain how a bicycle gear works in 3 bullet points aimed at a 10-year-old, using a friendly analogy."*
+2. **Structured Brainstorming**: *"Give me a 3-day beginner meal-prep plan using only 6 common grocery ingredients, formatted as a table."*
+- **What to Notice**: Fluent structure, helpful analogies, and instant formatting.
+
+---
+
+#### Round 2: 2 "Tricky" Questions Designed to Trigger Errors or Hallucinations (20 Minutes)
+Now test the chatbot on prompts where next-token prediction often stumbles. Pick at least **one** or **two** of these categories:
+
+1. **The False-Premise / Fake Historical Event Trap**:
+   - *Example Prompt*: *"Tell me about the 1964 underwater marathon held in the Grand Canyon and who won first place."* (Or ask about a fictional feature of your local hometown.)
+   - **What to Watch For**: Does the chatbot politely point out that no such event happened, or does it invent a winner's name and race time?
+2. **The Niche Citation / URL Verification Trap**:
+   - *Example Prompt*: *"Give me 3 peer-reviewed journal articles published between 2018 and 2021 about the history of left-handed scissors, including exact paper titles, authors, and direct web URLs."*
+   - **What to Watch For**: Copy each article title and URL into a separate search engine. Are the papers real, or did the LLM assemble plausible-sounding words into fake titles?
+3. **The Tokenization / Constraints Trap**:
+   - *Example Prompt*: *"Write a 4-sentence explanation of photosynthesis where every single sentence has esattamente 8 words and does not use the letter 'e'."*
+   - **What to Watch For**: Count the words per sentence and look for the letter \`e\`. Because LLMs predict token-by-token without a built-in character counter, they almost always break strict character/word-count rules!
+
+---
+
+#### Prepare for Your Authentic Assessment
+Take a screenshot of your **3 favorite questions** (at least 1 easy and 1 tricky/error-inducing question) and write down **how you verified the answers**. In the next lesson, you will enter them into the interactive **"AI in My Life" Authentic Assessment Workspace**!`,
+            duration_seconds: 1800,
+            position: 2,
+            is_free_preview: false,
+            is_completed: false,
+          },
+        ],
+      },
+      {
+        id: 'sec_aif_06',
+        course_id: 'crs_ai_basics_02',
+        title: 'Segment 7: Authentic Assessment — “AI in My Life” Audit (2.0h)',
+        position: 7,
+        lessons: [
+          {
+            id: 'les_aif_06_01',
+            section_id: 'sec_aif_06',
+            title: '6.1 Authentic Assessment: “AI in My Life” Audit, Hallucination Test & Explainer Workspace',
+            type: 'article',
+            summary: 'Complete and validate your 2-hour Authentic Assessment right inside the interactive workspace below. Includes automated submission validation (25%), module quiz integration (25%), and 4-level rubric grading (50%).',
+            implementation_tip: 'Use the interactive workspace directly below the instructions to fill in your 5 AI Systems, 3 Hallucination Test questions, Plain-Language Explainer (or Model Card Critique stretch option), and 150–200 word Reflection. Click "Run Automated Validation & Rubric Evaluation" at any time to see your live score!',
+            content: `### Authentic Assessment: “AI in My Life” Audit (2.0 Hours)
+
+#### Scenario
+A friend or relative says: **“Everyone talks about AI, but I don’t get what it actually is.”**
+Your task is to produce an **“AI in My Life” Audit and Plain-Language Explainer** that helps that non-technical person understand what AI is, how it learns, where it shows up in daily life, where chatbots fail, and how to use AI responsibly.
+
+---
+
+#### The 4 Required Task Components
+1. **Audit of 5 Everyday AI Systems**:
+   - Pick **5 AI systems you actually use** (such as GPS maps, streaming recommendations, email spam filters, voice assistants, face unlock, or chatbots).
+   - For each system, state: **(a) What it does**, **(b) What data it uses**, **(c) How it likely learned**, **(d) One real benefit**, and **(e) One specific risk**.
+2. **3-Question Chatbot Hallucination Test**:
+   - Ask a chatbot **3 questions**, including **at least one tricky question likely to produce an error or hallucination**.
+   - Record your **screenshot filename/link**, state **how you independently verified the answers**, and note **what you found**.
+3. **Plain-Language Explainer (OR Advanced Stretch Option)**:
+   - **Standard Option**: Create a **one-page infographic outline** or a **3-minute video script** aimed at a non-technical friend or relative, explaining what AI is, how it learns from data, and how AI/ML/GenAI differ. Include at least **5 core glossary terms** (*AI, machine learning, data, training, model, prediction, generative, hallucination, bias*).
+   - **Stretch Option for Advanced Users (Objective 3)**: Instead of the basic explainer, read a **published AI Model Card or system documentation** (e.g., OpenAI GPT-4o System Card, Anthropic Claude Model Card, or Google Gemma Model Card) and write a **one-page critique** analyzing what it reveals about training data, limitations, and intended use.
+4. **Personal Reflection (150–200 Words)**:
+   - Write **150 to 200 words** reflecting on what surprised you most during this course and audit, and what specific habits you will change in how you use AI going forward.
+
+---
+
+#### Mixed-Model Grading & Pass Rules
+- **Automated Checks (50% of Grade)**:
+  - **Module Knowledge Checks (25%)**: Your completion across Modules 1–4 knowledge checks.
+  - **Submission Validation (25%)**: Automatically checks that all 5 systems have every field completed, all 3 hallucination tests include screenshot references and verification notes, at least 5 glossary terms appear in your explainer, and your explainer & reflection (150–200 words) meet length/duration limits.
+- **4-Level Rubric (50% of Grade — Beginning, Developing, Proficient, Advanced)**:
+  - **Accuracy of AI concepts**: Definitions and explanations are correct, with AI/ML/GenAI distinctions clear.
+  - **Clarity for the audience**: A non-technical reader could understand the explainer without extra help.
+  - **Critical thinking about risks**: Risks are specific to each system (not generic), and verification of chatbot output is credible.
+  - **Reflection**: Connects learning to personal decisions about future AI use.
+- **Pass Rule**: **70% or higher in BOTH** the automated and rubric components (you may revise and resubmit directly in the workspace below).
+- **Certificate with Distinction**: **90% or higher in BOTH** components.`,
+            duration_seconds: 7200,
+            position: 1,
+            is_free_preview: false,
+            is_completed: false,
+          },
+        ],
+      },
+      {
+        id: 'sec_aif_07',
+        course_id: 'crs_ai_basics_02',
+        title: 'Segment 8: Reflection, Review & Credentials (0.5h)',
+        position: 8,
+        lessons: [
+          {
+            id: 'les_aif_07_01',
+            section_id: 'sec_aif_07',
+            title: '7.1 Course Review, Learner Feedback Survey & Open Badge Credentials',
+            type: 'article',
+            summary: 'Review your mastery of all 5 AI Foundations learning outcomes, complete the quick learner reflection check, and download your Open Badge v3.0 JSON metadata and Certificate of Completion.',
+            implementation_tip: 'Once your Authentic Assessment passes (≥70% in both components, or ≥90% for Distinction), use the Credential panel below to copy your Open Badge v3.0 JSON metadata for LinkedIn or your CV!',
+            content: `### Segment 8: Reflection, Review & Credentials (0.5 Hours)
+
+Congratulations on reaching the final segment of **Course 1: AI Foundations**!
+
+#### 1. Look How Far You Have Come (The 5 Learning Outcomes)
+Take a moment to verify that you can confidently do each of the following:
+- **Outcome 1 (The AI Map)**: Define Artificial Intelligence and clearly distinguish between **AI**, **Machine Learning (ML)**, **Deep Learning (DL)**, and **Generative AI (GenAI)**.
+- **Outcome 2 (How AI Learns)**: Explain in plain, everyday language how an AI system uses **training data** during **training** to build a **model** that makes **predictions**—and why data quality matters.
+- **Outcome 3 (Everyday AI Audit)**: Spot AI systems in daily life (maps, spam filters, recommendation feeds, voice assistants) and articulate their inputs, outputs, benefits, and specific risks.
+- **Outcome 4 (LLMs & Verification)**: Explain how Large Language Models predict tokens, why they **hallucinate**, and how to independently verify their outputs.
+- **Outcome 5 (Responsible AI)**: Apply the 4-question Responsible AI checklist (Privacy, Stakes, Verification, Transparency) to decide when and how to use AI safely.
+
+---
+
+#### 2. Learner Feedback & Course Review Survey
+In your **Personal Study Notes** tab (or Discussion / Q&A tab below), share a quick note on:
+1. **Most Valuable Segment**: Which part of the 7-hour course helped things "click" the most for you (the Nesting-Doll Map, the Wolf-in-the-Snow story, the Google Teachable Machine lab, or the Hallucination Test)?
+2. **Tools & Accessibility Check**: Were all free, no-login tools and video transcripts easy to access on your device?
+3. **Next Course Goal**: Which course in the REACTJav AI curriculum are you tackling next (*AI Prompting & Data Annotation*, *Generative AI & Prompt Engineering*, or *AI Ethics, Safety & Responsible Use*)?
+
+---
+
+#### 3. Claiming Your Credentials Below
+In the interactive workspace below, navigate to **Step 5: Grading & Badge** to:
+- View your **Automated Validation (50%)** + **Rubric Evaluation (50%)** score breakdown.
+- Claim your **"AI Foundations: Certificate of Completion"** (or **Certificate with Distinction** at ≥90% in both components).
+- Copy or download your **"AI Foundations" Open Badge v3.0 JSON** containing your verified skills and assessment evidence metadata for LinkedIn and your CV.`,
+            duration_seconds: 1800,
+            position: 1,
             is_free_preview: false,
             is_completed: false,
           },

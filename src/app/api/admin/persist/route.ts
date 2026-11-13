@@ -74,6 +74,7 @@ export async function GET() {
       !Array.isArray(courses) ||
       courses.length < INITIAL_COURSES.length ||
       !courses.some((c: any) => c.id === 'crs_coding_with_ai_14') ||
+      !courses.some((c: any) => c.id === 'crs_ai_basics_02' && c.sections?.some((s: any) => s.id === 'sec_aif_06')) ||
       courses.some((c: any) => c.id === 'crs_nextjs_supabase_01')
     ) {
       courses = INITIAL_COURSES;
@@ -150,6 +151,7 @@ export async function GET() {
               Array.isArray(row.data) &&
               row.data.length >= INITIAL_COURSES.length &&
               row.data.some((c: any) => c.id === 'crs_coding_with_ai_14') &&
+              row.data.some((c: any) => c.id === 'crs_ai_basics_02' && c.sections?.some((s: any) => s.id === 'sec_aif_06')) &&
               !row.data.some((c: any) => c.id === 'crs_nextjs_supabase_01')
             ) {
               courses = row.data;

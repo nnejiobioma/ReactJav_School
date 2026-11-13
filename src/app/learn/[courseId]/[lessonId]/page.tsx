@@ -41,6 +41,7 @@ import LessonTabEditorModal, {
   DEFAULT_RESOURCES 
 } from '@/components/player/LessonTabEditorModal';
 import ProgrammeCheckoutModal from '@/components/checkout/ProgrammeCheckoutModal';
+import AIFoundationsAssessmentWorkspace from '@/components/course/AIFoundationsAssessmentWorkspace';
 
 export default function CoursePlayerPage() {
   const params = useParams();
@@ -561,6 +562,15 @@ export default function CoursePlayerPage() {
                 }}>
                   {currentLesson.content}
                 </div>
+
+                {(currentLesson.id === 'les_aif_06_01' || currentLesson.id === 'les_aif_07_01') && (
+                  <AIFoundationsAssessmentWorkspace
+                    courseId={course.id}
+                    lessonId={currentLesson.id}
+                    userName={currentUser?.full_name || currentUser?.email?.split('@')[0] || 'Student'}
+                    onCompleteLesson={handleLessonAutoCompleted}
+                  />
+                )}
 
                 <div style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'flex-end' }}>
                   <button
