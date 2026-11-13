@@ -12,10 +12,8 @@ interface FeaturedProgrammesSectionProps {
 }
 
 export default function FeaturedProgrammesSection({ courses, userId }: FeaturedProgrammesSectionProps) {
-  // Select top 3-4 flagship/popular programmes
-  // Priority: is_popular, is_now_open, or first 4
-  const featuredCourses = courses.filter(c => c.is_popular || c.is_now_open).slice(0, 4);
-  const displayCourses = featuredCourses.length >= 3 ? featuredCourses : courses.slice(0, 4);
+  // Display all published AI programmes so visitors can browse the complete catalog directly
+  const displayCourses = courses;
 
   return (
     <section id="featured-programmes" style={{ margin: '5rem 0', scrollMarginTop: '6rem' }}>

@@ -72,7 +72,8 @@ export async function GET() {
     let courses = readJsonFile(COURSES_FILE, INITIAL_COURSES);
     if (
       !Array.isArray(courses) ||
-      !courses.some((c: any) => c.id === 'crs_ai_prompting_annotation_01') ||
+      courses.length < INITIAL_COURSES.length ||
+      !courses.some((c: any) => c.id === 'crs_website_dev_ai_11') ||
       courses.some((c: any) => c.id === 'crs_nextjs_supabase_01')
     ) {
       courses = INITIAL_COURSES;
@@ -147,7 +148,8 @@ export async function GET() {
             if (
               row.key === 'courses' &&
               Array.isArray(row.data) &&
-              row.data.some((c: any) => c.id === 'crs_ai_prompting_annotation_01') &&
+              row.data.length >= INITIAL_COURSES.length &&
+              row.data.some((c: any) => c.id === 'crs_website_dev_ai_11') &&
               !row.data.some((c: any) => c.id === 'crs_nextjs_supabase_01')
             ) {
               courses = row.data;

@@ -36,6 +36,7 @@ export default function CoursesCatalogPage() {
     'Prompt Engineering & RLHF',
     'AI Foundations',
     'Large Language Models',
+    'Applied AI & Automation',
   ];
 
   const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced'];

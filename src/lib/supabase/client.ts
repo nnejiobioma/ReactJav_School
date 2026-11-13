@@ -109,7 +109,7 @@ export const isFaculty = (user?: Profile | null): boolean => {
 const STORAGE_KEYS = {
   CURRENT_USER: 'reactjav_current_user',
   PROFILES: 'reactjav_user_profiles',
-  COURSES: 'reactjav_courses_ai_v2',
+  COURSES: 'reactjav_courses_ai_v3',
   PROGRESS: 'reactjav_lesson_progress',
   ENROLLMENTS: 'reactjav_enrollments',
   QUIZ_SUBMISSIONS: 'reactjav_quiz_submissions',
@@ -476,7 +476,7 @@ export class LocalDataService {
           Array.isArray(parsed) &&
           !hasLegacyCourse &&
           parsed.length >= INITIAL_COURSES.length &&
-          parsed.some(c => c.id === 'crs_ai_prompting_annotation_01')
+          parsed.some(c => c.id === 'crs_website_dev_ai_11')
         ) {
           return parsed;
         }
@@ -2517,7 +2517,8 @@ export class LocalDataService {
       if (
         courses &&
         Array.isArray(courses) &&
-        courses.some((c: any) => c.id === 'crs_ai_prompting_annotation_01') &&
+        courses.length >= INITIAL_COURSES.length &&
+        courses.some((c: any) => c.id === 'crs_website_dev_ai_11') &&
         !courses.some((c: any) => c.id === 'crs_nextjs_supabase_01')
       ) {
         localStorage.setItem(STORAGE_KEYS.COURSES, JSON.stringify(courses));

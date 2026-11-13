@@ -4,7 +4,10 @@
     "instructor_id": "usr_instructor_001",
     "title": "AI Prompting and Data Annotation",
     "slug": "ai-prompting-and-data-annotation",
-    "previous_slugs": ["ai-career-essentials", "nextjs-supabase-web-engineering"],
+    "previous_slugs": [
+      "ai-career-essentials",
+      "nextjs-supabase-web-engineering"
+    ],
     "description": "Master professional prompt engineering, Reinforcement Learning from Human Feedback (RLHF), supervised fine-tuning (SFT) data annotation, red-teaming, and AI response evaluation rubrics used by leading AI labs.",
     "category": "Prompt Engineering & RLHF",
     "track": "Prompt Engineering & RLHF",
@@ -153,7 +156,9 @@
     "instructor_id": "usr_instructor_001",
     "title": "AI Basics - Getting Started with AI",
     "slug": "ai-basics-getting-started-with-ai",
-    "previous_slugs": ["data-analytics-career-accelerator"],
+    "previous_slugs": [
+      "data-analytics-career-accelerator"
+    ],
     "description": "Your complete foundational launchpad into Artificial Intelligence. Understand how AI and machine learning work, explore generative AI tools across text, image, and audio, and build practical AI-powered workflows from scratch with zero prior coding required.",
     "category": "AI Foundations",
     "track": "AI Foundations",
@@ -288,7 +293,9 @@
     "instructor_id": "usr_instructor_001",
     "title": "Intro to Large Language Models - LLM",
     "slug": "intro-to-large-language-models-llm",
-    "previous_slugs": ["deep-learning-transformers"],
+    "previous_slugs": [
+      "deep-learning-transformers"
+    ],
     "description": "Dive inside Large Language Models (LLMs). Understand tokenization, vector embeddings, the Transformer self-attention architecture, pre-training vs. fine-tuning, sampling parameters, and Retrieval-Augmented Generation (RAG).",
     "category": "Large Language Models",
     "track": "Large Language Models",
@@ -427,6 +434,850 @@
             "position": 2,
             "is_free_preview": false,
             "is_completed": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "crs_genai_prompt_eng_04",
+    "instructor_id": "usr_instructor_001",
+    "title": "Generative AI and Prompt Engineering",
+    "slug": "generative-ai-and-prompt-engineering",
+    "description": "Master multimodal Generative AI across text, code, image, and audio models. Learn advanced prompt engineering frameworks, meta-prompting, structured JSON outputs, system persona design, and multi-turn conversational chaining.",
+    "category": "Prompt Engineering & RLHF",
+    "track": "Prompt Engineering & RLHF",
+    "level": "Beginner",
+    "outcome_hook": "Design production-grade prompt templates and multimodal Generative AI workflows that deliver consistent, verifiable outputs.",
+    "duration_weeks": 8,
+    "weekly_hours": "10-14 hrs/week",
+    "skills": [
+      "Generative AI",
+      "Advanced Prompt Engineering",
+      "Multimodal Prompting",
+      "Structured JSON Outputs",
+      "Meta-Prompting",
+      "Tree-of-Thoughts"
+    ],
+    "sponsorship_note": "Sponsored / $0 Upfront",
+    "is_now_open": true,
+    "is_popular": true,
+    "cohort_date": "Rolling Admissions",
+    "price": 39.99,
+    "thumbnail_url": "https://images.unsplash.com/photo-1676299081847-824916de030a?auto=format&fit=crop&w=800&q=80",
+    "is_published": true,
+    "created_at": "2026-03-12T09:00:00Z",
+    "enrollments_count": 5120,
+    "average_rating": 4.97,
+    "reviews_count": 710,
+    "instructor": {
+      "id": "faculty_author_001",
+      "email": "faculty@reactjav.io",
+      "full_name": "Dr. Elena Chen",
+      "avatar_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+      "role": "instructor",
+      "bio": "Principal AI Research Scientist & Lead Faculty with 12+ years of experience in Large Language Models, RLHF Data Alignment, and Applied AI Systems.",
+      "created_at": "2025-11-01T08:00:00Z",
+      "subscription_status": "active",
+      "subscription_plan": "lifetime",
+      "admin_granted": true
+    },
+    "sections": [
+      {
+        "id": "sec_gpe_01",
+        "course_id": "crs_genai_prompt_eng_04",
+        "title": "Module 1: Generative AI Ecosystem & Multimodal Foundations",
+        "position": 1,
+        "lessons": [
+          {
+            "id": "les_gpe_01_01",
+            "section_id": "sec_gpe_01",
+            "title": "1.1 How Generative AI Creates Text, Code, Images & Audio",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+            "content": "Explore diffusion models, autoregressive language models, and multimodal architectures that unify text, vision, and speech.",
+            "duration_seconds": 520,
+            "position": 1,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_gpe_01_02",
+            "section_id": "sec_gpe_01",
+            "title": "1.2 Advanced Prompting Frameworks: Role-Task-Format, ReAct & Tree-of-Thoughts",
+            "type": "article",
+            "content": "### Advanced Prompt Engineering Frameworks\n\nMoving from casual chat prompts to deterministic production prompts requires repeatable architectural patterns.\n\n#### 1. The R-T-C-F Framework (Role, Task, Context, Format)\n- **Role**: Establish domain authority and behavioral constraints.\n- **Task**: Define the exact action verb and objective.\n- **Context**: Supply reference documents, user constraints, and edge-case rules.\n- **Format**: Enforce strict output schemas (JSON, Markdown tables, or XML tags).\n\n#### 2. Meta-Prompting & Self-Critique\nAsk the model to critique and refine its own draft against a rubric before emitting the final response—dramatically boosting accuracy on analytical and creative tasks.",
+            "duration_seconds": 450,
+            "position": 2,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_gpe_01_03",
+            "section_id": "sec_gpe_01",
+            "title": "1.3 Checkpoint Quiz: Generative AI & Prompt Architecture",
+            "type": "quiz",
+            "duration_seconds": 240,
+            "position": 3,
+            "is_free_preview": true,
+            "is_completed": false,
+            "quiz_questions": [
+              {
+                "id": "q_gpe_01",
+                "lesson_id": "les_gpe_01_03",
+                "question": "What is Meta-Prompting in prompt engineering?",
+                "options": [
+                  "Using an AI model to generate, critique, or optimize prompts and intermediate drafts based on a quality rubric",
+                  "Running prompts without an internet connection",
+                  "Compressing images into JPEG format",
+                  "Deleting system instructions to save tokens"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Meta-prompting leverages the LLM itself to architect, audit, and refine prompt instructions for higher precision.",
+                "position": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sec_gpe_02",
+        "course_id": "crs_genai_prompt_eng_04",
+        "title": "Module 2: Prompt Chaining, Guardrails & Evaluation",
+        "position": 2,
+        "lessons": [
+          {
+            "id": "les_gpe_02_01",
+            "section_id": "sec_gpe_02",
+            "title": "2.1 Multi-Step Prompt Chaining & Deterministic Schema Enforcement",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+            "content": "Break complex monolithic prompts into reliable multi-step chains with validation gates between steps.",
+            "duration_seconds": 580,
+            "position": 1,
+            "is_free_preview": false,
+            "is_completed": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "crs_ml_essentials_05",
+    "instructor_id": "usr_instructor_001",
+    "title": "Machine Learning Essentials",
+    "slug": "machine-learning-essentials",
+    "description": "Build a strong practical foundation in classical and modern Machine Learning. Master feature engineering, regression, classification, clustering, decision trees, model evaluation metrics, and overfitting prevention.",
+    "category": "AI Foundations",
+    "track": "AI Foundations",
+    "level": "Beginner",
+    "outcome_hook": "Train, evaluate, and validate predictive Machine Learning models on real-world tabular and structured datasets.",
+    "duration_weeks": 10,
+    "weekly_hours": "10-15 hrs/week",
+    "skills": [
+      "Supervised Learning",
+      "Unsupervised Clustering",
+      "Feature Engineering",
+      "Model Evaluation Metrics",
+      "Decision Trees & Ensembles",
+      "Data Preprocessing"
+    ],
+    "sponsorship_note": "Sponsored / $5/mo",
+    "is_now_open": true,
+    "is_popular": true,
+    "cohort_date": "Rolling Admissions",
+    "price": 44.99,
+    "thumbnail_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    "is_published": true,
+    "created_at": "2026-03-14T10:00:00Z",
+    "enrollments_count": 3890,
+    "average_rating": 4.93,
+    "reviews_count": 480,
+    "instructor": {
+      "id": "faculty_author_001",
+      "email": "faculty@reactjav.io",
+      "full_name": "Dr. Elena Chen",
+      "avatar_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+      "role": "instructor",
+      "bio": "Principal AI Research Scientist & Lead Faculty with 12+ years of experience in Large Language Models, RLHF Data Alignment, and Applied AI Systems.",
+      "created_at": "2025-11-01T08:00:00Z",
+      "subscription_status": "active",
+      "subscription_plan": "lifetime",
+      "admin_granted": true
+    },
+    "sections": [
+      {
+        "id": "sec_mle_01",
+        "course_id": "crs_ml_essentials_05",
+        "title": "Module 1: Supervised & Unsupervised Learning Foundations",
+        "position": 1,
+        "lessons": [
+          {
+            "id": "les_mle_01_01",
+            "section_id": "sec_mle_01",
+            "title": "1.1 The End-to-End Machine Learning Lifecycle: Data Prep to Inference",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+            "content": "Understand problem framing, exploratory data analysis, train/validation/test splits, and feature scaling.",
+            "duration_seconds": 540,
+            "position": 1,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_mle_01_02",
+            "section_id": "sec_mle_01",
+            "title": "1.2 Regression, Classification & Model Evaluation (Precision, Recall, F1, ROC-AUC)",
+            "type": "article",
+            "content": "### Evaluating Machine Learning Models Accurately\n\nAccuracy alone can be misleading—especially on imbalanced datasets (such as fraud detection where 99% of transactions are legitimate).\n\n#### Core Evaluation Metrics:\n- **Precision**: Out of all positive predictions, how many were truly positive?\n- **Recall (Sensitivity)**: Out of all actual positive cases, how many did the model successfully catch?\n- **F1-Score**: The harmonic mean of Precision and Recall.\n- **RMSE & MAE**: Standard error metrics for continuous regression predictions.\n\n#### Preventing Overfitting:\nAlways evaluate your model on a held-out **Test Set** and use **K-Fold Cross-Validation** to ensure the model generalizes to unseen real-world data.",
+            "duration_seconds": 440,
+            "position": 2,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_mle_01_03",
+            "section_id": "sec_mle_01",
+            "title": "1.3 Checkpoint Quiz: Machine Learning Essentials",
+            "type": "quiz",
+            "duration_seconds": 240,
+            "position": 3,
+            "is_free_preview": true,
+            "is_completed": false,
+            "quiz_questions": [
+              {
+                "id": "q_mle_01",
+                "lesson_id": "les_mle_01_03",
+                "question": "What happens when a Machine Learning model overfits the training data?",
+                "options": [
+                  "It memorizes noise in the training set and performs poorly on unseen test data",
+                  "It trains faster and achieves 100% accuracy on all future data",
+                  "It automatically deletes duplicate columns",
+                  "It converts classification problems into clustering problems"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Overfitting occurs when a model captures random noise in the training set rather than generalizable underlying patterns.",
+                "position": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "crs_ai_ethics_safety_06",
+    "instructor_id": "usr_instructor_001",
+    "title": "AI Ethics, Safety, and Responsible Use",
+    "slug": "ai-ethics-safety-and-responsible-use",
+    "description": "Navigate the critical landscape of AI Safety, Alignment, Fairness, Privacy, and Governance. Learn how to audit AI systems for bias, prevent prompt injection and jailbreaks, protect data privacy, and comply with global AI regulations.",
+    "category": "AI Foundations",
+    "track": "AI Foundations",
+    "level": "Beginner",
+    "outcome_hook": "Audit AI systems for fairness, safety, red-team vulnerabilities, and regulatory compliance across enterprise teams.",
+    "duration_weeks": 6,
+    "weekly_hours": "6-10 hrs/week",
+    "skills": [
+      "AI Safety & Alignment",
+      "Red-Teaming & Jailbreak Defense",
+      "Algorithmic Fairness & Bias Auditing",
+      "AI Governance & Compliance",
+      "Data Privacy & PII Protection",
+      "Responsible AI Frameworks"
+    ],
+    "sponsorship_note": "Fully Funded / Free Access",
+    "is_now_open": true,
+    "is_popular": false,
+    "cohort_date": "Rolling Admissions",
+    "price": 0,
+    "thumbnail_url": "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?auto=format&fit=crop&w=800&q=80",
+    "is_published": true,
+    "created_at": "2026-03-15T11:00:00Z",
+    "enrollments_count": 3150,
+    "average_rating": 4.95,
+    "reviews_count": 410,
+    "instructor": {
+      "id": "faculty_author_001",
+      "email": "faculty@reactjav.io",
+      "full_name": "Dr. Elena Chen",
+      "avatar_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+      "role": "instructor",
+      "bio": "Principal AI Research Scientist & Lead Faculty with 12+ years of experience in Large Language Models, RLHF Data Alignment, and Applied AI Systems.",
+      "created_at": "2025-11-01T08:00:00Z",
+      "subscription_status": "active",
+      "subscription_plan": "lifetime",
+      "admin_granted": true
+    },
+    "sections": [
+      {
+        "id": "sec_aes_01",
+        "course_id": "crs_ai_ethics_safety_06",
+        "title": "Module 1: AI Safety, Bias Mitigation & Adversarial Red-Teaming",
+        "position": 1,
+        "lessons": [
+          {
+            "id": "les_aes_01_01",
+            "section_id": "sec_aes_01",
+            "title": "1.1 Principles of Responsible AI: Fairness, Transparency, Accountability & Privacy",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+            "content": "How organizations implement practical AI governance, human-in-the-loop oversight, and transparency cards.",
+            "duration_seconds": 490,
+            "position": 1,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_aes_01_02",
+            "section_id": "sec_aes_01",
+            "title": "1.2 Defending Against Prompt Injection, Jailbreaks & Data Leakage",
+            "type": "article",
+            "content": "### Securing AI Systems Against Adversarial Prompts\n\nAs AI models are deployed into customer-facing products, safety engineers must defend against adversarial manipulation:\n\n1. **Direct & Indirect Prompt Injection**: Untrusted external text attempting to override system instructions.\n2. **PII & Training Data Extraction**: Ensuring models never regurgitate confidential user records or API keys.\n3. **Balanced Refusal Calibration**: Training models to refuse genuinely harmful requests while remaining helpful on benign sensitive queries.",
+            "duration_seconds": 410,
+            "position": 2,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_aes_01_03",
+            "section_id": "sec_aes_01",
+            "title": "1.3 Checkpoint Quiz: AI Safety & Governance",
+            "type": "quiz",
+            "duration_seconds": 240,
+            "position": 3,
+            "is_free_preview": true,
+            "is_completed": false,
+            "quiz_questions": [
+              {
+                "id": "q_aes_01",
+                "lesson_id": "les_aes_01_03",
+                "question": "What is an Indirect Prompt Injection attack?",
+                "options": [
+                  "Malicious instructions hidden inside external documents or web pages that an AI assistant retrieves and processes",
+                  "Upgrading an LLM to a newer version",
+                  "Using a lower temperature setting during API calls",
+                  "Running an AI model on local hardware"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Indirect prompt injection embeds untrusted instructions inside retrieved data sources to hijack the model’s behavior.",
+                "position": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "crs_ai_productivity_automation_07",
+    "instructor_id": "usr_instructor_001",
+    "title": "AI for Productivity and Workflow Automation",
+    "slug": "ai-for-productivity-and-workflow-automation",
+    "description": "Supercharge personal and team productivity using AI agents and no-code/low-code automation pipelines. Connect LLMs to spreadsheets, email, CRM, research synthesis, and multi-step automated business workflows.",
+    "category": "Applied AI & Automation",
+    "track": "Applied AI & Automation",
+    "level": "Beginner",
+    "outcome_hook": "Automate repetitive business operations, research synthesis, reporting, and multi-app workflows using AI.",
+    "duration_weeks": 6,
+    "weekly_hours": "8-12 hrs/week",
+    "skills": [
+      "AI Workflow Automation",
+      "AI Copilot Systems",
+      "Automated Document Synthesis",
+      "No-Code AI Pipelines",
+      "AI Data Extraction",
+      "Business Process Automation"
+    ],
+    "sponsorship_note": "Sponsored / $0 Upfront",
+    "is_now_open": true,
+    "is_popular": true,
+    "cohort_date": "Rolling Admissions",
+    "price": 34.99,
+    "thumbnail_url": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
+    "is_published": true,
+    "created_at": "2026-03-16T12:00:00Z",
+    "enrollments_count": 5480,
+    "average_rating": 4.96,
+    "reviews_count": 690,
+    "instructor": {
+      "id": "faculty_author_001",
+      "email": "faculty@reactjav.io",
+      "full_name": "Dr. Elena Chen",
+      "avatar_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+      "role": "instructor",
+      "bio": "Principal AI Research Scientist & Lead Faculty with 12+ years of experience in Large Language Models, RLHF Data Alignment, and Applied AI Systems.",
+      "created_at": "2025-11-01T08:00:00Z",
+      "subscription_status": "active",
+      "subscription_plan": "lifetime",
+      "admin_granted": true
+    },
+    "sections": [
+      {
+        "id": "sec_apa_01",
+        "course_id": "crs_ai_productivity_automation_07",
+        "title": "Module 1: Designing End-to-End AI Automation Pipelines",
+        "position": 1,
+        "lessons": [
+          {
+            "id": "les_apa_01_01",
+            "section_id": "sec_apa_01",
+            "title": "1.1 Mapping High-ROI Tasks for AI Augmentation vs. Full Automation",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+            "content": "How to audit daily workflows and connect AI reasoning steps with webhooks, spreadsheets, and notification triggers.",
+            "duration_seconds": 510,
+            "position": 1,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_apa_01_02",
+            "section_id": "sec_apa_01",
+            "title": "1.2 Automating Document Triage, Meeting Intelligence & Structured Reporting",
+            "type": "article",
+            "content": "### Architecting Reliable AI Workflow Automations\n\nAn effective AI automation pipeline follows a clear **Trigger → Context Enrichment → AI Reasoning → Schema Validation → Action** loop:\n\n1. **Trigger**: Incoming customer inquiry, uploaded PDF invoice, or scheduled daily report.\n2. **AI Processing Step**: Extract structured fields (e.g., priority, sentiment, action items) into strict JSON.\n3. **Human-in-the-Loop Approval**: Route high-stakes actions for 1-click human review before final dispatch.",
+            "duration_seconds": 390,
+            "position": 2,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_apa_01_03",
+            "section_id": "sec_apa_01",
+            "title": "1.3 Checkpoint Quiz: AI Workflow Automation",
+            "type": "quiz",
+            "duration_seconds": 240,
+            "position": 3,
+            "is_free_preview": true,
+            "is_completed": false,
+            "quiz_questions": [
+              {
+                "id": "q_apa_01",
+                "lesson_id": "les_apa_01_03",
+                "question": "Why is enforcing a structured JSON output schema essential in automated multi-app AI workflows?",
+                "options": [
+                  "Downstream apps (databases, CRMs, webhooks) require predictable field names and data types to process the AI output reliably",
+                  "JSON files do not use any storage space",
+                  "It prevents the user from reading the output",
+                  "It bypasses API authentication"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Downstream automation steps rely on deterministic keys and types so they can map AI outputs directly into database columns or API payloads.",
+                "position": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "crs_building_ai_apps_08",
+    "instructor_id": "usr_instructor_001",
+    "title": "Building AI-Powered Applications",
+    "slug": "building-ai-powered-applications",
+    "description": "Transition from AI user to AI application builder. Integrate LLM APIs, streaming responses, tool/function calling, vector databases, semantic search, and agentic memory into full-stack applications.",
+    "category": "Applied AI & Automation",
+    "track": "Applied AI & Automation",
+    "level": "Intermediate",
+    "outcome_hook": "Architect and ship full-stack AI applications with LLM APIs, function calling, RAG vector search, and streaming UIs.",
+    "duration_weeks": 10,
+    "weekly_hours": "12-16 hrs/week",
+    "skills": [
+      "LLM API Integration",
+      "Tool & Function Calling",
+      "RAG & Vector Databases",
+      "Streaming AI Interfaces",
+      "AI Agents & Memory",
+      "Evaluation & Observability"
+    ],
+    "sponsorship_note": "Sponsored / $5/mo",
+    "is_now_open": true,
+    "is_popular": true,
+    "cohort_date": "April 2026",
+    "price": 49.99,
+    "thumbnail_url": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80",
+    "is_published": true,
+    "created_at": "2026-03-18T14:00:00Z",
+    "enrollments_count": 4210,
+    "average_rating": 4.96,
+    "reviews_count": 560,
+    "instructor": {
+      "id": "faculty_author_001",
+      "email": "faculty@reactjav.io",
+      "full_name": "Dr. Elena Chen",
+      "avatar_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+      "role": "instructor",
+      "bio": "Principal AI Research Scientist & Lead Faculty with 12+ years of experience in Large Language Models, RLHF Data Alignment, and Applied AI Systems.",
+      "created_at": "2025-11-01T08:00:00Z",
+      "subscription_status": "active",
+      "subscription_plan": "lifetime",
+      "admin_granted": true
+    },
+    "sections": [
+      {
+        "id": "sec_baa_01",
+        "course_id": "crs_building_ai_apps_08",
+        "title": "Module 1: LLM APIs, Streaming, Function Calling & Agentic Tool Use",
+        "position": 1,
+        "lessons": [
+          {
+            "id": "les_baa_01_01",
+            "section_id": "sec_baa_01",
+            "title": "1.1 Integrating Frontier LLM APIs with Streaming & Structured Outputs",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+            "content": "Build responsive AI interfaces using Server-Sent Events (SSE) token streaming, system instructions, and token budget management.",
+            "duration_seconds": 600,
+            "position": 1,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_baa_01_02",
+            "section_id": "sec_baa_01",
+            "title": "1.2 Tool Calling (Function Calling) & Grounded RAG Pipelines",
+            "type": "article",
+            "content": "### Giving AI Applications Real-World Capabilities with Tool Calling\n\nBy defining typed **Tools (Functions)**, an LLM can decide when to query a live database, call an external weather or payment API, or search a vector index before answering the user.\n\n```json\n{\n  \"name\": \"lookup_order_status\",\n  \"description\": \"Retrieve live shipping status for a customer order ID\",\n  \"parameters\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"order_id\": { \"type\": \"string\", \"description\": \"Unique order identifier e.g. ORD-9021\" }\n    },\n    \"required\": [\"order_id\"]\n  }\n}\n```\n\n#### Production Best Practices:\n- Validate all tool arguments against your schema before executing backend queries.\n- Log latency, token usage, and user feedback thumbs-up/down for continuous evaluation.",
+            "duration_seconds": 470,
+            "position": 2,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_baa_01_03",
+            "section_id": "sec_baa_01",
+            "title": "1.3 Checkpoint Quiz: AI Application Architecture",
+            "type": "quiz",
+            "duration_seconds": 240,
+            "position": 3,
+            "is_free_preview": true,
+            "is_completed": false,
+            "quiz_questions": [
+              {
+                "id": "q_baa_01",
+                "lesson_id": "les_baa_01_03",
+                "question": "How does Tool/Function Calling work in an LLM-powered application?",
+                "options": [
+                  "The LLM outputs a structured JSON tool call request with arguments, which the application executes and returns to the model",
+                  "The LLM directly rewrites the operating system kernel",
+                  "The browser disables all API routes",
+                  "The model skips tokenization"
+                ],
+                "correct_option_index": 0,
+                "explanation": "The model emits a structured tool name and arguments; your application code safely executes the function and passes the result back to the model.",
+                "position": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "crs_deep_learning_advanced_09",
+    "instructor_id": "usr_instructor_001",
+    "title": "Deep Learning and Advanced Techniques",
+    "slug": "deep-learning-and-advanced-techniques",
+    "description": "Master neural networks, backpropagation, Convolutional & Transformer architectures, parameter-efficient fine-tuning (LoRA / QLoRA), quantization, preference optimization (RLHF / DPO), and distributed GPU inference.",
+    "category": "Large Language Models",
+    "track": "Large Language Models",
+    "level": "Advanced",
+    "outcome_hook": "Fine-tune, quantize, and optimize deep neural networks and open-weight LLMs using LoRA, QLoRA, and DPO.",
+    "duration_weeks": 12,
+    "weekly_hours": "14-18 hrs/week",
+    "skills": [
+      "Deep Neural Networks",
+      "Backpropagation & Optimizers",
+      "LoRA & QLoRA Fine-Tuning",
+      "DPO & RLHF Alignment",
+      "Model Quantization",
+      "Multi-Modal Transformers"
+    ],
+    "sponsorship_note": "Sponsored / $5/mo",
+    "is_now_open": true,
+    "is_popular": false,
+    "cohort_date": "May 2026",
+    "price": 59.99,
+    "thumbnail_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+    "is_published": true,
+    "created_at": "2026-03-20T09:00:00Z",
+    "enrollments_count": 2740,
+    "average_rating": 4.95,
+    "reviews_count": 350,
+    "instructor": {
+      "id": "faculty_author_001",
+      "email": "faculty@reactjav.io",
+      "full_name": "Dr. Elena Chen",
+      "avatar_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+      "role": "instructor",
+      "bio": "Principal AI Research Scientist & Lead Faculty with 12+ years of experience in Large Language Models, RLHF Data Alignment, and Applied AI Systems.",
+      "created_at": "2025-11-01T08:00:00Z",
+      "subscription_status": "active",
+      "subscription_plan": "lifetime",
+      "admin_granted": true
+    },
+    "sections": [
+      {
+        "id": "sec_dla_01",
+        "course_id": "crs_deep_learning_advanced_09",
+        "title": "Module 1: Neural Networks, Gradients & Parameter-Efficient Fine-Tuning (PEFT)",
+        "position": 1,
+        "lessons": [
+          {
+            "id": "les_dla_01_01",
+            "section_id": "sec_dla_01",
+            "title": "1.1 Deep Neural Networks, Loss Landscapes, Backpropagation & AdamW",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+            "content": "Understand forward passes, automatic differentiation, vanishing gradients, layer normalization, and modern optimizers.",
+            "duration_seconds": 620,
+            "position": 1,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_dla_01_02",
+            "section_id": "sec_dla_01",
+            "title": "1.2 Fine-Tuning LLMs with LoRA, QLoRA & Direct Preference Optimization (DPO)",
+            "type": "article",
+            "content": "### Parameter-Efficient Fine-Tuning (PEFT) & Alignment\n\nUpdating all billions of parameters in a modern foundation model is prohibitively expensive. **LoRA (Low-Rank Adaptation)** freezes the base model weights and injects tiny trainable rank-decomposition matrices into the attention layers.\n\n#### Key Techniques Covered:\n- **LoRA & QLoRA**: Fine-tune 7B–70B models on a single GPU by combining 4-bit NormalFloat quantization (`NF4`) with low-rank adapters.\n- **Direct Preference Optimization (DPO)**: Align models directly on human preference pairs (`chosen` vs. `rejected` responses) without training a separate reward model.",
+            "duration_seconds": 490,
+            "position": 2,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_dla_01_03",
+            "section_id": "sec_dla_01",
+            "title": "1.3 Checkpoint Quiz: Deep Learning & PEFT",
+            "type": "quiz",
+            "duration_seconds": 240,
+            "position": 3,
+            "is_free_preview": true,
+            "is_completed": false,
+            "quiz_questions": [
+              {
+                "id": "q_dla_01",
+                "lesson_id": "les_dla_01_03",
+                "question": "How does LoRA (Low-Rank Adaptation) dramatically reduce GPU memory requirements during fine-tuning?",
+                "options": [
+                  "It freezes the pretrained model weights and trains small low-rank adapter matrices",
+                  "It deletes 90% of the vocabulary tokens",
+                  "It converts all text to ASCII",
+                  "It replaces neural networks with decision trees"
+                ],
+                "correct_option_index": 0,
+                "explanation": "By freezing the base weights and only computing gradients for compact low-rank adapter matrices, LoRA cuts trainable parameters by over 99%.",
+                "position": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "crs_ai_capstone_10",
+    "instructor_id": "usr_instructor_001",
+    "title": "AI Capstone: Solve a Real Problem",
+    "slug": "ai-capstone-solve-a-real-problem",
+    "description": "Put your AI skills to the test by scoping, architecting, evaluating, and deploying an end-to-end AI solution for a real-world industry problem. Build a verified portfolio project complete with golden evaluation datasets, safety guardrails, and live deployment.",
+    "category": "Applied AI & Automation",
+    "track": "Applied AI & Automation",
+    "level": "Advanced",
+    "outcome_hook": "Scope, build, benchmark, and ship a portfolio-ready AI solution solving a high-impact real-world problem.",
+    "duration_weeks": 8,
+    "weekly_hours": "12-16 hrs/week",
+    "skills": [
+      "End-to-End AI Architecture",
+      "Problem Scoping & ROI",
+      "Golden Dataset Benchmarking",
+      "Safety & Hallucination Guardrails",
+      "Production AI Deployment",
+      "Technical Portfolio Defense"
+    ],
+    "sponsorship_note": "Sponsored / $0 Upfront",
+    "is_now_open": true,
+    "is_popular": true,
+    "cohort_date": "Rolling Admissions",
+    "price": 49.99,
+    "thumbnail_url": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
+    "is_published": true,
+    "created_at": "2026-03-22T10:00:00Z",
+    "enrollments_count": 2380,
+    "average_rating": 4.98,
+    "reviews_count": 310,
+    "instructor": {
+      "id": "faculty_author_001",
+      "email": "faculty@reactjav.io",
+      "full_name": "Dr. Elena Chen",
+      "avatar_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+      "role": "instructor",
+      "bio": "Principal AI Research Scientist & Lead Faculty with 12+ years of experience in Large Language Models, RLHF Data Alignment, and Applied AI Systems.",
+      "created_at": "2025-11-01T08:00:00Z",
+      "subscription_status": "active",
+      "subscription_plan": "lifetime",
+      "admin_granted": true
+    },
+    "sections": [
+      {
+        "id": "sec_cap_01",
+        "course_id": "crs_ai_capstone_10",
+        "title": "Module 1: Problem Discovery, Architecture Design & Evaluation Benchmarking",
+        "position": 1,
+        "lessons": [
+          {
+            "id": "les_cap_01_01",
+            "section_id": "sec_cap_01",
+            "title": "1.1 Scoping a High-Impact AI Capstone Project & Defining Success Metrics",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+            "content": "How to select a real-world domain problem, curate a 50-example golden evaluation benchmark, and design your AI system architecture.",
+            "duration_seconds": 540,
+            "position": 1,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_cap_01_02",
+            "section_id": "sec_cap_01",
+            "title": "1.2 Capstone Rubric: Accuracy, Latency, Safety Guardrails & Live Demo Defense",
+            "type": "article",
+            "content": "### Capstone Deliverable Blueprint\n\nEvery scholar completes the programme by shipping an audited, production-grade AI solution:\n\n1. **Problem Statement & Dataset Specification**: Clear definition of the user pain point and source data.\n2. **System Architecture**: Prompt chains, RAG pipeline, or fine-tuned model workflow.\n3. **Evaluation Suite**: Quantitative pass/fail scores on a curated Golden Dataset (measuring factuality, schema compliance, and safety).\n4. **Live Application & Technical Walkthrough**: Deployed application with documented source repository.",
+            "duration_seconds": 430,
+            "position": 2,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_cap_01_03",
+            "section_id": "sec_cap_01",
+            "title": "1.3 Checkpoint Quiz: AI Capstone Readiness",
+            "type": "quiz",
+            "duration_seconds": 240,
+            "position": 3,
+            "is_free_preview": true,
+            "is_completed": false,
+            "quiz_questions": [
+              {
+                "id": "q_cap_01",
+                "lesson_id": "les_cap_01_03",
+                "question": "Why should you create a Golden Evaluation Dataset before iterating on complex prompt or RAG architectures?",
+                "options": [
+                  "It provides an objective baseline to measure whether architectural changes actually improve accuracy and reduce hallucinations",
+                  "It replaces the user interface",
+                  "It eliminates the need for an internet connection",
+                  "It automatically writes CSS styles"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Without a fixed evaluation benchmark, you cannot objectively verify whether a prompt or retrieval change improved or degraded system quality.",
+                "position": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "crs_website_dev_ai_11",
+    "instructor_id": "usr_instructor_001",
+    "title": "Website Development with AI",
+    "slug": "website-development-with-ai",
+    "description": "Build, style, debug, and deploy modern responsive websites and full-stack web applications using AI coding assistants, generative UI workflows, and modern web standards—from idea to live production deployment in record time.",
+    "category": "Applied AI & Automation",
+    "track": "Applied AI & Automation",
+    "level": "Beginner",
+    "outcome_hook": "Build and deploy modern, responsive websites and web apps 5x faster using AI-assisted web development.",
+    "duration_weeks": 8,
+    "weekly_hours": "10-14 hrs/week",
+    "skills": [
+      "AI-Assisted Web Development",
+      "HTML, CSS & Modern JavaScript",
+      "React & Next.js with AI Copilots",
+      "Generative UI Prototyping",
+      "AI Debugging & Refactoring",
+      "Cloud Deployment & SEO"
+    ],
+    "sponsorship_note": "Sponsored / $0 Upfront",
+    "is_now_open": true,
+    "is_popular": true,
+    "cohort_date": "Rolling Admissions",
+    "price": 39.99,
+    "thumbnail_url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
+    "is_published": true,
+    "created_at": "2026-03-24T11:00:00Z",
+    "enrollments_count": 6150,
+    "average_rating": 4.97,
+    "reviews_count": 820,
+    "instructor": {
+      "id": "faculty_author_001",
+      "email": "faculty@reactjav.io",
+      "full_name": "Dr. Elena Chen",
+      "avatar_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+      "role": "instructor",
+      "bio": "Principal AI Research Scientist & Lead Faculty with 12+ years of experience in Large Language Models, RLHF Data Alignment, and Applied AI Systems.",
+      "created_at": "2025-11-01T08:00:00Z",
+      "subscription_status": "active",
+      "subscription_plan": "lifetime",
+      "admin_granted": true
+    },
+    "sections": [
+      {
+        "id": "sec_wda_01",
+        "course_id": "crs_website_dev_ai_11",
+        "title": "Module 1: AI-First Web Design, Frontend Engineering & Responsive UI",
+        "position": 1,
+        "lessons": [
+          {
+            "id": "les_wda_01_01",
+            "section_id": "sec_wda_01",
+            "title": "1.1 From Wireframe Prompt to Live Responsive Website with AI Coding Copilots",
+            "type": "video",
+            "video_url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+            "content": "Learn how to prompt AI coding assistants to scaffold semantic HTML5, modern CSS Grid/Flexbox layouts, interactive React components, and accessible design systems.",
+            "duration_seconds": 550,
+            "position": 1,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_wda_01_02",
+            "section_id": "sec_wda_01",
+            "title": "1.2 Prompting for Clean Component Architecture, Debugging & Live Cloud Deployment",
+            "type": "article",
+            "content": "### Building Production Websites with AI Pair Programming\n\nAI coding assistants allow creators and developers to go from concept to deployed web application faster than ever—when guided by clear architectural prompts.\n\n#### The AI Web Development Workflow:\n1. **Specification & Design Tokens**: Define your color palette, typography, layout structure, and target user flow before generating code.\n2. **Iterative Component Generation**: Build modular, reusable UI sections (Hero, Features, Pricing, Contact Forms) and review the generated code for accessibility and mobile responsiveness.\n3. **AI-Assisted Debugging & Verification**: Paste console errors or layout edge cases directly into your AI assistant with context to resolve bugs systematically.\n4. **Continuous Deployment**: Connect your GitHub repository to cloud hosting (Vercel / Render) for automatic live URLs on every push.",
+            "duration_seconds": 440,
+            "position": 2,
+            "is_free_preview": true,
+            "is_completed": false
+          },
+          {
+            "id": "les_wda_01_03",
+            "section_id": "sec_wda_01",
+            "title": "1.3 Checkpoint Quiz: Website Development with AI",
+            "type": "quiz",
+            "duration_seconds": 240,
+            "position": 3,
+            "is_free_preview": true,
+            "is_completed": false,
+            "quiz_questions": [
+              {
+                "id": "q_wda_01",
+                "lesson_id": "les_wda_01_03",
+                "question": "What is the most effective way to prompt an AI coding assistant when building a complex website?",
+                "options": [
+                  "Break the website into modular components with clear layout, styling, and responsiveness specifications, verifying each step",
+                  "Ask for a 10,000-line website in a single vague 3-word prompt without testing",
+                  "Avoid using CSS or semantic HTML tags",
+                  "Never test the site on mobile screens"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Decomposing web applications into well-specified, modular components produces clean, maintainable, and bug-free code.",
+                "position": 1
+              }
+            ]
           }
         ]
       }
