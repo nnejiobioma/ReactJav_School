@@ -10,8 +10,8 @@ import KeycloakSessionProvider from '@/components/auth/KeycloakSessionProvider';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
-  title: 'ReactJav • Modern LMS with Supabase & Next.js',
-  description: 'Production-ready Learning Management Platform with PostgreSQL, Row Level Security, Resumable Video Streaming, and Interactive Quizzes.',
+  title: 'ReactJav AI Academy • AI Prompting, Data Annotation & LLM Skill Development',
+  description: 'Master practical AI skills with hands-on courses in AI Prompting and Data Annotation, AI Basics, and Intro to Large Language Models (LLM).',
   icons: {
     icon: '/icon.svg',
     shortcut: '/icon.svg',

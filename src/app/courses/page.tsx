@@ -33,11 +33,9 @@ export default function CoursesCatalogPage() {
 
   const tracks = [
     'All Programmes',
-    'AI & Data',
-    'Software Engineering',
-    'Creative & Design',
-    'Entrepreneurship',
-    'Game Development',
+    'Prompt Engineering & RLHF',
+    'AI Foundations',
+    'Large Language Models',
   ];
 
   const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced'];

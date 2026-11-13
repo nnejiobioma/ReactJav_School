@@ -31,29 +31,29 @@ export default function InteractiveCampusPreview() {
 
   // CBT Question Data
   const cbtQuestion = {
-    title: 'PostgreSQL Enterprise Architecture & RLS Security',
-    codeSnippet: `CREATE POLICY "User Data Isolation" ON public.student_records\n  FOR ALL\n  TO authenticated\n  ???`,
-    prompt: 'Which clause correctly restricts read/write operations so that students can only access records matching their authenticated user ID?',
+    title: 'AI Prompting, RLHF Data Annotation & LLM Evaluation',
+    codeSnippet: `System: Extract invoice fields strictly as JSON.\nContext: <invoice>Vendor: Acme AI Labs | Total: $1,250</invoice>\nInstruction: If "due_date" is missing from context, ???`,
+    prompt: 'When designing a hallucination-resistant prompt for structured data extraction, which instruction best prevents the LLM from fabricating missing values?',
     options: [
       {
-        text: 'USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);',
+        text: 'Set "due_date": null when the value is not explicitly stated in <invoice>.',
         isCorrect: true,
-        explanation: 'Correct! The USING clause restricts row selection (reads/updates/deletes) and WITH CHECK validates new rows inserted or updated.',
+        explanation: 'Correct! Giving an explicit fallback value (null) for absent fields prevents the LLM from guessing or hallucinating ungrounded dates.',
       },
       {
-        text: 'WHERE current_user() == student_id ALLOW ALL;',
+        text: 'Estimate the most likely due_date based on standard 30-day billing.',
         isCorrect: false,
-        explanation: 'Incorrect. PostgreSQL RLS policies require USING / WITH CHECK expressions, not standard WHERE filter clauses.',
+        explanation: 'Incorrect. Instructing an LLM to guess or estimate missing facts directly causes extrinsic hallucinations.',
       },
       {
-        text: 'GRANT ACCESS TO session_user WITH LEVEL = "student";',
+        text: 'Increase sampling temperature to 1.6 so the model fills in creative dates.',
         isCorrect: false,
-        explanation: 'Incorrect. GRANT is for role privileges, not table-level Row Level Security policies.',
+        explanation: 'Incorrect. High temperature increases randomness; structured extraction requires temperature near 0 and explicit null handling.',
       },
       {
-        text: 'FILTER BY auth.jwt() ->> "sub" = student_id;',
+        text: 'Omit all system instructions and send only raw text.',
         isCorrect: false,
-        explanation: 'Incorrect syntax for Supabase PostgreSQL RLS policy definitions.',
+        explanation: 'Incorrect. Without schema and grounding constraints, output format and factuality become unpredictable.',
       },
     ],
   };
@@ -324,7 +324,7 @@ export default function InteractiveCampusPreview() {
             {/* Question Box */}
             <div style={{ marginBottom: '1.5rem' }}>
               <div style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 800, marginBottom: '0.5rem', letterSpacing: '0.03em' }}>
-                QUESTION 18 • DATABASE ACCESS CONTROL
+                QUESTION 18 • PROMPT ENGINEERING & FACTUAL GROUNDING
               </div>
               <p style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.5, marginBottom: '1rem' }}>
                 {cbtQuestion.prompt}
@@ -481,30 +481,30 @@ export default function InteractiveCampusPreview() {
               fontSize: '0.78rem',
             }}>
               <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-                PROJECT EXPLORER
+                AI LAB WORKSPACE
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--primary)', fontWeight: 700 }}>
                   <FileCode size={14} />
-                  <span>auth/route.ts</span>
+                  <span>prompts/chainOfThought.ts</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)' }}>
                   <FileCode size={14} />
-                  <span>supabase/client.ts</span>
+                  <span>rlhf/preferenceRubric.json</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)' }}>
                   <FileCode size={14} />
-                  <span>migrations/rls.sql</span>
+                  <span>llm/ragEmbeddings.ts</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)' }}>
                   <FileCode size={14} />
-                  <span>package.json</span>
+                  <span>evals/hallucinationTest.ts</span>
                 </div>
               </div>
 
               <div style={{ marginTop: '2.5rem', paddingTop: '1rem', borderTop: '1px solid var(--border-subtle)' }}>
-                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>GIT BRANCH</span>
-                <span style={{ color: '#059669', fontWeight: 700, fontSize: '0.75rem' }}>feature/supabase-rls</span>
+                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>ACTIVE TRACK</span>
+                <span style={{ color: '#059669', fontWeight: 700, fontSize: '0.75rem' }}>ai-prompting-llm-lab</span>
               </div>
             </div>
 
@@ -512,15 +512,14 @@ export default function InteractiveCampusPreview() {
             <div style={{ display: 'flex', flexDirection: 'column', background: '#0a0d1a' }}>
               {/* Code Lines */}
               <div style={{ padding: '1.25rem', fontSize: '0.8rem', lineHeight: 1.6, flex: 1, overflowX: 'auto', color: '#f8fafc' }}>
-                <div style={{ color: '#94a3b8' }}>// Next.js 16 App Router - Server-Side RLS Authentication Handler</div>
-                <div><span style={{ color: '#f43f5e' }}>import</span> {'{ createServerClient }'} <span style={{ color: '#f43f5e' }}>from</span> <span style={{ color: '#a7f3d0' }}>'@supabase/ssr'</span>;</div>
-                <div><span style={{ color: '#f43f5e' }}>import</span> {'{ cookies }'} <span style={{ color: '#f43f5e' }}>from</span> <span style={{ color: '#a7f3d0' }}>'next/headers'</span>;</div>
-                <br />
-                <div><span style={{ color: '#818cf8' }}>export async function</span> <span style={{ color: '#38bdf8' }}>GET</span>(request: Request) {'{'}</div>
-                <div>&nbsp;&nbsp;<span style={{ color: '#818cf8' }}>const</span> cookieStore = <span style={{ color: '#f43f5e' }}>await</span> cookies();</div>
-                <div>&nbsp;&nbsp;<span style={{ color: '#818cf8' }}>const</span> supabase = createServerClient(process.env.SUPABASE_URL!, ...);</div>
-                <div>&nbsp;&nbsp;<span style={{ color: '#818cf8' }}>const</span> {'{ data: { user } }'} = <span style={{ color: '#f43f5e' }}>await</span> supabase.auth.getUser();</div>
-                <div>&nbsp;&nbsp;<span style={{ color: '#f43f5e' }}>return</span> Response.json({'{ status: "authenticated", user_id: user?.id }'});</div>
+                <div style={{ color: '#94a3b8' }}>// Structured Prompt & RLHF Response Evaluation Pipeline</div>
+                <div><span style={{ color: '#818cf8' }}>export async function</span> <span style={{ color: '#38bdf8' }}>evaluateCompletion</span>(prompt: string, completion: string) {'{'}</div>
+                <div>&nbsp;&nbsp;<span style={{ color: '#818cf8' }}>const</span> rubric = {'{'}</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;instructionFollowing: <span style={{ color: '#34d399' }}>true</span>,</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;factualityGrounded: <span style={{ color: '#34d399' }}>true</span>,</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;temperature: <span style={{ color: '#f59e0b' }}>0.0</span>,</div>
+                <div>&nbsp;&nbsp;{'}'};</div>
+                <div>&nbsp;&nbsp;<span style={{ color: '#f43f5e' }}>return</span> {'{ status: "golden_verified", rubric }'};</div>
                 <div>{'}'}</div>
               </div>
 
@@ -533,13 +532,13 @@ export default function InteractiveCampusPreview() {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#10b981', marginBottom: '0.35rem' }}>
                   <Terminal size={14} />
-                  <span>$ supabase test --policies</span>
+                  <span>$ ai-eval run --suite rlhf-annotation</span>
                 </div>
-                <div style={{ color: '#cbd5e1' }}>Running 8 security validation suites across PostgreSQL tables...</div>
-                <div style={{ color: '#34d399' }}>✓ [RLS_01] User profile isolation: PASS (8ms)</div>
-                <div style={{ color: '#34d399' }}>✓ [RLS_02] Timed examination submissions immutable: PASS (5ms)</div>
+                <div style={{ color: '#cbd5e1' }}>Running 12 prompt & RLHF quality checks across LLM outputs...</div>
+                <div style={{ color: '#34d399' }}>✓ [PROMPT_01] JSON schema & constraint adherence: PASS (100%)</div>
+                <div style={{ color: '#34d399' }}>✓ [RLHF_02] Zero extrinsic hallucinations detected: PASS</div>
                 <div style={{ color: '#60a5fa', marginTop: '0.35rem' }}>
-                  All security benchmarks satisfied. Build deployed to Vercel preview branch.
+                  All AI evaluation benchmarks satisfied. Golden dataset ready for export.
                 </div>
               </div>
             </div>
@@ -594,10 +593,10 @@ export default function InteractiveCampusPreview() {
                 <div style={{ position: 'absolute', bottom: '1rem', left: '1rem', right: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
                     <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#ffffff', display: 'block' }}>
-                      Pair Programming: Supabase Architecture
+                      Live Lab: RLHF Data Annotation & LLM Evaluation
                     </span>
                     <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
-                      Mentor: Senior Software Architect (ReactJav Core)
+                      Mentor: Principal AI Scientist (ReactJav Core)
                     </span>
                   </div>
 
@@ -631,11 +630,11 @@ export default function InteractiveCampusPreview() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.82rem' }}>
                   <div style={{ background: 'var(--bg-surface-elevated)', padding: '0.65rem 0.85rem', borderRadius: '0.5rem', color: 'var(--text-primary)' }}>
                     <strong style={{ color: 'var(--primary)' }}>Mentor Obioma: </strong>
-                    <span>"Notice how line 14 validates the bearer token before running the database query."</span>
+                    <span>"Notice how Response A grounds every factual claim in the source passage, whereas Response B introduces an unverified date."</span>
                   </div>
                   <div style={{ background: 'var(--bg-surface-elevated)', padding: '0.65rem 0.85rem', borderRadius: '0.5rem', color: 'var(--text-primary)' }}>
                     <strong style={{ color: '#d97706' }}>Fellow Amara: </strong>
-                    <span>"Got it! That completely avoids race conditions on multi-tenant queries."</span>
+                    <span>"Got it! That makes ranking Response A as the golden completion straightforward under the RLHF factuality rubric."</span>
                   </div>
                 </div>
 

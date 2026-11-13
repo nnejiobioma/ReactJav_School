@@ -66,7 +66,17 @@ function writeJsonFile(filePath: string, data: any): void {
 export async function GET() {
   try {
     let siteContent = readJsonFile(SITE_CONTENT_FILE, DEFAULT_SITE_CONTENT);
+    if (siteContent?.hero?.title_prefix === 'Every Programme Leads to a') {
+      siteContent = DEFAULT_SITE_CONTENT;
+    }
     let courses = readJsonFile(COURSES_FILE, INITIAL_COURSES);
+    if (
+      !Array.isArray(courses) ||
+      !courses.some((c: any) => c.id === 'crs_ai_prompting_annotation_01') ||
+      courses.some((c: any) => c.id === 'crs_nextjs_supabase_01')
+    ) {
+      courses = INITIAL_COURSES;
+    }
     let tracks = readJsonFile(TRACKS_FILE, ACADEMY_TRACKS);
     let profiles = readJsonFile<Profile[]>(PROFILES_FILE, []);
     let inquiries = readJsonFile<any[]>(INQUIRIES_FILE, []);
@@ -127,8 +137,21 @@ export async function GET() {
         const { data: dbSiteData, error: sErr } = await supabase.from('site_data').select('key, data');
         if (!sErr && dbSiteData) {
           dbSiteData.forEach((row: any) => {
-            if (row.key === 'siteContent' && row.data) siteContent = row.data;
-            if (row.key === 'courses' && Array.isArray(row.data)) courses = row.data;
+            if (
+              row.key === 'siteContent' &&
+              row.data &&
+              row.data.hero?.title_prefix !== 'Every Programme Leads to a'
+            ) {
+              siteContent = row.data;
+            }
+            if (
+              row.key === 'courses' &&
+              Array.isArray(row.data) &&
+              row.data.some((c: any) => c.id === 'crs_ai_prompting_annotation_01') &&
+              !row.data.some((c: any) => c.id === 'crs_nextjs_supabase_01')
+            ) {
+              courses = row.data;
+            }
             if (row.key === 'tracks' && Array.isArray(row.data)) tracks = row.data;
             if (row.key === 'inquiries' && Array.isArray(row.data)) inquiries = row.data;
           });

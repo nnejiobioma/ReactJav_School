@@ -329,14 +329,14 @@ export default function LandingHero({
             }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                 <span className="badge badge-emerald" style={{ fontSize: '0.7rem' }}>
-                  <Timer size={12} /> CBT Engine • Proctored
+                  <Timer size={12} /> AI & RLHF CBT Engine • Proctored
                 </span>
                 <span style={{ fontSize: '0.78rem', color: '#d97706', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>
                   54:12 REMAINING
                 </span>
               </div>
               <p style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
-                Question 14 of 40: Which SQL statement enforces Row Level Security in PostgreSQL?
+                Question 4 of 20: Which prompting technique guides an LLM using 3–5 input/output exemplars?
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.78rem' }}>
                 <div style={{
@@ -351,7 +351,7 @@ export default function LandingHero({
                   gap: '0.4rem',
                 }}>
                   <CheckCircle2 size={13} />
-                  <code>ALTER TABLE records ENABLE ROW LEVEL SECURITY;</code>
+                  <code>Few-Shot In-Context Prompting</code>
                 </div>
                 <div style={{
                   padding: '0.45rem 0.75rem',
@@ -360,12 +360,12 @@ export default function LandingHero({
                   border: '1px solid var(--border-subtle)',
                   color: 'var(--text-secondary)',
                 }}>
-                  <code>SET SECURITY POLICY ON records;</code>
+                  <code>Unconstrained Zero-Shot Decoding</code>
                 </div>
               </div>
             </div>
 
-            {/* Column 2: In-Browser Code IDE Preview */}
+            {/* Column 2: AI Prompt & RLHF Annotation Sandbox Preview */}
             <div style={{
               background: 'var(--bg-surface-elevated)',
               padding: '1.25rem',
@@ -375,10 +375,10 @@ export default function LandingHero({
             }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                 <span className="badge badge-primary" style={{ fontSize: '0.7rem' }}>
-                  <Code2 size={12} /> Cloud IDE Sandbox
+                  <Code2 size={12} /> AI Prompt & RLHF Sandbox
                 </span>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                  branch: main (verified)
+                  model: llm-eval-v3 (verified)
                 </span>
               </div>
               <div style={{
@@ -391,15 +391,15 @@ export default function LandingHero({
                 overflowX: 'auto',
                 border: '1px solid rgba(255, 255, 255, 0.08)',
               }}>
-                <span style={{ color: '#818cf8' }}>const</span> supabase = createServerClient(<br />
-                &nbsp;&nbsp;process.env.NEXT_PUBLIC_SUPABASE_URL,<br />
-                &nbsp;&nbsp;process.env.SUPABASE_SERVICE_ROLE_KEY<br />
-                );<br />
-                <span style={{ color: '#34d399' }}>// ✓ Next.js 16 App Router Connected</span>
+                <span style={{ color: '#818cf8' }}>const</span> evaluation = annotateResponse({'{'}<br />
+                &nbsp;&nbsp;prompt: <span style={{ color: '#a7f3d0' }}>"Summarize clinical trial with citations"</span>,<br />
+                &nbsp;&nbsp;factuality: <span style={{ color: '#38bdf8' }}>"verified"</span>, preference: <span style={{ color: '#f43f5e' }}>"Response_A"</span><br />
+                {'}'});<br />
+                <span style={{ color: '#34d399' }}>// ✓ RLHF Golden Rubric Passed (100%)</span>
               </div>
               <div style={{ marginTop: '0.6rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                <span>Build Status: Passing (100%)</span>
-                <span style={{ color: 'var(--primary)', fontWeight: 700 }}>350+ Fellows Coding Live</span>
+                <span>Rubric Score: 5/5 (Factually Grounded)</span>
+                <span style={{ color: 'var(--primary)', fontWeight: 700 }}>350+ AI Fellows Training Live</span>
               </div>
             </div>
           </div>

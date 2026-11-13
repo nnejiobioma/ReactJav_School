@@ -59,7 +59,7 @@ export default function HomePage() {
   }, []);
 
   // Flagship Spotlight Course
-  const flagshipCourse = courses.find(c => c.id === 'crs_aice_03') || courses[0];
+  const flagshipCourse = courses.find(c => c.id === 'crs_ai_prompting_annotation_01') || courses[0];
 
   return (
     <div className="container" style={{ paddingBottom: '6rem' }}>

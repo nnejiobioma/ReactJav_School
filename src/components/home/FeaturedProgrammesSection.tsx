@@ -56,7 +56,7 @@ export default function FeaturedProgrammesSection({ courses, userId }: FeaturedP
             letterSpacing: '-0.025em',
             margin: 0,
           }}>
-            Featured <span className="text-gradient">Flagship Programmes</span>
+            Core <span className="text-gradient">AI Skill Development Programmes</span>
           </h2>
           <p style={{
             fontSize: '1rem',
@@ -65,7 +65,7 @@ export default function FeaturedProgrammesSection({ courses, userId }: FeaturedP
             maxWidth: '650px',
             lineHeight: 1.55,
           }}>
-            Handpicked engineering and technical specializations with active cohort intakes, industry partner grants, and proven career placement velocity.
+            Focused, high-impact Artificial Intelligence curricula covering AI Prompting & Data Annotation, AI Basics, and Large Language Models (LLMs).
           </p>
         </div>
 
@@ -80,7 +80,7 @@ export default function FeaturedProgrammesSection({ courses, userId }: FeaturedP
             borderRadius: '9999px',
           }}
         >
-          <span>View All 20+ Programmes</span>
+          <span>View All AI Courses</span>
           <ArrowRight size={16} />
         </Link>
       </div>
@@ -117,13 +117,13 @@ export default function FeaturedProgrammesSection({ courses, userId }: FeaturedP
         <div style={{ maxWidth: '680px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary)', fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.4rem' }}>
             <BookOpen size={16} />
-            <span>Complete Syllabus & Specialization Library</span>
+            <span>AI Skill Development Curriculum Library</span>
           </div>
           <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--text-primary)', margin: 0 }}>
-            Looking for a specific tech stack or skill level?
+            Ready to build practical, verifiable AI skills?
           </h3>
           <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', margin: '0.5rem 0 0', lineHeight: 1.55 }}>
-            Browse our comprehensive catalogue of 20+ technical disciplines spanning AI & Deep Learning, Cloud DevOps, Distributed Systems, UX Product Design, Mobile Architecture, and Founder Academy.
+            Explore our complete AI learning pathway—from getting started with AI Basics to mastering AI Prompting & Data Annotation and understanding Large Language Models (LLMs).
           </p>
         </div>
 
@@ -140,7 +140,7 @@ export default function FeaturedProgrammesSection({ courses, userId }: FeaturedP
             boxShadow: '0 8px 25px -4px rgba(37, 99, 235, 0.4)',
           }}
         >
-          <span>Explore All 20+ Curricula</span>
+          <span>Explore AI Catalogue</span>
           <ArrowRight size={17} />
         </Link>
       </div>

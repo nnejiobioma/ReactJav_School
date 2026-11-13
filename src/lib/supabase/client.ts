@@ -109,18 +109,18 @@ export const isFaculty = (user?: Profile | null): boolean => {
 const STORAGE_KEYS = {
   CURRENT_USER: 'reactjav_current_user',
   PROFILES: 'reactjav_user_profiles',
-  COURSES: 'reactjav_courses',
+  COURSES: 'reactjav_courses_ai_v2',
   PROGRESS: 'reactjav_lesson_progress',
   ENROLLMENTS: 'reactjav_enrollments',
   QUIZ_SUBMISSIONS: 'reactjav_quiz_submissions',
-  CBT_EXAMS: 'reactjav_cbt_exams',
-  CBT_ATTEMPTS: 'reactjav_cbt_attempts',
-  LIVE_ROOMS: 'reactjav_live_rooms',
-  LIVE_MESSAGES: 'reactjav_live_messages',
+  CBT_EXAMS: 'reactjav_cbt_exams_ai_v2',
+  CBT_ATTEMPTS: 'reactjav_cbt_attempts_ai_v2',
+  LIVE_ROOMS: 'reactjav_live_rooms_ai_v2',
+  LIVE_MESSAGES: 'reactjav_live_messages_ai_v2',
   INTRANET_REQUESTS: 'reactjav_intranet_requests',
-  CAMPUS_BULLETINS: 'reactjav_campus_bulletins',
+  CAMPUS_BULLETINS: 'reactjav_campus_bulletins_ai_v2',
   TUTORING_ATTENDANCE: 'reactjav_tutoring_attendance',
-  SITE_CONTENT: 'reactjav_site_content',
+  SITE_CONTENT: 'reactjav_site_content_ai_v2',
   ADMIN_EDIT_MODE: 'reactjav_admin_edit_mode',
   ACADEMY_TRACKS: 'reactjav_academy_tracks',
   LAST_ACCESSED: 'reactjav_last_accessed_learning',
@@ -471,7 +471,13 @@ export class LocalDataService {
     if (stored) {
       try {
         const parsed: Course[] = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length >= INITIAL_COURSES.length && parsed.some(c => c.track)) {
+        const hasLegacyCourse = Array.isArray(parsed) && parsed.some(c => c.id === 'crs_nextjs_supabase_01');
+        if (
+          Array.isArray(parsed) &&
+          !hasLegacyCourse &&
+          parsed.length >= INITIAL_COURSES.length &&
+          parsed.some(c => c.id === 'crs_ai_prompting_annotation_01')
+        ) {
           return parsed;
         }
       } catch {
@@ -2504,11 +2510,16 @@ export class LocalDataService {
       const siteContent = base.siteContent || remote.siteContent;
       const courses = base.courses || remote.courses;
       const tracks = base.tracks || remote.tracks;
-      if (siteContent) {
+      if (siteContent && siteContent.hero?.title_prefix !== 'Every Programme Leads to a') {
         localStorage.setItem(STORAGE_KEYS.SITE_CONTENT, JSON.stringify(siteContent));
         window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: siteContent }));
       }
-      if (courses && Array.isArray(courses)) {
+      if (
+        courses &&
+        Array.isArray(courses) &&
+        courses.some((c: any) => c.id === 'crs_ai_prompting_annotation_01') &&
+        !courses.some((c: any) => c.id === 'crs_nextjs_supabase_01')
+      ) {
         localStorage.setItem(STORAGE_KEYS.COURSES, JSON.stringify(courses));
       }
       if (tracks && Array.isArray(tracks)) {

@@ -173,7 +173,7 @@ export default function HeroSection({
         marginBottom: '2.5rem',
       }}>
         <span style={{ fontWeight: 600 }}>Quick suggestions:</span>
-        {['AI Essentials', 'Full-Stack Next.js', 'Data Analytics', 'Cloud DevOps', 'UI/UX Design', 'Founder Academy', 'Game Development'].map((tag) => (
+        {['AI Prompting', 'Data Annotation', 'RLHF', 'AI Basics', 'Large Language Models', 'Transformers', 'RAG'].map((tag) => (
           <button
             key={tag}
             type="button"
