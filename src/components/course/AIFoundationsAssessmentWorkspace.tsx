@@ -1,22 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
-  CheckCircle2,
-  AlertCircle,
   Award,
-  Sparkles,
   FileCheck,
-  ShieldCheck,
-  RefreshCw,
-  Download,
   Copy,
   Check,
-  BookOpen,
-  HelpCircle,
-  Layers,
+  Users,
 } from 'lucide-react';
-import { LocalDataService } from '@/lib/supabase/client';
 
 interface AISystemAuditRow {
   name: string;
@@ -81,39 +72,40 @@ const DEFAULT_SYSTEMS: AISystemAuditRow[] = [
 
 const DEFAULT_HALLUCINATION_TESTS: HallucinationTestItem[] = [
   {
-    questionType: '1. Easy / Well-Known Fact',
+    questionType: '1. Well-Known Fact (Baseline Verification)',
     questionAsked: 'What is the difference between Artificial Intelligence and Machine Learning in plain English?',
     chatbotResponse: 'AI is the broad goal of making machines perform tasks that require human-like intelligence, while Machine Learning is a specific subset of AI where systems learn patterns from data instead of following hand-coded rules.',
-    screenshotEvidence: 'screenshot_test1_easy_fact_verified.png',
-    verificationMethod: 'Cross-checked against the Course Glossary and Stanford AI Index definitions.',
+    screenshotEvidence: 'screenshot_test1_well_known_fact.png',
+    verificationMethod: 'Step 1 & 2 of Verification Habit: Cross-checked against the Course Glossary and Stanford AI Index definitions.',
     findings: 'Accurate and clear. The chatbot handled foundational definitions well because they appear thousands of times in its training data.',
   },
   {
-    questionType: '2. Multi-Step Practical Question',
-    questionAsked: 'Give me 3 concrete ways a hospital might use predictive machine learning and 1 specific risk for patients.',
-    chatbotResponse: 'Hospitals use ML to read X-rays, predict patient readmission risk, and forecast ER wait times. A key risk is dataset bias if the training data underrepresents certain patient demographics.',
-    screenshotEvidence: 'screenshot_test2_hospital_ml.png',
-    verificationMethod: 'Verified against Module 4 healthcare case studies and WHO guidance on AI in health.',
-    findings: 'Accurate examples and relevant risk identification.',
-  },
-  {
-    questionType: '3. Tricky / Hallucination-Prone Prompt',
-    questionAsked: 'Summarize the 2025 Supreme Court ruling in "United States v. NeuralNet Corp" and include the exact page citation.',
+    questionType: '2. Obscure or Tricky Question (Hallucination Stress-Test)',
+    questionAsked: 'Summarize the 2025 Supreme Court ruling in "United States v. NeuralNet Corp" and explain why the dissenting justices disagreed.',
     chatbotResponse: 'In the first test without web search, the chatbot invented a fictional 6-3 ruling and fabricated a docket number before admitting on follow-up that no such case exists.',
-    screenshotEvidence: 'screenshot_test3_hallucination_caught.png',
+    screenshotEvidence: 'screenshot_test2_obscure_tricky_caught.png',
     verificationMethod: 'Searched official Supreme Court docket records and Google Scholar Case Law; confirmed the case name was fictional.',
     findings: 'Caught a classic hallucination! Because LLMs predict plausible next words, a leading question about a fake legal case caused it to invent convincing legal details.',
+  },
+  {
+    questionType: '3. Request for Sources & Citations (Source Existence Check)',
+    questionAsked: 'Give me 3 peer-reviewed studies on algorithmic bias in healthcare with exact article titles, authors, and DOI links.',
+    chatbotResponse: 'Provided one real 2019 Science study by Obermeyer et al., alongside two plausible-sounding paper titles whose DOI links led to 404 errors or completely unrelated journals.',
+    screenshotEvidence: 'screenshot_test3_sources_check.png',
+    verificationMethod: 'Step 3 of Verification Habit: Searched each exact paper title and DOI on PubMed and Google Scholar to verify the source exists and says what the chatbot claims.',
+    findings: '1 real study confirmed; 2 citations were "Frankenstein" hallucinations combining real researcher names with invented article titles.',
   },
 ];
 
 const REQUIRED_GLOSSARY_TERMS = [
   'ai',
-  'machine learning',
+  'algorithm',
   'data',
-  'training',
   'model',
+  'training',
   'prediction',
-  'generative',
+  'machine learning',
+  'generative ai',
   'hallucination',
   'bias',
 ];
@@ -131,26 +123,29 @@ export default function AIFoundationsAssessmentWorkspace({
   userName = 'AI Foundations Scholar',
   onCompleteLesson,
 }: AIFoundationsAssessmentWorkspaceProps) {
+  const [audiencePerson, setAudiencePerson] = useState(
+    'My Aunt Clara — a retired nurse who hears about AI on the news every day and wants a plain-language guide without technical jargon.'
+  );
   const [systems, setSystems] = useState<AISystemAuditRow[]>(DEFAULT_SYSTEMS);
   const [hallucinationTests, setHallucinationTests] = useState<HallucinationTestItem[]>(
     DEFAULT_HALLUCINATION_TESTS
   );
   const [explainerMode, setExplainerMode] = useState<'standard' | 'stretch'>('standard');
-  const [explainerFormat, setExplainerFormat] = useState<'infographic' | 'video'>('infographic');
+  const [explainerFormat, setExplainerFormat] = useState<'written' | 'infographic'>('written');
   const [explainerMediaUrl, setExplainerMediaUrl] = useState(
-    'https://reactjav.com/portfolio/ai-foundations-explainer-infographic.pdf'
+    'https://reactjav.com/portfolio/ai-foundations-one-page-explainer.pdf'
   );
   const [explainerContent, setExplainerContent] = useState(
-    `What is AI and How Does It Actually Learn? (A Plain-Language Guide)
+    `What is AI and How Does It Actually Learn? (A One-Page Plain-Language Guide for Aunt Clara)
 
 1. The Big Picture (AI vs. Machine Learning vs. Generative AI):
-Artificial Intelligence (AI) is any computer system designed to perform tasks that normally require human intelligence—like recognizing speech, navigating traffic, or answering questions. Machine Learning (ML) is the engine inside modern AI: instead of a programmer typing every rule by hand, the computer learns patterns from examples. Deep Learning uses multi-layered neural networks inspired by the brain, and Generative AI goes a step further by creating brand-new text, images, or audio.
+Artificial Intelligence (AI) is any computer system designed to perform tasks that normally require human intelligence—like recognizing speech, navigating traffic, or answering questions. Instead of following a fixed step-by-step Algorithm written by hand, modern Machine Learning (ML) lets the computer learn patterns from examples. Deep Learning uses multi-layered neural networks, and Generative AI goes a step further by creating brand-new text, images, or audio.
 
 2. How AI Learns from Data:
-Think of teaching a child to recognize dogs vs. cats using flashcards. First, we gather thousands of labeled examples (Data). During Training, the computer adjusts its internal math until it builds a Model—a pattern-recognition recipe. When you show the model a new photo it has never seen, it outputs a Prediction. If the training data is incomplete or skewed, the model inherits Bias ("Garbage In, Garbage Out").
+Think of teaching a child to recognize apples vs. oranges from examples. First, we gather thousands of labeled examples (Data). During Training, the computer adjusts its internal math until it builds a Model—a pattern-recognition recipe. When you show the model a new photo it has never seen, it outputs a Prediction. However, if the training data is incomplete or skewed, the model inherits Bias ("Garbage In, Garbage Out").
 
 3. Why Chatbots Sometimes Hallucinate:
-Large Language Models predict the next most likely word based on statistical patterns. Because they do not "know" facts the way a human database does, they can produce a Hallucination—a confident, fluent answer that is factually wrong. Always verify important medical, legal, or financial claims with trusted primary sources!`
+Large Language Models generate replies by predicting the next most likely word. Because they do not verify facts like a human librarian, they can produce a Hallucination—a confident, fluent answer or citation that is completely made up. Always cross-check important medical, legal, or financial claims with trusted sources, and never paste private information into a chatbot!`
   );
 
   const [reflectionText, setReflectionText] = useState(
@@ -159,6 +154,10 @@ Large Language Models predict the next most likely word based on statistical pat
 What surprised me most during the hallucination stress-test was how confidently a chatbot can invent a fake citation when asked a leading question. Moving forward, I will apply three habits whenever I use AI at work or home: first, I will treat generative AI as a first-draft brainstorming partner rather than an infallible authority; second, I will verify specific dates, citations, and high-stakes claims against primary sources; and third, I will never paste private personal or client data into public AI tools.`
   );
 
+  const [selfCheckConfirmed, setSelfCheckConfirmed] = useState(true);
+  const [surveyFeedback, setSurveyFeedback] = useState(
+    'The written lessons, "Be the Algorithm" activity, and Teachable Machine lab made how AI learns from data crystal clear.'
+  );
   const [submitted, setSubmitted] = useState(false);
   const [copiedBadge, setCopiedBadge] = useState(false);
 
@@ -195,24 +194,24 @@ What surprised me most during the hallucination stress-test was how confidently 
   ).length;
 
   // Automated Score (out of 100%)
-  // 50% from Module Knowledge Checks (simulated/pulled at 95% if completed or 88% baseline) + 50% from Submission Validation
+  // 50% from Module Knowledge Checks (25% of total course grade) + 50% from Submission Validation (25% of total course grade)
   const systemsScore = (completeSystemsCount / 5) * 30; // 30 pts
   const hallucinationScore = (completeHallucinationCount / 3) * 25; // 25 pts
-  const glossaryScore = Math.min(1, matchedGlossaryTerms.length / 6) * 25; // 25 pts
+  const glossaryScore = Math.min(1, matchedGlossaryTerms.length / 7) * 25; // 25 pts
   const reflectionValid = reflectionWords >= 120 && reflectionWords <= 300;
   const reflectionValidationScore = reflectionValid ? 20 : Math.min(15, (reflectionWords / 150) * 20); // 20 pts
 
   const submissionValidationPercent = Math.round(
     systemsScore + hallucinationScore + glossaryScore + reflectionValidationScore
   );
-  const moduleQuizzesPercent = 95; // 4 Module Knowledge Checks
+  const moduleQuizzesPercent = 95; // 4 Module Knowledge Checks (5 questions drawn from 10-question banks)
   const automatedCompositePercent = Math.round(
     moduleQuizzesPercent * 0.5 + submissionValidationPercent * 0.5
   );
 
   // 4-Level Rubric Evaluation (Beginning = 55%, Developing = 70%, Proficient = 88%, Advanced = 96%)
-  const rubricAccuracy = matchedGlossaryTerms.length >= 7 ? 96 : matchedGlossaryTerms.length >= 5 ? 88 : 70;
-  const rubricClarity = explainerContent.trim().length >= 400 ? 95 : 78;
+  const rubricAccuracy = matchedGlossaryTerms.length >= 8 ? 96 : matchedGlossaryTerms.length >= 6 ? 88 : 70;
+  const rubricClarity = explainerContent.trim().length >= 400 && audiencePerson.trim().length > 5 ? 95 : 78;
   const rubricCriticalThinking =
     completeSystemsCount === 5 && completeHallucinationCount === 3 ? 96 : 75;
   const rubricReflection = reflectionWords >= 150 ? 95 : 72;
@@ -248,7 +247,7 @@ What surprised me most during the hallucination stress-test was how confidently 
       },
       criteria: {
         narrative:
-          'Completed 7-hour AI Foundations curriculum, 4 Module Knowledge Checks, No-Code Image Classifier & Chatbot Lab, and passed the "AI in My Life" Authentic Assessment under the Mixed-Model Grading Rubric.',
+          'Completed 7-hour AI Foundations written curriculum, 4 Module Knowledge Checks (drawn from 10-question banks), No-Code Image Classifier & Chatbot Lab, and passed the "AI in My Life" Authentic Assessment under the Mixed-Model Grading Rubric.',
       },
       skills: [
         'AI & Machine Learning Literacy',
@@ -302,22 +301,55 @@ What surprised me most during the hallucination stress-test was how confidently 
         </div>
 
         <h2 style={{ fontSize: '1.55rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '0.6rem' }}>
-          Authentic Assessment: “AI in My Life” Audit & Plain-Language Explainer
+          Authentic Assessment: “AI in My Life” Audit & Written Explainer
         </h2>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.65, margin: 0 }}>
-          <strong>Scenario:</strong> A friend or relative says, <em>“Everyone talks about AI, but I don’t get what it actually is.”</em> Complete the 4 components below to produce your real-world AI audit, chatbot hallucination verification, plain-language explainer (or advanced Model Card critique), and reflection.
+          <strong>Scenario:</strong> A friend or relative says, <em>“Everyone talks about AI, but I don’t get what it actually is.”</em> Follow the 4 steps below: (1) Plan your 5 everyday AI systems and confirm your named audience person, (2) Audit 5 AI systems, (3) Write up your 3-question Chatbot Hallucination Test, and (4) Produce your One-Page Written Explainer or One-Page Infographic (or Stretch Model Card Critique) + Reflection.
         </p>
+
+        {/* Step 0: Plan & Named Audience Person (15 min) */}
+        <div
+          style={{
+            marginTop: '1.25rem',
+            padding: '1rem 1.25rem',
+            borderRadius: '0.75rem',
+            background: 'var(--bg-surface-elevated)',
+            border: '1px solid var(--border-subtle)',
+          }}
+        >
+          <label
+            style={{
+              fontSize: '0.8rem',
+              fontWeight: 800,
+              color: 'var(--primary)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              marginBottom: '0.4rem',
+            }}
+          >
+            <Users size={15} />
+            <span>Step 1 (Plan — 15 min): Your Named Audience Person (Chosen in Orientation)</span>
+          </label>
+          <input
+            type="text"
+            className="form-input"
+            value={audiencePerson}
+            onChange={(e) => setAudiencePerson(e.target.value)}
+            placeholder="Who is the real friend or relative you are writing this explainer for?"
+          />
+        </div>
       </div>
 
-      {/* ================= COMPONENT 1: 5 AI SYSTEMS AUDIT ================= */}
+      {/* ================= COMPONENT 1: 5 AI SYSTEMS AUDIT (45 MIN) ================= */}
       <div className="glass-card" style={{ padding: '1.75rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.25rem' }}>
           <div>
             <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-              Part 1: Audit of 5 Everyday AI Systems You Use
+              Step 2 (Audit — 45 min): Audit of 5 Everyday AI Systems You Use
             </h3>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-              For each of the 5 AI systems, state what it does, what data it uses, how it likely learned, one specific benefit, and one specific risk.
+              For each of the 5 AI systems, record what it does, what data it uses, how it likely learned, one concrete benefit, and one specific risk.
             </p>
           </div>
           <span className={`badge ${completeSystemsCount === 5 ? 'badge-emerald' : 'badge-amber'}`}>
@@ -436,15 +468,15 @@ What surprised me most during the hallucination stress-test was how confidently 
         </div>
       </div>
 
-      {/* ================= COMPONENT 2: HALLUCINATION TEST (3 QUESTIONS) ================= */}
+      {/* ================= COMPONENT 2: HALLUCINATION TEST (20 MIN) ================= */}
       <div className="glass-card" style={{ padding: '1.75rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.25rem' }}>
           <div>
             <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-              Part 2: Chatbot Hallucination & Verification Test (3 Questions)
+              Step 3 (Hallucination Test Write-Up — 20 min): 3 Chatbot Questions & Verification
             </h3>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-              Ask a chatbot 3 questions (including at least 1 tricky prompt likely to produce an error). Record your screenshot reference, how you verified the answer, and what you found.
+              Build on Part B of the Guided Lab: probe a chatbot on (1) a well-known fact, (2) an obscure/tricky question, and (3) a request for sources. Record screenshots, verification method, and findings.
             </p>
           </div>
           <span className={`badge ${completeHallucinationCount === 3 ? 'badge-emerald' : 'badge-amber'}`}>
@@ -514,7 +546,7 @@ What surprised me most during the hallucination stress-test was how confidently 
                 </div>
                 <div>
                   <label style={{ fontSize: '0.75rem', fontWeight: 700, display: 'block', marginBottom: '0.25rem' }}>
-                    How You Verified the Output
+                    How You Verified the Output (4-Step Verification Habit)
                   </label>
                   <input
                     type="text"
@@ -529,7 +561,7 @@ What surprised me most during the hallucination stress-test was how confidently 
                 </div>
                 <div>
                   <label style={{ fontSize: '0.75rem', fontWeight: 700, display: 'block', marginBottom: '0.25rem' }}>
-                    What You Found (Accurate vs. Hallucination/Bias)
+                    What You Found (Verified Fact vs. Hallucination)
                   </label>
                   <input
                     type="text"
@@ -548,15 +580,15 @@ What surprised me most during the hallucination stress-test was how confidently 
         </div>
       </div>
 
-      {/* ================= COMPONENT 3: PLAIN-LANGUAGE EXPLAINER OR STRETCH OPTION ================= */}
+      {/* ================= COMPONENT 3: WRITTEN EXPLAINER OR INFOGRAPHIC OR STRETCH OPTION (40 MIN) ================= */}
       <div className="glass-card" style={{ padding: '1.75rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1rem' }}>
           <div>
             <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-              Part 3: Plain-Language Explainer (or Advanced Model Card Critique)
+              Step 4 (Explainer — 40 min): One-Page Written Explainer or Infographic (Written Format)
             </h3>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-              Accepts either a 1-page Infographic or a 3-minute Video script/link for a non-technical person—or choose the Stretch Option to critique a published AI Model Card.
+              Create a One-Page Written Explainer or a One-Page Infographic aimed at your named audience person—or choose the Stretch Option to write a One-Page Critique of a published AI Model Card.
             </p>
           </div>
 
@@ -581,22 +613,22 @@ What surprised me most during the hallucination stress-test was how confidently 
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
           <div style={{ flex: 1, minWidth: '220px' }}>
             <label style={{ fontSize: '0.75rem', fontWeight: 700, display: 'block', marginBottom: '0.25rem' }}>
-              Submission Format (Accessibility: Infographic or 3-Min Video Accepted)
+              Submission Format (Written Formats Only — No Video Required)
             </label>
             <select
               className="form-input"
               value={explainerFormat}
-              onChange={(e) => setExplainerFormat(e.target.value as 'infographic' | 'video')}
+              onChange={(e) => setExplainerFormat(e.target.value as 'written' | 'infographic')}
             >
-              <option value="infographic">One-Page Infographic + Text Script</option>
-              <option value="video">3-Minute Explainer Video + Captioned Transcript</option>
+              <option value="written">One-Page Written Explainer (Plain-Language Document)</option>
+              <option value="infographic">One-Page Infographic (with Alt Text & Summary)</option>
             </select>
           </div>
           <div style={{ flex: 2, minWidth: '260px' }}>
             <label style={{ fontSize: '0.75rem', fontWeight: 700, display: 'block', marginBottom: '0.25rem' }}>
-              {explainerFormat === 'infographic'
-                ? 'Infographic Link / File Reference (Optional)'
-                : '3-Minute Video Link (Duration Limit: ≤ 3:00 mins)'}
+              {explainerFormat === 'written'
+                ? 'One-Page Written Document Link / Reference (Optional)'
+                : 'One-Page Infographic Link / Image Reference (Optional)'}
             </label>
             <input
               type="text"
@@ -610,7 +642,7 @@ What surprised me most during the hallucination stress-test was how confidently 
         <div style={{ marginBottom: '0.85rem' }}>
           <label style={{ fontSize: '0.78rem', fontWeight: 700, display: 'block', marginBottom: '0.35rem' }}>
             {explainerMode === 'standard'
-              ? 'One-Page Plain-Language Explainer Text / Video Transcript (Include key glossary terms):'
+              ? 'One-Page Plain-Language Explainer Text (Include the 10 core glossary terms naturally):'
               : 'One-Page Critique of a Published AI Model Card (Analyze Training Data, Limits & Intended Use):'}
           </label>
           <textarea
@@ -624,7 +656,7 @@ What surprised me most during the hallucination stress-test was how confidently 
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap', fontSize: '0.78rem' }}>
           <span style={{ fontWeight: 700, color: 'var(--text-secondary)' }}>
-            Automated Glossary Term Check ({matchedGlossaryTerms.length}/{REQUIRED_GLOSSARY_TERMS.length}):
+            Automated 10-Term Glossary Check ({matchedGlossaryTerms.length}/{REQUIRED_GLOSSARY_TERMS.length}):
           </span>
           {REQUIRED_GLOSSARY_TERMS.map((term) => {
             const present = matchedGlossaryTerms.includes(term);
@@ -641,15 +673,15 @@ What surprised me most during the hallucination stress-test was how confidently 
         </div>
       </div>
 
-      {/* ================= COMPONENT 4: REFLECTION (150-200 WORDS) ================= */}
+      {/* ================= COMPONENT 4: REFLECTION, RUBRIC SELF-ASSESSMENT & SURVEY ================= */}
       <div className="glass-card" style={{ padding: '1.75rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '0.85rem' }}>
           <div>
             <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-              Part 4: Personal Reflection (Target: 150–200 Words)
+              Segment 8: Personal Reflection (150–200 Words), Rubric Self-Check & Survey
             </h3>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-              Reflect on what surprised you during this audit and how you will use AI differently in your daily life or work.
+              Write 150–200 words on what surprised you and how you will use AI differently, self-assess against the 4-level rubric, and submit your package.
             </p>
           </div>
           <span className={`badge ${reflectionWords >= 150 && reflectionWords <= 220 ? 'badge-emerald' : 'badge-primary'}`}>
@@ -662,8 +694,40 @@ What surprised me most during the hallucination stress-test was how confidently 
           className="form-input"
           value={reflectionText}
           onChange={(e) => setReflectionText(e.target.value)}
-          style={{ lineHeight: 1.65, fontSize: '0.9rem' }}
+          style={{ lineHeight: 1.65, fontSize: '0.9rem', marginBottom: '1rem' }}
         />
+
+        <div
+          style={{
+            padding: '1rem',
+            borderRadius: '0.65rem',
+            background: 'var(--bg-surface-elevated)',
+            border: '1px solid var(--border-subtle)',
+            marginBottom: '1rem',
+          }}
+        >
+          <label style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer' }}>
+            <input
+              type="checkbox"
+              checked={selfCheckConfirmed}
+              onChange={(e) => setSelfCheckConfirmed(e.target.checked)}
+            />
+            <span>
+              Rubric Self-Assessment (5 min): I have checked my submission against the 4 rubric criteria (Accuracy of AI concepts, Clarity for my named audience person, Critical thinking about specific risks, and Reflection).
+            </span>
+          </label>
+          <div style={{ marginTop: '0.75rem' }}>
+            <label style={{ fontSize: '0.75rem', fontWeight: 700, display: 'block', marginBottom: '0.25rem' }}>
+              Short Course Feedback Survey (Optional): What part of the 7-hour course helped you most?
+            </label>
+            <input
+              type="text"
+              className="form-input"
+              value={surveyFeedback}
+              onChange={(e) => setSurveyFeedback(e.target.value)}
+            />
+          </div>
+        </div>
 
         <div style={{ marginTop: '1.25rem', display: 'flex', justifyContent: 'flex-end', gap: '0.75rem' }}>
           <button
@@ -673,7 +737,7 @@ What surprised me most during the hallucination stress-test was how confidently 
             style={{ gap: '0.5rem', fontWeight: 800 }}
           >
             <FileCheck size={18} />
-            <span>{submitted ? 'Re-Validate & Update Grade' : 'Run Mixed-Model Grading & Validate Submission'}</span>
+            <span>{submitted ? 'Re-Validate & Update Grade' : 'Run Mixed-Model Grading & Submit Full Package'}</span>
           </button>
         </div>
       </div>
@@ -694,7 +758,7 @@ What surprised me most during the hallucination stress-test was how confidently 
                   ? '★ PASSED WITH DISTINCTION (≥90% IN BOTH COMPONENTS)'
                   : passedBoth
                   ? '✓ PASSED (≥70% IN BOTH COMPONENTS)'
-                  : 'REVISION NEEDED (REVISE & RESUBMIT)'}
+                  : 'REVISION NEEDED (REVISE & RESUBMIT ONCE)'}
               </span>
               <h3 style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--text-primary)', marginTop: '0.5rem' }}>
                 Mixed-Model Grading Report: {overallGradePercent}% Overall
@@ -708,7 +772,7 @@ What surprised me most during the hallucination stress-test was how confidently 
                   {automatedCompositePercent}%
                 </div>
                 <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
-                  Quizzes: {moduleQuizzesPercent}% | Validator: {submissionValidationPercent}%
+                  Module Quizzes (25%): {moduleQuizzesPercent}% | Validator (25%): {submissionValidationPercent}%
                 </div>
               </div>
 
@@ -738,7 +802,7 @@ What surprised me most during the hallucination stress-test was how confidently 
               <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--primary)' }}>2. Clarity for the Audience</div>
               <div style={{ fontSize: '1.1rem', fontWeight: 900, margin: '0.25rem 0' }}>{getRubricLevelLabel(rubricClarity)}</div>
               <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: 0 }}>
-                A non-technical reader can understand the explainer without extra help.
+                A non-technical reader ({audiencePerson.split('—')[0].trim()}) can understand the explainer without extra help.
               </p>
             </div>
 
@@ -746,7 +810,7 @@ What surprised me most during the hallucination stress-test was how confidently 
               <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--primary)' }}>3. Critical Thinking About Risks</div>
               <div style={{ fontSize: '1.1rem', fontWeight: 900, margin: '0.25rem 0' }}>{getRubricLevelLabel(rubricCriticalThinking)}</div>
               <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: 0 }}>
-                Risks are specific to each system, and chatbot verification is credible.
+                Risks are specific to each system, not generic, and chatbot verification is credible.
               </p>
             </div>
 
@@ -816,4 +880,3 @@ What surprised me most during the hallucination stress-test was how confidently 
     </div>
   );
 }
-

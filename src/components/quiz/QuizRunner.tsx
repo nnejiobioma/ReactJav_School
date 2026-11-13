@@ -16,8 +16,14 @@ interface QuizRunnerProps {
 
 const MAX_QUESTIONS_PER_ATTEMPT = 5;
 
-function sampleQuestionBank(bank: QuizQuestion[], count: number): QuizQuestion[] {
-  if (!bank || bank.length <= count) return bank || [];
+function isFullDiagnosticQuiz(title: string): boolean {
+  const lower = (title || '').toLowerCase();
+  return lower.includes('pre-check') || lower.includes('post-check') || lower.includes('already know');
+}
+
+function sampleQuestionBank(bank: QuizQuestion[], count: number, fullDiagnostic = false): QuizQuestion[] {
+  if (!bank) return [];
+  if (fullDiagnostic || bank.length <= count) return bank;
   const shuffled = [...bank];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -33,8 +39,9 @@ export default function QuizRunner({
   canEdit = false,
   onUpdateQuestions,
 }: QuizRunnerProps) {
+  const isDiagnostic = isFullDiagnosticQuiz(lessonTitle);
   const [activeQuestions, setActiveQuestions] = useState<QuizQuestion[]>(() =>
-    sampleQuestionBank(questions, MAX_QUESTIONS_PER_ATTEMPT)
+    sampleQuestionBank(questions, MAX_QUESTIONS_PER_ATTEMPT, isDiagnostic)
   );
   const [attemptNumber, setAttemptNumber] = useState(1);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -45,8 +52,8 @@ export default function QuizRunner({
   const [isEditingQuestions, setIsEditingQuestions] = useState(false);
 
   const drawNewAttemptQuestions = useCallback(
-    (sourceBank: QuizQuestion[]) => {
-      setActiveQuestions(sampleQuestionBank(sourceBank, MAX_QUESTIONS_PER_ATTEMPT));
+    (sourceBank: QuizQuestion[], fullDiag: boolean) => {
+      setActiveQuestions(sampleQuestionBank(sourceBank, MAX_QUESTIONS_PER_ATTEMPT, fullDiag));
       setCurrentIdx(0);
       setSelectedOption(null);
       setShowExplanation(false);
@@ -57,9 +64,9 @@ export default function QuizRunner({
   );
 
   useEffect(() => {
-    drawNewAttemptQuestions(questions);
+    drawNewAttemptQuestions(questions, isDiagnostic);
     setAttemptNumber(1);
-  }, [questions, lessonTitle, drawNewAttemptQuestions]);
+  }, [questions, lessonTitle, isDiagnostic, drawNewAttemptQuestions]);
 
   if (!questions || questions.length === 0) {
     return (
@@ -108,7 +115,7 @@ export default function QuizRunner({
     );
   }
 
-  const isQuestionBank = questions.length > MAX_QUESTIONS_PER_ATTEMPT;
+  const isQuestionBank = !isDiagnostic && questions.length > MAX_QUESTIONS_PER_ATTEMPT;
   const quizQuestions = activeQuestions.length > 0 ? activeQuestions : questions;
   const currentQ = quizQuestions[currentIdx] || quizQuestions[0];
 
@@ -144,8 +151,8 @@ export default function QuizRunner({
     });
 
     const percent = Math.round((correctCount / quizQuestions.length) * 100);
-    if (percent >= 70) {
-      // Passed! Trigger confetti celebration
+    if (isDiagnostic || percent >= 70) {
+      // Diagnostic pre/post checks are ungraded (always complete); module knowledge checks require >= 70%
       try {
         confetti({
           particleCount: 80,
@@ -160,7 +167,7 @@ export default function QuizRunner({
   };
 
   const handleRestart = () => {
-    drawNewAttemptQuestions(questions);
+    drawNewAttemptQuestions(questions, isDiagnostic);
     setAttemptNumber((n) => n + 1);
   };
 
@@ -169,7 +176,7 @@ export default function QuizRunner({
     (q, idx) => userAnswers[idx] === q.correct_option_index
   ).length;
   const scorePercent = Math.round((totalCorrect / quizQuestions.length) * 100);
-  const isPassed = scorePercent >= 70;
+  const isPassed = isDiagnostic || scorePercent >= 70;
 
   if (isFinished) {
     return (
@@ -233,7 +240,7 @@ export default function QuizRunner({
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
           <HelpCircle size={20} color="var(--accent-amber)" />
           <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-            5-Question Knowledge Check
+            {isDiagnostic ? '10-Question Pre/Post Diagnostic Check (Ungraded)' : '5-Question Knowledge Check'}
           </span>
           {isQuestionBank && (
             <span
@@ -398,7 +405,7 @@ export default function QuizRunner({
           onSave={(newQuestions) => {
             onUpdateQuestions(newQuestions);
             setIsEditingQuestions(false);
-            drawNewAttemptQuestions(newQuestions);
+            drawNewAttemptQuestions(newQuestions, isDiagnostic);
           }}
         />
       )}

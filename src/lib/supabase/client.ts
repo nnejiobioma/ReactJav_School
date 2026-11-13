@@ -111,7 +111,7 @@ export const isFaculty = (user?: Profile | null): boolean => {
 const STORAGE_KEYS = {
   CURRENT_USER: 'reactjav_current_user',
   PROFILES: 'reactjav_user_profiles',
-  COURSES: 'reactjav_courses_ai_v5',
+  COURSES: 'reactjav_courses_ai_v6',
   PROGRESS: 'reactjav_lesson_progress',
   ENROLLMENTS: 'reactjav_enrollments',
   QUIZ_SUBMISSIONS: 'reactjav_quiz_submissions',
@@ -478,7 +478,9 @@ export class LocalDataService {
         const hasAIFoundationsBlueprint =
           Array.isArray(parsed) &&
           parsed.some(
-            c => c.id === 'crs_ai_basics_02' && c.sections?.some(s => s.id === 'sec_aif_06')
+            c =>
+              c.id === 'crs_ai_basics_02' &&
+              c.sections?.some(s => s.id === 'sec_aif_07' && s.lessons?.some(l => l.id === 'les_aif_07_02'))
           );
         if (
           Array.isArray(parsed) &&
@@ -2528,7 +2530,11 @@ export class LocalDataService {
         Array.isArray(courses) &&
         courses.length >= INITIAL_COURSES.length &&
         courses.some((c: any) => c.id === 'crs_coding_with_ai_14') &&
-        courses.some((c: any) => c.id === 'crs_ai_basics_02' && c.sections?.some((s: any) => s.id === 'sec_aif_06')) &&
+        courses.some(
+          (c: any) =>
+            c.id === 'crs_ai_basics_02' &&
+            c.sections?.some((s: any) => s.id === 'sec_aif_07' && s.lessons?.some((l: any) => l.id === 'les_aif_07_02'))
+        ) &&
         !courses.some((c: any) => c.id === 'crs_nextjs_supabase_01')
       ) {
         localStorage.setItem(STORAGE_KEYS.COURSES, JSON.stringify(courses));
