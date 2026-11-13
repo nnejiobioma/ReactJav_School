@@ -380,10 +380,10 @@
           {
             "id": "les_aif_01_01",
             "section_id": "sec_aif_01",
-            "title": "1.1 Written Lesson: What Is AI? Definitions, History & Myth Busting",
+            "title": "1.1 Written Lesson: What Is AI? (Rules vs. Learning, Map & 5 Myths)",
             "type": "article",
-            "summary": "Plain-language definition of AI, rules vs. learning, a short timeline from the 1950s to 2020s, the nested circles map (AI/ML/DL/GenAI), everyday AI around you, and three common myths.",
-            "content": "> **What you will learn:** How to define AI in plain language, tell the difference between AI, machine learning, deep learning, and generative AI, and separate real AI from common myths.\n\n---\n\n### 1. Rules vs. Learning: What Makes Software “AI”?\nFirst, let us compare two everyday machines in your home. A **pocket calculator** always gives the exact same answer because a programmer wrote fixed mathematical rules: whenever you press `2 + 2`, it follows rule #1 and outputs `4`. Because the calculator never learns from experience, it is **not AI**.\n\nBy contrast, your **email spam filter** faces thousands of new scam tricks every week. A programmer could not possibly type a fixed rule for every scam phrase in the world. Instead, the spam filter learns patterns from millions of real emails marked as \"Spam\" or \"Safe.\" Because it learns patterns from data to handle tasks that normally require human judgment, it **is AI**.\n\n---\n\n### 2. A Short Timeline of AI (1950s–2020s)\n- **1950s — The Naming of AI**: Computer scientists coined the term *Artificial Intelligence* and built early rule-based programs that played checkers and solved logic puzzles.\n- **1990s–2000s — Machine Learning Takes Off**: Faster computers and larger digital datasets allowed systems to learn from data rather than relying purely on hand-written rules (for example, postal zip-code readers and early spam filters).\n- **2010s — Deep Learning Breakthrough**: Multi-layered neural networks achieved human-level accuracy on recognizing photos, transcribing speech, and translating languages.\n- **2020s — Generative AI**: Large Language Models and image generators began creating brand-new text, images, and audio from simple everyday prompts.\n\n---\n\n### 3. The Nested Circles Map: AI → ML → DL → GenAI\nPeople often use *AI*, *Machine Learning*, *Deep Learning*, and *Generative AI* as if they mean the same thing. However, they actually fit inside one another like nested circles:\n\n| Layer | Plain-Language Meaning | Everyday Example |\n| :--- | :--- | :--- |\n| **1. Artificial Intelligence (AI)** *(Outer Circle)* | Any computer system built to perform tasks that usually require human intelligence. | Navigation routing, voice assistants, game-playing computers |\n| **2. Machine Learning (ML)** *(Inside AI)* | AI that learns patterns from data examples instead of following only fixed rules. | Email spam filters, credit-card fraud alerts, movie recommendations |\n| **3. Deep Learning (DL)** *(Inside ML)* | ML that uses multi-layered neural networks to learn complex patterns in images, sound, and text. | Smartphone face unlock, live speech-to-text captions |\n| **4. Generative AI (GenAI)** *(Innermost Circle)* | Deep learning models that create *brand-new* text, images, audio, or code. | ChatGPT, Gemini, Claude, image generators |\n\n> **Diagram Alt Text:** *A four-ring nested circles diagram. The largest outer ring is labeled \"Artificial Intelligence (AI): machines performing smart tasks.\" Inside it is a second ring labeled \"Machine Learning (ML): systems that learn from data.\" Inside ML is a third ring labeled \"Deep Learning (DL): multi-layered neural networks.\" At the center is the smallest ring labeled \"Generative AI (GenAI): systems that create new text, images, and audio.\"*\n\n---\n\n### 4. Three Common Myths About AI (Myth Busting)\n1. **Myth 1: “AI is one single super-brain.”**\n   - *Reality:* AI is not one thing. A spam filter, a traffic predictor, and a chatbot are completely separate tools built for narrow jobs.\n2. **Myth 2: “AI is conscious and has feelings.”**\n   - *Reality:* Even when a chatbot sounds warm and polite, it has no awareness, beliefs, or emotions. It is running math on patterns of words.\n3. **Myth 3: “AI is always right and objective.”**\n   - *Reality:* AI makes mistakes, reflects biases in its training data, and can invent false answers with complete confidence.\n\n---\n\n> **Key takeaways:**\n> - Fixed-rule software follows hand-written instructions; AI systems (especially Machine Learning) learn patterns from data.\n> - **GenAI** sits inside **Deep Learning**, which sits inside **Machine Learning**, which sits inside **Artificial Intelligence**.\n> - AI is already in everyday tools like maps, spam filters, and face unlock—not just chatbots.\n> - AI is not one single thing, is not conscious, and is not always right.\n\n#### New Words\n| Term | Plain-Language Meaning |\n| :--- | :--- |\n| **Artificial Intelligence (AI)** | Computer systems that perform tasks normally requiring human intelligence. |\n| **Algorithm** | A step-by-step set of rules a computer follows to solve a problem. |\n| **Machine Learning (ML)** | AI that learns patterns from data examples rather than fixed hand-coded rules. |\n| **Deep Learning (DL)** | Machine learning using multi-layered neural networks for complex data like images and speech. |\n| **Generative AI (GenAI)** | Deep learning that creates new text, images, or audio. |",
+            "summary": "Say what AI is in simple words, compare rules vs. learning (21°C thermostat vs. spam filter), trace the story of AI (1950s–2020s), see the 4-term nested map, explore AI around you, and bust 5 common myths.",
+            "content": "> **What you will learn:** By the end of this lesson, you will be able to say what AI is in simple words. You will also see how AI, machine learning, deep learning, and generative AI fit together, and you will know which common ideas about AI are wrong.\n\n---\n\n### 1. What is AI?\nFirst, let’s start with a simple idea. **Artificial intelligence (AI)** is a computer system that can do tasks that usually need human thinking. For example, it can recognize a face, understand speech, suggest a movie, or answer a question.\n\nNotice that the word **“artificial”** means made by people, and **“intelligence”** means the ability to learn and solve problems. So, in other words, AI is a human-made tool that can learn from information and then use it to make a choice or give an answer.\n\nHowever, AI is not a robot with feelings, and it is not magic. Instead, it is software. It follows math and patterns, and it works only with the information it has been given.\n\n---\n\n### 2. Rules versus learning: the big difference\nBefore we go further, we need to understand one key difference, because it explains almost everything in AI.\n\nImagine a **thermostat**. You set it to **21°C**. When the room is colder, it turns the heating on, and when the room is warm enough, it turns the heating off. This is a rule: *“If the temperature is below 21, then heat.”* A person wrote this rule, and the thermostat never changes it. As a result, the thermostat is **not really AI**.\n\nNow imagine a **spam filter** in your email. Nobody can write a rule for every spam message, because spammers change their messages all the time. So, instead, the filter looks at thousands of examples of spam and normal email. Then it learns the patterns. After that, it can guess whether a new email is spam, even if it has never seen that exact message before. This is learning from examples, and it **is AI**.\n\n> **In short:** **Rules:** a person writes the steps. **Learning:** the computer finds the steps by looking at examples.\n\n---\n\n### 3. A short story of AI\nNext, let’s look at how AI developed. Don’t worry about memorizing dates. The story is what matters.\n- **1950s — the idea begins:** First, scientists asked, *“Can machines think?”* In 1956, a group of researchers met and used the name *“artificial intelligence”* for the first time.\n- **1960s to 1980s — rule-based systems:** Then, people built programs full of hand-written rules. For example, some programs helped doctors with medical questions. However, these systems were hard to update, because people had to write every rule themselves.\n- **1990s to 2000s — machines start to learn:** After that, computers became faster and there was more digital data. Therefore, learning from examples became practical. This is the time when email spam filters and online recommendations began.\n- **2010s — deep learning:** Later, new methods made computers much better at images, speech, and translation.\n- **2020s — generative AI:** Finally, AI tools that can write text, create images, and hold a conversation became easy for everyone to use. That is why AI is in the news today.\n\nSo AI is not new. What is new is that it is now powerful and easy to use.\n\n---\n\n### 4. The AI family: four terms, one map\nPeople use many AI words, and they often mix them up. Fortunately, the idea is simple. Think of circles inside circles, going from the biggest circle to the smallest:\n\n| Layer (Outer to Inner) | Plain-Language Meaning |\n| :--- | :--- |\n| **ARTIFICIAL INTELLIGENCE (AI)** *(Biggest Circle)* | Any computer system that does tasks that need human-like thinking. |\n| **MACHINE LEARNING (ML)** *(Inside AI)* | AI that learns from examples instead of following only fixed rules (e.g., your spam filter). |\n| **DEEP LEARNING** *(Inside ML)* | ML using many-layered **neural networks**, loosely inspired by the brain, great at pictures, sounds, and language. |\n| **GENERATIVE AI** *(Smallest Circle)* | Creates new text, images, or sound—such as a paragraph, a picture, or a song. |\n\n> **Diagram Alt Text:** *Four nested shaded boxes/circles going from largest to smallest: outer layer \"Artificial Intelligence (AI): any computer system that does tasks that need human-like thinking,\" containing \"Machine Learning (ML): AI that learns from examples,\" containing \"Deep Learning: ML using many-layered neural networks,\" containing at the center \"Generative AI: creates new text, images, or sound.\"*\n\n**An easy way to remember:** Every generative AI tool is AI, but not every AI tool is generative AI. For instance, a spam filter is AI, but it does not create anything new—it only decides.\n\n---\n\n### 5. AI around you\nBecause AI is already in daily life, you probably use it every day:\n\n| What you do | Where AI helps |\n| :--- | :--- |\n| **Use a map app** | It predicts traffic and chooses a faster route |\n| **Watch videos or listen to music** | It suggests what you may like next |\n| **Check your email** | It filters spam and suggests replies |\n| **Unlock your phone with your face** | It recognizes your face |\n| **Talk to a voice assistant** | It turns your speech into text and finds an answer |\n| **Use a chatbot** | It writes, explains, or translates for you |\n\nAs you can see, AI is not only for scientists and big companies. It is part of ordinary life.\n\n---\n\n### 6. Myths about AI\nFinally, let’s correct five common wrong ideas:\n\n| Myth | Truth |\n| :--- | :--- |\n| **“AI is one single thing.”** | AI is a large group of different tools. A chess program, a face-unlock feature, and a chatbot are all AI, but they work in very different ways. |\n| **“AI thinks and feels like a human.”** | AI finds patterns in data. It may sound friendly, but that does not mean it understands or feels anything. |\n| **“AI is always right.”** | AI makes mistakes. Sometimes it gives a wrong answer in a very confident voice. That is why we always need to check important information. |\n| **“AI will do everything by itself.”** | AI needs people to build it, give it data, and check its work. Because of this, people stay important. |\n| **“You need to be a genius to use AI.”** | Many AI tools are made for everyday users. You can start with simple questions, and then you can learn more step by step. |\n\n---\n\n> **Key takeaways:**\n> - AI is a human-made computer system that does tasks that normally need human thinking.\n> - Rules are written by people. Learning means the computer finds patterns from examples.\n> - The AI family has four levels: **AI → machine learning → deep learning → generative AI**.\n> - AI is already in maps, email, phones, and entertainment.\n> - AI is powerful but not perfect, and it does not think or feel like a human.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Artificial intelligence (AI)** | Computer systems that do tasks that usually need human thinking |\n| **Algorithm** | A set of steps a computer follows to solve a problem |\n| **Machine learning** | AI that learns patterns from examples |\n| **Deep learning** | Machine learning that uses many-layered neural networks |\n| **Neural network** | A computer model loosely inspired by the brain, made of connected layers |\n| **Generative AI** | AI that creates new content, such as text, images, or sound |\n\n*Next: the activity “AI or not AI?”, where you sort everyday items and test what you just learned.*",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": true,
@@ -395,7 +395,7 @@
             "title": "1.2 Activity: “AI or Not AI?” (Sort 10 Everyday Items)",
             "type": "article",
             "summary": "Sort 10 everyday tools into AI or Not AI, write your reasoning for each, and check your answers against the detailed explanation key.",
-            "content": "> **What you will learn:** How to tell the difference between fixed-rule automation and true data-driven AI across 10 everyday tools.\n\n### Your Task (15 Minutes)\nFor each of the **10 items** below, decide whether it is **AI** or **Not AI** and note *why* in your **Personal Study Notes** tab before checking the Answer Key below.\n\n1. **A pocket calculator**\n2. **A fixed-rule thermostat** (turns heat on below 68°F, off above 72°F)\n3. **An email spam filter**\n4. **Video recommendations** (YouTube / Netflix)\n5. **A voice assistant** (Siri / Alexa / Google Assistant)\n6. **A washing machine timer**\n7. **A spreadsheet `SUM` formula**\n8. **Smartphone face unlock**\n9. **A customer-support chatbot**\n10. **A motion-activated grocery store door**\n\n---\n\n### Answer Key & Explanations\n| # | Item | AI or Not AI? | Explanation |\n| :--- | :--- | :--- | :--- |\n| **1** | **Pocket calculator** | **Not AI** | Follows fixed mathematical rules programmed by engineers; never learns from examples. |\n| **2** | **Fixed-rule thermostat** | **Not AI** | Uses a simple `IF temp < 68 THEN heat ON` rule with zero learning. *(Note: A \"smart\" thermostat that learns your weekly schedule would use ML.)* |\n| **3** | **Email spam filter** | **AI** | Uses Machine Learning trained on millions of emails to spot changing scam patterns. |\n| **4** | **Video recommendations** | **AI** | Learns from your watch history and millions of similar viewers to predict what you will click next. |\n| **5** | **Voice assistant** | **AI** | Uses Deep Learning for speech recognition and natural-language understanding. |\n| **6** | **Washing machine timer** | **Not AI** | Counts down fixed minutes and follows a preset mechanical or digital sequence. |\n| **7** | **Spreadsheet `SUM` formula** | **Not AI** | Executes an exact arithmetic instruction on the cells you selected. |\n| **8** | **Smartphone face unlock** | **AI** | Uses Deep Learning to recognize your unique facial geometry across different lighting and angles. |\n| **9** | **Customer-support chatbot** | **AI** | Uses language models to interpret customer questions and generate helpful replies. |\n| **10** | **Motion-activated grocery door** | **Not AI** | A simple infrared or radar sensor triggers `IF motion detected THEN open door`. |",
+            "content": "> **What you will learn:** How to tell the difference between fixed-rule automation and true data-driven AI across 10 everyday tools.\n\n### Your Task (15 Minutes)\nFor each of the **10 items** below, decide whether it is **AI** or **Not AI** and note *why* in your **Personal Study Notes** tab before checking the Answer Key below.\n\n1. **A pocket calculator**\n2. **A fixed-rule thermostat** (turns heat on below 21°C, off above 21°C)\n3. **An email spam filter**\n4. **Video recommendations** (YouTube / Netflix)\n5. **A voice assistant** (Siri / Alexa / Google Assistant)\n6. **A washing machine timer**\n7. **A spreadsheet `SUM` formula**\n8. **Smartphone face unlock**\n9. **A customer-support chatbot**\n10. **A motion-activated grocery store door**\n\n---\n\n### Answer Key & Explanations\n| # | Item | AI or Not AI? | Explanation |\n| :--- | :--- | :--- | :--- |\n| **1** | **Pocket calculator** | **Not AI** | Follows fixed mathematical rules programmed by engineers; never learns from examples. |\n| **2** | **Fixed-rule thermostat** | **Not AI** | Uses a simple `IF temp < 21°C THEN heat ON` rule written by a person with zero learning. |\n| **3** | **Email spam filter** | **AI** | Uses Machine Learning trained on thousands of emails to spot changing scam patterns. |\n| **4** | **Video recommendations** | **AI** | Learns from your watch history and millions of similar viewers to predict what you will click next. |\n| **5** | **Voice assistant** | **AI** | Uses Deep Learning for speech recognition and natural-language understanding. |\n| **6** | **Washing machine timer** | **Not AI** | Counts down fixed minutes and follows a preset mechanical or digital sequence. |\n| **7** | **Spreadsheet `SUM` formula** | **Not AI** | Executes an exact arithmetic instruction on the cells you selected. |\n| **8** | **Smartphone face unlock** | **AI** | Uses Deep Learning to recognize your unique facial geometry across different lighting and angles. |\n| **9** | **Customer-support chatbot** | **AI** | Uses language models to interpret customer questions and generate helpful replies. |\n| **10** | **Motion-activated grocery door** | **Not AI** | A simple sensor triggers `IF motion detected THEN open door`. |",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
@@ -406,7 +406,7 @@
             "section_id": "sec_aif_01",
             "title": "1.3 Module 1 Knowledge Check (5 Questions from 10-Question Bank)",
             "type": "quiz",
-            "summary": "5 questions randomly drawn from a 10-question Module 1 bank with instant feedback. Retake anytime for a fresh variation.",
+            "summary": "5 questions randomly drawn from the 10-question Module 1 bank with instant feedback. Retake anytime for a fresh variation.",
             "duration_seconds": 600,
             "position": 3,
             "is_free_preview": false,
@@ -415,141 +415,137 @@
               {
                 "id": "q_aif_01_1",
                 "lesson_id": "les_aif_01_03",
-                "question": "Which statement accurately orders AI concepts from broadest (outer circle) to most specific (inner circle)?",
+                "question": "Which sentence best describes AI?",
                 "options": [
-                  "Artificial Intelligence → Machine Learning → Deep Learning → Generative AI",
-                  "Generative AI → Machine Learning → Deep Learning → Artificial Intelligence",
-                  "Machine Learning → Artificial Intelligence → Generative AI → Deep Learning",
-                  "Deep Learning → Generative AI → Artificial Intelligence → Machine Learning"
+                  "A robot that feels emotions like a person",
+                  "A human-made computer system that does tasks that usually need human thinking",
+                  "Any machine that uses electricity",
+                  "A program that only works on the internet"
                 ],
-                "correct_option_index": 0,
-                "explanation": "AI is the broadest umbrella, followed by Machine Learning, then Deep Learning, and finally Generative AI at the center.",
+                "correct_option_index": 1,
+                "explanation": "AI is a human-made system that does tasks that normally need human thinking, such as recognizing faces or answering questions. It is software, not a being with feelings.",
                 "position": 1
               },
               {
                 "id": "q_aif_01_2",
                 "lesson_id": "les_aif_01_03",
-                "question": "Why is a motion-activated grocery store door NOT considered AI?",
+                "question": "A thermostat turns the heating on when the room is colder than 21°C and off when it is warmer. Why is this not really AI?",
                 "options": [
-                  "It follows a simple fixed sensor rule (if motion, open) without learning from data",
-                  "It runs on electricity instead of a battery",
-                  "It is too large to fit on a phone",
-                  "It does not have a keyboard"
+                  "It uses electricity",
+                  "It follows a fixed rule that a person wrote and it never learns",
+                  "It only works at home",
+                  "It is too old"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Fixed-rule automation responds mechanically to a trigger without learning patterns from data.",
+                "correct_option_index": 1,
+                "explanation": "The thermostat follows one rule written by a person. AI, by contrast, finds patterns by learning from examples.",
                 "position": 2
               },
               {
                 "id": "q_aif_01_3",
                 "lesson_id": "les_aif_01_03",
-                "question": "What separates Machine Learning from traditional rule-based programming?",
+                "question": "What makes an email spam filter an example of machine learning?",
                 "options": [
-                  "In Machine Learning, the computer learns patterns from data examples rather than relying solely on hand-written rules",
-                  "Traditional programming never uses numbers",
-                  "Machine Learning requires no data at all",
-                  "Machine Learning only works without electricity"
+                  "It learns patterns from many examples of spam and normal email",
+                  "It deletes all emails with the word “free”",
+                  "A person checks every email",
+                  "It only works on one device"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Traditional software executes rules typed by humans; ML discovers patterns from training examples.",
+                "explanation": "The filter looks at many examples and learns patterns, so it can judge new emails it has never seen before.",
                 "position": 3
               },
               {
                 "id": "q_aif_01_4",
                 "lesson_id": "les_aif_01_03",
-                "question": "Which of these everyday tools IS an example of AI?",
+                "question": "In the “circles inside circles” map, which is the biggest circle?",
                 "options": [
-                  "A smartphone face-unlock system",
-                  "A spreadsheet SUM formula",
-                  "A washing machine countdown timer",
-                  "A basic pocket calculator"
+                  "Generative AI",
+                  "Deep learning",
+                  "Machine learning",
+                  "Artificial intelligence"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Smartphone face unlock uses deep learning to recognize facial features across changing lighting and angles.",
+                "correct_option_index": 3,
+                "explanation": "AI is the biggest circle. Machine learning, deep learning, and generative AI are all inside it.",
                 "position": 4
               },
               {
                 "id": "q_aif_01_5",
                 "lesson_id": "les_aif_01_03",
-                "question": "Which myth about AI is FALSE?",
+                "question": "True or false: Every generative AI tool is also AI.",
                 "options": [
-                  "Modern chatbots are conscious and truly feel emotions when they apologize",
-                  "AI systems can inherit bias from their training data",
-                  "Different AI tools are built for different narrow tasks",
-                  "AI can make mistakes even when it sounds confident"
+                  "True",
+                  "False"
                 ],
                 "correct_option_index": 0,
-                "explanation": "AI has no consciousness, feelings, or lived awareness—even when its language sounds empathetic.",
+                "explanation": "Generative AI sits inside the AI circle, so every generative AI tool is AI.",
                 "position": 5
               },
               {
                 "id": "q_aif_01_6",
                 "lesson_id": "les_aif_01_03",
-                "question": "Which type of AI specifically creates brand-new text, images, or audio from a prompt?",
+                "question": "True or false: Every AI tool is generative AI.",
                 "options": [
-                  "Generative AI",
-                  "A fixed-rule thermostat",
-                  "A spreadsheet SUM formula",
-                  "A motion sensor"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Generative AI creates new content rather than only sorting or labeling existing items.",
+                "correct_option_index": 1,
+                "explanation": "Many AI tools only sort, recognize, or predict. A spam filter, for example, is AI, but it does not create anything new.",
                 "position": 6
               },
               {
                 "id": "q_aif_01_7",
                 "lesson_id": "les_aif_01_03",
-                "question": "Why did Machine Learning become far more powerful in the 1990s–2010s?",
+                "question": "What does deep learning use to find very complex patterns?",
                 "options": [
-                  "Faster computers and large digital datasets became widely available",
-                  "Programmers stopped writing any code in the 1990s",
-                  "The internet was turned off",
-                  "Calculators were banned from schools"
+                  "Neural networks with many layers",
+                  "A list of hand-written rules",
+                  "A single yes-or-no question",
+                  "A calculator"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Large datasets plus faster hardware allowed ML and deep learning models to train effectively.",
+                "explanation": "Deep learning uses many-layered neural networks, which work well for images, sound, and language.",
                 "position": 7
               },
               {
                 "id": "q_aif_01_8",
                 "lesson_id": "les_aif_01_03",
-                "question": "A thermostat turns heat on when the temperature drops below 68°F and off above 72°F. Is this AI?",
+                "question": "Which of these is an example of generative AI?",
                 "options": [
-                  "No — it follows a fixed rule and does not learn from data",
-                  "Yes — anything with a digital screen is AI",
-                  "Yes — because it controls temperature",
-                  "No — unless it is painted white"
+                  "A thermostat that turns the heating on and off",
+                  "A tool that writes a new paragraph from your request",
+                  "A calculator that adds numbers",
+                  "A clock that shows the time"
                 ],
-                "correct_option_index": 0,
-                "explanation": "A fixed-threshold thermostat uses simple rule-based logic, not Machine Learning.",
+                "correct_option_index": 1,
+                "explanation": "Generative AI creates new content, such as text, images, or sound.",
                 "position": 8
               },
               {
                 "id": "q_aif_01_9",
                 "lesson_id": "les_aif_01_03",
-                "question": "What does \"Deep\" refer to in Deep Learning?",
+                "question": "A chatbot gives a confident answer that turns out to be wrong. Which myth does this show is false?",
                 "options": [
-                  "Multiple hidden layers in an artificial neural network",
-                  "Storing servers deep underground",
-                  "Philosophical thinking by a computer",
-                  "Using only text files longer than 1,000 pages"
+                  "“AI is one single thing”",
+                  "“AI is always right”",
+                  "“You need to be a genius to use AI”",
+                  "“AI is only for big companies”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Deep Learning stacks many neural network layers to learn complex patterns in images, audio, and text.",
+                "correct_option_index": 1,
+                "explanation": "AI can make mistakes, even when it sounds sure. This is why we check important information.",
                 "position": 9
               },
               {
                 "id": "q_aif_01_10",
                 "lesson_id": "les_aif_01_03",
-                "question": "Which statement best captures why \"AI is not one thing\"?",
+                "question": "Why is AI in the news much more today than in the 1950s?",
                 "options": [
-                  "A spam filter, a traffic map, and a chatbot are different systems trained on different data for different jobs",
-                  "Every AI system uses the exact same single program",
-                  "AI only exists inside smartphones",
-                  "AI cannot be used outside of video games"
+                  "AI was only invented last year",
+                  "It is now powerful and easy for everyone to use",
+                  "People stopped using computers before",
+                  "AI now thinks and feels like a human"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Each AI system is built and trained for a specific task using its own data and model.",
+                "correct_option_index": 1,
+                "explanation": "AI is not new. What changed is that it became powerful and easy to use, especially with generative AI tools.",
                 "position": 10
               }
             ]
