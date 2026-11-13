@@ -71,8 +71,8 @@ export default function AIBlogArticlePage() {
     return (
       <div
         style={{
-          backgroundColor: '#000000',
-          color: '#ffffff',
+          backgroundColor: 'var(--blog-bg)',
+          color: 'var(--blog-text)',
           minHeight: '100vh',
           display: 'flex',
           alignItems: 'center',
@@ -95,7 +95,7 @@ export default function AIBlogArticlePage() {
           style={{
             fontSize: '1.22rem',
             fontWeight: 800,
-            color: '#00f0ff',
+            color: 'var(--blog-accent-cyan)',
             marginTop: '1.75rem',
             marginBottom: '0.65rem',
             fontFamily: 'var(--font-mono), monospace',
@@ -112,11 +112,11 @@ export default function AIBlogArticlePage() {
           style={{
             fontSize: '1.5rem',
             fontWeight: 900,
-            color: '#ffffff',
+            color: 'var(--blog-text)',
             marginTop: '2.25rem',
             marginBottom: '0.85rem',
             paddingBottom: '0.45rem',
-            borderBottom: '1px solid rgba(255,255,255,0.16)',
+            borderBottom: '1px solid var(--blog-border)',
           }}
         >
           {trimmed.replace('### ', '')}
@@ -128,7 +128,7 @@ export default function AIBlogArticlePage() {
         key={idx}
         style={{
           fontSize: '1.05rem',
-          color: 'rgba(255, 255, 255, 0.88)',
+          color: 'var(--blog-text-secondary)',
           lineHeight: 1.8,
           marginBottom: '1.25rem',
           whiteSpace: 'pre-line',
@@ -142,8 +142,8 @@ export default function AIBlogArticlePage() {
   return (
     <div
       style={{
-        backgroundColor: '#000000',
-        color: '#ffffff',
+        backgroundColor: 'var(--blog-bg)',
+        color: 'var(--blog-text)',
         minHeight: '100vh',
         width: '100vw',
         marginLeft: 'calc(50% - 50vw)',
@@ -152,8 +152,9 @@ export default function AIBlogArticlePage() {
         paddingTop: '2.5rem',
         paddingBottom: '6rem',
         backgroundImage:
-          'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+          'linear-gradient(var(--blog-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--blog-grid-line) 1px, transparent 1px)',
         backgroundSize: '40px 40px',
+        transition: 'background-color 0.25s ease, color 0.25s ease',
       }}
     >
       <div className="container" style={{ maxWidth: '920px', margin: '0 auto', padding: '0 1.5rem' }}>
@@ -167,7 +168,7 @@ export default function AIBlogArticlePage() {
             gap: '1rem',
             marginBottom: '2rem',
             paddingBottom: '1rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.18)',
+            borderBottom: '1px solid var(--blog-border)',
           }}
         >
           <Link
@@ -176,15 +177,15 @@ export default function AIBlogArticlePage() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.5rem',
-              color: '#ffffff',
+              color: 'var(--blog-text)',
               textDecoration: 'none',
               fontFamily: 'var(--font-mono), monospace',
               fontSize: '0.8rem',
               fontWeight: 700,
               padding: '0.45rem 0.9rem',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              border: '1px solid var(--blog-border)',
               borderRadius: '0.35rem',
-              background: '#050505',
+              background: 'var(--blog-surface)',
             }}
           >
             <ArrowLeft size={14} />
@@ -200,15 +201,22 @@ export default function AIBlogArticlePage() {
               fontSize: '0.75rem',
             }}
           >
-            <span style={{ color: '#10b981', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+            <span
+              style={{
+                color: 'var(--blog-accent-emerald)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+              }}
+            >
               <Radio size={13} /> {post.telemetry_id}
             </span>
             <button
               onClick={handleShareUrl}
               style={{
-                background: '#050505',
-                border: '1px solid rgba(255,255,255,0.25)',
-                color: '#ffffff',
+                background: 'var(--blog-surface)',
+                border: '1px solid var(--blog-border)',
+                color: 'var(--blog-text)',
                 padding: '0.38rem 0.75rem',
                 borderRadius: '0.3rem',
                 fontFamily: 'var(--font-mono), monospace',
@@ -229,8 +237,8 @@ export default function AIBlogArticlePage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
           <span
             style={{
-              background: '#ffffff',
-              color: '#000000',
+              background: 'var(--blog-btn-bg)',
+              color: 'var(--blog-btn-text)',
               padding: '0.28rem 0.75rem',
               borderRadius: '0.25rem',
               fontFamily: 'var(--font-mono), monospace',
@@ -245,9 +253,9 @@ export default function AIBlogArticlePage() {
             <span
               key={tag}
               style={{
-                background: '#080808',
-                border: '1px solid rgba(255, 255, 255, 0.22)',
-                color: 'rgba(255, 255, 255, 0.8)',
+                background: 'var(--blog-surface)',
+                border: '1px solid var(--blog-border)',
+                color: 'var(--blog-text-secondary)',
                 padding: '0.22rem 0.6rem',
                 borderRadius: '0.25rem',
                 fontFamily: 'var(--font-mono), monospace',
@@ -264,7 +272,7 @@ export default function AIBlogArticlePage() {
           style={{
             fontSize: 'clamp(1.9rem, 4vw, 2.9rem)',
             fontWeight: 900,
-            color: '#ffffff',
+            color: 'var(--blog-text)',
             lineHeight: 1.15,
             letterSpacing: '-0.025em',
             marginBottom: '1rem',
@@ -276,7 +284,7 @@ export default function AIBlogArticlePage() {
         <p
           style={{
             fontSize: '1.15rem',
-            color: 'rgba(255, 255, 255, 0.76)',
+            color: 'var(--blog-text-secondary)',
             lineHeight: 1.6,
             marginBottom: '1.75rem',
           }}
@@ -293,8 +301,8 @@ export default function AIBlogArticlePage() {
             flexWrap: 'wrap',
             gap: '1rem',
             padding: '1rem 1.25rem',
-            background: '#060606',
-            border: '1px solid rgba(255, 255, 255, 0.18)',
+            background: 'var(--blog-surface)',
+            border: '1px solid var(--blog-border)',
             borderRadius: '0.5rem',
             marginBottom: '2rem',
           }}
@@ -308,14 +316,14 @@ export default function AIBlogArticlePage() {
                 height: '44px',
                 borderRadius: '50%',
                 objectFit: 'cover',
-                border: '1.5px solid #ffffff',
+                border: '1.5px solid var(--blog-border-strong)',
               }}
             />
             <div>
-              <div style={{ fontSize: '0.92rem', fontWeight: 800, color: '#ffffff' }}>
+              <div style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--blog-text)' }}>
                 {post.author_name}
               </div>
-              <div style={{ fontSize: '0.76rem', color: 'rgba(255, 255, 255, 0.65)' }}>
+              <div style={{ fontSize: '0.76rem', color: 'var(--blog-text-muted)' }}>
                 {post.author_role}
               </div>
             </div>
@@ -328,7 +336,7 @@ export default function AIBlogArticlePage() {
               gap: '1rem',
               fontFamily: 'var(--font-mono), monospace',
               fontSize: '0.76rem',
-              color: 'rgba(255, 255, 255, 0.75)',
+              color: 'var(--blog-text-secondary)',
             }}
           >
             <span>
@@ -340,7 +348,14 @@ export default function AIBlogArticlePage() {
               })}
             </span>
             <span>•</span>
-            <span style={{ color: '#00f0ff', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+            <span
+              style={{
+                color: 'var(--blog-accent-cyan)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.3rem',
+              }}
+            >
               <Clock size={13} /> {post.reading_time_minutes} MIN READ
             </span>
           </div>
@@ -352,7 +367,7 @@ export default function AIBlogArticlePage() {
             height: '340px',
             borderRadius: '0.65rem',
             overflow: 'hidden',
-            border: '1px solid rgba(255, 255, 255, 0.22)',
+            border: '1px solid var(--blog-border)',
             marginBottom: '2.25rem',
           }}
         >
@@ -363,7 +378,7 @@ export default function AIBlogArticlePage() {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              filter: 'grayscale(25%) contrast(115%)',
+              filter: 'grayscale(25%) contrast(112%)',
             }}
           />
         </div>
@@ -372,12 +387,11 @@ export default function AIBlogArticlePage() {
         {post.tldr && post.tldr.length > 0 && (
           <div
             style={{
-              background: '#050505',
-              border: '1px solid #00f0ff',
+              background: 'var(--blog-surface)',
+              border: '1px solid var(--blog-accent-cyan)',
               borderRadius: '0.6rem',
               padding: '1.25rem 1.5rem',
               marginBottom: '2.25rem',
-              boxShadow: '0 0 25px rgba(0, 240, 255, 0.08)',
             }}
           >
             <button
@@ -386,7 +400,7 @@ export default function AIBlogArticlePage() {
                 width: '100%',
                 background: 'transparent',
                 border: 'none',
-                color: '#00f0ff',
+                color: 'var(--blog-accent-cyan)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -409,7 +423,7 @@ export default function AIBlogArticlePage() {
                 style={{
                   margin: '1rem 0 0 0',
                   paddingLeft: '1.25rem',
-                  color: '#ffffff',
+                  color: 'var(--blog-text)',
                   fontSize: '0.95rem',
                   lineHeight: 1.65,
                   display: 'flex',
@@ -432,8 +446,8 @@ export default function AIBlogArticlePage() {
         {post.code_snippet && (
           <div
             style={{
-              background: '#050505',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
+              background: 'var(--blog-code-bg)',
+              border: '1px solid var(--blog-border)',
               borderRadius: '0.6rem',
               overflow: 'hidden',
               marginBottom: '3rem',
@@ -445,7 +459,7 @@ export default function AIBlogArticlePage() {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '0.65rem 1.15rem',
-                background: '#111111',
+                background: 'var(--blog-code-header)',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.18)',
                 fontFamily: 'var(--font-mono), monospace',
                 fontSize: '0.75rem',
@@ -490,7 +504,7 @@ export default function AIBlogArticlePage() {
                 padding: '1.25rem',
                 fontSize: '0.84rem',
                 lineHeight: 1.6,
-                color: '#f3f4f6',
+                color: 'var(--blog-code-text)',
                 fontFamily: 'var(--font-mono), monospace',
                 overflowX: 'auto',
               }}
@@ -503,8 +517,8 @@ export default function AIBlogArticlePage() {
         {/* ================= RELATED AI COURSES CALLOUT ================= */}
         <div
           style={{
-            background: '#050505',
-            border: '1px solid #ffffff',
+            background: 'var(--blog-surface)',
+            border: '1px solid var(--blog-border-strong)',
             borderRadius: '0.75rem',
             padding: '2rem',
             marginBottom: '3rem',
@@ -525,20 +539,20 @@ export default function AIBlogArticlePage() {
                 style={{
                   fontFamily: 'var(--font-mono), monospace',
                   fontSize: '0.74rem',
-                  color: '#00f0ff',
+                  color: 'var(--blog-accent-cyan)',
                   fontWeight: 700,
                 }}
               >
                 // BUILD_THESE_SKILLS_HANDS_ON
               </span>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#ffffff', margin: '0.25rem 0 0 0' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--blog-text)', margin: '0.25rem 0 0 0' }}>
                 Related ReactJav AI Courses
               </h3>
             </div>
             <Link
               href="/courses"
               style={{
-                color: '#ffffff',
+                color: 'var(--blog-text)',
                 fontFamily: 'var(--font-mono), monospace',
                 fontSize: '0.76rem',
                 fontWeight: 700,
@@ -561,12 +575,12 @@ export default function AIBlogArticlePage() {
                 key={course.id}
                 href={`/courses/${course.slug}`}
                 style={{
-                  background: '#000000',
-                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  background: 'var(--blog-card)',
+                  border: '1px solid var(--blog-border)',
                   borderRadius: '0.5rem',
                   padding: '1.15rem',
                   textDecoration: 'none',
-                  color: '#ffffff',
+                  color: 'var(--blog-text)',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
@@ -578,16 +592,16 @@ export default function AIBlogArticlePage() {
                     style={{
                       fontFamily: 'var(--font-mono), monospace',
                       fontSize: '0.68rem',
-                      color: '#10b981',
+                      color: 'var(--blog-accent-emerald)',
                       fontWeight: 700,
                     }}
                   >
                     [{course.level.toUpperCase()} // {course.duration_weeks} WEEKS]
                   </span>
-                  <h4 style={{ fontSize: '1rem', fontWeight: 800, color: '#ffffff', margin: '0.35rem 0' }}>
+                  <h4 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--blog-text)', margin: '0.35rem 0' }}>
                     {course.title}
                   </h4>
-                  <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.45 }}>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--blog-text-secondary)', margin: 0, lineHeight: 1.45 }}>
                     {course.outcome_hook}
                   </p>
                 </div>
@@ -599,7 +613,7 @@ export default function AIBlogArticlePage() {
                     fontFamily: 'var(--font-mono), monospace',
                     fontSize: '0.74rem',
                     fontWeight: 800,
-                    color: '#00f0ff',
+                    color: 'var(--blog-accent-cyan)',
                   }}
                 >
                   <BookOpen size={13} />
@@ -619,7 +633,7 @@ export default function AIBlogArticlePage() {
                 fontFamily: 'var(--font-mono), monospace',
                 fontSize: '0.9rem',
                 fontWeight: 800,
-                color: '#ffffff',
+                color: 'var(--blog-text)',
                 marginBottom: '1rem',
               }}
             >
@@ -637,19 +651,19 @@ export default function AIBlogArticlePage() {
                   key={p.id}
                   href={`/blog/${p.slug}`}
                   style={{
-                    background: '#050505',
-                    border: '1px solid rgba(255,255,255,0.2)',
+                    background: 'var(--blog-surface)',
+                    border: '1px solid var(--blog-border)',
                     borderRadius: '0.5rem',
                     padding: '1.1rem',
                     textDecoration: 'none',
-                    color: '#ffffff',
+                    color: 'var(--blog-text)',
                   }}
                 >
                   <div
                     style={{
                       fontFamily: 'var(--font-mono), monospace',
                       fontSize: '0.68rem',
-                      color: '#00f0ff',
+                      color: 'var(--blog-accent-cyan)',
                       marginBottom: '0.35rem',
                     }}
                   >
@@ -667,8 +681,8 @@ export default function AIBlogArticlePage() {
         {/* ================= NEWSLETTER SUBSCRIPTION ================= */}
         <div
           style={{
-            background: '#050505',
-            border: '1px solid rgba(255,255,255,0.3)',
+            background: 'var(--blog-surface)',
+            border: '1px solid var(--blog-border)',
             borderRadius: '0.65rem',
             padding: '1.75rem',
             display: 'flex',
@@ -679,15 +693,15 @@ export default function AIBlogArticlePage() {
           }}
         >
           <div>
-            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: '0.72rem', color: '#10b981', fontWeight: 700 }}>
+            <div style={{ fontFamily: 'var(--font-mono), monospace', fontSize: '0.72rem', color: 'var(--blog-accent-emerald)', fontWeight: 700 }}>
               // WEEKLY_AI_BRIEFING
             </div>
-            <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff' }}>
+            <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--blog-text)' }}>
               Subscribe to ReactJav AI Tech Dispatches & Job Alerts
             </div>
           </div>
           {newsletterSubscribed ? (
-            <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: '0.8rem', color: '#10b981' }}>
+            <span style={{ fontFamily: 'var(--font-mono), monospace', fontSize: '0.8rem', color: 'var(--blog-accent-emerald)' }}>
               [SUBSCRIBED_SUCCESSFULLY]
             </span>
           ) : (
@@ -705,11 +719,11 @@ export default function AIBlogArticlePage() {
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder="you@domain.ai"
                 style={{
-                  background: '#000000',
-                  border: '1px solid rgba(255,255,255,0.35)',
+                  background: 'var(--blog-bg)',
+                  border: '1px solid var(--blog-border)',
                   borderRadius: '0.35rem',
                   padding: '0.6rem 0.9rem',
-                  color: '#ffffff',
+                  color: 'var(--blog-text)',
                   fontFamily: 'var(--font-mono), monospace',
                   fontSize: '0.82rem',
                 }}
@@ -717,9 +731,9 @@ export default function AIBlogArticlePage() {
               <button
                 type="submit"
                 style={{
-                  background: '#ffffff',
-                  color: '#000000',
-                  border: '1px solid #ffffff',
+                  background: 'var(--blog-btn-bg)',
+                  color: 'var(--blog-btn-text)',
+                  border: '1px solid var(--blog-border-strong)',
                   borderRadius: '0.35rem',
                   padding: '0.6rem 1.1rem',
                   fontFamily: 'var(--font-mono), monospace',
@@ -740,4 +754,3 @@ export default function AIBlogArticlePage() {
     </div>
   );
 }
-

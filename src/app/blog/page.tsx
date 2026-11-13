@@ -21,7 +21,6 @@ import {
   Code2,
   ShieldCheck,
   Briefcase,
-  BookOpen,
   Send,
 } from 'lucide-react';
 import { BlogPost, BlogCategory, Profile } from '@/types';
@@ -55,7 +54,9 @@ export default function AIBlogPage() {
   const [formCodeLabel, setFormCodeLabel] = useState('');
   const [formCodeSnippet, setFormCodeSnippet] = useState('');
   const [formReadingTime, setFormReadingTime] = useState(5);
-  const [formThumbnail, setFormThumbnail] = useState('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1000&q=80');
+  const [formThumbnail, setFormThumbnail] = useState(
+    'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1000&q=80'
+  );
   const [formIsFeatured, setFormIsFeatured] = useState(false);
 
   useEffect(() => {
@@ -98,7 +99,9 @@ export default function AIBlogPage() {
     setFormCodeLabel('AI_PIPELINE_CONFIG.ts // Technical Snippet');
     setFormCodeSnippet('// Optional code or prompt template\nconst model = "frontier-llm-v3";');
     setFormReadingTime(5);
-    setFormThumbnail('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80');
+    setFormThumbnail(
+      'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80'
+    );
     setFormIsFeatured(false);
     setShowEditorModal(true);
   };
@@ -205,25 +208,25 @@ export default function AIBlogPage() {
   const getCategoryIcon = (cat: BlogCategory) => {
     switch (cat) {
       case 'AI News & Frontier Models':
-        return <Cpu size={13} color="#00f0ff" />;
+        return <Cpu size={13} color="var(--blog-accent-cyan)" />;
       case 'Prompt Engineering & Workflows':
-        return <Sparkles size={13} color="#10b981" />;
+        return <Sparkles size={13} color="var(--blog-accent-emerald)" />;
       case 'AI Coding & Web Dev':
-        return <Code2 size={13} color="#38bdf8" />;
+        return <Code2 size={13} color="var(--blog-accent-cyan)" />;
       case 'AI Ethics, Safety & RLHF':
         return <ShieldCheck size={13} color="#a855f7" />;
       case 'AI Jobs & Careers':
         return <Briefcase size={13} color="#f59e0b" />;
       default:
-        return <Terminal size={13} color="#00f0ff" />;
+        return <Terminal size={13} color="var(--blog-accent-cyan)" />;
     }
   };
 
   return (
     <div
       style={{
-        backgroundColor: '#000000',
-        color: '#ffffff',
+        backgroundColor: 'var(--blog-bg)',
+        color: 'var(--blog-text)',
         minHeight: '100vh',
         width: '100vw',
         marginLeft: 'calc(50% - 50vw)',
@@ -232,9 +235,10 @@ export default function AIBlogPage() {
         paddingTop: '2.5rem',
         paddingBottom: '6rem',
         backgroundImage:
-          'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+          'linear-gradient(var(--blog-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--blog-grid-line) 1px, transparent 1px)',
         backgroundSize: '40px 40px',
         position: 'relative',
+        transition: 'background-color 0.25s ease, color 0.25s ease',
       }}
     >
       <div className="container" style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 1.5rem' }}>
@@ -247,8 +251,8 @@ export default function AIBlogPage() {
             flexWrap: 'wrap',
             gap: '1rem',
             padding: '0.75rem 1.15rem',
-            background: '#050505',
-            border: '1px solid rgba(255, 255, 255, 0.16)',
+            background: 'var(--blog-surface)',
+            border: '1px solid var(--blog-border)',
             borderRadius: '0.5rem',
             marginBottom: '2.5rem',
             fontFamily: 'var(--font-mono), monospace',
@@ -262,19 +266,19 @@ export default function AIBlogPage() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.4rem',
-                color: '#10b981',
+                color: 'var(--blog-accent-emerald)',
                 fontWeight: 700,
               }}
             >
-              <Radio size={14} color="#10b981" />
+              <Radio size={14} color="var(--blog-accent-emerald)" />
               <span>SYS.ONLINE // REACTJAV_AI_RESEARCH_LAB</span>
             </span>
-            <span style={{ color: 'rgba(255,255,255,0.25)' }}>|</span>
-            <span style={{ color: 'rgba(255,255,255,0.75)' }}>
-              STREAM: <strong style={{ color: '#00f0ff' }}>FRONTIER_AI_DISPATCHES</strong>
+            <span style={{ color: 'var(--blog-text-muted)' }}>|</span>
+            <span style={{ color: 'var(--blog-text-secondary)' }}>
+              STREAM: <strong style={{ color: 'var(--blog-accent-cyan)' }}>FRONTIER_AI_DISPATCHES</strong>
             </span>
-            <span style={{ color: 'rgba(255,255,255,0.25)' }}>|</span>
-            <span style={{ color: 'rgba(255,255,255,0.65)' }}>
+            <span style={{ color: 'var(--blog-text-muted)' }}>|</span>
+            <span style={{ color: 'var(--blog-text-muted)' }}>
               INDEXED_NODES: {posts.length} ARTICLES
             </span>
           </div>
@@ -286,9 +290,9 @@ export default function AIBlogPage() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.4rem',
-                background: '#ffffff',
-                color: '#000000',
-                border: '1px solid #ffffff',
+                background: 'var(--blog-btn-bg)',
+                color: 'var(--blog-btn-text)',
+                border: '1px solid var(--blog-border-strong)',
                 borderRadius: '0.35rem',
                 padding: '0.38rem 0.85rem',
                 fontSize: '0.74rem',
@@ -307,7 +311,7 @@ export default function AIBlogPage() {
         {/* ================= HERO TERMINAL HEADER ================= */}
         <div
           style={{
-            borderLeft: '3px solid #00f0ff',
+            borderLeft: '3px solid var(--blog-accent-cyan)',
             paddingLeft: '1.5rem',
             marginBottom: '2.75rem',
           }}
@@ -318,10 +322,10 @@ export default function AIBlogPage() {
               alignItems: 'center',
               gap: '0.5rem',
               padding: '0.28rem 0.75rem',
-              background: 'rgba(0, 240, 255, 0.08)',
-              border: '1px solid rgba(0, 240, 255, 0.35)',
+              background: 'var(--blog-surface)',
+              border: '1px solid var(--blog-accent-cyan)',
               borderRadius: '0.25rem',
-              color: '#00f0ff',
+              color: 'var(--blog-accent-cyan)',
               fontFamily: 'var(--font-mono), monospace',
               fontSize: '0.73rem',
               fontWeight: 700,
@@ -338,19 +342,14 @@ export default function AIBlogPage() {
             style={{
               fontSize: 'clamp(2.2rem, 4.8vw, 3.75rem)',
               fontWeight: 900,
-              color: '#ffffff',
+              color: 'var(--blog-text)',
               lineHeight: 1.08,
               letterSpacing: '-0.03em',
               margin: '0 0 1rem 0',
             }}
           >
             AI Intelligence, Prompt Architecture &{' '}
-            <span
-              style={{
-                color: '#00f0ff',
-                textShadow: '0 0 28px rgba(0, 240, 255, 0.35)',
-              }}
-            >
+            <span style={{ color: 'var(--blog-accent-cyan)' }}>
               Frontier Systems.
             </span>
           </h1>
@@ -358,7 +357,7 @@ export default function AIBlogPage() {
           <p
             style={{
               fontSize: '1.08rem',
-              color: 'rgba(255, 255, 255, 0.78)',
+              color: 'var(--blog-text-secondary)',
               maxWidth: '780px',
               lineHeight: 1.65,
               margin: 0,
@@ -376,8 +375,8 @@ export default function AIBlogPage() {
             flexDirection: 'column',
             gap: '1.15rem',
             padding: '1.25rem',
-            background: '#050505',
-            border: '1px solid rgba(255, 255, 255, 0.18)',
+            background: 'var(--blog-surface)',
+            border: '1px solid var(--blog-border)',
             borderRadius: '0.65rem',
             marginBottom: '3rem',
           }}
@@ -387,13 +386,13 @@ export default function AIBlogPage() {
               display: 'flex',
               alignItems: 'center',
               gap: '0.75rem',
-              background: '#000000',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
+              background: 'var(--blog-bg)',
+              border: '1px solid var(--blog-border)',
               borderRadius: '0.45rem',
               padding: '0.7rem 1rem',
             }}
           >
-            <Search size={18} color="#00f0ff" />
+            <Search size={18} color="var(--blog-accent-cyan)" />
             <input
               type="text"
               value={searchQuery}
@@ -404,7 +403,7 @@ export default function AIBlogPage() {
                 background: 'transparent',
                 border: 'none',
                 outline: 'none',
-                color: '#ffffff',
+                color: 'var(--blog-text)',
                 fontFamily: 'var(--font-mono), monospace',
                 fontSize: '0.88rem',
               }}
@@ -415,7 +414,7 @@ export default function AIBlogPage() {
                 style={{
                   background: 'transparent',
                   border: 'none',
-                  color: 'rgba(255,255,255,0.6)',
+                  color: 'var(--blog-text-muted)',
                   cursor: 'pointer',
                   fontFamily: 'var(--font-mono), monospace',
                   fontSize: '0.75rem',
@@ -436,11 +435,11 @@ export default function AIBlogPage() {
                   style={{
                     padding: '0.48rem 0.95rem',
                     borderRadius: '0.35rem',
-                    background: active ? '#ffffff' : '#000000',
-                    color: active ? '#000000' : '#ffffff',
+                    background: active ? 'var(--blog-btn-bg)' : 'var(--blog-bg)',
+                    color: active ? 'var(--blog-btn-text)' : 'var(--blog-text)',
                     border: active
-                      ? '1px solid #ffffff'
-                      : '1px solid rgba(255, 255, 255, 0.22)',
+                      ? '1px solid var(--blog-border-strong)'
+                      : '1px solid var(--blog-border)',
                     fontFamily: 'var(--font-mono), monospace',
                     fontSize: '0.76rem',
                     fontWeight: active ? 800 : 600,
@@ -459,12 +458,12 @@ export default function AIBlogPage() {
         {featuredPost && (
           <div
             style={{
-              background: '#030303',
-              border: '1px solid rgba(255, 255, 255, 0.28)',
+              background: 'var(--blog-card)',
+              border: '1px solid var(--blog-border)',
               borderRadius: '0.75rem',
               overflow: 'hidden',
               marginBottom: '3.5rem',
-              boxShadow: '0 0 40px rgba(0, 240, 255, 0.06)',
+              boxShadow: 'var(--shadow-md)',
             }}
           >
             <div
@@ -473,8 +472,8 @@ export default function AIBlogPage() {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '0.65rem 1.25rem',
-                background: '#0a0a0a',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.14)',
+                background: 'var(--blog-surface-elevated)',
+                borderBottom: '1px solid var(--blog-border)',
                 fontFamily: 'var(--font-mono), monospace',
                 fontSize: '0.74rem',
               }}
@@ -485,16 +484,15 @@ export default function AIBlogPage() {
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    background: '#00f0ff',
-                    boxShadow: '0 0 10px #00f0ff',
+                    background: 'var(--blog-accent-cyan)',
                   }}
                 />
-                <span style={{ color: '#00f0ff', fontWeight: 700 }}>
+                <span style={{ color: 'var(--blog-accent-cyan)', fontWeight: 700 }}>
                   PINNED_FEATURED_DISPATCH // {featuredPost.telemetry_id}
                 </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <span style={{ color: 'rgba(255,255,255,0.65)' }}>
+                <span style={{ color: 'var(--blog-text-muted)' }}>
                   {new Date(featuredPost.published_at).toLocaleDateString('en-US', {
                     month: 'short',
                     day: 'numeric',
@@ -506,8 +504,8 @@ export default function AIBlogPage() {
                     onClick={() => openEditModal(featuredPost)}
                     style={{
                       background: 'transparent',
-                      border: '1px solid rgba(255,255,255,0.3)',
-                      color: '#ffffff',
+                      border: '1px solid var(--blog-border)',
+                      color: 'var(--blog-text)',
                       padding: '0.2rem 0.55rem',
                       borderRadius: '0.25rem',
                       cursor: 'pointer',
@@ -537,11 +535,11 @@ export default function AIBlogPage() {
                       alignItems: 'center',
                       gap: '0.45rem',
                       padding: '0.25rem 0.7rem',
-                      border: '1px solid rgba(255,255,255,0.22)',
+                      border: '1px solid var(--blog-border)',
                       borderRadius: '0.25rem',
                       fontFamily: 'var(--font-mono), monospace',
                       fontSize: '0.72rem',
-                      color: '#ffffff',
+                      color: 'var(--blog-text)',
                       marginBottom: '1rem',
                     }}
                   >
@@ -551,13 +549,13 @@ export default function AIBlogPage() {
 
                   <Link
                     href={`/blog/${featuredPost.slug}`}
-                    style={{ textDecoration: 'none', color: '#ffffff' }}
+                    style={{ textDecoration: 'none', color: 'var(--blog-text)' }}
                   >
                     <h2
                       style={{
                         fontSize: 'clamp(1.55rem, 2.6vw, 2.15rem)',
                         fontWeight: 900,
-                        color: '#ffffff',
+                        color: 'var(--blog-text)',
                         lineHeight: 1.2,
                         marginBottom: '0.85rem',
                         letterSpacing: '-0.02em',
@@ -570,7 +568,7 @@ export default function AIBlogPage() {
                   <p
                     style={{
                       fontSize: '0.98rem',
-                      color: 'rgba(255, 255, 255, 0.8)',
+                      color: 'var(--blog-text-secondary)',
                       lineHeight: 1.65,
                       marginBottom: '1.25rem',
                     }}
@@ -581,8 +579,8 @@ export default function AIBlogPage() {
                   {/* Interactive AI TL;DR Summary Box */}
                   <div
                     style={{
-                      background: '#000000',
-                      border: '1px solid rgba(0, 240, 255, 0.35)',
+                      background: 'var(--blog-surface)',
+                      border: '1px solid var(--blog-accent-cyan)',
                       borderRadius: '0.5rem',
                       padding: '0.9rem 1.1rem',
                       marginBottom: '1.5rem',
@@ -594,7 +592,7 @@ export default function AIBlogPage() {
                         width: '100%',
                         background: 'transparent',
                         border: 'none',
-                        color: '#00f0ff',
+                        color: 'var(--blog-accent-cyan)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
@@ -621,7 +619,7 @@ export default function AIBlogPage() {
                         style={{
                           margin: '0.85rem 0 0 0',
                           paddingLeft: '1.15rem',
-                          color: '#ffffff',
+                          color: 'var(--blog-text)',
                           fontSize: '0.86rem',
                           lineHeight: 1.6,
                           display: 'flex',
@@ -630,7 +628,7 @@ export default function AIBlogPage() {
                         }}
                       >
                         {featuredPost.tldr.map((point, idx) => (
-                          <li key={idx} style={{ color: 'rgba(255,255,255,0.9)' }}>
+                          <li key={idx} style={{ color: 'var(--blog-text-secondary)' }}>
                             {point}
                           </li>
                         ))}
@@ -647,7 +645,7 @@ export default function AIBlogPage() {
                     flexWrap: 'wrap',
                     gap: '1rem',
                     paddingTop: '1rem',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.14)',
+                    borderTop: '1px solid var(--blog-border)',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -659,17 +657,17 @@ export default function AIBlogPage() {
                         height: '36px',
                         borderRadius: '50%',
                         objectFit: 'cover',
-                        border: '1px solid #ffffff',
+                        border: '1px solid var(--blog-border-strong)',
                       }}
                     />
                     <div>
-                      <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff' }}>
+                      <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--blog-text)' }}>
                         {featuredPost.author_name}
                       </div>
                       <div
                         style={{
                           fontSize: '0.72rem',
-                          color: 'rgba(255,255,255,0.6)',
+                          color: 'var(--blog-text-muted)',
                           fontFamily: 'var(--font-mono), monospace',
                         }}
                       >
@@ -685,8 +683,8 @@ export default function AIBlogPage() {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '0.5rem',
-                      background: '#ffffff',
-                      color: '#000000',
+                      background: 'var(--blog-btn-bg)',
+                      color: 'var(--blog-btn-text)',
                       padding: '0.65rem 1.25rem',
                       borderRadius: '0.35rem',
                       fontFamily: 'var(--font-mono), monospace',
@@ -705,8 +703,8 @@ export default function AIBlogPage() {
               {/* Right Column: Terminal Code Preview & Visual */}
               <div
                 style={{
-                  background: '#070707',
-                  borderLeft: '1px solid rgba(255, 255, 255, 0.14)',
+                  background: 'var(--blog-surface)',
+                  borderLeft: '1px solid var(--blog-border)',
                   padding: '2rem',
                   display: 'flex',
                   flexDirection: 'column',
@@ -720,7 +718,7 @@ export default function AIBlogPage() {
                     height: '200px',
                     borderRadius: '0.5rem',
                     overflow: 'hidden',
-                    border: '1px solid rgba(255,255,255,0.2)',
+                    border: '1px solid var(--blog-border)',
                   }}
                 >
                   <img
@@ -730,7 +728,7 @@ export default function AIBlogPage() {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      filter: 'grayscale(35%) contrast(115%)',
+                      filter: 'grayscale(30%) contrast(115%)',
                     }}
                   />
                   <div
@@ -738,7 +736,7 @@ export default function AIBlogPage() {
                       position: 'absolute',
                       inset: 0,
                       background:
-                        'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%)',
+                        'linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.82) 100%)',
                       display: 'flex',
                       alignItems: 'flex-end',
                       padding: '0.85rem',
@@ -750,7 +748,7 @@ export default function AIBlogPage() {
                           key={tag}
                           style={{
                             background: 'rgba(0,0,0,0.85)',
-                            border: '1px solid rgba(255,255,255,0.3)',
+                            border: '1px solid rgba(255,255,255,0.35)',
                             color: '#ffffff',
                             padding: '0.18rem 0.55rem',
                             borderRadius: '0.2rem',
@@ -768,8 +766,8 @@ export default function AIBlogPage() {
                 {featuredPost.code_snippet && (
                   <div
                     style={{
-                      background: '#000000',
-                      border: '1px solid rgba(255, 255, 255, 0.22)',
+                      background: 'var(--blog-code-bg)',
+                      border: '1px solid var(--blog-border)',
                       borderRadius: '0.5rem',
                       overflow: 'hidden',
                     }}
@@ -780,7 +778,7 @@ export default function AIBlogPage() {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         padding: '0.45rem 0.85rem',
-                        background: '#111111',
+                        background: 'var(--blog-code-header)',
                         borderBottom: '1px solid rgba(255,255,255,0.14)',
                         fontFamily: 'var(--font-mono), monospace',
                         fontSize: '0.7rem',
@@ -821,7 +819,7 @@ export default function AIBlogPage() {
                         padding: '0.9rem',
                         fontSize: '0.74rem',
                         lineHeight: 1.5,
-                        color: '#e5e7eb',
+                        color: 'var(--blog-code-text)',
                         fontFamily: 'var(--font-mono), monospace',
                         overflowX: 'auto',
                         maxHeight: '190px',
@@ -843,7 +841,7 @@ export default function AIBlogPage() {
             alignItems: 'center',
             justifyContent: 'space-between',
             marginBottom: '1.5rem',
-            borderBottom: '1px solid rgba(255,255,255,0.15)',
+            borderBottom: '1px solid var(--blog-border)',
             paddingBottom: '0.75rem',
           }}
         >
@@ -852,7 +850,7 @@ export default function AIBlogPage() {
               fontFamily: 'var(--font-mono), monospace',
               fontSize: '0.82rem',
               fontWeight: 700,
-              color: '#ffffff',
+              color: 'var(--blog-text)',
               letterSpacing: '0.06em',
             }}
           >
@@ -862,7 +860,7 @@ export default function AIBlogPage() {
             style={{
               fontFamily: 'var(--font-mono), monospace',
               fontSize: '0.74rem',
-              color: 'rgba(255,255,255,0.55)',
+              color: 'var(--blog-text-muted)',
             }}
           >
             SORT: CHRONOLOGICAL_DESC
@@ -881,13 +879,14 @@ export default function AIBlogPage() {
             <article
               key={post.id}
               style={{
-                background: '#040404',
-                border: '1px solid rgba(255, 255, 255, 0.22)',
+                background: 'var(--blog-card)',
+                border: '1px solid var(--blog-border)',
                 borderRadius: '0.65rem',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 overflow: 'hidden',
+                boxShadow: 'var(--shadow-sm)',
                 transition: 'border-color 0.2s ease',
               }}
             >
@@ -899,14 +898,16 @@ export default function AIBlogPage() {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: '0.55rem 1rem',
-                    background: '#0c0c0c',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.12)',
+                    background: 'var(--blog-surface-elevated)',
+                    borderBottom: '1px solid var(--blog-border)',
                     fontFamily: 'var(--font-mono), monospace',
                     fontSize: '0.7rem',
-                    color: 'rgba(255, 255, 255, 0.7)',
+                    color: 'var(--blog-text-secondary)',
                   }}
                 >
-                  <span style={{ color: '#00f0ff', fontWeight: 700 }}>{post.telemetry_id}</span>
+                  <span style={{ color: 'var(--blog-accent-cyan)', fontWeight: 700 }}>
+                    {post.telemetry_id}
+                  </span>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <span>{post.reading_time_minutes} MIN READ</span>
                     {canManageBlog && (
@@ -917,7 +918,7 @@ export default function AIBlogPage() {
                           style={{
                             background: 'transparent',
                             border: 'none',
-                            color: '#ffffff',
+                            color: 'var(--blog-text)',
                             cursor: 'pointer',
                             padding: '0.1rem',
                           }}
@@ -943,7 +944,10 @@ export default function AIBlogPage() {
                 </div>
 
                 {/* Thumbnail */}
-                <Link href={`/blog/${post.slug}`} style={{ display: 'block', position: 'relative', height: '185px', overflow: 'hidden' }}>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  style={{ display: 'block', position: 'relative', height: '185px', overflow: 'hidden' }}
+                >
                   <img
                     src={post.thumbnail_url}
                     alt={post.title}
@@ -951,7 +955,7 @@ export default function AIBlogPage() {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      filter: 'grayscale(30%) contrast(115%)',
+                      filter: 'grayscale(25%) contrast(112%)',
                     }}
                   />
                   <div
@@ -959,8 +963,8 @@ export default function AIBlogPage() {
                       position: 'absolute',
                       top: '0.75rem',
                       left: '0.75rem',
-                      background: 'rgba(0, 0, 0, 0.88)',
-                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      background: 'var(--blog-bg)',
+                      border: '1px solid var(--blog-border-strong)',
                       padding: '0.25rem 0.65rem',
                       borderRadius: '0.25rem',
                       display: 'inline-flex',
@@ -968,7 +972,7 @@ export default function AIBlogPage() {
                       gap: '0.4rem',
                       fontFamily: 'var(--font-mono), monospace',
                       fontSize: '0.68rem',
-                      color: '#ffffff',
+                      color: 'var(--blog-text)',
                       fontWeight: 700,
                     }}
                   >
@@ -981,13 +985,13 @@ export default function AIBlogPage() {
                 <div style={{ padding: '1.35rem' }}>
                   <Link
                     href={`/blog/${post.slug}`}
-                    style={{ textDecoration: 'none', color: '#ffffff' }}
+                    style={{ textDecoration: 'none', color: 'var(--blog-text)' }}
                   >
                     <h3
                       style={{
                         fontSize: '1.2rem',
                         fontWeight: 800,
-                        color: '#ffffff',
+                        color: 'var(--blog-text)',
                         lineHeight: 1.32,
                         marginBottom: '0.65rem',
                       }}
@@ -999,7 +1003,7 @@ export default function AIBlogPage() {
                   <p
                     style={{
                       fontSize: '0.88rem',
-                      color: 'rgba(255, 255, 255, 0.75)',
+                      color: 'var(--blog-text-secondary)',
                       lineHeight: 1.6,
                       marginBottom: '1rem',
                     }}
@@ -1010,8 +1014,8 @@ export default function AIBlogPage() {
                   {/* Interactive TL;DR Toggle */}
                   <div
                     style={{
-                      background: '#000000',
-                      border: '1px solid rgba(255, 255, 255, 0.18)',
+                      background: 'var(--blog-surface)',
+                      border: '1px solid var(--blog-border)',
                       borderRadius: '0.4rem',
                       padding: '0.6rem 0.8rem',
                       marginBottom: '0.85rem',
@@ -1023,7 +1027,7 @@ export default function AIBlogPage() {
                         width: '100%',
                         background: 'transparent',
                         border: 'none',
-                        color: '#10b981',
+                        color: 'var(--blog-accent-emerald)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
@@ -1048,7 +1052,7 @@ export default function AIBlogPage() {
                           margin: '0.65rem 0 0 0',
                           paddingLeft: '1rem',
                           fontSize: '0.78rem',
-                          color: 'rgba(255,255,255,0.88)',
+                          color: 'var(--blog-text-secondary)',
                           lineHeight: 1.5,
                           display: 'flex',
                           flexDirection: 'column',
@@ -1070,9 +1074,9 @@ export default function AIBlogPage() {
                         style={{
                           fontSize: '0.68rem',
                           fontFamily: 'var(--font-mono), monospace',
-                          color: 'rgba(255,255,255,0.7)',
-                          background: '#0d0d0d',
-                          border: '1px solid rgba(255,255,255,0.15)',
+                          color: 'var(--blog-text-secondary)',
+                          background: 'var(--blog-surface)',
+                          border: '1px solid var(--blog-border)',
                           padding: '0.15rem 0.45rem',
                           borderRadius: '0.2rem',
                         }}
@@ -1088,18 +1092,18 @@ export default function AIBlogPage() {
               <div
                 style={{
                   padding: '0.9rem 1.35rem',
-                  borderTop: '1px solid rgba(255, 255, 255, 0.12)',
+                  borderTop: '1px solid var(--blog-border)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  background: '#070707',
+                  background: 'var(--blog-surface)',
                 }}
               >
                 <span
                   style={{
                     fontFamily: 'var(--font-mono), monospace',
                     fontSize: '0.72rem',
-                    color: 'rgba(255,255,255,0.6)',
+                    color: 'var(--blog-text-muted)',
                   }}
                 >
                   {new Date(post.published_at).toLocaleDateString('en-US', {
@@ -1115,7 +1119,7 @@ export default function AIBlogPage() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.35rem',
-                    color: '#ffffff',
+                    color: 'var(--blog-text)',
                     fontFamily: 'var(--font-mono), monospace',
                     fontSize: '0.75rem',
                     fontWeight: 800,
@@ -1123,7 +1127,7 @@ export default function AIBlogPage() {
                   }}
                 >
                   <span>EXECUTE_READ</span>
-                  <ArrowUpRight size={14} color="#00f0ff" />
+                  <ArrowUpRight size={14} color="var(--blog-accent-cyan)" />
                 </Link>
               </div>
             </article>
@@ -1133,8 +1137,8 @@ export default function AIBlogPage() {
         {/* ================= AI DISPATCH NEWSLETTER TERMINAL ================= */}
         <div
           style={{
-            background: '#050505',
-            border: '1px solid #ffffff',
+            background: 'var(--blog-surface)',
+            border: '1px solid var(--blog-border-strong)',
             borderRadius: '0.75rem',
             padding: '2.5rem',
             display: 'grid',
@@ -1148,7 +1152,7 @@ export default function AIBlogPage() {
               style={{
                 fontFamily: 'var(--font-mono), monospace',
                 fontSize: '0.74rem',
-                color: '#10b981',
+                color: 'var(--blog-accent-emerald)',
                 fontWeight: 700,
                 marginBottom: '0.5rem',
               }}
@@ -1159,13 +1163,20 @@ export default function AIBlogPage() {
               style={{
                 fontSize: '1.65rem',
                 fontWeight: 900,
-                color: '#ffffff',
+                color: 'var(--blog-text)',
                 margin: '0 0 0.6rem 0',
               }}
             >
               Get Weekly Frontier AI Briefings, Prompt Templates & Remote AI Job Alerts
             </h3>
-            <p style={{ fontSize: '0.92rem', color: 'rgba(255,255,255,0.75)', margin: 0, lineHeight: 1.6 }}>
+            <p
+              style={{
+                fontSize: '0.92rem',
+                color: 'var(--blog-text-secondary)',
+                margin: 0,
+                lineHeight: 1.6,
+              }}
+            >
               Zero fluff. Pure technical breakdowns on LLMs, AI coding workflows, data annotation
               rubrics, and open AI roles sent straight to your inbox.
             </p>
@@ -1177,9 +1188,9 @@ export default function AIBlogPage() {
                 style={{
                   padding: '1rem 1.25rem',
                   background: 'rgba(16, 185, 129, 0.12)',
-                  border: '1px solid #10b981',
+                  border: '1px solid var(--blog-accent-emerald)',
                   borderRadius: '0.45rem',
-                  color: '#ffffff',
+                  color: 'var(--blog-text)',
                   fontFamily: 'var(--font-mono), monospace',
                   fontSize: '0.84rem',
                 }}
@@ -1203,11 +1214,11 @@ export default function AIBlogPage() {
                   style={{
                     flex: 1,
                     minWidth: '220px',
-                    background: '#000000',
-                    border: '1px solid rgba(255,255,255,0.35)',
+                    background: 'var(--blog-bg)',
+                    border: '1px solid var(--blog-border)',
                     borderRadius: '0.4rem',
                     padding: '0.8rem 1rem',
-                    color: '#ffffff',
+                    color: 'var(--blog-text)',
                     fontFamily: 'var(--font-mono), monospace',
                     fontSize: '0.86rem',
                   }}
@@ -1215,9 +1226,9 @@ export default function AIBlogPage() {
                 <button
                   type="submit"
                   style={{
-                    background: '#ffffff',
-                    color: '#000000',
-                    border: '1px solid #ffffff',
+                    background: 'var(--blog-btn-bg)',
+                    color: 'var(--blog-btn-text)',
+                    border: '1px solid var(--blog-border-strong)',
                     borderRadius: '0.4rem',
                     padding: '0.8rem 1.35rem',
                     fontFamily: 'var(--font-mono), monospace',
@@ -1244,7 +1255,7 @@ export default function AIBlogPage() {
           style={{
             position: 'fixed',
             inset: 0,
-            background: 'rgba(0, 0, 0, 0.88)',
+            background: 'rgba(0, 0, 0, 0.8)',
             backdropFilter: 'blur(8px)',
             zIndex: 999,
             display: 'flex',
@@ -1255,15 +1266,15 @@ export default function AIBlogPage() {
         >
           <div
             style={{
-              background: '#050505',
-              border: '1px solid #ffffff',
+              background: 'var(--blog-bg)',
+              border: '1px solid var(--blog-border-strong)',
               borderRadius: '0.75rem',
               width: '100%',
               maxWidth: '780px',
               maxHeight: '90vh',
               overflowY: 'auto',
               padding: '2rem',
-              color: '#ffffff',
+              color: 'var(--blog-text)',
             }}
           >
             <div
@@ -1273,7 +1284,7 @@ export default function AIBlogPage() {
                 justifyContent: 'space-between',
                 marginBottom: '1.5rem',
                 paddingBottom: '0.85rem',
-                borderBottom: '1px solid rgba(255,255,255,0.2)',
+                borderBottom: '1px solid var(--blog-border)',
               }}
             >
               <span
@@ -1281,7 +1292,7 @@ export default function AIBlogPage() {
                   fontFamily: 'var(--font-mono), monospace',
                   fontSize: '0.9rem',
                   fontWeight: 800,
-                  color: '#00f0ff',
+                  color: 'var(--blog-accent-cyan)',
                 }}
               >
                 {editingPost ? '// EDIT_AI_DISPATCH' : '// PUBLISH_NEW_AI_DISPATCH'}
@@ -1290,8 +1301,8 @@ export default function AIBlogPage() {
                 onClick={() => setShowEditorModal(false)}
                 style={{
                   background: 'transparent',
-                  border: '1px solid rgba(255,255,255,0.3)',
-                  color: '#ffffff',
+                  border: '1px solid var(--blog-border)',
+                  color: 'var(--blog-text)',
                   borderRadius: '0.3rem',
                   padding: '0.3rem',
                   cursor: 'pointer',
@@ -1314,11 +1325,11 @@ export default function AIBlogPage() {
                   placeholder="e.g. Building Autonomous AI Workflows with Function Calling"
                   style={{
                     width: '100%',
-                    background: '#000000',
-                    border: '1px solid rgba(255,255,255,0.3)',
+                    background: 'var(--blog-surface)',
+                    border: '1px solid var(--blog-border)',
                     borderRadius: '0.35rem',
                     padding: '0.65rem 0.85rem',
-                    color: '#ffffff',
+                    color: 'var(--blog-text)',
                   }}
                 />
               </div>
@@ -1333,11 +1344,11 @@ export default function AIBlogPage() {
                     onChange={(e) => setFormCategory(e.target.value as BlogCategory)}
                     style={{
                       width: '100%',
-                      background: '#000000',
-                      border: '1px solid rgba(255,255,255,0.3)',
+                      background: 'var(--blog-surface)',
+                      border: '1px solid var(--blog-border)',
                       borderRadius: '0.35rem',
                       padding: '0.65rem 0.85rem',
-                      color: '#ffffff',
+                      color: 'var(--blog-text)',
                     }}
                   >
                     {BLOG_CATEGORIES.map((cat) => (
@@ -1359,11 +1370,11 @@ export default function AIBlogPage() {
                     placeholder="LLMs, Prompt Engineering, AI Jobs"
                     style={{
                       width: '100%',
-                      background: '#000000',
-                      border: '1px solid rgba(255,255,255,0.3)',
+                      background: 'var(--blog-surface)',
+                      border: '1px solid var(--blog-border)',
                       borderRadius: '0.35rem',
                       padding: '0.65rem 0.85rem',
-                      color: '#ffffff',
+                      color: 'var(--blog-text)',
                     }}
                   />
                 </div>
@@ -1380,11 +1391,11 @@ export default function AIBlogPage() {
                   onChange={(e) => setFormExcerpt(e.target.value)}
                   style={{
                     width: '100%',
-                    background: '#000000',
-                    border: '1px solid rgba(255,255,255,0.3)',
+                    background: 'var(--blog-surface)',
+                    border: '1px solid var(--blog-border)',
                     borderRadius: '0.35rem',
                     padding: '0.65rem 0.85rem',
-                    color: '#ffffff',
+                    color: 'var(--blog-text)',
                   }}
                 />
               </div>
@@ -1399,11 +1410,11 @@ export default function AIBlogPage() {
                   onChange={(e) => setFormTldr(e.target.value)}
                   style={{
                     width: '100%',
-                    background: '#000000',
-                    border: '1px solid rgba(255,255,255,0.3)',
+                    background: 'var(--blog-surface)',
+                    border: '1px solid var(--blog-border)',
                     borderRadius: '0.35rem',
                     padding: '0.65rem 0.85rem',
-                    color: '#ffffff',
+                    color: 'var(--blog-text)',
                     fontFamily: 'var(--font-mono), monospace',
                     fontSize: '0.82rem',
                   }}
@@ -1421,11 +1432,11 @@ export default function AIBlogPage() {
                   onChange={(e) => setFormContent(e.target.value)}
                   style={{
                     width: '100%',
-                    background: '#000000',
-                    border: '1px solid rgba(255,255,255,0.3)',
+                    background: 'var(--blog-surface)',
+                    border: '1px solid var(--blog-border)',
                     borderRadius: '0.35rem',
                     padding: '0.65rem 0.85rem',
-                    color: '#ffffff',
+                    color: 'var(--blog-text)',
                     fontSize: '0.9rem',
                     lineHeight: 1.5,
                   }}
@@ -1442,8 +1453,8 @@ export default function AIBlogPage() {
                   onChange={(e) => setFormCodeSnippet(e.target.value)}
                   style={{
                     width: '100%',
-                    background: '#000000',
-                    border: '1px solid rgba(255,255,255,0.3)',
+                    background: 'var(--blog-code-bg)',
+                    border: '1px solid var(--blog-border)',
                     borderRadius: '0.35rem',
                     padding: '0.65rem 0.85rem',
                     color: '#10b981',
@@ -1469,8 +1480,8 @@ export default function AIBlogPage() {
                     onClick={() => setShowEditorModal(false)}
                     style={{
                       background: 'transparent',
-                      border: '1px solid rgba(255,255,255,0.3)',
-                      color: '#ffffff',
+                      border: '1px solid var(--blog-border)',
+                      color: 'var(--blog-text)',
                       padding: '0.65rem 1.2rem',
                       borderRadius: '0.35rem',
                       fontFamily: 'var(--font-mono), monospace',
@@ -1483,9 +1494,9 @@ export default function AIBlogPage() {
                   <button
                     type="submit"
                     style={{
-                      background: '#ffffff',
-                      border: '1px solid #ffffff',
-                      color: '#000000',
+                      background: 'var(--blog-btn-bg)',
+                      border: '1px solid var(--blog-border-strong)',
+                      color: 'var(--blog-btn-text)',
                       padding: '0.65rem 1.4rem',
                       borderRadius: '0.35rem',
                       fontFamily: 'var(--font-mono), monospace',
@@ -1505,4 +1516,3 @@ export default function AIBlogPage() {
     </div>
   );
 }
-

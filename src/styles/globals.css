@@ -51,6 +51,25 @@
 
   /* Transitions */
   --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* AI Tech Blog Theme Variables (Light Mode: Crisp High-Contrast White & Black) */
+  --blog-bg: #ffffff;
+  --blog-surface: #f8fafc;
+  --blog-surface-elevated: #f1f5f9;
+  --blog-card: #ffffff;
+  --blog-text: #000000;
+  --blog-text-secondary: #334155;
+  --blog-text-muted: #64748b;
+  --blog-border: rgba(0, 0, 0, 0.16);
+  --blog-border-strong: #000000;
+  --blog-grid-line: rgba(0, 0, 0, 0.04);
+  --blog-accent-cyan: #0284c7;
+  --blog-accent-emerald: #059669;
+  --blog-btn-bg: #000000;
+  --blog-btn-text: #ffffff;
+  --blog-code-bg: #0f172a;
+  --blog-code-header: #1e293b;
+  --blog-code-text: #f8fafc;
   color-scheme: light;
 }
 
@@ -97,6 +116,25 @@
   --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.55);
   --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.75);
   --shadow-glow: 0 0 35px rgba(139, 92, 246, 0.35);
+
+  /* AI Tech Blog Theme Variables (Dark Mode: Pure #000000 Black & #FFFFFF White) */
+  --blog-bg: #000000;
+  --blog-surface: #050505;
+  --blog-surface-elevated: #0b0b0b;
+  --blog-card: #040404;
+  --blog-text: #ffffff;
+  --blog-text-secondary: rgba(255, 255, 255, 0.8);
+  --blog-text-muted: rgba(255, 255, 255, 0.58);
+  --blog-border: rgba(255, 255, 255, 0.22);
+  --blog-border-strong: #ffffff;
+  --blog-grid-line: rgba(255, 255, 255, 0.03);
+  --blog-accent-cyan: #00f0ff;
+  --blog-accent-emerald: #10b981;
+  --blog-btn-bg: #ffffff;
+  --blog-btn-text: #000000;
+  --blog-code-bg: #000000;
+  --blog-code-header: #111111;
+  --blog-code-text: #e5e7eb;
   color-scheme: dark;
 }
 

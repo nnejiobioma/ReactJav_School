@@ -227,19 +227,18 @@ export default function Navbar() {
               href="/blog"
               className="btn btn-sm"
               style={{
-                background: pathname.startsWith('/blog') ? '#000000' : 'rgba(0, 0, 0, 0.85)',
-                color: '#ffffff',
-                border: pathname.startsWith('/blog') ? '1px solid #00f0ff' : '1px solid rgba(255, 255, 255, 0.25)',
-                fontSize: '0.84rem',
-                padding: '0.5rem 0.85rem',
-                fontWeight: 700,
+                background: pathname.startsWith('/blog') ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
+                color: pathname.startsWith('/blog') ? 'var(--primary)' : 'var(--text-secondary)',
+                fontSize: '0.86rem',
+                padding: '0.52rem 0.85rem',
+                fontWeight: 600,
                 borderRadius: '0.75rem',
                 gap: '0.45rem',
                 display: 'inline-flex',
                 alignItems: 'center',
               }}
             >
-              <Terminal size={15} color="#00f0ff" />
+              <Terminal size={16} color="var(--accent-cyan)" />
               <span>AI Blog</span>
             </Link>
 
@@ -1021,8 +1020,8 @@ export default function Navbar() {
                 <Sparkles size={17} /> Tuition & Plans
               </Link>
             )}
-            <Link href="/blog" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem', background: '#000000', color: '#ffffff', border: '1px solid rgba(255,255,255,0.25)' }}>
-              <Terminal size={17} color="#00f0ff" /> AI Tech Blog
+            <Link href="/blog" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
+              <Terminal size={17} color="var(--accent-cyan)" /> AI Tech Blog
             </Link>
             <Link href="/about" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
               <BookOpen size={17} /> About ReactJav
