@@ -123,6 +123,7 @@ export default function CoursesCatalogPage() {
         {/* REACTJav Track Tabs */}
         <div style={{
           display: 'flex',
+          alignItems: 'center',
           flexWrap: 'wrap',
           gap: '0.6rem',
           paddingBottom: '1.25rem',
@@ -136,6 +137,11 @@ export default function CoursesCatalogPage() {
                 key={track}
                 onClick={() => setSelectedTrack(track)}
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
                   padding: '0.6rem 1.3rem',
                   borderRadius: '9999px',
                   fontSize: '0.88rem',

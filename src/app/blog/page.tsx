@@ -433,6 +433,11 @@ export default function AIBlogPage() {
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
                   style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
                     padding: '0.48rem 0.95rem',
                     borderRadius: '0.35rem',
                     background: active ? 'var(--blog-btn-bg)' : 'var(--blog-bg)',

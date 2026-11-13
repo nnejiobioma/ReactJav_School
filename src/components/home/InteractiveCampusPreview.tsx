@@ -138,8 +138,10 @@ export default function InteractiveCampusPreview() {
           <button
             onClick={() => setActiveTab('cbt')}
             style={{
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               gap: '0.5rem',
               padding: '0.65rem 1.4rem',
               borderRadius: '9999px',
@@ -160,8 +162,10 @@ export default function InteractiveCampusPreview() {
           <button
             onClick={() => setActiveTab('ide')}
             style={{
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               gap: '0.5rem',
               padding: '0.65rem 1.4rem',
               borderRadius: '9999px',
@@ -182,8 +186,10 @@ export default function InteractiveCampusPreview() {
           <button
             onClick={() => setActiveTab('live')}
             style={{
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
               gap: '0.5rem',
               padding: '0.65rem 1.4rem',
               borderRadius: '9999px',

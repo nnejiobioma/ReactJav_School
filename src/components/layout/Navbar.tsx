@@ -144,19 +144,22 @@ export default function Navbar() {
         <nav
           className="header-desktop-nav"
           style={{
-            justifySelf: 'center',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5rem',
+            justifyContent: 'center',
+            gap: '0.4rem',
+            flexWrap: 'nowrap',
+            minWidth: 0,
           }}
         >
           {/* Main Academic & Curriculum Pill Container */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.35rem',
+            flexWrap: 'nowrap',
+            gap: '0.25rem',
             background: 'var(--bg-surface)',
-            padding: '0.38rem 0.55rem',
+            padding: '0.35rem 0.5rem',
             borderRadius: '0.95rem',
             border: '1px solid var(--border-subtle)',
             boxShadow: 'var(--shadow-sm)',
@@ -167,16 +170,18 @@ export default function Navbar() {
               style={{
                 background: (pathname === '/' || pathname.startsWith('/courses')) ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
                 color: (pathname === '/' || pathname.startsWith('/courses')) ? 'var(--primary)' : 'var(--text-secondary)',
-                fontSize: '0.86rem',
-                padding: '0.52rem 0.85rem',
+                fontSize: '0.84rem',
+                padding: '0.48rem 0.75rem',
                 fontWeight: 600,
-                borderRadius: '0.75rem',
-                gap: '0.45rem',
+                borderRadius: '0.7rem',
+                gap: '0.4rem',
                 display: 'inline-flex',
                 alignItems: 'center',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
               }}
             >
-              <BookOpen size={16} />
+              <BookOpen size={15} />
               <span>Programmes</span>
             </Link>
 
@@ -186,18 +191,20 @@ export default function Navbar() {
               style={{
                 background: (pathname.startsWith('/academy') || pathname.startsWith('/tutoring')) ? 'rgba(16, 185, 129, 0.14)' : 'transparent',
                 color: (pathname.startsWith('/academy') || pathname.startsWith('/tutoring')) ? 'var(--accent-emerald)' : 'var(--text-secondary)',
-                fontSize: '0.86rem',
-                padding: '0.52rem 0.85rem',
+                fontSize: '0.84rem',
+                padding: '0.48rem 0.75rem',
                 fontWeight: 600,
-                borderRadius: '0.75rem',
-                gap: '0.45rem',
+                borderRadius: '0.7rem',
+                gap: '0.4rem',
                 display: 'inline-flex',
                 alignItems: 'center',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
               }}
             >
-              <GraduationCap size={16} color="var(--accent-emerald)" />
+              <GraduationCap size={15} color="var(--accent-emerald)" />
               <span>Direct Tutoring</span>
-              <span className="badge badge-emerald" style={{ fontSize: '0.62rem', padding: '0.1rem 0.4rem' }}>
+              <span className="badge badge-emerald" style={{ fontSize: '0.6rem', padding: '0.08rem 0.35rem', flexShrink: 0 }}>
                 1-on-1
               </span>
             </Link>
@@ -209,16 +216,18 @@ export default function Navbar() {
                 style={{
                   background: pathname === '/subscribe' ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
                   color: pathname === '/subscribe' ? 'var(--primary)' : 'var(--text-secondary)',
-                  fontSize: '0.86rem',
-                  padding: '0.52rem 0.85rem',
+                  fontSize: '0.84rem',
+                  padding: '0.48rem 0.75rem',
                   fontWeight: 600,
-                  borderRadius: '0.75rem',
-                  gap: '0.45rem',
+                  borderRadius: '0.7rem',
+                  gap: '0.4rem',
                   display: 'inline-flex',
                   alignItems: 'center',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
                 }}
               >
-                <Sparkles size={16} color="var(--primary)" />
+                <Sparkles size={15} color="var(--primary)" />
                 <span>Tuition & Plans</span>
               </Link>
             )}
@@ -229,16 +238,18 @@ export default function Navbar() {
               style={{
                 background: pathname.startsWith('/blog') ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
                 color: pathname.startsWith('/blog') ? 'var(--primary)' : 'var(--text-secondary)',
-                fontSize: '0.86rem',
-                padding: '0.52rem 0.85rem',
+                fontSize: '0.84rem',
+                padding: '0.48rem 0.75rem',
                 fontWeight: 600,
-                borderRadius: '0.75rem',
-                gap: '0.45rem',
+                borderRadius: '0.7rem',
+                gap: '0.4rem',
                 display: 'inline-flex',
                 alignItems: 'center',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
               }}
             >
-              <Terminal size={16} color="var(--accent-cyan)" />
+              <Terminal size={15} color="var(--accent-cyan)" />
               <span>AI Blog</span>
             </Link>
 
@@ -248,13 +259,15 @@ export default function Navbar() {
               style={{
                 background: pathname === '/about' ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
                 color: pathname === '/about' ? 'var(--primary)' : 'var(--text-secondary)',
-                fontSize: '0.86rem',
-                padding: '0.52rem 0.85rem',
+                fontSize: '0.84rem',
+                padding: '0.48rem 0.75rem',
                 fontWeight: 600,
-                borderRadius: '0.75rem',
-                gap: '0.45rem',
+                borderRadius: '0.7rem',
+                gap: '0.4rem',
                 display: 'inline-flex',
                 alignItems: 'center',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
               }}
             >
               <span>About</span>
@@ -266,13 +279,15 @@ export default function Navbar() {
               style={{
                 background: pathname === '/contact' ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
                 color: pathname === '/contact' ? 'var(--primary)' : 'var(--text-secondary)',
-                fontSize: '0.86rem',
-                padding: '0.52rem 0.85rem',
+                fontSize: '0.84rem',
+                padding: '0.48rem 0.75rem',
                 fontWeight: 600,
-                borderRadius: '0.75rem',
-                gap: '0.45rem',
+                borderRadius: '0.7rem',
+                gap: '0.4rem',
                 display: 'inline-flex',
                 alignItems: 'center',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
               }}
             >
               <span>Contact</span>
@@ -284,26 +299,28 @@ export default function Navbar() {
               <div style={{ width: '1px', height: '28px', background: 'var(--border-subtle)', margin: '0 0.25rem' }} />
 
               {/* Collapsed Campus Intranet Dropdown */}
-              <div ref={intranetMenuRef} style={{ position: 'relative' }}>
+              <div ref={intranetMenuRef} style={{ position: 'relative', flexShrink: 0 }}>
                 <button
                   onClick={() => setShowIntranetMenu(!showIntranetMenu)}
-              className="btn btn-sm"
-              style={{
-                background: isIntranetActive ? 'rgba(79, 70, 229, 0.16)' : 'var(--bg-surface)',
-                color: isIntranetActive ? 'var(--primary)' : 'var(--text-primary)',
-                fontWeight: 600,
-                fontSize: '0.86rem',
-                padding: '0.52rem 0.95rem',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                borderRadius: '0.85rem',
-                border: isIntranetActive ? '1px solid rgba(79, 70, 229, 0.35)' : '1px solid var(--border-subtle)',
-                boxShadow: 'var(--shadow-sm)',
-                cursor: 'pointer',
-              }}
-              title="Campus Intranet Portal & Resources"
-            >
+                  className="btn btn-sm"
+                  style={{
+                    background: isIntranetActive ? 'rgba(79, 70, 229, 0.16)' : 'var(--bg-surface)',
+                    color: isIntranetActive ? 'var(--primary)' : 'var(--text-primary)',
+                    fontWeight: 600,
+                    fontSize: '0.84rem',
+                    padding: '0.48rem 0.85rem',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.45rem',
+                    borderRadius: '0.85rem',
+                    border: isIntranetActive ? '1px solid rgba(79, 70, 229, 0.35)' : '1px solid var(--border-subtle)',
+                    boxShadow: 'var(--shadow-sm)',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
+                  }}
+                  title="Campus Intranet Portal & Resources"
+                >
               <ShieldCheck size={17} color={currentUser?.admin_granted || currentUser?.tutoring_enrolled || currentUser?.role !== 'student' ? 'var(--accent-emerald)' : 'var(--accent-amber)'} />
               <span>Campus Intranet</span>
               <ChevronDown
