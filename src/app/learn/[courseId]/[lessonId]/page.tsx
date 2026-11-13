@@ -42,6 +42,7 @@ import LessonTabEditorModal, {
 } from '@/components/player/LessonTabEditorModal';
 import ProgrammeCheckoutModal from '@/components/checkout/ProgrammeCheckoutModal';
 import AIFoundationsAssessmentWorkspace from '@/components/course/AIFoundationsAssessmentWorkspace';
+import RichContentRenderer from '@/components/common/RichContentRenderer';
 
 export default function CoursePlayerPage() {
   const params = useParams();
@@ -545,23 +546,39 @@ export default function CoursePlayerPage() {
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
-                  marginBottom: '1rem',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '0.75rem',
+                  marginBottom: '1.25rem',
                 }}>
-                  <span className="badge badge-cyan">Article Reading</span>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    Approx {Math.round(currentLesson.duration_seconds / 60)} min read
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span className="badge badge-cyan">Article Reading</span>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                      Approx {Math.round(currentLesson.duration_seconds / 60)} min read
+                    </span>
+                  </div>
+
+                  {canEdit && (
+                    <button
+                      onClick={() => setEditingSection('notes')}
+                      className="btn btn-secondary btn-sm"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        color: 'var(--primary)',
+                        borderColor: 'rgba(99, 102, 241, 0.35)',
+                        background: 'rgba(99, 102, 241, 0.08)',
+                      }}
+                      title="Edit Article Rich Text & Pictures"
+                    >
+                      <Edit3 size={14} />
+                      <span>Edit Content & Add Pictures</span>
+                    </button>
+                  )}
                 </div>
 
-                <div style={{
-                  color: 'var(--text-primary)',
-                  lineHeight: 1.8,
-                  fontSize: '1rem',
-                  whiteSpace: 'pre-line',
-                }}>
-                  {currentLesson.content}
-                </div>
+                <RichContentRenderer content={currentLesson.content} />
 
                 {(currentLesson.id === 'les_aif_06_01' || currentLesson.id === 'les_aif_07_01') && (
                   <AIFoundationsAssessmentWorkspace
@@ -720,9 +737,9 @@ export default function CoursePlayerPage() {
                   </button>
                 )}
               </div>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.25rem', whiteSpace: 'pre-line' }}>
-                {summaryContent}
-              </p>
+              <div style={{ marginBottom: '1.25rem' }}>
+                <RichContentRenderer content={summaryContent} />
+              </div>
               <div style={{
                 background: 'var(--bg-surface-elevated)',
                 padding: '1rem 1.25rem',
@@ -768,14 +785,7 @@ export default function CoursePlayerPage() {
                   </button>
                 )}
               </div>
-              <div style={{
-                color: 'var(--text-primary)',
-                lineHeight: 1.8,
-                fontSize: '0.95rem',
-                whiteSpace: 'pre-line',
-              }}>
-                {notesContent}
-              </div>
+              <RichContentRenderer content={notesContent} />
 
               {/* Personal Student Study Notebook */}
               <div style={{

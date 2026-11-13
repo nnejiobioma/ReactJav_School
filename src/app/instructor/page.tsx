@@ -33,6 +33,7 @@ import { formatCurrency } from '@/lib/utils';
 import TutoringAttendanceTracker from '@/components/attendance/TutoringAttendanceTracker';
 import AdminTrackEditorModal from '@/components/academy/AdminTrackEditorModal';
 import AccessGuard from '@/components/auth/AccessGuard';
+import RichContentEditor, { compressImageFileToDataUrl } from '@/components/common/RichContentEditor';
 
 export default function InstructorDashboardPage() {
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
@@ -50,10 +51,11 @@ export default function InstructorDashboardPage() {
 
   // New catalog course form
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('Web Development');
+  const [category, setCategory] = useState('AI Foundations');
   const [level, setLevel] = useState<'Beginner' | 'Intermediate' | 'Advanced' | 'All Levels'>('Beginner');
   const [price, setPrice] = useState('49.99');
   const [description, setDescription] = useState('');
+  const [thumbnailUrl, setThumbnailUrl] = useState('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80');
 
   // New 1-on-1 Track form
   const [newTrackName, setNewTrackName] = useState('');
@@ -101,7 +103,7 @@ export default function InstructorDashboardPage() {
       category,
       level,
       price: parseFloat(price) || 0,
-      thumbnail_url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80',
+      thumbnail_url: thumbnailUrl || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80',
       is_published: false,
       created_at: new Date().toISOString(),
       enrollments_count: 0,
@@ -929,12 +931,14 @@ export default function InstructorDashboardPage() {
           }}>
             <div className="glass-card animate-fade-in" style={{
               width: '100%',
-              maxWidth: '560px',
+              maxWidth: '780px',
+              maxHeight: '92dvh',
+              overflowY: 'auto',
               background: 'var(--bg-surface-elevated)',
               border: '1px solid var(--border-accent)',
             }}>
               <h3 style={{ fontSize: '1.3rem', color: '#ffffff', marginBottom: '1.25rem' }}>
-                Create New Engineering Course
+                Create New AI & Engineering Course
               </h3>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
@@ -944,14 +948,14 @@ export default function InstructorDashboardPage() {
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. Distributed Cloud Architecture with Kubernetes"
+                    placeholder="e.g. Applied Multimodal AI & Agentic Workflows"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     className="form-input"
                   />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
                   <div>
                     <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
                       Category
@@ -961,10 +965,11 @@ export default function InstructorDashboardPage() {
                       onChange={(e) => setCategory(e.target.value)}
                       className="form-input"
                     >
-                      <option value="Web Development">Web Development</option>
-                      <option value="Data Science & AI">Data Science & AI</option>
-                      <option value="Design">Design</option>
-                      <option value="Cloud Architecture">Cloud Architecture</option>
+                      <option value="AI Foundations">AI Foundations</option>
+                      <option value="Generative AI & LLMs">Generative AI & LLMs</option>
+                      <option value="Machine Learning & Deep Learning">Machine Learning & Deep Learning</option>
+                      <option value="AI Web & App Engineering">AI Web & App Engineering</option>
+                      <option value="AI Ethics & Productivity">AI Ethics & Productivity</option>
                     </select>
                   </div>
 
@@ -983,31 +988,66 @@ export default function InstructorDashboardPage() {
                       <option value="All Levels">All Levels</option>
                     </select>
                   </div>
+
+                  <div>
+                    <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
+                      Price (USD)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                      className="form-input"
+                    />
+                  </div>
                 </div>
 
                 <div>
                   <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
-                    Price (USD)
+                    Course Cover Picture (Upload or URL)
                   </label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    className="form-input"
-                  />
+                  <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                    {thumbnailUrl && (
+                      <img
+                        src={thumbnailUrl}
+                        alt="Course cover"
+                        style={{ width: '84px', height: '56px', objectFit: 'cover', borderRadius: '0.45rem', border: '1px solid var(--border-subtle)' }}
+                      />
+                    )}
+                    <label className="btn btn-secondary btn-sm" style={{ cursor: 'pointer' }}>
+                      <span>Upload Cover Picture</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={async (e) => {
+                          if (e.target.files && e.target.files[0]) {
+                            const dataUrl = await compressImageFileToDataUrl(e.target.files[0], 1200, 0.85);
+                            setThumbnailUrl(dataUrl);
+                          }
+                        }}
+                      />
+                    </label>
+                    <input
+                      type="text"
+                      value={thumbnailUrl}
+                      onChange={(e) => setThumbnailUrl(e.target.value)}
+                      placeholder="Or paste cover image URL (https://...)"
+                      className="form-input"
+                      style={{ flex: 1, minWidth: '200px' }}
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
-                    Overview Description
-                  </label>
-                  <textarea
-                    rows={3}
-                    placeholder="Summarize course goals, target audience, and key prerequisites..."
+                  <RichContentEditor
+                    label="Overview Description (Rich Text & Pictures)"
+                    helperText="Format headings, bullet points, or insert pictures directly into your course overview."
                     value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="form-input"
+                    onChange={setDescription}
+                    minRows={5}
+                    placeholder="Summarize course goals, target audience, and key prerequisites..."
                   />
                 </div>
               </div>

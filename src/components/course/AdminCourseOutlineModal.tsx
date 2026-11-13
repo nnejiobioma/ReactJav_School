@@ -13,11 +13,13 @@ import {
   Check, 
   Clock, 
   Award,
-  HelpCircle
+  HelpCircle,
+  Upload
 } from 'lucide-react';
 import { Course } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import CurriculumEditor from '@/components/instructor/CurriculumEditor';
+import RichContentEditor, { compressImageFileToDataUrl } from '@/components/common/RichContentEditor';
 
 const COURSE_CATEGORIES = [
   'AI & Data',
@@ -78,6 +80,7 @@ export default function AdminCourseOutlineModal({
         title: course.title,
         slug: course.slug,
         description: course.description,
+        thumbnail_url: course.thumbnail_url,
         category: course.category,
         track: course.track,
         level: course.level,
@@ -155,6 +158,7 @@ export default function AdminCourseOutlineModal({
       slug: newSlug,
       previous_slugs: Array.from(previous),
       description: formData.description || course.description,
+      thumbnail_url: formData.thumbnail_url || course.thumbnail_url,
       category: formData.category || course.category,
       track: formData.track || course.track,
       level: formData.level || course.level,
@@ -433,14 +437,48 @@ export default function AdminCourseOutlineModal({
               </div>
 
               <div>
-                <label className="form-label">Course Description</label>
-                <textarea
-                  rows={3}
-                  required
-                  className="form-input"
-                  style={{ resize: 'vertical' }}
+                <label className="form-label">Course Cover Picture (Upload or URL)</label>
+                <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                  {formData.thumbnail_url && (
+                    <img
+                      src={formData.thumbnail_url}
+                      alt="Course cover"
+                      style={{ width: '96px', height: '64px', objectFit: 'cover', borderRadius: '0.5rem', border: '1px solid var(--border-subtle)' }}
+                    />
+                  )}
+                  <label className="btn btn-secondary btn-sm" style={{ cursor: 'pointer', gap: '0.4rem' }}>
+                    <Upload size={14} color="var(--accent-emerald)" />
+                    <span>Upload Picture</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      style={{ display: 'none' }}
+                      onChange={async (e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          const dataUrl = await compressImageFileToDataUrl(e.target.files[0], 1200, 0.85);
+                          handleMetadataChange('thumbnail_url', dataUrl);
+                        }
+                      }}
+                    />
+                  </label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    style={{ flex: 1, minWidth: '220px' }}
+                    placeholder="Or paste cover image URL (https://...)"
+                    value={formData.thumbnail_url || ''}
+                    onChange={(e) => handleMetadataChange('thumbnail_url', e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <RichContentEditor
+                  label="Course Description (Rich Text & Pictures)"
+                  helperText="Format text, add lists/tables, or insert pictures directly into the course overview."
                   value={formData.description || ''}
-                  onChange={(e) => handleMetadataChange('description', e.target.value)}
+                  onChange={(val) => handleMetadataChange('description', val)}
+                  minRows={5}
                 />
               </div>
 

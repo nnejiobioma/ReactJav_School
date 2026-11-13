@@ -26,6 +26,7 @@ import { formatCurrency, formatDuration } from '@/lib/utils';
 import AdminEditableSection from '@/components/admin/AdminEditableSection';
 import AdminCourseOutlineModal from '@/components/course/AdminCourseOutlineModal';
 import ProgrammeCheckoutModal from '@/components/checkout/ProgrammeCheckoutModal';
+import RichContentRenderer from '@/components/common/RichContentRenderer';
 
 export default function CourseDetailPage() {
   const params = useParams();
@@ -157,14 +158,14 @@ export default function CourseDetailPage() {
               {course.title}
             </h1>
 
-            <p style={{
+            <div style={{
               fontSize: '1.05rem',
               color: 'var(--text-secondary)',
               lineHeight: 1.6,
               marginBottom: '1.5rem',
             }}>
-              {course.description}
-            </p>
+              <RichContentRenderer content={course.description} />
+            </div>
 
             {/* Instructor and Rating row */}
             <div style={{

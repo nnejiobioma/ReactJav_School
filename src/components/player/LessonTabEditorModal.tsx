@@ -20,6 +20,7 @@ import {
   Heading
 } from 'lucide-react';
 import { Lesson, LessonQaItem, LessonResourceItem } from '@/types';
+import RichContentEditor from '@/components/common/RichContentEditor';
 
 export type LessonEditorSection = 'summary' | 'notes' | 'qa' | 'resources';
 
@@ -209,6 +210,7 @@ export default function LessonTabEditorModal({
       summary,
       implementation_tip: implementationTip,
       lecture_notes: lectureNotes,
+      content: lesson.type === 'article' ? lectureNotes : (lesson.content || lectureNotes),
       qa_items: qaItems,
       resources,
     };
@@ -400,29 +402,13 @@ export default function LessonTabEditorModal({
           {activeSection === 'summary' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.5rem' }}>
-                  Summary & Key Takeaways Content
-                </label>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
-                  Provide an executive synthesis of what the learner will discover and master in this lesson.
-                </p>
-                <textarea
+                <RichContentEditor
+                  label="Summary & Key Takeaways Content (Rich Text & Pictures)"
+                  helperText="Provide an executive synthesis of what the learner will master. Supports formatted text, lists, tables, and embedded pictures."
                   value={summary}
-                  onChange={(e) => setSummary(e.target.value)}
-                  rows={6}
-                  className="form-input"
-                  style={{
-                    width: '100%',
-                    padding: '0.85rem 1rem',
-                    borderRadius: '0.65rem',
-                    background: 'var(--bg-surface)',
-                    border: '1px solid var(--border-subtle)',
-                    color: '#ffffff',
-                    fontSize: '0.95rem',
-                    lineHeight: 1.6,
-                    fontFamily: 'inherit',
-                  }}
-                  placeholder="Summarize the key architectural takeaways, principles, and concepts..."
+                  onChange={setSummary}
+                  minRows={6}
+                  placeholder="Summarize the key takeaways, principles, and concepts..."
                 />
               </div>
 
@@ -458,90 +444,15 @@ export default function LessonTabEditorModal({
           {/* SECTION 2: Lecture Notes & Key Concepts */}
           {activeSection === 'notes' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.25rem' }}>
-                    Lecture Notes & Detailed Concepts
-                  </label>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                    Rich lecture curriculum notes, code snippets, definitions, and technical steps.
-                  </p>
-                </div>
-
-                {/* Toolbar */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <button
-                    type="button"
-                    onClick={() => insertMarkdownHelper('### ')}
-                    className="btn btn-secondary btn-sm"
-                    title="Insert Heading"
-                  >
-                    <Heading size={14} />
-                    <span>Heading</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => insertMarkdownHelper('- ')}
-                    className="btn btn-secondary btn-sm"
-                    title="Insert Bullet Item"
-                  >
-                    <List size={14} />
-                    <span>List</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => insertMarkdownHelper('```sql\n', '\n```')}
-                    className="btn btn-secondary btn-sm"
-                    title="Insert Code Block"
-                  >
-                    <Code size={14} />
-                    <span>Code</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPreviewNotes(!previewNotes)}
-                    className={`btn btn-sm ${previewNotes ? 'btn-primary' : 'btn-secondary'}`}
-                  >
-                    <span>{previewNotes ? 'Edit Source' : 'Preview'}</span>
-                  </button>
-                </div>
-              </div>
-
-              {!previewNotes ? (
-                <textarea
-                  id="lesson-notes-textarea"
-                  value={lectureNotes}
-                  onChange={(e) => setLectureNotes(e.target.value)}
-                  rows={14}
-                  className="form-input"
-                  style={{
-                    width: '100%',
-                    padding: '1rem',
-                    borderRadius: '0.65rem',
-                    background: 'var(--bg-surface)',
-                    border: '1px solid var(--border-subtle)',
-                    color: '#ffffff',
-                    fontSize: '0.9rem',
-                    lineHeight: 1.7,
-                    fontFamily: 'monospace',
-                  }}
-                  placeholder="Enter detailed lecture notes, concepts, code examples..."
-                />
-              ) : (
-                <div style={{
-                  padding: '1.25rem',
-                  borderRadius: '0.65rem',
-                  background: 'var(--bg-surface)',
-                  border: '1px solid var(--border-subtle)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.95rem',
-                  lineHeight: 1.8,
-                  minHeight: '280px',
-                  whiteSpace: 'pre-line',
-                }}>
-                  {lectureNotes}
-                </div>
-              )}
+              <RichContentEditor
+                label="Lecture Notes, Article Reading & Visual Diagrams"
+                helperText="Format headings, bold/italic/highlighted text, tables, code blocks, and upload or insert pictures directly into the lesson."
+                value={lectureNotes}
+                onChange={setLectureNotes}
+                minRows={14}
+                defaultMode="split"
+                placeholder="Enter detailed lecture notes, concepts, diagrams, and examples..."
+              />
             </div>
           )}
 

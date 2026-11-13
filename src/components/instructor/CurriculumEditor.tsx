@@ -18,11 +18,14 @@ import {
   ChevronDown,
   CornerDownRight,
   ExternalLink,
-  GripVertical
+  GripVertical,
+  Image as ImageIcon,
+  Upload
 } from 'lucide-react';
 import { Course, Section, Lesson, QuizQuestion } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import QuizQuestionEditorModal, { createDefaultQuestion } from '@/components/quiz/QuizQuestionEditorModal';
+import RichContentEditor, { compressImageFileToDataUrl } from '@/components/common/RichContentEditor';
 
 interface CurriculumEditorProps {
   course: Course;
@@ -244,7 +247,41 @@ export default function CurriculumEditor({
   const [sectionTitleInput, setSectionTitleInput] = useState('');
   const [showSectionModal, setShowSectionModal] = useState(false);
 
+  // Course-level Cover Picture, Title & Rich Description Editor state
+  const [showCourseDetailsPanel, setShowCourseDetailsPanel] = useState(false);
+  const [courseTitleEdit, setCourseTitleEdit] = useState(course.title || '');
+  const [courseThumbEdit, setCourseThumbEdit] = useState(course.thumbnail_url || '');
+  const [courseDescEdit, setCourseDescEdit] = useState(course.description || '');
+  const [courseOutcomeEdit, setCourseOutcomeEdit] = useState(course.outcome_hook || '');
+  const [isUploadingThumb, setIsUploadingThumb] = useState(false);
+
   const [savedToast, setSavedToast] = useState(false);
+
+  const handleSaveCourseMetadata = () => {
+    const updatedCourse: Course = {
+      ...course,
+      title: courseTitleEdit.trim() || course.title,
+      thumbnail_url: courseThumbEdit.trim() || course.thumbnail_url,
+      description: courseDescEdit || course.description,
+      outcome_hook: courseOutcomeEdit || course.outcome_hook,
+      sections,
+    };
+    LocalDataService.saveCourse(updatedCourse);
+    onCourseUpdated(updatedCourse);
+    showSaveNotification();
+    setShowCourseDetailsPanel(false);
+  };
+
+  const handleThumbUpload = async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    setIsUploadingThumb(true);
+    try {
+      const dataUrl = await compressImageFileToDataUrl(files[0], 1200, 0.85);
+      setCourseThumbEdit(dataUrl);
+    } finally {
+      setIsUploadingThumb(false);
+    }
+  };
 
   const handleAddSection = () => {
     if (!newSectionTitle.trim()) return;
@@ -313,7 +350,7 @@ export default function CurriculumEditor({
     setLessonTitle(lesson.title);
     setLessonType(lesson.type);
     setLessonUrl(lesson.video_url || '');
-    setLessonContent(lesson.content || '');
+    setLessonContent(lesson.content || lesson.lecture_notes || '');
     setLessonDuration(lesson.duration_seconds || 300);
     setLessonPreview(!!lesson.is_free_preview);
     setQuizQuestions(lesson.quiz_questions && lesson.quiz_questions.length > 0 ? lesson.quiz_questions : [createDefaultQuestion(lesson.id, 1)]);
@@ -339,7 +376,7 @@ export default function CurriculumEditor({
     setLessonTitle(subLesson.title);
     setLessonType(subLesson.type);
     setLessonUrl(subLesson.video_url || '');
-    setLessonContent(subLesson.content || '');
+    setLessonContent(subLesson.content || subLesson.lecture_notes || '');
     setLessonDuration(subLesson.duration_seconds || 180);
     setLessonPreview(!!subLesson.is_free_preview);
     setQuizQuestions(subLesson.quiz_questions && subLesson.quiz_questions.length > 0 ? subLesson.quiz_questions : [createDefaultQuestion(subLesson.id, 1)]);
@@ -396,7 +433,8 @@ export default function CurriculumEditor({
                           title: lessonTitle.trim(),
                           type: lessonType,
                           video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
-                          content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
+                          content: lessonType !== 'quiz' ? (lessonContent || 'Sample article content.') : null,
+                          lecture_notes: lessonType !== 'quiz' && lessonContent ? lessonContent : sub.lecture_notes,
                           duration_seconds: lessonDuration,
                           is_free_preview: lessonPreview,
                           quiz_questions: lessonType === 'quiz' ? (quizQuestions.length > 0 ? quizQuestions : (sub.quiz_questions || [createDefaultQuestion(sub.id, 1)])) : undefined,
@@ -422,7 +460,8 @@ export default function CurriculumEditor({
           title: lessonTitle.trim(),
           type: lessonType,
           video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
-          content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
+          content: lessonType !== 'quiz' ? (lessonContent || 'Sample article content.') : null,
+          lecture_notes: lessonType !== 'quiz' && lessonContent ? lessonContent : undefined,
           duration_seconds: lessonDuration,
           position: ((parentLessonForSubLesson.sub_lessons?.length || 0) + 1),
           is_free_preview: lessonPreview,
@@ -462,7 +501,8 @@ export default function CurriculumEditor({
                     title: lessonTitle.trim(),
                     type: lessonType,
                     video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
-                    content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
+                    content: lessonType !== 'quiz' ? (lessonContent || 'Sample article content.') : null,
+                    lecture_notes: lessonType !== 'quiz' && lessonContent ? lessonContent : les.lecture_notes,
                     duration_seconds: lessonDuration,
                     is_free_preview: lessonPreview,
                     quiz_questions: lessonType === 'quiz' ? (quizQuestions.length > 0 ? quizQuestions : (les.quiz_questions || [createDefaultQuestion(les.id, 1)])) : undefined,
@@ -483,7 +523,8 @@ export default function CurriculumEditor({
           title: lessonTitle.trim(),
           type: lessonType,
           video_url: lessonType === 'video' ? (lessonUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4') : null,
-          content: lessonType === 'article' ? (lessonContent || 'Sample article content.') : null,
+          content: lessonType !== 'quiz' ? (lessonContent || 'Sample article content.') : null,
+          lecture_notes: lessonType !== 'quiz' && lessonContent ? lessonContent : undefined,
           duration_seconds: lessonDuration,
           position: (activeSec.lessons?.length || 0) + 1,
           is_free_preview: lessonPreview,
@@ -635,7 +676,21 @@ export default function CurriculumEditor({
           <h2 style={{ fontSize: '1.4rem', color: 'var(--text-primary)' }}>{course.title}</h2>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <button
+            type="button"
+            onClick={() => setShowCourseDetailsPanel(!showCourseDetailsPanel)}
+            className="btn btn-secondary btn-sm"
+            style={{
+              gap: '0.4rem',
+              borderColor: showCourseDetailsPanel ? 'var(--primary)' : 'rgba(99, 102, 241, 0.35)',
+              color: '#a5b4fc',
+            }}
+          >
+            <ImageIcon size={15} color="var(--accent-emerald)" />
+            <span>{showCourseDetailsPanel ? 'Hide Course Settings' : 'Edit Cover Picture & Rich Description'}</span>
+          </button>
+
           <button
             onClick={togglePublish}
             className={`btn btn-sm ${course.is_published ? 'btn-secondary' : 'btn-primary'}`}
@@ -654,6 +709,105 @@ export default function CurriculumEditor({
           </a>
         </div>
       </div>
+
+      {/* Expandable Course Cover Picture & Rich Description Editor */}
+      {showCourseDetailsPanel && (
+        <div className="glass-card animate-fade-in" style={{ border: '1px solid var(--border-accent)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <div>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                Course Cover Picture, Title & Rich Overview
+              </h3>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: '0.2rem 0 0' }}>
+                Upload a course cover picture and format the course description with rich text, bullet lists, tables, and embedded images.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleSaveCourseMetadata}
+              className="btn btn-primary btn-sm"
+            >
+              <Save size={15} />
+              <span>Save Course Overview</span>
+            </button>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem', alignItems: 'start' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <div>
+                <label style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
+                  Course Title
+                </label>
+                <input
+                  type="text"
+                  value={courseTitleEdit}
+                  onChange={(e) => setCourseTitleEdit(e.target.value)}
+                  className="form-input"
+                />
+              </div>
+              <div>
+                <label style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
+                  Outcome Hook / Course Promise
+                </label>
+                <input
+                  type="text"
+                  value={courseOutcomeEdit}
+                  onChange={(e) => setCourseOutcomeEdit(e.target.value)}
+                  className="form-input"
+                  placeholder="What can students do after finishing this course?"
+                />
+              </div>
+              <div>
+                <label style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
+                  Course Cover Picture (Upload or URL)
+                </label>
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                  {courseThumbEdit && (
+                    <img
+                      src={courseThumbEdit}
+                      alt="Course cover"
+                      style={{ width: '96px', height: '64px', objectFit: 'cover', borderRadius: '0.5rem', border: '1px solid var(--border-subtle)' }}
+                    />
+                  )}
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                    <label
+                      className="btn btn-secondary btn-sm"
+                      style={{ cursor: 'pointer', width: 'fit-content', gap: '0.4rem' }}
+                    >
+                      <Upload size={14} color="var(--accent-emerald)" />
+                      <span>{isUploadingThumb ? 'Uploading...' : 'Upload Picture from Device'}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={(e) => handleThumbUpload(e.target.files)}
+                      />
+                    </label>
+                    <input
+                      type="text"
+                      value={courseThumbEdit}
+                      onChange={(e) => setCourseThumbEdit(e.target.value)}
+                      placeholder="Or paste cover image URL (https://...)"
+                      className="form-input"
+                      style={{ fontSize: '0.8rem', padding: '0.4rem 0.65rem' }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <RichContentEditor
+                label="Course Description (Supports Rich Text & Embedded Pictures)"
+                value={courseDescEdit}
+                onChange={setCourseDescEdit}
+                minRows={7}
+                placeholder="Write a compelling course overview, format key highlights, or insert diagrams..."
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Editor Grid: Sections on left, Lessons on right */}
       <div style={{
@@ -1294,7 +1448,9 @@ export default function CurriculumEditor({
         }}>
           <div className="glass-card animate-fade-in" style={{
             width: '100%',
-            maxWidth: '540px',
+            maxWidth: '880px',
+            maxHeight: '92dvh',
+            overflowY: 'auto',
             background: 'var(--bg-surface-elevated)',
             border: '1px solid var(--border-accent)',
             boxShadow: 'var(--shadow-lg)',
@@ -1386,18 +1542,19 @@ export default function CurriculumEditor({
                 </div>
               )}
 
-              {lessonType === 'article' && (
+              {(lessonType === 'article' || lessonType === 'video') && (
                 <div>
-                  <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.35rem' }}>
-                    Article Markdown Content
-                  </label>
-                  <textarea
-                    rows={5}
-                    placeholder="### Overview&#10;Write markdown lecture notes here..."
+                  <RichContentEditor
+                    label={
+                      lessonType === 'article'
+                        ? 'Article Content (Rich Text, Headings, Tables & Pictures)'
+                        : 'Companion Lecture Notes & Visual Diagrams (Rich Text & Pictures)'
+                    }
+                    helperText="Format text, add tables/callouts, or click '+ Add Picture' to upload/insert images (Drag & Drop or Ctrl+V also supported)."
                     value={lessonContent}
-                    onChange={(e) => setLessonContent(e.target.value)}
-                    className="form-input"
-                    style={{ resize: 'vertical' }}
+                    onChange={setLessonContent}
+                    minRows={10}
+                    placeholder="### Overview\nWrite formatted lecture notes, insert diagrams or pictures, and highlight key concepts..."
                   />
                 </div>
               )}
