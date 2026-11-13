@@ -6,6 +6,7 @@ import LandingHero from '@/components/home/LandingHero';
 import WhyChooseReactJav from '@/components/home/WhyChooseReactJav';
 import InteractiveCampusPreview from '@/components/home/InteractiveCampusPreview';
 import FeaturedProgrammesSection from '@/components/home/FeaturedProgrammesSection';
+import AIBlogPreviewSection from '@/components/home/AIBlogPreviewSection';
 import TuitionSponsorshipSection from '@/components/home/TuitionSponsorshipSection';
 import REACTJavTrackOverview from '@/components/home/REACTJavTrackOverview';
 import REACTJavLearningModel from '@/components/home/REACTJavLearningModel';
@@ -80,6 +81,9 @@ export default function HomePage() {
 
       {/* 4. Curated Featured Programmes Showcase (Top 3-4 Courses + Link to Full /courses Catalog) */}
       <FeaturedProgrammesSection courses={courses} userId={currentUser?.id} />
+
+      {/* 4b. Pure-Black Technical AI Blog & Dispatches Preview */}
+      <AIBlogPreviewSection />
 
       {/* 5. Flagship Programme Spotlight Banner */}
       {flagshipCourse && (

@@ -224,6 +224,26 @@ export default function Navbar() {
             )}
 
             <Link
+              href="/blog"
+              className="btn btn-sm"
+              style={{
+                background: pathname.startsWith('/blog') ? '#000000' : 'rgba(0, 0, 0, 0.85)',
+                color: '#ffffff',
+                border: pathname.startsWith('/blog') ? '1px solid #00f0ff' : '1px solid rgba(255, 255, 255, 0.25)',
+                fontSize: '0.84rem',
+                padding: '0.5rem 0.85rem',
+                fontWeight: 700,
+                borderRadius: '0.75rem',
+                gap: '0.45rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+              }}
+            >
+              <Terminal size={15} color="#00f0ff" />
+              <span>AI Blog</span>
+            </Link>
+
+            <Link
               href="/about"
               className="btn btn-sm"
               style={{
@@ -1001,6 +1021,9 @@ export default function Navbar() {
                 <Sparkles size={17} /> Tuition & Plans
               </Link>
             )}
+            <Link href="/blog" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem', background: '#000000', color: '#ffffff', border: '1px solid rgba(255,255,255,0.25)' }}>
+              <Terminal size={17} color="#00f0ff" /> AI Tech Blog
+            </Link>
             <Link href="/about" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
               <BookOpen size={17} /> About ReactJav
             </Link>

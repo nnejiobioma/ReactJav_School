@@ -18,6 +18,7 @@ import {
   TutoringAttendanceSession,
   MonthlyAttendanceSummary,
   SiteContentConfig,
+  BlogPost,
   ROLE_PRIVILEGES
 } from '@/types';
 import { 
@@ -36,6 +37,7 @@ import {
 } from './mockData';
 import { DEFAULT_SITE_CONTENT } from './defaultSiteContent';
 import { ACADEMY_TRACKS, AcademyTrack } from '@/data/academyTracks';
+import { INITIAL_BLOG_POSTS } from '@/data/blogPosts';
 import { toValidUuid } from '@/lib/utils';
 
 const FALLBACK_SUPABASE_URL = 'https://jfhmqodrjnsabpyxbgnn.supabase.co';
@@ -109,7 +111,7 @@ export const isFaculty = (user?: Profile | null): boolean => {
 const STORAGE_KEYS = {
   CURRENT_USER: 'reactjav_current_user',
   PROFILES: 'reactjav_user_profiles',
-  COURSES: 'reactjav_courses_ai_v3',
+  COURSES: 'reactjav_courses_ai_v4',
   PROGRESS: 'reactjav_lesson_progress',
   ENROLLMENTS: 'reactjav_enrollments',
   QUIZ_SUBMISSIONS: 'reactjav_quiz_submissions',
@@ -125,6 +127,7 @@ const STORAGE_KEYS = {
   ACADEMY_TRACKS: 'reactjav_academy_tracks',
   LAST_ACCESSED: 'reactjav_last_accessed_learning',
   STUDENT_NOTES: 'reactjav_student_notes',
+  BLOG_POSTS: 'reactjav_blog_posts_ai_v1',
 };
 
 // Client-side Local State Store (Local Persistence Fallback)
@@ -476,7 +479,7 @@ export class LocalDataService {
           Array.isArray(parsed) &&
           !hasLegacyCourse &&
           parsed.length >= INITIAL_COURSES.length &&
-          parsed.some(c => c.id === 'crs_website_dev_ai_11')
+          parsed.some(c => c.id === 'crs_coding_with_ai_14')
         ) {
           return parsed;
         }
@@ -2518,7 +2521,7 @@ export class LocalDataService {
         courses &&
         Array.isArray(courses) &&
         courses.length >= INITIAL_COURSES.length &&
-        courses.some((c: any) => c.id === 'crs_website_dev_ai_11') &&
+        courses.some((c: any) => c.id === 'crs_coding_with_ai_14') &&
         !courses.some((c: any) => c.id === 'crs_nextjs_supabase_01')
       ) {
         localStorage.setItem(STORAGE_KEYS.COURSES, JSON.stringify(courses));
@@ -2676,6 +2679,57 @@ export class LocalDataService {
     window.dispatchEvent(new CustomEvent('reactjav-site-content-updated', { detail: { tracks: ACADEMY_TRACKS } }));
     this.persistToServer({ type: 'reset', data: { target: 'tracks' } });
     return ACADEMY_TRACKS;
+  }
+
+  // ==========================================
+  // AI Tech Blog & Dispatch Methods
+  // ==========================================
+
+  static getBlogPosts(): BlogPost[] {
+    if (typeof window === 'undefined') return INITIAL_BLOG_POSTS;
+    const stored = localStorage.getItem(STORAGE_KEYS.BLOG_POSTS);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      } catch {
+        // fallback
+      }
+    }
+    localStorage.setItem(STORAGE_KEYS.BLOG_POSTS, JSON.stringify(INITIAL_BLOG_POSTS));
+    return INITIAL_BLOG_POSTS;
+  }
+
+  static getBlogPostBySlug(slug: string): BlogPost | undefined {
+    const posts = this.getBlogPosts();
+    return posts.find((p) => p.slug === slug || p.id === slug);
+  }
+
+  static saveBlogPost(post: BlogPost): BlogPost[] {
+    if (typeof window === 'undefined') return INITIAL_BLOG_POSTS;
+    const current = this.getBlogPosts();
+    const index = current.findIndex((p) => p.id === post.id || p.slug === post.slug);
+    let updated: BlogPost[];
+    if (index >= 0) {
+      updated = [...current];
+      updated[index] = post;
+    } else {
+      updated = [post, ...current];
+    }
+    localStorage.setItem(STORAGE_KEYS.BLOG_POSTS, JSON.stringify(updated));
+    window.dispatchEvent(new Event('storage'));
+    return updated;
+  }
+
+  static deleteBlogPost(id: string): BlogPost[] {
+    if (typeof window === 'undefined') return INITIAL_BLOG_POSTS;
+    const current = this.getBlogPosts();
+    const updated = current.filter((p) => p.id !== id);
+    localStorage.setItem(STORAGE_KEYS.BLOG_POSTS, JSON.stringify(updated));
+    window.dispatchEvent(new Event('storage'));
+    return updated;
   }
 }
 

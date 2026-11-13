@@ -73,7 +73,7 @@ export async function GET() {
     if (
       !Array.isArray(courses) ||
       courses.length < INITIAL_COURSES.length ||
-      !courses.some((c: any) => c.id === 'crs_website_dev_ai_11') ||
+      !courses.some((c: any) => c.id === 'crs_coding_with_ai_14') ||
       courses.some((c: any) => c.id === 'crs_nextjs_supabase_01')
     ) {
       courses = INITIAL_COURSES;
@@ -149,7 +149,7 @@ export async function GET() {
               row.key === 'courses' &&
               Array.isArray(row.data) &&
               row.data.length >= INITIAL_COURSES.length &&
-              row.data.some((c: any) => c.id === 'crs_website_dev_ai_11') &&
+              row.data.some((c: any) => c.id === 'crs_coding_with_ai_14') &&
               !row.data.some((c: any) => c.id === 'crs_nextjs_supabase_01')
             ) {
               courses = row.data;

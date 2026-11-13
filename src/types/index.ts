@@ -661,6 +661,39 @@ export interface SiteTutoringBottomCtaContent {
   whatsapp_number?: string;
 }
 
+export type BlogCategory =
+  | 'AI News & Frontier Models'
+  | 'Prompt Engineering & Workflows'
+  | 'AI Coding & Web Dev'
+  | 'AI Ethics, Safety & RLHF'
+  | 'AI Jobs & Careers';
+
+export interface BlogPost {
+  id: string;
+  slug: string;
+  telemetry_id: string;
+  title: string;
+  subtitle: string;
+  excerpt: string;
+  tldr: string[];
+  content: string;
+  code_snippet?: {
+    language: string;
+    label: string;
+    code: string;
+  };
+  category: BlogCategory;
+  tags: string[];
+  author_name: string;
+  author_role: string;
+  author_avatar: string;
+  published_at: string;
+  reading_time_minutes: number;
+  is_featured?: boolean;
+  thumbnail_url: string;
+  related_course_slugs: string[];
+}
+
 export interface SiteContentConfig {
   hero: SiteHeroContent;
   flagship: SiteFlagshipContent;
