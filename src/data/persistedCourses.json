@@ -2971,33 +2971,33 @@
           {
             "id": "les_gpe_03_01",
             "section_id": "sec_gpe_03",
-            "title": "3.1 Lesson & Reading: Everyday Work Tasks & “Your Prompt Library” (20 min)",
+            "title": "3.1 Lesson & Reading: Prompts for Real Work & “Your Prompt Library” (20 min)",
             "type": "article",
-            "summary": "Apply prompting to 6 everyday work tasks, turn working prompts into reusable templates with [blanks], and build a named prompt library.",
+            "summary": "Apply prompting to 6 everyday text tasks, turn working prompts into reusable templates with [blanks], run the 5-point output check, and organize a starter Prompt Library.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **What you will learn:** Apply prompting to common text tasks, and turn a good prompt into a reusable template. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n#### 1. Six everyday uses—where they shine and where to be careful\n| Use | Where it works well | Where to be careful |\n| :--- | :--- | :--- |\n| **Writing & editing** | First drafts, clarity edits, tightening wordy emails | Keep your authentic voice; never paste private data |\n| **Summarizing** | Condensing long notes or articles into key takeaways | Check that critical numbers or caveats weren’t dropped |\n| **Learning & explaining** | Analogies, plain-language definitions, step-by-step guides | Verify facts; don’t confuse fluency with accuracy |\n| **Brainstorming** | Generating 10–20 options when you feel stuck | You still curate and choose the best fit |\n| **Planning** | Timelines, checklists, event run-of-show, agendas | Adjust unrealistic time estimates yourself |\n| **Organizing into tables** | Turning messy text into clean columns for spreadsheets | Spot-check every row against the original source |\n\n#### 2. Turning a prompt into a reusable template\nOnce a prompt works well, replace one-off details with bracketed blanks such as `[audience]`, `[topic]`, `[tone]`, and `[length]`:\n\n> **Worked Template Example — Plain-Language Summary:**\n> *“Summarize the text below for `[audience]` in `[format, e.g., 5 bullet points]`. Keep the tone `[tone]`, stay under `[word limit]` words, and list any open questions at the end. Text: `[paste non-private text]`”*\n\n---\n\n### Part B: Reading (8 minutes) — “Your Prompt Library”\nStarting from zero every time wastes effort. Save your best templates in a simple document, note app, or spreadsheet with four fields:\n1. **Name:** Clear title (e.g., *“Meeting Notes → Action Table”*)\n2. **When to use it:** One-line trigger\n3. **Template:** The prompt with `[blanks]`\n4. **Notes / Last updated:** What worked or what to watch out for\n\nImprove a template whenever you notice yourself making the same manual edit twice."
+            "content": "> **What you will learn:** By the end of this lesson, you will be able to use prompts for **six everyday tasks**, check the results before you rely on them, and turn a good prompt into a **reusable template with fill-in blanks**. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n#### 1. From techniques to real tasks\nSo far, you have learned how to write a clear prompt and how to use five techniques. Now, it is time to use these skills on real tasks. In this lesson, you will see **six everyday uses** of generative AI for text. Then, you will learn how to turn a prompt that works into a **template**, so that you never have to start from zero again.\n\n#### 2. Six everyday uses\n| Use | Example prompt | Be careful about |\n| :--- | :--- | :--- |\n| **Writing and editing** | “Rewrite this email to my landlord so that it is polite and clear, in under 120 words. Keep the dates unchanged: `[paste draft]`.” | Your own voice, and facts, names, and promises that the AI may change |\n| **Summarizing** | “Summarize the text below in five bullet points for a busy manager. Keep every number exactly as written: `[paste text]`.” | Missing or distorted points, so compare with the original |\n| **Explaining** | “Explain what inflation is to a 15-year-old, in four short sentences, with one everyday example.” | Mistakes in the explanation. You will practice checking in Module 4 |\n| **Brainstorming** | “Give me 10 ideas for a low-cost fundraiser at a small school. List them with one sentence each, and avoid bake sales.” | Ordinary ideas. Treat them as starting points |\n| **Planning** | “Make a 4-week study plan for a beginner’s Spanish exam. I have 5 hours per week. Put it in a table by week.” | Unrealistic times, costs, and dates. Check them against your real life |\n| **Organizing information** | “Turn these messy notes into a table with the columns Task, Person, and Deadline. Keep every item: `[paste notes]`.” | Dropped or changed items, so compare with the original |\n\n#### 3. A closer look: messy notes into a table\n| Version | Prompt |\n| :--- | :--- |\n| **Weak** | “Make these notes better.” |\n| **Clear** | “Turn the meeting notes below into a table with three columns: Task, Person, and Deadline. Keep every task, and do not invent deadlines. If a deadline is missing, write ‘not stated’. Notes: `[paste notes]`.” |\n\nNotice the important details: the prompt tells the AI to keep every task, and says what to do when information is missing. Because of this, the AI is less likely to invent anything. Afterwards, you should still compare the table with your notes.\n\n#### 4. From a good prompt to a template\nA **template** is a prompt with blanks that you fill in each time. The fixed parts stay the same, while the blanks change:\n\n| Part | Content |\n| :--- | :--- |\n| **Template** | “Write a `[length]`-word `[type of message]` to `[audience]` about `[topic]`. The tone should be `[tone]`. Include `[must-have points]`. Avoid `[things to avoid]`. Finish with `[ending]`.” |\n| **Filled in** | “Write a 100-word update email to my team about the new printer. The tone should be friendly and brief. Include the date it starts and who to ask for help. Avoid technical words. Finish with a thank-you.” |\n\n**How to build a good template:**\n1. Start with a prompt that already works. Do not build a template from a prompt that gave poor results.\n2. Replace details with blanks using square brackets, such as `[audience]` and `[topic]`, with short, clear names.\n3. Keep the fixed parts (format, limits, tone).\n4. Add a **“when to use it”** line (e.g., *“Use for short team updates”*).\n5. Add one example if style matters.\n6. Test it twice with different details, and improve it.\n\n#### 5. Check before you use the result\nIn real work, the result is going to someone else. You are still the author, and you are responsible for it:\n\n| Check | Ask yourself |\n| :--- | :--- |\n| **Facts** | Are the names, dates, numbers, and claims correct? |\n| **Promises** | Did the AI promise something that I cannot or do not want to promise? |\n| **Tone** | Does it sound like me, and does it suit the reader? |\n| **Privacy** | Did I paste any private details that should not be there? |\n| **Read aloud** | Does it sound natural when I read it out loud? |\n\n#### 6. When not to rely on AI for real work\n- The content is **private or sensitive**, such as customer details or health information.\n- The task is an **important decision**, such as a legal, medical, or money decision, without a qualified person.\n- You **need to learn the skill yourself**. If you let AI do all the work, you may not learn (Module 4 covers this).\n\n> **Remember:** AI can speed up your work, but it does not take over your responsibility.\n\n#### Key takeaways\n- Six everyday uses are writing and editing, summarizing, explaining, brainstorming, planning, and organizing information.\n- Each use has a typical risk, so check the result—especially names, numbers, dates, and promises.\n- A template is a prompt with blanks that you can fill in and reuse.\n- Build templates from prompts that already work, and test them with different details.\n- Do not use AI for private content, or for important decisions without a qualified person.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Template** | A prompt with blanks that you can fill in and reuse |\n| **Blank (placeholder)** | A part of a template written in brackets, such as `[audience]`, that you replace each time |\n| **Draft** | A first version that you will review and improve |\n| **Summary** | A shorter version of a text that keeps the main points |\n| **Brainstorming** | Collecting many ideas, without judging them yet |\n\n---\n\n### Part B: Reading (8 minutes) — “Your Prompt Library”\nA **prompt library** is simply a collection of your best prompts and templates (in a document, a notes app, or a spreadsheet) so you can find them quickly.\n\n#### What to write for each entry\n| Field | What to write |\n| :--- | :--- |\n| **Name** | A short name that starts with the task, such as *“Email: polite reminder”* |\n| **When to use it** | One line, such as *“For gentle reminders to colleagues”* |\n| **Template** | The prompt, with `[blanks]` |\n| **Example** | One filled-in version, so that you remember how it works |\n| **Notes** | What you learned, such as *“Works better when I give the audience”* |\n| **Last improved** | The date, so that you know how fresh it is |\n\n#### A small starter library\n| Name | When to use it | Template |\n| :--- | :--- | :--- |\n| **Summary: meeting** | After a meeting, for people who were absent | “Summarize the notes below in `[number]` bullet points for `[audience]`. Keep every number exactly. Notes: `[paste notes]`.” |\n| **Email: polite reminder** | For gentle reminders to colleagues | “Write a polite reminder to `[person]` about `[task]`, due on `[date]`. Keep it under `[length]` words and friendly.” |\n| **Plan: study week** | When planning study time | “Make a `[number]`-day study plan for `[subject]`. I have `[hours]` hours per day. Put it in a table with columns Day, Topic, and Time.” |\n\n#### Habits that keep a library useful\n- **Keep it small:** Ten templates that you really use are better than a hundred that you never open.\n- **Improve after use:** When a template gives a weak result, change it and note what you learned.\n- **Review now and then:** Retire templates that no longer work, because tools and your needs change.\n- **Keep private data out:** Never store passwords, customer details, or private information inside a template. Use blanks instead.\n\n> **In short:** Save what works, name it clearly, and improve it over time."
           },
           {
             "id": "les_gpe_03_02",
             "section_id": "sec_gpe_03",
-            "title": "3.2 Activity: Build a Template & Stretch Instruction Set (15 min)",
+            "title": "3.2 Activity: “Build a Template” & Stretch Instruction Set (15 min)",
             "type": "article",
-            "summary": "Turn a repeated work or study task into a reusable prompt template with fill-in blanks and one filled-in example, plus a Stretch instruction set.",
+            "summary": "Turn a repeated task into a reusable template with at least 3 bracketed blanks, test it on a second situation (live or text-only), and build a Stretch instruction set.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **Your goal:** Choose one task you repeat in work, volunteering, or study and turn a working prompt into a reusable template with blanks and one filled-in example. *(15 minutes)*\n\n---\n\n### Steps (in your Personal Study Notes)\n1. **Pick a repeated task** (e.g., weekly status update, lesson summary, thank-you note, or organizing meeting notes).\n2. **Write the working prompt** with Task, Context, Audience, Format, and Limits.\n3. **Convert it to a template** with at least **3 clear blanks** like `[audience]`, `[topic]`, `[tone]`, or `[word limit]`.\n4. **Add a “When to use it” line** and **one filled-in example** showing how it looks in practice.\n\n---\n\n### Stretch Task (Advanced Users)\nWrite a **short reusable instruction set** (3–5 rules) that you can paste at the start of a chat—or save in custom instructions—so the AI **always** answers in your chosen structure (for example: *1. 2-sentence summary, 2. 3-column table, 3. 2 follow-up risks*)."
+            "content": "> **Your goal:** Choose a task that you repeat, and turn a working prompt into a reusable template. If you have a chatbot, you can test it. If not, use the text-only test in Step 4. *(15 minutes)*\n\n---\n\n### A Worked Example\n| Step | Result |\n| :--- | :--- |\n| **Task I repeat** | A weekly update email to my team |\n| **Working prompt** | “Write a 120-word update email to my team about the new printer. The tone should be friendly and brief. Include the start date and who to ask for help. Avoid technical words. Finish with a thank-you.” |\n| **Template** | “Write a `[length]`-word update email to `[audience]` about `[topic]`. The tone should be `[tone]`. Include `[must-have points]`. Avoid `[things to avoid]`. Finish with `[ending]`.” |\n| **When to use it** | For short updates to a group of colleagues |\n| **Test fill** | “Write an 80-word update email to my volunteers about the changed meeting room. The tone should be warm and clear. Include the new room number and time. Avoid long sentences. Finish with a welcome.” |\n\n---\n\n### Step 1: Choose a task (3 minutes)\nPick something that you really repeat: *thank-you messages, weekly updates, summaries of articles, social media posts, study plans, or reminder emails*.\n\n### Step 2: Write a working prompt (4 minutes)\nWrite one clear prompt for a real or made-up situation, using the Module 1 checklist and, if useful, a technique from Module 2. Use made-up details if the real ones are private.\n\n### Step 3: Turn it into a template (5 minutes)\nReplace the specific details with **at least three blanks** in square brackets (`[...]`). Keep the fixed instructions for format, limits, and tone. Add a **“when to use it”** line, and record all 5 fields in your **Personal Study Notes**:\n- **The task I repeat**\n- **My working prompt**\n- **My template (at least 3 blanks)**\n- **When to use it**\n- **Test fill (a different situation)**\n\n### Step 4: Test it (3 minutes)\n- **Option A — With a chatbot:** Fill the blanks for a different situation, and run the prompt. Does the result fit what you wanted? If not, change the template.\n- **Option B — Text-only version:** Fill the blanks again with different details, and read the new prompt carefully. Ask yourself: *Is anything unclear? Is any blank missing? Would the result fit the new situation?* Make one improvement to your template.\n\n---\n\n### Answer Guide and Feedback\n| Task | Sample template |\n| :--- | :--- |\n| **Thank-you message** | “Write a `[length]`-word thank-you message to `[person]` for `[reason]`. The tone should be `[tone]`. Mention `[one detail]`. Avoid `[things to avoid]`. Finish with `[ending]`.” *When to use it:* for short, personal thanks. |\n| **Article summary** | “Summarize the text below in `[number]` bullet points for `[audience]`. Keep every number and name exactly as written. If something is unclear, say so. Text: `[paste text]`.” *When to use it:* for quick summaries of articles or reports. |\n\n> **What good answers show:** At least three clear blanks with short, meaningful names; fixed parts for format, limits, or tone; a “when to use it” line; and zero private information inside the template.\n\n---\n\n### Stretch Task (Advanced Users)\nWrite a **short instruction set** that makes the AI always answer in the same structure—for example: *“Always answer with three parts: Summary (one sentence), Key points (three bullets), and Next step (one sentence).”* Test it on two different topics."
           },
           {
             "id": "les_gpe_03_03",
             "section_id": "sec_gpe_03",
             "title": "3.3 Module 3 Knowledge Check (10 Questions from 20-Question Bank)",
             "type": "quiz",
-            "summary": "10 questions randomly drawn from the 20-question Module 3 bank (15 minutes).",
+            "summary": "Answer 10 questions randomly drawn from the 20-question Module 3 bank (15 minutes). Retake anytime for fresh questions with instant feedback.",
             "duration_seconds": 900,
             "position": 3,
             "is_free_preview": false,
@@ -3006,275 +3006,277 @@
               {
                 "id": "q_gpe_03_1",
                 "lesson_id": "les_gpe_03_03",
-                "question": "What turns a one-off prompt into a reusable template?",
+                "question": "Which is a strong everyday use of generative AI?",
                 "options": [
-                  "Replacing specific details with clear fill-in blanks like [audience] and [topic]",
-                  "Deleting the format and limits",
-                  "Writing it in another language",
-                  "Making it 1,000 words longer"
+                  "Sending an AI-written email without reading it",
+                  "Drafting a first version of an email that you then review and edit",
+                  "Asking it to guarantee that all facts are true",
+                  "Sharing a customer’s private details to save time"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Bracketed blanks let you drop in new inputs without rewriting the structure.",
+                "correct_option_index": 1,
+                "explanation": "AI is useful for drafts, but you stay responsible for the final result.",
                 "position": 1
               },
               {
                 "id": "q_gpe_03_2",
                 "lesson_id": "les_gpe_03_03",
-                "question": "When using AI to organize messy notes into a table, what should you always do?",
+                "question": "What is a risk when you ask AI to summarize a long text?",
                 "options": [
-                  "Spot-check every row against your original notes",
-                  "Assume the AI never drops a row",
-                  "Paste private passwords into the notes",
-                  "Delete the original notes immediately"
+                  "The summary may leave out or distort something important, so compare it with the original",
+                  "The summary will always be longer than the text",
+                  "The summary will always be perfect",
+                  "The AI will refuse to summarize"
                 ],
                 "correct_option_index": 0,
-                "explanation": "AI can occasionally skip or misread an item when reformatting.",
+                "explanation": "Summaries can drop or change points, so check them.",
                 "position": 2
               },
               {
                 "id": "q_gpe_03_3",
                 "lesson_id": "les_gpe_03_03",
-                "question": "Why keep a “Prompt Library”?",
+                "question": "You want to turn messy meeting notes into a table. What helps most in the prompt?",
                 "options": [
-                  "So you save proven templates and improve them over time instead of starting from zero",
-                  "Because chatbots delete all your files",
-                  "To memorize 500 technical terms",
-                  "To avoid checking outputs"
+                  "Saying “make it better”",
+                  "Asking for as few details as possible",
+                  "Leaving out the notes",
+                  "Naming the columns and telling the AI to keep every item"
                 ],
-                "correct_option_index": 0,
-                "explanation": "A named library compounds your best prompts over time.",
+                "correct_option_index": 3,
+                "explanation": "Clear columns and a rule to keep every item reduce missing or invented information.",
                 "position": 3
               },
               {
                 "id": "q_gpe_03_4",
                 "lesson_id": "les_gpe_03_03",
-                "question": "Which field belongs in every Prompt Library entry?",
+                "question": "After the AI turns your notes into a table, what should you do?",
                 "options": [
-                  "A short “When to use it” line and the template with blanks",
-                  "Your bank PIN",
-                  "The AI’s home address",
-                  "A random emoji only"
+                  "Trust it without checking",
+                  "Delete the original notes",
+                  "Compare the table with your original notes to check that nothing was dropped or changed",
+                  "Send it at once"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Knowing when to use a template makes it fast to find and apply.",
+                "correct_option_index": 2,
+                "explanation": "Always compare the result with the source.",
                 "position": 4
               },
               {
                 "id": "q_gpe_03_5",
                 "lesson_id": "les_gpe_03_03",
-                "question": "Where is AI especially helpful during brainstorming?",
+                "question": "How should you treat the ideas from an AI brainstorm?",
                 "options": [
-                  "Generating a wide list of initial options when you feel stuck",
-                  "Making final legal decisions alone",
-                  "Replacing human judgment completely",
-                  "Inventing fake statistics"
+                  "As final decisions",
+                  "As starting points that you choose from and improve",
+                  "As guaranteed to be original",
+                  "As something you must use all of"
                 ],
-                "correct_option_index": 0,
-                "explanation": "AI gives you breadth quickly; you select and refine what fits.",
+                "correct_option_index": 1,
+                "explanation": "Brainstorm results are raw material, not finished answers.",
                 "position": 5
               },
               {
                 "id": "q_gpe_03_6",
                 "lesson_id": "les_gpe_03_03",
-                "question": "What should you watch out for when summarizing a long document with AI?",
+                "question": "How can you get less ordinary brainstorming ideas?",
                 "options": [
-                  "Important numbers, exceptions, or caveats being left out",
-                  "The summary being too short to read",
-                  "The font changing size",
-                  "The summary having bullet points"
+                  "Ask for unusual ideas, and say which obvious ideas to avoid",
+                  "Ask for exactly one idea",
+                  "Use the shortest prompt possible",
+                  "Remove all context"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Compression can drop subtle qualifiers, so verify key details.",
+                "explanation": "Telling the AI what to avoid pushes it beyond the obvious.",
                 "position": 6
               },
               {
                 "id": "q_gpe_03_7",
                 "lesson_id": "les_gpe_03_03",
-                "question": "True or false: If you catch yourself making the same manual edit twice to an AI draft, you should update your template.",
+                "question": "What is a prompt template?",
                 "options": [
-                  "True",
-                  "False"
+                  "A prompt that can only be used once",
+                  "A type of chatbot",
+                  "An image file",
+                  "A prompt with fill-in blanks that you can reuse"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Baking recurring fixes into the template saves time on every future run.",
+                "correct_option_index": 3,
+                "explanation": "A template keeps the fixed instructions and lets you change the details.",
                 "position": 7
               },
               {
                 "id": "q_gpe_03_8",
                 "lesson_id": "les_gpe_03_03",
-                "question": "Which blank is most useful in a summary template?",
+                "question": "Which is a good name for a blank in a template?",
                 "options": [
-                  "[audience] and [word limit]",
-                  "[favorite color]",
-                  "[Wi-Fi password]",
-                  "[shoe size]"
+                  "[stuff]",
+                  "[x]",
+                  "[audience]",
+                  "[thing 1]"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Audience and length directly control how the summary is written.",
+                "correct_option_index": 2,
+                "explanation": "Clear, short names make a template easy to fill in.",
                 "position": 8
               },
               {
                 "id": "q_gpe_03_9",
                 "lesson_id": "les_gpe_03_03",
-                "question": "What is a “reusable instruction set”?",
+                "question": "In a template, which parts usually stay the same each time?",
                 "options": [
-                  "A short set of rules pasted at the start of a chat so every reply follows your preferred structure",
-                  "A hardware manual",
-                  "A one-word prompt",
-                  "A list of banned websites"
+                  "The names of the people",
+                  "The fixed instructions, such as format, limits, and tone",
+                  "The dates",
+                  "The topic"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Instruction sets keep formatting and tone consistent across a session.",
+                "correct_option_index": 1,
+                "explanation": "The blanks change, while the fixed parts keep the results consistent.",
                 "position": 9
               },
               {
                 "id": "q_gpe_03_10",
                 "lesson_id": "les_gpe_03_03",
-                "question": "When using AI to draft an email, what keeps it authentic?",
+                "question": "Why add a “when to use it” line to a template?",
                 "options": [
-                  "Reviewing and editing it in your own voice before sending",
-                  "Sending it unread",
-                  "Adding fake facts",
-                  "Pasting confidential HR files"
+                  "So that you remember which template fits which task",
+                  "To make the template longer",
+                  "To hide the template from others",
+                  "To replace the blanks"
                 ],
                 "correct_option_index": 0,
-                "explanation": "AI provides a first draft; your judgment and voice finish it.",
+                "explanation": "A short purpose line helps you find the right template later.",
                 "position": 10
               },
               {
                 "id": "q_gpe_03_11",
                 "lesson_id": "les_gpe_03_03",
-                "question": "Which task is a strong fit for organizing information into tables?",
+                "question": "What is the best way to test a new template?",
                 "options": [
-                  "Turning meeting notes into Action, Owner, and Deadline columns",
-                  "Feeling emotions",
-                  "Replacing a doctor",
-                  "Generating random passwords"
+                  "Use it once and never change it",
+                  "Test it only with the same details",
+                  "Never test it",
+                  "Fill the blanks with a different situation, and check that the result still fits"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Structured extraction is a reliable strength of language models.",
+                "correct_option_index": 3,
+                "explanation": "A good template works for more than one situation.",
                 "position": 11
               },
               {
                 "id": "q_gpe_03_12",
                 "lesson_id": "les_gpe_03_03",
-                "question": "Why include one filled-in example alongside a template in your library?",
-                "options": [
-                  "It reminds you how to fill the blanks quickly later",
-                  "It makes the file heavier",
-                  "It prevents anyone from reading it",
-                  "It turns off formatting"
-                ],
-                "correct_option_index": 0,
-                "explanation": "A worked example makes templates effortless to reuse months later.",
-                "position": 12
-              },
-              {
-                "id": "q_gpe_03_13",
-                "lesson_id": "les_gpe_03_03",
-                "question": "True or false: AI-generated project timelines should always be checked for realistic time estimates.",
-                "options": [
-                  "True",
-                  "False"
-                ],
-                "correct_option_index": 0,
-                "explanation": "AI does not know your team’s real capacity or blockers.",
-                "position": 13
-              },
-              {
-                "id": "q_gpe_03_14",
-                "lesson_id": "les_gpe_03_03",
-                "question": "What should you do before pasting a work document into a public chatbot?",
-                "options": [
-                  "Remove names, private details, and confidential data",
-                  "Paste everything including IDs",
-                  "Ask the chatbot to keep it secret",
-                  "Nothing"
-                ],
-                "correct_option_index": 0,
-                "explanation": "Protect privacy and workplace rules before pasting any text.",
-                "position": 14
-              },
-              {
-                "id": "q_gpe_03_15",
-                "lesson_id": "les_gpe_03_03",
-                "question": "Which of these is a well-named library template?",
-                "options": [
-                  "“Weekly Team Update — 3-Bullet Status”",
-                  "“Prompt 1”",
-                  "“Stuff”",
-                  "“Test”"
-                ],
-                "correct_option_index": 0,
-                "explanation": "Descriptive names help you find the right template in seconds.",
-                "position": 15
-              },
-              {
-                "id": "q_gpe_03_16",
-                "lesson_id": "les_gpe_03_03",
-                "question": "In a template, what do square brackets like [topic] signal?",
-                "options": [
-                  "A placeholder you replace before running the prompt",
-                  "A coding error",
-                  "Text the AI must delete",
-                  "A secret code"
-                ],
-                "correct_option_index": 0,
-                "explanation": "Brackets clearly mark where your new input goes.",
-                "position": 16
-              },
-              {
-                "id": "q_gpe_03_17",
-                "lesson_id": "les_gpe_03_03",
-                "question": "Which everyday use carries the highest risk if you skip checking?",
-                "options": [
-                  "Summarizing rules or numbers you will act on at work",
-                  "Brainstorming 10 party themes",
-                  "Drafting a friendly birthday wish",
-                  "Suggesting dinner ideas"
-                ],
-                "correct_option_index": 0,
-                "explanation": "Factual accuracy matters most when decisions depend on the summary.",
-                "position": 17
-              },
-              {
-                "id": "q_gpe_03_18",
-                "lesson_id": "les_gpe_03_03",
-                "question": "How many fill-in blanks make a template flexible without being confusing?",
-                "options": [
-                  "2 to 5 clear blanks",
-                  "Zero blanks",
-                  "50 blanks",
-                  "100 blanks"
-                ],
-                "correct_option_index": 0,
-                "explanation": "A handful of well-chosen blanks keeps templates practical.",
-                "position": 18
-              },
-              {
-                "id": "q_gpe_03_19",
-                "lesson_id": "les_gpe_03_03",
-                "question": "True or false: Templates only work for coding, never for everyday writing.",
+                "question": "True or false: A template must be perfect on the first try.",
                 "options": [
                   "True",
                   "False"
                 ],
                 "correct_option_index": 1,
-                "explanation": "Templates are hugely valuable for emails, summaries, study notes, and planning.",
+                "explanation": "Templates improve with use. Test them, note what you learned, and adjust.",
+                "position": 12
+              },
+              {
+                "id": "q_gpe_03_13",
+                "lesson_id": "les_gpe_03_03",
+                "question": "Which fields belong in a prompt library entry?",
+                "options": [
+                  "Only the date",
+                  "Name, when to use it, the template, an example, and notes",
+                  "Only the password",
+                  "Only a picture"
+                ],
+                "correct_option_index": 1,
+                "explanation": "These fields make a template easy to find and use.",
+                "position": 13
+              },
+              {
+                "id": "q_gpe_03_14",
+                "lesson_id": "les_gpe_03_03",
+                "question": "Before you send an AI-written email, what should you check?",
+                "options": [
+                  "Names, dates, numbers, promises, tone, and privacy",
+                  "Only the font",
+                  "Only the length",
+                  "Nothing, because AI is always right"
+                ],
+                "correct_option_index": 0,
+                "explanation": "You are the author and you are responsible for what you send.",
+                "position": 14
+              },
+              {
+                "id": "q_gpe_03_15",
+                "lesson_id": "les_gpe_03_03",
+                "question": "Which should you NOT put in a prompt or a template?",
+                "options": [
+                  "The topic of the email",
+                  "The length you want",
+                  "The tone you prefer",
+                  "A customer’s private details, such as an address or phone number"
+                ],
+                "correct_option_index": 3,
+                "explanation": "Use blanks or made-up details instead of private information.",
+                "position": 15
+              },
+              {
+                "id": "q_gpe_03_16",
+                "lesson_id": "les_gpe_03_03",
+                "question": "When is it best NOT to rely on AI for real work?",
+                "options": [
+                  "For a first draft of a thank-you note",
+                  "For a list of party ideas",
+                  "For an important legal or medical decision, without a qualified person",
+                  "For a rough study schedule"
+                ],
+                "correct_option_index": 2,
+                "explanation": "Important decisions need a qualified person, not only AI.",
+                "position": 16
+              },
+              {
+                "id": "q_gpe_03_17",
+                "lesson_id": "les_gpe_03_03",
+                "question": "You ask AI for a project plan, and it gives unrealistic deadlines. What does this show?",
+                "options": [
+                  "AI plans are always realistic",
+                  "You must check plans against reality, such as real dates, costs, and time",
+                  "Deadlines never matter",
+                  "You should use the plan without changes"
+                ],
+                "correct_option_index": 1,
+                "explanation": "AI does not know your real situation, so check the plan yourself.",
+                "position": 17
+              },
+              {
+                "id": "q_gpe_03_18",
+                "lesson_id": "les_gpe_03_03",
+                "question": "True or false: A good summary request says how long the summary should be and who it is for.",
+                "options": [
+                  "True",
+                  "False"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Length and audience are part of the format and context, so they help the AI give a useful summary.",
+                "position": 18
+              },
+              {
+                "id": "q_gpe_03_19",
+                "lesson_id": "les_gpe_03_03",
+                "question": "Which prompt is a template?",
+                "options": [
+                  "“Write a message.”",
+                  "“Write 100 words about the printer for my team.”",
+                  "“Thank you.”",
+                  "“Write a [length]-word [type of message] for [audience] about [topic].”"
+                ],
+                "correct_option_index": 3,
+                "explanation": "A template has blanks that you can fill in for different situations.",
                 "position": 19
               },
               {
                 "id": "q_gpe_03_20",
                 "lesson_id": "les_gpe_03_03",
-                "question": "What is the main payoff of building a Prompt Library across this course?",
+                "question": "Which habit keeps a prompt library useful?",
                 "options": [
-                  "Faster, more consistent results on tasks you actually repeat",
-                  "Never having to read AI output again",
-                  "Bypassing privacy rules",
-                  "Replacing your own thinking"
+                  "Never changing any template",
+                  "Adding a hundred templates that you never use",
+                  "Reviewing it now and then, and improving or retiring templates that no longer work",
+                  "Storing private data in each template"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Reusable, tested templates turn good prompts into lasting productivity.",
+                "correct_option_index": 2,
+                "explanation": "A small, regularly improved library is more useful than a large, outdated one.",
                 "position": 20
               }
             ]
@@ -3290,26 +3292,26 @@
           {
             "id": "les_gpe_04_01",
             "section_id": "sec_gpe_04",
-            "title": "4.1 Lesson & Reading: AI as Study Partner, Research Workflow & “Ask It to Teach, Not to Answer” (20 min)",
+            "title": "4.1 Lesson & Reading: Prompting for Learning and Research & “Ask It to Teach, Not to Answer” (20 min)",
             "type": "article",
-            "summary": "Use AI as a tutor and practice partner, follow the 5-step research workflow, verify suggested sources, spot one-sided answers, and avoid over-reliance.",
+            "summary": "Use AI as a tutor and practice partner, follow a simple five-step research workflow, check suggested sources, spot one-sided answers, and keep your own thinking in charge.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **What you will learn:** Use AI as a study partner and research aid, check sources, and keep your own thinking in charge. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n#### 1. AI as a tutor and practice partner\n- **Tutor:** Ask for explanations at your exact level, everyday analogies, and two different ways of picturing a hard idea.\n- **Practice partner:** Ask for 5 quiz questions, flashcards, or *“Check my understanding: here is how I explain [concept]—what did I miss or confuse?”*\n\n#### 2. A simple five-step research workflow\n1. **Define the question:** Write what you actually need to find out and why.\n2. **Gather sources:** Search trusted references (libraries, official sites, encyclopedias, peer-reviewed or respected journalism).\n3. **Summarize each source:** Use AI to pull key claims from text you provide—never ask it to guess what a source says without reading it.\n4. **Compare views:** Ask what viewpoints, caveats, or evidence are missing or one-sided.\n5. **Write your own conclusion:** Synthesize the answer in your own words.\n\n#### 3. Checking sources & keeping academic honesty\n- **Open every suggested source:** Chatbots can invent realistic book titles, DOIs, and web links. Never cite a source you have not opened and read.\n- **Avoid over-reliance:** If AI writes your homework or summary without you understanding it, you fail the real goal—learning.\n- **Be honest:** Follow your school or workplace rules and disclose AI help where required.\n\n---\n\n### Part B: Reading (8 minutes) — “Ask It to Teach, Not to Answer”\nThe difference between finishing fast and actually learning comes down to your prompt:\n- **Answer-only prompt:** *“Solve this problem / write my paragraph on photosynthesis.”* → You get text, but your brain did zero work.\n- **Teaching prompt:** *“Don’t give me the final answer yet. Ask me one guiding question at a time, give a hint if I get stuck, and test me after I explain it back.”*\n\nUse AI to **challenge** your thinking, not replace it."
+            "content": "**COURSE 2 | PART 1: TEXT PROMPTING**\n**Module 4: Prompting for Learning and Research**\n*Written lesson and reading (20 minutes)*\n\n| Item | Details |\n| :--- | :--- |\n| **Module time** | 50 minutes: written lesson (12 min), reading (8 min), activity (15 min), knowledge check (15 min) |\n| **Level** | Beginner to Intermediate. Modules 1 to 3 are helpful |\n| **Tools** | A chatbot and a web browser are helpful for the activity. A text-only version is included |\n| **Format** | Written lesson with tables, a short reading, a study-and-source-checking activity, and a quiz |\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n> **What you will learn:** By the end of this lesson, you will be able to use AI as a tutor and a practice partner, follow a simple five-step research workflow, check the sources that AI gives you, and keep your own thinking in charge.\n\n#### 1. Learning is not the same as finishing\nFirst, let’s think about the goal. When you use AI for study or research, you can use it in two very different ways. In the first way, you let it do the work, so that you finish faster. In the second way, you use it to understand the material better. Both can save time. However, only the second way helps you to learn.\n\nTherefore, in this lesson, the goal is simple: to use AI so that you know and understand more, while you also stay honest and check what the AI says.\n\n#### 2. AI as a tutor\nA good tutor explains things at your level, gives examples, and answers your questions patiently. Generative AI can do something similar. For instance, you can try prompts like these:\n- “Explain how solar panels work to a beginner, in five short sentences.”\n- “Explain it again, using an everyday comparison.”\n- “What are three mistakes that beginners often make with this topic?”\n- “I am a 15-year-old with no science background. Which words should I learn first?”\n\nHowever, remember that a tutor can make mistakes. So, when an explanation matters, compare it with your textbook, your teacher, or another trusted source.\n\n#### 3. AI as a practice partner\nNext, AI can help you practice. Practicing is often more useful than rereading, because it shows what you really understand. Here are three ways to do it.\n\n| Way to practice | Example prompt |\n| :--- | :--- |\n| **Quiz me** | “Quiz me on solar panels with five questions, one at a time. Wait for my answer, tell me whether it is right, and explain briefly.” |\n| **Teach-back** | “I will explain how solar panels work in my own words. Tell me what is missing or wrong, but do not give me the full answer first. Here is my explanation: [your explanation].” |\n| **Flashcards** | “Make ten flashcards about solar panels with a question on one side and a short answer on the other.” |\n\nNotice that in the first two examples, you do the thinking, and the AI gives feedback. This is a much better way to learn than asking for answers.\n\n#### 4. A simple research workflow\nNow, let’s move from studying to research. Research means finding out about a question, using several sources. A simple workflow has five steps, and AI can help with each one, as long as you stay in charge.\n\n| Step | How AI can help | Your job |\n| :--- | :--- | :--- |\n| **1. Define the question** | Helps you make a broad topic into a clear question | Decide what you really want to know |\n| **2. Gather sources** | Suggests where to look and what words to search for | Find and open the real sources yourself |\n| **3. Summarize each source** | Summarizes the text that you paste in | Read the source, and compare the summary with it |\n| **4. Compare views** | Lists where sources agree and differ | Check that the comparison is fair and complete |\n| **5. Write your conclusion** | Gives feedback on your draft | Write the conclusion yourself, in your own words |\n\n#### 5. Sources: find them, open them, check them\nThe most important rule in research with AI is this: **a source is only a source if you can find and open it.** As you learned in earlier modules, chatbots can invent sources. They may give you an author, a title, a year, and even a web address, and still none of it is real.\n\nSo, whenever AI suggests a source, follow these steps:\n1. **Find it.** Search for the exact title, or go to the organization’s own website.\n2. **Open it.** Check that it exists, and read the relevant part.\n3. **Check it.** Does it really say what the AI claimed? Who wrote it, and when? Is the author or organization trustworthy?\n\nIf you cannot find it, do not use it. Write “unverified” in your notes.\n\n> **A useful trick:** Instead of asking the AI to recall facts from memory, paste the real text of a source, and ask the AI to summarize or explain that text. The answer is then based on something that you can check.\n\n#### 6. Missing viewpoints and one-sided answers\nIn addition, an AI answer can sound complete and still be one-sided. For example, it might only mention one opinion, or it might leave out evidence that does not fit. To find out, ask questions such as:\n- “What would someone who disagrees say?”\n- “What evidence or viewpoints are missing from this answer?”\n- “What are the strongest arguments on each side?”\n\nThen, check the answers against real sources, because the AI’s counter-arguments can contain mistakes too.\n\n#### 7. Keep your own thinking in charge\nFinally, there is a risk called **over-reliance**. This means depending on AI so much that you stop thinking for yourself. If you always ask AI for the answer, you may finish quickly, but you may not remember or understand anything later.\n- **Try first.** Make your own attempt, and then ask AI for a hint or feedback.\n- **Write your own conclusions.** Use AI to improve your work, not to replace your thinking.\n- **Be honest.** Follow the rules of your school or workplace, and say how you used AI when you are asked to.\n\n#### Key takeaways\n- Use AI to understand, not only to finish. Practice with quizzes and teach-back.\n- The five research steps are: define the question, gather sources, summarize each source, compare views, and write your own conclusion.\n- Find and open every source that AI suggests. If you cannot find it, do not use it.\n- Ask for missing viewpoints, and check the answers against real sources.\n- Avoid over-reliance, write your own conclusions, and be honest about AI help.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Tutor** | Someone or something that explains a topic and helps you learn it |\n| **Teach-back** | Explaining a topic in your own words, and asking for feedback on what is missing or wrong |\n| **Source** | A real document, page, book, or data that information comes from |\n| **Verify** | To check that something is true, or that a source really exists and says what is claimed |\n| **Over-reliance** | Depending on AI so much that you stop thinking and learning for yourself |\n| **Perspective** | A viewpoint or way of looking at a question |\n\n---\n\n### Part B: Reading (8 minutes): “Ask It to Teach, Not to Answer”\n\nImagine two students who both use AI to prepare for a test. The first student types every homework question into a chatbot and copies the answers. The second student tries each question first, and then uses the chatbot to check the work and to get hints. On the test day, which student is better prepared?\n\nMost teachers and learners would say the second student. When you make an effort yourself, even if it is a small one, you usually remember more. So the best way to use AI for learning is to ask it to teach, not just to answer.\n\n#### The hint ladder\nOne helpful method is the **hint ladder**. You start with the smallest help, and you only go up one step when you are really stuck.\n\n| Step | What you ask |\n| :--- | :--- |\n| **1** | “Do not solve it. Ask me one question that helps me start.” |\n| **2** | “Give me a small hint about the next step, without the answer.” |\n| **3** | “Show me a similar example, and let me try the real one myself.” |\n| **4** | “Now explain the full solution step by step, and tell me what I misunderstood.” |\n\n#### Prompts that make AI teach\n- “Act as a patient tutor. Do not give the final answer. Ask me guiding questions.”\n- “Check my work and tell me where I made a mistake, but let me fix it myself.”\n- “After I answer, tell me what I got right, what I got wrong, and why.”\n- “Explain this in a different way, because I did not understand the first explanation.”\n\n#### Two cautions\n1. **The tutor can be wrong.** If a hint or explanation seems strange, check it against your textbook, your teacher, or another trusted source.\n2. **Follow the rules.** Some schools and teachers limit AI use. Read the rules, and be honest about how you use AI.\n\n**In short:** Try first, ask for hints, practice with questions, and keep the thinking for yourself."
           },
           {
             "id": "les_gpe_04_02",
             "section_id": "sec_gpe_04",
-            "title": "4.2 Activity: Study Partner Session & Stretch Research Brief (15 min)",
+            "title": "4.2 Activity: “Study Partner Session” & Stretch Task (15 min)",
             "type": "article",
-            "summary": "Write 4 study-partner prompts on a topic you are learning, open and verify 2 sources, and try the Stretch research brief template.",
+            "summary": "Use AI as a study partner on a topic you want to learn, write four study prompts, check whether sources can be trusted (with Option A and text-only Option B), and try the Stretch research brief template.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **Your goal:** Pick a topic you are studying or curious about and write four study-partner prompts, then verify two real sources. *(15 minutes)*\n\n---\n\n### Step 1: Write Four Study-Partner Prompts (in Personal Study Notes)\n1. **Explain it:** Ask for a plain-language explanation with one everyday analogy at your current level.\n2. **Quiz me:** Ask for 3–5 practice questions *without* showing the answers until you reply.\n3. **Find what I misunderstand:** Write a 2-sentence explanation in your own words and ask the AI to spot gaps or misconceptions.\n4. **Summarize with sources:** Ask for key claims and candidate sources to check.\n\n### Step 2: Open and Check Two Sources\nFind and open **two sources** (using a search engine or library if no chatbot is open, or checking two sample sources). Record for each:\n- Does the source **really exist**?\n- Does it **actually support** the claim?\n- What **viewpoint or caveat** might be missing?\n\n---\n\n### Stretch Task (Advanced Users)\nBuild a **research brief template** with 4 columns: `Question | Source | Claim | Checked? (Yes/No + Notes)`, and fill it in for one real question from your work or study."
+            "content": "### Part C: Activity (15 minutes): “Study Partner Session”\n\n> **Your goal:** Use AI as a study partner on a topic that you really want to learn, and then check whether the sources it gives can be trusted. You can use a chatbot and a web browser, or you can use the text-only version in Step 3.\n\n---\n\n#### Step 1: Choose a topic (3 minutes)\nChoose something you are studying or curious about, for example, how solar panels work, how vaccines were developed, how a bill becomes law, or the causes of a historical event. Pick a topic that does not need private information.\n\n| Field | My answer |\n| :--- | :--- |\n| **My topic** | *(Write your topic here)* |\n| **What I already know (one or two sentences)** | *(Write what you already know)* |\n\n---\n\n#### Step 2: Write four study prompts (6 minutes)\nWrite one prompt for each purpose. Use what you learned in Modules 1 to 3, such as audience, format, and limits.\n\n| # | Purpose | My prompt |\n| :--- | :--- | :--- |\n| **1** | Explain the topic at my level | *(Write your prompt)* |\n| **2** | Quiz me with one question at a time | *(Write your prompt)* |\n| **3** | Teach-back: find what I misunderstand | *(Write your prompt)* |\n| **4** | Summarize with sources that I can check | *(Write your prompt)* |\n\n---\n\n#### Step 3: Check the sources (4 minutes)\n\n##### Option A: With a chatbot and a browser\nRun your fourth prompt. Choose two sources that the AI gave. Search for each one, open it, and complete the table.\n\n| Source the AI gave | Did I find it? (yes or no) | Does it say what the AI claimed? | My decision (use or do not use) |\n| :--- | :--- | :--- | :--- |\n| **Source 1** | | | |\n| **Source 2** | | | |\n\n##### Option B: Text-only version\nRead the sample AI answer below. All three sources were **invented for this exercise**, so searching for them will not find real results. The goal is to practice noticing the warning signs.\n\n> **Sample AI answer:**\n> Solar panels turn sunlight into electricity using photovoltaic cells. Most panels use silicon. When light hits the silicon, it knocks electrons loose, which creates an electric current. Panels work best in direct sun, but they still produce some power on cloudy days.\n\n| # | Sources listed by the AI |\n| :--- | :--- |\n| **1** | International Energy Agency, “Introduction to Solar Photovoltaics”, 2019. |\n| **2** | “A study by leading scientists shows that solar panels are 100% efficient in bright light.” |\n| **3** | Dr. Helena Marwick, “The Silicon Revolution: How Light Became Power”, Greenfield Press, 2017. |\n\nFor each source, answer: (a) Does it give enough detail to be searched? (b) What warning signs do you see? (c) What would you do next?\n\n| # | Enough detail to search? | Warning signs | What I would do next |\n| :--- | :--- | :--- | :--- |\n| **1** | | | |\n| **2** | | | |\n| **3** | | | |\n\n---\n\n#### Step 4: Reflect (2 minutes)\n- Which of the four prompts helped you learn the most, and why?\n- What would you do differently when a source cannot be found?\n\n---\n\n### Answer Guide and Feedback\n\n#### Sample study prompts (topic: solar panels)\n| # | Purpose | Sample prompt |\n| :--- | :--- | :--- |\n| **1** | Explain | “Explain how solar panels work to a beginner with no science background, in five short sentences, with one everyday comparison.” |\n| **2** | Quiz me | “Quiz me on how solar panels work with five questions, one at a time. Wait for my answer, say whether it is right, and explain briefly.” |\n| **3** | Teach-back | “I will explain how solar panels work in my own words. Tell me what is missing or wrong, but do not give me the full answer first. My explanation: [text].” |\n| **4** | Summarize with sources | “Summarize how solar panels work in five bullet points. For each point, name a real source that I can find, with the organization, title, and year. If you are not sure that a source exists, say so.” |\n\n#### Text-only source review\n| # | Sample analysis |\n| :--- | :--- |\n| **1** | Detailed enough to search: it names an organization, a title, and a year. Warning sign: a detailed look is not proof. Search the organization’s own website for the exact title. If you cannot find it, treat it as unverified. Here it was invented, so you would not find it. |\n| **2** | Not enough detail: no author, no title, no date, and no link. The claim of “100% efficient” is also not believable, since no real machine converts all energy perfectly. Next step: do not use it, and look for a real, named source. |\n| **3** | Detailed enough to search: author, title, publisher, and year. Warning sign: all of these details can be invented, and they look very convincing. Next step: search for the title and the author, and check a library or bookseller listing. If nothing is found, do not use it. |\n\n#### What good answers show\n- The study prompts include the audience, the format, and a clear purpose.\n- The learner opens sources (or looks for warning signs) instead of trusting them.\n- The learner understands that a detailed-looking source can still be invented.\n\n#### Feedback to show learners\n- **Automated check:** All four prompts are written, and the source table has a decision for each source.\n- **Feedback:** “Good work. Using AI to practice and to get feedback helps you learn, and checking sources keeps your work honest. Remember: if you cannot find it, do not use it.”\n\n---\n\n### Stretch Task\nBuild a **research brief template** with four columns: `Question`, `Source`, `Claim`, and `Checked (yes or no)`. Use it on one real question, and record at least three sources.\n\n> **Instructor notes:**\n> - This is a practice activity that supports the portfolio’s learning or research entry. It is not rubric-graded.\n> - Real chatbots vary in how often they invent sources, so accept honest results.\n> - The sources in the text-only version are invented on purpose. Make that clear, so that learners do not think they are real."
           },
           {
             "id": "les_gpe_04_03",
@@ -3325,275 +3327,277 @@
               {
                 "id": "q_gpe_04_1",
                 "lesson_id": "les_gpe_04_03",
-                "question": "Why must you open and read any source a chatbot suggests?",
+                "question": "What is the main goal of using AI to study?",
                 "options": [
-                  "Because chatbots can invent plausible titles, authors, and links that do not exist",
-                  "Because browsers block all links from AI",
-                  "Because sources expire in 5 minutes",
-                  "Because footnotes are illegal"
+                  "To avoid ever reading anything",
+                  "To understand the material better, not only to finish faster",
+                  "To copy answers quickly",
+                  "To skip all practice"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Always verify that a source exists and actually supports the claim.",
+                "correct_option_index": 1,
+                "explanation": "Both approaches save time, but only understanding helps you learn.",
                 "position": 1
               },
               {
                 "id": "q_gpe_04_2",
                 "lesson_id": "les_gpe_04_03",
-                "question": "What is the core idea of “Ask it to teach, not to answer”?",
+                "question": "Which prompt makes the AI act as a practice partner?",
                 "options": [
-                  "Prompt the AI to guide you with questions, hints, and feedback so you build real understanding",
-                  "Ask the AI to do all your assignments silently",
-                  "Never ask follow-up questions",
-                  "Only use AI for math"
+                  "“Quiz me on this topic, one question at a time, and wait for my answer.”",
+                  "“Write my whole essay.”",
+                  "“Give me all the answers.”",
+                  "“Do my homework.”"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Active recall and guided hints build lasting skill instead of dependency.",
+                "explanation": "A quiz makes you do the thinking while the AI gives feedback.",
                 "position": 2
               },
               {
                 "id": "q_gpe_04_3",
                 "lesson_id": "les_gpe_04_03",
-                "question": "Which order shows a sound 5-step research workflow with AI?",
+                "question": "What is “teach-back”?",
                 "options": [
-                  "Define question → gather sources → summarize each source → compare views → write your own conclusion",
-                  "Write conclusion → invent sources → skip reading",
-                  "Ask chatbot once → submit unread",
-                  "Copy first link → stop"
+                  "The AI explains and you copy it",
+                  "You return a book to the library",
+                  "The AI teaches the next student",
+                  "You explain the topic in your own words and ask the AI to point out what is missing or wrong"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Real sources and your own synthesis stay at the center.",
+                "correct_option_index": 3,
+                "explanation": "Teach-back shows what you really understand.",
                 "position": 3
               },
               {
                 "id": "q_gpe_04_4",
                 "lesson_id": "les_gpe_04_03",
-                "question": "How can AI act as a “check my understanding” partner?",
+                "question": "What is the first step of the five-step research workflow?",
                 "options": [
-                  "You explain the concept in your own words and ask the AI to point out gaps or errors",
-                  "It reads your brain without text",
-                  "It gives you a grade automatically for school",
-                  "It hides mistakes so you feel good"
+                  "Write the conclusion",
+                  "Gather sources",
+                  "Define the question",
+                  "Ask the AI for the answer"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Testing your own explanation exposes fuzzy thinking quickly.",
+                "correct_option_index": 2,
+                "explanation": "A clear question guides everything that follows.",
                 "position": 4
               },
               {
                 "id": "q_gpe_04_5",
                 "lesson_id": "les_gpe_04_03",
-                "question": "What is a risk of asking a chatbot for “the answer” to a debate or policy topic?",
+                "question": "Which list shows the research steps in the right order?",
                 "options": [
-                  "It may give a one-sided answer and miss important counter-arguments",
-                  "It will always refuse",
-                  "It will cite 100 books accurately",
-                  "It will turn off your screen"
+                  "Write the conclusion, gather sources, define the question, compare views, summarize",
+                  "Define the question, gather sources, summarize each source, compare views, write your conclusion",
+                  "Compare views, define the question, write the conclusion, summarize, gather sources",
+                  "Summarize, write the conclusion, define the question, gather sources, compare views"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Always ask what viewpoints or evidence might be missing.",
+                "correct_option_index": 1,
+                "explanation": "The workflow moves from the question to your own conclusion.",
                 "position": 5
               },
               {
                 "id": "q_gpe_04_6",
                 "lesson_id": "les_gpe_04_03",
-                "question": "True or false: If an AI summarizes an article for you, you never need to read the original even for high-stakes research.",
+                "question": "The AI gives you a list of sources. What should you do?",
                 "options": [
-                  "True",
-                  "False"
+                  "Find and open each source to confirm that it exists and says what the AI claimed",
+                  "Use them all as they are",
+                  "Copy them into your report immediately",
+                  "Ask the AI to say they are real"
                 ],
-                "correct_option_index": 1,
-                "explanation": "Important claims must be checked against the original source.",
+                "correct_option_index": 0,
+                "explanation": "A source is only a source if you can find and open it.",
                 "position": 6
               },
               {
                 "id": "q_gpe_04_7",
                 "lesson_id": "les_gpe_04_03",
-                "question": "Which prompt is best for studying?",
+                "question": "Why can a source with an author, title, and year still be unreliable?",
                 "options": [
-                  "“Quiz me with 4 questions on cell division, one at a time, and wait for my answer before giving feedback.”",
-                  "“Give me all the answers to my test.”",
-                  "“Write my essay.”",
-                  "“Explain nothing.”"
+                  "Real sources never have authors",
+                  "Sources with years are always old",
+                  "Titles are never correct",
+                  "Chatbots can invent sources that look real"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Interactive quizzing forces active recall.",
+                "correct_option_index": 3,
+                "explanation": "Detailed-looking sources can be made up, so verify them.",
                 "position": 7
               },
               {
                 "id": "q_gpe_04_8",
                 "lesson_id": "les_gpe_04_03",
-                "question": "What does “keeping your own thinking in charge” mean?",
+                "question": "Why is it helpful to paste real text and ask the AI to summarize that text?",
                 "options": [
-                  "You evaluate claims, check sources, and write the final conclusion yourself",
-                  "You let AI decide every opinion",
-                  "You never edit AI drafts",
-                  "You hide AI use from teachers"
+                  "It makes the AI faster",
+                  "It removes the need to read anything",
+                  "The summary is based on a source that you can check, not on the AI’s memory",
+                  "It guarantees a perfect summary"
                 ],
-                "correct_option_index": 0,
-                "explanation": "AI is a study aid; judgment and synthesis remain yours.",
+                "correct_option_index": 2,
+                "explanation": "Working from real text keeps the answer tied to something you can compare.",
                 "position": 8
               },
               {
                 "id": "q_gpe_04_9",
                 "lesson_id": "les_gpe_04_03",
-                "question": "When using AI for schoolwork, what should you do about disclosure rules?",
+                "question": "Which question helps you find a one-sided answer?",
                 "options": [
-                  "Check your course or institution policy and honestly disclose AI assistance as required",
-                  "Always hide it",
-                  "Ask the AI to remove evidence",
-                  "Ignore the syllabus"
+                  "“Is that all?”",
+                  "“What would someone who disagrees say?”",
+                  "“Say it louder.”",
+                  "“Make it shorter.”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Academic honesty requires following local rules and disclosing help.",
+                "correct_option_index": 1,
+                "explanation": "Asking for other viewpoints reveals what the first answer left out.",
                 "position": 9
               },
               {
                 "id": "q_gpe_04_10",
                 "lesson_id": "les_gpe_04_03",
-                "question": "Why ask AI for an analogy when learning a difficult concept?",
+                "question": "What does “over-reliance” mean?",
                 "options": [
-                  "An everyday comparison connects new ideas to something you already understand",
-                  "Analogies replace all facts",
-                  "Analogies make text longer",
-                  "Analogies prevent checking"
+                  "Depending on AI so much that you stop thinking and learning for yourself",
+                  "Using a chatbot at night",
+                  "Using a very large screen",
+                  "Having too many apps"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Concrete analogies accelerate comprehension before diving into detail.",
+                "explanation": "Over-reliance can leave you with finished work but little understanding.",
                 "position": 10
               },
               {
                 "id": "q_gpe_04_11",
                 "lesson_id": "les_gpe_04_03",
-                "question": "If a chatbot lists 3 academic papers, what is the very first check?",
+                "question": "Which approach usually helps you learn the most?",
                 "options": [
-                  "Search for each title/author to confirm it exists and says what was claimed",
-                  "Copy them straight into your bibliography",
-                  "Assume 2 of 3 are always real",
-                  "Ask the chatbot if it is lying"
+                  "Asking for the final answer immediately",
+                  "Never trying anything",
+                  "Copying every answer",
+                  "Trying first, and then asking for a hint or feedback"
                 ],
-                "correct_option_index": 0,
-                "explanation": "External verification is the only reliable check for citations.",
+                "correct_option_index": 3,
+                "explanation": "Making your own effort first helps you remember.",
                 "position": 11
               },
               {
                 "id": "q_gpe_04_12",
                 "lesson_id": "les_gpe_04_03",
-                "question": "What is “over-reliance” in learning?",
+                "question": "What is the idea of the “hint ladder”?",
                 "options": [
-                  "Letting AI do the thinking so you cannot explain or solve the task yourself afterward",
-                  "Using flashcards",
-                  "Checking two sources",
-                  "Writing an outline"
+                  "Ask for the whole solution first",
+                  "Climb a real ladder while studying",
+                  "Ask for a small hint first, and only ask for more help if you are still stuck",
+                  "Ask the same question five times"
                 ],
-                "correct_option_index": 0,
-                "explanation": "If you cannot explain it without the chatbot, you haven’t learned it yet.",
+                "correct_option_index": 2,
+                "explanation": "Starting small keeps your own thinking involved.",
                 "position": 12
               },
               {
                 "id": "q_gpe_04_13",
                 "lesson_id": "les_gpe_04_03",
-                "question": "Which column helps most in a research brief template?",
+                "question": "True or false: If an AI explains something confidently, you do not need to check it against a trusted source.",
                 "options": [
-                  "A “Checked? (Yes/No + Source URL)” column",
-                  "Favorite color",
-                  "Word font",
-                  "Battery percentage"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Tracking verification status prevents unverified claims from slipping into final work.",
+                "correct_option_index": 1,
+                "explanation": "AI can be wrong with great confidence, so compare important explanations with a trusted source.",
                 "position": 13
               },
               {
                 "id": "q_gpe_04_14",
                 "lesson_id": "les_gpe_04_03",
-                "question": "How can you prompt AI to surface missing viewpoints?",
+                "question": "How should you use AI for schoolwork that you hand in?",
                 "options": [
-                  "“What counter-arguments, limitations, or perspectives are missing from this summary?”",
-                  "“Agree with me completely.”",
-                  "“Make it shorter.”",
-                  "“Remove all caveats.”"
+                  "Follow your school’s rules, and be honest about how you used it",
+                  "Hide it from everyone",
+                  "Ignore all rules",
+                  "Say that you did everything alone if you used AI"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Explicitly asking for counter-views counters one-sided framing.",
+                "explanation": "Honesty and following the rules are part of responsible use.",
                 "position": 14
               },
               {
                 "id": "q_gpe_04_15",
                 "lesson_id": "les_gpe_04_03",
-                "question": "True or false: Asking AI to generate flashcards from your own study notes is a good study use.",
+                "question": "Which is a good prompt for the “compare views” step?",
                 "options": [
-                  "True",
-                  "False"
+                  "“Which one do I like?”",
+                  "“Just pick one.”",
+                  "“Ignore the second article.”",
+                  "“Here are summaries of two articles. List where they agree and where they differ.”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Turning your own notes into active-recall flashcards is a high-value study habit.",
+                "correct_option_index": 3,
+                "explanation": "A clear comparison prompt helps you see agreement and differences.",
                 "position": 15
               },
               {
                 "id": "q_gpe_04_16",
                 "lesson_id": "les_gpe_04_03",
-                "question": "When pasting an article excerpt into a chatbot to summarize, what should you still verify?",
+                "question": "Who should write the final conclusion in a research task?",
                 "options": [
-                  "That no key numbers, conditions, or exceptions were distorted",
-                  "Nothing—summaries are always exact",
-                  "Only the title",
-                  "Only the punctuation"
+                  "Only the chatbot",
+                  "A friend without reading it",
+                  "You, in your own words",
+                  "The first source you find"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Check that the summary faithfully reflects the original nuance.",
+                "correct_option_index": 2,
+                "explanation": "AI can give feedback, but the conclusion is your own thinking.",
                 "position": 16
               },
               {
                 "id": "q_gpe_04_17",
                 "lesson_id": "les_gpe_04_03",
-                "question": "Which is a sign of a fabricated citation?",
+                "question": "True or false: A source with an author, a title, and a year is always real.",
                 "options": [
-                  "A link that leads to a 404 page or a paper title that does not appear in any search",
-                  "A link to an official university page",
-                  "A clear author and year you can open and read",
-                  "A short title"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "404 links and unfindable titles are classic citation hallucinations.",
+                "correct_option_index": 1,
+                "explanation": "All of those details can be invented, so you must still find and open the source.",
                 "position": 17
               },
               {
                 "id": "q_gpe_04_18",
                 "lesson_id": "les_gpe_04_03",
-                "question": "Why summarize each source individually before comparing views?",
+                "question": "Which source is easiest to verify?",
                 "options": [
-                  "So you keep clear track of which source actually supports which claim",
-                  "To double the word count",
-                  "To avoid reading",
-                  "To hide contradictions"
+                  "One that names the organization, the exact title, and the year",
+                  "“A study by scientists”",
+                  "“Experts say so”",
+                  "“I read it somewhere”"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Source-by-source notes prevent blending claims together inaccurately.",
+                "explanation": "Specific details let you search for the source, but you still need to check that it exists.",
                 "position": 18
               },
               {
                 "id": "q_gpe_04_19",
                 "lesson_id": "les_gpe_04_03",
-                "question": "True or false: A chatbot can explain a topic at a beginner level and then step up to an intermediate level on request.",
+                "question": "The AI says a claim is supported by a study, but you cannot find the study anywhere. What should you do?",
                 "options": [
-                  "True",
-                  "False"
+                  "Use it anyway, because the AI sounded sure",
+                  "Change the study’s name to something similar",
+                  "Assume it exists in a private library",
+                  "Do not use it, and mark it as unverified"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Adjusting explanation depth is one of AI’s best tutoring strengths.",
+                "correct_option_index": 3,
+                "explanation": "If you cannot find it, do not use it.",
                 "position": 19
               },
               {
                 "id": "q_gpe_04_20",
                 "lesson_id": "les_gpe_04_03",
-                "question": "What should you do if two trusted sources disagree on a research question?",
+                "question": "Which prompt asks for missing perspectives?",
                 "options": [
-                  "Note both viewpoints and their evidence in your conclusion instead of picking one blindly",
-                  "Invent a third answer",
-                  "Delete both sources",
-                  "Ask the chatbot to hide the disagreement"
+                  "“Is this good?”",
+                  "“Write more words.”",
+                  "“What viewpoints or evidence are missing from this answer?”",
+                  "“Be funnier.”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Good research acknowledges genuine debate and weighs evidence.",
+                "correct_option_index": 2,
+                "explanation": "This kind of question helps you spot gaps and bias.",
                 "position": 20
               }
             ]
@@ -3609,26 +3613,26 @@
           {
             "id": "les_gpe_05_01",
             "section_id": "sec_gpe_05",
-            "title": "5.1 Lesson & Reading: Output Evaluation & “The Iteration Log” (20 min)",
+            "title": "5.1 Lesson & Reading: Checking and Improving Output & “The Iteration Log” (20 min)",
             "type": "article",
-            "summary": "Evaluate any AI output for accuracy, completeness, fairness, and audience fit; spot hallucinations and bias; protect privacy; and track fixes in an iteration log.",
+            "summary": "Check AI output with the A-C-F-R test, spot hallucinations, missing context, bias, and outdated info, turn mistakes into better prompts, and keep private information out.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **What you will learn:** Evaluate output for accuracy, bias, and fit, and improve prompts from what went wrong. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n#### 1. Why good-looking output can still be wrong\nAI writes fluent, confident prose even when facts are wrong, key context is missing, or assumptions are biased. Polish is not proof.\n\n#### 2. A four-part check for every output\n| Check | Ask yourself | If it fails, how to fix the prompt |\n| :--- | :--- | :--- |\n| **Accurate** | Are names, dates, numbers, and links verified? | Ask for sources to check, supply the source text yourself, or cross-check externally |\n| **Complete** | Did it answer every part of the task without skipping caveats? | Break into smaller chained steps or add a required checklist |\n| **Fair** | Does it avoid stereotypes, one-sided framing, or exclusionary assumptions? | Explicitly ask for balanced perspectives and check audience assumptions |\n| **Right for the audience** | Does the tone, depth, and format fit the real reader? | Specify audience, reading level, and format limits |\n\n#### 3. What NEVER to paste into a prompt\nNever paste **passwords, bank/card numbers, government IDs, private medical/HR records, or other people’s personal details** into public AI tools.\n\n---\n\n### Part B: Reading (8 minutes) — “The Iteration Log”\nProfessionals don’t guess randomly when fixing prompts—they keep an **Iteration Log** with four columns:\n1. **Prompt version** (what I asked)\n2. **Result** (what I got)\n3. **Problem** (what was inaccurate, incomplete, biased, or off-tone)\n4. **Fix** (the exact change I made to the next prompt)\n\nOne clear log entry teaches you more than ten unrecorded retries."
+            "content": "**COURSE 2 | PART 1: TEXT PROMPTING**\n**Module 5: Checking and Improving Output**\n*Written lesson and reading (20 minutes)*\n\n| Item | Details |\n| :--- | :--- |\n| **Module time** | 50 minutes: written lesson (12 min), reading (8 min), activity (15 min), knowledge check (15 min) |\n| **Level** | Beginner to Intermediate. Modules 1 to 4 are helpful |\n| **Tools** | A web browser is needed for the activity. A chatbot is optional |\n| **Format** | Written lesson with tables, a short reading, a fact-checking activity, and a quiz |\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n> **What you will learn:** By the end of this lesson, you will be able to check AI output with a four-part test, spot hallucinations, missing context, and bias, turn each mistake into a better prompt, and avoid sharing information that should stay private.\n\n#### 1. Good-looking is not the same as good\nFirst, let’s face a simple fact. AI output almost always looks good. It is well organized, it uses confident words, and it rarely says “I don’t know.” Nevertheless, the answer can still contain wrong facts, leave out important things, or be unfair. Therefore, a good prompter does not only write good prompts. A good prompter also checks the result and improves the prompt when something goes wrong.\n\n#### 2. The four-check test\nTo make checking easy, you can use four questions. Together, they spell a simple memory aid: **A-C-F-R**.\n\n| Check | Question | What to look for |\n| :--- | :--- | :--- |\n| **Accurate** | Are the facts correct? | Names, dates, numbers, quotes, links, and advice. Check the ones that matter |\n| **Complete** | Is anything important missing? | Missing warnings, steps, costs, or viewpoints |\n| **Fair** | Is it balanced and respectful? | Stereotypes, one-sided views, or assumptions about people |\n| **Right for the audience** | Does it fit the reader and the purpose? | Tone, level, length, and safety for the people who will use it |\n\nFor quick, low-stakes tasks, a fast look may be enough. In contrast, for anything that other people will read or rely on, use all four checks.\n\n#### 3. Four common problems\n| Problem | What it looks like | Warning signs |\n| :--- | :--- | :--- |\n| **Hallucination** | A made-up fact, quote, source, or link that sounds real | Very exact details that you cannot find anywhere, and total confidence |\n| **Missing context** | A correct-sounding answer that leaves out something that matters | No warnings, no limits, and no “it depends” |\n| **Bias** | Stereotypes, or only one viewpoint | Assumptions about gender, age, culture, or places |\n| **Outdated information** | Facts that were true earlier but have changed | Laws, prices, news, and “latest” anything |\n\n#### 4. How to check quickly\n- **Choose the claims that matter.** You do not have to check every word. Start with names, dates, numbers, quotes, and advice that someone might act on.\n- **Cross-check with trusted sources.** For important facts, look for two independent sources, such as official websites, respected news organizations, or encyclopedias.\n- **Ask the AI to list its claims.** For example: *“List the factual claims in your answer that I should check.”* This can help, but it never replaces your own checking.\n- **Read it as the audience.** Would the reader be confused, offended, or put at risk?\n- **Ask a knowledgeable person** for important decisions, such as health, money, law, or safety.\n\n#### 5. Turn every mistake into a better prompt\nWhen you find a problem, do not only fix the result. Instead, ask why the AI made the mistake, and change the prompt. As a result, your next answer is likely to be better, and your templates get stronger.\n\n| Problem you found | Prompt fix to try |\n| :--- | :--- |\n| **Invented facts** | “Use only the information I give you. If you are not sure, say ‘I don’t know’ instead of guessing.” |\n| **Missing context** | Add the situation, the audience, and what must be included, such as “Include safety warnings.” |\n| **Too general** | Add examples, limits, and the format you want |\n| **Wrong tone or level** | Name the audience and the tone, such as “for 11-year-olds, friendly and simple.” |\n| **Biased or one-sided** | “Include different viewpoints, and avoid stereotypes. Describe people neutrally.” |\n| **Outdated** | Paste the current information, or check an up-to-date source yourself |\n\n> **Remember:** A better prompt can reduce mistakes, but it cannot remove them. You still need to check.\n\n#### 6. Privacy and safety in your prompts\nIn addition to checking the output, you must also think about what you put in. Some information should never go into a prompt:\n- Passwords, bank details, and ID numbers.\n- Private information about other people, such as addresses, phone numbers, or health details.\n- Confidential documents from your school or workplace, unless your organization has approved the tool.\n\nInstead, use placeholders such as `[name]` or made-up details. Also, check the privacy settings of your tool, because some tools may store or use what you type.\n\n#### Being honest\nFinally, be honest about how you use AI. If you are asked whether AI helped, say so. Following the rules of your school or workplace is part of using AI responsibly.\n\n#### 7. Knowing when to stop\nSometimes, no amount of prompting fixes a problem. If you have tried two or three improved prompts and the answer is still wrong, stop. Then, you can do the task yourself, use a different source, or ask an expert.\n\n#### Key takeaways\n- AI output looks good even when it is wrong, so always check what matters.\n- Use the A-C-F-R test: accurate, complete, fair, and right for the audience.\n- Common problems are hallucinations, missing context, bias, and outdated information.\n- Turn each mistake into a prompt fix, and keep private information out of prompts.\n- If repeated tries do not work, change your approach.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Claim** | A statement that says something is true, such as a fact, a date, or a number |\n| **Hallucination** | A confident answer that is false or made up |\n| **Bias** | An unfair or unbalanced tendency in output |\n| **Cross-check** | Confirming a fact in more than one trusted source |\n| **Iteration** | Improving a prompt step by step, based on the results |\n| **Placeholder** | A made-up or blank item, such as `[name]`, used instead of real private information |\n\n---\n\n### Part B: Reading (8 minutes): “The Iteration Log”\n\nWhen you improve a prompt, it is easy to forget what you changed and why. After a few tries, you may not remember which version worked best. That is why many experienced prompters keep a simple **iteration log**.\n\nAn iteration log is a small table where you record each version of your prompt, the result, the problem, and the fix. It takes only a minute per version, but it gives you three benefits. First, you can see what really worked. Second, you can turn the best version into a template (Module 3). Third, it becomes evidence of your thinking in the final portfolio.\n\n#### An example log\n| Version | Prompt | Result | Problem | Fix for next time |\n| :--- | :--- | :--- | :--- | :--- |\n| **1** | “Write a welcome email for my club.” | Long and formal | Wrong tone, too long | Add audience, tone, and a word limit |\n| **2** | “Write a 100-word friendly welcome email for new members of a hiking club.” | Better, but invented a meeting time | Made-up detail | Give the real meeting times, and say not to invent details |\n| **3** | “…Use only these meeting times: [times]. Do not add anything else.” | Correct and friendly | None | Save as a template |\n\n#### Your own log\n| Version | Prompt | Result | Problem | Fix for next time |\n| :--- | :--- | :--- | :--- | :--- |\n| **1** | | | | |\n| **2** | | | | |\n| **3** | | | | |\n\n#### Tips for a useful log\n- **Change one thing at a time.** Then you can see which change made the difference.\n- **Be specific about the problem.** Write “invented a date,” not “bad.”\n- **Keep the good versions.** Save the best prompt as a template, with a “when to use it” line.\n- **Keep private data out.** Use placeholders in the log, too.\n\n**In short:** Write down the prompt, the result, the problem, and the fix. It takes a minute and saves much more."
           },
           {
             "id": "les_gpe_05_02",
             "section_id": "sec_gpe_05",
-            "title": "5.2 Activity: Fact-Check and Refine & Stretch Test Set (15 min)",
+            "title": "5.2 Activity: “Fact-Check and Refine” & Stretch Task (15 min)",
             "type": "article",
-            "summary": "Inspect an AI answer with hidden errors, check it, and rewrite the prompt to prevent the errors—plus a Stretch 5-input test set.",
+            "summary": "Mark and check claims in a Mount Everest fact sheet, apply the A-C-F-R test, write an improved prompt with an iteration log, and try the Stretch test-set task.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **Your goal:** Inspect the sample AI answer below, find its hidden errors, and rewrite the prompt so the next answer is accurate and complete. *(15 minutes)*\n\n---\n\n### Sample AI Output (with hidden errors)\n> *“The Great Wall of China is one single continuous wall built in 1800, and it is clearly visible to the naked eye from the Moon. It stretches about 21,000 kilometers across northern China.”*\n\n#### Your Tasks (in Personal Study Notes)\n1. **Check the 3 claims:** Identify which claim is **accurate** (~21,196 km total across dynasties/sections) and which two are **false** (it is a network of walls built over many centuries starting well before 1800, and it is *not* visible to the naked eye from the Moon).\n2. **Log it:** Write a 4-column **Iteration Log** entry (*Prompt → Result → Problem → Fix*).\n3. **Rewrite the prompt:** Add constraints (such as *\"only state verified historical facts, distinguish myths from facts, and list what to double-check\"*).\n\n---\n\n### Stretch Task (Advanced Users)\nDesign a **small test set of five different inputs** for one prompt template (e.g., an easy input, a very short input, a messy input, a tricky edge case, and an ambiguous input). Run or trace all five and record where the prompt fails."
+            "content": "### Part C: Activity (15 minutes): “Fact-Check and Refine”\n\n> **Your goal:** Read an AI answer that contains hidden problems. Check it with the A-C-F-R test, find the mistakes, and rewrite the prompt so that the next answer is better. You need a web browser. A chatbot is optional.\n\n---\n\n#### The situation\nA school newsletter editor asked an AI tool to write a short fact sheet about Mount Everest for children aged 10 to 12. The prompt was: *“Write a short fact sheet about Mount Everest.”* Here is the AI’s answer. It was written for this exercise to include mistakes.\n\n> **AI answer:**\n> Mount Everest is the highest mountain on Earth above sea level, at about 8,849 meters. It lies on the border between Nepal and India. Edmund Hillary and Tenzing Norgay were the first people to reach the summit, in 1963. Today, hundreds of climbers try the climb each year, and the climbing season is in the autumn, when the weather is warmest. Climbing Everest is easy for beginners with a good guide.\n\n---\n\n#### Step 1: Mark the claims (3 minutes)\nRead the answer. Underline every claim that you could check, such as places, dates, numbers, and advice.\n\n#### Step 2: Check the claims (6 minutes)\nUse a search engine and trusted sources, such as an encyclopedia or an official mountaineering or government page. For each claim, decide if it is right, wrong, or unsure, and note your source.\n\n| Claim | Right, wrong, or unsure? | Source I used | Correct version |\n| :--- | :--- | :--- | :--- |\n| Height of about 8,849 meters | | | |\n| On the border of Nepal and India | | | |\n| First climbed by Hillary and Tenzing in 1963 | | | |\n| Climbing season is autumn, “when the weather is warmest” | | | |\n| “Easy for beginners with a good guide” | | | |\n\n#### Step 3: Apply the A-C-F-R test (2 minutes)\n| Check | What I found |\n| :--- | :--- |\n| **Accurate** | |\n| **Complete** (what is missing?) | |\n| **Fair** | |\n| **Right for the audience** (ages 10 to 12) | |\n\n#### Step 4: Rewrite the prompt (4 minutes)\nWrite an improved prompt that would lead to a better fact sheet. Use what you found. Think about the audience, safety, and what to do when the AI is unsure. Then, add your changes to an iteration log (Version 1 is the original prompt, and Version 2 is yours).\n\n| Field | My answer |\n| :--- | :--- |\n| **My improved prompt (Version 2)** | |\n| **The problem that I fixed** | |\n| **What I will still check myself** | |\n\nIf you have a chatbot, run your improved prompt and check the new answer with A-C-F-R. If not, explain in one sentence what you expect to improve.\n\n---\n\n### Answer Guide and Feedback\n\n| Claim | Result |\n| :--- | :--- |\n| **Height of about 8,849 meters** | **Right.** The officially accepted height is about 8,849 meters, which was confirmed in a 2020 measurement agreed by Nepal and China |\n| **On the border of Nepal and India** | **Wrong.** Everest is on the border between Nepal and China (the Tibet Autonomous Region) |\n| **First climbed in 1963** | **Wrong.** Hillary and Tenzing Norgay reached the summit in 1953, not 1963 |\n| **Autumn is the season, “when the weather is warmest”** | **Misleading.** Most expeditions climb in spring (around April and May), before the summer monsoon. There is a smaller window in autumn. The weather is extremely cold at the summit in any season |\n| **“Easy for beginners with a good guide”** | **Wrong and unsafe.** Climbing Everest is extremely dangerous and demanding, even for very experienced climbers. This sentence could give children a false idea |\n\n#### A-C-F-R summary\n- **Accurate:** three factual errors (the border, the year, the season) and one dangerous statement.\n- **Complete:** there is nothing about the risks, the cold, the thin air, or the cost and preparation.\n- **Fair:** there is no obvious bias, but the answer leaves out the people who live and work in the region, such as the Sherpa guides. A fuller answer would mention them.\n- **Right for the audience:** the safety claim is not suitable for 10- to 12-year-olds.\n\n#### A sample improved prompt (Version 2)\n> “Write a fact sheet about Mount Everest for children aged 10 to 12, in six short bullet points and simple words. Use only facts that you are very confident about, and write ‘I am not sure’ if you are unsure. Include one bullet about how dangerous climbing is, and one about the Sherpa guides who work there. List the facts that I should check before I publish.”\n\n#### What good answers show\n- The learner checks each claim with a real source, and finds at least three of the problems.\n- The improved prompt names the audience, asks for caution when unsure, and requests safety information.\n- The learner knows that they must still check the new answer, because a better prompt does not remove all errors.\n\n#### Feedback to show learners\n- **Automated check:** The claim table is filled in, and the improved prompt has at least 25 words.\n- **Feedback:** “Good work. Checking claims and then improving the prompt is the core skill of this module. Keep an iteration log, and remember that you are responsible for the final result.”\n\n---\n\n### Stretch Task\nDesign a small **test set of five different inputs** for one of your prompts, such as five different topics for a summary. Run the prompt on each one, check the results with A-C-F-R, and record where it fails.\n\n> **Instructor notes:**\n> - This is a practice activity that supports the portfolio. It is not rubric-graded.\n> - The AI answer was written on purpose to include errors. Please verify the facts in the answer guide against current sources before each term.\n> - If learners have no internet access, let them use the answer guide after they try the claims themselves, and discuss why checking matters."
           },
           {
             "id": "les_gpe_05_03",
@@ -3644,275 +3648,277 @@
               {
                 "id": "q_gpe_05_1",
                 "lesson_id": "les_gpe_05_03",
-                "question": "Why can fluent, well-formatted AI output still be wrong?",
+                "question": "Why is it risky to trust AI output only because it looks professional?",
                 "options": [
-                  "Fluency comes from predicting likely word patterns, not verifying truth",
-                  "Good formatting prevents errors",
-                  "AI always checks every number twice",
-                  "Grammar rules guarantee facts"
+                  "Professional-looking text is always correct",
+                  "It can look polished and confident while still containing wrong or missing information",
+                  "AI never makes formatting mistakes",
+                  "Looks decide whether facts are true"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Smooth writing can still hide hallucinations, omissions, or bias.",
+                "correct_option_index": 1,
+                "explanation": "Good looks and correctness are two different things.",
                 "position": 1
               },
               {
                 "id": "q_gpe_05_2",
                 "lesson_id": "les_gpe_05_03",
-                "question": "What are the four checks for every AI output?",
+                "question": "What do the letters A-C-F-R stand for?",
                 "options": [
                   "Accurate, Complete, Fair, and Right for the audience",
-                  "Fast, Long, Fancy, and Secret",
-                  "Cheap, Loud, Bright, and New",
-                  "Short, Vague, Random, and Hidden"
+                  "Always, Check, Fix, Repeat",
+                  "Answer, Copy, Format, Reply",
+                  "Ask, Cut, Fill, Read"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Checking accuracy, completeness, fairness, and audience fit catches most failures.",
+                "explanation": "The four-check test covers facts, gaps, fairness, and fit.",
                 "position": 2
               },
               {
                 "id": "q_gpe_05_3",
                 "lesson_id": "les_gpe_05_03",
-                "question": "What four columns belong in an Iteration Log?",
+                "question": "Which of these is a hallucination?",
                 "options": [
-                  "Prompt, Result, Problem, and Fix",
-                  "Name, Age, Password, and Bank",
-                  "Date, Weather, Font, and Color",
-                  "Title, Price, Link, and Ad"
+                  "A correct date",
+                  "A short answer",
+                  "A table with three columns",
+                  "A confident quote or source that does not exist"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Tracking Problem → Fix turns trial-and-error into systematic improvement.",
+                "correct_option_index": 3,
+                "explanation": "A hallucination is a confident answer that is false or made up.",
                 "position": 3
               },
               {
                 "id": "q_gpe_05_4",
                 "lesson_id": "les_gpe_05_03",
-                "question": "If an output is accurate but uses too much technical jargon for your reader, which check failed?",
+                "question": "What does “missing context” look like?",
                 "options": [
-                  "Right for the audience",
-                  "Privacy",
-                  "Hardware",
-                  "None"
+                  "An answer that is too long",
+                  "An answer in a table",
+                  "A correct-sounding answer that leaves out something important, such as a warning",
+                  "An answer with a heading"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Tone and vocabulary must match the intended audience.",
+                "correct_option_index": 2,
+                "explanation": "Missing context can make an answer incomplete or even unsafe.",
                 "position": 4
               },
               {
                 "id": "q_gpe_05_5",
                 "lesson_id": "les_gpe_05_03",
-                "question": "Which item should NEVER be pasted into a public AI prompt?",
+                "question": "Which is an example of bias in output?",
                 "options": [
-                  "Passwords, ID numbers, bank details, or private customer records",
-                  "A general question about history",
-                  "A cooking recipe",
-                  "A draft blog outline with no personal data"
+                  "A correct number",
+                  "A stereotype about a group of people",
+                  "A list of three items",
+                  "A friendly tone"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Never share sensitive personal or confidential data in prompts.",
+                "correct_option_index": 1,
+                "explanation": "Bias is an unfair or unbalanced tendency, such as stereotypes.",
                 "position": 5
               },
               {
                 "id": "q_gpe_05_6",
                 "lesson_id": "les_gpe_05_03",
-                "question": "How should you use a mistake you found in an AI output?",
+                "question": "Why might an AI answer about a recent law be wrong?",
                 "options": [
-                  "Use it to diagnose what rule, context, or limit to add to your next prompt",
-                  "Ignore the mistake and publish anyway",
-                  "Give up on prompting forever",
-                  "Repeat the exact same prompt word for word"
+                  "Its information may be outdated, so you should check an up-to-date source",
+                  "Laws never change",
+                  "AI always knows tomorrow’s news",
+                  "Only old laws exist"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Every failure points to a specific missing constraint in the prompt.",
+                "explanation": "Models can lack recent information.",
                 "position": 6
               },
               {
                 "id": "q_gpe_05_7",
                 "lesson_id": "les_gpe_05_03",
-                "question": "True or false: Testing a prompt on five varied inputs is better than testing it once on an easy example.",
+                "question": "Which claims should you check first?",
                 "options": [
-                  "True",
-                  "False"
+                  "Only the font",
+                  "Only the first word",
+                  "Nothing, as long as it sounds good",
+                  "Names, dates, numbers, quotes, and advice that someone may act on"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Edge cases and messy inputs reveal hidden weaknesses.",
+                "correct_option_index": 3,
+                "explanation": "Start with the claims that matter most.",
                 "position": 7
               },
               {
                 "id": "q_gpe_05_8",
                 "lesson_id": "les_gpe_05_03",
-                "question": "What does checking for “Fair” output mean?",
+                "question": "How can you cross-check an important fact?",
                 "options": [
-                  "Looking for stereotypes, one-sided framing, or assumptions that exclude groups",
-                  "Checking that the text has even margins",
-                  "Making sure every sentence has 10 words",
-                  "Using only uppercase letters"
+                  "Ask the same chatbot twice",
+                  "Read it again in the same answer",
+                  "Find it in two independent, trusted sources",
+                  "Trust the longest answer"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Fairness checks catch bias inherited from training data or vague prompts.",
+                "correct_option_index": 2,
+                "explanation": "Independent sources give you more confidence.",
                 "position": 8
               },
               {
                 "id": "q_gpe_05_9",
                 "lesson_id": "les_gpe_05_03",
-                "question": "If an AI skipped two of your four required questions, which check failed?",
+                "question": "True or false: Asking the AI to list claims you should check replaces the need to check them yourself.",
                 "options": [
-                  "Complete",
-                  "Font",
-                  "Audio",
-                  "Speed"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Completeness ensures every requested part is actually delivered.",
+                "correct_option_index": 1,
+                "explanation": "It can help you plan the checking, but you still have to verify the claims.",
                 "position": 9
               },
               {
                 "id": "q_gpe_05_10",
                 "lesson_id": "les_gpe_05_03",
-                "question": "Why might an AI repeat a popular myth like “visible from the Moon”?",
+                "question": "Which prompt fix helps reduce invented facts?",
                 "options": [
-                  "Because the myth appears frequently in human writing it trained on",
-                  "Because it visited the Moon",
-                  "Because it hates geography",
-                  "Because it cannot count"
+                  "“Use only the information I give you, and say ‘I don’t know’ if you are not sure.”",
+                  "“Be more confident.”",
+                  "“Make it longer.”",
+                  "“Use fancier words.”"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Common myths in training text can surface unless verified.",
+                "explanation": "This kind of instruction discourages guessing, although it cannot remove all errors.",
                 "position": 10
               },
               {
                 "id": "q_gpe_05_11",
                 "lesson_id": "les_gpe_05_03",
-                "question": "When rewriting a prompt after a factual error, which addition helps most?",
+                "question": "The tone of the answer is too formal for children. What is the best prompt fix?",
                 "options": [
-                  "Asking it to separate verified facts from common myths and flag uncertainty",
-                  "Removing all limits",
-                  "Asking for a poem instead",
-                  "Making the prompt 3 words long"
+                  "Add more technical words",
+                  "Make the prompt shorter",
+                  "Remove the context",
+                  "Name the audience and tone, such as “for 11-year-olds, friendly and simple”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Inviting uncertainty and myth-checking reduces overconfident guessing.",
+                "correct_option_index": 3,
+                "explanation": "Naming the audience and tone fixes the fit.",
                 "position": 11
               },
               {
                 "id": "q_gpe_05_12",
                 "lesson_id": "les_gpe_05_03",
-                "question": "True or false: An Iteration Log is only useful for software engineers.",
+                "question": "What does an iteration log record?",
                 "options": [
-                  "True",
-                  "False"
+                  "Only your passwords",
+                  "Only the final answer",
+                  "The prompt, the result, the problem, and the fix for each version",
+                  "The names of other users"
                 ],
-                "correct_option_index": 1,
-                "explanation": "Anyone who writes prompts repeatedly benefits from logging what fixed a weak result.",
+                "correct_option_index": 2,
+                "explanation": "A log shows what you changed and why.",
                 "position": 12
               },
               {
                 "id": "q_gpe_05_13",
                 "lesson_id": "les_gpe_05_03",
-                "question": "What is “missing context” in an AI failure?",
+                "question": "Why is it a good idea to change one thing at a time when improving a prompt?",
                 "options": [
-                  "The AI guessed wrong because a key fact or constraint wasn’t in your prompt",
-                  "Your Wi-Fi disconnected",
-                  "The screen went dark",
-                  "The file was too small"
+                  "It is a legal rule",
+                  "You can see which change made the difference",
+                  "It makes the AI cheaper",
+                  "It hides the original prompt"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Adding the missing constraint directly fixes context failures.",
+                "correct_option_index": 1,
+                "explanation": "Single changes make cause and effect visible.",
                 "position": 13
               },
               {
                 "id": "q_gpe_05_14",
                 "lesson_id": "les_gpe_05_03",
-                "question": "Which of these is a good edge-case input when stress-testing a summary prompt?",
+                "question": "Which information should you never put into a prompt?",
                 "options": [
-                  "A very messy bulleted transcript with abbreviations and no headings",
-                  "A clean 2-sentence paragraph",
-                  "An empty page",
-                  "The exact same example twice"
+                  "Passwords, bank details, ID numbers, and private details about other people",
+                  "The topic of your task",
+                  "The length that you want",
+                  "The audience"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Messy real-world inputs show whether a prompt holds up.",
+                "explanation": "Private data may be stored or used by the tool.",
                 "position": 14
               },
               {
                 "id": "q_gpe_05_15",
                 "lesson_id": "les_gpe_05_03",
-                "question": "If you paste your own source text into a prompt, what instruction helps accuracy?",
+                "question": "What can you use instead of real private details in a prompt?",
                 "options": [
-                  "“Use only the facts in the text below; if something isn’t stated, say ‘Not stated.’”",
-                  "“Invent extra statistics to sound smart.”",
-                  "“Ignore the text below.”",
-                  "“Guess the missing numbers.”"
+                  "Real passwords",
+                  "Real ID numbers",
+                  "Photos of other people’s documents",
+                  "Placeholders or made-up details, such as [name]"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Grounding instructions tell the model not to extrapolate beyond your source.",
+                "correct_option_index": 3,
+                "explanation": "Placeholders let you ask for help without sharing private data.",
                 "position": 15
               },
               {
                 "id": "q_gpe_05_16",
                 "lesson_id": "les_gpe_05_03",
-                "question": "True or false: Reviewing AI output takes zero time once you write a good prompt.",
+                "question": "You tried three improved prompts and the answer is still wrong. What is the best next step?",
                 "options": [
-                  "True",
-                  "False"
+                  "Keep repeating the same prompt forever",
+                  "Publish the answer anyway",
+                  "Change your approach: do it yourself, use a different source, or ask an expert",
+                  "Blame the audience"
                 ],
-                "correct_option_index": 1,
-                "explanation": "Human review remains essential, especially for medium- and high-stakes work.",
+                "correct_option_index": 2,
+                "explanation": "Sometimes prompting is not the right solution.",
                 "position": 16
               },
               {
                 "id": "q_gpe_05_17",
                 "lesson_id": "les_gpe_05_03",
-                "question": "Which check catches an AI assuming all users are in one country or speak one dialect?",
+                "question": "True or false: A better prompt can completely remove all errors from AI output.",
                 "options": [
-                  "Fair / Right for the audience",
-                  "File size",
-                  "Print preview",
-                  "None"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Checking fairness and audience fit surfaces hidden cultural or regional assumptions.",
+                "correct_option_index": 1,
+                "explanation": "Better prompts reduce problems, but you still need to check the result.",
                 "position": 17
               },
               {
                 "id": "q_gpe_05_18",
                 "lesson_id": "les_gpe_05_03",
-                "question": "What should you record in the “Fix” column of an Iteration Log?",
+                "question": "A fact sheet for children says that a dangerous activity is “easy.” Which check does this fail most clearly?",
                 "options": [
-                  "The exact wording or constraint you added to solve the problem",
-                  "“I don’t know”",
-                  "A random website",
-                  "Your password"
+                  "Right for the audience, because it could mislead and put children at risk",
+                  "Format, because it has bullets",
+                  "Length, because it is short",
+                  "Title, because it has a name"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Recording the exact fix makes it repeatable.",
+                "explanation": "Safety and fit for the audience are part of the check.",
                 "position": 18
               },
               {
                 "id": "q_gpe_05_19",
                 "lesson_id": "les_gpe_05_03",
-                "question": "When is it best to abandon a prompt and start fresh with a smaller chained step?",
+                "question": "When should you be most careful to involve a knowledgeable person?",
                 "options": [
-                  "When 3+ tweaks still produce confused output because the prompt is doing too much at once",
-                  "After 1 second",
-                  "Never",
-                  "Before reading the first answer"
+                  "For choosing a font",
+                  "For naming a pet",
+                  "For picking a color",
+                  "For important decisions about health, money, law, or safety"
                 ],
-                "correct_option_index": 0,
-                "explanation": "If a monolithic prompt fights you, split it into a clean chain.",
+                "correct_option_index": 3,
+                "explanation": "High-stakes decisions need more than AI and a quick check.",
                 "position": 19
               },
               {
                 "id": "q_gpe_05_20",
                 "lesson_id": "les_gpe_05_03",
-                "question": "Who is responsible for errors in published work that used an AI draft?",
+                "question": "If someone asks whether AI helped with your work, what should you do?",
                 "options": [
-                  "The human author/publisher who reviewed and released it",
-                  "The chatbot alone",
-                  "The keyboard",
-                  "Nobody"
+                  "Say no even if AI helped",
+                  "Refuse to answer",
+                  "Be honest, and follow the rules of your school or workplace",
+                  "Blame the AI"
                 ],
-                "correct_option_index": 0,
-                "explanation": "People stay accountable for checking and approving what they share.",
+                "correct_option_index": 2,
+                "explanation": "Honesty about AI use is part of responsible use.",
                 "position": 20
               }
             ]
