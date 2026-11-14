@@ -37,19 +37,19 @@ export default function AboutPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const stats = [
-    { value: '350,000+', label: 'Learners & Fellows Empowered', icon: Users, color: '#38bdf8' },
-    { value: '85%', label: 'Employment & Career Progression Rate', icon: Rocket, color: '#10b981' },
-    { value: '54+', label: 'Global Alliance Hubs & Campuses', icon: Globe, color: '#c084fc' },
-    { value: '$0 Upfront', label: 'Scholarship Grants & Subsidized Tuition', icon: HeartHandshake, color: '#f59e0b' },
+    { value: '350,000+', label: 'Learners & Builders Using AI', icon: Users, color: '#38bdf8' },
+    { value: '14 Courses', label: 'Beginner to AI Engineering Tracks', icon: Rocket, color: '#10b981' },
+    { value: '54+', label: 'Global AI Hubs & Learning Pods', icon: Globe, color: '#c084fc' },
+    { value: '$0 Upfront', label: 'Free AI Foundations & Grants', icon: HeartHandshake, color: '#f59e0b' },
   ];
 
   const pillars = [
     {
       id: 'pillar-1',
-      title: 'Production-Grade Engineering',
+      title: 'Practical AI Literacy for Everyone',
       description:
-        'We refuse superficial slide-deck teaching. Every student designs PostgreSQL schemas with Row-Level Security, configures Next.js App Router architectures, and deploys scalable production APIs.',
-      tag: 'ENTERPRISE ARCHITECTURE',
+        'We demystify AI without jargon. Starting from AI Foundations (zero coding required), anyone can learn what AI is, how models learn from data, how to spot hallucinations, and how to apply AI responsibly.',
+      tag: 'AI LITERACY & FOUNDATIONS',
       icon: Terminal,
       accent: 'rgba(79, 70, 229, 0.15)',
       borderColor: 'rgba(79, 70, 229, 0.35)',
@@ -57,33 +57,33 @@ export default function AboutPage() {
     },
     {
       id: 'pillar-2',
-      title: 'Cohort Accountability & Pods',
+      title: 'Developing Real AI Technology',
       description:
-        'Isolation is where self-taught developers stall. At ReactJav, you pair-program in small student squads, conduct peer pull request reviews, and join daily agile checkpoints.',
-      tag: 'COLLABORATIVE CULTURE',
-      icon: Users,
+        'Beyond consuming chatbots, we teach learners and engineers how to design AI-first websites, integrate LLM APIs, build RAG pipelines, and ship production AI-powered applications.',
+      tag: 'AI ENGINEERING & BUILDING',
+      icon: Cpu,
       accent: 'rgba(16, 185, 129, 0.15)',
       borderColor: 'rgba(16, 185, 129, 0.35)',
       iconColor: '#10b981',
     },
     {
       id: 'pillar-3',
-      title: 'Direct 1-on-1 Faculty Mentorship',
+      title: 'Human-Centered & Responsible AI',
       description:
-        'Direct, unblocked learning. Our faculty includes principal engineers and cloud architects who review your code line-by-line in live screen-sharing rooms and direct WhatsApp pods.',
-      tag: 'PERSONAL GUIDANCE',
-      icon: GraduationCap,
+        'Great AI keeps humans in the loop. Every course emphasizes data quality, bias auditing, privacy protection, and independent verification so people stay in charge of every decision.',
+      tag: 'ETHICS & VERIFICATION',
+      icon: ShieldCheck,
       accent: 'rgba(192, 132, 252, 0.15)',
       borderColor: 'rgba(192, 132, 252, 0.35)',
-      iconColor: '#c084fc',
+      iconColor: 'var(--accent-purple)',
     },
     {
       id: 'pillar-4',
-      title: 'Proctored CBT & Verifiable Certs',
+      title: 'Proctored CBT & Open Badge Credentials',
       description:
-        'Certificates are only as valuable as the rigour behind them. Our timed 60-minute Computer-Based Testing center validates real problem-solving with tamper-proof digital credentials.',
+        'Our authentic assessments, randomized question-bank checks, and timed Computer-Based Testing (CBT) validate real AI mastery with Open Badges and verifiable certificates.',
       tag: 'VERIFIED CREDENTIALS',
-      icon: ShieldCheck,
+      icon: Award,
       accent: 'rgba(245, 158, 11, 0.15)',
       borderColor: 'rgba(245, 158, 11, 0.35)',
       iconColor: '#f59e0b',
@@ -93,27 +93,27 @@ export default function AboutPage() {
   const journeySteps = [
     {
       step: '01',
-      title: 'Deep Foundational Immersion',
-      badge: 'Weeks 1 – 4',
-      description: 'Master core systems, modern TypeScript, algorithms, and git team workflows before writing application logic.',
+      title: 'AI Foundations & Literacy',
+      badge: 'Stage 1 • Beginner',
+      description: 'Understand AI, Machine Learning, Deep Learning, and Generative AI, spot hallucinations, and audit everyday AI systems.',
     },
     {
       step: '02',
-      title: 'Full-Stack Cloud & Database Design',
-      badge: 'Weeks 5 – 8',
-      description: 'Architect multi-tenant databases in PostgreSQL, implement Supabase RLS policies, and deploy serverless endpoints.',
+      title: 'Prompting, Workflows & Ethics',
+      badge: 'Stage 2 • Practitioner',
+      description: 'Master structured prompting, automate daily workflows, and apply responsible-use rules for work, study, and business.',
     },
     {
       step: '03',
-      title: 'Timed CBT & Security Clearance',
-      badge: 'Weeks 9 – 10',
-      description: 'Take timed Computer-Based Testing exams under strict proctoring to earn your accredited digital certification.',
+      title: 'Web Design, Coding & AI Integration',
+      badge: 'Stage 3 • Builder',
+      description: 'Use AI to design websites, write and debug code faster, and integrate live AI features directly into your own web apps.',
     },
     {
       step: '04',
-      title: 'Capstone Delivery & Career Launch',
-      badge: 'Weeks 11 – 12',
-      description: 'Ship a live, production-grade SaaS product to real users, prepare resume narratives, and enter global job pipelines.',
+      title: 'AI Engineering & Capstone Launch',
+      badge: 'Stage 4 • Developer',
+      description: 'Build LLM applications with RAG, pass proctored CBT certifications, and ship real AI technology to users worldwide.',
     },
   ];
 
@@ -154,24 +154,24 @@ export default function AboutPage() {
 
   const faqs = [
     {
-      q: 'What sets ReactJav School apart from typical coding bootcamps?',
-      a: 'Most bootcamps charge tens of thousands of dollars upfront and leave students stranded in passive video tutorials. ReactJav is an outcome-engineered academy built around "Learning Hard Things First". We combine open public syllabi, a private campus intranet with timed CBT testing, live virtual pairing pods, and foundation-backed sponsorship grants so that world-class software engineering education is accessible to everyone regardless of financial background.',
+      q: 'What is ReactJav’s mission in the age of Artificial Intelligence?',
+      a: 'ReactJav exists to develop practical AI technology and empower everyday people, creators, and engineers to understand, evaluate, and utilize the power of AI. From our free, no-code AI Foundations course to advanced LLM and AI-integrated web development tracks, we bridge the gap between hype and real-world capability.',
+    },
+    {
+      q: 'Do I need coding experience to start learning AI at ReactJav?',
+      a: 'Not at all! Course 1 (AI Foundations: Getting Started with AI) requires zero coding and no prerequisites. You learn through plain-language written lessons, no-code hands-on labs (like Google Teachable Machine), and everyday AI audits before deciding whether to explore Prompt Engineering, Web Design with AI, or Coding with AI.',
     },
     {
       q: 'How does the dual Public Catalog and Campus Intranet architecture work?',
-      a: 'We believe in complete transparency. Our Public Catalog is open to all visitors to inspect full course outlines, lesson objectives, instructor profiles, and free preview lectures without login requirements. The Campus Intranet is our gated internal facility where enrolled fellows access timed 60-minute proctored CBT examination centers, live virtual breakout rooms with 1080p screen-sharing, and private code repositories.',
+      a: 'Our Public Catalog and AI Tech Blog are open to all visitors to explore full course syllabi, free preview lessons, and daily AI insights without login barriers. Inside the Campus Intranet, enrolled learners access guided labs, timed Computer-Based Testing (CBT) exams, live virtual breakout rooms, and 1-on-1 faculty mentorship.',
     },
     {
-      q: 'What is 1-on-1 Direct Tutoring and how can I get enrolled?',
-      a: 'Our Direct Tutoring track connects you with dedicated senior software engineers for personalized curriculum pacing, code reviews, and weekly live pairing sessions. Students can apply directly through our Academy portal or connect with our Academic Admissions team via WhatsApp for tailored track placement.',
+      q: 'Are the AI certificates and Open Badges verifiable by employers?',
+      a: 'Yes. Every ReactJav certificate and Open Badge is tied to randomized question-bank checks, authentic real-world deliverables (such as our “AI in My Life” Audit), and proctored CBT assessments, with metadata you can share directly on LinkedIn or your CV.',
     },
     {
-      q: 'Are the certifications accredited and verifiable by employers?',
-      a: 'Yes. Every ReactJav certificate is tied to verifiable project submissions and a passing score on our proctored Computer-Based Testing (CBT) examinations. Certificates feature unique digital verification IDs and cryptographic hashes that employers and academic institutions can validate in real-time.',
-    },
-    {
-      q: 'How do foundation-backed sponsorship grants work?',
-      a: 'Through partnerships with global philanthropic foundations and technology industry sponsors, we provide subsidized and 100% sponsored scholarship grants for motivated learners in underrepresented and emerging tech communities worldwide.',
+      q: 'How do free access and foundation-backed sponsorship grants work?',
+      a: 'Our flagship AI Foundations course is 100% free and uses free, no-login tools so cost and privacy are never barriers. For advanced AI engineering tracks, our philanthropic and industry partnerships provide subsidized and fully sponsored grants for motivated learners worldwide.',
     },
   ];
 
@@ -214,7 +214,7 @@ export default function AboutPage() {
           marginBottom: '1.25rem',
         }}>
           <Sparkles size={14} />
-          <span>Our Ethos, Vision & Academic Architecture</span>
+          <span>Developing AI Technology • Empowering People With AI</span>
         </div>
 
         <h1 style={{
@@ -226,8 +226,8 @@ export default function AboutPage() {
           margin: '0 auto 1.5rem',
           letterSpacing: '-0.03em',
         }}>
-          We Believe in Learning <br />
-          <span className="text-gradient">Hard Things First.</span>
+          Helping Everyone Learn &amp; <br />
+          <span className="text-gradient">Build With the Power of AI.</span>
         </h1>
 
         <p style={{
@@ -237,7 +237,7 @@ export default function AboutPage() {
           maxWidth: '780px',
           margin: '0 auto 2.5rem',
         }}>
-          ReactJav was built to eliminate the <em>tutorial hell</em> trap. We combine production-grade engineering curricula, peer-to-peer accountability, timed CBT certifications, and direct 1-on-1 faculty mentorship into a world-class academic institution.
+          ReactJav is dedicated to <strong>developing AI technology</strong> and <strong>assisting people to learn and utilize the power of AI</strong>—from plain-language AI literacy and responsible everyday use, to designing websites, writing code, and shipping production AI applications.
         </p>
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
@@ -357,35 +357,35 @@ export default function AboutPage() {
               marginBottom: '1.25rem',
               letterSpacing: '-0.02em',
             }}>
-              Why We Founded <br />
-              <span className="text-gradient">ReactJav School</span>
+              Our AI Mission at <br />
+              <span className="text-gradient">ReactJav Academy</span>
             </h2>
 
             <p style={{ fontSize: '0.96rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.2rem' }}>
-              The modern tech education industry is divided between two extremes: expensive bootcamps charging over $20,000 with predatory loan contracts, and low-cost pre-recorded video sites where 92% of students drop out due to lack of feedback, accountability, and real code review.
+              Artificial Intelligence is reshaping every profession, classroom, and business—yet most people are left either intimidated by technical jargon or misled by hype. Meanwhile, builders need practical skills to integrate AI reliably into real products.
             </p>
 
             <p style={{ fontSize: '0.96rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.75rem' }}>
-              We founded ReactJav on a fundamentally different premise: <strong>Software engineering is a craft best mastered through deliberate practice, architectural feedback, and rigorous evaluation.</strong> By pairing a transparent Public Curriculum with an internal Campus Intranet for proctored examinations and live code defense, we prepare students to excel in high-stakes engineering environments from day one.
+              We built ReactJav around a dual commitment: <strong>developing accessible AI technology</strong> and <strong>guiding people step by step to master and utilize AI</strong>. Whether you are taking your first no-code steps in <em>AI Foundations</em> or engineering LLM workflows and AI-powered web apps, you learn by testing real tools, verifying outputs, and building with human judgment at the center.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                 <CheckCircle2 size={18} color="#10b981" style={{ marginTop: '0.15rem', flexShrink: 0 }} />
                 <span style={{ fontSize: '0.9rem', color: 'var(--text-primary)', fontWeight: 600 }}>
-                  Zero Synthetic Code: Every exercise is based on real production architectures.
+                  AI for Everyone: Free, no-coding AI Foundations with plain-language written lessons.
                 </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                 <CheckCircle2 size={18} color="#10b981" style={{ marginTop: '0.15rem', flexShrink: 0 }} />
                 <span style={{ fontSize: '0.9rem', color: 'var(--text-primary)', fontWeight: 600 }}>
-                  Foundation Backing: Scholarships and grants available for high-aptitude fellows.
+                  Builders &amp; Innovators: Web Design with AI, Coding with AI, and AI App Integration.
                 </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                 <CheckCircle2 size={18} color="#10b981" style={{ marginTop: '0.15rem', flexShrink: 0 }} />
                 <span style={{ fontSize: '0.9rem', color: 'var(--text-primary)', fontWeight: 600 }}>
-                  Cryptographically Verified Credentials: No participation trophies. Only proven competence.
+                  Open Badges &amp; Verified Competence: Real-world audits, hallucination tests, and proctored CBT.
                 </span>
               </div>
             </div>
@@ -452,7 +452,7 @@ export default function AboutPage() {
                 background: 'rgba(168, 85, 247, 0.08)',
                 border: '1px solid rgba(168, 85, 247, 0.25)',
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#c084fc', fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.35rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-purple)', fontWeight: 700, fontSize: '0.85rem', marginBottom: '0.35rem' }}>
                   <ShieldCheck size={15} />
                   <span>Partition 2: The Gated Campus Intranet</span>
                 </div>
@@ -506,10 +506,10 @@ export default function AboutPage() {
             letterSpacing: '-0.02em',
             marginBottom: '0.75rem',
           }}>
-            Engineered for Real-World Competence
+            Built to Demystify &amp; Deploy AI
           </h2>
           <p style={{ fontSize: '0.96rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-            Every component of our curriculum and campus architecture exists to produce confident, high-agency builders who thrive in modern engineering teams.
+            Every part of our curriculum and technology platform is designed to help learners understand AI clearly, verify it critically, and build with it confidently.
           </p>
         </div>
 
@@ -590,10 +590,10 @@ export default function AboutPage() {
         }}>
           <div style={{ textAlign: 'center', maxWidth: '650px', margin: '0 auto 2.5rem' }}>
             <h2 style={{ fontSize: '1.85rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
-              Our Philosophical Tenets
+              Our AI Learning Principles
             </h2>
             <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary)' }}>
-              Click through our educational principles to understand how we structure curricula and evaluate technical talent.
+              Click through the principles guiding how we teach AI literacy, build AI technology, and verify real-world skills.
             </p>
           </div>
 
@@ -606,10 +606,10 @@ export default function AboutPage() {
             marginBottom: '2rem',
           }}>
             {[
-              { id: 'philosophy', label: '1. Learn Hard Things First', icon: Zap },
-              { id: 'practice', label: '2. Zero Tutorial Hell', icon: Code2 },
-              { id: 'access', label: '3. Radical Inclusivity', icon: HeartHandshake },
-              { id: 'verification', label: '4. Verifiable Competence', icon: Award },
+              { id: 'philosophy', label: '1. Plain-Language Clarity', icon: Zap },
+              { id: 'practice', label: '2. Hands-On AI Building', icon: Code2 },
+              { id: 'access', label: '3. AI Access for All', icon: HeartHandshake },
+              { id: 'verification', label: '4. Verify & Human-in-Loop', icon: Award },
             ].map((tab) => {
               const TabIcon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -653,13 +653,13 @@ export default function AboutPage() {
             {activeTab === 'philosophy' && (
               <div>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.8rem' }}>
-                  Starting with First Principles
+                  Starting with Clear Mental Models
                 </h3>
                 <p style={{ fontSize: '0.94rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1rem' }}>
-                  Many learning platforms start with toy abstractions and visual drag-and-drop builders that fail to explain what is happening under the hood. When students enter production environments, they break under the pressure of memory limits, race conditions, and network latency.
+                  Too much AI education hides behind intimidating math or shallow hype. People deserve to understand what AI actually is—how models learn from data, why they make predictions, and why chatbots sometimes hallucinate—in plain, everyday language.
                 </p>
                 <p style={{ fontSize: '0.94rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                  At ReactJav, we introduce foundational concepts early: database normalization, distributed state management, asynchronous execution, and cryptographic integrity. When you master hard things first, everyday software engineering becomes intuitive.
+                  At ReactJav, every concept starts with everyday analogies before moving into technical implementation, so both non-technical learners and software engineers build lasting confidence.
                 </p>
               </div>
             )}
@@ -667,13 +667,13 @@ export default function AboutPage() {
             {activeTab === 'practice' && (
               <div>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.8rem' }}>
-                  Breaking the Passive Video Loop
+                  Learn by Testing, Auditing &amp; Building
                 </h3>
                 <p style={{ fontSize: '0.94rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1rem' }}>
-                  Watching an instructor code a project at 1.5x speed creates an illusion of understanding. The true test of an engineer begins when the terminal outputs an unhandled rejection and there is no video to scrub through.
+                  Reading headlines about AI is not the same as using it well. True AI fluency comes from training your own classifier, stress-testing chatbots with tricky prompts, designing AI-assisted websites, and integrating real AI models into software.
                 </p>
                 <p style={{ fontSize: '0.94rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                  Every ReactJav lesson includes mandatory code checkpoints, unguided architectural challenges, and automated verification suites that require students to debug and reason independently.
+                  Every ReactJav course pairs structured lessons with hands-on labs, interactive workspaces, and authentic real-world deliverables.
                 </p>
               </div>
             )}
@@ -681,13 +681,13 @@ export default function AboutPage() {
             {activeTab === 'access' && (
               <div>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.8rem' }}>
-                  Democratizing World-Class Tech Talent
+                  Democratizing AI Literacy &amp; Tools
                 </h3>
                 <p style={{ fontSize: '0.94rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1rem' }}>
-                  Brilliant technical minds are distributed evenly across the globe, but high-end engineering mentorship has traditionally been locked behind elite universities and geography-specific networks.
+                  AI should empower people everywhere—not only engineers at giant tech companies. That is why we design beginner tracks around free, no-login tools and written lessons with full alt-text accessibility.
                 </p>
                 <p style={{ fontSize: '0.94rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                  Through strategic alliances with philanthropic foundations and technology enterprises, we offer fully sponsored grants ($0 upfront) so that high-potential students in developing regions can build high-paying global careers.
+                  Through open public syllabi, our free AI Tech Blog, and foundation-backed scholarship grants ($0 upfront), learners worldwide can step into the AI economy without financial or technical barriers.
                 </p>
               </div>
             )}
@@ -695,13 +695,13 @@ export default function AboutPage() {
             {activeTab === 'verification' && (
               <div>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.8rem' }}>
-                  Zero Fake Credentials
+                  Verification First, Humans in Charge
                 </h3>
                 <p style={{ fontSize: '0.94rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1rem' }}>
-                  The web is flooded with meaningless certificates of completion that only prove a video was played to the end. Industry employers have grown rightfully skeptical of portfolio claims.
+                  Because AI systems can hallucinate facts and inherit training-data bias, our 4-Step Verification Habit and 5-Point Responsible-Use Checklist are woven into every track.
                 </p>
                 <p style={{ fontSize: '0.94rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                  ReactJav certifications are backed by timed Computer-Based Testing (CBT) proctoring, live verbal code defense in virtual rooms, and deployed production deliverables that can be independently audited via public URLs.
+                  Likewise, ReactJav certifications and Open Badges are backed by randomized question banks, mixed-model rubric grading, and timed Computer-Based Testing (CBT) so employers know your AI skills are proven.
                 </p>
               </div>
             )}
@@ -729,10 +729,10 @@ export default function AboutPage() {
             <span>Path to Mastery</span>
           </div>
           <h2 style={{ fontSize: 'clamp(1.85rem, 3vw, 2.4rem)', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
-            The 12-Week Fellowship Pathway
+            From AI Literacy to Building AI Technology
           </h2>
           <p style={{ fontSize: '0.96rem', color: 'var(--text-secondary)' }}>
-            A structured roadmap transforming curious beginners and junior developers into confident, senior-caliber engineering contributors.
+            A clear, modular pathway guiding beginners, professionals, and developers from understanding AI to building with it.
           </p>
         </div>
 
@@ -1081,7 +1081,7 @@ export default function AboutPage() {
             marginBottom: '1rem',
             letterSpacing: '-0.02em',
           }}>
-            Ready to Build Production Systems That Matter?
+            Ready to Learn &amp; Harness the Power of AI?
           </h2>
 
           <p style={{
@@ -1091,7 +1091,7 @@ export default function AboutPage() {
             maxWidth: '680px',
             margin: '0 auto 2.25rem',
           }}>
-            Whether you want to explore our open public syllabi, apply for a 100% sponsored foundation grant, or enroll in direct 1-on-1 faculty mentorship, your next career chapter starts here.
+            Start for free with <strong>AI Foundations</strong>, explore our <strong>AI Tech Blog</strong>, or enroll in hands-on courses for building websites, workflows, and applications powered by AI.
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
