@@ -3993,26 +3993,26 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
           {
             "id": "les_gpe_06_01",
             "section_id": "sec_gpe_06",
-            "title": "6.1 Lesson & Reading: Anatomy of Image Prompts & “One Change at a Time” (20 min)",
+            "title": "6.1 Lesson & Reading: Prompting for Images & “One Change at a Time” (20 min)",
             "type": "article",
-            "summary": "Master the 8-part anatomy of an image prompt, specific vs. poetic phrasing, style/character consistency, why text in images fails, alt text, and iterating one change at a time.",
+            "summary": "Write an image prompt with eight useful parts, iterate one change at a time, use style sheets for consistency, know tool limits, and write accessible alt text.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **What you will learn:** Write effective image prompts, improve them by iteration, and describe images accurately with alt text. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n#### 1. The 8-part anatomy of an image prompt\n| Element | What to specify | Example |\n| :--- | :--- | :--- |\n| **1. Subject** | Main person, object, or animal + key details | *“A small ceramic coffee mug with a chipped rim”* |\n| **2. Setting** | Where it is and what is around it | *“on a weathered wooden café table near a rain-streaked window”* |\n| **3. Style** | Photo, watercolor, flat vector, 3D render, etc. | *“natural editorial photograph”* |\n| **4. Composition & camera view** | Close-up, wide shot, top-down, rule of thirds | *“eye-level close-up, shallow depth of field”* |\n| **5. Lighting** | Soft morning light, golden hour, studio key light | *“soft overcast morning light from the left”* |\n| **6. Color & mood** | Palette and emotional feel | *“warm earth tones, calm and cozy mood”* |\n| **7. Format** | Aspect ratio or orientation | *“16:9 widescreen”* or *“1:1 square”* |\n| **8. What to avoid** | Elements to exclude | *“no text, no watermarks, no extra hands”* |\n\n#### 2. Specific instead of poetic + Consistency + Alt Text\n- **Be visual and concrete:** *“Soft golden sunlight through pine trees”* works far better than *“a symphony of hopeful dreams.”*\n- **Text inside images:** Image generators predict visual patterns, not spelling—expect garbled letters unless you add text later in a design tool.\n- **Keeping consistency:** Reuse exact character/clothing/palette phrases across prompts.\n- **Accessibility (Alt Text):** Always write clear **alt text** describing the subject, setting, and purpose of any image you share.\n\n---\n\n### Part B: Reading (8 minutes) — “One Change at a Time”\nWhen an image isn’t quite right, resist rewriting the whole prompt at once. Change **only one element** per round (e.g., first fix the camera angle, then adjust lighting, then refine style). Keeping a stable base lets you see what each change actually did."
+            "content": "**COURSE 2 | PART 2: IMAGES, AUDIO, AND VIDEO**\n**Module 6: Prompting for Images**\n*Written lesson and reading (20 minutes)*\n\n| Item | Details |\n| :--- | :--- |\n| **Module time** | 50 minutes: written lesson (12 min), reading (8 min), activity (15 min), knowledge check (15 min) |\n| **Level** | Beginner to Intermediate. Modules 1 and 2 are helpful |\n| **Tools** | An image tool is helpful for the activity but not required. A text-only version is included, with sample results described in words |\n| **Format** | Written lesson with tables, a short reading, a prompt-rewriting activity, and a quiz |\n\n> **Access and fairness:** Image tools often have limits, accounts, or costs, and their rules change. You do not have to pay for anything, because every task has a text-only version. Please do not use a real person’s face in your work without their permission.\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n> **What you will learn:** By the end of this lesson, you will be able to write an image prompt with eight useful parts, improve it by changing one thing at a time, know the common limits of image tools, and write alt text so that your images are accessible.\n\n#### 1. How image tools respond to your words\nFirst, let’s connect this lesson to what you already know. In earlier modules, you learned that a text prompt works best when it is clear and complete. The same idea applies to images. An image tool turns your written description into a picture, using patterns that it learned from very many pictures and their descriptions.\n\nHowever, there is one important difference. When you read text, you can judge the result quickly. With an image, you judge by looking, and small changes in your words can change the picture a lot. In addition, the tool cannot see the picture in your mind. Therefore, every detail that you leave out is chosen for you, and the tool’s choice is often average or generic.\n\n#### 2. The anatomy of an image prompt\nTo avoid generic results, you can think of an image prompt as having **eight parts**. You do not need all eight every time, but the checklist helps you to remember what to describe.\n\n| Part | Question it answers | Example |\n| :--- | :--- | :--- |\n| **Subject** | What is in the picture? | “a grey tabby cat sleeping” |\n| **Setting** | Where and when is it? | “on a windowsill in a sunny kitchen” |\n| **Style** | What kind of image is it? | “watercolor illustration” or “realistic photo” |\n| **Composition and camera view** | How is it framed? | “close-up from the side” or “view from above” |\n| **Lighting** | What is the light like? | “soft morning light” or “warm lamp light at night” |\n| **Color and mood** | What colors and feeling? | “warm yellow and cream colors, calm mood” |\n| **Format** | What shape or size? | “square image” or “wide image” |\n| **What to avoid** | What should not appear? | “no text, no people” |\n\n##### A weak prompt and a strong prompt\n| Version | Prompt |\n| :--- | :--- |\n| **Weak** | “A cat.” |\n| **Strong** | “A grey tabby cat sleeping on a windowsill in a sunny kitchen, watercolor illustration style, close-up from the side, soft morning light, warm yellow and cream colors, calm mood, square image, no text.” |\n\nIn the strong prompt, the subject, setting, style, composition, lighting, color and mood, format, and exclusions are all named. As a result, the tool has very little to guess.\n\n#### 3. Be specific, not poetic\nNext, it helps to describe what can be seen. For instance, an abstract phrase such as *“a feeling of nostalgia”* gives the tool very little to work with. In contrast, *“a faded photo-style picture of an old bicycle leaning on a brick wall, warm sepia colors”* describes things that the tool can draw.\n- **Use visible words:** objects, colors, materials, places, and light.\n- **Put the most important things first.** Many tools give more weight to the early words.\n- **Use a short list of details** instead of a long, flowery sentence.\n\n#### 4. Improve it by changing one thing at a time\nAfter you run a prompt, you will rarely get the perfect picture on the first try. Therefore, you improve it by iteration. The best method is to change **one thing at a time**, such as the lighting or the camera view. Then you can see exactly what each change does. If you change five things at once, you cannot tell which change helped, and you may lose something that you liked.\n- **Keep what works.** Write down the version you liked, so that you can return to it.\n- **Try variations.** Many tools can make several versions from one prompt, or edit an existing picture, for example *“keep everything, but change the background to a beach.”*\n- **Know when to stop.** If a picture is good enough for its purpose, stop.\n\n#### 5. Keeping a set of images consistent\nSometimes, you need several images that belong together, such as pictures for a story or a presentation. Here, consistency is difficult, because each run can look different. A useful approach is to write a **style sheet**, which is a short description that you paste into every prompt.\n\n| Part | Example |\n| :--- | :--- |\n| **Style sheet** | “Flat vector illustration, pastel colors, thick outlines, soft shadows, no text.” |\n| **Character description** | “A round-faced girl with short black hair, a yellow raincoat, and red boots.” |\n| **One prompt using both** | “[Style sheet] [Character description] jumping over a puddle in a rainy city street, view from the side.” |\n\nEven so, do not expect a perfect match. Treat consistency as something that you improve, not something that you can guarantee.\n\n#### 6. Common limits of image tools\n| Limit | What to do |\n| :--- | :--- |\n| **Text inside images is often misspelled or distorted** | Ask for “no text”, and add the words later in a design or editing tool |\n| **Small details, such as hands, fingers, and tiny objects, can look wrong** | Check carefully, try again, or use a different view, such as a hand holding a cup from a distance |\n| **Counting objects may be wrong** | Check the number, and try again if it matters |\n| **Real brands, logos, and places may be wrong or may raise legal problems** | Avoid logos and brand names, and use general descriptions |\n| **Results vary** | Run again, and record what you really got |\n\n#### 7. Alt text: describing images for everyone\nFinally, remember that not everyone can see your image. For example, people who use screen readers hear a description instead. **Alt text** is a short written description of an image. Good alt text says what is shown, includes the important details, and matches the purpose of the image.\n\n| Version | Alt text |\n| :--- | :--- |\n| **Weak** | “Image of a cat.” |\n| **Better** | “A grey tabby cat sleeps on a sunny kitchen windowsill in a soft watercolor illustration, with warm yellow and cream tones.” |\n\n- Keep it to **one or two sentences**.\n- **Do not start with “image of” or “picture of”**, because screen readers already say that it is an image.\n- Describe what matters for the purpose, not every tiny detail.\n\n#### 8. Responsible use: three quick reminders\n- **People:** Do not make or share images of real people without their permission.\n- **Labels:** Say that an image is AI-made when you share it.\n- **Style and ownership:** Do not try to copy a brand or the style of a living artist. Module 9 covers consent, ownership, and labeling in depth.\n\n#### Key takeaways\n- An image prompt has eight parts: subject, setting, style, composition, lighting, color and mood, format, and what to avoid.\n- Describe what can be seen, and put the most important things first.\n- Improve by changing one thing at a time, and keep what works.\n- Use a style sheet for consistency, and expect imperfect results.\n- Text, hands, and counting are weak points. Write alt text for every image, and label AI-made images.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Subject** | The main thing in the picture |\n| **Composition** | How the picture is framed and arranged, including the camera view |\n| **Style** | The kind of look, such as a photo, a watercolor, or a flat illustration |\n| **Variation** | A different version of the same idea |\n| **Style sheet** | A short description of the look that you paste into several prompts to keep images consistent |\n| **Alt text** | A short written description of an image for people who cannot see it |\n\n---\n\n### Part B: Reading (8 minutes): “One Change at a Time”\n\nImagine that you are testing a recipe. If you change the sugar, the oven temperature, and the baking time all at once, and the cake turns out better, you will not know why. If you change only the sugar, you will learn what the sugar does. Improving an image prompt works the same way.\n\n#### An example of four rounds\nThe table below shows how one prompt can improve over four rounds. The “typical effect” column describes what often happens, but real tools vary.\n\n| Round | What I changed | Typical effect |\n| :--- | :--- | :--- |\n| **1** | “A lighthouse.” | A generic lighthouse, usually centered, with default style and light |\n| **2** | Added the setting and style: “A white lighthouse on a rocky coast, watercolor illustration.” | A more specific scene, with a painted look |\n| **3** | Changed only the lighting: “…at sunset, golden light.” | The same scene, with warmer colors and longer shadows |\n| **4** | Changed only the camera view: “…seen from below, wide image.” | The same scene, with a more dramatic, taller feeling |\n\n#### Why this works\n- **You learn what each word does.** After a few rounds, you build a personal sense of which words change what.\n- **You can go back.** If round 4 is worse, you return to round 3 and try something else.\n- **You can reuse the result.** The best version becomes a template, and the style part becomes your style sheet.\n\n#### Keep a short log\nUse the iteration log from Module 5. For each round, write the prompt, what you saw, what you liked or disliked, and the next change.\n\n| Version | Prompt | Result | Problem | Next change |\n| :--- | :--- | :--- | :--- | :--- |\n| **1** | | | | |\n| **2** | | | | |\n| **3** | | | | |\n\n**In short:** Change one thing, look, decide, and repeat. Keep what works, and stop when the picture is good enough for its purpose."
           },
           {
             "id": "les_gpe_06_02",
             "section_id": "sec_gpe_06",
-            "title": "6.2 Activity: Rebuild the Picture & Stretch Style Sheet (15 min)",
+            "title": "6.2 Activity: “Rebuild the Picture” & Stretch Task (15 min)",
             "type": "article",
-            "summary": "Rewrite five weak image prompts using the 8-part anatomy checklist, write alt text for the result (with sample descriptions for analysis-only learners), and try the Stretch style sheet.",
+            "summary": "Rewrite five weak prompts using the eight-part anatomy, test or compare with the text-only alternative, write alt text, and try the Stretch style-sheet task.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **Your goal:** Rewrite five weak image prompts using the 8-part anatomy checklist and write clear **alt text** for the result. *(15 minutes)*\n\n---\n\n### Target Description & Five Weak Prompts\n**Target:** A calm community-garden poster illustration showing volunteers watering raised vegetable beds at sunrise.\nRewrite these 5 weak prompts in your **Personal Study Notes**:\n1. *“Garden.”*\n2. *“Happy nature vibes.”*\n3. *“People with plants, nice light, put text ‘JOIN US SATURDAY’.”*\n4. *“Draw a cool farm.”*\n5. *“Vegetables in a box, photo.”*\n\n*(Analysis-Only Sample: Prompt #3 will likely produce garbled letters for “JOIN US SATURDAY”. A strong rebuild removes in-image text—”no text”—specifies “flat warm-toned editorial illustration, wide shot of 3 diverse volunteers watering raised wooden beds at sunrise, soft golden light, 4:5 portrait”—and adds **Alt text**: “Editorial illustration of three volunteers watering raised vegetable beds in soft sunrise light.”)*\n\n---\n\n### Stretch Task (Advanced Users)\nWrite a reusable **“style sheet” prompt block** (palette, medium, lighting, line weight, and background rules) that keeps a set of **four illustrations** visually consistent."
+            "content": "### Part C: Activity (15 minutes): “Rebuild the Picture”\n\n> **Your goal:** Five weak prompts are paired with five pictures that someone wants. Rewrite each prompt using the eight-part anatomy, and write alt text. If you have an image tool, test two of your prompts. If not, use the text-only version in Step 3.\n\n---\n\n#### Step 1: Read the targets (2 minutes)\nEach row shows a weak prompt and the picture that the person really wants.\n\n#### Step 2: Rewrite the prompts (7 minutes)\nFor each row, write an improved prompt. Use at least five of the eight anatomy parts. Do not include real people or brand names.\n\n| # | Weak prompt | Target picture (what the person wants) | My improved prompt |\n| :--- | :--- | :--- | :--- |\n| **1** | “A library.” | A quiet reading corner by a tall window on a rainy evening, with a green armchair, a steaming cup, warm lamp light, and old books | |\n| **2** | “A dog.” | A golden retriever puppy running through orange autumn leaves in a park, looking joyful, in the late afternoon | |\n| **3** | “A city.” | A busy night market in a small city, with glowing lanterns and food stalls, seen from above | |\n| **4** | “A poster for my club.” | A hiking club poster with mountains at sunrise, bold simple shapes, bright colors, and no text | |\n| **5** | “Food.” | A bowl of tomato soup with fresh basil on a rustic wooden table, seen from above, in natural light | |\n\n---\n\n#### Step 3: Test or compare (4 minutes)\n\n##### Option A: With an image tool\nRun two of your prompts. For one of them, change **one thing only** (such as the lighting or the camera view) and run it again. Record what changed.\n\n| Prompt I ran | What I changed (one thing) | What the picture did |\n| :--- | :--- | :--- |\n| | | |\n\n##### Option B: Text-only version\nTwo sample results are described in words below. They were written for this exercise, and real tools will give different pictures. Both answer the “dog” row.\n\n| Prompt | Sample result (described in words) |\n| :--- | :--- |\n| **Weak:** “A dog.” | A dog stands in the middle of the picture in front of a plain grey background. It looks straight at the camera. The light is flat and even, and there are no other objects. |\n| **Improved:** “A golden retriever puppy running across a park path covered in orange autumn leaves, caught mid-stride, low camera angle, warm late-afternoon sunlight, shallow depth of field, joyful mood, wide image.” | A golden puppy bounds along a leaf-covered path, with its ears flying. The camera is near the ground, so the leaves in front are slightly blurred. Long golden light falls from the side, and the trees in the background are soft and orange. |\n\n- Which anatomy parts did the improved prompt add?\n- What did the weak prompt leave to the tool’s choice?\n\n---\n\n#### Step 4: Write alt text (2 minutes)\nWrite alt text (one or two sentences) for the improved “dog” picture, or for one of your own results.\n\n| Field | My answer |\n| :--- | :--- |\n| **My alt text** | |\n\n---\n\n### Answer Guide and Feedback\n\nThere is no single correct prompt. Here are sample rewrites.\n\n| # | Sample improved prompt |\n| :--- | :--- |\n| **1** | “A quiet reading corner by a tall window on a rainy evening, a green armchair, a wooden side table with a steaming cup, a stack of old books, rain on the glass, warm lamp light, cozy mood, soft realistic illustration style, wide image, no people.” |\n| **2** | “A golden retriever puppy running through orange autumn leaves in a park, caught mid-stride, low camera angle, warm late-afternoon light, joyful mood, realistic photo style, wide image.” |\n| **3** | “A busy night market in a small city, glowing paper lanterns and food stalls, view from above, warm orange and red colors, lively mood, detailed illustration style, wide image, no text, no real brands.” |\n| **4** | “A hiking club poster: mountains at sunrise, bold simple flat shapes, bright orange and blue colors, hopeful mood, vertical poster format, no text.” |\n| **5** | “A bowl of tomato soup with fresh basil on a rustic wooden table, view from above, soft natural window light, warm red and green colors, realistic photo style, square image.” |\n\n#### Sample alt text for the “dog” picture\n> “A golden retriever puppy runs along a park path covered in orange autumn leaves, with long golden light and soft trees behind it.”\n\n#### What good answers show\n- Each rewrite uses at least five anatomy parts, and describes things that can be seen.\n- The poster prompt asks for “no text”, because text in images is often wrong.\n- The alt text describes what is shown in one or two sentences, and it does not start with “image of”.\n- No real people or brands are used.\n\n#### Feedback to show learners\n- **Automated check:** All five prompts are rewritten with at least 25 words each, and alt text is provided.\n- **Feedback:** “Good work. Strong image prompts name what can be seen, and they leave little for the tool to guess. Remember to change one thing at a time, and to write alt text.”\n\n---\n\n### Stretch Task\nWrite a **style sheet** and a **character description**, and use them in four different prompts for a short story, such as a girl in a yellow raincoat in four different places. Note how consistent the results are.\n\n> **Instructor notes:**\n> - This is a practice activity that supports the portfolio’s image entry. It is not rubric-graded.\n> - Check the terms and the privacy notice of any image tool you recommend, since they change.\n> - Tell learners not to use real people’s faces or brand names, and to label AI-made images when they share them.\n> - The sample results in the text-only version are descriptions written for this exercise. Update them if they no longer show a clear difference."
           },
           {
             "id": "les_gpe_06_03",
@@ -4028,275 +4028,277 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
               {
                 "id": "q_gpe_06_1",
                 "lesson_id": "les_gpe_06_03",
-                "question": "Why should image prompts be concrete and visual rather than abstractly poetic?",
+                "question": "Why do short, vague image prompts often give generic pictures?",
                 "options": [
-                  "Image models map concrete visual words (objects, light, style) far more reliably than abstract metaphors",
-                  "Poetic words are forbidden",
-                  "Short words cost more",
-                  "Concrete words disable style"
+                  "Image tools refuse short prompts",
+                  "The tool chooses every missing detail for you, and its choices are often average",
+                  "Short prompts make images darker",
+                  "Vague prompts are illegal"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Describing what the camera or eye actually sees gives predictable results.",
+                "correct_option_index": 1,
+                "explanation": "Details that you leave out are chosen by the tool.",
                 "position": 1
               },
               {
                 "id": "q_gpe_06_2",
                 "lesson_id": "les_gpe_06_03",
-                "question": "Which element belongs in the 8-part image prompt anatomy?",
+                "question": "Which is NOT one of the eight parts of an image prompt in this module?",
                 "options": [
-                  "Composition and camera view (e.g., close-up, top-down)",
-                  "Your home Wi-Fi password",
-                  "A 500-word biography",
-                  "Hidden audio tracks"
+                  "The price of the tool",
+                  "Subject",
+                  "Lighting",
+                  "Composition"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Subject, setting, style, composition, lighting, color/mood, format, and exclusions form the anatomy.",
+                "explanation": "The eight parts are subject, setting, style, composition, lighting, color and mood, format, and what to avoid.",
                 "position": 2
               },
               {
                 "id": "q_gpe_06_3",
                 "lesson_id": "les_gpe_06_03",
-                "question": "Why does text inside AI-generated images often appear misspelled?",
+                "question": "What does “composition and camera view” describe?",
                 "options": [
-                  "Image models predict visual shapes rather than spelling words reliably",
-                  "Keyboards break during image generation",
-                  "Fonts are copyrighted",
-                  "Images cannot show letters at all"
+                  "The price of the picture",
+                  "The name of the tool",
+                  "The file size",
+                  "How the picture is framed, such as a close-up or a view from above"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Add clean headlines or labels afterward in a design tool when spelling matters.",
+                "correct_option_index": 3,
+                "explanation": "Composition says how the scene is framed and arranged.",
                 "position": 3
               },
               {
                 "id": "q_gpe_06_4",
                 "lesson_id": "les_gpe_06_03",
-                "question": "What is the core rule of “One change at a time”?",
+                "question": "Which is a better image description?",
                 "options": [
-                  "Modify only one prompt element per round so you know what caused the change",
-                  "Delete everything after every test",
-                  "Change 6 elements at once",
-                  "Never iterate"
+                  "“A feeling of nostalgia”",
+                  "“Something nice”",
+                  "“An old bicycle leaning on a brick wall, warm sepia colors, soft evening light”",
+                  "“Beautiful”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Isolating one variable per iteration prevents losing what already worked.",
+                "correct_option_index": 2,
+                "explanation": "Visible details are easier for the tool to draw than abstract feelings.",
                 "position": 4
               },
               {
                 "id": "q_gpe_06_5",
                 "lesson_id": "les_gpe_06_03",
-                "question": "What is “alt text” for an image?",
+                "question": "Why should you put the most important words first in an image prompt?",
                 "options": [
-                  "A short written description of the image so screen readers and text-only users understand it",
-                  "A secret prompt",
-                  "A file compression format",
-                  "An advertisement"
+                  "Late words are never read",
+                  "Many tools give more weight to the early words",
+                  "It makes the file smaller",
+                  "It is a legal rule"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Alt text makes visual media accessible to everyone.",
+                "correct_option_index": 1,
+                "explanation": "Putting key details early helps them to stand out.",
                 "position": 5
               },
               {
                 "id": "q_gpe_06_6",
                 "lesson_id": "les_gpe_06_03",
-                "question": "How can you keep a character or style consistent across four images?",
+                "question": "What is the best way to improve an image prompt?",
                 "options": [
-                  "Reuse the exact same character description and style-sheet block in every prompt",
-                  "Use a totally different style word each time",
-                  "Write only one word",
-                  "Remove all lighting details"
+                  "Change one thing at a time, and look at the result",
+                  "Change everything at once",
+                  "Never change the first version",
+                  "Delete the prompt and stop"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Consistent anchor phrases keep characters and visual identity aligned.",
+                "explanation": "Single changes show what each change does.",
                 "position": 6
               },
               {
                 "id": "q_gpe_06_7",
                 "lesson_id": "les_gpe_06_03",
-                "question": "True or false: Specifying “what to avoid” (like “no text, no watermarks”) helps keep posters clean.",
+                "question": "You like version 2 of a picture, but version 3 is worse. What should you do?",
                 "options": [
-                  "True",
-                  "False"
+                  "Keep version 3 anyway",
+                  "Start over from nothing",
+                  "Change five things at once",
+                  "Go back to version 2, and try a different single change"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Explicit exclusions reduce unwanted clutter.",
+                "correct_option_index": 3,
+                "explanation": "Keeping the version that works lets you improve from a good base.",
                 "position": 7
               },
               {
                 "id": "q_gpe_06_8",
                 "lesson_id": "les_gpe_06_03",
-                "question": "Which lighting description is clearest?",
+                "question": "What is a style sheet in this module?",
                 "options": [
-                  "“Soft overcast morning light from the left”",
-                  "“Nice vibes”",
-                  "“Good energy”",
-                  "“Normal”"
+                  "A paper form from a school",
+                  "A list of passwords",
+                  "A short description of the look that you paste into several prompts for consistency",
+                  "A type of camera"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Direction and quality of light strongly shape depth and mood.",
+                "correct_option_index": 2,
+                "explanation": "A style sheet helps several images to match.",
                 "position": 8
               },
               {
                 "id": "q_gpe_06_9",
                 "lesson_id": "les_gpe_06_03",
-                "question": "What does “aspect ratio” (e.g., 16:9 or 1:1) control?",
+                "question": "Which is a common weak point of image tools?",
                 "options": [
-                  "The width-to-height shape/format of the image",
-                  "The brightness of the screen",
-                  "The price of the tool",
-                  "The spelling of captions"
+                  "Drawing the color blue",
+                  "Text inside images, which is often misspelled",
+                  "Making square images",
+                  "Drawing trees"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Match aspect ratio to where the image will be used (banner, square post, poster).",
+                "correct_option_index": 1,
+                "explanation": "It is better to add text later in a design tool.",
                 "position": 9
               },
               {
                 "id": "q_gpe_06_10",
                 "lesson_id": "les_gpe_06_03",
-                "question": "If an image prompt produces a cluttered background, what single change fixes it best?",
+                "question": "How can you reduce the risk of misspelled text in an image?",
                 "options": [
-                  "Simplify the setting and add “clean uncluttered background”",
-                  "Add 10 more objects",
-                  "Change the file name",
-                  "Remove the subject"
+                  "Ask for “no text”, and add the words later in an editing tool",
+                  "Ask for longer text",
+                  "Use only capital letters in the prompt",
+                  "Ask the tool to guess the spelling"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Directing the setting and background removes visual noise.",
+                "explanation": "Adding text yourself gives you control over the spelling.",
                 "position": 10
               },
               {
                 "id": "q_gpe_06_11",
                 "lesson_id": "les_gpe_06_03",
-                "question": "True or false: You should upload a real classmate’s face to an image generator without asking them.",
+                "question": "True or false: Image tools always draw the correct number of objects.",
                 "options": [
                   "True",
                   "False"
                 ],
                 "correct_option_index": 1,
-                "explanation": "Never use a real person’s likeness without explicit permission.",
+                "explanation": "Counting can be wrong, so check the picture when the number matters.",
                 "position": 11
               },
               {
                 "id": "q_gpe_06_12",
                 "lesson_id": "les_gpe_06_03",
-                "question": "Which composition term gives a bird’s-eye view of items on a desk?",
+                "question": "What is alt text?",
                 "options": [
-                  "Top-down flat lay",
-                  "Extreme close-up of a shoe",
-                  "Low-angle worm’s-eye view",
-                  "Silhouette"
+                  "A kind of image filter",
+                  "A password for the tool",
+                  "A short written description of an image for people who cannot see it",
+                  "A paper caption on a wall"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Top-down flat lay places the camera directly overhead.",
+                "correct_option_index": 2,
+                "explanation": "Alt text makes images accessible.",
                 "position": 12
               },
               {
                 "id": "q_gpe_06_13",
                 "lesson_id": "les_gpe_06_03",
-                "question": "When rebuilding a weak prompt like “Cool farm,” what is missing?",
+                "question": "Which alt text is best?",
                 "options": [
-                  "Subject details, setting, style, composition, lighting, mood, and format",
-                  "Nothing—it is complete",
-                  "Only a period",
-                  "Only a hashtag"
+                  "“Image of a dog.”",
+                  "“A golden puppy runs along a park path covered in orange autumn leaves.”",
+                  "“Picture.”",
+                  "“IMG_2043”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "One-word prompts leave every visual choice to chance.",
+                "correct_option_index": 1,
+                "explanation": "Good alt text says what is shown, and does not start with “image of.”",
                 "position": 13
               },
               {
                 "id": "q_gpe_06_14",
                 "lesson_id": "les_gpe_06_03",
-                "question": "Why write alt text for your own AI-generated images?",
+                "question": "How long should alt text usually be?",
                 "options": [
-                  "For accessibility and clear documentation in your portfolio",
-                  "To make the image larger",
-                  "To hide the image",
-                  "To change the colors"
+                  "One or two sentences",
+                  "Ten pages",
+                  "One letter",
+                  "It should not be written at all"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Alt text ensures screen-reader users and text-only reviewers can follow your work.",
+                "explanation": "Alt text should be short and focused on what matters.",
                 "position": 14
               },
               {
                 "id": "q_gpe_06_15",
                 "lesson_id": "les_gpe_06_03",
-                "question": "What is a “style sheet” prompt?",
+                "question": "You want four pictures of the same character. What helps most?",
                 "options": [
-                  "A reusable block defining palette, medium, lighting, and look across a series",
-                  "A spreadsheet of passwords",
-                  "A CSS file only for coders",
-                  "A single emoji"
+                  "Using a different description each time",
+                  "Asking for no details",
+                  "Changing the style every time",
+                  "A character description and a style sheet pasted into each prompt"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Style sheets keep multi-image sets cohesive.",
+                "correct_option_index": 3,
+                "explanation": "Repeating the same description helps the pictures to match, but they may still differ.",
                 "position": 15
               },
               {
                 "id": "q_gpe_06_16",
                 "lesson_id": "les_gpe_06_03",
-                "question": "If a generated hand has six fingers, what is the best next step?",
+                "question": "True or false: A style sheet guarantees that all images will match perfectly.",
                 "options": [
-                  "Adjust composition (e.g., wider shot or hands holding a prop) or regenerate/edit",
-                  "Pretend nobody will notice",
-                  "Add more hands to the prompt",
-                  "Make the prompt vaguer"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Reframing or excluding awkward poses fixes common anatomy glitches.",
+                "correct_option_index": 1,
+                "explanation": "It improves consistency, but results can still differ from image to image.",
                 "position": 16
               },
               {
                 "id": "q_gpe_06_17",
                 "lesson_id": "les_gpe_06_03",
-                "question": "True or false: Changing lighting from “harsh noon” to “warm golden hour” changes mood dramatically.",
+                "question": "What should you do before making an image of a real person?",
                 "options": [
-                  "True",
-                  "False"
+                  "Nothing, because it is only AI",
+                  "Get their permission, or choose a different subject",
+                  "Post it first and ask later",
+                  "Hide that it is AI-made"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Lighting is one of the strongest levers for mood and realism.",
+                "correct_option_index": 1,
+                "explanation": "Respect for people and consent matter.",
                 "position": 17
               },
               {
                 "id": "q_gpe_06_18",
                 "lesson_id": "les_gpe_06_03",
-                "question": "Which element tells the tool whether you want a photo, watercolor, or 3D icon?",
+                "question": "What should you do when you share an AI-made image?",
                 "options": [
-                  "Style",
-                  "Format",
-                  "What to avoid",
-                  "Alt text"
+                  "Say that it was made with AI",
+                  "Pretend that you took the photo",
+                  "Remove all labels",
+                  "Claim it as a real news photo"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Style sets the artistic or photographic medium.",
+                "explanation": "Honest labeling prevents people from being misled.",
                 "position": 18
               },
               {
                 "id": "q_gpe_06_19",
                 "lesson_id": "les_gpe_06_03",
-                "question": "For a mobile vertical story, which format fits best?",
+                "question": "Why should you avoid brand names and logos in prompts?",
                 "options": [
-                  "9:16 vertical",
-                  "16:9 widescreen",
-                  "21:9 ultrawide",
-                  "1:100"
+                  "Brands cannot be drawn in blue",
+                  "Logos make files too small",
+                  "Tools only draw brands",
+                  "They may come out wrong or may cause legal problems, so use general descriptions"
                 ],
-                "correct_option_index": 0,
-                "explanation": "9:16 matches vertical phone screens.",
+                "correct_option_index": 3,
+                "explanation": "General descriptions are safer and often work better.",
                 "position": 19
               },
               {
                 "id": "q_gpe_06_20",
                 "lesson_id": "les_gpe_06_03",
-                "question": "What should you check before using an AI image in public work?",
+                "question": "A tool gives a different picture each time for the same prompt. What does this mean?",
                 "options": [
-                  "Visual errors, tool terms/ownership, consent, and honest AI labeling",
-                  "Only file size",
-                  "Nothing",
-                  "Whether it has 100 colors"
+                  "The tool is broken",
+                  "You made a typing error",
+                  "Results vary, so you should record what you really got",
+                  "Images cannot be improved"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Quality, rights, consent, and transparency all matter.",
+                "correct_option_index": 2,
+                "explanation": "Variation is normal, which is why logs and screenshots are useful.",
                 "position": 20
               }
             ]
@@ -4312,26 +4314,26 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
           {
             "id": "les_gpe_07_01",
             "section_id": "sec_gpe_07",
-            "title": "7.1 Lesson & Reading: Audio AI Uses, Consent & “Write for the Ear” (20 min)",
+            "title": "7.1 Lesson & Reading: Audio and Speech & “Write for the Ear” (20 min)",
             "type": "article",
-            "summary": "Use AI for speech-to-text, audio summaries, text-to-speech scripts, and 6-parameter music prompts; spot transcript errors; protect consent/voice likeness; and write for the ear.",
+            "summary": "Learn four ways to use AI with audio (speech to text, summarizing audio, text to speech, music/sound prompts), fix transcript errors, write scripts for the ear, and protect consent and privacy.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **What you will learn:** Use AI for transcription, summaries, voice scripts, and music/sound prompts, and check the results. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n#### 1. Four main audio uses\n| Use | What it does | What to watch / parameters |\n| :--- | :--- | :--- |\n| **1. Speech to text (STT)** | Transcribes talks, interviews, or voice memos | Check accents, proper names, technical terms, and background noise errors |\n| **2. Summarizing audio** | Condenses a cleaned transcript into key points/actions | Always clean transcript errors *before* summarizing |\n| **3. Text to speech (TTS)** | Turns a written script into a spoken voiceover | Watch pacing, pauses, abbreviations, and numbers |\n| **4. Music & sound prompts** | Generates background music or sound effects | Specify **genre, mood, tempo, instruments, vocals/no vocals, and length** |\n\n#### 2. Consent and voice-cloning risks\n- **Always get consent before recording** people in meetings or interviews.\n- **Never clone a real person’s voice** without explicit, documented permission—voice cloning carries severe impersonation, scam, and privacy risks.\n\n---\n\n### Part B: Reading (8 minutes) — “Write for the Ear”\nText that reads fine on a page often sounds robotic or confusing when spoken by TTS:\n- Use **short, clear sentences** (12–18 words).\n- **Spell out numbers, symbols, and acronyms** how you want them spoken (*“twenty-five percent”* instead of *“25%”*, *“A-I”* or *“eye-dee”* if needed).\n- Add **pronunciation notes** in brackets or phonetic spelling for tricky names (e.g., *“Nadia [NAH-dee-ah]”*), and mark short pauses with commas or line breaks."
+            "content": "**COURSE 2 | PART 2: IMAGES, AUDIO, AND VIDEO**\n**Module 7: Audio and Speech**\n*Written lesson and reading (20 minutes)*\n\n| Item | Details |\n| :--- | :--- |\n| **Module time** | 50 minutes: written lesson (12 min), reading (8 min), activity (15 min), knowledge check (15 min) |\n| **Level** | Beginner to Intermediate. Modules 1, 2, and 5 are helpful |\n| **Tools** | A speech-to-text or text-to-speech tool is helpful for the activity but not required. A text-only version is included |\n| **Format** | Written lesson with tables, a short reading, a transcript-and-script activity, and a quiz |\n\n> **Access and fairness:** Audio tools often have limits, accounts, or costs, and their rules change. You never have to pay for anything, because every task has a text-only version. Please do not record or upload other people’s voices without their permission.\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n> **What you will learn:** By the end of this lesson, you will know four ways to use AI with audio, how to prompt for each one, what typically goes wrong, and how to protect the privacy and consent of the people in your recordings.\n\n#### 1. Four ways to use AI with audio\nFirst, let’s look at the big picture. Generative AI can work with sound in several ways. In this module, we focus on four of them.\n\n| Use | What it does | Example |\n| :--- | :--- | :--- |\n| **Speech to text** | Turns spoken words into written text, called a transcript | Transcribing a talk, an interview, or a meeting |\n| **Summarizing audio** | Shortens a transcript into the main points and actions | “Five bullet points and who does what” |\n| **Text to speech** | Turns a written script into a spoken voice | A voice-over for a video or a spoken announcement |\n| **Music and sound** | Creates background music or sound effects from a description | “Calm piano music for a study video” |\n\n#### 2. Speech to text: getting a good transcript\nSpeech to text is often the first step, because a transcript lets you search, quote, and summarize what was said. It is also good for accessibility, since people who cannot hear the audio can read it.\n\nHowever, transcripts are not perfect. The tool listens to sounds and guesses the words, so it often makes the same kinds of mistakes.\n\n| Typical problem | Example and what to do |\n| :--- | :--- |\n| **Names and unusual words** | “Marcus” becomes “Mercus.” Check names against a list, and fix them |\n| **Words that sound alike** | “two” becomes “to,” and “gate” becomes “gait.” Read for meaning, and fix |\n| **Accents and fast speech** | Accuracy may drop. Review these parts more carefully |\n| **Noise and several speakers** | Wind, music, and people talking at once confuse the tool. Record in a quiet place, with one person speaking at a time |\n| **Numbers, dates, and email addresses** | These are easy to mishear and very important. Always check them |\n\n##### Tips for better transcripts\n- **Record clearly.** Stay close to the microphone, use a quiet room, and speak at a normal pace.\n- **Give the tool a head start.** Some tools let you add a list of names or special words. If yours does, use it.\n- **Always review.** Read the transcript while you listen, at least to the parts that matter.\n\n##### A prompt for cleaning a transcript\n> “Below is a transcript with possible errors. Fix obvious spelling and word mistakes using the facts sheet. Do not change the meaning, and do not add anything. If a word is unclear, write [unclear]. Facts sheet: [paste facts]. Transcript: [paste transcript].”\n\n#### 3. Summarizing audio\nNext, to summarize audio, you usually start with the transcript, and then use a text prompt. This links back to what you learned in Module 3. For example:\n> “Summarize the transcript below in five bullet points. Then list the action items in a table with the columns Task, Person, and Deadline. Use only what is in the transcript, and write ‘not stated’ if something is missing. Transcript: [paste transcript].”\n\n- **Check against the transcript.** A summary can drop or change points.\n- **Remember the chain.** If the transcript has errors, the summary will also have them. Therefore, fix the transcript first.\n- **Check who said what.** Speaker labels are often wrong in meetings with several people.\n\n#### 4. Text to speech: from script to voice\nNow, let’s turn to text to speech. Here, you write a script, and the tool reads it aloud in a synthetic voice. You can often choose the voice, the pace, and the tone. For a good result, **write for the ear**, because text that reads well on a page may sound awkward when spoken. The next reading explains how.\n- **Choose a voice that fits.** A calm, slow voice suits a study guide, and a lively voice suits an event announcement.\n- **Add pronunciation notes** for names and unusual words, such as *“Siobhan (shuh-VAWN).”*\n- **Listen to the whole thing.** Mistakes in stress and pacing are easy to hear, and hard to see.\n- **Label it.** Tell listeners that the voice is AI-generated.\n\n#### 5. Music and sound prompts\nYou can also describe music or sound effects in words. As with images, a good prompt names the important parts. Six useful parts are shown below.\n\n| Part | Example |\n| :--- | :--- |\n| **Genre** | “lo-fi,” “acoustic folk,” or “orchestral” |\n| **Mood** | “calm and focused” or “bright and hopeful” |\n| **Tempo** | “slow,” “medium,” or “fast” |\n| **Instruments** | “soft piano and light percussion” |\n| **Length and structure** | “30 seconds, with a gentle start and a clear ending” |\n| **What to avoid** | “no vocals, no sudden loud sounds” |\n\nFor example: *“Calm lo-fi study music, slow tempo, soft piano and light percussion, 30 seconds with a gentle start and a clear ending, no vocals.”* As with images, improve by changing one thing at a time, and record what each change did.\n- **Results vary.** Run it again, and record what you really got.\n- **Check the rules.** Tools have terms about how you may use the music. Read them before you publish.\n- **Avoid copying.** Do not ask for a copy of a particular song, for someone else’s lyrics, or for the voice of a real artist. Module 9 covers ownership and consent.\n\n#### 6. Consent and privacy come first\nFinally, sound is personal. A voice can identify a person, and a recording can contain private information. Therefore, think about the people in your audio before you record or upload.\n- **Ask permission** before you record someone, and before you upload their voice to a tool. Rules about recording differ between places and organizations, so ask, and follow the rules that apply.\n- **Keep sensitive recordings out.** Do not upload private conversations, such as health, legal, or personal talks.\n- **Never imitate a real person’s voice without their permission.** Voice imitation can be used to trick people, and it can seriously harm someone’s trust and reputation.\n- **Label synthetic voices.** Say when a voice is AI-generated.\n- **Delete what you no longer need.** Check how your tool stores recordings.\n\n#### 7. Accessibility benefits\nOn the positive side, audio tools can make content more accessible. Transcripts and captions help people who are deaf or hard of hearing, people who are learning a language, and anyone who prefers to read. Text to speech helps people who find reading difficult. So, whenever you publish audio, offer a transcript.\n\n#### Key takeaways\n- Four audio uses are speech to text, summarizing audio, text to speech, and music or sound prompts.\n- Transcripts often contain errors in names, similar-sounding words, numbers, and dates, so always check them.\n- Fix the transcript before you summarize it, because errors carry over.\n- Write scripts for the ear, add pronunciation notes, and label synthetic voices.\n- Ask permission before recording or uploading a voice, never imitate a real person’s voice, and keep private recordings out of tools.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Transcript** | A written version of spoken words |\n| **Speech to text** | Technology that turns spoken words into written text |\n| **Text to speech** | Technology that reads written text aloud in a synthetic voice |\n| **Synthetic voice** | A voice made by AI, not recorded from a person |\n| **Pronunciation note** | A short guide to how a word should sound, such as “Siobhan (shuh-VAWN)” |\n| **Tempo** | The speed of music |\n| **Consent** | Permission from a person before you record, use, or copy their voice or image |\n\n---\n\n### Part B: Reading (8 minutes): “Write for the Ear”\n\nWritten text and spoken text are different. When you read a page, your eyes can go back, skim ahead, and pause on a hard sentence. When you listen, you hear each word once, in order. Therefore, a script that looks perfect on paper can sound confusing when it is read aloud.\n\n#### Six rules for scripts\n1. **Use short sentences.** Aim for about 15 words, with one idea in each.\n2. **Write numbers and dates the way you say them.** Write “ten in the morning” instead of “10:00,” and “the eighteenth of May” instead of “18/5.”\n3. **Avoid symbols and abbreviations.** Write “percent” instead of “%,” and “for example” instead of “e.g.”\n4. **Repeat the key point.** Listeners cannot scroll back, so say the date, place, or action twice.\n5. **Add pronunciation notes** for names and unusual words.\n6. **Read it aloud before you use it.** If you stumble, the tool will probably stumble too.\n\n#### Before and after\n| Version | Text |\n| :--- | :--- |\n| **Written for the eye** | “The Q3 results (see p. 4) show a 12% increase in sales vs. last year; attendance was 1,250 on 18/5.” |\n| **Written for the ear** | “Our sales grew by twelve percent compared with last year. That is good news. On the eighteenth of May, one thousand two hundred and fifty people came.” |\n\n#### Marking pauses and emphasis\nMany tools respond to punctuation. A comma gives a short pause, and a full stop gives a longer one. Some tools also accept notes such as `[pause]`. Check what your tool supports, and listen to the result.\n\n#### An example with pronunciation notes\n> “Welcome, everyone. Our guest today is Siobhan (shuh-VAWN) Ó Briain (oh BREE-un). She will talk about the new library. Please welcome Siobhan.”\n\nNotice that the name is repeated, so that listeners remember it, and that the notes show how to say it.\n\n**In short:** Short sentences, spoken numbers, repeated key points, and pronunciation notes. Always listen before you publish."
           },
           {
             "id": "les_gpe_07_02",
             "section_id": "sec_gpe_07",
-            "title": "7.2 Activity: Script & Transcript Check + Stretch Music Prompt (15 min)",
+            "title": "7.2 Activity: “Script and Transcript Check” & Stretch Task (15 min)",
             "type": "article",
-            "summary": "Fix errors in a sample AI transcript, write a summary prompt, and prepare a short voice script with pronunciation notes (text-only), plus a 6-parameter Stretch music prompt.",
+            "summary": "Find and fix five errors in an AI transcript using a facts sheet, write a clean-and-summarize prompt, draft a voice script for the ear, and try the Stretch 6-part music prompt task.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **Your goal:** Fix errors in the sample AI transcript below, write a prompt that summarizes it, and rewrite the short announcement for the ear. *(15 minutes, text-only)*\n\n---\n\n### Part 1: Fix This Sample AI Transcript\n> *“Welcome to the Oakridge community garden orientation with Maria Gomez [transcribed: Maria Go Mess]. Today we’ll cover the 3 Rs: reduce, reuse, and recycle [transcribed: re-cycle paths]. Please meet at Gate B at 9:30 AM [transcribed: 930 a.m.].”*\n\n1. List the **3 transcript errors** you spotted in your **Personal Study Notes**.\n2. Write a **summary prompt** that turns the corrected transcript into a 3-bullet reminder for attendees.\n\n### Part 2: Write for the Ear (Voice Script)\nRewrite this sentence for a TTS voiceover with short sentences, spelled-out numbers, and pronunciation notes:\n> *“RSVP to Dr. Okafor by 11/15 at 5:00 PM for the 45-min AI Q&A (Rm 204B).”*\n\n---\n\n### Stretch Task (Advanced Users)\nWrite a **music prompt with all six parameters** (*genre, mood, tempo, instruments, vocals/instrumental, and length*), then explain how changing **one** parameter (e.g., tempo from *slow 70 BPM* to *upbeat 120 BPM*) changes the fit for a video."
+            "content": "### Part C: Activity (15 minutes): “Script and Transcript Check”\n\n> **Your goal:** Fix errors in an AI transcript, write a prompt that cleans and summarizes it, and prepare a short voice script that is written for the ear. If you have a speech tool, you can use it for Step 3. If not, read your script aloud yourself.\n\n---\n\n#### Step 1: Find and fix the errors (4 minutes)\nAn AI tool transcribed a 40-second announcement, recorded outdoors on a windy day. The transcript has **five errors**. Compare it with the organizer’s facts sheet.\n\n| | |\n| :--- | :--- |\n| **Facts sheet (correct information)** | Speaker: Marcus, from the Maple Park Neighbors group. Event: community cleanup day on Saturday, 18 May, at 10 a.m. Meeting place: the north gate by the playground. Bring gloves, and a wheelbarrow if you have one. Two volunteers are needed for the snack table. To help, email marcus at maplepark dot example by Wednesday. |\n| **AI transcript (with errors)** | Hi everyone, this is Mercus from the Maple Park Neighbors group. Our next cleanup day is Saturday the eighteenth of May at tent a.m. We meet at the north gait by the playground. Please bring gloves, and if you have one, a wheelbarrow. We also need to volunteers to help with the snack table. If you can help, email marcus at maple park group dot org by Wednesday. Thanks, and see you there! |\n\n| # | Wrong text in the transcript | Correct text | Why the tool may have made this mistake |\n| :--- | :--- | :--- | :--- |\n| **1** | | | |\n| **2** | | | |\n| **3** | | | |\n| **4** | | | |\n| **5** | | | |\n\n---\n\n#### Step 2: Write a clean-and-summarize prompt (4 minutes)\nWrite one prompt that asks an AI tool to (a) fix the transcript using the facts sheet without changing the meaning, and (b) summarize it in three bullet points with the action items in a table. Use what you learned in this module and in Modules 1 to 3.\n\n| Field | My answer |\n| :--- | :--- |\n| **My prompt** | |\n\n---\n\n#### Step 3: Write a voice script (5 minutes)\nWrite a short script (about 40 words) for a different announcement, such as a school event or a club meeting. Use made-up details. Follow the rules for writing for the ear, and add a pronunciation note for at least one name or unusual word.\n\n| Field | My answer |\n| :--- | :--- |\n| **My announcement script** | |\n| **My pronunciation note(s)** | |\n| **Voice choice (pace and tone) and why** | |\n\n**Test it:**\n- **Option A:** Run your script through a text-to-speech tool, listen, and note one thing to fix.\n- **Option B (text-only):** Read it aloud yourself, and mark any place where you stumbled or ran out of breath.\n\n---\n\n#### Step 4: Consent and reflection (2 minutes)\n- Who is speaking in the recording? Did they agree to be recorded and transcribed?\n- How will you label a voice that is AI-generated?\n- Which correction in Step 1 would have been hardest to notice without the facts sheet?\n\n---\n\n### Answer Guide and Feedback\n\n| # | Wrong text | Correct text | Likely reason |\n| :--- | :--- | :--- | :--- |\n| **1** | Mercus | Marcus | Names are often mis-spelled when they are unusual or spoken in wind |\n| **2** | tent a.m. | ten a.m. | A sound-alike word, and numbers are easy to mishear |\n| **3** | gait | gate | Words that sound alike, so read for meaning |\n| **4** | need to volunteers | need two volunteers | “to” and “two” sound the same, and the number changes the meaning |\n| **5** | maple park group dot org | maplepark dot example | Email addresses are often mis-heard, so always check them against the source |\n\n#### A sample clean-and-summarize prompt\n> “Below is a transcript of a short announcement that may contain errors. Fix obvious spelling and word mistakes using the facts sheet, but do not change the meaning or add anything. If a word is unclear, write [unclear]. Then summarize the announcement in three bullet points, and list the action items in a table with the columns Task, Person, and Deadline. Write ‘not stated’ if something is missing. Facts sheet: [paste facts]. Transcript: [paste transcript].”\n\n#### A sample script written for the ear\n> “Hello, neighbors. Our book club meets on Thursday, at seven in the evening. We meet at the library, near the front desk. This month, we read a book by Siobhan (shuh-VAWN) Keane. Please bring your copy. Again, Thursday at seven. See you there!”\n\n#### What good answers show\n- The learner finds all five errors and compares them with a facts sheet instead of guessing.\n- The prompt tells the AI to keep the meaning, not add anything, use the facts sheet, and mark unclear words.\n- The script uses short sentences, spoken numbers and times, a repeated key point, and a pronunciation note.\n- The learner thinks about consent and labeling.\n\n#### Feedback to show learners\n- **Automated check:** Five rows are filled in, the prompt has at least 30 words, and the script has at least one pronunciation note.\n- **Feedback:** “Good work. Audio tools are powerful, but they make predictable mistakes, especially with names, numbers, and email addresses. Check them, write for the ear, and always think about consent.”\n\n---\n\n### Stretch Task\nWrite a **music prompt** with all six parts (genre, mood, tempo, instruments, length and structure, and what to avoid). Run it, or imagine the result. Then change one part, such as the tempo, and describe how the result changes.\n\n> **Instructor notes:**\n> - This is a practice activity that supports the portfolio’s audio entry. It is not rubric-graded.\n> - The transcript and the facts sheet were written for this exercise. The event and the people are made up.\n> - If you recommend tools, check their terms, privacy notices, and recording rules first. Remind learners to get permission before they record anyone.\n> - Provide transcripts for any audio samples that you use."
           },
           {
             "id": "les_gpe_07_03",
@@ -4347,273 +4349,277 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
               {
                 "id": "q_gpe_07_1",
                 "lesson_id": "les_gpe_07_03",
-                "question": "Why should you review an AI transcript before asking AI to summarize it?",
+                "question": "What does speech to text do?",
                 "options": [
-                  "Transcript errors (wrong names or numbers) will carry straight into the summary",
-                  "AI cannot summarize clean text",
-                  "Summarizing fixes all spelling automatically",
-                  "Audio files are deleted otherwise"
+                  "It turns text into music",
+                  "It turns spoken words into written text",
+                  "It translates images",
+                  "It deletes recordings"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Garbage in, garbage out: clean transcript mistakes first.",
+                "correct_option_index": 1,
+                "explanation": "The result is a transcript.",
                 "position": 1
               },
               {
                 "id": "q_gpe_07_2",
                 "lesson_id": "les_gpe_07_03",
-                "question": "Which of the following commonly causes errors in speech-to-text transcripts?",
+                "question": "Which kinds of words are most likely to be wrong in a transcript?",
                 "options": [
-                  "Unfamiliar proper names, strong accents, and background noise",
-                  "Clear quiet rooms",
-                  "Short sentences",
-                  "Standard greetings"
+                  "Names, similar-sounding words, numbers, dates, and email addresses",
+                  "Only very long words",
+                  "Only the first word",
+                  "Words in capital letters"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Accents, names, and noise are top causes of misheard words.",
+                "explanation": "These are easy to mishear and often important.",
                 "position": 2
               },
               {
                 "id": "q_gpe_07_3",
                 "lesson_id": "les_gpe_07_03",
-                "question": "What does “Write for the ear” recommend for text-to-speech scripts?",
+                "question": "A transcript says “we need to volunteers.” What is the likely problem?",
                 "options": [
-                  "Short sentences, spelled-out numbers, and pronunciation notes for tricky names",
-                  "Dense 60-word sentences with parentheses",
-                  "Raw spreadsheet tables",
-                  "Zero punctuation"
+                  "The tool wrote in a different language",
+                  "The speaker was silent",
+                  "The tool translated the word",
+                  "“to” was written instead of “two,” because the words sound alike"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Listeners cannot re-read a sentence, so clarity and pacing matter.",
+                "correct_option_index": 3,
+                "explanation": "Read for meaning to catch sound-alike errors.",
                 "position": 3
               },
               {
                 "id": "q_gpe_07_4",
                 "lesson_id": "les_gpe_07_03",
-                "question": "What is the ethical rule on cloning a real person’s voice?",
+                "question": "How can you improve the quality of a recording for speech to text?",
                 "options": [
-                  "Never clone anyone’s voice without explicit permission",
-                  "Clone any coworker’s voice for fun",
-                  "Clone voices if the clip is under 10 seconds",
-                  "Consent is never needed for audio"
+                  "Record in the wind",
+                  "Have everybody speak together",
+                  "Record in a quiet place, near the microphone, with one person speaking at a time",
+                  "Place the microphone far away"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Voice likeness requires explicit consent to prevent impersonation and harm.",
+                "correct_option_index": 2,
+                "explanation": "Clear audio gives better transcripts.",
                 "position": 4
               },
               {
                 "id": "q_gpe_07_5",
                 "lesson_id": "les_gpe_07_03",
-                "question": "Which six parameters make a strong AI music prompt?",
+                "question": "Why should you fix the transcript before you summarize it?",
                 "options": [
-                  "Genre, mood, tempo, instruments, vocals/instrumental, and length",
-                  "Password, email, address, font, color, and price",
-                  "Camera angle, shutter speed, lens, crop, DPI, and paper",
-                  "None"
+                  "Summaries correct all errors automatically",
+                  "Errors in the transcript carry over into the summary",
+                  "Summaries cannot use text",
+                  "It is a legal rule"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Covering those six musical elements steers the sound accurately.",
+                "correct_option_index": 1,
+                "explanation": "A summary can only be as good as the transcript it is based on.",
                 "position": 5
               },
               {
                 "id": "q_gpe_07_6",
                 "lesson_id": "les_gpe_07_03",
-                "question": "True or false: You should ask for consent before recording people in a meeting or interview for AI transcription.",
+                "question": "Which instruction helps keep a cleaned transcript faithful?",
                 "options": [
-                  "True",
-                  "False"
+                  "“Do not change the meaning and do not add anything. Mark unclear words as [unclear].”",
+                  "“Make it sound better.”",
+                  "“Add some extra details.”",
+                  "“Guess the missing words.”"
                 ],
                 "correct_option_index": 0,
-                "explanation": "People have a right to know when their voice is being recorded and processed.",
+                "explanation": "Clear limits prevent invented content.",
                 "position": 6
               },
               {
                 "id": "q_gpe_07_7",
                 "lesson_id": "les_gpe_07_03",
-                "question": "How should “Dr. Okafor” or “Rm 204B” be prepared in a TTS script?",
+                "question": "What is text to speech?",
                 "options": [
-                  "Write “Doctor Okafor [oh-KAH-for], Room two-oh-four B” so the voice reads it naturally",
-                  "Leave abbreviations unchanged and hope",
-                  "Remove the room number completely",
-                  "Write it in all caps with no spaces"
+                  "Technology that records people",
+                  "A type of microphone",
+                  "A transcript editor",
+                  "Technology that reads written text aloud in a synthetic voice"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Spelling out abbreviations and adding phonetic hints prevents awkward misreads.",
+                "correct_option_index": 3,
+                "explanation": "You write the script, and the tool speaks it.",
                 "position": 7
               },
               {
                 "id": "q_gpe_07_8",
                 "lesson_id": "les_gpe_07_03",
-                "question": "Why specify “instrumental only, no vocals” in a background music prompt?",
+                "question": "Which script is better written for the ear?",
                 "options": [
-                  "So lyrics do not clash with a spoken voiceover",
-                  "Because AI cannot make instruments",
-                  "To make the file silent",
-                  "To increase file size"
+                  "“The meeting is at 10:00 on 18/5.”",
+                  "“Mtg @ 10:00, 18/5.”",
+                  "“The meeting is at ten in the morning on the eighteenth of May.”",
+                  "“See calendar.”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Background beds for narration should stay vocal-free.",
+                "correct_option_index": 2,
+                "explanation": "Spoken forms of numbers and dates are easier to say and hear.",
                 "position": 8
               },
               {
                 "id": "q_gpe_07_9",
                 "lesson_id": "les_gpe_07_03",
-                "question": "If an AI voice reads “9:30 AM” strangely, what is the simplest fix?",
+                "question": "Why repeat the key point in a spoken script?",
                 "options": [
-                  "Write “nine thirty in the morning”",
-                  "Delete the time",
-                  "Repeat it 5 times",
-                  "Switch to a video tool"
+                  "Repetition makes the audio longer on purpose",
+                  "Listeners cannot scroll back, so repetition helps them to remember",
+                  "It is a legal rule",
+                  "Tools require it"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Spelled-out times read smoothly across TTS engines.",
+                "correct_option_index": 1,
+                "explanation": "In audio, you hear each word once.",
                 "position": 9
               },
               {
                 "id": "q_gpe_07_10",
                 "lesson_id": "les_gpe_07_03",
-                "question": "True or false: AI speech-to-text is 100% accurate on medical or legal terminology without checking.",
+                "question": "What is a pronunciation note?",
                 "options": [
-                  "True",
-                  "False"
+                  "A short guide to how a word should be said, such as “Siobhan (shuh-VAWN)”",
+                  "A picture of a mouth",
+                  "A sound effect",
+                  "A password"
                 ],
-                "correct_option_index": 1,
-                "explanation": "Specialized terms and names always need human verification.",
+                "correct_option_index": 0,
+                "explanation": "Notes help the tool or a reader to say unusual words correctly.",
                 "position": 10
               },
               {
                 "id": "q_gpe_07_11",
                 "lesson_id": "les_gpe_07_03",
-                "question": "What happens if you change only “tempo” from 70 BPM to 125 BPM in a music prompt?",
+                "question": "Which is a good music prompt?",
                 "options": [
-                  "The energy shifts from calm/reflective to upbeat/energetic while keeping the rest consistent",
-                  "The genre disappears",
-                  "It turns into text",
-                  "Nothing changes"
+                  "“Nice music.”",
+                  "“Something good.”",
+                  "“Music.”",
+                  "“Calm lo-fi study music, slow tempo, soft piano, 30 seconds, no vocals.”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Changing one parameter isolates pacing and energy.",
+                "correct_option_index": 3,
+                "explanation": "Genre, mood, tempo, instruments, length, and exclusions give the tool clear direction.",
                 "position": 11
               },
               {
                 "id": "q_gpe_07_12",
                 "lesson_id": "les_gpe_07_03",
-                "question": "Which audio task turns a recorded 30-minute talk into written text?",
+                "question": "How should you improve a music prompt?",
                 "options": [
-                  "Speech to text (STT)",
-                  "Text to speech (TTS)",
-                  "Image generation",
-                  "Prompt injection"
+                  "Change everything at once",
+                  "Never change it",
+                  "Change one part at a time, and note what changes",
+                  "Delete the mood"
                 ],
-                "correct_option_index": 0,
-                "explanation": "STT transcribes spoken audio into text.",
+                "correct_option_index": 2,
+                "explanation": "One change at a time shows what each part does.",
                 "position": 12
               },
               {
                 "id": "q_gpe_07_13",
                 "lesson_id": "les_gpe_07_03",
-                "question": "Which audio task turns your written script into spoken narration?",
+                "question": "What should you do before recording a person or uploading their voice?",
                 "options": [
-                  "Text to speech (TTS)",
-                  "Speech to text (STT)",
-                  "Optical character recognition",
-                  "Chart reading"
+                  "Nothing, because voices are not private",
+                  "Ask for their permission, and follow the rules that apply",
+                  "Record secretly to be safe",
+                  "Post it first and ask later"
                 ],
-                "correct_option_index": 0,
-                "explanation": "TTS synthesizes speech from a written script.",
+                "correct_option_index": 1,
+                "explanation": "Consent matters, and rules about recording vary.",
                 "position": 13
               },
               {
                 "id": "q_gpe_07_14",
                 "lesson_id": "les_gpe_07_03",
-                "question": "Why add pauses (commas or line breaks) in a voice script?",
+                "question": "Which recording should you NOT upload to an AI tool?",
                 "options": [
-                  "To give listeners breathing room between key points",
-                  "To make the script harder to read",
-                  "To break the audio tool",
-                  "To hide facts"
+                  "A private conversation about someone’s health",
+                  "A recording of your own practice talk",
+                  "A recording of a public event that you have permission to use",
+                  "A test recording of yourself saying hello"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Natural pacing improves comprehension.",
+                "explanation": "Sensitive conversations should stay out of tools.",
                 "position": 14
               },
               {
                 "id": "q_gpe_07_15",
                 "lesson_id": "les_gpe_07_03",
-                "question": "True or false: You should avoid uploading confidential phone recordings to public audio tools.",
+                "question": "True or false: It is fine to imitate a real person’s voice with AI if you only do it for a joke and do not ask them.",
                 "options": [
                   "True",
                   "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Respect privacy and terms before uploading any recording.",
+                "correct_option_index": 1,
+                "explanation": "Voice imitation without permission can trick people and harm someone’s trust and reputation.",
                 "position": 15
               },
               {
                 "id": "q_gpe_07_16",
                 "lesson_id": "les_gpe_07_03",
-                "question": "When checking a transcript of an interview, what should you check first?",
+                "question": "How should you treat an AI-generated voice when you share it?",
                 "options": [
-                  "Names of people/places, numbers/dates, and homophones that sound alike",
-                  "Only the font",
-                  "Only the word count",
-                  "Nothing"
+                  "Pretend that it is a real person",
+                  "Hide that it is synthetic",
+                  "Tell listeners that the voice is AI-generated",
+                  "Claim that a famous person said it"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Sound-alike words and proper nouns are where transcripts trip up most.",
+                "correct_option_index": 2,
+                "explanation": "Honest labeling is part of responsible use.",
                 "position": 16
               },
               {
                 "id": "q_gpe_07_17",
                 "lesson_id": "les_gpe_07_03",
-                "question": "What makes a music prompt like “happy song” too vague?",
+                "question": "How do transcripts and captions help accessibility?",
                 "options": [
-                  "It leaves out genre, tempo, instruments, vocals, and duration",
-                  "It is too long",
-                  "It includes tempo",
-                  "It specifies mood"
+                  "They make audio louder",
+                  "They help people who cannot hear the audio, people learning a language, and anyone who prefers to read",
+                  "They remove background noise",
+                  "They only help musicians"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Adding concrete musical parameters narrows the output to what you need.",
+                "correct_option_index": 1,
+                "explanation": "Offering a transcript makes audio available to more people.",
                 "position": 17
               },
               {
                 "id": "q_gpe_07_18",
                 "lesson_id": "les_gpe_07_03",
-                "question": "If you share an AI-generated voiceover in a public video, what is good practice?",
+                "question": "A summary lists “Marcus” as “Mercus.” What should you do?",
                 "options": [
-                  "Label clearly that an AI voice was used and avoid impersonating real people",
-                  "Claim a celebrity recorded it",
-                  "Hide all credits",
-                  "Use a friend’s cloned voice secretly"
+                  "Check names against a trusted source, and fix the transcript and summary",
+                  "Leave it, because summaries are always right",
+                  "Delete the summary",
+                  "Ask the AI to guess"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Honest labeling and consent protect trust.",
+                "explanation": "Names are a typical error, so check them.",
                 "position": 18
               },
               {
                 "id": "q_gpe_07_19",
                 "lesson_id": "les_gpe_07_03",
-                "question": "True or false: A text-only learner can practice audio prompting by editing transcripts and writing ear-ready scripts.",
+                "question": "True or false: A text-to-speech voice will always pronounce every name correctly.",
                 "options": [
                   "True",
                   "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Script craft and transcript verification work cleanly without paid audio tools.",
+                "correct_option_index": 1,
+                "explanation": "Names and unusual words are often mispronounced, so add notes and listen to the result.",
                 "position": 19
               },
               {
                 "id": "q_gpe_07_20",
                 "lesson_id": "les_gpe_07_03",
-                "question": "What is the biggest danger of unconsented voice cloning?",
+                "question": "Why should you read your script aloud before using text to speech?",
                 "options": [
-                  "Identity impersonation, fraud, and violating personal likeness rights",
-                  "Slightly slower downloads",
-                  "Better grammar",
-                  "Longer transcripts"
+                  "It makes the file smaller",
+                  "Tools require a human voice",
+                  "If you stumble, the tool will probably stumble too, and you can fix the script",
+                  "It removes the need to listen later"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Realistic fake voices can deceive family members, colleagues, and institutions.",
+                "correct_option_index": 2,
+                "explanation": "Reading aloud shows awkward sentences and long phrases.",
                 "position": 20
               }
             ]
@@ -4629,26 +4635,26 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
           {
             "id": "les_gpe_08_01",
             "section_id": "sec_gpe_08",
-            "title": "8.1 Lesson & Reading: Video Prompts, Multimodal Inputs & “Think in Shots” (20 min)",
+            "title": "8.1 Lesson & Reading: Video and Multimodal Prompting & “Think in Shots” (20 min)",
             "type": "article",
-            "summary": "Build 8-part video prompts, plan shot-by-shot storyboards, handle typical video limits, query photos/screenshots/charts/documents, and protect privacy.",
+            "summary": "Plan short videos as storyboards of simple shots with an 8-part video prompt, use the two-step method for multimodal inputs (charts/images), protect privacy, and add captions.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **What you will learn:** Plan and prompt short videos with shot-by-shot storyboards, and use images, screenshots, charts, and documents as inputs. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n#### 1. Anatomy of a video prompt (8 parts)\n**Scene + Subject + Action + Camera movement + Shot type + Lighting + Style + Length**\n*(Example: “Wide establishing shot of a sunlit community library, slow pan left as two students shelve books, warm afternoon light, realistic documentary style, 5 seconds, no text.”)*\n\n#### 2. Typical limits of AI video\n- **Inconsistent characters/props** across shots\n- **Odd motion or physics** (warped hands, floating objects)\n- **Wrong or garbled on-screen text** (add titles in an editor later)\n\n#### 3. Multimodal inputs (showing the AI an image, screenshot, chart, or document)\nYou can upload a photo, screenshot, chart, or document and ask questions—for example, *“Read the values from this bar chart into a 2-column table.”*\n- **Always check for misreads:** AI can misread small axis labels, overlapping bars, or blurry numbers. Compare every number against the original.\n- **Privacy care:** Never upload **faces without consent, IDs, passports, bank statements, or private documents**.\n\n---\n\n### Part B: Reading (8 minutes) — “Think in Shots”\nNever ask for a whole 30-second story in one prompt. **Think in shots:** write a **four-shot storyboard** (e.g., four 5-second shots = 20 seconds) before touching any tool. Plan what each shot shows, how the camera moves, and how it connects to the next shot."
+            "content": "**COURSE 2 | PART 2: IMAGES, AUDIO, AND VIDEO**\n**Module 8: Video and Multimodal Prompting**\n*Written lesson and reading (20 minutes)*\n\n| Item | Details |\n| :--- | :--- |\n| **Module time** | 50 minutes: written lesson (12 min), reading (8 min), activity (15 min), knowledge check (15 min) |\n| **Level** | Intermediate. Modules 1, 2, and 6 are helpful |\n| **Tools** | A video tool and a chatbot that accepts images are helpful but not required. A text-only version is included, with a sample chart |\n| **Format** | Written lesson with tables, a short reading, a storyboard-and-chart activity, and a quiz |\n\n> **Access and fairness:** Video tools are often limited, slow, or costly, and their rules change. You never have to pay for anything, because every task has a text-only version. Please do not use real people’s faces or voices, and do not upload private pictures or documents.\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n> **What you will learn:** By the end of this lesson, you will be able to plan and prompt a short video as a series of shots, and to use images, screenshots, charts, and documents as inputs for AI, while checking for misreads and protecting private information.\n\n#### 1. Two big ideas in one module\nThis module covers two related skills. First, you will learn to prompt AI to create short videos. Second, you will learn to give AI different kinds of input, such as photos, screenshots, charts, and documents, and to ask questions about them. When a tool can work with more than one kind of information, such as text, images, and video, we call it **multimodal**.\n\n#### 2. The parts of a video prompt\nA video prompt is similar to an image prompt, but with two extra ingredients: **action** and **camera movement**, because a video changes over time. A good video prompt has the parts below.\n\n| Part | Question it answers | Example |\n| :--- | :--- | :--- |\n| **Scene** | Where and when does it happen? | “a small kitchen at sunrise” |\n| **Subject** | Who or what is the focus? | “a ceramic kettle” |\n| **Action** | What happens? | “steam rises, and the kettle begins to whistle” |\n| **Shot type** | How close is the view? | “close-up” or “wide shot” |\n| **Camera movement** | How does the camera move? | “slowly moves in” or “stays still” |\n| **Lighting** | What is the light like? | “warm morning light from a window” |\n| **Style** | What does it look like? | “realistic, calm, slightly soft focus” |\n| **Length and format** | How long and what shape? | “five seconds, wide format” |\n\nFor example: *“Close-up of a ceramic kettle on a kitchen stove at sunrise. Steam rises, and the kettle begins to whistle. The camera slowly moves in. Warm morning light from a window, realistic and calm, five seconds, wide format.”*\n\n#### 3. Plan in shots\nNext, it helps to remember how film makers work. A short video is not one long scene. It is a series of short **shots**, joined together. Many AI video tools also make short clips, often of only a few seconds. Therefore, the best approach is to plan your video as a **storyboard**: a list of shots, each with one idea.\n- **One subject, one action, one camera move per shot.** Simple shots work best.\n- **Reuse your style sheet (Module 6)** in every shot prompt, so that the look stays similar.\n- **Describe the setting the same way each time**, such as *“the same small kitchen at sunrise.”*\n- **Join the shots later in a video editor**, and add text, sound, and music yourself.\n\n#### 4. Common limits of AI video\n| Limit | What to do |\n| :--- | :--- |\n| **Characters and objects change from one clip to the next** | Use short, simple shots, repeat the same description, and accept small differences |\n| **Odd motion, such as strange hands, melting objects, or impossible physics** | Watch the clip several times, even frame by frame, and discard clips with problems |\n| **Text and signs are often wrong** | Ask for “no text,” and add text later in an editor |\n| **Short length** | Plan for several short clips, not one long one |\n| **Sound may not match** | Add your own music or voice-over, and label synthetic voices |\n| **Results vary and take time** | Test the first shot, before you spend time on all of them |\n\nBecause AI video can look very real, honesty matters even more. Label AI-made video, and do not make realistic videos of real people. Module 9 explains why in more depth.\n\n#### 5. Giving AI more than text: multimodal inputs\nNow, let’s look at the other side. Many AI tools let you upload a photo, a screenshot, a chart, or a document, and then ask about it. This is very useful. For example, you can ask:\n- “Describe this photo in two sentences that I can use as alt text.”\n- “This is a screenshot of an error message. Explain in simple words what it means, and what I should try first.”\n- “Here is a chart. List the value for each day in a table, then tell me the highest and the lowest.”\n- “Here is a photo of my handwritten notes. Type out the text, and mark any words that you cannot read.”\n- “Summarize the attached document in five bullet points, and list the numbers that I should double-check.”\n\n#### 6. A two-step method for reading charts and images\nHowever, multimodal tools can **misread**. They may get a number wrong, miss small text, mix up labels, or confidently describe something that is not there. To protect yourself, use a two-step method.\n\n| Step | What to ask |\n| :--- | :--- |\n| **1. Describe first** | “First, list exactly what you see: the title, the axes, and each value. Say ‘unclear’ if you cannot read something.” |\n| **2. Then analyze** | “Now, using only your list, tell me which day is highest and the total.” |\n\nAfter that, you compare the AI’s list with the original. Check the numbers, the labels, and the units. If you cannot verify a number, do not use it.\n\n#### 7. Privacy: what you upload matters\nIn addition, pictures and documents often contain more information than you notice. A photo can show faces, a house number, or a car number plate. A screenshot can show names, emails, or passwords. A document can contain confidential details. Therefore:\n- **Do not upload** photos of other people without their permission, ID cards, bank documents, or confidential work files.\n- **Crop or blur private parts first**, or use a made-up example.\n- **Remember hidden information.** Photos can contain location data. Check your tool and device settings.\n- **Check the tool’s privacy notice**, because some tools may store or use what you upload.\n\n#### 8. Accessibility with video and images\nFinally, remember accessibility. Add **captions** to videos, so that people who cannot hear them can follow. Provide a short description of what happens in the video, for people who cannot see it. Also, write alt text for images that you upload or share.\n\n#### Key takeaways\n- A video prompt names the scene, subject, action, shot type, camera movement, lighting, style, and length.\n- Plan in shots: one subject, one action, and one camera move per shot. Reuse your style sheet.\n- Typical limits are changing characters, odd motion, wrong text, and short clips. Review carefully, and label AI video.\n- For charts and images, describe first, then analyze, and always compare the AI’s reading with the original.\n- Protect privacy: do not upload faces, IDs, or confidential documents. Add captions and descriptions.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Shot** | One continuous piece of video from a single camera view |\n| **Storyboard** | A plan of a video as a list of shots, with what we see in each |\n| **Camera movement** | How the camera moves in a shot, such as still, panning, or moving in |\n| **Multimodal** | Able to work with more than one kind of information, such as text, images, and video |\n| **Caption** | Text on a video that shows the words and important sounds |\n| **Misread** | When the AI gets a number, a label, or a detail wrong while reading an image or a document |\n\n---\n\n### Part B: Reading (8 minutes): “Think in Shots”\n\nBefore you open a video tool, take a pencil and write a **storyboard**. It takes only a few minutes, and it saves a lot of time later. Without a plan, people often try to describe a whole story in one prompt, and the result is a confusing clip.\n\n#### An example storyboard\nHere is a four-shot storyboard for a 20-second video called “Morning tea.” Each shot lasts about five seconds.\n\n| Shot | What we see | Camera and shot type | Light and style |\n| :--- | :--- | :--- | :--- |\n| **1** | A small kitchen at sunrise | Wide shot, camera stays still | Warm window light, realistic and calm |\n| **2** | A ceramic kettle on the stove, steam rising | Close-up, camera slowly moves in | Warm window light, soft focus |\n| **3** | Hot water poured into a cup | Medium shot, camera stays still | Warm window light, realistic |\n| **4** | Steam rising from the full cup on a wooden table | Close-up, camera stays still | Warm light, soft background |\n\n#### From storyboard to prompts\nNext, turn each row into one prompt. Start every prompt with the same style words, such as *“realistic, calm, warm morning window light, the same small kitchen.”* In this way, the shots look like they belong together.\n\n> **Shot 2 prompt:** “Close-up of a ceramic kettle on a stove in a small kitchen at sunrise. Steam rises and the kettle begins to whistle. The camera slowly moves in. Realistic, calm, warm morning window light, soft focus. Five seconds, wide format, no text.”\n\n#### Tips for good storyboards\n- **One idea per shot.** If a shot needs two actions, make it two shots.\n- **Vary the shot types.** Mix wide, medium, and close-up views, so that the video feels alive.\n- **Test one shot first.** If the style is wrong, fix it before you make the others.\n- **Plan the sound separately.** Add music, voice-over, and captions in an editor.\n- **Keep a log.** Write the prompt, the result, and the next change for each shot, as in Module 5.\n\n**In short:** Think in shots. Plan first, keep each shot simple, reuse your style, and test one shot before you make them all."
           },
           {
             "id": "les_gpe_08_02",
             "section_id": "sec_gpe_08",
-            "title": "8.2 Activity: Storyboard in Prompts & Chart Check + Stretch Sheet (15 min)",
+            "title": "8.2 Activity: “Storyboard in Prompts” & Stretch Task (15 min)",
             "type": "article",
-            "summary": "Write a 4-shot prompt plan for a 20-second video and perform a “read the chart” verification check on a sample output, plus a Stretch character & setting sheet.",
+            "summary": "Storyboard a 20-second video in four shots with a shared style sheet, check an AI reading of a library visitors chart, and try the Stretch character-and-setting sheet task.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **Your goal:** Write a four-shot prompt plan for a 20-second video, then complete the “read the chart” check below. *(15 minutes)*\n\n---\n\n### Part 1: Four-Shot Storyboard (20 seconds = 4 × 5s shots)\nChoose a simple topic (e.g., *morning coffee routine*, *planting a seed*, or *bike safety check*) and write 4 shot prompts in **Personal Study Notes**, each including **Shot type, Subject, Action, Camera movement, Lighting, Style, and Length (5s)**.\n\n### Part 2: “Read the Chart” Check (Multimodal Verification)\nA learner uploaded a simple quarterly sales chart showing:\n- **Original Chart Values:** Q1: **120**, Q2: **145**, Q3: **138**, Q4: **190**\n- **Sample AI Reading:** *“Q1: 120, Q2: 154, Q3: 138, Q4: 190. Sales rose every quarter.”*\n\nIn your **Personal Study Notes**, list the **two errors** in the AI’s reading (one misread number and one false trend claim) and write a **follow-up prompt** asking the AI to re-check carefully.\n\n---\n\n### Stretch Task (Advanced Users)\nWrite a reusable **character and setting sheet** (exact appearance, clothing, colors, and room details) designed to be pasted into **every shot prompt** to improve visual consistency."
+            "content": "### Part C: Activity (15 minutes): “Storyboard in Prompts”\n\n> **Your goal:** Plan a 20-second video as four shots, write a prompt for each shot, and then practice reading a chart with the two-step method. You can use a video tool and a chatbot that accepts images, or you can use the text-only version.\n\n---\n\n#### Step 1: Storyboard a 20-second video (7 minutes)\nChoose a simple idea that needs no real people, for example a community cleanup, a cup of tea, a plant growing, or a rainy street. Plan four shots of about five seconds each. First, write your shared style sheet.\n\n| Field | My answer |\n| :--- | :--- |\n| **My video idea** | |\n| **Shared style sheet (style, light, setting words to repeat in every shot)** | |\n\n| Shot | What we see (one idea) | Camera and shot type | My prompt for this shot (include the style sheet) |\n| :--- | :--- | :--- | :--- |\n| **1** | | | |\n| **2** | | | |\n| **3** | | | |\n| **4** | | | |\n\n- **Option A:** If you have a video tool, run the prompt for Shot 1 only, and watch it more than once. Note anything odd.\n- **Option B (text-only):** Reread your Shot 1 prompt, and list three things that could go wrong in the clip, such as a changing object, odd motion, or text.\n\n---\n\n#### Step 2: Read the chart (5 minutes)\nThe chart below shows the number of visitors to a small library during one week (made-up data). An AI tool read the chart. Its reading is shown below the chart. Compare the reading with the chart, and find the errors.\n\n**Library Visitors (One Week — Chart Data):**\n| Day | Mon | Tue | Wed | Thu | Fri | Sat | Sun |\n| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n| **Visitors** | 120 | 95 | 140 | 110 | 160 | 210 | 60 |\n\n*Accessibility: A text version of the chart is stored in the image’s alt text, and the course team can give it to you in another format on request.*\n\n> **AI’s reading of the chart:**\n> Saturday had the most visitors, at about 210. Wednesday was the busiest weekday, with about 140 visitors. Tuesday had more visitors than Monday. Sunday had the fewest visitors, at about 90. In total, about 895 people visited during the week.\n\n| Claim in the AI’s reading | Right or wrong? | What the chart really shows |\n| :--- | :--- | :--- |\n| Saturday had the most visitors, at about 210 | | |\n| Wednesday was the busiest weekday, with about 140 | | |\n| Tuesday had more visitors than Monday | | |\n| Sunday had the fewest visitors, at about 90 | | |\n| In total, about 895 people visited | | |\n\n- **Optional with a tool:** Upload the chart to a chatbot that accepts images, and use the two-step method: *“First list every bar’s label and value. Then tell me the highest weekday and the total.”* Compare its list with the chart.\n\n---\n\n#### Step 3: Reflect (3 minutes)\n- Which of your video shots was simplest, and which was hardest to describe?\n- Why is it helpful to ask the AI to describe the chart first, and then analyze?\n- How will you label an AI-made video? What would you check before uploading a photo or a document?\n\n---\n\n### Answer Guide and Feedback\n\n#### Chart check\n| Claim | Result | What the chart really shows |\n| :--- | :--- | :--- |\n| **Saturday had the most visitors, at about 210** | **Right** | Saturday is the tallest bar, at 210 |\n| **Wednesday was the busiest weekday, with about 140** | **Wrong** | Friday was the busiest weekday, with 160. Wednesday had 140 |\n| **Tuesday had more visitors than Monday** | **Wrong** | Monday had 120, and Tuesday had 95 |\n| **Sunday had the fewest visitors, at about 90** | **Wrong** | Sunday had the fewest, but the value is 60, not 90 |\n| **In total, about 895 people visited** | **Right** | 120 + 95 + 140 + 110 + 160 + 210 + 60 = 895 |\n\nNotice that three of the five claims were wrong, even though the reading sounded confident, and one error (Sunday) was a number. This is why the two-step method and your own comparison matter.\n\n#### A sample storyboard (idea: a rainy street)\n**Style sheet:** *“realistic, calm, grey-blue evening light, the same quiet city street in light rain, no text, no people.”*\n\n| Shot | What we see | Camera and shot type | Sample prompt |\n| :--- | :--- | :--- | :--- |\n| **1** | A quiet street in light rain | Wide shot, camera still | “Wide shot of a quiet city street in light rain at dusk. Camera stays still. Realistic, calm, grey-blue evening light, no text, no people. Five seconds, wide format.” |\n| **2** | Rain drops on a shop window | Close-up, camera still | “Close-up of rain drops running down a shop window on a quiet city street at dusk. Camera stays still. Realistic, calm, grey-blue evening light, no text, no people. Five seconds, wide format.” |\n| **3** | A bicycle parked under a lamp | Medium shot, camera slowly moves in | “Medium shot of a bicycle under a street lamp on a quiet rainy street at dusk. Camera slowly moves in. Realistic, calm, grey-blue evening light, no text, no people. Five seconds, wide format.” |\n| **4** | A puddle with ripples | Close-up, camera still | “Close-up of a puddle with rain ripples on a quiet city street at dusk. Camera stays still. Realistic, calm, grey-blue evening light, no text, no people. Five seconds, wide format.” |\n\n#### What good answers show\n- The storyboard has four simple shots, each with one idea, one action, and one camera move.\n- The same style words are used in every shot prompt.\n- The learner found at least three of the chart errors, by comparing, and understands that a confident reading can still be wrong.\n- The learner thinks about labeling and privacy.\n\n#### Feedback to show learners\n- **Automated check:** Four shots are filled in, each prompt has at least 25 words, and the chart table is complete.\n- **Feedback:** “Good work. Plan in shots, repeat your style, and compare the AI’s reading of an image with the original. Remember to label AI video and to keep private material out.”\n\n---\n\n### Stretch Task\nWrite a **character and setting sheet** (a few sentences that describe a made-up character and place), and paste it into all four shot prompts. Note how consistent the shots look, or how consistent you expect them to be.\n\n> **Instructor notes:**\n> - This is a practice activity that supports the portfolio’s audio or video entry and the workflow entry. It is not rubric-graded.\n> - The chart data are made up. The chart image has alt text and a text version. Check the answer guide, if you change the data.\n> - Video tools vary a lot. Accept honest results, including failed clips, and ask learners to describe what went wrong.\n> - Remind learners not to use real people, and not to upload private images or documents."
           },
           {
             "id": "les_gpe_08_03",
@@ -4664,273 +4670,277 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
               {
                 "id": "q_gpe_08_1",
                 "lesson_id": "les_gpe_08_03",
-                "question": "Why should you plan a 20-second AI video as four 5-second shots instead of one giant prompt?",
+                "question": "What does “multimodal” mean?",
                 "options": [
-                  "Short single-action shots stay cleaner, more controllable, and easier to fix individually",
-                  "AI videos must be silent",
-                  "Four shots cost zero tokens",
-                  "Long prompts are illegal"
+                  "Able to run on many computers at once",
+                  "Able to work with more than one kind of information, such as text, images, and video",
+                  "Only able to read text",
+                  "Very fast"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Thinking in shots gives you director-level control over each clip.",
+                "correct_option_index": 1,
+                "explanation": "Multimodal tools can use more than one type of input.",
                 "position": 1
               },
               {
                 "id": "q_gpe_08_2",
                 "lesson_id": "les_gpe_08_03",
-                "question": "Which elements belong in a video prompt?",
+                "question": "Which two ingredients make a video prompt different from an image prompt?",
                 "options": [
-                  "Scene, subject, action, camera movement, shot type, lighting, style, and length",
-                  "Password, PIN, and bank name",
-                  "Only one noun",
-                  "A 10-page script"
+                  "Action and camera movement",
+                  "Price and speed",
+                  "Password and name",
+                  "Title and author"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Specifying action and camera movement distinguishes video prompts from still images.",
+                "explanation": "Videos change over time, so you describe what happens and how the camera moves.",
                 "position": 2
               },
               {
                 "id": "q_gpe_08_3",
                 "lesson_id": "les_gpe_08_03",
-                "question": "What is a typical limitation of AI-generated video clips?",
+                "question": "What is a shot?",
                 "options": [
-                  "Inconsistent characters across shots, odd motion, and garbled text",
-                  "Perfect spelling every time",
-                  "Zero need for planning",
-                  "Unlimited 2-hour single takes"
+                  "A type of camera",
+                  "A long film",
+                  "A caption",
+                  "One continuous piece of video from a single camera view"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Expect motion/consistency quirks and add titles in a regular editor.",
+                "correct_option_index": 3,
+                "explanation": "A video is a series of shots.",
                 "position": 3
               },
               {
                 "id": "q_gpe_08_4",
                 "lesson_id": "les_gpe_08_03",
-                "question": "When you ask an AI to read numbers from an uploaded chart, what must you always do?",
+                "question": "What is a storyboard?",
                 "options": [
-                  "Verify every extracted number against the original chart",
-                  "Trust the numbers blindly",
-                  "Delete the original chart before checking",
-                  "Only check the title"
+                  "A board game",
+                  "A final video file",
+                  "A plan of a video as a list of shots, with what we see in each",
+                  "A transcript"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Vision models can misread small labels or transpose digits (like 145 vs 154).",
+                "correct_option_index": 2,
+                "explanation": "A storyboard helps you plan before you use a tool.",
                 "position": 4
               },
               {
                 "id": "q_gpe_08_5",
                 "lesson_id": "les_gpe_08_03",
-                "question": "What does “multimodal prompting” mean?",
+                "question": "Why is it best to plan a short video as several simple shots?",
                 "options": [
-                  "Using inputs like photos, screenshots, charts, or documents alongside text prompts",
-                  "Typing with two hands",
-                  "Using only plain text forever",
-                  "Printing a document"
+                  "Long videos are always illegal",
+                  "AI video tools often make short clips, and simple shots work better",
+                  "Tools can only make one-second videos",
+                  "Shots are required by law"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Multimodal models accept visual or document inputs in addition to text.",
+                "correct_option_index": 1,
+                "explanation": "Simple, short shots are easier to control and to join together.",
                 "position": 5
               },
               {
                 "id": "q_gpe_08_6",
                 "lesson_id": "les_gpe_08_03",
-                "question": "Which item should you NEVER upload into a public multimodal chatbot?",
+                "question": "Which is a good rule for a single shot?",
                 "options": [
-                  "Government IDs, passports, bank statements, or private photos of faces without consent",
-                  "A public weather chart",
-                  "A sketch of a mug",
-                  "A sample bar graph you drew"
+                  "One subject, one action, one camera move",
+                  "Ten subjects and many actions",
+                  "No subject at all",
+                  "Three different locations"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Uploaded images can be logged; protect IDs and private faces.",
+                "explanation": "Simple shots are more reliable.",
                 "position": 6
               },
               {
                 "id": "q_gpe_08_7",
                 "lesson_id": "les_gpe_08_03",
-                "question": "How do you improve character consistency across four video shots?",
+                "question": "How can you help several shots look like they belong together?",
                 "options": [
-                  "Reuse the exact same character and setting description block in every shot prompt",
-                  "Describe the character differently in each shot",
-                  "Leave out clothing and colors",
-                  "Ask for random styles"
+                  "Change the style each time",
+                  "Use no style words",
+                  "Use a different tool for each word",
+                  "Repeat the same style words and setting description in every shot prompt"
                 ],
-                "correct_option_index": 0,
-                "explanation": "A shared character/setting sheet anchors visual continuity.",
+                "correct_option_index": 3,
+                "explanation": "A shared style sheet improves consistency.",
                 "position": 7
               },
               {
                 "id": "q_gpe_08_8",
                 "lesson_id": "les_gpe_08_03",
-                "question": "True or false: “Slow pan left” is an example of camera movement in a video prompt.",
+                "question": "Which is a typical limit of AI video?",
                 "options": [
-                  "True",
-                  "False"
+                  "It cannot show the color blue",
+                  "It can only make videos with no light",
+                  "Characters and objects can change between clips, and motion can look odd",
+                  "It always makes perfect clips"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Clear camera movement directions guide how the frame shifts.",
+                "correct_option_index": 2,
+                "explanation": "Review clips carefully and discard those with problems.",
                 "position": 8
               },
               {
                 "id": "q_gpe_08_9",
                 "lesson_id": "les_gpe_08_03",
-                "question": "In “Think in shots,” when do you write your storyboard?",
+                "question": "How should you handle text that you want in a video?",
                 "options": [
-                  "Before touching any video generation tool",
-                  "After publishing the final video",
-                  "Never",
-                  "Only after deleting your notes"
+                  "Trust the tool to spell everything",
+                  "Ask for “no text” in the prompt, and add the text later in an editor",
+                  "Write the text in very small letters",
+                  "Use only numbers"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Planning shots first saves time, credits, and frustration.",
+                "correct_option_index": 1,
+                "explanation": "Text in generated video is often wrong, so add it yourself.",
                 "position": 9
               },
               {
                 "id": "q_gpe_08_10",
                 "lesson_id": "les_gpe_08_03",
-                "question": "If an AI reads a chart and claims “sales rose every quarter” when Q3 dipped from 145 to 138, what failed?",
+                "question": "What should you do with an AI-made video that looks very realistic?",
                 "options": [
-                  "Both number verification and trend logic—always compare AI claims to the data",
-                  "The chart colors",
-                  "Your monitor",
-                  "Nothing"
+                  "Label it as AI-made, and do not use real people’s likenesses",
+                  "Say that it is a real recording",
+                  "Remove all labels",
+                  "Use a famous person’s face"
                 ],
                 "correct_option_index": 0,
-                "explanation": "AI can summarize a trend inaccurately even when most numbers look close.",
+                "explanation": "Honest labeling prevents people from being misled.",
                 "position": 10
               },
               {
                 "id": "q_gpe_08_11",
                 "lesson_id": "les_gpe_08_03",
-                "question": "True or false: Adding on-screen titles in a normal video editor is usually cleaner than asking AI video tools to render text.",
+                "question": "What is the two-step method for reading a chart with AI?",
                 "options": [
-                  "True",
-                  "False"
+                  "Ask for the final answer only",
+                  "Upload the chart twice",
+                  "Ask the AI to guess",
+                  "First ask the AI to describe what it sees, and then ask it to analyze using only that description"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Video editors guarantee crisp, correctly spelled typography.",
+                "correct_option_index": 3,
+                "explanation": "Describing first makes misreads easier to spot.",
                 "position": 11
               },
               {
                 "id": "q_gpe_08_12",
                 "lesson_id": "les_gpe_08_03",
-                "question": "Which shot type shows the whole room or landscape to set the scene?",
+                "question": "The AI says a chart value is 90, but the bar shows 60. What should you do?",
                 "options": [
-                  "Wide / establishing shot",
-                  "Extreme close-up",
-                  "Audio-only track",
-                  "Footnote"
+                  "Trust the AI because it sounds confident",
+                  "Average the two numbers",
+                  "Trust the chart, not the AI, and correct the reading",
+                  "Ignore the chart"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Establishing shots orient the viewer to the setting.",
+                "correct_option_index": 2,
+                "explanation": "Always compare the AI’s reading with the original.",
                 "position": 12
               },
               {
                 "id": "q_gpe_08_13",
                 "lesson_id": "les_gpe_08_03",
-                "question": "What is a practical use of multimodal screenshot prompting?",
+                "question": "Which is a good multimodal prompt?",
                 "options": [
-                  "Uploading a messy error dialog or UI screenshot and asking what each button/option does",
-                  "Uploading your bank login screen with password visible",
-                  "Uploading someone else’s medical chart",
-                  "Uploading private tax returns"
+                  "“Fix.”",
+                  "“Here is a screenshot of an error message. Explain in simple words what it means and what to try first.”",
+                  "“Look at it.”",
+                  "“Do something.”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Non-sensitive UI screenshots are great for troubleshooting and explanations.",
+                "correct_option_index": 1,
+                "explanation": "A clear request tells the AI what to do with the image.",
                 "position": 13
               },
               {
                 "id": "q_gpe_08_14",
                 "lesson_id": "les_gpe_08_03",
-                "question": "Why include “length (e.g., 5 seconds)” in each storyboard shot?",
+                "question": "Which should you NOT upload to an AI tool?",
                 "options": [
-                  "So the action fits realistically into a short clip without rushing",
-                  "To change the audio volume",
-                  "To hide the subject",
-                  "To add watermarks"
+                  "A photo of your friend’s ID card",
+                  "A made-up chart",
+                  "A photo of a plant",
+                  "A screenshot with private details removed"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Matching action complexity to clip duration prevents chaotic motion.",
+                "explanation": "IDs and other private documents should stay out of tools.",
                 "position": 14
               },
               {
                 "id": "q_gpe_08_15",
                 "lesson_id": "les_gpe_08_03",
-                "question": "True or false: Blurry or low-resolution screenshots increase the chance of AI misreading numbers.",
+                "question": "What should you do before uploading a screenshot that shows names and emails?",
                 "options": [
-                  "True",
-                  "False"
+                  "Upload it as it is",
+                  "Add more names",
+                  "Send it to strangers",
+                  "Crop or blur the private parts, or use a made-up example"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Clear, high-contrast images reduce optical misreads.",
+                "correct_option_index": 3,
+                "explanation": "Remove private details before you upload.",
                 "position": 15
               },
               {
                 "id": "q_gpe_08_16",
                 "lesson_id": "les_gpe_08_03",
-                "question": "Which follow-up prompt helps verify a chart reading?",
-                "options": [
-                  "“List each bar’s exact label and value one by one, and note if any label is hard to read.”",
-                  "“Make up the missing values.”",
-                  "“Summarize in 3 words.”",
-                  "“Skip the numbers.”"
-                ],
-                "correct_option_index": 0,
-                "explanation": "Asking for item-by-item extraction and uncertainty flags catches misreads.",
-                "position": 16
-              },
-              {
-                "id": "q_gpe_08_17",
-                "lesson_id": "les_gpe_08_03",
-                "question": "What should a “character and setting sheet” include?",
-                "options": [
-                  "Exact age/appearance, clothing colors, props, and room/lighting details",
-                  "Your home address",
-                  "Random emojis",
-                  "Only the character’s first name"
-                ],
-                "correct_option_index": 0,
-                "explanation": "Concrete visual traits keep shots cohesive.",
-                "position": 17
-              },
-              {
-                "id": "q_gpe_08_18",
-                "lesson_id": "les_gpe_08_03",
-                "question": "Why check for “odd motion” before using an AI video clip?",
-                "options": [
-                  "Unnatural physics or morphing objects distract viewers and lower trust",
-                  "Motion is invisible",
-                  "It increases file size",
-                  "It changes the aspect ratio"
-                ],
-                "correct_option_index": 0,
-                "explanation": "Always inspect generated motion frame-by-frame.",
-                "position": 18
-              },
-              {
-                "id": "q_gpe_08_19",
-                "lesson_id": "les_gpe_08_03",
-                "question": "True or false: A text-only learner can master video prompting by writing 4-shot storyboards and checking sample chart outputs.",
+                "question": "True or false: A photo can contain hidden information, such as location data.",
                 "options": [
                   "True",
                   "False"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Storyboarding and multimodal verification are core transferable skills.",
+                "explanation": "Check your device and tool settings, and remove such information when needed.",
+                "position": 16
+              },
+              {
+                "id": "q_gpe_08_17",
+                "lesson_id": "les_gpe_08_03",
+                "question": "What do captions on a video help with?",
+                "options": [
+                  "They make the video louder",
+                  "They help people who cannot hear the video to follow it",
+                  "They remove the picture",
+                  "They make the video shorter"
+                ],
+                "correct_option_index": 1,
+                "explanation": "Captions improve accessibility.",
+                "position": 17
+              },
+              {
+                "id": "q_gpe_08_18",
+                "lesson_id": "les_gpe_08_03",
+                "question": "Why write a short description of a video or an image?",
+                "options": [
+                  "It helps people who cannot see it",
+                  "It makes the file smaller",
+                  "It replaces the video",
+                  "It is needed only by the tool"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Descriptions and alt text help people who use screen readers.",
+                "position": 18
+              },
+              {
+                "id": "q_gpe_08_19",
+                "lesson_id": "les_gpe_08_03",
+                "question": "The AI reads three of five chart numbers wrongly, but sounds confident. What does this show?",
+                "options": [
+                  "Confidence means accuracy",
+                  "Charts cannot be read",
+                  "The numbers do not matter",
+                  "A confident reading can still be wrong, so you must check"
+                ],
+                "correct_option_index": 3,
+                "explanation": "Check numbers, labels, and units against the original.",
                 "position": 19
               },
               {
                 "id": "q_gpe_08_20",
                 "lesson_id": "les_gpe_08_03",
-                "question": "Before sharing an AI-generated video clip, what should you check?",
+                "question": "True or false: You should test one shot before you make all of the shots in a storyboard.",
                 "options": [
-                  "Consent, honest AI labeling, no misleading claims, and visual accuracy",
-                  "Only the file name",
-                  "Nothing",
-                  "Whether it is over 1 GB"
+                  "True",
+                  "False"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Responsible media checks apply to video just as much as images and audio.",
+                "explanation": "A test shot shows whether the style works, before you spend time on the rest.",
                 "position": 20
               }
             ]
