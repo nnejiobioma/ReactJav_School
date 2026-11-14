@@ -250,7 +250,7 @@ export default function Navbar() {
               }}
             >
               <Terminal size={15} color="var(--accent-cyan)" />
-              <span>AI Blog</span>
+              <span>Blog</span>
             </Link>
 
             <Link
@@ -1038,7 +1038,7 @@ export default function Navbar() {
               </Link>
             )}
             <Link href="/blog" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
-              <Terminal size={17} color="var(--accent-cyan)" /> AI Tech Blog
+              <Terminal size={17} color="var(--accent-cyan)" /> Blog
             </Link>
             <Link href="/about" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
               <BookOpen size={17} /> About ReactJav

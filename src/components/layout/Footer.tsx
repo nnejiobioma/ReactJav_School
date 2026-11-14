@@ -143,6 +143,11 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
+                    <Link href="/blog" style={{ color: 'inherit', textDecoration: 'none' }}>
+                      Blog
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/about" style={{ color: 'inherit', textDecoration: 'none' }}>
                       About ReactJav
                     </Link>
@@ -197,6 +202,16 @@ export default function Footer() {
                 {footerContent.copyright_text}
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem 1.5rem' }}>
+                <Link
+                  href="/blog"
+                  style={{
+                    color: 'var(--primary)',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                  }}
+                >
+                  Blog
+                </Link>
                 <Link
                   href="/about"
                   style={{
