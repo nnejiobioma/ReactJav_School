@@ -483,7 +483,7 @@ export default function PrivacyPolicyPage() {
             fontSize: '0.9rem',
           }}>
             <div><strong>Institutional Authority:</strong> ReactJav School Global Data Office</div>
-            <div><strong>Official Inquiries Email:</strong> <code style={{ color: 'var(--primary)' }}>privacy@reactjav.school</code> / <code style={{ color: 'var(--primary)' }}>compliance@reactjav.com</code></div>
+            <div><strong>Official Inquiries Email:</strong> <code style={{ color: 'var(--primary)' }}>reactjav@gmail.com</code></div>
             <div><strong>Academy Support Hotline:</strong> +358 0465695068</div>
             <div><strong>Response Standard:</strong> Formal inquiries acknowledged within 48 business hours.</div>
           </div>

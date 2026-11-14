@@ -384,7 +384,7 @@ export default function CookiePolicyPage() {
             Have questions about cookies or data compliance?
           </h3>
           <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0 }}>
-            Reach out to our Data Protection and Security Team at <strong>privacy@reactjav.school</strong>.
+            Reach out to our Data Protection and Security Team at <strong>reactjav@gmail.com</strong>.
           </p>
         </div>
 

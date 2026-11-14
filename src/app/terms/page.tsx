@@ -521,7 +521,7 @@ export default function TermsOfServicePage() {
               These Terms and any non-contractual obligations arising out of or in connection with them shall be governed by and construed in accordance with applicable laws without regard to conflict of law principles.
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: 1.7, margin: 0 }}>
-              Prior to initiating formal dispute proceedings, student and institution agree to engage in a good-faith informal resolution period of thirty (30) days by contacting school leadership at <strong style={{ color: '#ffffff' }}>legal@reactjav.school</strong>.
+              Prior to initiating formal dispute proceedings, student and institution agree to engage in a good-faith informal resolution period of thirty (30) days by contacting school leadership at <strong style={{ color: '#ffffff' }}>reactjav@gmail.com</strong>.
             </p>
           </div>
         </section>
@@ -551,11 +551,11 @@ export default function TermsOfServicePage() {
             }}>
               <div>
                 <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em', display: 'block', marginBottom: '0.25rem' }}>Legal & Compliance</span>
-                <strong style={{ color: '#ffffff', fontSize: '0.92rem' }}>legal@reactjav.school</strong>
+                <strong style={{ color: '#ffffff', fontSize: '0.92rem' }}>reactjav@gmail.com</strong>
               </div>
               <div>
                 <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em', display: 'block', marginBottom: '0.25rem' }}>Office of the Registrar</span>
-                <strong style={{ color: '#ffffff', fontSize: '0.92rem' }}>registrar@reactjav.school</strong>
+                <strong style={{ color: '#ffffff', fontSize: '0.92rem' }}>reactjav@gmail.com</strong>
               </div>
               <div>
                 <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em', display: 'block', marginBottom: '0.25rem' }}>Institutional Headquarters</span>

@@ -70,18 +70,18 @@ function ContactPageContent() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const primaryEmail = 'admissions@reactjav.com';
+  const primaryEmail = 'reactjav@gmail.com';
   const whatsappUrl = getTutoringWhatsAppUrl('General Admissions Inquiry');
 
   const channels = [
     {
       title: 'Admissions & Curricula',
-      email: 'admissions@reactjav.com',
+      email: 'reactjav@gmail.com',
       desc: 'Questions about tracks, course syllabi, prerequisites, and enrollment start dates.',
       icon: GraduationCap,
       color: '#38bdf8',
-      actionText: 'admissions@reactjav.com',
-      actionHref: 'mailto:admissions@reactjav.com?subject=Admissions%20Inquiry',
+      actionText: 'reactjav@gmail.com',
+      actionHref: 'mailto:reactjav@gmail.com?subject=Admissions%20Inquiry',
     },
     {
       title: 'WhatsApp Live Hotline',
@@ -95,21 +95,21 @@ function ContactPageContent() {
     },
     {
       title: 'Scholarships & Grants',
-      email: 'grants@reactjav.com',
+      email: 'reactjav@gmail.com',
       desc: 'Apply for foundation sponsorships, corporate subsidized tuition, and fee waivers.',
       icon: HeartHandshake,
       color: '#f59e0b',
-      actionText: 'grants@reactjav.com',
-      actionHref: 'mailto:grants@reactjav.com?subject=Scholarship%20Grant%20Inquiry',
+      actionText: 'reactjav@gmail.com',
+      actionHref: 'mailto:reactjav@gmail.com?subject=Scholarship%20Grant%20Inquiry',
     },
     {
       title: 'Registrar & Certifications',
-      email: 'registrar@reactjav.com',
+      email: 'reactjav@gmail.com',
       desc: 'CBT examination scores, employer credential verification, and transcript records.',
       icon: ShieldCheck,
       color: '#c084fc',
-      actionText: 'registrar@reactjav.com',
-      actionHref: 'mailto:registrar@reactjav.com?subject=Credential%20Verification%20Request',
+      actionText: 'reactjav@gmail.com',
+      actionHref: 'mailto:reactjav@gmail.com?subject=Credential%20Verification%20Request',
     },
   ];
 
@@ -124,7 +124,7 @@ function ContactPageContent() {
     },
     {
       q: 'How can employers verify a student’s ReactJav CBT certification?',
-      a: 'Employers can email registrar@reactjav.com with the student’s full name and certificate verification ID, or scan the cryptographic verification QR code present on all official ReactJav certificates for instant verification.',
+      a: 'Employers can email reactjav@gmail.com with the student’s full name and certificate verification ID, or scan the cryptographic verification QR code present on all official ReactJav certificates for instant verification.',
     },
     {
       q: 'Do you offer corporate cohort training for engineering teams?',
@@ -153,11 +153,18 @@ function ContactPageContent() {
         const inquiries = JSON.parse(localStorage.getItem('reactjav_inquiries') || '[]');
         inquiries.push({
           ...formData,
+          recipient: primaryEmail,
           id: 'inq_' + Date.now(),
           timestamp: new Date().toISOString(),
         });
         localStorage.setItem('reactjav_inquiries', JSON.stringify(inquiries));
       } catch {}
+
+      const subject = encodeURIComponent(`[${formData.department}] Inquiry from ${formData.name}`);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\nDepartment: ${formData.department}\n\n${formData.message}`
+      );
+      window.location.href = `mailto:${primaryEmail}?subject=${subject}&body=${body}`;
 
       setIsSubmitting(false);
       setSubmitted(true);
