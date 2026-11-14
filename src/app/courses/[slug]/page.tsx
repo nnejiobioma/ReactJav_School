@@ -76,7 +76,7 @@ export default function CourseDetailPage() {
   if (!course) {
     return (
       <div className="container" style={{ padding: '6rem 0', textAlign: 'center' }}>
-        <h2 style={{ marginBottom: '1rem', color: '#ffffff' }}>Course Not Found</h2>
+        <h2 style={{ marginBottom: '1rem', color: 'var(--text-primary)' }}>Course Not Found</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
           The requested course could not be located in the catalog.
         </p>
@@ -131,7 +131,7 @@ export default function CourseDetailPage() {
         }}
       >
         <section style={{
-          background: 'linear-gradient(180deg, rgba(18, 25, 42, 0.9) 0%, var(--bg-main) 100%)',
+          background: 'var(--grad-surface)',
           borderBottom: '1px solid var(--border-subtle)',
           padding: '3.5rem 0 3rem',
         }}>
@@ -151,7 +151,7 @@ export default function CourseDetailPage() {
             <h1 style={{
               fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
               fontWeight: 800,
-              color: '#ffffff',
+              color: 'var(--text-primary)',
               lineHeight: 1.2,
               marginBottom: '1rem',
             }}>
@@ -184,13 +184,13 @@ export default function CourseDetailPage() {
                 />
                 <div>
                   <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'block' }}>Instructor</span>
-                  <span style={{ fontWeight: 600, color: '#ffffff' }}>{course.instructor?.full_name}</span>
+                  <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{course.instructor?.full_name}</span>
                 </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <Star size={18} fill="#f59e0b" color="#f59e0b" />
-                <span style={{ fontWeight: 700, color: '#ffffff' }}>{course.average_rating || 4.9}</span>
+                <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{course.average_rating || 4.9}</span>
                 <span style={{ color: 'var(--text-muted)' }}>({course.reviews_count || 120} ratings)</span>
               </div>
 
@@ -244,7 +244,7 @@ export default function CourseDetailPage() {
               {/* Pricing & CTA */}
               <div style={{ marginBottom: '1.5rem' }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff' }}>
+                  <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                     {formatCurrency(course.price)}
                   </span>
                   <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', textDecoration: 'line-through' }}>
@@ -330,7 +330,7 @@ export default function CourseDetailPage() {
               gap: '1rem',
             }}>
               <div>
-                <h2 style={{ fontSize: '1.75rem', color: '#ffffff', marginBottom: '0.5rem' }}>
+                <h2 style={{ fontSize: '1.75rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
                   Curriculum Syllabus
                 </h2>
                 <p style={{ color: 'var(--text-secondary)' }}>
@@ -389,7 +389,7 @@ export default function CourseDetailPage() {
                   gap: '0.75rem',
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <h3 style={{ fontSize: '1.1rem', color: '#ffffff', margin: 0 }}>
+                    <h3 style={{ fontSize: '1.1rem', color: 'var(--text-primary)', margin: 0 }}>
                       {section.title}
                     </h3>
                     {isAdmin && (
@@ -444,11 +444,11 @@ export default function CourseDetailPage() {
                           {lesson.type === 'quiz' && <HelpCircle size={16} color="var(--accent-amber)" />}
 
                           <div>
-                            <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#ffffff', display: 'block' }}>
+                            <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', display: 'block' }}>
                               {lesson.title}
                             </span>
                             {lesson.sub_lessons && lesson.sub_lessons.length > 0 && (
-                              <span style={{ fontSize: '0.7rem', color: '#a5b4fc' }}>
+                              <span style={{ fontSize: '0.7rem', color: 'var(--primary)' }}>
                                 {lesson.sub_lessons.length} sub-lessons
                               </span>
                             )}
@@ -498,8 +498,8 @@ export default function CourseDetailPage() {
                               style={{
                                 padding: '0.55rem 0.85rem',
                                 borderRadius: '0.375rem',
-                                background: 'rgba(255, 255, 255, 0.02)',
-                                border: '1px solid rgba(255, 255, 255, 0.04)',
+                                background: 'var(--bg-surface-elevated)',
+                                border: '1px solid var(--border-subtle)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'space-between',
