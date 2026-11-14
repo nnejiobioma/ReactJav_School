@@ -21,7 +21,7 @@ import {
   Layers,
   Video
 } from 'lucide-react';
-import { Profile, SubscriptionPlan, Course } from '@/types';
+import { Profile, Course } from '@/types';
 import { LocalDataService } from '@/lib/supabase/client';
 import { formatCurrency } from '@/lib/utils';
 import { AcademyTrack, ACADEMY_TRACKS } from '@/data/academyTracks';
@@ -42,8 +42,7 @@ function SubscribeContent() {
   const parentConsentParam = searchParams.get('parentConsent') === 'true';
 
   const [currentUser, setCurrentUser] = useState<Profile | null>(null);
-  const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
-  const [selectedPlanId, setSelectedPlanId] = useState<'term' | 'annual' | 'lifetime'>('annual');
+  const [courses, setCourses] = useState<Course[]>([]);
   const [paymentMethod, setPaymentMethod] = useState<'credit_card' | 'bank_transfer' | 'campus_voucher'>('credit_card');
 
   // Enrolling course state
@@ -88,13 +87,17 @@ function SubscribeContent() {
     if (user && user.full_name) {
       setCardHolder(user.full_name);
     }
-    setPlans(LocalDataService.getSubscriptionPlans());
+
+    const availableCourses = LocalDataService.getCourses().filter((c) => c.is_published !== false);
+    setCourses(availableCourses);
 
     if (courseId) {
       const course = LocalDataService.getCourseById(courseId);
       if (course) {
         setSelectedCourse(course);
       }
+    } else if (!tutoringTrackId && availableCourses.length > 0) {
+      setSelectedCourse(availableCourses[0]);
     }
 
     if (tutoringTrackId) {
@@ -106,28 +109,22 @@ function SubscribeContent() {
     }
   }, [courseId, tutoringTrackId, learnerNameParam, frequencyParam, contactParam, parentNameParam, router]);
 
-  const selectedPlan = plans.find((p) => p.id === selectedPlanId) || plans[1];
   const payableAmount = selectedTutoringTrack
     ? 149
     : selectedCourse
     ? selectedCourse.price
-    : (selectedPlan?.price || 99);
+    : 0;
   const firstLessonId = selectedCourse?.sections?.[0]?.lessons?.[0]?.id || 'overview';
 
   const handleSubmitPayment = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!selectedTutoringTrack && !selectedCourse) return;
     setIsProcessing(true);
 
     const randomSuffix = Math.random().toString(36).substring(2, 7).toUpperCase();
     const prefix = selectedTutoringTrack
       ? 'TUT-FELLOW'
-      : selectedCourse
-      ? 'ENR-PROG'
-      : paymentMethod === 'credit_card'
-      ? 'TXN-CARD'
-      : paymentMethod === 'bank_transfer'
-      ? 'TXN-WIRE'
-      : 'VCH-CAMPUS';
+      : 'ENR-PROG';
     const txnRef = `${prefix}-${randomSuffix}`;
 
     setTimeout(() => {
@@ -160,9 +157,6 @@ function SubscribeContent() {
           selectedCourse.price,
           txnRef
         );
-      } else {
-        // Submit standard intranet clearance subscription
-        LocalDataService.submitSubscriptionPayment(selectedPlanId, paymentMethod, txnRef);
       }
 
       setGeneratedRef(txnRef);
@@ -221,10 +215,8 @@ function SubscribeContent() {
         }}>
           {selectedTutoringTrack ? (
             <>1-on-1 Direct Tutoring <span className="text-gradient">Tuition & Intranet Access</span></>
-          ) : selectedCourse ? (
-            <>Complete Programme <span className="text-gradient">Tuition Payment</span></>
           ) : (
-            <>Tuition Plans & <span className="text-gradient">Intranet Access</span></>
+            <>Complete Programme <span className="text-gradient">Tuition Payment</span></>
           )}
         </h1>
 
@@ -238,9 +230,9 @@ function SubscribeContent() {
           {selectedTutoringTrack ? (
             `Pay tuition to confirm your 1-on-1 Direct Tutoring enrollment for ${selectedTutoringTrack.name} (${selectedTutoringTrack.tier}). Tuition grants unrestricted Campus Intranet privileges, dedicated live mentoring room, and CBT certification.`
           ) : selectedCourse ? (
-            `Pay tuition to confirm your enrollment in ${selectedCourse.title}. Tuition includes full courseware, virtual classrooms, and unrestricted Campus Intranet privileges.`
+            `Pay tuition to confirm your enrollment in ${selectedCourse.title}. Tuition includes full courseware, virtual classrooms, and immediate Campus Intranet access.`
           ) : (
-            'Gain unrestricted access to internal CBT testing, live virtual classrooms, faculty office hours, and engineering curriculum.'
+            'Select a programme below and complete your tuition payment for immediate enrollment and Campus Intranet access.'
           )}
         </p>
       </div>
@@ -291,9 +283,7 @@ function SubscribeContent() {
           <h2 style={{ fontSize: '1.85rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
             {selectedTutoringTrack
               ? 'Direct Tutoring Enrolment Confirmed!'
-              : selectedCourse
-              ? 'Programme Enrollment Confirmed!'
-              : 'Tuition Payment Processed!'}
+              : 'Programme Enrollment Confirmed!'}
           </h2>
 
           <p style={{ color: 'var(--text-secondary)', maxWidth: '540px', margin: '0 auto 1.5rem', lineHeight: 1.6 }}>
@@ -305,11 +295,11 @@ function SubscribeContent() {
             ) : selectedCourse ? (
               <>
                 Your payment of <strong style={{ color: '#ffffff' }}>{formatCurrency(selectedCourse.price)}</strong> for{' '}
-                <strong style={{ color: 'var(--primary)' }}>{selectedCourse.title}</strong> has been received. Your curriculum lessons and Campus Intranet fellowship privileges are now active!
+                <strong style={{ color: 'var(--primary)' }}>{selectedCourse.title}</strong> has been received. Your curriculum lessons and Campus Intranet privileges are now active!
               </>
             ) : (
               <>
-                Your tuition for the <strong style={{ color: 'var(--text-primary)' }}>{selectedPlan?.name}</strong> has been logged. Your application reference has been assigned to the Registrar queue.
+                Your tuition payment has been confirmed and your Campus Intranet access is now active.
               </>
             )}
           </p>
@@ -484,11 +474,10 @@ function SubscribeContent() {
 
           <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.25rem' }}>
             <Link
-              href="/subscribe"
-              onClick={() => setSelectedTutoringTrack(null)}
+              href="/tutoring"
               style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textDecoration: 'underline' }}
             >
-              Or view general subscription options instead
+              Change tutoring track
             </Link>
           </div>
         </div>
@@ -551,111 +540,68 @@ function SubscribeContent() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.25rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem', paddingTop: '0.25rem' }}>
+            {!courseId && courses.length > 1 ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
+                <label htmlFor="programme-select" style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                  Switch Programme:
+                </label>
+                <select
+                  id="programme-select"
+                  value={selectedCourse.id}
+                  onChange={(e) => {
+                    const found = courses.find((c) => c.id === e.target.value);
+                    if (found) setSelectedCourse(found);
+                  }}
+                  className="form-input"
+                  style={{ width: 'auto', minWidth: '240px', padding: '0.45rem 0.75rem', fontSize: '0.85rem' }}
+                >
+                  {courses.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.title} ({formatCurrency(c.price)})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <span />
+            )}
+
             <Link
-              href="/subscribe"
-              onClick={() => setSelectedCourse(null)}
+              href="/courses"
               style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textDecoration: 'underline' }}
             >
-              Or view general subscription options instead
+              Browse all programmes
             </Link>
           </div>
         </div>
       )}
 
-      {/* PLAN SELECTOR CARDS (SHOWN IF NO SPECIFIC COURSE OR TUTORING CHOSEN) */}
+      {/* FALLBACK IF NO COURSE SELECTED */}
       {!isSuccess && !selectedCourse && !selectedTutoringTrack && (
-        <>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-            gap: '1.5rem',
-            marginBottom: '3.5rem',
-          }}>
-            {plans.map((plan) => {
-              const isSelected = plan.id === selectedPlanId;
-              return (
-                <div
-                  key={plan.id}
-                  onClick={() => setSelectedPlanId(plan.id)}
-                  className="glass-card"
-                  style={{
-                    cursor: 'pointer',
-                    padding: 'clamp(1.25rem, 3vw, 2rem)',
-                    borderRadius: '1.25rem',
-                    position: 'relative',
-                    border: isSelected ? '2px solid var(--primary)' : '1px solid var(--border-subtle)',
-                    background: isSelected
-                      ? 'radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15) 0%, rgba(15, 23, 42, 0.95) 75%)'
-                      : 'var(--bg-surface)',
-                    boxShadow: isSelected ? '0 15px 40px rgba(99, 102, 241, 0.25)' : 'none',
-                    transform: isSelected ? 'translateY(-4px)' : 'none',
-                    transition: 'all 0.2s ease',
-                  }}
-                >
-                  {plan.popular && (
-                    <div style={{
-                      position: 'absolute',
-                      top: '-12px',
-                      right: '24px',
-                      background: 'var(--grad-primary)',
-                      color: '#ffffff',
-                      fontSize: '0.72rem',
-                      fontWeight: 700,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.08em',
-                      padding: '0.3rem 0.75rem',
-                      borderRadius: '9999px',
-                      boxShadow: '0 4px 12px rgba(99, 102, 241, 0.4)',
-                    }}>
-                      Most Enrolled
-                    </div>
-                  )}
-
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                      {plan.name}
-                    </h3>
-                    <div style={{
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
-                      border: isSelected ? '6px solid var(--primary)' : '2px solid var(--text-muted)',
-                      background: 'var(--bg-surface)',
-                    }} />
-                  </div>
-
-                  <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', minHeight: '38px', marginBottom: '1.25rem' }}>
-                    {plan.tagline}
-                  </p>
-
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem', marginBottom: '1.5rem' }}>
-                    <span style={{ fontSize: '2.4rem', fontWeight: 800, color: 'var(--text-primary)' }}>${plan.price}</span>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{plan.period}</span>
-                  </div>
-
-                  <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '1.25rem', marginBottom: '1rem' }}>
-                    <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.06em', fontWeight: 600, display: 'block', marginBottom: '0.75rem' }}>
-                      Intranet Perks:
-                    </span>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                      {plan.features.map((feat, idx) => (
-                        <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.825rem', color: 'var(--text-primary)' }}>
-                          <CheckCircle2 size={15} color="var(--primary)" style={{ marginTop: '2px', flexShrink: 0 }} />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </>
+        <div className="glass-card" style={{
+          maxWidth: '680px',
+          margin: '0 auto 2.5rem',
+          padding: '2rem',
+          borderRadius: '1.25rem',
+          textAlign: 'center',
+        }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.75rem' }}>
+            Choose a Programme to Continue
+          </h3>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', marginBottom: '1.25rem' }}>
+            Select a course from our Programmes catalog to proceed with tuition payment and instant access.
+          </p>
+          <Link href="/courses" className="btn btn-primary btn-md">
+            <BookOpen size={16} />
+            <span>Browse Programmes</span>
+            <ArrowRight size={16} />
+          </Link>
+        </div>
       )}
 
       {/* CHECKOUT PAYMENT DRAWER */}
-      {!isSuccess && (
+      {!isSuccess && (selectedCourse || selectedTutoringTrack) && (
         <div className="glass-card" style={{
           maxWidth: '720px',
           margin: '0 auto',
@@ -668,16 +614,12 @@ function SubscribeContent() {
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 {selectedTutoringTrack
                   ? '1-on-1 Direct Tutoring Tuition'
-                  : selectedCourse
-                  ? 'Programme Enrollment'
-                  : 'Selected Plan'}
+                  : 'Programme Enrollment Payment'}
               </span>
               <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                 {selectedTutoringTrack
                   ? `${selectedTutoringTrack.name} (1-on-1 Mentorship)`
-                  : selectedCourse
-                  ? selectedCourse.title
-                  : selectedPlan?.name} — {formatCurrency(payableAmount)}
+                  : selectedCourse?.title} — {formatCurrency(payableAmount)}
               </h3>
             </div>
 
@@ -885,13 +827,9 @@ function SubscribeContent() {
                   <>
                     <Lock size={18} />
                     <span>
-                      {selectedTutoringTrack ? (
-                        `Pay Tutoring Tuition & Unlock Intranet (${formatCurrency(payableAmount)})`
-                      ) : selectedCourse ? (
-                        `Pay Tuition & Unlock Programme (${formatCurrency(payableAmount)})`
-                      ) : (
-                        `Submit Payment & Request Intranet Clearance (${formatCurrency(payableAmount)})`
-                      )}
+                      {selectedTutoringTrack
+                        ? `Pay Tutoring Tuition & Unlock Intranet (${formatCurrency(payableAmount)})`
+                        : `Pay Tuition & Unlock Programme (${formatCurrency(payableAmount)})`}
                     </span>
                   </>
                 )}
@@ -914,13 +852,13 @@ export default function SubscribePage() {
   return (
     <Suspense fallback={
       <div className="container" style={{ padding: '6rem 0', textAlign: 'center' }}>
-        <p style={{ color: 'var(--text-secondary)' }}>Loading Tuition & Plans...</p>
+        <p style={{ color: 'var(--text-secondary)' }}>Loading Payment Page...</p>
       </div>
     }>
       <AccessGuard
         level="authenticated"
-        pageTitle="Tuition & Plans Portal"
-        customDescription="Tuition schedules, subscription plans, and bursar payment processing are restricted to authenticated students and registered applicants. Please sign in to access your tuition plan."
+        pageTitle="Programme Payment Portal"
+        customDescription="Programme tuition checkout and bursar payment processing are restricted to authenticated students and registered applicants. Please sign in to complete your payment."
       >
         <SubscribeContent />
       </AccessGuard>
