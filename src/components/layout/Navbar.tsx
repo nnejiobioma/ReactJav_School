@@ -209,29 +209,6 @@ export default function Navbar() {
               </span>
             </Link>
 
-            {isAuthenticated && (
-              <Link
-                href="/subscribe"
-                className="btn btn-sm"
-                style={{
-                  background: pathname === '/subscribe' ? 'rgba(79, 70, 229, 0.12)' : 'transparent',
-                  color: pathname === '/subscribe' ? 'var(--primary)' : 'var(--text-secondary)',
-                  fontSize: '0.84rem',
-                  padding: '0.48rem 0.75rem',
-                  fontWeight: 600,
-                  borderRadius: '0.7rem',
-                  gap: '0.4rem',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  whiteSpace: 'nowrap',
-                  flexShrink: 0,
-                }}
-              >
-                <Sparkles size={15} color="var(--primary)" />
-                <span>Tuition & Plans</span>
-              </Link>
-            )}
-
             <Link
               href="/blog"
               className="btn btn-sm"
@@ -813,29 +790,6 @@ export default function Navbar() {
                   )}
 
                   <Link
-                    href="/subscribe"
-                    onClick={() => setShowRoleMenu(false)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '0.45rem 0.75rem',
-                      fontSize: '0.825rem',
-                      color: 'var(--primary)',
-                      textDecoration: 'none',
-                      borderRadius: '0.5rem',
-                      fontWeight: 600,
-                      marginBottom: '0.3rem',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                      <Sparkles size={14} color="var(--primary)" />
-                      <span>Tuition & Plans</span>
-                    </div>
-                    <ExternalLink size={12} />
-                  </Link>
-
-                  <Link
                     href="/auth"
                     onClick={() => setShowRoleMenu(false)}
                     style={{
@@ -1032,11 +986,6 @@ export default function Navbar() {
             <Link href="/academy" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem', color: 'var(--accent-emerald)' }}>
               <GraduationCap size={17} /> Direct Tutoring (1-on-1)
             </Link>
-            {isAuthenticated && (
-              <Link href="/subscribe" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
-                <Sparkles size={17} /> Tuition & Plans
-              </Link>
-            )}
             <Link href="/blog" className="btn btn-secondary btn-sm touch-target" style={{ justifyContent: 'flex-start', gap: '0.6rem' }}>
               <Terminal size={17} color="var(--accent-cyan)" /> Blog
             </Link>
