@@ -2677,33 +2677,33 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
           {
             "id": "les_gpe_02_01",
             "section_id": "sec_gpe_02",
-            "title": "2.1 Lesson & Reading: Five Core Techniques & “Ask It to Ask You” (20 min)",
+            "title": "2.1 Lesson & Reading: Five Prompting Techniques & “Ask It to Ask You” (20 min)",
             "type": "article",
-            "summary": "Master five core prompting techniques—giving examples, asking for steps, assigning a role, controlling format, and prompt chaining—plus letting the AI ask clarifying questions.",
+            "summary": "Master giving examples, asking for steps, assigning a role, controlling format, and prompt chaining—plus using clarifying questions and specific conversational follow-ups.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **What you will learn:** Choose and apply the five main prompting techniques, and explain when each one helps. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\nOnce your basic brief is clear, five proven techniques give you much stronger control:\n\n| Technique | How it works | When to use it | Worked example |\n| :--- | :--- | :--- | :--- |\n| **1. Giving examples** *(few-shot)* | Show 1–3 samples of the exact style, tone, or pattern you want | Matching a brand voice, classification, or custom formatting | *“Write a product tagline like these: ‘Sleep deeper.’ / ‘Move lighter.’ Now write 3 for a travel mug.”* |\n| **2. Asking for steps** | Ask the AI to show its reasoning or break a problem into ordered steps | Math, planning, troubleshooting, or comparing trade-offs | *“Walk me through the pros and cons step by step before recommending an option.”* |\n| **3. Assigning a role** | Tell the AI what perspective or expertise to adopt | Reviewing a draft, practicing interviews, or getting targeted feedback | *“Act as a friendly, critical editor. Point out 3 unclear sentences in this paragraph.”* |\n| **4. Controlling format** | Specify exact headings, bullet counts, or table columns | Reports, checklists, spreadsheets, and quick scanning | *“Return a 3-column table: Risk, Likelihood, and Simple Mitigation.”* |\n| **5. Prompt chaining** | Split a big job into linked prompts where step 1 feeds step 2 | Multi-part projects like research → outline → draft → polish | *Prompt 1: “Outline 4 sections.” → Prompt 2: “Now draft Section 1 using this outline…”* |\n\n---\n\n### Part B: Reading (8 minutes) — “Ask It to Ask You”\nYou do not always know every detail the AI needs up front. A powerful habit is ending your prompt with:\n> *“Before you answer, ask me 3–5 short clarifying questions if anything is missing.”*\n\nBy letting the AI interview you first, you uncover missing context (budget, audience, constraints, deadline) in 30 seconds instead of fixing a off-target draft later. Refining by conversation turns prompting into a collaborative loop."
+            "content": "> **What you will learn:** By the end of this lesson, you will know five prompting techniques: **giving examples, asking for steps, assigning a role, controlling format, and prompt chaining**. You will also know when each one helps, and how to combine them. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n#### 1. Why learn techniques?\nFirst, let’s connect this lesson to Module 1. There, you learned the six-part checklist, which helps you write a clear prompt. Now, you will learn **techniques**, which are ways of shaping a prompt to get better results for specific kinds of tasks. You can think of the checklist as your basic toolbox, and of the techniques as extra tools that you take out when the job needs them.\n\nIn this lesson, you will learn five techniques. Although they have different names, each one has the same goal: to tell the AI more clearly what a good result looks like.\n\n#### 2. Technique 1: Give examples\nSometimes, it is hard to describe the style you want in words. In that case, it is easier to show it. When you include **one to three examples** in your prompt, the AI can copy the style, the tone, or the structure.\n\n| Version | Prompt |\n| :--- | :--- |\n| **Without examples** | “Write a product description for a wooden desk lamp.” |\n| **With examples** | “Write a product description for a wooden desk lamp in the same style as these two examples. Example 1: ‘Meet the Cozy Mug: it keeps your coffee warm and your mornings calm.’ Example 2: ‘Meet the Soft Sock: it hugs your feet and chases away cold floors.’ Keep it to one sentence.” |\n\n- **Good for:** matching a tone or style, sorting items into groups, and repeating a format.\n- **Tip:** Give more than one example, and make them a little different from each other. Otherwise, the AI may copy a single example too closely.\n- **Tip:** Mark your examples clearly, for example with the word “Example,” so that the AI does not confuse them with the task.\n\n#### 3. Technique 2: Ask for steps\nNext, some tasks need careful thinking, such as comparing options, solving a problem, or making a plan. For these, you can ask the AI to work **step by step**. As a result, the answer is usually more organized, and it is easier for you to see where an idea came from.\n\n| Version | Prompt |\n| :--- | :--- |\n| **Plain** | “Which phone plan is better, A or B?” |\n| **With steps** | “Compare these two phone plans. First, list the price and data limit of each. Second, explain who each plan suits best. Third, put the main differences in a table. Finally, recommend one plan for someone who uses about 10 GB a month. Plan A: `[details]`. Plan B: `[details]`.” |\n\n- **Good for:** comparisons, decisions, planning, and problems that have several parts.\n- **Caution:** Steps that look logical can still contain mistakes. Therefore, read the reasoning, and check the numbers and facts yourself.\n\n#### 4. Technique 3: Assign a role\nIn addition, you can tell the AI to take on a **role**, such as a patient tutor, a friendly editor, or a job interviewer. A role helps the AI choose the right tone, level, and focus.\n\n| Version | Prompt |\n| :--- | :--- |\n| **No role** | “Help me prepare for a job interview.” |\n| **With a role** | “Act as an interviewer for a shop assistant job. Ask me one question at a time. After each answer, give me short feedback and then ask the next question. Start with the first question.” |\n\n- **Good for:** tutoring, practice, feedback, and writing in a specific voice.\n- **Caution:** A role changes the style of the answer, but **it does not give the AI real qualifications**. If you say “act as a doctor,” the advice is not suddenly medical advice. For health, money, or law, always ask a qualified person.\n\n#### 5. Technique 4: Control the format\nFurthermore, you can tell the AI exactly how the answer should look. This is called **controlling the format**. You can ask for a table, a list, a certain length, headings, or a fill-in template.\n\n| Version | Prompt |\n| :--- | :--- |\n| **Open** | “Give me a meal plan for the week.” |\n| **Controlled** | “Give me a vegetarian meal plan for 7 days as a table with four columns: Day, Breakfast, Lunch, Dinner. Keep each meal to five words or fewer.” |\n\n- **Good for:** results that you want to paste into a document or a spreadsheet, and for anything that you will compare or scan quickly.\n- **Useful phrases:** *“in a table with columns…”*, *“in exactly three bullet points”*, *“under 100 words”*, *“in plain language”*, and *“with a heading for each part.”*\n\n#### 6. Technique 5: Prompt chaining\nFinally, a big task often works better as a **chain of smaller prompts**. In a chain, you ask for one step at a time, and you use the result of each step in the next one.\n\nFor example, imagine that you need to write a school report about renewable energy. Instead of asking for the whole report in one prompt, you can work in stages:\n\n| Step | Prompt |\n| :---: | :--- |\n| **1** | “List the five questions a student should answer in a short report about renewable energy.” |\n| **2** | “Using those questions, make an outline with three main sections.” |\n| **3** | “Write the first section from the outline, in about 150 words, for a 14-year-old reader.” |\n| **4** | “Suggest three ways to improve this section, but do not rewrite it yet.” |\n| **5** | “Now apply my choice of improvements 1 and 3.” |\n\n- **Good for:** long or complex tasks, such as reports, plans, and projects.\n- **Why it works:** You control the direction, you can check each result before continuing, and it is easier to fix a small step than a huge answer.\n\n#### 7. Choosing and combining techniques\n| If your situation is… | Try this technique |\n| :--- | :--- |\n| **You want a certain style or tone** | Give examples |\n| **You need to compare options or solve a problem** | Ask for steps |\n| **You want practice, feedback, or a specific voice** | Assign a role |\n| **You want to paste the result into a table or document** | Control the format |\n| **The task is big and has several parts** | Use prompt chaining |\n\nIn many cases, you can combine techniques. For instance, you might ask a “friendly editor” (**role**) to improve your text in three steps (**steps**), and to give the result as a table of changes (**format**). However, do not add every technique to every prompt. Use only the ones that the task needs, because a clear, simple prompt often works best.\n\n#### Key takeaways\n- Techniques are extra tools that build on the six-part checklist.\n- **Examples** show the style you want. **Steps** organize careful thinking. **Roles** set the tone and focus. **Format** controls how the answer looks. **Chaining** splits a big task into smaller prompts.\n- A role changes style, not qualifications, and steps can still be wrong, so always check important results.\n- Combine techniques when the task needs them, but keep the prompt as simple as possible.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Technique** | A way of shaping a prompt to get a better result for a certain kind of task |\n| **Example** | A sample in your prompt that shows the style or format you want |\n| **Step by step** | Asking the AI to work through a task in stages |\n| **Role** | A character or job you ask the AI to take on, such as a tutor or an interviewer |\n| **Prompt chaining** | Breaking a big task into a series of smaller prompts, where each result feeds the next |\n\n---\n\n### Part B: Reading (8 minutes) — “Ask It to Ask You”\nSo far, you have learned to tell the AI what you want. However, sometimes you do not know exactly what the AI needs to know. In that case, there is a simple trick: **let the AI ask you questions first.**\n\n#### The clarifying-questions prompt\nAdd a short sentence at the end of your prompt, such as:\n> *“Before you answer, ask me up to five questions that you need to do this well. Wait for my answers.”*\n\nAs a result, the AI will ask things like, *“Who is the audience?”* or *“How long should it be?”* Then, you answer, and the final result fits your needs much better. This is especially helpful when you are not sure which details matter.\n\n| Speaker | Example |\n| :--- | :--- |\n| **You** | “I want a travel plan for a weekend in Lisbon. Before you answer, ask me up to five questions that you need to do this well.” |\n| **AI** | “How many people are travelling? What is your budget? What do you enjoy: museums, food, walking, or nightlife? When are you travelling? Do you need accessible routes?” |\n| **You** | “Two adults, about 300 euros, we love food and walking, in May, no accessibility needs.” |\n\n#### Refine by conversation\nYou do not have to start again when the first answer is not perfect. Instead, refine it with short, specific follow-ups:\n- *“Keep paragraphs 1 and 3. Make paragraph 2 shorter and simpler.”*\n- *“Give me three different versions: formal, friendly, and very short.”*\n- *“What is missing from this answer? What would you ask me to improve it?”*\n- *“Explain the second point in simpler words.”*\n\nNotice that each follow-up is specific. A vague follow-up, such as *“make it better,”* gives the AI very little to work with.\n\n> **In short:** If you are unsure what to include, ask the AI to ask you. Then refine with specific follow-ups, instead of starting over."
           },
           {
             "id": "les_gpe_02_02",
             "section_id": "sec_gpe_02",
-            "title": "2.2 Activity: Choose the Technique & Stretch Task (15 min)",
+            "title": "2.2 Activity: “Choose the Technique” & Stretch Comparison (15 min)",
             "type": "article",
-            "summary": "Match six real situations to the best prompting technique, write the prompt, explain why, and try the two-technique Stretch comparison.",
+            "summary": "Match six situations to the best prompting technique, test or compare outputs (live or text-only lamp descriptions), review sample prompts, and run a 2-technique Stretch comparison.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **Your goal:** Six situations are shown below. Pick the best technique (**Examples, Steps, Role, Format, or Chaining**) for each, write the prompt in your **Personal Study Notes**, and explain why it fits. *(15 minutes)*\n\n---\n\n### Six Situations\n1. **Customer replies:** You have 30 short support replies to write and want them all to match your warm, concise house style.\n2. **Planning a community workshop:** You need a topic list, a 60-minute schedule, and a flyer—all consistent with each other.\n3. **Comparing two phone plans:** You want to see the monthly math clearly before deciding.\n4. **Practicing for a job interview:** You want realistic follow-up questions and feedback on your answers.\n5. **Organizing messy meeting notes:** You need action items, owners, and deadlines pulled out cleanly.\n6. **Unclear project goal:** You are not sure what details matter yet for a small event plan. *(Bonus: use “Ask it to ask you”!)*\n\n#### Suggested Answer Guide\n1. **Giving examples** — shows exact tone and length.\n2. **Prompt chaining** — keeps topic, schedule, and flyer aligned step by step.\n3. **Asking for steps** — makes the reasoning and math transparent.\n4. **Assigning a role** — simulates an interviewer and gives targeted critique.\n5. **Controlling format** — e.g., a 3-column table (*Action, Owner, Due Date*).\n6. **Ask it to ask you** — surfaces missing constraints before drafting.\n\n---\n\n### Stretch Task (Advanced Users)\nPick **one task** (such as *reviewing a cover letter* or *planning a study week*) and test it with **two different techniques** (e.g., *Assigning a Role* vs. *Controlling Format* or *Prompt Chaining*). Write a short comparison explaining which produced a more useful result and why."
+            "content": "> **Your goal:** Six situations are shown below. For each one, choose the best technique (or a combination), write a prompt, and explain your choice in one sentence. You can use a chatbot to test two of your prompts, or you can use the text-only version in Step 2. *(15 minutes)*\n\n---\n\n### Step 1: Choose, write, and explain (9 minutes)\nRecord your choices in your **Personal Study Notes** (make each prompt **at least 15 words**, using placeholders like `[details]` instead of private information):\n\n| # | Situation |\n| :---: | :--- |\n| **1** | You want product descriptions in the same cheerful style as three descriptions you love |\n| **2** | You must decide between two phone plans that have different prices and data limits |\n| **3** | You want to practice for a job interview |\n| **4** | You need a weekly meal plan that you can paste into a spreadsheet |\n| **5** | You must write a five-page school report on a topic that you know little about |\n| **6** | You want a travel plan, but you are not sure which details matter |\n\n---\n\n### Step 2: Test or compare (4 minutes)\n- **Option A — With a chatbot:** Run two of your prompts. Record how well the technique worked, and what you would change.\n- **Option B — Text-only version:** Read the two sample outputs below (written for this exercise; both answer *“Write a description for a wooden desk lamp”*) and answer the questions:\n\n| Prompt | Sample output |\n| :--- | :--- |\n| **Without examples:** *“Write a description for a wooden desk lamp.”* | This wooden desk lamp combines natural materials with modern design. Its adjustable arm provides focused light for reading and working, while the warm wood finish complements any home office. |\n| **With examples:** same request + two cheerful one-sentence examples (*“Meet the Cozy Mug…”*, *“Meet the Soft Sock…”*) | Meet the Wooden Lamp: it lights up your late-night reading and makes your desk feel like home. |\n\n- Which output matches the cheerful style of the examples? Why?\n- What did the examples change: the length, the tone, or the structure?\n\n### Step 3: Think about it (2 minutes)\n- Which situation needed more than one technique?\n- Which technique would you use most often in your own life?\n\n---\n\n### Answer Guide and Feedback\n| # | Best technique(s) | Sample prompt |\n| :---: | :--- | :--- |\n| **1** | **Give examples, and control the format** | “Write a one-sentence product description for a wooden desk lamp in the same cheerful style as these three examples: `[Example 1]` `[Example 2]` `[Example 3]`.” |\n| **2** | **Ask for steps, and control the format** | “Compare these two phone plans. First list the price and data of each, then say who each suits, then put the differences in a table, and finally recommend one for someone who uses 10 GB a month. Plan A: `[details]`. Plan B: `[details]`.” |\n| **3** | **Assign a role** | “Act as an interviewer for a shop assistant job. Ask me one question at a time, give short feedback after each answer, and then ask the next question.” |\n| **4** | **Control the format** | “Make a 7-day vegetarian meal plan as a table with the columns Day, Breakfast, Lunch, and Dinner. Keep each meal to five words or fewer.” |\n| **5** | **Prompt chaining** | Step 1: “List the five key questions a short report on `[topic]` should answer.” Step 2: “Make an outline with three sections.” Step 3: “Write section 1 in 150 words.” Continue one section at a time, and check each result. |\n| **6** | **Ask it to ask you** | “I want a travel plan for a weekend in `[city]`. Before you answer, ask me up to five questions that you need to do this well.” |\n\n> **What good answers show:**\n> - The technique matches the situation, and you can explain why.\n> - The prompt still includes Module 1 basics (task, audience, limits) and uses placeholders instead of private info.\n\n---\n\n### Stretch Task (Advanced Users)\nChoose one real task. Run it with **two different techniques**, such as **examples** and **steps**. Write a short comparison of the results: which technique gave the better result, and why?"
           },
           {
             "id": "les_gpe_02_03",
             "section_id": "sec_gpe_02",
             "title": "2.3 Module 2 Knowledge Check (10 Questions from 20-Question Bank)",
             "type": "quiz",
-            "summary": "10 questions randomly drawn from the 20-question Module 2 bank (15 minutes).",
+            "summary": "Answer 10 questions randomly drawn from the 20-question Module 2 bank (15 minutes). Retake anytime for fresh questions with instant feedback.",
             "duration_seconds": 900,
             "position": 3,
             "is_free_preview": false,
@@ -2712,275 +2712,277 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
               {
                 "id": "q_gpe_02_1",
                 "lesson_id": "les_gpe_02_03",
-                "question": "Which technique works best when you want the AI to match a very specific writing style?",
+                "question": "Which technique shows the AI the style you want by giving samples?",
                 "options": [
-                  "Giving 1–3 short examples",
-                  "Asking for no format",
-                  "Using a single word",
-                  "Prompting in all caps"
+                  "Prompt chaining",
+                  "Giving examples",
+                  "Deleting the context",
+                  "Using a longer title"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Examples show the exact pattern, rhythm, and tone to imitate.",
+                "correct_option_index": 1,
+                "explanation": "Examples show the style, tone, or structure that you want.",
                 "position": 1
               },
               {
                 "id": "q_gpe_02_2",
                 "lesson_id": "les_gpe_02_03",
-                "question": "What is “prompt chaining”?",
+                "question": "Which prompt asks for steps?",
                 "options": [
-                  "Breaking a complex task into linked prompts where one output feeds the next",
-                  "Sending the same prompt 10 times",
-                  "Linking two computers with a cable",
-                  "Writing a 2,000-word single prompt"
+                  "“First list the options, then compare them in a table, and finally recommend one.”",
+                  "“Tell me everything.”",
+                  "“Pick one.”",
+                  "“Be quick.”"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Chaining keeps each step focused and easy to check.",
+                "explanation": "Asking for steps helps the AI organize careful thinking.",
                 "position": 2
               },
               {
                 "id": "q_gpe_02_3",
                 "lesson_id": "les_gpe_02_03",
-                "question": "When is “assigning a role” especially helpful?",
+                "question": "What does assigning a role, such as “act as a patient tutor,” mainly help with?",
                 "options": [
-                  "When you want feedback from a specific perspective, like an editor or interviewer",
-                  "When you want to skip checking facts",
-                  "When you want the AI to feel real emotions",
-                  "When you have no task"
+                  "The speed of the computer",
+                  "The price of the tool",
+                  "The color of the screen",
+                  "The tone, level, and focus of the answer"
                 ],
-                "correct_option_index": 0,
-                "explanation": "A role frames the perspective, criteria, and tone of the response.",
+                "correct_option_index": 3,
+                "explanation": "A role shapes how the AI answers.",
                 "position": 3
               },
               {
                 "id": "q_gpe_02_4",
                 "lesson_id": "les_gpe_02_03",
-                "question": "Why ask the AI to “show its reasoning step by step”?",
+                "question": "If you write “act as a doctor,” what does that mean for the advice?",
                 "options": [
-                  "It helps you spot mistakes in logic or math before accepting the conclusion",
-                  "It hides the answer",
-                  "It guarantees 100% truth",
-                  "It shortens the output to one word"
+                  "It becomes reliable medical advice",
+                  "The AI gets a medical license",
+                  "It changes the style only, so you should still ask a qualified person for health decisions",
+                  "The advice becomes legally valid"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Step-by-step output makes errors visible and easier to verify.",
+                "correct_option_index": 2,
+                "explanation": "A role changes style, not real qualifications.",
                 "position": 4
               },
               {
                 "id": "q_gpe_02_5",
                 "lesson_id": "les_gpe_02_03",
-                "question": "What does the “Ask it to ask you” technique do?",
+                "question": "Which is an example of controlling the format?",
                 "options": [
-                  "Lets the AI ask clarifying questions before generating the full answer",
-                  "Forces the AI to guess silently",
-                  "Turns off all formatting",
-                  "Shares your chat publicly"
+                  "“Think hard.”",
+                  "“Answer in a table with three columns: option, cost, and benefit.”",
+                  "“Be nice.”",
+                  "“Do your best.”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Clarifying questions uncover missing context early.",
+                "correct_option_index": 1,
+                "explanation": "Format instructions tell the AI how the answer should look.",
                 "position": 5
               },
               {
                 "id": "q_gpe_02_6",
                 "lesson_id": "les_gpe_02_03",
-                "question": "You have messy notes and need Action, Owner, and Deadline columns. Which technique fits best?",
+                "question": "What is prompt chaining?",
                 "options": [
-                  "Controlling format",
-                  "Giving no instructions",
-                  "Only assigning a role",
-                  "Asking for a poem"
+                  "Breaking a big task into a series of smaller prompts, where each result feeds the next",
+                  "Sending the same prompt many times",
+                  "Linking two chatbots with a cable",
+                  "Writing one very long prompt"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Controlling format enforces the exact table columns you need.",
+                "explanation": "A chain lets you control and check each step.",
                 "position": 6
               },
               {
                 "id": "q_gpe_02_7",
                 "lesson_id": "les_gpe_02_03",
-                "question": "True or false: Prompt chaining is useful when a single giant prompt keeps forgetting instructions.",
+                "question": "Why is chaining useful for a long report?",
                 "options": [
-                  "True",
-                  "False"
+                  "It makes the report shorter automatically",
+                  "It removes the need to read the result",
+                  "It hides mistakes",
+                  "You can check each part before you continue, and fix small problems early"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Smaller linked steps give the model higher focus on each stage.",
+                "correct_option_index": 3,
+                "explanation": "Smaller steps are easier to control and check.",
                 "position": 7
               },
               {
                 "id": "q_gpe_02_8",
                 "lesson_id": "les_gpe_02_03",
-                "question": "Which prompt uses “giving examples”?",
+                "question": "You want product descriptions in the same cheerful style as your three favorites. Which technique fits best?",
                 "options": [
-                  "“Match these two headlines: ‘Save Time.’ / ‘Work Smarter.’ Now write 3 more.”",
-                  "“Write 3 headlines.”",
-                  "“Be a marketing director.”",
-                  "“Explain step by step.”"
+                  "Asking for steps",
+                  "Prompt chaining",
+                  "Giving examples",
+                  "Assigning a role of a judge"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Providing two sample headlines demonstrates the desired pattern.",
+                "correct_option_index": 2,
+                "explanation": "Showing samples is the easiest way to pass on a style.",
                 "position": 8
               },
               {
                 "id": "q_gpe_02_9",
                 "lesson_id": "les_gpe_02_03",
-                "question": "Which prompt uses “assigning a role”?",
+                "question": "When the AI shows its reasoning step by step, what should you remember?",
                 "options": [
-                  "“Act as a plain-language editor and flag any jargon in this flyer.”",
-                  "“Output a CSV.”",
-                  "“Translate to Spanish.”",
-                  "“List 5 fruits.”"
+                  "The steps are always correct",
+                  "The steps can still contain mistakes, so check them",
+                  "You no longer need to read the answer",
+                  "Steps make facts true"
                 ],
-                "correct_option_index": 0,
-                "explanation": "“Act as a plain-language editor” sets a clear persona and review lens.",
+                "correct_option_index": 1,
+                "explanation": "Logical-looking reasoning can still be wrong.",
                 "position": 9
               },
               {
                 "id": "q_gpe_02_10",
                 "lesson_id": "les_gpe_02_03",
-                "question": "Why is refining by conversation often better than starting over from scratch?",
+                "question": "Which sentence can you add to let the AI ask you questions first?",
                 "options": [
-                  "You can keep what already works and fix only the weak part",
-                  "The AI forgets everything you said",
-                  "Starting over is forbidden",
-                  "It removes the need to read the output"
+                  "“Before you answer, ask me up to five questions that you need to do this well.”",
+                  "“Answer without asking anything.”",
+                  "“Never ask me questions.”",
+                  "“Guess everything.”"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Iterative follow-ups preserve good structure while adjusting details.",
+                "explanation": "Clarifying questions help when you are unsure which details matter.",
                 "position": 10
               },
               {
                 "id": "q_gpe_02_11",
                 "lesson_id": "les_gpe_02_03",
-                "question": "For a 3-part project (research → outline → newsletter), which technique is strongest?",
+                "question": "When is “ask it to ask you” most useful?",
                 "options": [
-                  "Prompt chaining",
-                  "Single-word prompting",
-                  "Removing context",
-                  "Ignoring the audience"
+                  "When you already know every detail",
+                  "When you want the shortest possible prompt",
+                  "When you do not want an answer",
+                  "When you are not sure which details matter for the task"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Chaining lets you review the outline before drafting the newsletter.",
+                "correct_option_index": 3,
+                "explanation": "The AI’s questions reveal what information it needs.",
                 "position": 11
               },
               {
                 "id": "q_gpe_02_12",
                 "lesson_id": "les_gpe_02_03",
-                "question": "What is a good clarifying prompt to add when you are unsure what details to include?",
+                "question": "True or false: You can combine several techniques in one prompt.",
                 "options": [
-                  "“Before answering, ask me 3 short questions to clarify my goal.”",
-                  "“Guess everything.”",
-                  "“Never ask questions.”",
-                  "“Write 1,000 words right now.”"
+                  "True",
+                  "False"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Inviting 3 short questions keeps the interaction fast and targeted.",
+                "explanation": "For example, a role, steps, and a format can work together, but only add what the task needs.",
                 "position": 12
               },
               {
                 "id": "q_gpe_02_13",
                 "lesson_id": "les_gpe_02_03",
-                "question": "True or false: Assigning a role makes an AI a licensed doctor or lawyer.",
+                "question": "Which situation suits prompt chaining best?",
                 "options": [
-                  "True",
-                  "False"
+                  "Asking for the capital of France",
+                  "Writing a long school report in stages",
+                  "Saying hello to the chatbot",
+                  "Naming a pet"
                 ],
                 "correct_option_index": 1,
-                "explanation": "A role only shapes writing perspective; it never replaces qualified professionals.",
+                "explanation": "Big tasks with several parts are good for chains.",
                 "position": 13
               },
               {
                 "id": "q_gpe_02_14",
                 "lesson_id": "les_gpe_02_03",
-                "question": "Which technique helps most when turning a paragraph into a spreadsheet-ready list?",
+                "question": "Why should you give more than one example?",
                 "options": [
-                  "Controlling format",
-                  "Assigning a poet role",
-                  "Removing limits",
-                  "Hiding the task"
+                  "It shows some variety, so the AI does not copy one example too closely",
+                  "More examples make the AI cheaper",
+                  "One example is not allowed",
+                  "Examples replace the task"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Specifying exact columns or delimiters prepares data for spreadsheets.",
+                "explanation": "Several different examples help the AI see the pattern, not just one sample.",
                 "position": 14
               },
               {
                 "id": "q_gpe_02_15",
                 "lesson_id": "les_gpe_02_03",
-                "question": "If you test one task with two different techniques, what should you compare?",
+                "question": "Which prompt controls the format?",
                 "options": [
-                  "Clarity, accuracy, fit for purpose, and how much editing you still had to do",
-                  "Only which answer was longer",
-                  "Only the font color",
-                  "Nothing"
+                  "“Make it interesting.”",
+                  "“Surprise me.”",
+                  "“Use your imagination.”",
+                  "“Give me five bullet points, each under 12 words.”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Compare usefulness and editing effort, not raw length.",
+                "correct_option_index": 3,
+                "explanation": "Clear length and structure rules are format control.",
                 "position": 15
               },
               {
                 "id": "q_gpe_02_16",
                 "lesson_id": "les_gpe_02_03",
-                "question": "Why does “giving examples” reduce back-and-forth editing?",
+                "question": "You want to practice for an interview. Which technique helps most?",
                 "options": [
-                  "Showing one concrete sample communicates tone better than ten adjectives",
-                  "It disables the AI’s creativity",
-                  "It searches private files",
-                  "It guarantees zero hallucinations"
+                  "Asking for a table",
+                  "Prompt chaining only",
+                  "Assigning a role, such as an interviewer who asks one question at a time",
+                  "Removing the context"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Models mimic concrete patterns much more reliably than abstract adjectives.",
+                "correct_option_index": 2,
+                "explanation": "A role lets the AI act as your practice partner.",
                 "position": 16
               },
               {
                 "id": "q_gpe_02_17",
                 "lesson_id": "les_gpe_02_03",
-                "question": "Which step in a prompt chain should come first for writing an article?",
+                "question": "The first answer is almost right. What is the best follow-up?",
                 "options": [
-                  "Clarifying the goal and building an outline",
-                  "Polishing the final punctuation",
-                  "Translating to 5 languages",
-                  "Publishing without reading"
+                  "“Make it better.”",
+                  "“Keep paragraphs 1 and 3, and make paragraph 2 shorter and simpler.”",
+                  "“Try again.”",
+                  "“I don’t like it.”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Locking in the outline first prevents rewriting whole drafts later.",
+                "correct_option_index": 1,
+                "explanation": "Specific follow-ups give the AI something clear to change.",
                 "position": 17
               },
               {
                 "id": "q_gpe_02_18",
                 "lesson_id": "les_gpe_02_03",
-                "question": "When comparing two phone plans, why combine “asking for steps” with “controlling format”?",
-                "options": [
-                  "You get transparent step-by-step math laid out in an easy-to-compare table",
-                  "It hides the prices",
-                  "It deletes the plan names",
-                  "It avoids checking numbers"
-                ],
-                "correct_option_index": 0,
-                "explanation": "Combining techniques pairs clear reasoning with scannable layout.",
-                "position": 18
-              },
-              {
-                "id": "q_gpe_02_19",
-                "lesson_id": "les_gpe_02_03",
-                "question": "True or false: You should always use all five techniques in every single prompt.",
+                "question": "True or false: A prompt that uses every technique is always the best prompt.",
                 "options": [
                   "True",
                   "False"
                 ],
                 "correct_option_index": 1,
-                "explanation": "Pick the 1–2 techniques that best fit the situation.",
+                "explanation": "Use only the techniques that the task needs. A clear, simple prompt often works best.",
+                "position": 18
+              },
+              {
+                "id": "q_gpe_02_19",
+                "lesson_id": "les_gpe_02_03",
+                "question": "You need to choose between two options and want careful reasoning. Which technique fits best?",
+                "options": [
+                  "Assigning the role of a pirate",
+                  "Removing all details",
+                  "Using only one word",
+                  "Asking for steps, such as listing, comparing, and then recommending"
+                ],
+                "correct_option_index": 3,
+                "explanation": "Steps make comparisons and decisions more organized.",
                 "position": 19
               },
               {
                 "id": "q_gpe_02_20",
                 "lesson_id": "les_gpe_02_03",
-                "question": "What is the main benefit of testing two techniques on the same task?",
+                "question": "The AI keeps copying the wrong style. What is a likely cause?",
                 "options": [
-                  "You learn which technique fits which kind of problem in your own workflow",
-                  "It breaks the chatbot",
-                  "It doubles your costs unnecessarily",
-                  "It replaces verification"
+                  "The AI dislikes you",
+                  "Examples never work",
+                  "Your examples may be sending the wrong signal, so adjust them",
+                  "You need a longer title"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Hands-on comparison builds reliable judgment for future tasks.",
+                "correct_option_index": 2,
+                "explanation": "The AI follows the pattern in your examples, so check that they show what you want.",
                 "position": 20
               }
             ]
