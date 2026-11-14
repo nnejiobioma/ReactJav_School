@@ -2172,22 +2172,22 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
           {
             "id": "les_gpe_00_01",
             "section_id": "sec_gpe_00",
-            "title": "0.1 Course Guide, 15-Hour Map, Glossary, Real Tasks & Tool Check",
+            "title": "0.1 Orientation Guide, Course Map, Glossary, Real Tasks & Tool Check",
             "type": "article",
-            "summary": "Welcome guide covering the 15-hour (900-minute) 3-part structure, 11 learning outcomes, grading (50 automated + 50 rubric), 10-term glossary preview, choosing 5 real tasks, and tool-neutral setup.",
-            "implementation_tip": "Pick 5 real tasks from your own work or study right now—covering text, image, audio/video, and learning/research—so every module builds toward your final portfolio.",
+            "summary": "Welcome guide covering the 15-hour 3-part course map, 10-term glossary preview, choosing 5 real tasks, tool readiness check, and starting confidence ratings.",
+            "implementation_tip": "Pick 5 real non-private tasks right now (text, image, audio/video, learning/research, and a 3-step workflow) and record your starting 1–5 confidence ratings before taking the Pre-Check.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": true,
             "is_completed": false,
-            "content": "> **Orientation guide, course map, and pre-check (30 minutes total):**\n> - **5 min:** Read the course guide (Part A)\n> - **5 min:** Preview the glossary (Part B)\n> - **5 min:** Choose your real tasks (Part C)\n> - **5 min:** Complete the tool check (Part D)\n> - **10 min:** Take the ungraded pre-check (Lesson 0.2)\n\n---\n\n### Part A: Course Guide (5 min)\n\n#### Welcome & Course Promise\nWelcome to **Generative AI and Prompt Engineering** (Course 2). No coding is required, and Course 1 (*AI Foundations*) is helpful but not required.\n\n> **Course Promise:** *After this course, you can get useful, reliable results from generative AI in text, images, audio, and video. You can write clear prompts for each medium, improve them step by step, check the output, use AI media honestly and safely, and build reusable prompt templates and workflows for your own work or study.*\n\n#### What you will be able to do (11 Outcomes)\n1. Explain in plain words how generative AI produces output, and why prompts shape the result.\n2. Write clear text prompts that include the task, context, format, and limits.\n3. Choose and apply prompting techniques, such as examples, step-by-step requests, roles, and prompt chaining.\n4. Write effective prompts for images, including subject, style, composition, and lighting, and improve them by iteration.\n5. Use AI for audio and speech tasks, such as transcribing, summarizing, voice scripts, and music prompts, and check the results.\n6. Plan and prompt short videos with shot-by-shot storyboards, and use images, screenshots, charts, and documents as inputs.\n7. Evaluate AI output of every kind for accuracy, bias, and fit, and improve the prompt from what went wrong.\n8. Use AI media responsibly, including consent, ownership, labeling, privacy, and safety.\n9. Use AI as a study partner and research aid, while checking sources and keeping your own thinking.\n10. Delegate multi-step tasks to AI assistants and agents safely, with clear limits, approvals, and checks.\n11. Design multi-step workflows and reusable prompt libraries, and test them on varied inputs.\n\n#### How the 15-hour (900-minute) course works\nThe course is organized into **three standalone parts** with a checkpoint after each part, so you can pause and return anytime:\n\n| Part | Segment | Time | Content |\n| :--- | :--- | :---: | :--- |\n| **Start** | **Orientation and self-check** | **30 min** | Written guide, pre-check, glossary preview, choosing real tasks, tool check |\n| **Part 1: Text prompting** | **Module 1: Prompting Basics** | **50 min** | Lesson (12m), reading (8m), activity (15m), knowledge check (15m) |\n| **Part 1** | **Module 2: Prompting Techniques** | **50 min** | Lesson, reading, activity, knowledge check |\n| **Part 1** | **Module 3: Prompts for Real Work** | **50 min** | Lesson, reading, activity, knowledge check |\n| **Part 1** | **Module 4: Prompting for Learning and Research** | **50 min** | Lesson, reading, activity, knowledge check |\n| **Part 1** | **Module 5: Checking and Improving Output** | **50 min** | Lesson, reading, activity, knowledge check |\n| **Checkpoint 1** | **Guided Lab 1: Text Prompt Workshop** | **60 min** | Prompt makeover, technique comparison, break and check + Part 1 self-check |\n| **Part 2: Images, audio, and video** | **Module 6: Prompting for Images** | **50 min** | Lesson, reading, activity, knowledge check |\n| **Part 2** | **Module 7: Audio and Speech** | **50 min** | Lesson, reading, activity, knowledge check |\n| **Part 2** | **Module 8: Video and Multimodal Prompting** | **50 min** | Lesson, reading, activity, knowledge check |\n| **Checkpoint 2** | **Guided Lab 2: Multimedia Prompt Workshop** | **60 min** | Image, audio, and video or multimodal tasks + Part 2 self-check |\n| **Part 3: Responsible & advanced use** | **Module 9: Responsible Use Across Media** | **50 min** | Lesson, reading, activity, knowledge check |\n| **Part 3** | **Module 10: Advanced Workflows and Prompt Systems** | **50 min** | Lesson, reading, activity, knowledge check |\n| **Part 3** | **Module 11: AI Assistants, Tools, and Agents** | **50 min** | Lesson, reading, activity, knowledge check |\n| **Checkpoint 3** | **Authentic assessment: “My Prompt Portfolio”** | **170 min** | 5 real task entries, verification & responsible-use notes, 5 templates, 1-page playbook |\n| **Finish** | **Reflection and review** | **30 min** | 150–200 word reflection, post-check, self-assessment, survey, submission |\n| **Total** | | **900 min** | **15 hours** |\n\n#### Serving Beginners, Growing Users, and Advanced Users\n- **Beginners:** Start with a simple prompt checklist, guided examples, and templates to copy and adapt. Every task has a text-only or analysis-only version.\n- **Growing users:** Practice techniques across text, images, audio, and video, and build a personal prompt library for real tasks.\n- **Advanced users:** Complete the **Stretch** task in every module, plus Modules 10 and 11 on workflows, structured output, instruction sets, testing prompts, and AI assistants and agents.\n\n#### Grading, Certificate & Open Badge\n- **Automated Checks (50 points):** 11 module knowledge checks (25 points; 10 drawn from 20-question banks per attempt) + Portfolio submission checks (25 points: 5 complete entries, verification & responsible-use notes, 5 templates, 1-page playbook, 150–200 word reflection, and accessibility/alt text).\n- **Rubric (50 points):** Prompt clarity & structure (12), Iteration & improvement (12), Verification & responsible use (12), Range & fit across media (8), Reflection & reusability (6).\n- **Pass:** At least **35 of 50 (70%) in BOTH** parts. **Distinction:** At least **45 of 50 (90%) in BOTH** parts. One resubmission is allowed on criteria below Proficient.\n- **Credentials:** *“Generative AI and Prompt Engineering: Certificate of Completion”* (or *with Distinction*) + Open Badge (plus optional stackable Part badges for *Text Prompting*, *Multimedia Prompting*, and *Responsible and Advanced Use*).\n\n---\n\n### Part B: Glossary Preview (5 min)\n| Term | Plain-Language Meaning |\n| :--- | :--- |\n| **Prompt** | The instruction, question, or brief you give to a generative AI tool |\n| **Context** | Background facts, audience, or situation the AI needs to give a fitting answer |\n| **Prompt chaining** | Breaking a large job into linked steps where one output feeds the next prompt |\n| **Template** | A reusable prompt with fill-in blanks like `[audience]` and `[topic]` |\n| **Iteration** | Improving a prompt step by step based on what worked or went wrong in the output |\n| **Hallucination** | A confident-sounding AI output (fact, quote, link, or source) that is false or invented |\n| **Multimodal** | Working across more than one medium—such as combining text, images, audio, or video |\n| **Storyboard** | A shot-by-shot plan for a short video before generating clips |\n| **Provenance** | Labels, notes, or metadata showing where AI media came from |\n| **Prompt injection** | Hidden orders inside a webpage or document that try to trick an AI assistant or agent |\n\n---\n\n### Part C: Choose Your Real Tasks (5 min)\nIn the final **“My Prompt Portfolio”** assessment, you will showcase **five real tasks** from your own work or study covering at least **three media types** (text, image, audio, video) and including **one learning or research task**. Note your initial 5 candidate tasks in your **Personal Study Notes** tab below (you can refine them as you go).\n\n---\n\n### Part D: Tool Check (5 min)\nThis course is **tool-neutral**—we teach principles, not button clicks. Every lab and activity also includes an **analysis-only path** with sample outputs, so you are never blocked by account limits or cost.\n- [ ] I have access to any text chatbot (free tools are fine), or I will use the analysis-only path\n- [ ] I know how I will view or test image, audio, or video prompts (or use the provided sample media/transcripts)\n- [ ] I will never paste passwords, private documents, or real people’s faces/voices without permission"
+            "content": "> **Welcome to Generative AI and Prompt Engineering — Orientation guide, course map, and pre-check (30 minutes):**\n> - **5 min:** Read the course guide (Part A)\n> - **5 min:** Preview the glossary (Part B)\n> - **5 min:** Choose your real tasks (Part C)\n> - **5 min:** Complete the tool check (Part D)\n> - **10 min:** Take the ungraded pre-check (Lesson 0.2)\n\n---\n\n### Part A: Course Guide (5 min)\n\n#### Welcome\nWelcome, and thank you for joining. This course teaches you how to get useful, reliable results from generative AI. You will learn to write clear prompts for **text, images, audio, and video**. You will also learn to check what AI gives you, use it honestly and safely, and build prompt templates that you can use again and again. You do not need any technical background, and you do not need to write code.\n\n#### What you will be able to do\n- Explain how prompts steer generative AI, and write clear prompts.\n- Use techniques such as examples, step-by-step requests, roles, and prompt chaining.\n- Prompt for images, audio, and video, and use pictures, charts, and documents as inputs.\n- Use AI to study and research, while checking sources and keeping your own thinking.\n- Check AI output for accuracy, bias, and fit, and improve your prompts from what goes wrong.\n- Use AI media responsibly, with consent, honest labeling, and respect for privacy.\n- Design workflows, and delegate multi-step tasks to AI assistants safely.\n\n#### How the course works\nThe course takes about **15 hours**. You can study at your own pace, and each part is short. The course has **three parts**, and each part ends with a checkpoint where you can pause and come back later.\n\n| Part and segment | Time | What you do |\n| :--- | :---: | :--- |\n| **Orientation** | **30 min** | Read this guide, choose your real tasks, check your tools, and take the pre-check |\n| **Part 1: Text prompting — Modules 1–5** | **50 min each** | Prompting Basics, Prompting Techniques, Prompts for Real Work, Prompting for Learning and Research, and Checking and Improving Output |\n| **Part 1 Checkpoint — Guided Lab 1** | **60 min** | Improve prompts, compare techniques, and test what breaks |\n| **Part 2: Images, audio, and video — Modules 6–8** | **50 min each** | Prompting for Images, Audio and Speech, and Video and Multimodal Prompting |\n| **Part 2 Checkpoint — Guided Lab 2** | **60 min** | Practice with images, audio, and video or multimodal inputs |\n| **Part 3: Responsible and advanced use — Modules 9–11** | **50 min each** | Responsible Use Across Media, Advanced Workflows and Prompt Systems, and AI Assistants, Tools, and Agents |\n| **“My Prompt Portfolio” assessment** | **170 min** | Complete five real tasks, check the results, and build reusable templates |\n| **Reflection and review** | **30 min** | Reflect, retake the pre-check, and submit your work |\n\nEvery module has the same four steps: a written lesson, a short reading, a hands-on activity, and a quiz of 10 questions (drawn from a 20-question bank).\n\n#### What you need\n- A computer, tablet, or phone with a web browser and an internet connection.\n- Access to at least one chatbot. A free version is fine.\n- *Optional:* tools for images, audio, or video. These often have limits, accounts, or fees, and **you do not need to pay for anything**. Every task has an **analysis-only version** with sample outputs.\n- A way to take screenshots, and a place to save your work.\n\n#### How you earn your certificate and badge\n- Take the quiz in each of the 11 modules. You can retake them, and each attempt has new questions.\n- Complete the **“My Prompt Portfolio”** assessment. Part of it is checked automatically, and part is graded with a rubric.\n- Reach at least **70%** in both the automated part and the rubric part. Reach **90%** in both for a **certificate with distinction**.\n- If you fall short, you can revise your work once, using the feedback.\n\n#### Tips for success\n- Try every prompt yourself. Prompting is a skill that you learn by practicing.\n- Keep a simple log of your prompts, the results, and what you changed. It makes your portfolio easier.\n- Expect different results each time. AI tools do not always give the same answer, so record what you really got.\n- Always check important facts before you use them.\n\n#### Rules for using AI in this course\n- You must use real tool output where tools are involved, but your **notes, reasons, playbook, and reflection must be in your own words**.\n- Never share passwords, bank details, ID numbers, or other private information with any tool.\n- Do not use a real person’s face or voice in your work without their permission. Use objects, places, made-up characters, or yourself instead.\n- Label AI-made images, audio, and video as AI-made when you share them.\n\n#### Help and access\nAll diagrams have alt text, and every activity has a text-only version. If you need extra help, cannot reach a tool, or need a different format, contact the course team. You will never lose credit because a tool is unavailable or costs money.\n\n---\n\n### Part B: Glossary Preview (5 min)\nThese ten words appear throughout the course. Do not worry if some feel new. Each one is explained step by step in the modules.\n\n| Word | Simple meaning |\n| :--- | :--- |\n| **Prompt** | The request or instruction you give to an AI tool |\n| **Output** | What the AI gives back, such as text, an image, or audio |\n| **Context** | The background information that helps the AI understand your situation |\n| **Format** | How you want the answer to look, such as a list, a table, or a short paragraph |\n| **Iteration** | Improving a prompt step by step, based on the results |\n| **Template** | A prompt with blanks that you can fill in and reuse |\n| **Hallucination** | A confident answer from an AI tool that is false or made up |\n| **Multimodal** | Able to work with more than one type of information, such as text and images |\n| **Consent** | Permission from a person before you use their face, voice, or information |\n| **Agent** | An AI tool that can carry out several steps on its own, such as searching and organizing |\n\n---\n\n### Part C: Choose Your Real Tasks (5 min)\nIn the final assessment, you will work on **five real tasks** from your own life or work. Thinking about them now will help you notice what is useful as you learn. Write down your ideas in your **Personal Study Notes** (you can change them later):\n\n| Task type | Your idea (something you really need or want to do) |\n| :--- | :--- |\n| **1. A text task** | *(for example an email, a summary, or a plan)* |\n| **2. An image task** | *(for example a poster, a picture for a post, or an illustration)* |\n| **3. An audio or video task** | *(for example a voice script, a short clip, or a transcript)* |\n| **4. A learning or research task** | *(for example understanding a topic or comparing options)* |\n| **5. A workflow of at least three steps** | *(for example researching, writing, and making a picture)* |\n\n> **Tip:** Choose tasks that do not need private information. For example, use a made-up business or a general topic if your real task is sensitive.\n\n---\n\n### Part D: Tool Check & Confidence Ratings (5 min)\nTick each item when you are ready:\n- [ ] I can open this course on my device and read the lessons\n- [ ] I can open at least one chatbot, or I will ask for help with this before Module 1\n- [ ] I know which image, audio, or video tools I can use, or I will use the analysis-only versions\n- [ ] I know how to take screenshots and where I will save my work\n- [ ] I know where to ask for help or for a different format\n\n#### Confidence ratings (before you start)\nBefore taking **Lesson 0.2 (Pre-Check)**, record your starting confidence on a scale of **1** (not at all confident) to **5** (very confident) in your **Personal Study Notes**:\n1. *How confident are you that you can write a prompt that gets a useful result?* **My rating (1–5):** `____`\n2. *How confident are you that you can check whether AI output is correct and safe to use?* **My rating (1–5):** `____`\n\nAt the end of the course, you will retake the Pre-Check and compare **Before / After / Change** on your score (out of 10) and both confidence ratings."
           },
           {
             "id": "les_gpe_00_02",
             "section_id": "sec_gpe_00",
-            "title": "0.2 Ungraded Pre-Check: Prompting & Multimodal Baseline (10 Questions)",
+            "title": "0.2 Ungraded Pre-Check: What Do I Already Know? (10 Questions)",
             "type": "quiz",
-            "summary": "Answer 10 ungraded baseline questions covering text, images, audio, video, responsible use, workflows, and agents. Choose \"I’m not sure\" whenever unsure—you will retake these exact 10 questions at the end to measure your growth.",
+            "summary": "This check is not graded. It shows what you already know, so choose \"I’m not sure\" whenever you are unsure. You will retake these exact 10 questions at the end of the course to see how much you have learned.",
             "duration_seconds": 600,
             "position": 2,
             "is_free_preview": true,
@@ -2196,151 +2196,151 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
               {
                 "id": "q_gpe_pre_1",
                 "lesson_id": "les_gpe_00_02",
-                "question": "Why does the same generative AI tool give very different answers to two different prompts?",
+                "question": "What is a prompt?",
                 "options": [
-                  "Prompts steer which patterns the model predicts next; clearer task, context, and limits narrow the output",
-                  "The tool randomly picks a different language each hour",
-                  "Shorter prompts always produce more accurate facts",
-                  "The AI checks your mood before answering",
+                  "The request or instruction you give to an AI tool",
+                  "The battery of a computer",
+                  "The final answer from an AI tool",
+                  "A type of image file",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Generative AI predicts likely output from patterns. A clear prompt acts like a brief that steers those predictions. Covered in Module 1.",
+                "explanation": "A prompt is what you type or say to ask an AI tool for something. Covered in Module 1.",
                 "position": 1
               },
               {
                 "id": "q_gpe_pre_2",
                 "lesson_id": "les_gpe_00_02",
-                "question": "Which prompting technique is best when you want an AI to match a very specific tone or layout?",
+                "question": "Which prompt is most likely to give a useful result?",
                 "options": [
-                  "Giving one or two short examples of the exact style you want",
-                  "Typing only one word",
-                  "Repeating the same question five times",
-                  "Turning off all limits",
+                  "“Write a friendly 100-word welcome email for new members of a hiking club, with three meeting times in a bullet list.”",
+                  "“Write an email.”",
+                  "“Help me with my club.”",
+                  "“Something about hiking.”",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Providing examples (few-shot prompting) shows the model the exact pattern and tone to follow. Covered in Module 2.",
+                "explanation": "Clear prompts say the task, the audience, the format, and the limits. Covered in Module 1.",
                 "position": 2
               },
               {
                 "id": "q_gpe_pre_3",
                 "lesson_id": "les_gpe_00_02",
-                "question": "What makes a prompt template reusable for real work?",
+                "question": "Showing the AI a sample of the style you want is called…",
                 "options": [
-                  "Replacing one-off details with clear fill-in blanks like [audience] and [topic]",
-                  "Hardcoding yesterday’s date and one person’s private email",
-                  "Making the prompt as vague as possible",
-                  "Deleting the output format",
+                  "Deleting the context",
+                  "Giving an example",
+                  "Switching tools",
+                  "Prompt injection",
                   "I’m not sure"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Templates with bracketed blanks let you reuse proven prompt structures quickly. Covered in Module 3.",
+                "correct_option_index": 1,
+                "explanation": "Examples show the AI the style or format you want. Covered in Module 2.",
                 "position": 3
               },
               {
                 "id": "q_gpe_pre_4",
                 "lesson_id": "les_gpe_00_02",
-                "question": "When using a chatbot for research, why must you open and verify the sources it suggests?",
+                "question": "A chatbot gives you a surprising statistic. What should you do first?",
                 "options": [
-                  "Chatbots can invent realistic-looking titles, quotes, or links that do not exist",
-                  "Web browsers cannot open links unless you type them twice",
-                  "Chatbots only cite sources from the 1990s",
-                  "Sources are only needed for images, not text",
+                  "Share it with friends",
+                  "Trust it because it sounds exact",
+                  "Check it with a trusted source",
+                  "Ask the chatbot to say it louder",
                   "I’m not sure"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Language models can hallucinate plausible citations, so every suggested source must be opened and checked. Covered in Module 4.",
+                "correct_option_index": 2,
+                "explanation": "Check important facts before using them. Covered in Modules 4 and 5.",
                 "position": 4
               },
               {
                 "id": "q_gpe_pre_5",
                 "lesson_id": "les_gpe_00_02",
-                "question": "What is the best way to improve an image prompt without losing what already works?",
+                "question": "When improving an image prompt, a good method is to…",
                 "options": [
-                  "Change one specific element at a time (such as lighting or camera angle) and compare the result",
-                  "Delete the entire prompt and start with a single word",
-                  "Add as many poetic adjectives as possible at once",
-                  "Paste a private photo of a friend without asking",
+                  "Change one thing at a time and see what happens",
+                  "Change everything at once",
+                  "Never change the first version",
+                  "Use as few words as possible",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Changing one variable at a time lets you see what each edit actually does. Covered in Module 6.",
+                "explanation": "Changing one thing at a time shows what each change does. Covered in Module 6.",
                 "position": 5
               },
               {
                 "id": "q_gpe_pre_6",
                 "lesson_id": "les_gpe_00_02",
-                "question": "When writing a script for an AI text-to-speech voice tool, what helps most?",
+                "question": "Which should you never put into a prompt?",
                 "options": [
-                  "Short sentences, spelled-out numbers, and pronunciation notes for tricky names",
-                  "Long paragraphs with no punctuation",
-                  "Tiny footnotes and complex tables",
-                  "Recording someone’s voice without telling them",
+                  "A password or private ID number",
+                  "A question about a recipe",
+                  "A request for party ideas",
+                  "A general question about history",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Writing for the ear with short sentences and pronunciation cues reduces misread words. Covered in Module 7.",
+                "explanation": "Private information may be stored or used by a tool. Covered in Modules 1 and 9.",
                 "position": 6
               },
               {
                 "id": "q_gpe_pre_7",
                 "lesson_id": "les_gpe_00_02",
-                "question": "What is the most reliable way to plan a 20-second AI video?",
+                "question": "What should you do before making an AI image of a real person?",
                 "options": [
-                  "Write a shot-by-shot storyboard (for example, four 5-second shots) before prompting",
-                  "Ask for a full 20-minute movie in one sentence",
-                  "Skip checking text or character consistency",
-                  "Upload private ID cards as reference images",
+                  "Get their permission, or choose a different subject",
+                  "Nothing, because AI images are never real",
+                  "Post it first and ask later",
+                  "Remove the label saying it is AI-made",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Short videos work best as planned sequences of short shots with consistent character and setting details. Covered in Module 8.",
+                "explanation": "Consent matters, and AI media should be labeled. Covered in Module 9.",
                 "position": 7
               },
               {
                 "id": "q_gpe_pre_8",
                 "lesson_id": "les_gpe_00_02",
-                "question": "Before sharing an AI-generated image or voice clip publicly, which check is essential?",
+                "question": "What does “multimodal” mean?",
                 "options": [
-                  "Confirm consent/likeness, tool ownership terms, honest AI labeling, and that it will not mislead or harm",
-                  "Only check if the file size is under 5 MB",
-                  "Remove all labels so people think it is real",
-                  "Use a living artist’s name to copy their exact style without care",
+                  "The AI can work with more than one type of input, such as text and images",
+                  "The AI only works with numbers",
+                  "The AI needs many users at once",
+                  "The AI is very fast",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Responsible media use requires checking consent, ownership, honest labeling, and harm. Covered in Module 9.",
+                "explanation": "Multimodal tools can use images, text, and more. Covered in Module 8.",
                 "position": 8
               },
               {
                 "id": "q_gpe_pre_9",
                 "lesson_id": "les_gpe_00_02",
-                "question": "How do you know if a reusable prompt workflow is actually reliable?",
+                "question": "What is “prompt chaining”?",
                 "options": [
-                  "Test it on several varied inputs and score the outputs against a simple scorecard",
-                  "Run it once on an easy example and assume it always works",
-                  "Never update it even when tools change",
-                  "Remove all output structure",
+                  "Breaking a big task into a series of smaller prompts",
+                  "Linking two computers with a cable",
+                  "Writing one very long prompt",
+                  "Copying a prompt many times",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Testing across varied inputs with a scorecard reveals edge-case failures before you rely on a workflow. Covered in Module 10.",
+                "explanation": "A chain of smaller prompts is often more reliable than one big prompt. Covered in Modules 2 and 10.",
                 "position": 9
               },
               {
                 "id": "q_gpe_pre_10",
                 "lesson_id": "les_gpe_00_02",
-                "question": "What is “prompt injection” when using an AI assistant or agent?",
+                "question": "When you ask an AI agent to do a task, who is responsible for checking the result?",
                 "options": [
-                  "Hidden orders inside a webpage or document that try to trick the AI into ignoring your rules",
-                  "A faster way to type prompts on a phone",
-                  "A medical tool for clinics",
-                  "Saving a prompt into a folder",
+                  "You are, as the person who delegated the task",
+                  "The agent alone",
+                  "The internet",
+                  "Nobody",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Agents reading untrusted content can encounter hidden instructions; limiting access and requiring human approval prevents harm. Covered in Module 11.",
+                "explanation": "People stay responsible for the work and for the access they give. Covered in Module 11.",
                 "position": 10
               }
             ]
@@ -2358,31 +2358,31 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
             "section_id": "sec_gpe_01",
             "title": "1.1 Lesson & Reading: Prompting Basics & “A Prompt Is a Brief” (20 min)",
             "type": "article",
-            "summary": "Learn how prompts steer generative AI, the six-part prompt checklist (task, context, audience, format, limits, example), vague vs. clear prompts, and why a prompt is like briefing a new colleague.",
+            "summary": "Learn why prompts shape AI output, the six-part checklist (T-C-A-F-L-E), vague vs. clear examples, common mistakes, and the \"stranger test\" reading.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": true,
             "is_completed": false,
-            "content": "> **What you will learn:** Explain how prompts steer generative AI, and write a clear prompt using a six-part checklist. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n#### 1. What a prompt is, and why prompts shape the result\nA **prompt** is the instruction, question, or brief you give to a generative AI tool. Just as Course 1 explained, a language model predicts likely next words based on patterns it learned during training. Because it does not read your mind, a vague prompt leaves hundreds of paths open—so the model guesses a generic average. A clear prompt narrows the path and steers the output toward what you actually need.\n\n#### 2. The six-part prompt checklist\n| Part | What it answers | Example |\n| :--- | :--- | :--- |\n| **1. Task** | What exact action should the AI take? | *“Write a 3-sentence apology email…”* |\n| **2. Context** | What background facts or situation matter? | *“…our delivery arrived 2 days late due to a warehouse delay…”* |\n| **3. Audience** | Who will read or use this output? | *“…for a small-business customer who is frustrated…”* |\n| **4. Format** | How should the answer be structured? | *“…with a clear subject line and 2 short paragraphs…”* |\n| **5. Limits** | What tone, length, or rules must it follow? | *“…polite, under 120 words, no excuses, offer a 10% credit.”* |\n| **6. Example** | What does “good” look like? *(optional)* | *“…Match this warm tone: ‘We value your time and…’”* |\n\n#### 3. Vague vs. Clear prompts side by side\n| Weak / Vague Prompt | Clear Checklist Prompt | Why it works better |\n| :--- | :--- | :--- |\n| *“Tell me about solar panels.”* | *“Explain how home solar panels save money in 5 bullet points for a homeowner with no technical background. Avoid jargon and keep it under 150 words.”* | Sets audience, format, length, and plain-language limit. |\n| *“Write a meeting agenda.”* | *“Create a 30-minute team check-in agenda for 4 volunteers planning a neighborhood cleanup. Include time blocks, owner roles, and 3 decisions we must make.”* | Gives context, participants, and exact deliverables. |\n\n#### 4. Common beginner mistakes\n- **Asking for too much at once:** Packing five unrelated jobs into one giant prompt causes the AI to skip details.\n- **No audience or format:** Without them, you get a generic essay when you wanted a 5-row table.\n- **Assuming the AI knows your situation:** It cannot see your calendar, local rules, or unstated preferences unless you include them.\n\n---\n\n### Part B: Reading (8 minutes) — “A Prompt Is a Brief”\nImagine hiring a helpful, fast new colleague on their very first day. They are eager to help, but they know **nothing** about your organization, your customers, or your taste. If you walk past their desk and say, *“Write a report on our project,”* they will guess—and probably miss the mark.\n\nInstead, you give them a **brief**: what the report is for, who will read it, how long it should be, what to include, and what to leave out. Writing a prompt works the exact same way. Whenever an AI output disappoints you, ask: *“What did I forget to put in the brief?”*"
+            "content": "> **What you will learn:** By the end of this lesson, you will be able to explain why prompts matter, and you will be able to write a clear prompt using a six-part checklist: **task, context, audience, format, limits, and example**. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n#### 1. What is a prompt, and why does it matter?\nFirst, let’s start with the basics. A **prompt** is the request or instruction that you give to an AI tool. For example, you might type, *“Write a short thank-you note to my neighbor.”* The tool then gives you an **output**, which is the result, such as a piece of text, an image, or a sound.\n\nNow, here is the key idea of this course. **The same AI tool can give very different results, depending on the prompt.** A clear prompt usually leads to a useful result, while a vague prompt usually leads to a generic or off-target result. In other words, you can get much more from the same tool by improving how you ask.\n\nWhy does this happen? As you may remember from earlier learning, generative AI works by predicting likely output from patterns. It does not know your situation, your goals, or your audience, unless you tell it. Therefore, when you give very little information, the tool has to guess, and its guesses are often average.\n\n#### 2. A prompt is a brief\nA helpful way to think about a prompt is as a **brief**. Imagine you give a task to a very capable new colleague who knows nothing about you. If you only say, *“Write something about our event,”* your colleague will have many questions. When will it happen? Who is it for? How long should it be? What tone do you want?\n\nIn the same way, an AI tool cannot ask you all these questions in the middle of a single prompt. Instead, it will fill in the gaps by itself. For this reason, a good prompt answers the most important questions before the tool starts.\n\n#### 3. The six-part prompt checklist (T-C-A-F-L-E)\nTo make this easy, you can use a checklist with six parts. Each part answers one question that the AI would otherwise have to guess:\n\n| Part | Question it answers | Example |\n| :--- | :--- | :--- |\n| **Task** | What do I want done? | “Write a welcome email.” |\n| **Context** | What background should the AI know? | “for a new hiking club that meets on weekends in a city park” |\n| **Audience** | Who will read or use the result? | “for adults who have never joined a club before” |\n| **Format** | How should the answer look? | “about 100 words, with the three meeting times as a bullet list” |\n| **Limits** | What should it include or avoid? | “friendly tone, no jargon, do not mention prices” |\n| **Example** | Can I show what I like? | “Use a style like this: ‘Hi everyone! We’re so glad you’re here.’” |\n\n> **Easy way to remember:** **T-C-A-F-L-E** — *Task, Context, Audience, Format, Limits, Example* — or simply “a brief that answers six questions.”\n\n#### 4. Vague versus clear: two examples\n**Example 1**\n| Version | Prompt |\n| :--- | :--- |\n| **Vague** | “Write about dogs.” |\n| **Clear** | “Write a 150-word friendly paragraph for a school newsletter about adopting a rescue dog. The readers are parents of young children. End with one tip for first-time dog owners. Use simple words.” |\n\nThe clear version names the **task** (write a paragraph), the **context** (a school newsletter), the **audience** (parents), the **format** (150 words, ending with a tip), and the **limits** (simple words).\n\n**Example 2**\n| Version | Prompt |\n| :--- | :--- |\n| **Vague** | “Help me with my email.” |\n| **Clear** | “I wrote the email below to ask my landlord to fix a leaking tap. Please make it more polite and clear, but keep it under 120 words. Do not change the dates. Here is my draft: `[paste draft]`.” |\n\nThis time, the clear version tells the AI the situation, what to improve, what to keep, and the length. As a result, the output will fit the real need.\n\n#### 5. Common mistakes\n| Mistake | Quick fix |\n| :--- | :--- |\n| **The prompt is too vague** | Add the missing parts of the checklist, especially context and audience |\n| **Too many tasks in one prompt** | Split the work into steps, and ask for one part at a time |\n| **No context** | Tell the AI your situation in one or two sentences |\n| **Accepting the first answer without checking** | Check facts, and improve the prompt if the result is not right |\n| **Sharing private information** | Remove names, numbers, and private details before you paste anything |\n| **Giving up after one try** | Treat the first result as a draft, and adjust the prompt |\n\n#### 6. You do not always need all six parts\nHowever, you do not need to write a long prompt every time. For a quick, low-stakes task, such as brainstorming party names, the task and the format may be enough. In contrast, for an important task, such as a job application letter, you should use all six parts and check the result carefully. So match the effort of your prompt to the importance of the task.\n\n> **Remember:** Longer is not always better. A clear, relevant prompt beats a long, messy one.\n\n#### Key takeaways\n- A **prompt** is the request you give to an AI tool, and the **output** is what comes back.\n- The same tool gives different results for different prompts, because the AI guesses what you did not say.\n- Think of a prompt as a **brief** for a helpful new colleague.\n- The six-part checklist is **task, context, audience, format, limits, and example**.\n- Match the length of your prompt to the importance of the task, and always check important results.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Prompt** | The request or instruction you give to an AI tool |\n| **Output** | What the AI gives back |\n| **Context** | Background information that helps the AI understand your situation |\n| **Audience** | The people who will read or use the result |\n| **Format** | How you want the answer to look, such as length, list, or table |\n| **Limits** | What the answer should include or avoid, such as tone or word count |\n\n---\n\n### Part B: Reading (8 minutes) — “A Prompt Is a Brief”\nImagine that you hire a helpful assistant on their first day. They are smart, fast, and eager, but they know nothing about you or your work. If you say, *“Make me a presentation,”* what will happen? Most likely, they will ask a lot of questions, or they will guess. If they guess, you may receive a presentation that is too long, too formal, or about the wrong topic.\n\nAn AI tool is similar. It is very capable, but it only knows what you tell it in your prompt. So the quality of your brief decides the quality of the result.\n\n#### Four questions before you write\n1. **What is the result for?** Say what you will use it for, such as a school newsletter, a work email, or a study guide.\n2. **Who is it for?** The same message sounds very different for a child, a manager, or a friend.\n3. **What should it look like?** Say the length, the structure, and the tone.\n4. **What should it avoid?** Say what to leave out, such as jargon or certain topics.\n\n#### The stranger test\nHere is a simple test. Read your prompt and ask: **“Could a smart stranger do this task well, using only this prompt?”** If the answer is no, add the missing information.\n\n| Version | Prompt |\n| :--- | :--- |\n| **First attempt** | “Write a speech for my sister’s wedding.” |\n| **After the stranger test** | “Write a 2-minute wedding speech from me, the older brother, about my sister Anna. She loves hiking and is always late. Keep it warm and funny, not embarrassing, and end with a toast to Anna and her husband.” |\n\nNotice that the second prompt gives real details, such as who is speaking, the length, the tone, and the ending. Therefore, the output will sound much more like the person who gives the speech.\n\n#### A note on privacy\nWhile you add details, be careful. Give the AI the information it needs, but **do not include passwords, bank details, ID numbers, or private information about other people**. You can use made-up names or general descriptions instead.\n\n> **In short:** Write your prompt like a brief. Say what, why, who for, what it should look like, and what to avoid."
           },
           {
             "id": "les_gpe_01_02",
             "section_id": "sec_gpe_01",
-            "title": "1.2 Activity: Prompt Makeover & Stretch Task (15 min)",
+            "title": "1.2 Activity: “Prompt Makeover” & Stretch Task (15 min)",
             "type": "article",
-            "summary": "Rewrite five weak prompts using the six-part checklist, compare outputs (or use the text-only sample comparison), and try the multi-audience stretch task.",
+            "summary": "Turn five weak prompts into clear 20+ word prompts using the six-part checklist, compare outputs (live or text-only photosynthesis sample), and complete the multi-audience Stretch task.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **Your goal:** Rewrite five weak prompts using the six-part checklist (**Task, Context, Audience, Format, Limits, Example**). If you have a chatbot, run both versions and compare; otherwise use the text-only sample comparison below. *(15 minutes)*\n\n---\n\n### The Five Weak Prompts to Makeover\nRewrite each prompt in your **Personal Study Notes** using at least **4 of the 6 checklist parts**:\n1. *“Write an email about the schedule change.”*\n2. *“Explain inflation.”*\n3. *“Give me dinner ideas.”*\n4. *“Summarize this article.”*\n5. *“Help me prepare for a job interview.”*\n\n#### Text-Only Sample Comparison (for learners without a live tool)\n- **Weak Prompt #2:** *“Explain inflation.”* → **Output:** A 400-word economics textbook definition full of terms like *monetary policy* and *CPI*.\n- **Checklist Makeover:** *“Explain inflation in 3 simple everyday examples (like groceries and rent) for a 14-year-old student. Keep it under 120 words and use friendly, plain language.”* → **Output:** Clear, concrete, jargon-free explanation tailored to the reader.\n\n---\n\n### Stretch Task (Advanced Users)\nTake **Prompt #2 (*Explain inflation*)** or one of your own tasks and rewrite it **three ways for three different audiences** (for example: a 10-year-old, a small café owner, and a retiree on a fixed income). Explain in 2–3 sentences how the **context, vocabulary, and examples** changed across the three prompts."
+            "content": "> **Your goal:** Turn five weak prompts into clear ones, using the six-part checklist (**Task, Context, Audience, Format, Limits, Example**). If you have a chatbot, you can also compare the results. If not, use the text-only version below. *(15 minutes)*\n\n---\n\n### Step 1: Rewrite the prompts (8 minutes)\nFor each weak prompt, imagine a real situation. Then fill in the checklist parts you need, and write an improved prompt in your **Personal Study Notes**. Make each improved prompt **at least 20 words**. Use made-up details if you want to protect your privacy.\n\n| # | Weak prompt | My situation and checklist parts used (task, context, audience, format, limits, example) | My improved prompt |\n| :---: | :--- | :--- | :--- |\n| **1** | “Write a report.” | | |\n| **2** | “Give me ideas.” | | |\n| **3** | “Explain photosynthesis.” | | |\n| **4** | “Make this better.” | | |\n| **5** | “Plan my week.” | | |\n\n---\n\n### Step 2: Compare the results (5 minutes)\n- **Option A — With a chatbot:** Choose two of your prompts. Run the weak version and your improved version. Record what changed, such as length, detail, tone, and how well it fit your situation.\n- **Option B — Text-only version:** Read the two sample outputs below (written for this exercise to show the difference; real tools will give different outputs) and answer the questions in Step 3.\n\n| Prompt | Sample output |\n| :--- | :--- |\n| **Weak:** “Explain photosynthesis.” | Photosynthesis is the process by which plants, algae, and some bacteria convert light energy into chemical energy. It takes place in the chloroplasts, where chlorophyll absorbs light. Carbon dioxide and water are converted into glucose and oxygen through light-dependent reactions and the Calvin cycle. |\n| **Clear:** “Explain photosynthesis to a 10-year-old in five short sentences, using a kitchen analogy. Then give me one question to check that I understood.” | Think of a plant leaf as a tiny kitchen. The ingredients are sunlight, water, and air. The plant mixes them to cook its own food, which is a sugar. While it cooks, it lets out oxygen, which we breathe. So plants are like chefs that run on sunshine. Check: What three ingredients does the plant leaf “kitchen” use? |\n\n---\n\n### Step 3: Think about it (2 minutes)\n- Which checklist parts made the biggest difference?\n- Which prompt was hardest to improve, and why?\n- *For the text-only version:* Who is the weak output written for? Who is the clear output written for?\n\n---\n\n### Answer Guide and Feedback\nThere is no single correct answer. Here are sample strong rewrites so you can compare the level of detail:\n\n| # | Sample strong rewrite |\n| :---: | :--- |\n| **1** | “Write a one-page report for my team leader on how our shop’s weekly sales changed in the last three months. The data is: `[paste numbers]`. Use short paragraphs and one table, in a neutral tone, and end with two suggestions.” |\n| **2** | “Give me ten ideas for a low-cost birthday party for a 7-year-old who loves space. Put them in a list, with one sentence for each idea. The budget is 50 euros, and we have a small apartment.” |\n| **3** | “Explain photosynthesis to a 10-year-old in five short sentences, using a kitchen analogy, and finish with one question to check understanding.” |\n| **4** | “Here is my cover letter for a shop assistant job: `[paste text]`. Make it more confident and shorter, under 200 words. Keep my name and my work history unchanged, and do not add new facts.” |\n| **5** | “Plan my week. I work Monday to Friday from 9 to 5, and I want to study 5 hours, exercise 3 times, and have two free evenings. Give me a table by day, with times, and keep Sunday free.” |\n\n> **What good answers show:**\n> - Each rewrite includes at least three checklist parts (such as task, context, audience, format, or limits) and is **at least 20 words**.\n> - The rewrite gives enough detail that a stranger could do the task.\n> - The rewrite avoids private information, and uses placeholders such as `[paste text]`.\n\n---\n\n### Stretch Task (Advanced Users)\nChoose one of your improved prompts. Rewrite it **three times for three different audiences**, such as a child, a manager, and a close friend. Explain in one or two sentences how the changes would affect the result."
           },
           {
             "id": "les_gpe_01_03",
             "section_id": "sec_gpe_01",
             "title": "1.3 Module 1 Knowledge Check (10 Questions from 20-Question Bank)",
             "type": "quiz",
-            "summary": "10 questions randomly drawn from the 20-question Module 1 bank (15 minutes). Retake anytime for fresh questions.",
+            "summary": "Answer 10 questions randomly drawn from the 20-question Module 1 bank (15 minutes). Retake anytime for fresh questions with instant feedback.",
             "duration_seconds": 900,
             "position": 3,
             "is_free_preview": false,
@@ -2391,277 +2391,277 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
               {
                 "id": "q_gpe_01_1",
                 "lesson_id": "les_gpe_01_03",
-                "question": "Why does a vague prompt often produce a generic answer?",
+                "question": "What is a prompt?",
                 "options": [
-                  "Because the model predicts likely averages when many paths are left open",
-                  "Because AI refuses to answer short prompts",
-                  "Because prompts must be written in code",
-                  "Because the internet slows down"
+                  "The request or instruction you give to an AI tool",
+                  "The battery of a computer",
+                  "The final answer from an AI tool",
+                  "A type of image file"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Without clear direction, a language model predicts broad, average patterns.",
+                "explanation": "A prompt is what you type or say to ask an AI tool for something.",
                 "position": 1
               },
               {
                 "id": "q_gpe_01_2",
                 "lesson_id": "les_gpe_01_03",
-                "question": "Which of the following is NOT one of the six parts of the prompt checklist?",
+                "question": "Which of these is NOT one of the six parts of the prompt checklist?",
                 "options": [
+                  "Price of the tool",
                   "Task",
                   "Context",
-                  "Server password",
-                  "Limits"
+                  "Audience"
                 ],
-                "correct_option_index": 2,
-                "explanation": "The six parts are Task, Context, Audience, Format, Limits, and Example—never share passwords.",
+                "correct_option_index": 0,
+                "explanation": "The six parts are task, context, audience, format, limits, and example.",
                 "position": 2
               },
               {
                 "id": "q_gpe_01_3",
                 "lesson_id": "les_gpe_01_03",
-                "question": "What does the “Format” part of a prompt specify?",
+                "question": "In the checklist, “Format” answers which question?",
                 "options": [
-                  "How the output should be structured, such as bullets, a table, or an email",
-                  "The brand of computer you own",
-                  "The training date of the model",
-                  "Your home address"
+                  "Who built the tool?",
+                  "How should the answer look, for example its length, a list, or a table?",
+                  "How much does it cost?",
+                  "Where was the tool made?"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Format tells the AI how to lay out the response.",
+                "correct_option_index": 1,
+                "explanation": "Format tells the AI how you want the answer to look.",
                 "position": 3
               },
               {
                 "id": "q_gpe_01_4",
                 "lesson_id": "les_gpe_01_03",
-                "question": "What does “A prompt is a brief” mean?",
+                "question": "In the checklist, “Context” answers which question?",
                 "options": [
-                  "Give the AI clear background and goals just as you would brief a new colleague",
-                  "Keep every prompt under three words",
-                  "Never give examples to an AI",
-                  "Only use AI for legal briefs"
+                  "What background should the AI know about my situation?",
+                  "What color should the answer be?",
+                  "How fast should it work?",
+                  "Which language is the tool written in?"
                 ],
                 "correct_option_index": 0,
-                "explanation": "A helpful colleague needs task, context, audience, and limits to do good work.",
+                "explanation": "Context gives the AI the background it cannot guess.",
                 "position": 4
               },
               {
                 "id": "q_gpe_01_5",
                 "lesson_id": "les_gpe_01_03",
-                "question": "Which is a common beginner prompting mistake?",
+                "question": "Which prompt is the clearest?",
                 "options": [
-                  "Asking for too many unrelated tasks in one prompt",
-                  "Specifying the target audience",
-                  "Setting a word-count limit",
-                  "Providing a short example"
+                  "“Write about dogs.”",
+                  "“Dogs.”",
+                  "“Something about pets.”",
+                  "“Write a 150-word friendly paragraph for a school newsletter about adopting a rescue dog, with one tip for first-time owners.”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Overloading one prompt causes skipped steps and messy output.",
+                "correct_option_index": 3,
+                "explanation": "The clear prompt includes the task, context, audience, format, and a limit.",
                 "position": 5
               },
               {
                 "id": "q_gpe_01_6",
                 "lesson_id": "les_gpe_01_03",
-                "question": "Which prompt is clearest?",
+                "question": "Why does a vague prompt often give a generic answer?",
                 "options": [
-                  "“Write a 100-word welcome note for new library volunteers in a warm tone.”",
-                  "“Write something about the library.”",
-                  "“Library.”",
-                  "“Do my work for me.”"
+                  "The AI has to guess what you want",
+                  "The AI refuses to work",
+                  "The AI is tired",
+                  "Vague prompts are always forbidden"
                 ],
                 "correct_option_index": 0,
-                "explanation": "It defines task, length limit, audience, and tone.",
+                "explanation": "When you leave out details, the AI fills the gaps with average guesses.",
                 "position": 6
               },
               {
                 "id": "q_gpe_01_7",
                 "lesson_id": "les_gpe_01_03",
-                "question": "Why does specifying the “Audience” improve an explanation?",
+                "question": "“A prompt is a brief” means…",
                 "options": [
-                  "It helps the AI choose the right vocabulary, depth, and examples",
-                  "It makes the AI charge less money",
-                  "It turns off hallucinations completely",
-                  "It deletes your chat history"
+                  "Write it like instructions for a helpful new colleague who knows nothing about your situation",
+                  "Always make it as short as possible",
+                  "Write it in secret code",
+                  "Only use one word"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Audience guides reading level and relevant examples.",
+                "explanation": "A good brief gives someone everything they need to do the task.",
                 "position": 7
               },
               {
                 "id": "q_gpe_01_8",
                 "lesson_id": "les_gpe_01_03",
-                "question": "What is the role of “Limits” in a prompt?",
+                "question": "The prompt is “Write an email asking for a meeting.” Which parts would improve it most?",
                 "options": [
-                  "Setting boundaries like word count, tone, or what to avoid",
-                  "Stopping the computer from turning off",
-                  "Blocking all web searches",
-                  "Limiting how many times you can log in"
+                  "The color of the email",
+                  "The speed of typing",
+                  "Context and audience, such as who it is for and why",
+                  "The name of the tool"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Limits prevent rambling, wrong tone, or unwanted details.",
+                "correct_option_index": 2,
+                "explanation": "The AI does not know who the email is for or why you want to meet.",
                 "position": 8
               },
               {
                 "id": "q_gpe_01_9",
                 "lesson_id": "les_gpe_01_03",
-                "question": "True or false: Including a short “Example” in your prompt is optional but helpful when tone matters.",
+                "question": "Which is a good example of a “limit” in a prompt?",
                 "options": [
-                  "True",
-                  "False"
+                  "“Keep it under 100 words and avoid technical terms.”",
+                  "“Write something.”",
+                  "“Do your best.”",
+                  "“Make it nice.”"
                 ],
                 "correct_option_index": 0,
-                "explanation": "An example shows the AI the exact style or pattern you want.",
+                "explanation": "Limits say what to include or avoid, such as length, tone, or topics to leave out.",
                 "position": 9
               },
               {
                 "id": "q_gpe_01_10",
                 "lesson_id": "les_gpe_01_03",
-                "question": "If an AI output misses the mark, what should you check first?",
+                "question": "Why might you add an example to your prompt?",
                 "options": [
-                  "What key detail was missing from your prompt brief",
-                  "Whether your screen brightness is too low",
-                  "Whether you need to buy a new keyboard",
-                  "Whether you should paste your password"
+                  "It shows the style or format you want",
+                  "It makes the AI slower on purpose",
+                  "It replaces the need for a task",
+                  "It hides your private data"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Missing context, audience, or format in the brief is the most common cause.",
+                "explanation": "Examples help the AI match the style you like.",
                 "position": 10
               },
               {
                 "id": "q_gpe_01_11",
                 "lesson_id": "les_gpe_01_03",
-                "question": "Which part of the checklist answers “Who will read or use this?”",
+                "question": "You ask for a recipe, a shopping list, a budget, and a travel plan in one prompt. What is the most likely problem?",
                 "options": [
-                  "Audience",
-                  "Format",
-                  "Task",
-                  "Example"
+                  "The answers may be shallow or mixed up, so it is better to split the work into steps",
+                  "The AI will refuse all of them",
+                  "The AI will give perfect answers to all of them",
+                  "The prompt will be deleted"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Audience identifies the reader or end user.",
+                "explanation": "Too many tasks in one prompt often reduce quality. Ask for one part at a time.",
                 "position": 11
               },
               {
                 "id": "q_gpe_01_12",
                 "lesson_id": "les_gpe_01_03",
-                "question": "Which part of the checklist answers “What background situation matters?”",
+                "question": "True or false: Every prompt must include all six parts of the checklist.",
                 "options": [
-                  "Context",
-                  "Limits",
-                  "Format",
-                  "Task"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Context supplies the relevant background facts.",
+                "correct_option_index": 1,
+                "explanation": "Match the effort to the task. Quick tasks may need only the task and format, but important tasks need more.",
                 "position": 12
               },
               {
                 "id": "q_gpe_01_13",
                 "lesson_id": "les_gpe_01_03",
-                "question": "A prompt asks: “Summarize this policy in 5 bullet points for new staff.” Which two checklist parts are clearly present?",
+                "question": "You are writing a job application letter. What is the best approach?",
                 "options": [
-                  "Format and Audience",
-                  "Password and Billing",
-                  "Audio and Video",
-                  "None of them"
+                  "Use all six parts of the checklist, and check the result carefully",
+                  "Type only “write a letter”",
+                  "Accept the first answer without reading it",
+                  "Share your passwords for more detail"
                 ],
                 "correct_option_index": 0,
-                "explanation": "“5 bullet points” is Format and “for new staff” is Audience.",
+                "explanation": "Important tasks deserve a clear, detailed prompt and a careful check.",
                 "position": 13
               },
               {
                 "id": "q_gpe_01_14",
                 "lesson_id": "les_gpe_01_03",
-                "question": "How does generative AI produce text in plain language?",
+                "question": "Which information should you leave out of a prompt?",
                 "options": [
-                  "By predicting likely next pieces of text from learned patterns",
-                  "By looking up one fixed answer in a dictionary",
-                  "By reading your mind",
-                  "By copying one random webpage"
+                  "A password or private ID number",
+                  "The topic of your task",
+                  "The length you want",
+                  "The tone you prefer"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Language models predict probable continuations shaped by your prompt.",
+                "explanation": "Private information may be stored or used by the tool, so keep it out.",
                 "position": 14
               },
               {
                 "id": "q_gpe_01_15",
                 "lesson_id": "les_gpe_01_03",
-                "question": "Why should you avoid packing 5 separate jobs into one giant prompt?",
+                "question": "A chatbot gives a confident answer with a specific statistic. What is the best first step?",
                 "options": [
-                  "The model may overlook details or mix formats together",
-                  "The model will delete your account",
-                  "Prompts cannot be longer than 10 words",
-                  "It uses a webcam"
+                  "Share it right away",
+                  "Believe it because it sounds exact",
+                  "Check it with a trusted source",
+                  "Ask the chatbot to repeat it"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Splitting complex work into focused steps yields cleaner output.",
+                "correct_option_index": 2,
+                "explanation": "AI can state wrong facts with confidence, so check important details.",
                 "position": 15
               },
               {
                 "id": "q_gpe_01_16",
                 "lesson_id": "les_gpe_01_03",
-                "question": "Which limit would best prevent jargon in a medical summary for patients?",
+                "question": "How does generative AI mainly produce its output?",
                 "options": [
-                  "“Use plain everyday language and avoid medical jargon.”",
-                  "“Make it as long as possible.”",
-                  "“Write it for senior surgeons.”",
-                  "“Ignore the reader.”"
+                  "By predicting likely output from patterns it learned",
+                  "By looking up one correct answer in a book",
+                  "By asking a person",
+                  "By copying one web page"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Explicitly forbidding jargon keeps the explanation accessible.",
+                "explanation": "Because it predicts likely output, it does not guarantee that the output is true.",
                 "position": 16
               },
               {
                 "id": "q_gpe_01_17",
                 "lesson_id": "les_gpe_01_03",
-                "question": "True or false: Two identical prompts can still give slightly different wording each time.",
+                "question": "The first answer is not what you wanted. What is the best next step?",
                 "options": [
-                  "True",
-                  "False"
+                  "Improve the prompt by adding what was missing, and try again",
+                  "Give up on AI forever",
+                  "Make the same request again word for word",
+                  "Paste your private information"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Generative AI outputs vary because generation involves probability.",
+                "explanation": "Treat the first result as a draft, and adjust the prompt.",
                 "position": 17
               },
               {
                 "id": "q_gpe_01_18",
                 "lesson_id": "les_gpe_01_03",
-                "question": "What should you add if a chatbot gives you a 500-word essay when you needed a quick comparison?",
+                "question": "Which prompt clearly includes an audience?",
                 "options": [
-                  "A Format and Limit such as “a 4-row table under 120 words”",
-                  "More vague adjectives",
-                  "Nothing—just accept it",
-                  "A link to your bank"
+                  "“Explain photosynthesis to a 10-year-old.”",
+                  "“Explain photosynthesis.”",
+                  "“Photosynthesis.”",
+                  "“Write something long.”"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Specifying table format and length fixes the structure immediately.",
+                "explanation": "Naming the audience helps the AI choose words and examples that fit.",
                 "position": 18
               },
               {
                 "id": "q_gpe_01_19",
                 "lesson_id": "les_gpe_01_03",
-                "question": "In a Prompt Makeover, why compare the weak prompt output with the checklist prompt output?",
+                "question": "Which is a good “format” instruction?",
                 "options": [
-                  "To see directly how adding context, audience, and limits improves relevance",
-                  "To waste time",
-                  "To prove AI never makes mistakes",
-                  "To test your internet speed"
+                  "“Give me a table with three columns: option, cost, and benefit.”",
+                  "“Make it good.”",
+                  "“Be creative.”",
+                  "“Do it fast.”"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Side-by-side comparison builds intuition for what each checklist item changes.",
+                "explanation": "A format instruction tells the AI exactly how the answer should be structured.",
                 "position": 19
               },
               {
                 "id": "q_gpe_01_20",
                 "lesson_id": "les_gpe_01_03",
-                "question": "When adapting one prompt for three different audiences, what changes most?",
+                "question": "True or false: A longer prompt is always better than a shorter one.",
                 "options": [
-                  "The context, vocabulary level, and examples",
-                  "Your device battery",
-                  "The name of the AI company",
-                  "Nothing at all"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Different audiences need different framing, tone, and examples.",
+                "correct_option_index": 1,
+                "explanation": "Clear and relevant beats long and messy. Add the details that matter, and leave out the rest.",
                 "position": 20
               }
             ]
@@ -5956,7 +5956,7 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
             "section_id": "sec_gpe_ref",
             "title": "13.2 Post-Check: Retake the 10-Question Check to Measure Growth",
             "type": "quiz",
-            "summary": "Retake the exact 10 questions from the Orientation Pre-Check to see how much your skills across text, media, responsible use, workflows, and agents have grown!",
+            "summary": "Retake the exact 10 questions from the Orientation Pre-Check and compare your Before and After score and 1–5 confidence ratings to see how much you have learned!",
             "duration_seconds": 600,
             "position": 2,
             "is_free_preview": false,
@@ -5965,151 +5965,151 @@ Self-attention allows every token in a sentence to dynamically weigh its relatio
               {
                 "id": "q_gpe_post_1",
                 "lesson_id": "les_gpe_ref_02",
-                "question": "Why does the same generative AI tool give very different answers to two different prompts?",
+                "question": "What is a prompt?",
                 "options": [
-                  "Prompts steer which patterns the model predicts next; clearer task, context, and limits narrow the output",
-                  "The tool randomly picks a different language each hour",
-                  "Shorter prompts always produce more accurate facts",
-                  "The AI checks your mood before answering",
+                  "The request or instruction you give to an AI tool",
+                  "The battery of a computer",
+                  "The final answer from an AI tool",
+                  "A type of image file",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Generative AI predicts likely output from patterns. A clear prompt acts like a brief that steers those predictions. Covered in Module 1.",
+                "explanation": "A prompt is what you type or say to ask an AI tool for something. Covered in Module 1.",
                 "position": 1
               },
               {
                 "id": "q_gpe_post_2",
                 "lesson_id": "les_gpe_ref_02",
-                "question": "Which prompting technique is best when you want an AI to match a very specific tone or layout?",
+                "question": "Which prompt is most likely to give a useful result?",
                 "options": [
-                  "Giving one or two short examples of the exact style you want",
-                  "Typing only one word",
-                  "Repeating the same question five times",
-                  "Turning off all limits",
+                  "“Write a friendly 100-word welcome email for new members of a hiking club, with three meeting times in a bullet list.”",
+                  "“Write an email.”",
+                  "“Help me with my club.”",
+                  "“Something about hiking.”",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Providing examples (few-shot prompting) shows the model the exact pattern and tone to follow. Covered in Module 2.",
+                "explanation": "Clear prompts say the task, the audience, the format, and the limits. Covered in Module 1.",
                 "position": 2
               },
               {
                 "id": "q_gpe_post_3",
                 "lesson_id": "les_gpe_ref_02",
-                "question": "What makes a prompt template reusable for real work?",
+                "question": "Showing the AI a sample of the style you want is called…",
                 "options": [
-                  "Replacing one-off details with clear fill-in blanks like [audience] and [topic]",
-                  "Hardcoding yesterday’s date and one person’s private email",
-                  "Making the prompt as vague as possible",
-                  "Deleting the output format",
+                  "Deleting the context",
+                  "Giving an example",
+                  "Switching tools",
+                  "Prompt injection",
                   "I’m not sure"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Templates with bracketed blanks let you reuse proven prompt structures quickly. Covered in Module 3.",
+                "correct_option_index": 1,
+                "explanation": "Examples show the AI the style or format you want. Covered in Module 2.",
                 "position": 3
               },
               {
                 "id": "q_gpe_post_4",
                 "lesson_id": "les_gpe_ref_02",
-                "question": "When using a chatbot for research, why must you open and verify the sources it suggests?",
+                "question": "A chatbot gives you a surprising statistic. What should you do first?",
                 "options": [
-                  "Chatbots can invent realistic-looking titles, quotes, or links that do not exist",
-                  "Web browsers cannot open links unless you type them twice",
-                  "Chatbots only cite sources from the 1990s",
-                  "Sources are only needed for images, not text",
+                  "Share it with friends",
+                  "Trust it because it sounds exact",
+                  "Check it with a trusted source",
+                  "Ask the chatbot to say it louder",
                   "I’m not sure"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Language models can hallucinate plausible citations, so every suggested source must be opened and checked. Covered in Module 4.",
+                "correct_option_index": 2,
+                "explanation": "Check important facts before using them. Covered in Modules 4 and 5.",
                 "position": 4
               },
               {
                 "id": "q_gpe_post_5",
                 "lesson_id": "les_gpe_ref_02",
-                "question": "What is the best way to improve an image prompt without losing what already works?",
+                "question": "When improving an image prompt, a good method is to…",
                 "options": [
-                  "Change one specific element at a time (such as lighting or camera angle) and compare the result",
-                  "Delete the entire prompt and start with a single word",
-                  "Add as many poetic adjectives as possible at once",
-                  "Paste a private photo of a friend without asking",
+                  "Change one thing at a time and see what happens",
+                  "Change everything at once",
+                  "Never change the first version",
+                  "Use as few words as possible",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Changing one variable at a time lets you see what each edit actually does. Covered in Module 6.",
+                "explanation": "Changing one thing at a time shows what each change does. Covered in Module 6.",
                 "position": 5
               },
               {
                 "id": "q_gpe_post_6",
                 "lesson_id": "les_gpe_ref_02",
-                "question": "When writing a script for an AI text-to-speech voice tool, what helps most?",
+                "question": "Which should you never put into a prompt?",
                 "options": [
-                  "Short sentences, spelled-out numbers, and pronunciation notes for tricky names",
-                  "Long paragraphs with no punctuation",
-                  "Tiny footnotes and complex tables",
-                  "Recording someone’s voice without telling them",
+                  "A password or private ID number",
+                  "A question about a recipe",
+                  "A request for party ideas",
+                  "A general question about history",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Writing for the ear with short sentences and pronunciation cues reduces misread words. Covered in Module 7.",
+                "explanation": "Private information may be stored or used by a tool. Covered in Modules 1 and 9.",
                 "position": 6
               },
               {
                 "id": "q_gpe_post_7",
                 "lesson_id": "les_gpe_ref_02",
-                "question": "What is the most reliable way to plan a 20-second AI video?",
+                "question": "What should you do before making an AI image of a real person?",
                 "options": [
-                  "Write a shot-by-shot storyboard (for example, four 5-second shots) before prompting",
-                  "Ask for a full 20-minute movie in one sentence",
-                  "Skip checking text or character consistency",
-                  "Upload private ID cards as reference images",
+                  "Get their permission, or choose a different subject",
+                  "Nothing, because AI images are never real",
+                  "Post it first and ask later",
+                  "Remove the label saying it is AI-made",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Short videos work best as planned sequences of short shots with consistent character and setting details. Covered in Module 8.",
+                "explanation": "Consent matters, and AI media should be labeled. Covered in Module 9.",
                 "position": 7
               },
               {
                 "id": "q_gpe_post_8",
                 "lesson_id": "les_gpe_ref_02",
-                "question": "Before sharing an AI-generated image or voice clip publicly, which check is essential?",
+                "question": "What does “multimodal” mean?",
                 "options": [
-                  "Confirm consent/likeness, tool ownership terms, honest AI labeling, and that it will not mislead or harm",
-                  "Only check if the file size is under 5 MB",
-                  "Remove all labels so people think it is real",
-                  "Use a living artist’s name to copy their exact style without care",
+                  "The AI can work with more than one type of input, such as text and images",
+                  "The AI only works with numbers",
+                  "The AI needs many users at once",
+                  "The AI is very fast",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Responsible media use requires checking consent, ownership, honest labeling, and harm. Covered in Module 9.",
+                "explanation": "Multimodal tools can use images, text, and more. Covered in Module 8.",
                 "position": 8
               },
               {
                 "id": "q_gpe_post_9",
                 "lesson_id": "les_gpe_ref_02",
-                "question": "How do you know if a reusable prompt workflow is actually reliable?",
+                "question": "What is “prompt chaining”?",
                 "options": [
-                  "Test it on several varied inputs and score the outputs against a simple scorecard",
-                  "Run it once on an easy example and assume it always works",
-                  "Never update it even when tools change",
-                  "Remove all output structure",
+                  "Breaking a big task into a series of smaller prompts",
+                  "Linking two computers with a cable",
+                  "Writing one very long prompt",
+                  "Copying a prompt many times",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Testing across varied inputs with a scorecard reveals edge-case failures before you rely on a workflow. Covered in Module 10.",
+                "explanation": "A chain of smaller prompts is often more reliable than one big prompt. Covered in Modules 2 and 10.",
                 "position": 9
               },
               {
                 "id": "q_gpe_post_10",
                 "lesson_id": "les_gpe_ref_02",
-                "question": "What is “prompt injection” when using an AI assistant or agent?",
+                "question": "When you ask an AI agent to do a task, who is responsible for checking the result?",
                 "options": [
-                  "Hidden orders inside a webpage or document that try to trick the AI into ignoring your rules",
-                  "A faster way to type prompts on a phone",
-                  "A medical tool for clinics",
-                  "Saving a prompt into a folder",
+                  "You are, as the person who delegated the task",
+                  "The agent alone",
+                  "The internet",
+                  "Nobody",
                   "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Agents reading untrusted content can encounter hidden instructions; limiting access and requiring human approval prevents harm. Covered in Module 11.",
+                "explanation": "People stay responsible for the work and for the access they give. Covered in Module 11.",
                 "position": 10
               }
             ]
