@@ -927,10 +927,10 @@
           {
             "id": "les_aif_04_01",
             "section_id": "sec_aif_04",
-            "title": "4.1 Written Lesson: AI in Society, 5 Risks & Responsible-Use Checklist",
+            "title": "4.1 Written Lesson & Reading: AI in Society, Responsible-Use Checklist & Where to Go Next",
             "type": "article",
-            "summary": "Explore AI in health, banking, transport, entertainment, and education; five key societal risks (including energy use); the 5-point Responsible-Use Checklist; and where to go next.",
-            "content": "> **What you will learn:** Where AI is used across major industries, five major societal risks to watch for, and how to use a 5-point Responsible-Use Checklist in daily life.\n\n---\n\n### 1. AI Across Five Everyday Industries\n- **Health**: Spotting signs of disease in X-rays or retinal scans, and drafting clinical visit summaries.\n- **Banking**: Detecting stolen credit-card transactions in milliseconds and flagging unusual account activity.\n- **Transport**: Predicting live traffic delays, optimizing delivery routes, and powering driver-assistance features.\n- **Entertainment**: Recommending movies, music, and videos tailored to your taste, and generating game worlds.\n- **Education**: Offering personalized study practice, instant language translation, and accessibility tools like live captions.\n\n---\n\n### 2. Five Major Risks of AI in Society\n1. **Bias**: Models trained on skewed data can treat some groups unfairly in hiring, lending, or policing.\n2. **Privacy**: Cameras, voice assistants, and chatbots collect vast amounts of personal behavior and biometric data.\n3. **Deepfakes and Misinformation**: Realistic fake voices, photos, and videos make scams and political misinformation harder to spot.\n4. **Energy Use**: Training and running massive AI data centers requires large amounts of electricity and cooling water.\n5. **Changes to Jobs**: Routine writing, data entry, and customer-support tasks are shifting, making AI literacy essential for workers.\n\n---\n\n### 3. Reading: The 5-Point Responsible-Use Checklist\nBefore you use an AI tool for school, work, or personal life, check these five points:\n\n| # | Checklist Question | What Responsible Use Looks Like |\n| :--- | :--- | :--- |\n| **1** | **Purpose** | Is AI actually helpful here, or would a simple tool or human conversation be better? |\n| **2** | **What data I share** | Am I keeping passwords, private IDs, and confidential files out of the prompt? |\n| **3** | **How I verify** | Have I checked key facts, numbers, and citations against a trusted source? |\n| **4** | **Whether I disclose AI use** | If I am submitting work or publishing content, am I honest about how AI helped? |\n| **5** | **Where a human stays in the loop** | Does a human make the final decision—especially for health, money, hiring, or grading? |\n\n> **Diagram Alt Text:** *A five-row checklist table titled \"The 5-Point Responsible-Use Checklist,\" covering: 1. Purpose, 2. What data I share, 3. How I verify, 4. Whether I disclose AI use, and 5. Where a human stays in the loop.*\n\n---\n\n### 4. Where to Go Next in the REACTJav Catalog\nOnce you finish Course 1 (*AI Foundations*), you can continue your pathway without any overwhelm:\n- **Want to master writing clear prompts?** → *Prompt Engineering & AI Workflows*\n- **Want to understand how chatbots work inside?** → *Intro to Large Language Models (LLM)*\n- **Want to build websites or code with AI?** → *Web Design with AI* or *Coding with AI*\n- **Want to explore machine learning deeper?** → *Machine Learning Essentials*\n\n---\n\n> **Key takeaways:**\n> - AI powers real systems in health, banking, transport, entertainment, and education.\n> - Five key societal risks are **bias**, **privacy**, **deepfakes/misinformation**, **energy use**, and **changes to jobs**.\n> - Use the **5-Point Responsible-Use Checklist** (purpose, data shared, verification, disclosure, human in the loop) before trusting AI.\n\n#### New Words\n| Term | Plain-Language Meaning |\n| :--- | :--- |\n| **Deepfake** | Realistic synthetic audio, photo, or video made by AI to imitate a real person. |\n| **Human in the Loop** | Keeping a person responsible for reviewing and making the final decision. |",
+            "summary": "Explore AI across 6 areas of life, the benefits, the 5 main risks, “human in the loop,” the 5-question Responsible-Use Checklist with 3 scenarios, and the Where to Go Next catalog map.",
+            "content": "> **What you will learn:** By the end of this lesson, you will be able to name where AI is used in daily life and industry. You will also be able to weigh its benefits against its main risks, and you will know why people must stay in charge.\n\n---\n\n### Part A: The Lesson (12 Minutes)\n\n#### 1. AI is already part of many areas of life\nFirst, let’s look at the big picture. In earlier modules, you saw AI in maps, email, and phones. In fact, AI is now used in almost every area of society:\n\n| Area | How AI helps | What to watch |\n| :--- | :--- | :--- |\n| **Health** | Helps doctors notice patterns in scans and test results | Mistakes are possible, and health data is very private. A doctor should make the final decision |\n| **Banking** | Spots unusual card activity to catch fraud, and helps check applications | Honest customers can be blocked by mistake, and decisions can be unfair |\n| **Transport** | Predicts traffic, plans routes, and supports driver-assist features | Unusual situations can confuse the system, so safety checks matter |\n| **Entertainment and social media** | Suggests videos, music, and posts you may like | You may see only more of the same, and you may spend more time than you planned |\n| **Education** | Explains ideas, gives practice, and adapts exercises | Answers can be wrong, and copying can replace real learning |\n| **Work** | Drafts text, summarizes meetings, and answers common customer questions | Quality still needs checking, and some tasks are changing |\n\n> **Diagram Alt Text:** *A six-row table titled \"AI Across Areas of Life,\" showing Health, Banking, Transport, Entertainment and social media, Education, and Work, with one column for how AI helps and one column for what to watch out for.*\n\n#### 2. The benefits\nBecause of these uses, AI brings real benefits. For example, it can save time on routine tasks. In addition, it can find patterns in large amounts of data that people would miss. Moreover, it can make things easier to access, such as automatic captions, translation, and reading text aloud. Finally, it can give personal help, such as practice questions that match your level.\n\n#### 3. The five main risks\nHowever, AI also brings risks. It is better to know them early, so you can use AI wisely:\n1. **Risk 1: Bias and unfair results.** As you learned in Module 2, a model learns from data. If the data is incomplete or unbalanced, the results can be unfair to some people. For example, a system may work well for one group and badly for another.\n2. **Risk 2: Privacy.** AI tools often need data, and some of that data is personal. Therefore, it is important to know what you share, who can see it, and how it may be used.\n3. **Risk 3: Deepfakes and misinformation.** AI can now create very realistic fake pictures, voices, and videos, called **deepfakes**. As a result, something that looks or sounds real may be false. Whenever a clip or image shocks you, pause first. Then check whether trusted news sources report the same thing before you believe it or share it.\n4. **Risk 4: Energy use.** Training and running large AI systems can use a lot of electricity. For this reason, it is wise to use AI when it helps, instead of using it for everything.\n5. **Risk 5: Changes to jobs.** AI can do some tasks faster, so some jobs are changing. At the same time, new tasks and new jobs appear. Consequently, learning how to work with AI is a useful skill for almost everyone.\n\n#### 4. People stay in charge\nSo who is responsible when AI makes a mistake? The answer is simple: **people are**. AI is a tool, so the people and organizations that build it and use it must make sure it is safe, fair, and honest.\n\nExperts call this idea **“human in the loop.”** It means that a person reviews and controls important decisions, such as hiring, health, or money. In addition, many places are creating rules for AI. For instance, the European Union has passed a law about AI. The details differ from place to place, but the goal is the same: to make AI safe and trustworthy.\n\n#### 5. Your role\nFinally, remember that you are not only a user of AI. You are also a decision maker. You decide what to share, what to believe, and when to ask a human.\n\n> **Key takeaways:**\n> - AI is used in health, banking, transport, entertainment, education, and work.\n> - The benefits are saving time, finding patterns, making things accessible, and personal help.\n> - The five main risks are **bias**, **privacy**, **deepfakes and misinformation**, **energy use**, and **changes to jobs**.\n> - People are responsible for AI, and important decisions need a **human in the loop**.\n> - You can protect yourself with simple habits and a personal set of rules.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Deepfake** | A very realistic fake picture, voice, or video made with AI |\n| **Misinformation** | False or misleading information, shared on purpose or by mistake |\n| **Privacy** | Your right to control who can see and use your personal information |\n| **Human in the loop** | A person reviews and controls important decisions made with AI |\n| **Automation** | Using technology to do a task without a person doing every step |\n| **Responsible use** | Using AI in ways that are safe, fair, and honest |\n\n---\n\n### Part B: Reading (8 Minutes): The Responsible-Use Checklist\nWhenever you use an AI tool, you can ask five simple questions: **Purpose, Data, Verify, Disclose, Human.**\n\n| Check | Ask yourself | Example |\n| :--- | :--- | :--- |\n| **Purpose** | Why am I using AI here? Is it a good fit for this task? | Using it to brainstorm ideas is a good fit. Using it to make a final medical choice is not |\n| **Data** | What am I sharing? Would I be comfortable if it became public? | Never paste passwords, bank details, ID numbers, or other people’s private information |\n| **Verify** | Have I checked the facts, names, numbers, and sources? | Cross-check with a trusted source before using a statistic |\n| **Disclose** | Am I honest about using AI? What are the rules for this school or workplace? | If a course says to mention AI help, mention it. If it forbids AI, do not use it |\n| **Human** | Who makes the final decision? Should a qualified person check this? | For health, money, law, or safety, ask a qualified person before acting |\n\n#### Three short scenarios\nTest the checklist on these three scenarios before reading the suggested answers:\n- **Scenario 1:** A student asks a chatbot to write a whole essay and submits it as their own work.\n  - *Suggested answer:* The **Disclose** and **Purpose** checks fail. The student should follow the school’s rules, be honest about any AI help, and use AI to support learning, such as getting feedback, not to replace the work.\n- **Scenario 2:** An employee pastes a customer’s name, address, and phone number into a public chatbot to write a reply faster.\n  - *Suggested answer:* The **Data** check fails. Customer details are private. The employee should remove the personal details or use a tool that the company has approved.\n- **Scenario 3:** You receive a shocking video of a well-known person saying something unbelievable. Friends are already sharing it.\n  - *Suggested answer:* The **Verify** check applies. Pause, look for the same story from trusted news sources, and do not share it until it is confirmed. It may be a deepfake.\n\n*In short: Purpose, Data, Verify, Disclose, Human. A few seconds with this checklist can prevent many problems.*\n\n---\n\n### Part F: Where to Go Next\nEach course in the catalog is standalone, so you can start with any one that fits:\n\n| If you want to… | Take this course |\n| :--- | :--- |\n| Get better results from chatbots and write stronger prompts | **Generative AI and Prompt Engineering** |\n| Go deeper on bias, privacy, safety, and rules | **AI Ethics, Safety, and Responsible Use** |\n| Save time at work or in study with AI tools | **AI for Productivity and Workflow Automation** |\n| Understand how models are built and trained (coding) | **Machine Learning Essentials** |\n| Design websites faster with AI help | **Web Design with AI** |\n| Write and fix code with an AI assistant | **Coding with AI** |\n| Add AI features to a website | **Integrating AI into Your Website** |\n| Build an AI-powered application or solve a real problem | **Building AI-Powered Applications**, or the **AI Capstone** |",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
@@ -939,10 +939,10 @@
           {
             "id": "les_aif_04_02",
             "section_id": "sec_aif_04",
-            "title": "4.2 Activity: “My Five Rules” (Write Your 5 Personal AI Rules)",
+            "title": "4.2 Activity (15m): “My Five Rules”",
             "type": "article",
-            "summary": "Draft five concrete personal rules for using AI responsibly in your daily life, work, and study.",
-            "content": "> **What you will learn:** How to turn the 5-Point Responsible-Use Checklist into five clear personal rules you will actually follow.\n\n### Your Task (15 Minutes)\nIn your **Personal Study Notes** tab below, write **five personal rules** for how you will use AI from today onward. Each rule should be specific and actionable—not vague.\n\n#### Example Rules to Inspire Yours\n1. *\"I never share passwords, financial account numbers, or private documents with a public chatbot.\"*\n2. *\"I always verify dates, statistics, and citations from a chatbot against an official source before sharing them.\"*\n3. *\"I use AI to brainstorm and outline, never to submit work as my own without reviewing and disclosing when required.\"*\n4. *\"I never let AI make the final decision on health, legal, or hiring questions—a qualified human stays in the loop.\"*\n5. *\"I double-check unexpected voice calls or videos from family or banks to protect against deepfake scams.\"*",
+            "summary": "Write five specific, honest personal rules for using AI—one for each part of the checklist (Purpose, Data, Verify, Disclose, Human)—and test them on two real situations.",
+            "content": "> **What you will learn:** How to turn the 5-point Responsible-Use Checklist into five specific, realistic personal rules with a clear reason (*“because…”*).\n\n**Your goal:** Write **five personal rules** for using AI, one for each part of the checklist. Make them specific and honest, so you can really follow them.\n\n---\n\n### Step 1: Think (3 minutes)\nThink about how you use AI now, or how you expect to use it. Which tools do you use? What do you ask them? What information do you share?\n\n### Step 2: Write your rules (7 minutes)\nIn your **Personal Study Notes** tab below, complete all **5 sentence frames**. Each rule needs two parts: **what you will do** and **why** (*because…*).\n\n| # | Topic | Sentence frame |\n| :--- | :--- | :--- |\n| **1** | **Purpose** | I will use AI for `___` and I will not use it for `___` because `___`. |\n| **2** | **Data** | I will never share `___` with an AI tool because `___`. |\n| **3** | **Verify** | Before I use a fact from AI, I will `___` because `___`. |\n| **4** | **Disclose** | When I use AI for `___`, I will `___` because `___`. |\n| **5** | **Human** | For decisions about `___`, I will ask `___` because `___`. |\n\n### Step 3: Test your rules (3 minutes)\nCheck whether your rules would help in these two situations. Write one sentence for each:\n- **Situation A:** You want a chatbot to summarize a long contract from your landlord. Which of your rules apply, and what will you do?\n- **Situation B:** A friend sends you an audio clip of a famous person saying something shocking. Which of your rules apply, and what will you do?\n\n### Step 4: Choose one to share (2 minutes)\nPick the rule you think is most useful and imagine telling it to a friend or family member. Write it in one sentence.\n\n---\n\n### What good rules look like\n| Topic | Weak rule | Stronger rule |\n| :--- | :--- | :--- |\n| **Data** | “I will be careful.” | “I will never paste passwords or private documents into a chatbot, because I do not know how the tool stores them.” |\n| **Verify** | “I will check sometimes.” | “Before I use a number or a quote from AI, I will find it in a trusted source, because AI can invent facts.” |\n| **Human** | “I will ask someone.” | “For health or money decisions, I will talk to a doctor or a bank adviser, because mistakes can be costly.” |\n\n> **Self-check:** Make sure all five rules are written and each includes a reason (*“because…”*). Strong rules are specific, realistic, and explain why.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
@@ -953,7 +953,7 @@
             "section_id": "sec_aif_04",
             "title": "4.3 Module 4 Knowledge Check (5 Questions from 10-Question Bank)",
             "type": "quiz",
-            "summary": "5 questions randomly drawn from a 10-question Module 4 bank with instant feedback.",
+            "summary": "5 questions randomly drawn from the 10-question Module 4 bank with instant feedback.",
             "duration_seconds": 600,
             "position": 3,
             "is_free_preview": false,
@@ -962,141 +962,139 @@
               {
                 "id": "q_aif_04_1",
                 "lesson_id": "les_aif_04_03",
-                "question": "Which five items make up the Responsible-Use Checklist?",
+                "question": "Which is an example of AI in banking?",
                 "options": [
-                  "Purpose, what data I share, how I verify, whether I disclose AI use, and where a human stays in the loop",
-                  "Speed, font size, price, battery life, and color",
-                  "Coding language, GPU brand, RAM size, monitor width, and Wi-Fi speed",
-                  "Likes, shares, comments, subscribers, and views"
+                  "Spotting unusual card activity that may be fraud",
+                  "Printing paper statements",
+                  "Counting coins in a machine",
+                  "Locking the bank door at night"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Responsible AI use checks purpose, data privacy, verification, transparency/disclosure, and human oversight.",
+                "explanation": "Banks use AI to spot unusual patterns in card activity, which helps catch fraud.",
                 "position": 1
               },
               {
                 "id": "q_aif_04_2",
                 "lesson_id": "les_aif_04_03",
-                "question": "How is AI commonly used in banking today?",
+                "question": "Unfair AI results often come from…",
                 "options": [
-                  "Flagging unusual or fraudulent card transactions in real time",
-                  "Printing physical dollar bills at home",
-                  "Replacing all bank vaults with chatbots",
-                  "Deleting customer savings automatically"
+                  "Data that is incomplete or unbalanced",
+                  "Computers that are too fast",
+                  "Screens that are too small",
+                  "Too many people using the tool"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Banks use ML models to spot unusual transaction patterns and stop fraud quickly.",
+                "explanation": "As in Module 2, a model learns from its data. Poor or unbalanced data can lead to bias.",
                 "position": 2
               },
               {
                 "id": "q_aif_04_3",
                 "lesson_id": "les_aif_04_03",
-                "question": "Why is \"energy use\" listed as a societal risk of modern AI?",
+                "question": "What is a deepfake?",
                 "options": [
-                  "Training and running large AI data centers consumes significant electricity and cooling water",
-                  "AI chatbots drain smartphone screens even when turned off",
-                  "AI models run on gasoline engines",
-                  "AI prevents solar panels from working"
+                  "A very realistic fake picture, voice, or video made with AI",
+                  "A slow computer",
+                  "A type of password",
+                  "A deep learning textbook"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Large-scale AI training and inference require substantial data-center power and cooling.",
+                "explanation": "Deepfakes can look and sound real, so they can spread false information.",
                 "position": 3
               },
               {
                 "id": "q_aif_04_4",
                 "lesson_id": "les_aif_04_03",
-                "question": "What does keeping a \"human in the loop\" mean?",
+                "question": "You receive a shocking video of a public figure. What should you do first?",
                 "options": [
-                  "A person reviews AI outputs and retains responsibility for final high-stakes decisions",
-                  "Wiring a human to a computer monitor",
-                  "Letting AI approve loans and medical treatments with zero human review",
-                  "Asking a chatbot to grade itself"
+                  "Share it immediately",
+                  "Pause and check whether trusted news sources report the same thing",
+                  "Believe it because it looks real",
+                  "Comment angrily"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Human-in-the-loop means humans stay accountable for judgment and final decisions.",
+                "correct_option_index": 1,
+                "explanation": "Pausing and checking helps stop the spread of misinformation.",
                 "position": 4
               },
               {
                 "id": "q_aif_04_5",
                 "lesson_id": "les_aif_04_03",
-                "question": "What is a \"deepfake\"?",
+                "question": "Why should you avoid pasting private documents into a chatbot?",
                 "options": [
-                  "Realistic AI-generated audio, image, or video that imitates a real person",
-                  "A deep ocean submarine sensor",
-                  "A broken keyboard key",
-                  "A password longer than 16 characters"
+                  "The tool may store or use the information, which is a privacy risk",
+                  "The chatbot cannot read documents",
+                  "Documents make the chatbot tired",
+                  "It uses too much paper"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Deepfakes use generative AI to mimic real people’s faces or voices, raising scam and misinformation risks.",
+                "explanation": "Private information can be stored or used by the tool, so keep it out.",
                 "position": 5
               },
               {
                 "id": "q_aif_04_6",
                 "lesson_id": "les_aif_04_03",
-                "question": "How is AI used constructively in healthcare?",
+                "question": "What does “human in the loop” mean?",
                 "options": [
-                  "Assisting doctors in spotting patterns on X-rays or retinal scans and summarizing notes",
-                  "Replacing all doctors with unverified chatbots",
-                  "Publishing private patient charts on social media",
-                  "Guessing prescriptions without medical data"
+                  "A person reviews and controls important decisions made with AI",
+                  "A robot lives in a house",
+                  "Only people can use AI",
+                  "AI must work without any help"
                 ],
                 "correct_option_index": 0,
-                "explanation": "AI assists clinicians with pattern detection and paperwork while doctors make clinical decisions.",
+                "explanation": "Important decisions, such as in health or money, need a person in charge.",
                 "position": 6
               },
               {
                 "id": "q_aif_04_7",
                 "lesson_id": "les_aif_04_03",
-                "question": "Why should you disclose AI use when required by a workplace, school, or publication?",
+                "question": "True or false: AI changes some jobs, but it also creates new tasks and new jobs.",
                 "options": [
-                  "Transparency builds trust and lets readers know how content was created and verified",
-                  "Because AI models charge a fine otherwise",
-                  "To make the document longer",
-                  "Because computers cannot save files without a disclosure"
+                  "True",
+                  "False"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Honest disclosure supports accountability and academic/professional integrity.",
+                "explanation": "AI automates some tasks, while new tasks and roles appear. Learning to work with AI is a useful skill.",
                 "position": 7
               },
               {
                 "id": "q_aif_04_8",
                 "lesson_id": "les_aif_04_03",
-                "question": "How is AI affecting jobs and careers?",
+                "question": "Which is the best example of a good personal rule?",
                 "options": [
-                  "Routine tasks are shifting, making AI literacy and human judgment more valuable across roles",
-                  "Every single human job will vanish tomorrow",
-                  "AI has zero impact on office or creative work",
-                  "Only rocket scientists need to understand AI"
+                  "“I will be careful with AI.”",
+                  "“I never paste passwords or private documents into a chatbot, because I do not know how it stores them.”",
+                  "“I will use AI for everything.”",
+                  "“I will never think about AI.”"
                 ],
-                "correct_option_index": 0,
-                "explanation": "AI reshapes tasks within jobs, rewarding people who know how to use and verify AI responsibly.",
+                "correct_option_index": 1,
+                "explanation": "A good rule is specific, realistic, and includes a reason.",
                 "position": 8
               },
               {
                 "id": "q_aif_04_9",
                 "lesson_id": "les_aif_04_03",
-                "question": "Which personal rule best protects your privacy when using chatbots?",
+                "question": "Your school allows AI help only if you mention it. What should you do when you use it?",
                 "options": [
-                  "I never paste passwords, IDs, or private documents into a public chatbot",
-                  "I always use my full legal name and SSN in every prompt",
-                  "I share my company’s private client list so the AI gives better advice",
-                  "I post my chatbot transcripts publicly"
+                  "Hide it",
+                  "Follow the rule and be honest about the AI help",
+                  "Ask a friend to hide it",
+                  "Stop reading the rules"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Keeping private and sensitive data out of public AI tools is the #1 privacy habit.",
+                "correct_option_index": 1,
+                "explanation": "Disclosing AI use honestly and following the rules is part of responsible use.",
                 "position": 9
               },
               {
                 "id": "q_aif_04_10",
                 "lesson_id": "les_aif_04_03",
-                "question": "How can AI improve accessibility in education?",
+                "question": "Which risk is about AI systems using a lot of electricity?",
                 "options": [
-                  "By providing live text captions, translation, and personalized practice",
-                  "By removing all teachers from schools",
-                  "By making fonts smaller and harder to read",
-                  "By blocking students from reading books"
+                  "Bias",
+                  "Energy use",
+                  "Deepfakes",
+                  "Privacy"
                 ],
-                "correct_option_index": 0,
-                "explanation": "AI powers translation, captions, and adaptive practice that help diverse learners.",
+                "correct_option_index": 1,
+                "explanation": "Training and running large AI systems can use a lot of electricity, so it is wise to use AI when it truly helps.",
                 "position": 10
               }
             ]
