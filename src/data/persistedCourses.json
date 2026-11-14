@@ -160,13 +160,13 @@
       "ai-foundations",
       "data-analytics-career-accelerator"
     ],
-    "description": "After this course, anyone can explain what AI is, how it learns, what it can and can’t do, and how to use it responsibly. Features written lessons with diagrams and alt text, hands-on activities, 10-question module banks, a 1-hour no-code Guided Lab, and the 2-hour “AI in My Life” Authentic Assessment.",
+    "description": "After this course, anyone can explain what AI is, how it learns, what it can and can’t do, and how to use it responsibly. Features written lessons with diagrams and alt text, hands-on activities, 20-question module banks (10 drawn per attempt), a 1-hour no-code Guided Lab, and the 2-hour “AI in My Life” Authentic Assessment.",
     "category": "AI Foundations",
     "track": "AI Foundations",
     "level": "Beginner",
     "outcome_hook": "After this course, anyone can explain what AI is, how it learns, what it can and can’t do, and how to use it responsibly.",
     "duration_weeks": 1,
-    "weekly_hours": "7 hours total (No Coding | No Prerequisites | Written Format)",
+    "weekly_hours": "7 hours 20 minutes (440 min | No Coding | No Prerequisites | Written Format)",
     "skills": [
       "AI vs. ML vs. DL vs. GenAI",
       "How AI Learns from Data",
@@ -178,7 +178,7 @@
     "sponsorship_note": "Fully Funded / Free Access (No-Login Tools)",
     "is_now_open": true,
     "is_popular": true,
-    "cohort_date": "Self-Paced (7 Hours)",
+    "cohort_date": "Self-Paced (7h 20m)",
     "price": 0,
     "thumbnail_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
     "is_published": true,
@@ -212,7 +212,7 @@
             "type": "article",
             "summary": "One-page written course guide covering the 7-hour structure, 5 learning outcomes, mixed-model grading, 10 core glossary terms, choosing your audience person, and checking your free no-login tools.",
             "implementation_tip": "Choose one real friend or relative right now as your \"Audience Person\"—you will write your final one-page explainer specifically for them.",
-            "content": "> **What you will learn:** How this 7-hour course is organized, the 10 core AI terms you will use throughout, who you are writing your final explainer for, and which free tools you need.\n\n---\n\n### 1. One-Page Written Course Guide (5 min)\n**Level:** Beginner | **Length:** 7 Hours | **Coding Required:** None | **Prerequisites:** None\n\n> **Course Promise:** *After this course, anyone can explain what AI is, how it learns, what it can and can’t do, and how to use it responsibly.*\n\nBy the end of this course, you will be able to:\n1. **Define AI** and distinguish AI, machine learning, deep learning, and generative AI.\n2. **Explain in plain language** how an AI system learns from data to make predictions.\n3. **Identify AI systems in everyday life** and describe their inputs, outputs, benefits, and risks.\n4. **Describe what large language models do well**, where they fail (hallucinations, bias), and how to check their output.\n5. **Make informed decisions** about when and how to use AI responsibly.\n\n#### How the 7 Hours Are Structured\n| Segment | Time | Content |\n| :--- | :--- | :--- |\n| **Orientation & Self-Check** | **0.5h (30m)** | One-page course guide, 10-question Pre-Check, 10-term glossary preview, Audience Person & Tool Check |\n| **Module 1: What is AI?** | **0.75h (45m)** | Written lesson + myth busting (20m), “AI or not AI?” activity (15m), 5-question knowledge check (10m) |\n| **Module 2: How AI Learns** | **0.75h (45m)** | Written lesson + “Garbage in, garbage out” reading (20m), “Be the algorithm” activity (15m), 5-question check (10m) |\n| **Module 3: Generative AI & Chatbots** | **0.75h (45m)** | Written lesson + 4-Step Verification Habit (18m), “Spot the hallucination” activity (17m), 5-question check (10m) |\n| **Module 4: AI in Society** | **0.75h (45m)** | Written lesson + Responsible-Use Checklist (20m), “My five rules” activity (15m), 5-question check (10m) |\n| **Guided Lab** | **1.0h (60m)** | Part A: Image classifier (35m) + Part B: Probe a chatbot (20m) + Part C: Debrief worksheet (5m) |\n| **Authentic Assessment** | **2.0h (120m)** | “AI in My Life” audit (15m plan, 45m audit of 5 systems, 20m hallucination write-up, 40m written/infographic explainer) |\n| **Reflection & Review** | **0.5h (30m)** | 150–200 word reflection, rubric self-check, survey, Post-Check (retake the 10-question Pre-Check), Certificate & Open Badge |\n\n#### What Earns the Certificate and Open Badge\n- **Automated Checks (50%)**: 4 Module Knowledge Checks (25%, drawn from 10-question banks so retakes vary) + Submission Validation (25%, confirming all 5 systems, hallucination screenshots/verification, glossary terms, and length limits).\n- **4-Level Rubric (50%)**: Accuracy of AI concepts, Clarity for the audience, Critical thinking about risks, and Reflection (*Beginning, Developing, Proficient, Advanced*).\n- **Pass Rule**: **70% or higher in BOTH** components (you can revise and resubmit once). **Certificate with Distinction**: **90% or higher in BOTH** components.\n- **Credentials**: *“AI Foundations: Certificate of Completion”* + Open Badge named *“AI Foundations”* with verified skills and assessment evidence in its metadata.\n\n---\n\n### 2. Core 10-Term Glossary Preview (5 min)\n1. **AI (Artificial Intelligence)**: Computer systems designed to perform tasks that normally require human intelligence, such as recognizing speech, spotting patterns, or answering questions.\n2. **Algorithm**: A step-by-step set of rules or instructions a computer follows to solve a problem.\n3. **Data**: Examples—such as text, photos, numbers, or audio—collected and used to train or test an AI system.\n4. **Model**: The finished pattern-recognition system created after training an algorithm on data.\n5. **Training**: The process where an AI system adjusts itself across many examples so it gets better at a task.\n6. **Prediction**: The output or best guess a trained model makes when given a new input it has not seen before.\n7. **Machine Learning**: A type of AI where computers learn patterns from data examples instead of following only hand-written rules.\n8. **Generative AI**: AI that creates new content—such as text, images, or audio—rather than just sorting or labeling existing data.\n9. **Hallucination**: When a generative AI system confidently invents false facts, quotes, or sources that sound plausible.\n10. **Bias**: Systematic, unfair errors in an AI system’s output, often caused by skewed or unrepresentative training data.\n\n---\n\n### 3. Choose Your “Audience Person” (5 min)\nYour final Authentic Assessment asks you to write a **one-page written explainer** or **one-page infographic** for a real person who says: *“Everyone talks about AI, but I don’t get what it actually is.”*\nIn your **Personal Study Notes** tab below, write down the name and background of your **Audience Person** (for example: *“My Uncle Sam, a retired carpenter who uses Google Maps and WhatsApp but feels confused by AI news”*).\n\n---\n\n### 4. Tool Check (5 min)\nAll tools in this course are **free and require no login** where possible:\n- **Image Classifier Lab**: Google Teachable Machine (works in any browser with a webcam, **or** use our provided ready-made image set if you have no webcam).\n- **Chatbot Verification**: Any free no-login chatbot interface (or your preferred free AI chat tool).\n- **Final Explainer**: Any word processor, Google Docs/Slides, Canva, or our built-in written submission box.\n\n> **Key takeaways:**\n> - This course takes 7 hours across 8 segments, with zero coding and no prerequisites.\n> - Every module follows the same rhythm: a written lesson, a hands-on activity, and a 5-question check drawn from a 10-question bank.\n> - You are preparing a real-world audit and one-page written explainer for one specific non-technical friend or relative.",
+            "content": "> **What you will learn:** How this 7-hour 20-minute (440-minute) course is organized, the 10 core AI terms you will use throughout, who you are writing your final explainer for, and which free tools you need.\n\n---\n\n### 1. One-Page Written Course Guide (5 min)\n**Level:** Beginner | **Length:** 7 Hours 20 Minutes (440 Minutes) | **Coding Required:** None | **Prerequisites:** None\n\n> **Course Promise:** *After this course, anyone can explain what AI is, how it learns, what it can and can’t do, and how to use it responsibly.*\n\nBy the end of this course, you will be able to:\n1. **Define AI** and distinguish AI, machine learning, deep learning, and generative AI.\n2. **Explain in plain language** how an AI system learns from data to make predictions.\n3. **Identify AI systems in everyday life** and describe their inputs, outputs, benefits, and risks.\n4. **Describe what large language models do well**, where they fail (hallucinations, bias), and how to check their output.\n5. **Make informed decisions** about when and how to use AI responsibly.\n\n#### How the 7 Hours 20 Minutes (440 Min) Are Structured\n| Segment | Time | Content |\n| :--- | :--- | :--- |\n| **Orientation & Self-Check** | **30 min** | One-page course guide, 10-question Pre-Check, 10-term glossary preview, Audience Person & Tool Check |\n| **Module 1: What is AI?** | **50 min** | Written lesson + myth busting (20m), “AI or not AI?” activity (15m), 10-question check from 20-question bank (15m) |\n| **Module 2: How AI Learns** | **50 min** | Written lesson + “Garbage in, garbage out” reading (20m), “Be the algorithm” activity (15m), 10-question check from 20-question bank (15m) |\n| **Module 3: Generative AI & Chatbots** | **50 min** | Written lesson + 4-Step Verification Habit (18m), “Spot the hallucination” activity (17m), 10-question check from 20-question bank (15m) |\n| **Module 4: AI in Society** | **50 min** | Written lesson + Responsible-Use Checklist (20m), “My five rules” activity (15m), 10-question check from 20-question bank (15m) |\n| **Guided Lab** | **60 min** | Part A: Image classifier (35m) + Part B: Probe a chatbot (20m) + Part C: Debrief worksheet (5m) |\n| **Authentic Assessment** | **120 min** | “AI in My Life” audit (15m plan, 45m audit of 5 systems, 20m hallucination write-up, 40m written/infographic explainer) |\n| **Reflection & Review** | **30 min** | 150–200 word reflection, rubric self-check, survey, Post-Check (retake the 10-question Pre-Check), Certificate & Open Badge |\n\n#### What Earns the Certificate and Open Badge\n- **Automated Checks (50%)**: 4 Module Knowledge Checks (25%, 10 questions drawn from 20-question banks so retakes vary) + Submission Validation (25%, confirming all 5 systems, hallucination screenshots/verification, glossary terms, and length limits).\n- **4-Level Rubric (50%)**: Accuracy of AI concepts, Clarity for the audience, Critical thinking about risks, and Reflection (*Beginning, Developing, Proficient, Advanced*).\n- **Pass Rule**: **70% or higher in BOTH** components (you can revise and resubmit once). **Certificate with Distinction**: **90% or higher in BOTH** components.\n- **Credentials**: *“AI Foundations: Certificate of Completion”* + Open Badge named *“AI Foundations”* with verified skills and assessment evidence in its metadata.\n\n---\n\n### 2. Core 10-Term Glossary Preview (5 min)\n1. **AI (Artificial Intelligence)**: Computer systems designed to perform tasks that normally require human intelligence, such as recognizing speech, spotting patterns, or answering questions.\n2. **Algorithm**: A step-by-step set of rules or instructions a computer follows to solve a problem.\n3. **Data**: Examples—such as text, photos, numbers, or audio—collected and used to train or test an AI system.\n4. **Model**: The finished pattern-recognition system created after training an algorithm on data.\n5. **Training**: The process where an AI system adjusts itself across many examples so it gets better at a task.\n6. **Prediction**: The output or best guess a trained model makes when given a new input it has not seen before.\n7. **Machine Learning**: A type of AI where computers learn patterns from data examples instead of following only hand-written rules.\n8. **Generative AI**: AI that creates new content—such as text, images, or audio—rather than just sorting or labeling existing data.\n9. **Hallucination**: When a generative AI system confidently invents false facts, quotes, or sources that sound plausible.\n10. **Bias**: Systematic, unfair errors in an AI system’s output, often caused by skewed or unrepresentative training data.\n\n---\n\n### 3. Choose Your “Audience Person” (5 min)\nYour final Authentic Assessment asks you to write a **one-page written explainer** or **one-page infographic** for a real person who says: *“Everyone talks about AI, but I don’t get what it actually is.”*\nIn your **Personal Study Notes** tab below, write down the name and background of your **Audience Person** (for example: *“My Uncle Sam, a retired carpenter who uses Google Maps and WhatsApp but feels confused by AI news”*).\n\n---\n\n### 4. Tool Check (5 min)\nAll tools in this course are **free and require no login** where possible:\n- **Image Classifier Lab**: Google Teachable Machine (works in any browser with a webcam, **or** use our provided ready-made image set if you have no webcam).\n- **Chatbot Verification**: Any free no-login chatbot interface (or your preferred free AI chat tool).\n- **Final Explainer**: Any word processor, Google Docs/Slides, Canva, or our built-in written submission box.\n\n> **Key takeaways:**\n> - This course takes 7 hours 20 minutes (440 minutes) across 8 segments, with zero coding and no prerequisites.\n> - Every module follows the same rhythm: a written lesson, a hands-on activity, and a 10-question check drawn from a 20-question bank.\n> - You are preparing a real-world audit and one-page written explainer for one specific non-technical friend or relative.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": true,
@@ -374,7 +374,7 @@
       {
         "id": "sec_aif_01",
         "course_id": "crs_ai_basics_02",
-        "title": "Segment 2 — Module 1: What Is AI? (0.75h)",
+        "title": "Segment 2 — Module 1: What Is AI? (50 min)",
         "position": 2,
         "lessons": [
           {
@@ -404,10 +404,10 @@
           {
             "id": "les_aif_01_03",
             "section_id": "sec_aif_01",
-            "title": "1.3 Module 1 Knowledge Check (5 Questions from 10-Question Bank)",
+            "title": "1.3 Module 1 Knowledge Check (10 Questions from 20-Question Bank)",
             "type": "quiz",
-            "summary": "5 questions randomly drawn from the 10-question Module 1 bank with instant feedback. Retake anytime for a fresh variation.",
-            "duration_seconds": 600,
+            "summary": "10 questions randomly drawn from the 20-question Module 1 bank (15 minutes) with instant feedback. Retake anytime for a fresh variation.",
+            "duration_seconds": 900,
             "position": 3,
             "is_free_preview": false,
             "is_completed": false,
@@ -547,6 +547,144 @@
                 "correct_option_index": 1,
                 "explanation": "AI is not new. What changed is that it became powerful and easy to use, especially with generative AI tools.",
                 "position": 10
+              },
+              {
+                "id": "q_aif_01_11",
+                "lesson_id": "les_aif_01_03",
+                "question": "What do the two words “artificial” and “intelligence” mean together in AI?",
+                "options": [
+                  "A human-made tool that can learn and solve problems",
+                  "A living creature made out of metal",
+                  "A magical program that never needs data",
+                  "Any screen that connects to Wi-Fi"
+                ],
+                "correct_option_index": 0,
+                "explanation": "“Artificial” means made by people, and “intelligence” means the ability to learn and solve problems.",
+                "position": 11
+              },
+              {
+                "id": "q_aif_01_12",
+                "lesson_id": "les_aif_01_03",
+                "question": "Which item is NOT AI because it only executes an exact arithmetic rule you typed?",
+                "options": [
+                  "A spreadsheet SUM formula",
+                  "A voice assistant",
+                  "Smartphone face unlock",
+                  "An email spam filter"
+                ],
+                "correct_option_index": 0,
+                "explanation": "A spreadsheet SUM formula follows a fixed math rule and does not learn from examples.",
+                "position": 12
+              },
+              {
+                "id": "q_aif_01_13",
+                "lesson_id": "les_aif_01_03",
+                "question": "In the 1960s to 1980s, why were early rule-based AI systems hard to update?",
+                "options": [
+                  "People had to write and maintain every single rule by hand",
+                  "Computers could only run for 5 minutes a day",
+                  "There were no keyboards yet",
+                  "Electricity was not invented yet"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Hand-written rules break when situations change, because humans must update every rule manually.",
+                "position": 13
+              },
+              {
+                "id": "q_aif_01_14",
+                "lesson_id": "les_aif_01_03",
+                "question": "Which layer sits directly inside Machine Learning on the AI family map?",
+                "options": [
+                  "Deep learning",
+                  "Pocket calculators",
+                  "Fixed-rule thermostats",
+                  "Washing machine timers"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Deep learning is a specialized subset inside Machine Learning that uses many-layered neural networks.",
+                "position": 14
+              },
+              {
+                "id": "q_aif_01_15",
+                "lesson_id": "les_aif_01_03",
+                "question": "What is a “neural network” in plain words?",
+                "options": [
+                  "A computer model loosely inspired by the brain, made of connected layers",
+                  "A social media website for doctors",
+                  "A physical cable under the ocean",
+                  "A list of passwords stored in a folder"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Neural networks are layered computer models loosely inspired by how brain cells connect.",
+                "position": 15
+              },
+              {
+                "id": "q_aif_01_16",
+                "lesson_id": "les_aif_01_03",
+                "question": "How does a map app use AI when you drive across town?",
+                "options": [
+                  "It predicts traffic and chooses a faster route based on patterns",
+                  "It paints new roads on the street",
+                  "It only works if you type the speed of every car",
+                  "It turns off your phone speaker"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Map apps use AI to predict traffic delays and recommend faster routes.",
+                "position": 16
+              },
+              {
+                "id": "q_aif_01_17",
+                "lesson_id": "les_aif_01_03",
+                "question": "Which myth is false because AI needs people to build it, give it data, and check its work?",
+                "options": [
+                  "“AI will do everything by itself.”",
+                  "“AI uses math and patterns.”",
+                  "“AI is already in everyday apps.”",
+                  "“AI can make mistakes.”"
+                ],
+                "correct_option_index": 0,
+                "explanation": "AI depends on humans to design it, supply data, and verify important outputs.",
+                "position": 17
+              },
+              {
+                "id": "q_aif_01_18",
+                "lesson_id": "les_aif_01_03",
+                "question": "True or false: You need to be a math genius or programmer to start using everyday AI tools.",
+                "options": [
+                  "True",
+                  "False"
+                ],
+                "correct_option_index": 1,
+                "explanation": "Many AI tools are built for everyday users—you can start with plain-language questions.",
+                "position": 18
+              },
+              {
+                "id": "q_aif_01_19",
+                "lesson_id": "les_aif_01_03",
+                "question": "Why does a motion-activated grocery store door NOT count as AI?",
+                "options": [
+                  "It follows a simple fixed sensor rule without learning from examples",
+                  "It has glass panels",
+                  "It opens too slowly",
+                  "It is used in a store instead of an office"
+                ],
+                "correct_option_index": 0,
+                "explanation": "A motion sensor triggers a fixed rule (\"if motion, open\"), with no learning from data.",
+                "position": 19
+              },
+              {
+                "id": "q_aif_01_20",
+                "lesson_id": "les_aif_01_03",
+                "question": "In 1956, what milestone happened in the story of AI?",
+                "options": [
+                  "Researchers met and used the name “artificial intelligence” for the first time",
+                  "Smartphones with face unlock were released",
+                  "Email spam filters were invented",
+                  "Chatbots wrote novels for everyone"
+                ],
+                "correct_option_index": 0,
+                "explanation": "The term “artificial intelligence” was first used at a 1956 research meeting.",
+                "position": 20
               }
             ]
           }
@@ -555,7 +693,7 @@
       {
         "id": "sec_aif_02",
         "course_id": "crs_ai_basics_02",
-        "title": "Segment 3 — Module 2: How AI Learns (0.75h)",
+        "title": "Segment 3 — Module 2: How AI Learns (50 min)",
         "position": 3,
         "lessons": [
           {
@@ -585,10 +723,10 @@
           {
             "id": "les_aif_02_03",
             "section_id": "sec_aif_02",
-            "title": "2.3 Module 2 Knowledge Check (5 Questions from 10-Question Bank)",
+            "title": "2.3 Module 2 Knowledge Check (10 Questions from 20-Question Bank)",
             "type": "quiz",
-            "summary": "5 questions randomly drawn from the 10-question Module 2 bank with instant feedback.",
-            "duration_seconds": 600,
+            "summary": "10 questions randomly drawn from the 20-question Module 2 bank (15 minutes) with instant feedback. Retake anytime for a fresh variation.",
+            "duration_seconds": 900,
             "position": 3,
             "is_free_preview": false,
             "is_completed": false,
@@ -730,6 +868,146 @@
                 "correct_option_index": 0,
                 "explanation": "The model has not seen night conditions, so it is less reliable there. The training data was not varied enough.",
                 "position": 10
+              },
+              {
+                "id": "q_aif_02_11",
+                "lesson_id": "les_aif_02_03",
+                "question": "What is a “label” in supervised machine learning?",
+                "options": [
+                  "The correct answer attached to a training example, such as “spam” or “cat”",
+                  "The brand logo on a laptop",
+                  "The price tag on software",
+                  "A broken internet link"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Labels give supervised learning examples an answer key to learn from.",
+                "position": 11
+              },
+              {
+                "id": "q_aif_02_12",
+                "lesson_id": "les_aif_02_03",
+                "question": "What happens during the “Training” step?",
+                "options": [
+                  "The computer studies examples again and again and adjusts itself to make fewer mistakes",
+                  "A user types a question into a finished chatbot",
+                  "The computer deletes all its files",
+                  "A programmer writes 10,000 fixed IF/THEN rules by hand"
+                ],
+                "correct_option_index": 0,
+                "explanation": "During training, the system studies training data repeatedly to learn patterns and reduce errors.",
+                "position": 12
+              },
+              {
+                "id": "q_aif_02_13",
+                "lesson_id": "les_aif_02_03",
+                "question": "In the child-and-apple analogy, how does a child learn to recognize an apple?",
+                "options": [
+                  "By seeing many examples of apples rather than memorizing a long list of rules",
+                  "By reading a geometry textbook on spheres",
+                  "By never looking at fruit",
+                  "By weighing every apple on a scale"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Just like a child learns from many apple examples, machine learning discovers patterns from examples.",
+                "position": 13
+              },
+              {
+                "id": "q_aif_02_14",
+                "lesson_id": "les_aif_02_03",
+                "question": "What does “representative” data mean?",
+                "options": [
+                  "The training data covers the different groups and real-world situations the model will face",
+                  "All photos are taken by one person in one room",
+                  "Every example has the exact same label",
+                  "The dataset is less than 5 examples long"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Representative data includes diverse groups and conditions so the model works fairly everywhere.",
+                "position": 14
+              },
+              {
+                "id": "q_aif_02_15",
+                "lesson_id": "les_aif_02_03",
+                "question": "If many photos in a training set have the wrong label (dogs labeled as cats), what happens?",
+                "options": [
+                  "The model learns the wrong lesson and makes inaccurate predictions",
+                  "The computer automatically fixes every photo",
+                  "The model runs twice as accurately",
+                  "Nothing changes at all"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Incorrect labels directly corrupt what the model learns (“garbage in, garbage out”).",
+                "position": 15
+              },
+              {
+                "id": "q_aif_02_16",
+                "lesson_id": "les_aif_02_03",
+                "question": "In the “Be the Algorithm” activity, why did the “FREE = spam” system wrongly block “Free parking available at the venue”?",
+                "options": [
+                  "Its training data was too narrow, so it learned a brittle one-word shortcut",
+                  "The message was too short",
+                  "The spam filter hated parking",
+                  "The email had no punctuation"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Narrow training data without varied normal emails caused a false positive on the word “free.”",
+                "position": 16
+              },
+              {
+                "id": "q_aif_02_17",
+                "lesson_id": "les_aif_02_03",
+                "question": "Which everyday picture best matches Unsupervised Learning?",
+                "options": [
+                  "Sorting a box of mixed buttons into piles by how they look without being told the piles",
+                  "Studying flashcards with an answer key on the back",
+                  "Training a dog with treats for sitting",
+                  "Following a cooking recipe step by step"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Unsupervised learning groups similar items together without pre-assigned labels.",
+                "position": 17
+              },
+              {
+                "id": "q_aif_02_18",
+                "lesson_id": "les_aif_02_03",
+                "question": "Why should we think of a model’s prediction as a “best guess” rather than a guaranteed fact?",
+                "options": [
+                  "Because models work from learned patterns and can miss new or unusual cases",
+                  "Because models always flip a coin",
+                  "Because computers cannot add numbers",
+                  "Because predictions only work on Mondays"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Models estimate likely patterns; unusual or unseen situations can still trip them up.",
+                "position": 18
+              },
+              {
+                "id": "q_aif_02_19",
+                "lesson_id": "les_aif_02_03",
+                "question": "What are the three questions to ask when judging if training data is good?",
+                "options": [
+                  "Is there enough of it? Is it correct? Does it cover everyone and everything?",
+                  "Is it expensive? Is it secret? Is it colorful?",
+                  "Was it typed in bold? Is it under 10 words? Is it printed?",
+                  "Does it have emojis? Is it viral? Is it anonymous?"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Good training data needs sufficient quantity, accurate labels, and broad representation.",
+                "position": 19
+              },
+              {
+                "id": "q_aif_02_20",
+                "lesson_id": "les_aif_02_03",
+                "question": "How can we reduce unfair bias from incomplete training data?",
+                "options": [
+                  "Use varied, accurate data, test across different groups, and keep a person in charge of key decisions",
+                  "Hide the results so nobody sees errors",
+                  "Use only 3 training examples",
+                  "Remove all human review"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Representative data, diverse testing, and human oversight help catch and reduce bias.",
+                "position": 20
               }
             ]
           }
@@ -738,7 +1016,7 @@
       {
         "id": "sec_aif_03",
         "course_id": "crs_ai_basics_02",
-        "title": "Segment 4 — Module 3: Generative AI and Chatbots (0.75h)",
+        "title": "Segment 4 — Module 3: Generative AI and Chatbots (50 min)",
         "position": 4,
         "lessons": [
           {
@@ -768,10 +1046,10 @@
           {
             "id": "les_aif_03_03",
             "section_id": "sec_aif_03",
-            "title": "3.3 Module 3 Knowledge Check (5 Questions from 10-Question Bank)",
+            "title": "3.3 Module 3 Knowledge Check (10 Questions from 20-Question Bank)",
             "type": "quiz",
-            "summary": "5 questions randomly drawn from the 10-question Module 3 bank with instant feedback.",
-            "duration_seconds": 600,
+            "summary": "10 questions randomly drawn from the 20-question Module 3 bank (15 minutes) with instant feedback. Retake anytime for a fresh variation.",
+            "duration_seconds": 900,
             "position": 3,
             "is_free_preview": false,
             "is_completed": false,
@@ -913,6 +1191,144 @@
                 "correct_option_index": 0,
                 "explanation": "A model learns patterns from its data. If the data is unbalanced, the answers can reflect that.",
                 "position": 10
+              },
+              {
+                "id": "q_aif_03_11",
+                "lesson_id": "les_aif_03_03",
+                "question": "How is a chatbot similar to your phone keyboard suggesting “morning” after you type “Good”?",
+                "options": [
+                  "Both predict likely next words based on patterns in text they learned from",
+                  "Both ask a live human to type the next word",
+                  "Both look up answers in a printed dictionary",
+                  "Both only work offline"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Language models predict likely next pieces of text from learned patterns, just on a much larger scale.",
+                "position": 11
+              },
+              {
+                "id": "q_aif_03_12",
+                "lesson_id": "les_aif_03_03",
+                "question": "When an AI image generator creates a picture from your words, does it copy-paste one existing photo?",
+                "options": [
+                  "No — it creates a new image fitting patterns between words and pictures, though it can still make mistakes",
+                  "Yes — it always downloads one photo from a friend’s album",
+                  "Yes — it only draws stick figures",
+                  "No — it takes a photo with your webcam"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Image generators synthesize new images from learned text-to-image patterns.",
+                "position": 12
+              },
+              {
+                "id": "q_aif_03_13",
+                "lesson_id": "les_aif_03_03",
+                "question": "What is a “prompt”?",
+                "options": [
+                  "The request or question you give to an AI tool",
+                  "A computer virus",
+                  "The power button on a laptop",
+                  "A type of font"
+                ],
+                "correct_option_index": 0,
+                "explanation": "A prompt is the instruction, question, or description you send to a generative AI tool.",
+                "position": 13
+              },
+              {
+                "id": "q_aif_03_14",
+                "lesson_id": "les_aif_03_03",
+                "question": "What is Step 1 of the 4-Step Verification Habit?",
+                "options": [
+                  "Check it: ask “What can be checked?” such as names, dates, numbers, quotes, and links",
+                  "Share it on social media immediately",
+                  "Paste your bank password for confirmation",
+                  "Skip reading the answer"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Step 1 is spotting checkable claims like names, dates, numbers, quotes, and links.",
+                "position": 14
+              },
+              {
+                "id": "q_aif_03_15",
+                "lesson_id": "les_aif_03_03",
+                "question": "In “Spot the Hallucination,” why was the Marie Curie hallucination hard to notice by reading alone?",
+                "options": [
+                  "The false claim about a 1921 Medicine prize was mixed smoothly inside mostly true facts",
+                  "It was written in a foreign language",
+                  "The font was invisible",
+                  "It had no dates at all"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Hallucinations often sit inside mostly accurate paragraphs and sound equally confident.",
+                "position": 15
+              },
+              {
+                "id": "q_aif_03_16",
+                "lesson_id": "les_aif_03_03",
+                "question": "For high-stakes topics like health, money, law, or safety, how carefully should you check AI output?",
+                "options": [
+                  "Cross-check with trusted sources AND ask a qualified human before acting",
+                  "A 2-second glance is enough",
+                  "Never check anything if the chatbot sounds polite",
+                  "Only check on weekends"
+                ],
+                "correct_option_index": 0,
+                "explanation": "High-stakes decisions require independent verification and qualified human advice.",
+                "position": 16
+              },
+              {
+                "id": "q_aif_03_17",
+                "lesson_id": "les_aif_03_03",
+                "question": "Which task is a helpful low-stakes use where a quick look is usually enough?",
+                "options": [
+                  "Brainstorming party names or icebreaker ideas",
+                  "Diagnosing chest pain without a doctor",
+                  "Filing taxes without checking numbers",
+                  "Writing a legal contract without review"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Creative brainstorming is low-stakes, whereas health, money, and law are high-stakes.",
+                "position": 17
+              },
+              {
+                "id": "q_aif_03_18",
+                "lesson_id": "les_aif_03_03",
+                "question": "True or false: Asking a chatbot “Give me sources I can check” replaces the need to verify those sources yourself.",
+                "options": [
+                  "True",
+                  "False"
+                ],
+                "correct_option_index": 1,
+                "explanation": "Chatbots can invent sources, so you must still open or search each source yourself.",
+                "position": 18
+              },
+              {
+                "id": "q_aif_03_19",
+                "lesson_id": "les_aif_03_03",
+                "question": "What does “knowledge cutoff” mean?",
+                "options": [
+                  "The date after which a model has not learned new information in its training data",
+                  "The time a website closes at night",
+                  "Turning off Wi-Fi on your phone",
+                  "Deleting old emails"
+                ],
+                "correct_option_index": 0,
+                "explanation": "A knowledge cutoff is the end date of a model’s training data unless it uses live search.",
+                "position": 19
+              },
+              {
+                "id": "q_aif_03_20",
+                "lesson_id": "les_aif_03_03",
+                "question": "If you cannot find a surprising AI-claimed fact in any trusted source, how should you treat it?",
+                "options": [
+                  "Treat it as unverified and do not rely on it",
+                  "Assume it is a secret truth",
+                  "Publish it as a headline",
+                  "Ask the chatbot to repeat it three times"
+                ],
+                "correct_option_index": 0,
+                "explanation": "If independent trusted sources do not confirm a claim, treat it as unverified.",
+                "position": 20
               }
             ]
           }
@@ -921,7 +1337,7 @@
       {
         "id": "sec_aif_04",
         "course_id": "crs_ai_basics_02",
-        "title": "Segment 5 — Module 4: AI in Society (0.75h)",
+        "title": "Segment 5 — Module 4: AI in Society (50 min)",
         "position": 5,
         "lessons": [
           {
@@ -951,10 +1367,10 @@
           {
             "id": "les_aif_04_03",
             "section_id": "sec_aif_04",
-            "title": "4.3 Module 4 Knowledge Check (5 Questions from 10-Question Bank)",
+            "title": "4.3 Module 4 Knowledge Check (10 Questions from 20-Question Bank)",
             "type": "quiz",
-            "summary": "5 questions randomly drawn from the 10-question Module 4 bank with instant feedback.",
-            "duration_seconds": 600,
+            "summary": "10 questions randomly drawn from the 20-question Module 4 bank (15 minutes) with instant feedback. Retake anytime for a fresh variation.",
+            "duration_seconds": 900,
             "position": 3,
             "is_free_preview": false,
             "is_completed": false,
@@ -1096,6 +1512,146 @@
                 "correct_option_index": 1,
                 "explanation": "Training and running large AI systems can use a lot of electricity, so it is wise to use AI when it truly helps.",
                 "position": 10
+              },
+              {
+                "id": "q_aif_04_11",
+                "lesson_id": "les_aif_04_03",
+                "question": "Which five words summarize the Responsible-Use Checklist?",
+                "options": [
+                  "Purpose, Data, Verify, Disclose, Human",
+                  "Speed, Color, Price, Click, Share",
+                  "Code, Server, Cloud, Font, Link",
+                  "Guess, Copy, Paste, Send, Forget"
+                ],
+                "correct_option_index": 0,
+                "explanation": "The 5-point checklist asks about Purpose, Data, Verify, Disclose, and Human.",
+                "position": 11
+              },
+              {
+                "id": "q_aif_04_12",
+                "lesson_id": "les_aif_04_03",
+                "question": "In healthcare, how should AI be used alongside doctors?",
+                "options": [
+                  "AI helps notice patterns in scans and test results, while a doctor makes the final decision",
+                  "AI replaces all doctors and nurses",
+                  "Patient records are posted publicly for training",
+                  "AI prescribes medicine without checking"
+                ],
+                "correct_option_index": 0,
+                "explanation": "AI supports clinicians with pattern detection while a qualified doctor stays in charge.",
+                "position": 12
+              },
+              {
+                "id": "q_aif_04_13",
+                "lesson_id": "les_aif_04_03",
+                "question": "What is a risk of entertainment and social media recommendation AI?",
+                "options": [
+                  "You may see only more of the same and spend more time than planned",
+                  "Your TV will stop showing colors",
+                  "Movies become shorter",
+                  "Speakers stop playing music"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Recommendation feeds can narrow what you see and keep you scrolling longer than intended.",
+                "position": 13
+              },
+              {
+                "id": "q_aif_04_14",
+                "lesson_id": "les_aif_04_03",
+                "question": "In education, what should students watch out for when using AI?",
+                "options": [
+                  "Answers can be wrong, and copying AI output can replace real learning",
+                  "Books will disappear tomorrow",
+                  "AI never makes spelling mistakes",
+                  "Teachers cannot read typed text"
+                ],
+                "correct_option_index": 0,
+                "explanation": "AI is great for practice and explanations, but copying replaces your own learning.",
+                "position": 14
+              },
+              {
+                "id": "q_aif_04_15",
+                "lesson_id": "les_aif_04_03",
+                "question": "An employee pastes a customer’s name, address, and phone number into a public chatbot. Which checklist item fails?",
+                "options": [
+                  "Data",
+                  "Font size",
+                  "Battery life",
+                  "Screen brightness"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Customer details are private—the Data check requires keeping personal info out of public chatbots.",
+                "position": 15
+              },
+              {
+                "id": "q_aif_04_16",
+                "lesson_id": "les_aif_04_03",
+                "question": "Who is responsible when an AI system makes a harmful mistake?",
+                "options": [
+                  "People and organizations that build and use the AI",
+                  "The electricity company",
+                  "The computer mouse",
+                  "Nobody—AI is legally a person"
+                ],
+                "correct_option_index": 0,
+                "explanation": "AI is a tool; the people and organizations building and deploying it remain responsible.",
+                "position": 16
+              },
+              {
+                "id": "q_aif_04_17",
+                "lesson_id": "les_aif_04_03",
+                "question": "What does “automation” mean?",
+                "options": [
+                  "Using technology to do a task without a person doing every step",
+                  "Writing every email by hand with a pen",
+                  "Turning off all computers in an office",
+                  "Memorizing a dictionary"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Automation lets technology handle steps of a task automatically.",
+                "position": 17
+              },
+              {
+                "id": "q_aif_04_18",
+                "lesson_id": "les_aif_04_03",
+                "question": "Why are places like the European Union passing AI laws?",
+                "options": [
+                  "To help make AI systems safe, fair, and trustworthy",
+                  "To ban all calculators",
+                  "To make websites load slower",
+                  "To stop people from learning math"
+                ],
+                "correct_option_index": 0,
+                "explanation": "AI regulations aim to protect safety, fairness, and transparency.",
+                "position": 18
+              },
+              {
+                "id": "q_aif_04_19",
+                "lesson_id": "les_aif_04_03",
+                "question": "Which personal rule is strongest for the “Verify” step?",
+                "options": [
+                  "“Before I use a number or quote from AI, I will find it in a trusted source, because AI can invent facts.”",
+                  "“I will check sometimes.”",
+                  "“I will trust AI if it sounds smart.”",
+                  "“I will never read sources.”"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Strong rules are specific, actionable, and state the reason (“because…”).",
+                "position": 19
+              },
+              {
+                "id": "q_aif_04_20",
+                "lesson_id": "les_aif_04_03",
+                "question": "Which course in the catalog should you take next if you want to design websites faster with AI help?",
+                "options": [
+                  "Web Design with AI",
+                  "Accounting 101",
+                  "Plumbing Basics",
+                  "Typing Speed Practice"
+                ],
+                "correct_option_index": 0,
+                "explanation": "The Where to Go Next map points learners to “Web Design with AI” for designing websites faster with AI.",
+                "position": 20
               }
             ]
           }

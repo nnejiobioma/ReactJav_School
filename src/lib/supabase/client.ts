@@ -111,7 +111,7 @@ export const isFaculty = (user?: Profile | null): boolean => {
 const STORAGE_KEYS = {
   CURRENT_USER: 'reactjav_current_user',
   PROFILES: 'reactjav_user_profiles',
-  COURSES: 'reactjav_courses_ai_v6',
+  COURSES: 'reactjav_courses_ai_v7',
   PROGRESS: 'reactjav_lesson_progress',
   ENROLLMENTS: 'reactjav_enrollments',
   QUIZ_SUBMISSIONS: 'reactjav_quiz_submissions',
@@ -480,7 +480,8 @@ export class LocalDataService {
           parsed.some(
             c =>
               c.id === 'crs_ai_basics_02' &&
-              c.sections?.some(s => s.id === 'sec_aif_07' && s.lessons?.some(l => l.id === 'les_aif_07_02'))
+              c.sections?.some(s => s.id === 'sec_aif_07' && s.lessons?.some(l => l.id === 'les_aif_07_02')) &&
+              c.sections?.some(s => s.id === 'sec_aif_01' && s.lessons?.some(l => l.id === 'les_aif_01_03' && (l.quiz_questions?.length || 0) >= 20))
           );
         if (
           Array.isArray(parsed) &&
@@ -2533,7 +2534,8 @@ export class LocalDataService {
         courses.some(
           (c: any) =>
             c.id === 'crs_ai_basics_02' &&
-            c.sections?.some((s: any) => s.id === 'sec_aif_07' && s.lessons?.some((l: any) => l.id === 'les_aif_07_02'))
+            c.sections?.some((s: any) => s.id === 'sec_aif_07' && s.lessons?.some((l: any) => l.id === 'les_aif_07_02')) &&
+            c.sections?.some((s: any) => s.id === 'sec_aif_01' && s.lessons?.some((l: any) => l.id === 'les_aif_01_03' && (l.quiz_questions?.length || 0) >= 20))
         ) &&
         !courses.some((c: any) => c.id === 'crs_nextjs_supabase_01')
       ) {

@@ -14,7 +14,7 @@ interface QuizRunnerProps {
   onUpdateQuestions?: (questions: QuizQuestion[]) => void;
 }
 
-const MAX_QUESTIONS_PER_ATTEMPT = 5;
+const MAX_QUESTIONS_PER_ATTEMPT = 10;
 
 function isFullDiagnosticQuiz(title: string): boolean {
   const lower = (title || '').toLowerCase();
@@ -210,7 +210,7 @@ export default function QuizRunner({
 
         {isQuestionBank && (
           <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', marginBottom: '1.5rem' }}>
-            Question Bank Active ({questions.length} total questions in pool) — clicking Retake draws a fresh 5-question variation.
+            Question Bank Active ({questions.length} total questions in pool) — clicking Retake draws a fresh {quizQuestions.length}-question variation.
           </p>
         )}
 
@@ -240,7 +240,7 @@ export default function QuizRunner({
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
           <HelpCircle size={20} color="var(--accent-amber)" />
           <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-            {isDiagnostic ? '10-Question Pre/Post Diagnostic Check (Ungraded)' : '5-Question Knowledge Check'}
+            {isDiagnostic ? `${quizQuestions.length}-Question Pre/Post Diagnostic Check (Ungraded)` : `${quizQuestions.length}-Question Knowledge Check`}
           </span>
           {isQuestionBank && (
             <span
