@@ -208,11 +208,11 @@
           {
             "id": "les_aif_00_01",
             "section_id": "sec_aif_00",
-            "title": "0.1 Written Course Guide, 10-Term Glossary, Audience Person & Tool Check",
+            "title": "0.1 Orientation Guide, Course Map, Glossary, Audience Person & Tool Check",
             "type": "article",
-            "summary": "One-page written course guide covering the 7-hour structure, 5 learning outcomes, mixed-model grading, 10 core glossary terms, choosing your audience person, and checking your free no-login tools.",
-            "implementation_tip": "Choose one real friend or relative right now as your \"Audience Person\"—you will write your final one-page explainer specifically for them.",
-            "content": "> **What you will learn:** How this 7-hour 20-minute (440-minute) course is organized, the 10 core AI terms you will use throughout, who you are writing your final explainer for, and which free tools you need.\n\n---\n\n### 1. One-Page Written Course Guide (5 min)\n**Level:** Beginner | **Length:** 7 Hours 20 Minutes (440 Minutes) | **Coding Required:** None | **Prerequisites:** None\n\n> **Course Promise:** *After this course, anyone can explain what AI is, how it learns, what it can and can’t do, and how to use it responsibly.*\n\nBy the end of this course, you will be able to:\n1. **Define AI** and distinguish AI, machine learning, deep learning, and generative AI.\n2. **Explain in plain language** how an AI system learns from data to make predictions.\n3. **Identify AI systems in everyday life** and describe their inputs, outputs, benefits, and risks.\n4. **Describe what large language models do well**, where they fail (hallucinations, bias), and how to check their output.\n5. **Make informed decisions** about when and how to use AI responsibly.\n\n#### How the 7 Hours 20 Minutes (440 Min) Are Structured\n| Segment | Time | Content |\n| :--- | :--- | :--- |\n| **Orientation & Self-Check** | **30 min** | One-page course guide, 10-question Pre-Check, 10-term glossary preview, Audience Person & Tool Check |\n| **Module 1: What is AI?** | **50 min** | Written lesson + myth busting (20m), “AI or not AI?” activity (15m), 10-question check from 20-question bank (15m) |\n| **Module 2: How AI Learns** | **50 min** | Written lesson + “Garbage in, garbage out” reading (20m), “Be the algorithm” activity (15m), 10-question check from 20-question bank (15m) |\n| **Module 3: Generative AI & Chatbots** | **50 min** | Written lesson + 4-Step Verification Habit (18m), “Spot the hallucination” activity (17m), 10-question check from 20-question bank (15m) |\n| **Module 4: AI in Society** | **50 min** | Written lesson + Responsible-Use Checklist (20m), “My five rules” activity (15m), 10-question check from 20-question bank (15m) |\n| **Guided Lab** | **60 min** | Part A: Image classifier (35m) + Part B: Probe a chatbot (20m) + Part C: Debrief worksheet (5m) |\n| **Authentic Assessment** | **120 min** | “AI in My Life” audit (15m plan, 45m audit of 5 systems, 20m hallucination write-up, 40m written/infographic explainer) |\n| **Reflection & Review** | **30 min** | 150–200 word reflection, rubric self-check, survey, Post-Check (retake the 10-question Pre-Check), Certificate & Open Badge |\n\n#### What Earns the Certificate and Open Badge\n- **Automated Checks (50%)**: 4 Module Knowledge Checks (25%, 10 questions drawn from 20-question banks so retakes vary) + Submission Validation (25%, confirming all 5 systems, hallucination screenshots/verification, glossary terms, and length limits).\n- **4-Level Rubric (50%)**: Accuracy of AI concepts, Clarity for the audience, Critical thinking about risks, and Reflection (*Beginning, Developing, Proficient, Advanced*).\n- **Pass Rule**: **70% or higher in BOTH** components (you can revise and resubmit once). **Certificate with Distinction**: **90% or higher in BOTH** components.\n- **Credentials**: *“AI Foundations: Certificate of Completion”* + Open Badge named *“AI Foundations”* with verified skills and assessment evidence in its metadata.\n\n---\n\n### 2. Core 10-Term Glossary Preview (5 min)\n1. **AI (Artificial Intelligence)**: Computer systems designed to perform tasks that normally require human intelligence, such as recognizing speech, spotting patterns, or answering questions.\n2. **Algorithm**: A step-by-step set of rules or instructions a computer follows to solve a problem.\n3. **Data**: Examples—such as text, photos, numbers, or audio—collected and used to train or test an AI system.\n4. **Model**: The finished pattern-recognition system created after training an algorithm on data.\n5. **Training**: The process where an AI system adjusts itself across many examples so it gets better at a task.\n6. **Prediction**: The output or best guess a trained model makes when given a new input it has not seen before.\n7. **Machine Learning**: A type of AI where computers learn patterns from data examples instead of following only hand-written rules.\n8. **Generative AI**: AI that creates new content—such as text, images, or audio—rather than just sorting or labeling existing data.\n9. **Hallucination**: When a generative AI system confidently invents false facts, quotes, or sources that sound plausible.\n10. **Bias**: Systematic, unfair errors in an AI system’s output, often caused by skewed or unrepresentative training data.\n\n---\n\n### 3. Choose Your “Audience Person” (5 min)\nYour final Authentic Assessment asks you to write a **one-page written explainer** or **one-page infographic** for a real person who says: *“Everyone talks about AI, but I don’t get what it actually is.”*\nIn your **Personal Study Notes** tab below, write down the name and background of your **Audience Person** (for example: *“My Uncle Sam, a retired carpenter who uses Google Maps and WhatsApp but feels confused by AI news”*).\n\n---\n\n### 4. Tool Check (5 min)\nAll tools in this course are **free and require no login** where possible:\n- **Image Classifier Lab**: Google Teachable Machine (works in any browser with a webcam, **or** use our provided ready-made image set if you have no webcam).\n- **Chatbot Verification**: Any free no-login chatbot interface (or your preferred free AI chat tool).\n- **Final Explainer**: Any word processor, Google Docs/Slides, Canva, or our built-in written submission box.\n\n> **Key takeaways:**\n> - This course takes 7 hours 20 minutes (440 minutes) across 8 segments, with zero coding and no prerequisites.\n> - Every module follows the same rhythm: a written lesson, a hands-on activity, and a 10-question check drawn from a 20-question bank.\n> - You are preparing a real-world audit and one-page written explainer for one specific non-technical friend or relative.",
+            "summary": "Welcome guide covering the 7h 20m course map, 10-term glossary preview, choosing your audience person, tool readiness check, and starting confidence rating.",
+            "implementation_tip": "Choose one real friend, relative, neighbor, or colleague right now as your \"Audience Person\"—and record your starting 1–5 confidence ratings in Personal Study Notes before taking the Pre-Check.",
+            "content": "> **Orientation guide, course map, and pre-check (30 minutes total):**\n> - **5 min:** Read the course guide (Part A)\n> - **5 min:** Preview the glossary (Part B)\n> - **5 min:** Choose your audience person (Part C)\n> - **5 min:** Complete the tool check (Part D)\n> - **10 min:** Take the ungraded pre-check (Lesson 0.2)\n\n---\n\n### Part A: Course Guide (5 min)\n\n#### Welcome\nWelcome, and thank you for joining. **AI Foundations** is a short, friendly course for anyone who wants to understand AI. You do not need any technical background, and you do not need to write code. By the end, you will be able to explain AI to someone else, and you will know how to use it more wisely.\n\n#### What you will be able to do\n- Explain what AI is, and tell AI, machine learning, deep learning, and generative AI apart.\n- Describe in simple words how an AI system learns from data.\n- Spot AI in everyday life, and name its benefits and risks.\n- Explain what chatbots do well, where they go wrong, and how to check their answers.\n- Make good decisions about when and how to use AI.\n\n#### How the course works\nThe course takes about **7 hours and 20 minutes** (440 minutes). You can study at your own pace. Each part is short, so you can stop and start again when you like.\n\n| Part | Time | What you do |\n| :--- | :--- | :--- |\n| **Orientation** | **30 min** | Read this guide, choose your audience person, check your tools, and take the pre-check |\n| **Module 1: What Is AI?** | **50 min** | Read the lesson, sort everyday items in “AI or Not AI?”, and take a short quiz |\n| **Module 2: How AI Learns** | **50 min** | Read the lesson and a short reading, do “Be the Algorithm”, and take a quiz |\n| **Module 3: Generative AI and Chatbots** | **50 min** | Read the lesson and a short reading, do “Spot the Hallucination”, and take a quiz |\n| **Module 4: AI in Society** | **50 min** | Read the lesson and a checklist, write “My Five Rules”, and take a quiz |\n| **Guided lab** | **60 min** | Train a simple image classifier and test a chatbot |\n| **“AI in My Life” assessment** | **120 min** | Audit five AI systems, test a chatbot, and explain AI to your audience person |\n| **Reflection and review** | **30 min** | Reflect, retake the pre-check, and submit your work |\n\n#### What you need\n- A computer, tablet, or phone with a web browser and an internet connection.\n- A webcam for the lab. If you do not have one, we provide a ready-made image set.\n- Access to any chatbot for the lab and the assessment. Free tools are fine.\n- A way to make a one-page infographic or a short written document.\n\n#### How you earn your certificate and badge\n- Take the four module quizzes. You can retake them, and each attempt has new questions (10 drawn from 20-question banks).\n- Complete the **“AI in My Life”** assessment. Part of it is checked automatically, and part is graded with a rubric.\n- Reach at least **70%** in both the automated part and the rubric part. Reach **90%** in both for a **certificate with distinction**.\n- If you fall short, you can revise your work once, using the feedback.\n\n#### Tips for success\n- Study in short blocks, and take the activities seriously. They prepare you for the assessment.\n- Use your own life for examples. The assessment uses the AI you already use.\n- Try the tools, but always check important facts.\n- Write the assessment in your own words.\n\n#### Using AI in this course\nYou may use a chatbot to test it, to explore ideas, and to check your understanding. However, your audit, notes, explainer, and reflection must be in your own words. **Please never share passwords, bank details, ID numbers, or other private information with any tool.**\n\n#### Help and access\nAll diagrams have alt text, and every activity has a text-only version. If you need extra help or a different format, contact the course team before you begin.\n\n---\n\n### Part B: Glossary Preview (5 min)\nThese ten words appear throughout the course. Read them now, and do not worry if some feel new. Each one is explained step by step in the modules.\n\n| Word | Simple meaning |\n| :--- | :--- |\n| **Artificial intelligence (AI)** | Computer systems that do tasks that usually need human thinking |\n| **Algorithm** | A set of steps a computer follows to solve a problem |\n| **Data** | Information such as pictures, words, numbers, or sounds |\n| **Model** | What an AI system has learned, saved as patterns it can use |\n| **Training** | The process of studying examples to find patterns |\n| **Prediction** | The model’s best guess about something new |\n| **Machine learning** | AI that learns patterns from examples |\n| **Generative AI** | AI that creates new content, such as text, images, or sound |\n| **Hallucination** | A confident answer from an AI tool that is false or made up |\n| **Bias** | An unfair or unbalanced tendency in results, often caused by the data |\n\n---\n\n### Part C: Choose Your Audience Person (5 min)\nIn the final assessment, you will explain AI to someone who does not know much about it. Choose that person now. This could be a friend, a relative, a neighbor, or a colleague. Choosing early helps you notice what is useful as you learn.\n\nRecord your answers in your **Personal Study Notes** tab below:\n- **Who is your audience person?** *(first name or role is enough)*\n- **What do they already know about AI?**\n- **Why might they be curious or worried about AI?**\n- **Write two questions they might ask you about AI.**\n\n> **Privacy tip:** You do not need to use real names. A description such as *“my neighbor who is retired”* is fine.\n\n---\n\n### Part D: Tool Check & Confidence Baseline (5 min)\nCheck each item when you are ready:\n- [ ] I can open this course on my device and read the lessons\n- [ ] I have a webcam, or I will use the ready-made image set in the lab\n- [ ] I can open a chatbot (free is fine), or I will ask for help with this before the lab\n- [ ] I know how I will make my explainer: an infographic tool or a document\n- [ ] I know where to ask for help or for a different format\n\n#### Confidence rating (before you start)\nBefore you move to **Lesson 0.2 (Pre-Check)**, note your starting confidence (1 = not at all confident, 5 = very confident) in your **Personal Study Notes**:\n1. *How confident are you that you could explain what AI is to a friend?* **My rating (1–5):** `____`\n2. *How confident are you that you can check whether an AI answer is true?* **My rating (1–5):** `____`\n\nYou will track your **Before / After / Change** growth on your Pre-Check score and these two confidence ratings at the end of the course in **Segment 8**.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": true,
@@ -221,9 +221,9 @@
           {
             "id": "les_aif_00_02",
             "section_id": "sec_aif_00",
-            "title": "0.2 Ungraded Pre-Check: What Do I Already Know? (10 Questions)",
+            "title": "0.2 Ungraded Pre-Check: What Do I Already Know? (11 Questions)",
             "type": "quiz",
-            "summary": "Answer 10 ungraded baseline questions to see what you already believe about AI. You will retake these exact 10 questions at the end of the course as a Post-Check to see how much you grew.",
+            "summary": "This check is not graded. It shows what you already know, so choose \"I’m not sure\" whenever you are unsure. You will retake these exact 11 questions at the end of the course to see how much you have learned.",
             "duration_seconds": 600,
             "position": 2,
             "is_free_preview": true,
@@ -232,140 +232,167 @@
               {
                 "id": "q_aif_pre_1",
                 "lesson_id": "les_aif_00_02",
-                "question": "Which statement best describes the relationship between Artificial Intelligence (AI) and Machine Learning (ML)?",
+                "question": "Which sentence best describes AI?",
                 "options": [
-                  "Machine Learning is a subset of AI where systems learn patterns from data instead of following only hand-coded rules",
-                  "AI and Machine Learning are completely unrelated fields",
-                  "AI is a small subset inside Machine Learning",
-                  "Machine Learning only works on physical robots, never on software"
+                  "A computer system that does tasks that usually need human thinking",
+                  "A robot that feels emotions",
+                  "Any machine that uses electricity",
+                  "A program that only works on the internet",
+                  "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "AI is the broad umbrella; Machine Learning is a major approach inside AI that learns patterns from examples.",
+                "explanation": "AI is software that does tasks that usually need human thinking. Covered in Module 1.",
                 "position": 1
               },
               {
                 "id": "q_aif_pre_2",
                 "lesson_id": "les_aif_00_02",
-                "question": "Which everyday tool is an example of AI rather than a simple fixed-rule program?",
+                "question": "Which of these learns patterns from many examples?",
                 "options": [
-                  "A pocket calculator adding 2 + 2",
-                  "A grocery store automatic sliding door",
-                  "An email spam filter that adapts to new scam messages",
-                  "A mechanical washing machine timer"
+                  "A pocket calculator",
+                  "A thermostat with a fixed temperature rule",
+                  "An email spam filter",
+                  "A timer on a washing machine",
+                  "I’m not sure"
                 ],
                 "correct_option_index": 2,
-                "explanation": "A spam filter learns patterns from millions of emails to classify new messages, whereas calculators and timers follow fixed rules.",
+                "explanation": "A spam filter learns from examples, while the others follow fixed rules. Covered in Module 1.",
                 "position": 2
               },
               {
                 "id": "q_aif_pre_3",
                 "lesson_id": "les_aif_00_02",
-                "question": "In Machine Learning, what is a \"model\"?",
+                "question": "What does generative AI do?",
                 "options": [
-                  "A human actor hired to demonstrate software",
-                  "The finished pattern-recognition system produced after training on data",
-                  "A physical 3D-printed microchip",
-                  "The internet browser used to open a website"
+                  "Only sorts emails",
+                  "Creates new content, such as text, images, or sound",
+                  "Only stores files",
+                  "Only measures speed",
+                  "I’m not sure"
                 ],
                 "correct_option_index": 1,
-                "explanation": "During training, an algorithm learns from data to build a model—a mathematical recipe that makes predictions on new inputs.",
+                "explanation": "Generative AI creates new content. Covered in Modules 1 and 3.",
                 "position": 3
               },
               {
                 "id": "q_aif_pre_4",
                 "lesson_id": "les_aif_00_02",
-                "question": "What does \"Garbage in, garbage out\" mean in AI?",
+                "question": "Which order shows how a machine learning system works?",
                 "options": [
-                  "AI systems clean up messy computer hard drives automatically",
-                  "If training data is incomplete, inaccurate, or skewed, the AI model will make poor or biased predictions",
-                  "Computers need to be recycled every year",
-                  "AI only works when given random numbers"
+                  "Data, training, model, prediction",
+                  "Prediction, model, data, training",
+                  "Model, prediction, training, data",
+                  "Training, prediction, data, model",
+                  "I’m not sure"
                 ],
-                "correct_option_index": 1,
-                "explanation": "An AI model can only learn from the examples it is given. Flawed or unrepresentative data leads to flawed predictions.",
+                "correct_option_index": 0,
+                "explanation": "The system learns from data, trains, saves a model, and then makes predictions. Covered in Module 2.",
                 "position": 4
               },
               {
                 "id": "q_aif_pre_5",
                 "lesson_id": "les_aif_00_02",
-                "question": "How does a Large Language Model (LLM) like ChatGPT or Gemini generate its replies?",
+                "question": "Why can a chatbot give a confident answer that is wrong?",
                 "options": [
-                  "By looking up verified answers in a locked encyclopedia",
-                  "By thinking consciously with human feelings",
-                  "By predicting the most statistically likely next word (or token) based on patterns in its training text",
-                  "By asking a human worker to type every reply live"
+                  "It writes text that sounds likely, and it does not guarantee the text is true",
+                  "It always looks up one correct answer",
+                  "It never makes mistakes",
+                  "It is switched off at night",
+                  "I’m not sure"
                 ],
-                "correct_option_index": 2,
-                "explanation": "LLMs are next-token prediction engines trained on vast text datasets, not conscious minds or fact-checked databases.",
+                "correct_option_index": 0,
+                "explanation": "A chatbot predicts likely words, so it can hallucinate. Covered in Module 3.",
                 "position": 5
               },
               {
                 "id": "q_aif_pre_6",
                 "lesson_id": "les_aif_00_02",
-                "question": "What is an AI \"hallucination\"?",
+                "question": "A chatbot gives you a surprising statistic. What should you do first?",
                 "options": [
-                  "A computer screen flickering due to low battery",
-                  "When a chatbot confidently invents false facts, quotes, or sources that sound plausible",
-                  "When an image generator uses bright colors",
-                  "A virus that deletes files"
+                  "Share it with friends",
+                  "Cross-check it with a trusted source",
+                  "Trust it because it sounds exact",
+                  "Ask the chatbot to say it again",
+                  "I’m not sure"
                 ],
                 "correct_option_index": 1,
-                "explanation": "Because chatbots predict plausible-sounding words, they can fabricate details or citations with high confidence.",
+                "explanation": "Check important facts before you rely on them. Covered in Module 3.",
                 "position": 6
               },
               {
                 "id": "q_aif_pre_7",
                 "lesson_id": "les_aif_00_02",
-                "question": "If a chatbot gives you a confident answer with an academic citation, what should you do before relying on it?",
+                "question": "Unfair results from an AI system often come from…",
                 "options": [
-                  "Trust it immediately because citations cannot be faked",
-                  "Confirm that the source actually exists and says what the chatbot claims",
-                  "Ask the same chatbot \"Are you sure?\" and accept its reply",
-                  "Assume any long answer is 100% accurate"
+                  "Data that is incomplete or unbalanced",
+                  "Computers that are too fast",
+                  "Screens that are too small",
+                  "Too many people online",
+                  "I’m not sure"
                 ],
-                "correct_option_index": 1,
-                "explanation": "Always cross-check and verify that cited sources exist and support the claim.",
+                "correct_option_index": 0,
+                "explanation": "A model learns from data, so poor data can lead to bias. Covered in Modules 2 and 4.",
                 "position": 7
               },
               {
                 "id": "q_aif_pre_8",
                 "lesson_id": "les_aif_00_02",
-                "question": "Which type of information should you NEVER paste into a public AI chatbot?",
+                "question": "Which information is safest to type into a public chatbot?",
                 "options": [
-                  "A request to brainstorm dinner ideas",
-                  "Passwords, private medical records, or confidential customer data",
-                  "A public news headline to summarize",
-                  "A general question about world history"
+                  "A general question, such as how photosynthesis works",
+                  "Your password",
+                  "Your bank details",
+                  "A private document with other people’s names",
+                  "I’m not sure"
                 ],
-                "correct_option_index": 1,
-                "explanation": "Never share passwords, personal IDs, or private/confidential documents with public AI tools.",
+                "correct_option_index": 0,
+                "explanation": "Never share private information with a chatbot. Covered in Modules 3 and 4.",
                 "position": 8
               },
               {
                 "id": "q_aif_pre_9",
                 "lesson_id": "les_aif_00_02",
-                "question": "True or False: Today’s AI systems are conscious and understand the world the same way humans do.",
+                "question": "What is a deepfake?",
                 "options": [
-                  "True — modern chatbots have real feelings and self-awareness",
-                  "False — AI systems process mathematical patterns without consciousness or true understanding"
+                  "A type of password",
+                  "A very fast computer",
+                  "A very realistic fake picture, voice, or video made with AI",
+                  "A deep learning textbook",
+                  "I’m not sure"
                 ],
-                "correct_option_index": 1,
-                "explanation": "AI can simulate fluent conversation, but it has no consciousness, beliefs, or lived understanding.",
+                "correct_option_index": 2,
+                "explanation": "Deepfakes can look and sound real, so check shocking content. Covered in Module 4.",
                 "position": 9
               },
               {
                 "id": "q_aif_pre_10",
                 "lesson_id": "les_aif_00_02",
-                "question": "What is an example of Algorithmic Bias?",
+                "question": "What does “human in the loop” mean?",
                 "options": [
-                  "A face-recognition tool performing worse for people underrepresented in its training photos",
-                  "A laptop running faster when plugged into power",
-                  "A user preferring dark mode over light mode",
-                  "A spreadsheet sorting numbers from smallest to largest"
+                  "A person reviews and controls important decisions made with AI",
+                  "A robot lives in a house",
+                  "Only people can use AI",
+                  "AI works without any help",
+                  "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "When training data underrepresents certain groups, the resulting model often makes more errors for those groups.",
+                "explanation": "Important decisions, such as hiring or health, need a person in charge. Covered in Module 4.",
                 "position": 10
+              },
+              {
+                "id": "q_aif_pre_11",
+                "lesson_id": "les_aif_00_02",
+                "question": "Which statement about AI is true?",
+                "options": [
+                  "AI can make mistakes, so important information should be checked",
+                  "AI is always right",
+                  "AI feels emotions like a person",
+                  "AI needs no people to build or check it",
+                  "I’m not sure"
+                ],
+                "correct_option_index": 0,
+                "explanation": "AI is powerful but not perfect, and people stay important. Covered in Modules 1 and 3.",
+                "position": 11
               }
             ]
           }
@@ -406,7 +433,7 @@
             "section_id": "sec_aif_01",
             "title": "1.3 Module 1 Knowledge Check (10 Questions from 20-Question Bank)",
             "type": "quiz",
-            "summary": "10 questions randomly drawn from the 20-question Module 1 bank (15 minutes) with instant feedback. Retake anytime for a fresh variation.",
+            "summary": "Answer 10 questions randomly drawn from the 20-question Module 1 bank (15 minutes). Retake anytime for a fresh set of questions with instant feedback.",
             "duration_seconds": 900,
             "position": 3,
             "is_free_preview": false,
@@ -551,139 +578,137 @@
               {
                 "id": "q_aif_01_11",
                 "lesson_id": "les_aif_01_03",
-                "question": "What do the two words “artificial” and “intelligence” mean together in AI?",
+                "question": "In 1956, researchers first used which name for the new field?",
                 "options": [
-                  "A human-made tool that can learn and solve problems",
-                  "A living creature made out of metal",
-                  "A magical program that never needs data",
-                  "Any screen that connects to Wi-Fi"
+                  "Artificial intelligence",
+                  "Machine learning",
+                  "Deep learning",
+                  "Generative AI"
                 ],
                 "correct_option_index": 0,
-                "explanation": "“Artificial” means made by people, and “intelligence” means the ability to learn and solve problems.",
+                "explanation": "At a meeting in 1956, researchers first used the name “artificial intelligence.” The other terms came later.",
                 "position": 11
               },
               {
                 "id": "q_aif_01_12",
                 "lesson_id": "les_aif_01_03",
-                "question": "Which item is NOT AI because it only executes an exact arithmetic rule you typed?",
+                "question": "Which sentence correctly describes machine learning?",
                 "options": [
-                  "A spreadsheet SUM formula",
-                  "A voice assistant",
-                  "Smartphone face unlock",
-                  "An email spam filter"
+                  "A person writes every rule the computer follows",
+                  "The computer finds patterns from many examples instead of following only fixed rules",
+                  "The computer copies one answer from a book",
+                  "The computer works without any data"
                 ],
-                "correct_option_index": 0,
-                "explanation": "A spreadsheet SUM formula follows a fixed math rule and does not learn from examples.",
+                "correct_option_index": 1,
+                "explanation": "Machine learning means the computer learns patterns from examples.",
                 "position": 12
               },
               {
                 "id": "q_aif_01_13",
                 "lesson_id": "les_aif_01_03",
-                "question": "In the 1960s to 1980s, why were early rule-based AI systems hard to update?",
+                "question": "“If the temperature is below 21°C, then heat” is an example of…",
                 "options": [
-                  "People had to write and maintain every single rule by hand",
-                  "Computers could only run for 5 minutes a day",
-                  "There were no keyboards yet",
-                  "Electricity was not invented yet"
+                  "A fixed rule written by a person",
+                  "Learning from examples",
+                  "Deep learning",
+                  "Generative AI"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Hand-written rules break when situations change, because humans must update every rule manually.",
+                "explanation": "A thermostat follows a rule that a person wrote. It does not learn.",
                 "position": 13
               },
               {
                 "id": "q_aif_01_14",
                 "lesson_id": "les_aif_01_03",
-                "question": "Which layer sits directly inside Machine Learning on the AI family map?",
+                "question": "Which of these is generative AI?",
                 "options": [
-                  "Deep learning",
-                  "Pocket calculators",
-                  "Fixed-rule thermostats",
-                  "Washing machine timers"
+                  "A tool that creates a new picture from your written description",
+                  "A calculator",
+                  "A clock",
+                  "A light switch"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Deep learning is a specialized subset inside Machine Learning that uses many-layered neural networks.",
+                "explanation": "Generative AI creates new content, such as pictures, text, or sound.",
                 "position": 14
               },
               {
                 "id": "q_aif_01_15",
                 "lesson_id": "les_aif_01_03",
-                "question": "What is a “neural network” in plain words?",
+                "question": "In the circles map, which circle is the smallest and sits inside all the others?",
                 "options": [
-                  "A computer model loosely inspired by the brain, made of connected layers",
-                  "A social media website for doctors",
-                  "A physical cable under the ocean",
-                  "A list of passwords stored in a folder"
+                  "Artificial intelligence",
+                  "Machine learning",
+                  "Generative AI",
+                  "Deep learning"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Neural networks are layered computer models loosely inspired by how brain cells connect.",
+                "correct_option_index": 2,
+                "explanation": "The order from biggest to smallest is AI, machine learning, deep learning, and generative AI.",
                 "position": 15
               },
               {
                 "id": "q_aif_01_16",
                 "lesson_id": "les_aif_01_03",
-                "question": "How does a map app use AI when you drive across town?",
-                "options": [
-                  "It predicts traffic and chooses a faster route based on patterns",
-                  "It paints new roads on the street",
-                  "It only works if you type the speed of every car",
-                  "It turns off your phone speaker"
-                ],
-                "correct_option_index": 0,
-                "explanation": "Map apps use AI to predict traffic delays and recommend faster routes.",
-                "position": 16
-              },
-              {
-                "id": "q_aif_01_17",
-                "lesson_id": "les_aif_01_03",
-                "question": "Which myth is false because AI needs people to build it, give it data, and check its work?",
-                "options": [
-                  "“AI will do everything by itself.”",
-                  "“AI uses math and patterns.”",
-                  "“AI is already in everyday apps.”",
-                  "“AI can make mistakes.”"
-                ],
-                "correct_option_index": 0,
-                "explanation": "AI depends on humans to design it, supply data, and verify important outputs.",
-                "position": 17
-              },
-              {
-                "id": "q_aif_01_18",
-                "lesson_id": "les_aif_01_03",
-                "question": "True or false: You need to be a math genius or programmer to start using everyday AI tools.",
+                "question": "True or false: AI is one single technology.",
                 "options": [
                   "True",
                   "False"
                 ],
                 "correct_option_index": 1,
-                "explanation": "Many AI tools are built for everyday users—you can start with plain-language questions.",
+                "explanation": "AI is a large group of different tools. A chess program, a face-unlock feature, and a chatbot work in very different ways.",
+                "position": 16
+              },
+              {
+                "id": "q_aif_01_17",
+                "lesson_id": "les_aif_01_03",
+                "question": "Why does a spam filter learn from examples instead of using only fixed rules?",
+                "options": [
+                  "Spammers change their messages all the time, so rules alone cannot keep up",
+                  "Computers cannot follow rules",
+                  "Rules are against the law",
+                  "Email has no patterns"
+                ],
+                "correct_option_index": 0,
+                "explanation": "Learning from many examples lets the filter judge new messages that it has never seen.",
+                "position": 17
+              },
+              {
+                "id": "q_aif_01_18",
+                "lesson_id": "les_aif_01_03",
+                "question": "A map app predicts traffic and picks a faster route. What does this show?",
+                "options": [
+                  "AI is only used in laboratories",
+                  "AI is already part of everyday life",
+                  "Maps are a type of generative AI",
+                  "AI always gives perfect routes"
+                ],
+                "correct_option_index": 1,
+                "explanation": "Maps, email, phones, and entertainment all use AI every day.",
                 "position": 18
               },
               {
                 "id": "q_aif_01_19",
                 "lesson_id": "les_aif_01_03",
-                "question": "Why does a motion-activated grocery store door NOT count as AI?",
+                "question": "True or false: AI thinks and feels like a human.",
                 "options": [
-                  "It follows a simple fixed sensor rule without learning from examples",
-                  "It has glass panels",
-                  "It opens too slowly",
-                  "It is used in a store instead of an office"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "A motion sensor triggers a fixed rule (\"if motion, open\"), with no learning from data.",
+                "correct_option_index": 1,
+                "explanation": "AI finds patterns in data. It may sound friendly, but that does not mean it understands or feels anything.",
                 "position": 19
               },
               {
                 "id": "q_aif_01_20",
                 "lesson_id": "les_aif_01_03",
-                "question": "In 1956, what milestone happened in the story of AI?",
+                "question": "Which statement about people and AI is true?",
                 "options": [
-                  "Researchers met and used the name “artificial intelligence” for the first time",
-                  "Smartphones with face unlock were released",
-                  "Email spam filters were invented",
-                  "Chatbots wrote novels for everyone"
+                  "AI needs no people at all",
+                  "People are no longer important",
+                  "People build AI, give it data, and check its work",
+                  "AI builds itself from nothing"
                 ],
-                "correct_option_index": 0,
-                "explanation": "The term “artificial intelligence” was first used at a 1956 research meeting.",
+                "correct_option_index": 2,
+                "explanation": "AI needs people at every stage, so people stay important.",
                 "position": 20
               }
             ]
@@ -699,10 +724,10 @@
           {
             "id": "les_aif_02_01",
             "section_id": "sec_aif_02",
-            "title": "2.1 Written Lesson & Reading: How AI Learns & “Garbage In, Garbage Out”",
+            "title": "2.1 Written Lesson & Reading: How AI Learns + “Garbage In, Garbage Out”",
             "type": "article",
-            "summary": "Learn the 4 steps of machine learning (data, training, model, prediction), the 3 ways machines learn (supervised, unsupervised, reinforcement), and the 8-minute reading “Garbage In, Garbage Out.”",
-            "content": "> **What you will learn:** By the end of this lesson, you will be able to explain how a machine learning system learns from examples. You will know the four steps (data, training, model, prediction), and you will be able to name the three main ways machines learn.\n\n---\n\n### Part A: The Lesson (12 Minutes)\n\n#### 1. Learning from examples\nFirst, think about how a child learns what an apple is. Nobody gives the child a long list of rules, such as *“round, red or green, with a stem on top.”* Instead, you show the child many apples and say, *“This is an apple.”* After a while, the child can recognize an apple they have never seen before, even if it is a different color or size.\n\nMachine learning works in a similar way. In other words, instead of writing rules for the computer, we show it many examples, and the computer finds the patterns by itself. This is why machine learning is so useful. Some problems, like recognizing a face or a spoken word, are too complicated for anyone to write down as rules.\n\n#### 2. The four steps: data, training, model, prediction\nEvery machine learning system follows the same four steps:\n\n| 1. DATA | 2. TRAINING | 3. MODEL | 4. PREDICTION |\n| :--- | :--- | :--- | :--- |\n| Examples are collected | The computer studies the examples to find patterns | The patterns it learned are saved | The model makes a guess about something new |\n| *Spam example:* thousands of emails marked “spam” or “not spam” | The computer compares the spam emails with the normal ones | It saves patterns, such as pressure words, strange links, and requests for money | A new email arrives and is marked “probably spam” |\n\n> **Diagram Alt Text:** *A four-column left-to-right flow table showing the four steps of machine learning: 1. Data (examples collected), 2. Training (computer studies examples to find patterns), 3. Model (learned patterns saved), 4. Prediction (model makes a guess about something new), illustrated with an email spam filter example.*\n\n- **Step 1, Data:** Data is information, such as pictures, words, numbers, or sounds. The examples we use for learning are called **training data**.\n- **Step 2, Training:** Next, the computer studies the training data again and again. Each time, it adjusts itself to make fewer mistakes. This process is called **training**.\n- **Step 3, Model:** After training, what the computer has learned is saved as a **model**. You can think of the model as the “learned experience” of the system.\n- **Step 4, Prediction:** Finally, we give the model something new, and it makes a **prediction**. For example, it says, *“This email is probably spam,”* or *“This photo shows a cat.”*\n\n> **Remember:** The model is not a list of rules written by a person. It is a set of patterns that the computer found by itself.\n\n#### 3. Why predictions can be wrong\nBecause a model works with patterns, it makes a best guess, not a perfect answer. For instance, a spam filter may say an email is probably spam, but sometimes a normal email gets caught. Similarly, it may miss a new kind of spam that looks different from anything it has seen.\n\nTherefore, we should never think of AI as always right. Instead, we should think of it as very good at patterns it has seen before, and less reliable when something is new or unusual.\n\n#### 4. Three ways machines learn\nThere is more than one way to teach a machine. Fortunately, the three main ways are easy to picture with everyday examples:\n\n| Way of learning | Everyday picture | Example |\n| :--- | :--- | :--- |\n| **Supervised learning** | Studying with an answer key. Each example comes with the correct answer, called a **label**. | A spam filter learns from emails labeled “spam” or “not spam.” A photo tool learns from pictures labeled “cat” or “dog.” |\n| **Unsupervised learning** | Sorting a box of mixed buttons into piles. Nobody tells you the piles, so you group the buttons by how they look. | A shop groups customers with similar buying habits, without being told the groups in advance. |\n| **Reinforcement learning** | Training a dog with treats, or learning a video game by playing. You try something, get a reward or a penalty, and improve. | A program learns to play a game by trying moves and earning points. A robot learns to walk by trial and error. |\n\nIn short, supervised learning has answers, unsupervised learning finds groups, and reinforcement learning uses rewards.\n\n> **Key takeaways:**\n> - Machine learning means the computer finds patterns from examples instead of following only written rules.\n> - The four steps are **data → training → model → prediction**.\n> - A model makes best guesses, so it can be wrong, especially with new or unusual cases.\n> - The three main ways to learn are **supervised**, **unsupervised**, and **reinforcement learning**.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Data** | Information such as pictures, words, numbers, or sounds |\n| **Training data** | The examples a system learns from |\n| **Label** | The correct answer attached to an example, such as “spam” or “cat” |\n| **Training** | The process of studying examples to find patterns |\n| **Model** | What the system has learned, saved as patterns it can use |\n| **Prediction** | The model’s best guess about something new |\n| **Supervised learning** | Learning from examples that come with correct answers |\n| **Unsupervised learning** | Finding groups or patterns in data without answers |\n| **Reinforcement learning** | Learning by trial and error with rewards |\n\n---\n\n### Part B: Reading (8 Minutes): “Garbage In, Garbage Out”\nComputer experts have a short saying: **“garbage in, garbage out.”** It means that if the information we give a computer is poor, the results will be poor too. This idea is very important for AI, because a model is only as good as the data it learned from.\n\n#### Three questions to ask about data\n1. **Is there enough of it?** A child who has seen only one apple may not recognize a different apple. In the same way, a model with too few examples may not learn the pattern well.\n2. **Is it correct?** If many photos in the training data have the wrong label—for instance, dogs labeled as cats—the model will learn the wrong lesson.\n3. **Does it cover everyone and everything?** This is called being **representative**. If the data leaves out some groups or situations, the model will not work well for them.\n\n- **Example 1: The daylight camera** — Imagine a model that learns to recognize street signs, but all of its training photos were taken on sunny days. As a result, it may work well at noon, but it may make many mistakes at night or in the rain. The problem is not the computer. The problem is that the data did not show those situations.\n- **Example 2: Unfair results** — Now imagine a face recognition tool trained mostly on photos of one group of people. Because the data was not representative, the tool will probably work worse for people from other groups. This kind of unfair result is called **bias**. Importantly, bias often does not come from bad intentions; it often comes from data that is incomplete or unbalanced. Similarly, if a model learns from past decisions that were unfair, it can repeat those unfair patterns.\n\n#### What can we do?\n- Use data that is large, correct, and varied.\n- Test the model on different groups and situations before using it.\n- Keep a person in charge of important decisions, such as hiring or health.\n\n> **In short:** Better data leads to better AI. Poor or unbalanced data leads to poor or unfair results.",
+            "summary": "Learn the 4 steps of machine learning (data, training, model, prediction), the 3 learning types (supervised, unsupervised, reinforcement), and why data quality prevents bias.",
+            "content": "> **What you will learn:** By the end of this lesson, you will be able to explain how a machine learning system learns from examples. You will know the four steps (**data, training, model, prediction**), and you will be able to name the three main ways machines learn.\n\n---\n\n### 1. Learning from examples\nFirst, think about how a child learns what an apple is. Nobody gives the child a long list of rules, such as *“round, red or green, with a stem on top.”* Instead, you show the child many apples and say, *“This is an apple.”* After a while, the child can recognize an apple they have never seen before, even if it is a different color or size.\n\nMachine learning works in a similar way. In other words, instead of writing rules for the computer, we show it many examples, and the computer finds the patterns by itself. This is why machine learning is so useful. Some problems, like recognizing a face or a spoken word, are too complicated for anyone to write down as rules.\n\n---\n\n### 2. The four steps: data, training, model, prediction\nEvery machine learning system follows the same four steps:\n\n| Step | What happens | Spam example |\n| :--- | :--- | :--- |\n| **1. DATA** | Examples are collected | Thousands of emails marked “spam” or “not spam” |\n| **2. TRAINING** | The computer studies the examples to find patterns | The computer compares the spam emails with the normal ones |\n| **3. MODEL** | The patterns it learned are saved | It saves patterns, such as pressure words, strange links, and requests for money |\n| **4. PREDICTION** | The model makes a guess about something new | A new email arrives and is marked “probably spam” |\n\n- **Step 1, Data:** Data is information, such as pictures, words, numbers, or sounds. The examples we use for learning are called **training data**.\n- **Step 2, Training:** Next, the computer studies the training data again and again. Each time, it adjusts itself to make fewer mistakes. This process is called **training**.\n- **Step 3, Model:** After training, what the computer has learned is saved as a **model**. You can think of the model as the “learned experience” of the system.\n- **Step 4, Prediction:** Finally, we give the model something new, and it makes a **prediction**. For example, it says, *“This email is probably spam,”* or *“This photo shows a cat.”*\n\n> **Remember:** The model is not a list of rules written by a person. It is a set of patterns that the computer found by itself.\n\n---\n\n### 3. Why predictions can be wrong\nBecause a model works with patterns, it makes a **best guess**, not a perfect answer. For instance, a spam filter may say an email is probably spam, but sometimes a normal email gets caught. Similarly, it may miss a new kind of spam that looks different from anything it has seen.\n\nTherefore, we should never think of AI as always right. Instead, we should think of it as very good at patterns it has seen before, and less reliable when something is new or unusual.\n\n---\n\n### 4. Three ways machines learn\nThere is more than one way to teach a machine. Fortunately, the three main ways are easy to picture with everyday examples:\n\n| Way of learning | Everyday picture | Example |\n| :--- | :--- | :--- |\n| **Supervised learning** | Studying with an answer key. Each example comes with the correct answer, called a **label** | A spam filter learns from emails labeled “spam” or “not spam.” A photo tool learns from pictures labeled “cat” or “dog” |\n| **Unsupervised learning** | Sorting a box of mixed buttons into piles. Nobody tells you the piles, so you group the buttons by how they look | A shop groups customers with similar buying habits, without being told the groups in advance |\n| **Reinforcement learning** | Training a dog with treats, or learning a video game by playing. You try something, get a reward or a penalty, and improve | A program learns to play a game by trying moves and earning points. A robot learns to walk by trial and error |\n\n> **In short:** Supervised learning has answers, unsupervised learning finds groups, and reinforcement learning uses rewards.\n\n---\n\n### Part B: Reading (8 minutes) — “Garbage In, Garbage Out”\nComputer experts have a short saying: **“garbage in, garbage out.”** It means that if the information we give a computer is poor, the results will be poor too. This idea is very important for AI, because a model is only as good as the data it learned from.\n\n#### Three questions to ask about data\nTo judge whether data is good, we can ask three simple questions:\n1. **Is there enough of it?** A child who has seen only one apple may not recognize a different apple. In the same way, a model with too few examples may not learn the pattern well.\n2. **Is it correct?** If many photos in the training data have the wrong label, for instance dogs labeled as cats, the model will learn the wrong lesson.\n3. **Does it cover everyone and everything?** This is called being **representative**. If the data leaves out some groups or situations, the model will not work well for them.\n\n#### Example 1: The daylight camera\nImagine a model that learns to recognize street signs, but all of its training photos were taken on sunny days. As a result, it may work well at noon, but it may make many mistakes at night or in the rain. The problem is not the computer. The problem is that the data did not show those situations.\n\n#### Example 2: Unfair results\nNow imagine a face recognition tool trained mostly on photos of one group of people. Because the data was not representative, the tool will probably work worse for people from other groups. This kind of unfair result is called **bias**. Importantly, bias often does not come from bad intentions. It often comes from data that is incomplete or unbalanced.\n\nSimilarly, if a model learns from past decisions that were unfair, it can repeat those unfair patterns. This is why people must check the data and the results.\n\n#### What can we do?\n- Use data that is large, correct, and varied.\n- Test the model on different groups and situations before using it.\n- Keep a person in charge of important decisions, such as hiring or health.\n\n> **In short:** Better data leads to better AI. Poor or unbalanced data leads to poor or unfair results.\n\n---\n\n> **Key takeaways:**\n> - Machine learning means the computer finds patterns from examples instead of following only written rules.\n> - The four steps are **data → training → model → prediction**.\n> - A model makes best guesses, so it can be wrong, especially with new or unusual cases.\n> - The three main ways to learn are **supervised**, **unsupervised**, and **reinforcement learning**.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Data** | Information such as pictures, words, numbers, or sounds |\n| **Training data** | The examples a system learns from |\n| **Label** | The correct answer attached to an example, such as “spam” or “cat” |\n| **Training** | The process of studying examples to find patterns |\n| **Model** | What the system has learned, saved as patterns it can use |\n| **Prediction** | The model’s best guess about something new |\n| **Supervised learning** | Learning from examples that come with correct answers |\n| **Unsupervised learning** | Finding groups or patterns in data without answers |\n| **Reinforcement learning** | Learning by trial and error with rewards |",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
@@ -711,10 +736,10 @@
           {
             "id": "les_aif_02_02",
             "section_id": "sec_aif_02",
-            "title": "2.2 Activity: “Be the Algorithm” (Round 1 Good Data vs. Round 2 Poor Data)",
+            "title": "2.2 Activity: “Be the Algorithm” (Good vs. Narrow Training Data)",
             "type": "article",
-            "summary": "Act like a machine learning system: study 10 labeled email subject lines, predict labels for 5 new messages, and repeat with a narrow “FREE = spam” dataset.",
-            "content": "> **What you will learn:** How a machine learning model learns patterns from training data—and how a narrow, skewed dataset causes avoidable mistakes.\n\n**Your goal:** Act like a machine learning system. You will learn from examples, make predictions, and then see what happens when the examples are poor.\n\n---\n\n### Round 1: Learn from good examples (7 minutes)\nFirst, study these **10 labeled email subject lines**. This is your training data. Look for patterns:\n\n| # | Subject line (training data) | Label |\n| :--- | :--- | :--- |\n| **1** | WIN a FREE prize now!!! | **Spam** |\n| **2** | Claim your reward: click here today | **Spam** |\n| **3** | Cheap pills, no prescription needed | **Spam** |\n| **4** | You have been selected: send your bank details | **Spam** |\n| **5** | Last chance: double your money in 24 hours | **Spam** |\n| **6** | Meeting moved to 3 pm tomorrow | **Not spam** |\n| **7** | Your library book is due Friday | **Not spam** |\n| **8** | Photos from the weekend trip | **Not spam** |\n| **9** | Invoice for October attached | **Not spam** |\n| **10** | Can you review my draft report? | **Not spam** |\n\nIn your **Personal Study Notes**, write in 1–2 sentences what the spam messages have in common, then predict the label and clue for these **5 new messages**:\n1. *Urgent: verify your password at this link*\n2. *Lunch on Thursday?*\n3. *Congratulations! You won a free vacation*\n4. *Notes from today’s class*\n5. *Free parking available at the venue*\n\n---\n\n### Round 2: Learn from poor examples (8 minutes)\nNow imagine a different system. It was trained on a much narrower set of examples. In this set, every spam message contained the word **“FREE,”** and no normal message did. Because of this, the system learned only one pattern: **“FREE = spam.”**\n\nUse only that rule and predict the labels for the same **5 messages** again, then reflect:\n- Which messages did the narrow system get wrong?\n- Why did the narrow system make those mistakes?\n- What kind of examples would you add to improve it?\n\n---\n\n### Answer Guide\n| # | New message | Best label (Round 1) | “FREE = spam” result | Right? |\n| :--- | :--- | :--- | :--- | :--- |\n| **1** | Urgent: verify your password at this link | **Spam** | Not spam | **Wrong** |\n| **2** | Lunch on Thursday? | **Not spam** | Not spam | Right |\n| **3** | Congratulations! You won a free vacation | **Spam** | Spam | Right |\n| **4** | Notes from today’s class | **Not spam** | Not spam | Right |\n| **5** | Free parking available at the venue | **Not spam** | Spam | **Wrong** |\n\n- **Round 1 pattern:** The spam messages use pressure and promises, such as *“now,” “last chance,” “click here,” “prize,”* and requests for money or private details. The normal messages are calm and about ordinary tasks. Message 5 is the tricky one: it contains *“free,”* but it is not spam.\n- **Round 2 lesson:** The narrow system missed message 1 because it did not contain *“free,”* and it wrongly blocked message 5 because it did. The problem was poor and narrow data, not a bad computer. Adding varied examples—including normal messages with *“free”* and spam without it—would improve the system.",
+            "summary": "Act like a machine learning system in two rounds: learn from 10 labeled emails, predict 5 new ones, then see how a narrow “FREE = spam” rule fails.",
+            "content": "> **Your goal:** Act like a machine learning system. You will learn from examples, make predictions, and then see what happens when the examples are poor. *(15 minutes total)*\n\n---\n\n### Round 1: Learn from good examples (7 minutes)\nFirst, study these **10 labeled email subject lines**. This is your **training data**. Look for patterns.\n\n| # | Subject line (training data) | Label |\n| :---: | :--- | :--- |\n| **1** | WIN a FREE prize now!!! | **Spam** |\n| **2** | Claim your reward: click here today | **Spam** |\n| **3** | Cheap pills, no prescription needed | **Spam** |\n| **4** | You have been selected: send your bank details | **Spam** |\n| **5** | Last chance: double your money in 24 hours | **Spam** |\n| **6** | Meeting moved to 3 pm tomorrow | **Not spam** |\n| **7** | Your library book is due Friday | **Not spam** |\n| **8** | Photos from the weekend trip | **Not spam** |\n| **9** | Invoice for October attached | **Not spam** |\n| **10** | Can you review my draft report? | **Not spam** |\n\nIn your **Personal Study Notes**, write in one or two sentences: **What do the spam messages have in common?**\n\nNext, predict the label for these **5 new messages**, and write the clue you used. These are your **predictions**:\n1. *Urgent: verify your password at this link*\n2. *Lunch on Thursday?*\n3. *Congratulations! You won a free vacation*\n4. *Notes from today’s class*\n5. *Free parking available at the venue*\n\n---\n\n### Round 2: Learn from poor examples (8 minutes)\nNow, imagine a different system. It was trained on a much narrower set of examples. In this set, every spam message contained the word **“FREE,”** and no normal message did. Because of this, the system learned only one pattern: **“FREE = spam.”**\n\nUse **only that rule** and predict the labels for the same 5 messages again, then compare with Round 1:\n1. *Urgent: verify your password at this link*\n2. *Lunch on Thursday?*\n3. *Congratulations! You won a free vacation*\n4. *Notes from today’s class*\n5. *Free parking available at the venue*\n\n#### Think about it\n- Which messages did the narrow system get wrong?\n- Why did the narrow system make those mistakes?\n- What kind of examples would you add to improve it?\n\n---\n\n### Answer Guide\n| # | New message | Best label (Round 1) | “FREE = spam” result | Right? |\n| :---: | :--- | :--- | :--- | :---: |\n| **1** | Urgent: verify your password at this link | **Spam** | Not spam | **Wrong** |\n| **2** | Lunch on Thursday? | **Not spam** | Not spam | **Right** |\n| **3** | Congratulations! You won a free vacation | **Spam** | Spam | **Right** |\n| **4** | Notes from today’s class | **Not spam** | Not spam | **Right** |\n| **5** | Free parking available at the venue | **Not spam** | Spam | **Wrong** |\n\n- **Round 1 pattern:** The spam messages use pressure and promises, such as “now,” “last chance,” “click here,” “prize,” and requests for money or private details. The normal messages are calm and about ordinary tasks. Message 5 is the tricky one: it contains “free,” but it is not spam. Learners who look at the whole meaning, not just one word, should get it right.\n- **Round 2 lesson:** The narrow system missed message 1 because it did not contain “free,” and it wrongly blocked message 5 because it did. The problem was **poor and narrow data**, not a bad computer. Adding varied examples, including normal messages with “free” and spam without it, would improve the system.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
@@ -725,7 +750,7 @@
             "section_id": "sec_aif_02",
             "title": "2.3 Module 2 Knowledge Check (10 Questions from 20-Question Bank)",
             "type": "quiz",
-            "summary": "10 questions randomly drawn from the 20-question Module 2 bank (15 minutes) with instant feedback. Retake anytime for a fresh variation.",
+            "summary": "Answer 10 questions randomly drawn from the 20-question Module 2 bank (15 minutes). Retake anytime for a fresh variation with instant feedback.",
             "duration_seconds": 900,
             "position": 3,
             "is_free_preview": false,
@@ -872,141 +897,139 @@
               {
                 "id": "q_aif_02_11",
                 "lesson_id": "les_aif_02_03",
-                "question": "What is a “label” in supervised machine learning?",
+                "question": "Teaching a child what an apple is by showing many apples is most similar to…",
                 "options": [
-                  "The correct answer attached to a training example, such as “spam” or “cat”",
-                  "The brand logo on a laptop",
-                  "The price tag on software",
-                  "A broken internet link"
+                  "Machine learning from examples",
+                  "Writing a fixed rule for a thermostat",
+                  "Typing a prompt",
+                  "Switching on a computer"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Labels give supervised learning examples an answer key to learn from.",
+                "explanation": "In both cases, the learner sees many examples and finds the pattern.",
                 "position": 11
               },
               {
                 "id": "q_aif_02_12",
                 "lesson_id": "les_aif_02_03",
-                "question": "What happens during the “Training” step?",
+                "question": "In machine learning, what is a “label”?",
                 "options": [
-                  "The computer studies examples again and again and adjusts itself to make fewer mistakes",
-                  "A user types a question into a finished chatbot",
-                  "The computer deletes all its files",
-                  "A programmer writes 10,000 fixed IF/THEN rules by hand"
+                  "The name of the computer",
+                  "The correct answer attached to an example, such as “spam” or “cat”",
+                  "A sticker on the screen",
+                  "The speed of training"
                 ],
-                "correct_option_index": 0,
-                "explanation": "During training, the system studies training data repeatedly to learn patterns and reduce errors.",
+                "correct_option_index": 1,
+                "explanation": "Labels are the correct answers that supervised learning uses.",
                 "position": 12
               },
               {
                 "id": "q_aif_02_13",
                 "lesson_id": "les_aif_02_03",
-                "question": "In the child-and-apple analogy, how does a child learn to recognize an apple?",
+                "question": "Why can a model’s prediction be wrong?",
                 "options": [
-                  "By seeing many examples of apples rather than memorizing a long list of rules",
-                  "By reading a geometry textbook on spheres",
-                  "By never looking at fruit",
-                  "By weighing every apple on a scale"
+                  "It is a best guess from patterns, so new or unusual cases can fool it",
+                  "Models are never trained",
+                  "Models always know the true answer",
+                  "Predictions are chosen at random"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Just like a child learns from many apple examples, machine learning discovers patterns from examples.",
+                "explanation": "A model makes best guesses. It is less reliable with cases that are very new or unusual.",
                 "position": 13
               },
               {
                 "id": "q_aif_02_14",
                 "lesson_id": "les_aif_02_03",
-                "question": "What does “representative” data mean?",
+                "question": "What does “training” mean in machine learning?",
                 "options": [
-                  "The training data covers the different groups and real-world situations the model will face",
-                  "All photos are taken by one person in one room",
-                  "Every example has the exact same label",
-                  "The dataset is less than 5 examples long"
+                  "Teaching people to use a computer",
+                  "Deleting old data",
+                  "Studying examples again and again to find patterns and make fewer mistakes",
+                  "Printing the results"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Representative data includes diverse groups and conditions so the model works fairly everywhere.",
+                "correct_option_index": 2,
+                "explanation": "During training, the computer adjusts itself to make fewer mistakes.",
                 "position": 14
               },
               {
                 "id": "q_aif_02_15",
                 "lesson_id": "les_aif_02_03",
-                "question": "If many photos in a training set have the wrong label (dogs labeled as cats), what happens?",
+                "question": "A photo tool learns from pictures marked “cat” or “dog.” This is…",
                 "options": [
-                  "The model learns the wrong lesson and makes inaccurate predictions",
-                  "The computer automatically fixes every photo",
-                  "The model runs twice as accurately",
-                  "Nothing changes at all"
+                  "Supervised learning",
+                  "Unsupervised learning",
+                  "Reinforcement learning",
+                  "A fixed rule"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Incorrect labels directly corrupt what the model learns (“garbage in, garbage out”).",
+                "explanation": "The pictures come with labels, so this is supervised learning.",
                 "position": 15
               },
               {
                 "id": "q_aif_02_16",
                 "lesson_id": "les_aif_02_03",
-                "question": "In the “Be the Algorithm” activity, why did the “FREE = spam” system wrongly block “Free parking available at the venue”?",
+                "question": "Sorting a box of mixed buttons into piles without being told the piles is like…",
                 "options": [
-                  "Its training data was too narrow, so it learned a brittle one-word shortcut",
-                  "The message was too short",
-                  "The spam filter hated parking",
-                  "The email had no punctuation"
+                  "Supervised learning",
+                  "Unsupervised learning",
+                  "Reinforcement learning",
+                  "Writing a rule"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Narrow training data without varied normal emails caused a false positive on the word “free.”",
+                "correct_option_index": 1,
+                "explanation": "Unsupervised learning finds groups in data without being given answers.",
                 "position": 16
               },
               {
                 "id": "q_aif_02_17",
                 "lesson_id": "les_aif_02_03",
-                "question": "Which everyday picture best matches Unsupervised Learning?",
+                "question": "A robot learns to walk by trying moves and getting rewards for good ones. This is…",
                 "options": [
-                  "Sorting a box of mixed buttons into piles by how they look without being told the piles",
-                  "Studying flashcards with an answer key on the back",
-                  "Training a dog with treats for sitting",
-                  "Following a cooking recipe step by step"
+                  "Reinforcement learning",
+                  "Supervised learning",
+                  "Unsupervised learning",
+                  "A fixed rule"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Unsupervised learning groups similar items together without pre-assigned labels.",
+                "explanation": "Reinforcement learning improves through trial and error with rewards.",
                 "position": 17
               },
               {
                 "id": "q_aif_02_18",
                 "lesson_id": "les_aif_02_03",
-                "question": "Why should we think of a model’s prediction as a “best guess” rather than a guaranteed fact?",
+                "question": "A spam filter was trained on only one kind of spam. What is most likely?",
                 "options": [
-                  "Because models work from learned patterns and can miss new or unusual cases",
-                  "Because models always flip a coin",
-                  "Because computers cannot add numbers",
-                  "Because predictions only work on Mondays"
+                  "It will miss other kinds of spam that look different",
+                  "It will catch every kind of spam",
+                  "It will delete all email",
+                  "It will stop learning forever"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Models estimate likely patterns; unusual or unseen situations can still trip them up.",
+                "explanation": "The training data was not varied enough, so new kinds of spam can slip through.",
                 "position": 18
               },
               {
                 "id": "q_aif_02_19",
                 "lesson_id": "les_aif_02_03",
-                "question": "What are the three questions to ask when judging if training data is good?",
+                "question": "Which question helps you judge whether data is good?",
                 "options": [
-                  "Is there enough of it? Is it correct? Does it cover everyone and everything?",
-                  "Is it expensive? Is it secret? Is it colorful?",
-                  "Was it typed in bold? Is it under 10 words? Is it printed?",
-                  "Does it have emojis? Is it viral? Is it anonymous?"
+                  "Does it cover everyone and everything, or is it representative?",
+                  "Is the file name short?",
+                  "Is the screen bright?",
+                  "Is the data stored on a red disk?"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Good training data needs sufficient quantity, accurate labels, and broad representation.",
+                "explanation": "Good data is large enough, correct, and representative.",
                 "position": 19
               },
               {
                 "id": "q_aif_02_20",
                 "lesson_id": "les_aif_02_03",
-                "question": "How can we reduce unfair bias from incomplete training data?",
+                "question": "True or false: A model is a list of rules written by a person.",
                 "options": [
-                  "Use varied, accurate data, test across different groups, and keep a person in charge of key decisions",
-                  "Hide the results so nobody sees errors",
-                  "Use only 3 training examples",
-                  "Remove all human review"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Representative data, diverse testing, and human oversight help catch and reduce bias.",
+                "correct_option_index": 1,
+                "explanation": "A model is a set of patterns that the computer found by itself from examples.",
                 "position": 20
               }
             ]
@@ -1024,8 +1047,8 @@
             "section_id": "sec_aif_03",
             "title": "3.1 Written Lesson & Reading: Generative AI, Chatbots & The Verification Habit",
             "type": "article",
-            "summary": "Learn what generative AI does, how chatbots and image generators work, 6 strengths, 5 limits, and the 4-step Verification Habit.",
-            "content": "> **What you will learn:** By the end of this lesson, you will be able to explain what generative AI does and how a chatbot writes its answers. You will know where it is strong, where it goes wrong, and why you should check what it tells you.\n\n---\n\n### Part A: The Lesson (12 Minutes)\n\n#### 1. What is generative AI?\nFirst, let’s remember the AI family from Module 1. Some AI tools recognize or sort things. For example, a spam filter decides whether an email is spam. In contrast, **generative AI** creates something new, such as a paragraph, a picture, a song, or a piece of computer code.\n\nFor example, you can type, *“Write a friendly message to invite my neighbors to a garden party,”* and a chatbot will write a new message for you. Similarly, you can describe a picture in words, and an image tool will draw it. This is why generative AI feels so different from older tools, and why so many people are talking about it.\n\n#### 2. How does a chatbot write its answers?\nNow we come to the key question. How does a chatbot produce text that sounds so natural?\n\nThink about the suggestions on your phone keyboard. When you type *“Good,”* the keyboard may suggest *“morning.”* It does this because, in the text it learned from, *“morning”* often follows *“Good.”* A chatbot works in a similar way, but on a much larger scale.\n\nIn other words, a chatbot is built on a **language model**. During training, the model studied huge amounts of text and learned which words and phrases usually go together. Then, when you send a request, called a **prompt**, the model builds its answer one small piece at a time. At each step, it predicts the most likely next piece.\n\n> **Remember:** A chatbot is designed to write text that sounds right. It is not designed to guarantee that the text is true.\n\nBecause of this, a chatbot does not “look up” facts like a library catalog by default. Instead, it generates likely-sounding text from patterns. Some tools can also search the web, which can help. However, you should still check important answers.\n\n#### 3. How do image generators work?\nImage tools follow a similar idea. During training, they studied very many pictures together with the words that describe them. As a result, they learned patterns that connect words and images. When you describe a picture, the tool creates a new image that fits those patterns. Notice that the image is newly made, not copied from a single photo, but it can still contain mistakes, such as strange hands or text that is spelled wrongly.\n\n#### 4. What generative AI does well\nGenerative AI is a useful helper for many everyday tasks:\n\n| Task | How it helps |\n| :--- | :--- |\n| **Drafting** | Writes a first version of an email, letter, or post, which you then improve |\n| **Summarizing** | Shortens a long text into the main points |\n| **Translating** | Gives a quick translation that you can check or polish |\n| **Brainstorming** | Suggests ideas, names, or approaches when you feel stuck |\n| **Explaining** | Describes a hard idea in simpler words or with an example |\n| **Practicing** | Acts as a partner for practicing a language or an interview |\n\nIn all of these tasks, the AI gives you a starting point. Then, you review and decide.\n\n#### 5. Where generative AI goes wrong\nHowever, generative AI also has important limits. It is better to know them before you rely on it:\n\n| Limit | What it means |\n| :--- | :--- |\n| **Hallucinations** | The AI gives an answer that sounds confident but is false or made up. For example, it may invent a book title, a statistic, or a web link that looks real but does not exist |\n| **Outdated knowledge** | A model learned from information up to a certain date, called its **knowledge cutoff**. Unless the tool can search the web, it may not know about recent events |\n| **Bias** | The model learned from human writing, which can be unbalanced or unfair. As a result, its answers can reflect those patterns |\n| **No real understanding** | The AI finds patterns in language. It does not understand or feel like a person, even when it sounds friendly |\n| **Privacy risks** | What you type may be stored or used by the tool, depending on its settings. Therefore, you should never share private information |\n\n> **Diagram Alt Text:** *Two reference tables for Generative AI: the first lists six strengths (Drafting, Summarizing, Translating, Brainstorming, Explaining, Practicing) and how each helps; the second lists five limits (Hallucinations, Outdated knowledge, Bias, No real understanding, Privacy risks) and what each means.*\n\n> **Key takeaways:**\n> - Generative AI creates new content, such as text, images, sound, and code.\n> - A chatbot builds answers by predicting likely next words from patterns it learned.\n> - It is useful for drafting, summarizing, translating, brainstorming, and explaining.\n> - It can hallucinate, be outdated, show bias, and put your privacy at risk.\n> - A confident answer is not always a correct answer, so check what matters.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Generative AI** | AI that creates new content, such as text, images, or sound |\n| **Chatbot** | A program you talk to by typing or speaking |\n| **Language model** | An AI model that learned patterns in language from large amounts of text |\n| **Prompt** | The request or question you give to an AI tool |\n| **Hallucination** | A confident answer that is false or made up |\n| **Knowledge cutoff** | The date after which a model has not learned new information |\n| **Bias** | An unfair or unbalanced tendency in results, often from the data |\n\n---\n\n### Part B: Reading (6 Minutes): The Verification Habit\nBecause AI can sound sure even when it is wrong, we need a habit that protects us. The habit has four steps. Fortunately, it only takes a few minutes.\n\n1. **Step 1: Check it** — Look at the answer and ask, *“What can be checked?”* Names, dates, numbers, quotes, and web links are easy to check. Be extra careful when the answer sounds very exact or very perfect.\n2. **Step 2: Cross-check with a trusted source** — Look for the same fact in a trusted place (official websites, well-known encyclopedias, respected news organizations). If two independent trusted sources agree, you can feel more confident. If you cannot find the fact anywhere, treat it as unverified.\n3. **Step 3: Ask for sources, then verify them** — You can ask the chatbot, *“What sources can I check for this?”* However, do not stop there, because chatbots can invent sources. Open each link, or search for the title, and confirm that it exists and really says what the chatbot claimed.\n4. **Step 4: Protect your privacy** — Think about what you are typing. Never share passwords, bank details, ID numbers, private documents, or other people’s personal information. If you are not sure how a tool uses your data, check its privacy settings first.\n\n#### How careful should I be?\n| Situation | How much checking? |\n| :--- | :--- |\n| **Low stakes**, such as brainstorming party names | A quick look is enough |\n| **Medium stakes**, such as a school or work document | Check every fact, name, and number |\n| **High stakes**, such as health, money, law, or safety | Cross-check with trusted sources and ask a qualified person before acting |\n\n*Helpful prompt ideas:* *“Tell me if you are not sure.”* and *“Give me sources I can check.”* These can help, but they never replace your own checking.",
+            "summary": "Learn how language models and image generators work, their 6 strengths and 5 limits (hallucinations, cutoff, bias, no understanding, privacy), and the 4-step Verification Habit.",
+            "content": "> **What you will learn:** By the end of this lesson, you will be able to explain what generative AI does and how a chatbot writes its answers. You will know where it is strong, where it goes wrong, and why you should check what it tells you.\n\n---\n\n### 1. What is generative AI?\nFirst, let’s remember the AI family from Module 1. Some AI tools recognize or sort things. For example, a spam filter decides whether an email is spam. In contrast, **generative AI** creates something new, such as a paragraph, a picture, a song, or a piece of computer code.\n\nFor example, you can type, *“Write a friendly message to invite my neighbors to a garden party,”* and a chatbot will write a new message for you. Similarly, you can describe a picture in words, and an image tool will draw it. This is why generative AI feels so different from older tools, and why so many people are talking about it.\n\n---\n\n### 2. How does a chatbot write its answers?\nNow we come to the key question. How does a chatbot produce text that sounds so natural?\n\nThink about the suggestions on your phone keyboard. When you type *“Good,”* the keyboard may suggest *“morning.”* It does this because, in the text it learned from, *“morning”* often follows *“Good.”* A chatbot works in a similar way, but on a much larger scale.\n\nIn other words, a chatbot is built on a **language model**. During training, the model studied huge amounts of text and learned which words and phrases usually go together. Then, when you send a request, called a **prompt**, the model builds its answer one small piece at a time. At each step, it predicts the most likely next piece.\n\n> **Remember:** A chatbot is designed to write text that sounds right. It is not designed to guarantee that the text is true.\n\nBecause of this, a chatbot does not “look up” facts like a library catalog by default. Instead, it generates likely-sounding text from patterns. Some tools can also search the web, which can help. However, you should still check important answers.\n\n---\n\n### 3. How do image generators work?\nImage tools follow a similar idea. During training, they studied very many pictures together with the words that describe them. As a result, they learned patterns that connect words and images. When you describe a picture, the tool creates a new image that fits those patterns. Notice that the image is newly made, not copied from a single photo, but it can still contain mistakes, such as strange hands or text that is spelled wrongly.\n\n---\n\n### 4. What generative AI does well\nGenerative AI is a useful helper for many everyday tasks. Here are some of its strengths:\n\n| Task | How it helps |\n| :--- | :--- |\n| **Drafting** | Writes a first version of an email, letter, or post, which you then improve |\n| **Summarizing** | Shortens a long text into the main points |\n| **Translating** | Gives a quick translation that you can check or polish |\n| **Brainstorming** | Suggests ideas, names, or approaches when you feel stuck |\n| **Explaining** | Describes a hard idea in simpler words or with an example |\n| **Practicing** | Acts as a partner for practicing a language or an interview |\n\nIn all of these tasks, the AI gives you a starting point. Then, you review and decide.\n\n---\n\n### 5. Where generative AI goes wrong\nHowever, generative AI also has important limits. It is better to know them before you rely on it.\n\n| Limit | What it means |\n| :--- | :--- |\n| **Hallucinations** | The AI gives an answer that sounds confident but is false or made up. For example, it may invent a book title, a statistic, or a web link that looks real but does not exist |\n| **Outdated knowledge** | A model learned from information up to a certain date, called its **knowledge cutoff**. Unless the tool can search the web, it may not know about recent events |\n| **Bias** | The model learned from human writing, which can be unbalanced or unfair. As a result, its answers can reflect those patterns |\n| **No real understanding** | The AI finds patterns in language. It does not understand or feel like a person, even when it sounds friendly |\n| **Privacy risks** | What you type may be stored or used by the tool, depending on its settings. Therefore, you should never share private information |\n\nThe most important limit for beginners is the **hallucination**, because the answer sounds correct. So the next reading teaches a simple habit for dealing with it.\n\n---\n\n### Part B: Reading (6 minutes) — The Verification Habit\nBecause AI can sound sure even when it is wrong, we need a habit that protects us. The habit has four steps. Fortunately, it only takes a few minutes.\n\n1. **Step 1: Check it** — First, look at the answer and ask, *“What can be checked?”* Names, dates, numbers, quotes, and web links are easy to check. Be extra careful when the answer sounds very exact or very perfect.\n2. **Step 2: Cross-check with a trusted source** — Next, look for the same fact in a trusted place. Good examples are official websites, well-known encyclopedias, and respected news organizations. If two independent trusted sources agree, you can feel more confident. If you cannot find the fact anywhere, treat it as unverified.\n3. **Step 3: Ask for sources, then verify them** — Then, you can ask the chatbot, *“What sources can I check for this?”* However, do not stop there, because chatbots can invent sources. Therefore, open each link, or search for the title, and confirm that it exists and really says what the chatbot claimed.\n4. **Step 4: Protect your privacy** — Finally, think about what you are typing. Never share passwords, bank details, ID numbers, private documents, or other people’s personal information. If you are not sure how a tool uses your data, check its privacy settings first.\n\n#### How careful should I be?\n| Situation | How much checking? |\n| :--- | :--- |\n| **Low stakes**, such as brainstorming party names | A quick look is enough |\n| **Medium stakes**, such as a school or work document | Check every fact, name, and number |\n| **High stakes**, such as health, money, law, or safety | Cross-check with trusted sources and ask a qualified person before acting |\n\n> **Helpful prompt ideas:** *“Tell me if you are not sure.”* and *“Give me sources I can check.”* These can help, but they never replace your own checking.\n\n---\n\n> **Key takeaways:**\n> - Generative AI creates new content, such as text, images, sound, and code.\n> - A chatbot builds answers by predicting likely next words from patterns it learned.\n> - It is useful for drafting, summarizing, translating, brainstorming, and explaining.\n> - It can hallucinate, be outdated, show bias, and put your privacy at risk.\n> - A confident answer is not always a correct answer, so check what matters.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Generative AI** | AI that creates new content, such as text, images, or sound |\n| **Chatbot** | A program you talk to by typing or speaking |\n| **Language model** | An AI model that learned patterns in language from large amounts of text |\n| **Prompt** | The request or question you give to an AI tool |\n| **Hallucination** | A confident answer that is false or made up |\n| **Knowledge cutoff** | The date after which a model has not learned new information |\n| **Bias** | An unfair or unbalanced tendency in results, often from the data |",
             "duration_seconds": 1080,
             "position": 1,
             "is_free_preview": false,
@@ -1036,8 +1059,8 @@
             "section_id": "sec_aif_03",
             "title": "3.2 Activity: “Spot the Hallucination” (Eiffel Tower, Marie Curie & Pacific Ocean)",
             "type": "article",
-            "summary": "Use the 4-step verification habit on three AI-written answers (Eiffel Tower, Marie Curie, Pacific Ocean) to catch the one containing a made-up claim.",
-            "content": "> **What you will learn:** How a hallucination can hide inside an answer that is mostly true—and how to catch it with a web browser.\n\n**Your goal:** Three AI-written answers are shown below. Two are accurate and one contains a made-up claim. Use the verification habit to find it. *(No chatbot account needed—just a web browser!)*\n\n---\n\n### Step 1: Read (3 minutes)\nRead the three answers carefully. Note any facts you could check, such as names, dates, and numbers:\n\n| Answer | Text (written by an AI chatbot) |\n| :--- | :--- |\n| **Answer A** *(Topic: Eiffel Tower)* | *The Eiffel Tower is in Paris, France. It was completed in 1889 for the World’s Fair, and it was designed by the engineering company of Gustave Eiffel. It was the tallest man-made structure in the world until 1930.* |\n| **Answer B** *(Topic: Marie Curie)* | *Marie Curie was born in Warsaw, Poland. She won Nobel Prizes in both Physics and Chemistry, and she was the first person to win two Nobel Prizes. She also won a third Nobel Prize, in Medicine, in 1921.* |\n| **Answer C** *(Topic: Pacific Ocean)* | *The Pacific Ocean is the largest and deepest ocean on Earth. Its deepest point is the Mariana Trench, which is about 11,000 meters deep. The Pacific covers roughly one third of the Earth’s surface.* |\n\n---\n\n### Step 2–4: Investigate, Record & Reflect (14 minutes)\n1. **Investigate (8 min):** Use a search engine or an online encyclopedia to check the facts in Answers A, B, and C against at least one trusted source.\n2. **Record (4 min):** In your **Personal Study Notes**, note for A, B, and C: *Claim checked → True or false? → Source used*.\n3. **Reflect (2 min):**\n   - Which answer contained the made-up claim, and how did you find it?\n   - Why was it hard to notice by reading alone?\n   - What will you do next time a chatbot gives you a fact?\n\n---\n\n### Answer Guide\n| Answer | Result |\n| :--- | :--- |\n| **A** | **Accurate.** The tower is in Paris, was completed in 1889 for the World’s Fair, and was designed by Gustave Eiffel’s company. It was the world’s tallest man-made structure until the Chrysler Building was completed in 1930. |\n| **B** | **Contains the made-up claim.** Marie Curie was born in Warsaw, won the Nobel Prize in Physics (1903) and in Chemistry (1911), and was the first person to win two Nobel Prizes. She **did not** win a third prize—the claim about a Nobel Prize in Medicine in 1921 is invented. |\n| **C** | **Accurate.** The Pacific is the largest and deepest ocean, the Mariana Trench is about 11,000 meters deep, and the Pacific covers roughly one third of the Earth’s surface. |\n\n> **Key lesson to repeat:** A hallucination can sit inside an answer that is mostly correct, and it sounds just as confident as the true parts.",
+            "summary": "Investigate three AI-written answers using the 4-step Verification Habit to catch the made-up claim hidden inside a confident answer.",
+            "content": "> **Your goal:** Three AI-written answers are shown below. Two are accurate and one contains a made-up claim. Use the verification habit to find it. *(17 minutes total)*\n\n---\n\n### Step 1: Read (3 minutes)\nRead the three answers carefully. Underline or list any facts you could check, such as names, dates, and numbers.\n\n| Answer | Text (written by an AI chatbot) |\n| :---: | :--- |\n| **Answer A**<br>*(Eiffel Tower)* | The Eiffel Tower is in Paris, France. It was completed in 1889 for the World’s Fair, and it was designed by the engineering company of Gustave Eiffel. It was the tallest man-made structure in the world until 1930. |\n| **Answer B**<br>*(Marie Curie)* | Marie Curie was born in Warsaw, Poland. She won Nobel Prizes in both Physics and Chemistry, and she was the first person to win two Nobel Prizes. She also won a third Nobel Prize, in Medicine, in 1921. |\n| **Answer C**<br>*(Pacific Ocean)* | The Pacific Ocean is the largest and deepest ocean on Earth. Its deepest point is the Mariana Trench, which is about 11,000 meters deep. The Pacific covers roughly one third of the Earth’s surface. |\n\n---\n\n### Step 2: Investigate (8 minutes)\nUse a search engine or an online encyclopedia. For each answer, check the facts you underlined. Follow the verification habit: check, cross-check with at least one trusted source, and note where you found the information.\n\n### Step 3: Record your findings (4 minutes)\nIn your **Personal Study Notes**, record for Answers **A**, **B**, and **C**:\n- **Claim I checked**\n- **True or false?**\n- **Source I used**\n\n### Step 4: Reflect (2 minutes)\n- Which answer contained the made-up claim, and how did you find it?\n- Why was it hard to notice by reading alone?\n- What will you do next time a chatbot gives you a fact?\n\n---\n\n### Answer Guide\n| Answer | Result |\n| :---: | :--- |\n| **A** | **Accurate.** The tower is in Paris, was completed in 1889 for the World’s Fair, and was designed by Gustave Eiffel’s company. It was the world’s tallest man-made structure until the Chrysler Building was completed in 1930. |\n| **B** | **Contains the made-up claim.** Marie Curie was born in Warsaw, won the Nobel Prize in Physics (1903) and in Chemistry (1911), and was the first person to win two Nobel Prizes. She did not win a third prize. The claim about a Nobel Prize in Medicine in 1921 is **invented**. |\n| **C** | **Accurate.** The Pacific is the largest and deepest ocean, the Mariana Trench is about 11,000 meters deep, and the Pacific covers roughly one third of the Earth’s surface. |\n\n> **Key lesson:** A hallucination can sit inside an answer that is mostly correct, and it sounds just as confident as the true parts.",
             "duration_seconds": 1020,
             "position": 2,
             "is_free_preview": false,
@@ -1048,7 +1071,7 @@
             "section_id": "sec_aif_03",
             "title": "3.3 Module 3 Knowledge Check (10 Questions from 20-Question Bank)",
             "type": "quiz",
-            "summary": "10 questions randomly drawn from the 20-question Module 3 bank (15 minutes) with instant feedback. Retake anytime for a fresh variation.",
+            "summary": "Answer 10 questions randomly drawn from the 20-question Module 3 bank (15 minutes). Retake anytime for a fresh variation with instant feedback.",
             "duration_seconds": 900,
             "position": 3,
             "is_free_preview": false,
@@ -1195,139 +1218,139 @@
               {
                 "id": "q_aif_03_11",
                 "lesson_id": "les_aif_03_03",
-                "question": "How is a chatbot similar to your phone keyboard suggesting “morning” after you type “Good”?",
+                "question": "What is a prompt?",
                 "options": [
-                  "Both predict likely next words based on patterns in text they learned from",
-                  "Both ask a live human to type the next word",
-                  "Both look up answers in a printed dictionary",
-                  "Both only work offline"
+                  "The request or question you give to an AI tool",
+                  "The battery of a computer",
+                  "A type of image",
+                  "The final answer of a chatbot"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Language models predict likely next pieces of text from learned patterns, just on a much larger scale.",
+                "explanation": "A prompt is what you type or say to an AI tool to ask for something.",
                 "position": 11
               },
               {
                 "id": "q_aif_03_12",
                 "lesson_id": "les_aif_03_03",
-                "question": "When an AI image generator creates a picture from your words, does it copy-paste one existing photo?",
+                "question": "Which task is a strength of generative AI?",
                 "options": [
-                  "No — it creates a new image fitting patterns between words and pictures, though it can still make mistakes",
-                  "Yes — it always downloads one photo from a friend’s album",
-                  "Yes — it only draws stick figures",
-                  "No — it takes a photo with your webcam"
+                  "Summarizing a long text into its main points",
+                  "Guaranteeing that every fact is true",
+                  "Knowing news from tomorrow",
+                  "Replacing all human judgment"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Image generators synthesize new images from learned text-to-image patterns.",
+                "explanation": "Summarizing is a strength, but you should still review the result.",
                 "position": 12
               },
               {
                 "id": "q_aif_03_13",
                 "lesson_id": "les_aif_03_03",
-                "question": "What is a “prompt”?",
+                "question": "You ask a chatbot about last week’s news, but its learning data ends months ago. What should you do?",
                 "options": [
-                  "The request or question you give to an AI tool",
-                  "A computer virus",
-                  "The power button on a laptop",
-                  "A type of font"
+                  "Trust the chatbot completely",
+                  "Ask the chatbot to guess",
+                  "Check a current, trusted news source",
+                  "Ignore the news"
                 ],
-                "correct_option_index": 0,
-                "explanation": "A prompt is the instruction, question, or description you send to a generative AI tool.",
+                "correct_option_index": 2,
+                "explanation": "A model may not know recent events, so cross-check with current trusted sources.",
                 "position": 13
               },
               {
                 "id": "q_aif_03_14",
                 "lesson_id": "les_aif_03_03",
-                "question": "What is Step 1 of the 4-Step Verification Habit?",
+                "question": "How do image generators create pictures?",
                 "options": [
-                  "Check it: ask “What can be checked?” such as names, dates, numbers, quotes, and links",
-                  "Share it on social media immediately",
-                  "Paste your bank password for confirmation",
-                  "Skip reading the answer"
+                  "They use patterns learned from many pictures and descriptions to make a new image",
+                  "They copy one photo exactly",
+                  "They search a library for a drawing",
+                  "They ask a person to paint"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Step 1 is spotting checkable claims like names, dates, numbers, quotes, and links.",
+                "explanation": "The image is newly made from learned patterns, so it can still contain mistakes.",
                 "position": 14
               },
               {
                 "id": "q_aif_03_15",
                 "lesson_id": "les_aif_03_03",
-                "question": "In “Spot the Hallucination,” why was the Marie Curie hallucination hard to notice by reading alone?",
+                "question": "Which is a warning sign of a possible hallucination?",
                 "options": [
-                  "The false claim about a 1921 Medicine prize was mixed smoothly inside mostly true facts",
-                  "It was written in a foreign language",
-                  "The font was invisible",
-                  "It had no dates at all"
+                  "An exact-sounding name or number that you cannot find in any trusted source",
+                  "A short answer",
+                  "A friendly tone",
+                  "An answer in a list"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Hallucinations often sit inside mostly accurate paragraphs and sound equally confident.",
+                "explanation": "Exact details that you cannot verify are a good reason to be careful.",
                 "position": 15
               },
               {
                 "id": "q_aif_03_16",
                 "lesson_id": "les_aif_03_03",
-                "question": "For high-stakes topics like health, money, law, or safety, how carefully should you check AI output?",
+                "question": "A chatbot answers a question about your health or money. How careful should you be?",
                 "options": [
-                  "Cross-check with trusted sources AND ask a qualified human before acting",
-                  "A 2-second glance is enough",
-                  "Never check anything if the chatbot sounds polite",
-                  "Only check on weekends"
+                  "A quick look is enough",
+                  "Very careful: cross-check with trusted sources and ask a qualified person",
+                  "Just trust it",
+                  "Ask the chatbot to repeat it"
                 ],
-                "correct_option_index": 0,
-                "explanation": "High-stakes decisions require independent verification and qualified human advice.",
+                "correct_option_index": 1,
+                "explanation": "High-stakes decisions need more checking and a qualified person.",
                 "position": 16
               },
               {
                 "id": "q_aif_03_17",
                 "lesson_id": "les_aif_03_03",
-                "question": "Which task is a helpful low-stakes use where a quick look is usually enough?",
+                "question": "Which prompt idea can help a little but never replaces your own checking?",
                 "options": [
-                  "Brainstorming party names or icebreaker ideas",
-                  "Diagnosing chest pain without a doctor",
-                  "Filing taxes without checking numbers",
-                  "Writing a legal contract without review"
+                  "“Tell me if you are not sure.”",
+                  "“Be correct.”",
+                  "“Never make mistakes.”",
+                  "“Hide your sources.”"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Creative brainstorming is low-stakes, whereas health, money, and law are high-stakes.",
+                "explanation": "Helpful prompts can reduce problems, but you must still check important facts.",
                 "position": 17
               },
               {
                 "id": "q_aif_03_18",
                 "lesson_id": "les_aif_03_03",
-                "question": "True or false: Asking a chatbot “Give me sources I can check” replaces the need to verify those sources yourself.",
+                "question": "True or false: By default, a chatbot looks up facts in a library catalog.",
                 "options": [
                   "True",
                   "False"
                 ],
                 "correct_option_index": 1,
-                "explanation": "Chatbots can invent sources, so you must still open or search each source yourself.",
+                "explanation": "A chatbot generates likely-sounding text from patterns. Some tools can also search the web, but you should still check.",
                 "position": 18
               },
               {
                 "id": "q_aif_03_19",
                 "lesson_id": "les_aif_03_03",
-                "question": "What does “knowledge cutoff” mean?",
+                "question": "Why do AI-generated images sometimes show strange hands or misspelled text?",
                 "options": [
-                  "The date after which a model has not learned new information in its training data",
-                  "The time a website closes at night",
-                  "Turning off Wi-Fi on your phone",
-                  "Deleting old emails"
+                  "The images are newly made from patterns, and patterns can produce mistakes",
+                  "Cameras are broken",
+                  "The image tool is tired",
+                  "Hands cannot be drawn by any tool"
                 ],
                 "correct_option_index": 0,
-                "explanation": "A knowledge cutoff is the end date of a model’s training data unless it uses live search.",
+                "explanation": "Generated images can contain errors, so look at them carefully.",
                 "position": 19
               },
               {
                 "id": "q_aif_03_20",
                 "lesson_id": "les_aif_03_03",
-                "question": "If you cannot find a surprising AI-claimed fact in any trusted source, how should you treat it?",
+                "question": "Which is the best example of a low-stakes use of a chatbot?",
                 "options": [
-                  "Treat it as unverified and do not rely on it",
-                  "Assume it is a secret truth",
-                  "Publish it as a headline",
-                  "Ask the chatbot to repeat it three times"
+                  "Brainstorming names for a party",
+                  "Choosing a medicine",
+                  "Deciding on a loan",
+                  "Writing a legal contract without help"
                 ],
                 "correct_option_index": 0,
-                "explanation": "If independent trusted sources do not confirm a claim, treat it as unverified.",
+                "explanation": "Brainstorming has low stakes. Health, money, and law need much more care.",
                 "position": 20
               }
             ]
@@ -1343,10 +1366,10 @@
           {
             "id": "les_aif_04_01",
             "section_id": "sec_aif_04",
-            "title": "4.1 Written Lesson & Reading: AI in Society, Responsible-Use Checklist & Where to Go Next",
+            "title": "4.1 Written Lesson & Reading: AI in Society + The Responsible-Use Checklist",
             "type": "article",
-            "summary": "Explore AI across 6 areas of life, the benefits, the 5 main risks, “human in the loop,” the 5-question Responsible-Use Checklist with 3 scenarios, and the Where to Go Next catalog map.",
-            "content": "> **What you will learn:** By the end of this lesson, you will be able to name where AI is used in daily life and industry. You will also be able to weigh its benefits against its main risks, and you will know why people must stay in charge.\n\n---\n\n### Part A: The Lesson (12 Minutes)\n\n#### 1. AI is already part of many areas of life\nFirst, let’s look at the big picture. In earlier modules, you saw AI in maps, email, and phones. In fact, AI is now used in almost every area of society:\n\n| Area | How AI helps | What to watch |\n| :--- | :--- | :--- |\n| **Health** | Helps doctors notice patterns in scans and test results | Mistakes are possible, and health data is very private. A doctor should make the final decision |\n| **Banking** | Spots unusual card activity to catch fraud, and helps check applications | Honest customers can be blocked by mistake, and decisions can be unfair |\n| **Transport** | Predicts traffic, plans routes, and supports driver-assist features | Unusual situations can confuse the system, so safety checks matter |\n| **Entertainment and social media** | Suggests videos, music, and posts you may like | You may see only more of the same, and you may spend more time than you planned |\n| **Education** | Explains ideas, gives practice, and adapts exercises | Answers can be wrong, and copying can replace real learning |\n| **Work** | Drafts text, summarizes meetings, and answers common customer questions | Quality still needs checking, and some tasks are changing |\n\n> **Diagram Alt Text:** *A six-row table titled \"AI Across Areas of Life,\" showing Health, Banking, Transport, Entertainment and social media, Education, and Work, with one column for how AI helps and one column for what to watch out for.*\n\n#### 2. The benefits\nBecause of these uses, AI brings real benefits. For example, it can save time on routine tasks. In addition, it can find patterns in large amounts of data that people would miss. Moreover, it can make things easier to access, such as automatic captions, translation, and reading text aloud. Finally, it can give personal help, such as practice questions that match your level.\n\n#### 3. The five main risks\nHowever, AI also brings risks. It is better to know them early, so you can use AI wisely:\n1. **Risk 1: Bias and unfair results.** As you learned in Module 2, a model learns from data. If the data is incomplete or unbalanced, the results can be unfair to some people. For example, a system may work well for one group and badly for another.\n2. **Risk 2: Privacy.** AI tools often need data, and some of that data is personal. Therefore, it is important to know what you share, who can see it, and how it may be used.\n3. **Risk 3: Deepfakes and misinformation.** AI can now create very realistic fake pictures, voices, and videos, called **deepfakes**. As a result, something that looks or sounds real may be false. Whenever a clip or image shocks you, pause first. Then check whether trusted news sources report the same thing before you believe it or share it.\n4. **Risk 4: Energy use.** Training and running large AI systems can use a lot of electricity. For this reason, it is wise to use AI when it helps, instead of using it for everything.\n5. **Risk 5: Changes to jobs.** AI can do some tasks faster, so some jobs are changing. At the same time, new tasks and new jobs appear. Consequently, learning how to work with AI is a useful skill for almost everyone.\n\n#### 4. People stay in charge\nSo who is responsible when AI makes a mistake? The answer is simple: **people are**. AI is a tool, so the people and organizations that build it and use it must make sure it is safe, fair, and honest.\n\nExperts call this idea **“human in the loop.”** It means that a person reviews and controls important decisions, such as hiring, health, or money. In addition, many places are creating rules for AI. For instance, the European Union has passed a law about AI. The details differ from place to place, but the goal is the same: to make AI safe and trustworthy.\n\n#### 5. Your role\nFinally, remember that you are not only a user of AI. You are also a decision maker. You decide what to share, what to believe, and when to ask a human.\n\n> **Key takeaways:**\n> - AI is used in health, banking, transport, entertainment, education, and work.\n> - The benefits are saving time, finding patterns, making things accessible, and personal help.\n> - The five main risks are **bias**, **privacy**, **deepfakes and misinformation**, **energy use**, and **changes to jobs**.\n> - People are responsible for AI, and important decisions need a **human in the loop**.\n> - You can protect yourself with simple habits and a personal set of rules.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Deepfake** | A very realistic fake picture, voice, or video made with AI |\n| **Misinformation** | False or misleading information, shared on purpose or by mistake |\n| **Privacy** | Your right to control who can see and use your personal information |\n| **Human in the loop** | A person reviews and controls important decisions made with AI |\n| **Automation** | Using technology to do a task without a person doing every step |\n| **Responsible use** | Using AI in ways that are safe, fair, and honest |\n\n---\n\n### Part B: Reading (8 Minutes): The Responsible-Use Checklist\nWhenever you use an AI tool, you can ask five simple questions: **Purpose, Data, Verify, Disclose, Human.**\n\n| Check | Ask yourself | Example |\n| :--- | :--- | :--- |\n| **Purpose** | Why am I using AI here? Is it a good fit for this task? | Using it to brainstorm ideas is a good fit. Using it to make a final medical choice is not |\n| **Data** | What am I sharing? Would I be comfortable if it became public? | Never paste passwords, bank details, ID numbers, or other people’s private information |\n| **Verify** | Have I checked the facts, names, numbers, and sources? | Cross-check with a trusted source before using a statistic |\n| **Disclose** | Am I honest about using AI? What are the rules for this school or workplace? | If a course says to mention AI help, mention it. If it forbids AI, do not use it |\n| **Human** | Who makes the final decision? Should a qualified person check this? | For health, money, law, or safety, ask a qualified person before acting |\n\n#### Three short scenarios\nTest the checklist on these three scenarios before reading the suggested answers:\n- **Scenario 1:** A student asks a chatbot to write a whole essay and submits it as their own work.\n  - *Suggested answer:* The **Disclose** and **Purpose** checks fail. The student should follow the school’s rules, be honest about any AI help, and use AI to support learning, such as getting feedback, not to replace the work.\n- **Scenario 2:** An employee pastes a customer’s name, address, and phone number into a public chatbot to write a reply faster.\n  - *Suggested answer:* The **Data** check fails. Customer details are private. The employee should remove the personal details or use a tool that the company has approved.\n- **Scenario 3:** You receive a shocking video of a well-known person saying something unbelievable. Friends are already sharing it.\n  - *Suggested answer:* The **Verify** check applies. Pause, look for the same story from trusted news sources, and do not share it until it is confirmed. It may be a deepfake.\n\n*In short: Purpose, Data, Verify, Disclose, Human. A few seconds with this checklist can prevent many problems.*\n\n---\n\n### Part F: Where to Go Next\nEach course in the catalog is standalone, so you can start with any one that fits:\n\n| If you want to… | Take this course |\n| :--- | :--- |\n| Get better results from chatbots and write stronger prompts | **Generative AI and Prompt Engineering** |\n| Go deeper on bias, privacy, safety, and rules | **AI Ethics, Safety, and Responsible Use** |\n| Save time at work or in study with AI tools | **AI for Productivity and Workflow Automation** |\n| Understand how models are built and trained (coding) | **Machine Learning Essentials** |\n| Design websites faster with AI help | **Web Design with AI** |\n| Write and fix code with an AI assistant | **Coding with AI** |\n| Add AI features to a website | **Integrating AI into Your Website** |\n| Build an AI-powered application or solve a real problem | **Building AI-Powered Applications**, or the **AI Capstone** |",
+            "summary": "Explore AI across 6 areas of life, 4 key benefits, 5 main risks (bias, privacy, deepfakes, energy, jobs), human-in-the-loop governance, and the Purpose-Data-Verify-Disclose-Human checklist.",
+            "content": "> **What you will learn:** By the end of this lesson, you will be able to name where AI is used in daily life and industry. You will also be able to weigh its benefits against its main risks, and you will know why people must stay in charge.\n\n---\n\n### 1. AI is already part of many areas of life\nFirst, let’s look at the big picture. In earlier modules, you saw AI in maps, email, and phones. In fact, AI is now used in almost every area of society. The table below shows some examples, together with one thing to watch in each area:\n\n| Area | How AI helps | What to watch |\n| :--- | :--- | :--- |\n| **Health** | Helps doctors notice patterns in scans and test results | Mistakes are possible, and health data is very private. A doctor should make the final decision |\n| **Banking** | Spots unusual card activity to catch fraud, and helps check applications | Honest customers can be blocked by mistake, and decisions can be unfair |\n| **Transport** | Predicts traffic, plans routes, and supports driver-assist features | Unusual situations can confuse the system, so safety checks matter |\n| **Entertainment and social media** | Suggests videos, music, and posts you may like | You may see only more of the same, and you may spend more time than you planned |\n| **Education** | Explains ideas, gives practice, and adapts exercises | Answers can be wrong, and copying can replace real learning |\n| **Work** | Drafts text, summarizes meetings, and answers common customer questions | Quality still needs checking, and some tasks are changing |\n\n---\n\n### 2. The benefits\nBecause of these uses, AI brings real benefits. For example, it can **save time** on routine tasks. In addition, it can **find patterns** in large amounts of data that people would miss. Moreover, it can make things **easier to access**, such as automatic captions, translation, and reading text aloud. Finally, it can give **personal help**, such as practice questions that match your level.\n\n---\n\n### 3. The five main risks\nHowever, AI also brings risks. It is better to know them early, so you can use AI wisely. Here are the five main ones:\n\n1. **Risk 1: Bias and unfair results.** As you learned in Module 2, a model learns from data. If the data is incomplete or unbalanced, the results can be unfair to some people. For example, a system may work well for one group and badly for another.\n2. **Risk 2: Privacy.** AI tools often need data, and some of that data is personal. Therefore, it is important to know what you share, who can see it, and how it may be used.\n3. **Risk 3: Deepfakes and misinformation.** AI can now create very realistic fake pictures, voices, and videos, called **deepfakes**. As a result, something that looks or sounds real may be false. Whenever a clip or image shocks you, pause first. Then check whether trusted news sources report the same thing before you believe it or share it.\n4. **Risk 4: Energy use.** Training and running large AI systems can use a lot of electricity. For this reason, it is wise to use AI when it helps, instead of using it for everything.\n5. **Risk 5: Changes to jobs.** AI can do some tasks faster, so some jobs are changing. At the same time, new tasks and new jobs appear. Consequently, learning how to work with AI is a useful skill for almost everyone.\n\n---\n\n### 4. People stay in charge\nSo who is responsible when AI makes a mistake? The answer is simple: **people are.** AI is a tool, so the people and organizations that build it and use it must make sure it is safe, fair, and honest.\n\nExperts call this idea **“human in the loop.”** It means that a person reviews and controls important decisions, such as hiring, health, or money. In addition, many places are creating rules for AI. For instance, the European Union has passed a law about AI. The details differ from place to place, but the goal is the same: to make AI safe and trustworthy.\n\n---\n\n### 5. Your role\nFinally, remember that you are not only a user of AI. You are also a **decision maker**. You decide what to share, what to believe, and when to ask a human. The next reading gives you a simple checklist to help with these decisions.\n\n---\n\n### Part B: Reading (8 minutes) — The Responsible-Use Checklist\nWhenever you use an AI tool, you can ask five simple questions. Together, they make a checklist that is easy to remember: **Purpose, Data, Verify, Disclose, Human**.\n\n| Check | Ask yourself | Example |\n| :--- | :--- | :--- |\n| **Purpose** | Why am I using AI here? Is it a good fit for this task? | Using it to brainstorm ideas is a good fit. Using it to make a final medical choice is not |\n| **Data** | What am I sharing? Would I be comfortable if it became public? | Never paste passwords, bank details, ID numbers, or other people’s private information |\n| **Verify** | Have I checked the facts, names, numbers, and sources? | Cross-check with a trusted source before using a statistic |\n| **Disclose** | Am I honest about using AI? What are the rules for this school or workplace? | If a course says to mention AI help, mention it. If it forbids AI, do not use it |\n| **Human** | Who makes the final decision? Should a qualified person check this? | For health, money, law, or safety, ask a qualified person before acting |\n\n#### Three short scenarios\nNow, let’s test the checklist. Read each scenario and decide what you would do before checking the suggested answers:\n- **Scenario 1:** A student asks a chatbot to write a whole essay and submits it as their own work.\n- **Scenario 2:** An employee pastes a customer’s name, address, and phone number into a public chatbot to write a reply faster.\n- **Scenario 3:** You receive a shocking video of a well-known person saying something unbelievable. Friends are already sharing it.\n\n#### Suggested answers\n- **Scenario 1:** The **Disclose** and **Purpose** checks fail. The student should follow the school’s rules, be honest about any AI help, and use AI to support learning, such as getting feedback, not to replace the work.\n- **Scenario 2:** The **Data** check fails. Customer details are private. The employee should remove the personal details or use a tool that the company has approved.\n- **Scenario 3:** The **Verify** check applies. Pause, look for the same story from trusted news sources, and do not share it until it is confirmed. It may be a deepfake.\n\n> **In short:** **Purpose, Data, Verify, Disclose, Human.** A few seconds with this checklist can prevent many problems.\n\n---\n\n> **Key takeaways:**\n> - AI is used in health, banking, transport, entertainment, education, and work.\n> - The benefits are saving time, finding patterns, making things accessible, and personal help.\n> - The five main risks are **bias**, **privacy**, **deepfakes and misinformation**, **energy use**, and **changes to jobs**.\n> - People are responsible for AI, and important decisions need a **human in the loop**.\n> - You can protect yourself with simple habits and a personal set of rules.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Deepfake** | A very realistic fake picture, voice, or video made with AI |\n| **Misinformation** | False or misleading information, shared on purpose or by mistake |\n| **Privacy** | Your right to control who can see and use your personal information |\n| **Human in the loop** | A person reviews and controls important decisions made with AI |\n| **Automation** | Using technology to do a task without a person doing every step |\n| **Responsible use** | Using AI in ways that are safe, fair, and honest |",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
@@ -1355,10 +1378,10 @@
           {
             "id": "les_aif_04_02",
             "section_id": "sec_aif_04",
-            "title": "4.2 Activity (15m): “My Five Rules”",
+            "title": "4.2 Activity: “My Five Rules” + Where to Go Next",
             "type": "article",
-            "summary": "Write five specific, honest personal rules for using AI—one for each part of the checklist (Purpose, Data, Verify, Disclose, Human)—and test them on two real situations.",
-            "content": "> **What you will learn:** How to turn the 5-point Responsible-Use Checklist into five specific, realistic personal rules with a clear reason (*“because…”*).\n\n**Your goal:** Write **five personal rules** for using AI, one for each part of the checklist. Make them specific and honest, so you can really follow them.\n\n---\n\n### Step 1: Think (3 minutes)\nThink about how you use AI now, or how you expect to use it. Which tools do you use? What do you ask them? What information do you share?\n\n### Step 2: Write your rules (7 minutes)\nIn your **Personal Study Notes** tab below, complete all **5 sentence frames**. Each rule needs two parts: **what you will do** and **why** (*because…*).\n\n| # | Topic | Sentence frame |\n| :--- | :--- | :--- |\n| **1** | **Purpose** | I will use AI for `___` and I will not use it for `___` because `___`. |\n| **2** | **Data** | I will never share `___` with an AI tool because `___`. |\n| **3** | **Verify** | Before I use a fact from AI, I will `___` because `___`. |\n| **4** | **Disclose** | When I use AI for `___`, I will `___` because `___`. |\n| **5** | **Human** | For decisions about `___`, I will ask `___` because `___`. |\n\n### Step 3: Test your rules (3 minutes)\nCheck whether your rules would help in these two situations. Write one sentence for each:\n- **Situation A:** You want a chatbot to summarize a long contract from your landlord. Which of your rules apply, and what will you do?\n- **Situation B:** A friend sends you an audio clip of a famous person saying something shocking. Which of your rules apply, and what will you do?\n\n### Step 4: Choose one to share (2 minutes)\nPick the rule you think is most useful and imagine telling it to a friend or family member. Write it in one sentence.\n\n---\n\n### What good rules look like\n| Topic | Weak rule | Stronger rule |\n| :--- | :--- | :--- |\n| **Data** | “I will be careful.” | “I will never paste passwords or private documents into a chatbot, because I do not know how the tool stores them.” |\n| **Verify** | “I will check sometimes.” | “Before I use a number or a quote from AI, I will find it in a trusted source, because AI can invent facts.” |\n| **Human** | “I will ask someone.” | “For health or money decisions, I will talk to a doctor or a bank adviser, because mistakes can be costly.” |\n\n> **Self-check:** Make sure all five rules are written and each includes a reason (*“because…”*). Strong rules are specific, realistic, and explain why.",
+            "summary": "Write five specific, realistic personal AI rules with reasons (\"because\"), test them on two real-world situations, and preview your next courses.",
+            "content": "> **Your goal:** Write five personal rules for using AI, one for each part of the checklist. Make them specific and honest, so you can really follow them. *(15 minutes total)*\n\n---\n\n### Step 1: Think (3 minutes)\nThink about how you use AI now, or how you expect to use it. Which tools do you use? What do you ask them? What information do you share?\n\n### Step 2: Write your rules (7 minutes)\nUse the sentence frames below in your **Personal Study Notes**. Each rule needs two parts: **what you will do** and **why** (include *\"because\"*).\n\n| # | Topic | Sentence frame |\n| :---: | :--- | :--- |\n| **1** | **Purpose** | *I will use AI for ___ and I will not use it for ___ because ___.* |\n| **2** | **Data** | *I will never share ___ with an AI tool because ___.* |\n| **3** | **Verify** | *Before I use a fact from AI, I will ___ because ___.* |\n| **4** | **Disclose** | *When I use AI for ___, I will ___ because ___.* |\n| **5** | **Human** | *For decisions about ___, I will ask ___ because ___.* |\n\n### Step 3: Test your rules (3 minutes)\nNext, check whether your rules would help in these two situations. Write one sentence for each:\n- **Situation A:** You want a chatbot to summarize a long contract from your landlord. Which of your rules apply, and what will you do?\n- **Situation B:** A friend sends you an audio clip of a famous person saying something shocking. Which of your rules apply, and what will you do?\n\n### Step 4: Choose one to share (2 minutes)\nFinally, pick the rule you think is most useful and imagine telling it to a friend or family member. Write it in one sentence.\n\n---\n\n### What good rules look like\n| Topic | Weak rule | Stronger rule |\n| :--- | :--- | :--- |\n| **Data** | “I will be careful.” | “I will never paste passwords or private documents into a chatbot, because I do not know how the tool stores them.” |\n| **Verify** | “I will check sometimes.” | “Before I use a number or a quote from AI, I will find it in a trusted source, because AI can invent facts.” |\n| **Human** | “I will ask someone.” | “For health or money decisions, I will talk to a doctor or a bank adviser, because mistakes can be costly.” |\n\n> **Self-check:** Strong rules are specific, realistic, and explain why (a sentence with *\"because\"*). Look at your weakest rule and make it more specific.\n\n---\n\n### Part F: Where to Go Next\nEach course in the catalog is standalone, so you can choose whichever fits your goals after completing **AI Foundations**:\n\n| If you want to… | Take this course |\n| :--- | :--- |\n| Get better results from chatbots and write stronger prompts | **Generative AI and Prompt Engineering** |\n| Go deeper on bias, privacy, safety, and rules | **AI Ethics, Safety, and Responsible Use** |\n| Save time at work or in study with AI tools | **AI for Productivity and Workflow Automation** |\n| Understand how models are built and trained (coding) | **Machine Learning Essentials** |\n| Design websites faster with AI help | **Web Design with AI** |\n| Write and fix code with an AI assistant | **Coding with AI** |\n| Add AI features to a website | **Integrating AI into Your Website** |\n| Build an AI-powered application or solve a real problem | **Building AI-Powered Applications**, or the **AI Capstone** |",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
@@ -1369,7 +1392,7 @@
             "section_id": "sec_aif_04",
             "title": "4.3 Module 4 Knowledge Check (10 Questions from 20-Question Bank)",
             "type": "quiz",
-            "summary": "10 questions randomly drawn from the 20-question Module 4 bank (15 minutes) with instant feedback. Retake anytime for a fresh variation.",
+            "summary": "Answer 10 questions randomly drawn from the 20-question Module 4 bank (15 minutes). Retake anytime for a fresh variation with instant feedback.",
             "duration_seconds": 900,
             "position": 3,
             "is_free_preview": false,
@@ -1516,141 +1539,139 @@
               {
                 "id": "q_aif_04_11",
                 "lesson_id": "les_aif_04_03",
-                "question": "Which five words summarize the Responsible-Use Checklist?",
+                "question": "Which is a benefit of AI mentioned in this module?",
                 "options": [
-                  "Purpose, Data, Verify, Disclose, Human",
-                  "Speed, Color, Price, Click, Share",
-                  "Code, Server, Cloud, Font, Link",
-                  "Guess, Copy, Paste, Send, Forget"
+                  "Making things more accessible, such as automatic captions",
+                  "Removing all risks",
+                  "Replacing every teacher",
+                  "Making privacy unnecessary"
                 ],
                 "correct_option_index": 0,
-                "explanation": "The 5-point checklist asks about Purpose, Data, Verify, Disclose, and Human.",
+                "explanation": "AI can help with captions, translation, and reading text aloud.",
                 "position": 11
               },
               {
                 "id": "q_aif_04_12",
                 "lesson_id": "les_aif_04_03",
-                "question": "In healthcare, how should AI be used alongside doctors?",
+                "question": "In which area can AI help doctors notice patterns in scans?",
                 "options": [
-                  "AI helps notice patterns in scans and test results, while a doctor makes the final decision",
-                  "AI replaces all doctors and nurses",
-                  "Patient records are posted publicly for training",
-                  "AI prescribes medicine without checking"
+                  "Health",
+                  "Entertainment",
+                  "Banking",
+                  "Transport"
                 ],
                 "correct_option_index": 0,
-                "explanation": "AI supports clinicians with pattern detection while a qualified doctor stays in charge.",
+                "explanation": "Health is one area where AI supports doctors. A doctor should make the final decision.",
                 "position": 12
               },
               {
                 "id": "q_aif_04_13",
                 "lesson_id": "les_aif_04_03",
-                "question": "What is a risk of entertainment and social media recommendation AI?",
+                "question": "In the responsible-use checklist, what does “Data” ask?",
                 "options": [
-                  "You may see only more of the same and spend more time than planned",
-                  "Your TV will stop showing colors",
-                  "Movies become shorter",
-                  "Speakers stop playing music"
+                  "How fast is the tool?",
+                  "What am I sharing, and would I be comfortable if it became public?",
+                  "What color is the app?",
+                  "Who built the keyboard?"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Recommendation feeds can narrow what you see and keep you scrolling longer than intended.",
+                "correct_option_index": 1,
+                "explanation": "The Data check is about what you share with a tool.",
                 "position": 13
               },
               {
                 "id": "q_aif_04_14",
                 "lesson_id": "les_aif_04_03",
-                "question": "In education, what should students watch out for when using AI?",
+                "question": "In the checklist, what does “Disclose” ask?",
                 "options": [
-                  "Answers can be wrong, and copying AI output can replace real learning",
-                  "Books will disappear tomorrow",
-                  "AI never makes spelling mistakes",
-                  "Teachers cannot read typed text"
+                  "Am I honest about using AI, and do I follow the rules of my school or workplace?",
+                  "Did I turn off the computer?",
+                  "Can I hide that I used AI?",
+                  "Is the answer long enough?"
                 ],
                 "correct_option_index": 0,
-                "explanation": "AI is great for practice and explanations, but copying replaces your own learning.",
+                "explanation": "Being honest about AI use and following the rules is part of responsible use.",
                 "position": 14
               },
               {
                 "id": "q_aif_04_15",
                 "lesson_id": "les_aif_04_03",
-                "question": "An employee pastes a customer’s name, address, and phone number into a public chatbot. Which checklist item fails?",
+                "question": "An employee pastes a customer’s name, address, and phone number into a public chatbot. Which check fails?",
                 "options": [
                   "Data",
-                  "Font size",
-                  "Battery life",
-                  "Screen brightness"
+                  "Purpose only",
+                  "Human only",
+                  "None of them"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Customer details are private—the Data check requires keeping personal info out of public chatbots.",
+                "explanation": "Customer details are private and should not be pasted into a public tool.",
                 "position": 15
               },
               {
                 "id": "q_aif_04_16",
                 "lesson_id": "les_aif_04_03",
-                "question": "Who is responsible when an AI system makes a harmful mistake?",
+                "question": "What is a risk of recommendation systems on social media?",
                 "options": [
-                  "People and organizations that build and use the AI",
-                  "The electricity company",
-                  "The computer mouse",
-                  "Nobody—AI is legally a person"
+                  "You may see only more of the same and spend more time than planned",
+                  "They stop all advertising",
+                  "They make every post true",
+                  "They delete your account every day"
                 ],
                 "correct_option_index": 0,
-                "explanation": "AI is a tool; the people and organizations building and deploying it remain responsible.",
+                "explanation": "Recommendations can keep showing similar content, so it helps to be aware.",
                 "position": 16
               },
               {
                 "id": "q_aif_04_17",
                 "lesson_id": "les_aif_04_03",
-                "question": "What does “automation” mean?",
+                "question": "True or false: When AI makes a mistake, the AI alone is responsible, not people.",
                 "options": [
-                  "Using technology to do a task without a person doing every step",
-                  "Writing every email by hand with a pen",
-                  "Turning off all computers in an office",
-                  "Memorizing a dictionary"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Automation lets technology handle steps of a task automatically.",
+                "correct_option_index": 1,
+                "explanation": "The people and organizations that build and use AI are responsible for making it safe, fair, and honest.",
                 "position": 17
               },
               {
                 "id": "q_aif_04_18",
                 "lesson_id": "les_aif_04_03",
-                "question": "Why are places like the European Union passing AI laws?",
+                "question": "What is misinformation?",
                 "options": [
-                  "To help make AI systems safe, fair, and trustworthy",
-                  "To ban all calculators",
-                  "To make websites load slower",
-                  "To stop people from learning math"
+                  "False or misleading information, shared on purpose or by mistake",
+                  "A very fast computer",
+                  "Information that is always correct",
+                  "A kind of password"
                 ],
                 "correct_option_index": 0,
-                "explanation": "AI regulations aim to protect safety, fairness, and transparency.",
+                "explanation": "Misinformation can spread easily, especially when deepfakes look real.",
                 "position": 18
               },
               {
                 "id": "q_aif_04_19",
                 "lesson_id": "les_aif_04_03",
-                "question": "Which personal rule is strongest for the “Verify” step?",
+                "question": "Which decision most needs a human in the loop?",
                 "options": [
-                  "“Before I use a number or quote from AI, I will find it in a trusted source, because AI can invent facts.”",
-                  "“I will check sometimes.”",
-                  "“I will trust AI if it sounds smart.”",
-                  "“I will never read sources.”"
+                  "A decision about hiring, health, or money",
+                  "Choosing a song",
+                  "Picking a wallpaper",
+                  "Naming a pet"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Strong rules are specific, actionable, and state the reason (“because…”).",
+                "explanation": "Important decisions that affect people need a person in charge.",
                 "position": 19
               },
               {
                 "id": "q_aif_04_20",
                 "lesson_id": "les_aif_04_03",
-                "question": "Which course in the catalog should you take next if you want to design websites faster with AI help?",
+                "question": "What makes a personal AI rule strong?",
                 "options": [
-                  "Web Design with AI",
-                  "Accounting 101",
-                  "Plumbing Basics",
-                  "Typing Speed Practice"
+                  "It is specific, realistic, and explains why",
+                  "It is long and complicated",
+                  "It is never followed",
+                  "It is vague, such as “be careful”"
                 ],
                 "correct_option_index": 0,
-                "explanation": "The Where to Go Next map points learners to “Web Design with AI” for designing websites faster with AI.",
+                "explanation": "Strong rules are specific, can really be followed, and include a reason.",
                 "position": 20
               }
             ]
@@ -1666,11 +1687,11 @@
           {
             "id": "les_aif_05_01",
             "section_id": "sec_aif_05",
-            "title": "5.1 Lab Part A (35m): Train a 3-Category Image Classifier & Skew Test",
+            "title": "5.1 Guided Lab Part A: Train & Test an Image Classifier (35 min)",
             "type": "article",
-            "summary": "Use Google Teachable Machine (webcam or ready-made image set) to train a 3-category image classifier with 20–30 samples each, then intentionally skew one category and observe how errors change.",
+            "summary": "Teach a no-code image classifier 3 classes, test 6 new examples, break it on purpose with Narrow Data or Too Little Data, and record your observations.",
             "implementation_tip": "No webcam? Download our ready-made image set (Pen, Mug, Phone — 25 photos each + dim-light test folder) using the Upload option in Teachable Machine!",
-            "content": "> **What you will learn:** Hands-on proof of how training data variety—and skewed data—directly controls what an AI model learns and where it fails.\n\n### Part A: Train an Image Classifier (35 Minutes)\n**Tool:** Google Teachable Machine (`teachablemachine.withgoogle.com`) — free, browser-based, no login required.\n\n1. **Create 3 Categories**:\n   - Choose 3 everyday objects (for example: **Pen**, **Mug**, **Phone**) or 3 hand gestures (for example: **Thumbs Up**, **Open Palm**, **Fist**).\n2. **Collect 20–30 Samples per Category**:\n   - **With a Webcam**: Hold each object at slightly different angles and distances while recording 20–30 samples per class.\n   - **No Webcam? (Ready-Made Image Set Option)**: Click *Upload* in Teachable Machine and upload 20–30 images per category from the provided **Ready-Made Image Set** resource below.\n3. **Train & Test**:\n   - Click **Train Model** (takes ~15 seconds in your browser).\n   - Test all 3 objects in normal light and record your accuracy in your **Personal Study Notes**.\n4. **Intentionally Skew One Category**:\n   - Delete the varied samples for **one** category (e.g., Mug) and re-record all 25 samples **in dim light or from only one fixed angle**.\n   - Retrain the model and test that object again in bright light or from a different angle.\n   - **Observe & Record**: Watch how the confidence bars jump to the wrong category! That is *\"Garbage in, garbage out\"* happening live in front of you.",
+            "content": "> **Your goal:** Teach a computer to tell three things apart by showing it examples. Then, find out what happens when the examples are poor. This is the **data → training → model → prediction** flow from Module 2, and you will see it work. *(35 minutes)*\n\n> **Privacy tip:** Use everyday objects or hand gestures. **Please do not use photos of other people’s faces.** Your images are for learning only, and you should not upload private photos. Check the tool’s privacy notice if you are not sure.\n\n---\n\n### Step 1: Set up (5 minutes)\n1. Open the image tool in your browser (for example, [Google Teachable Machine](https://teachablemachine.withgoogle.com/)).\n2. Choose an **Image Project**, and then the **Standard image model**.\n3. Rename the first three classes. Choose three things that look clearly different. For example: *Pen, Mug, Phone*, or three hand gestures: *Thumbs up, Open hand, Fist*.\n4. Write your three class names in the Step 6 observation table in your **Personal Study Notes**.\n\n---\n\n### Step 2: Collect training data (10 minutes)\n1. For each class, record **20–30 samples** with your webcam. If you have no webcam, upload photos or use the ready-made image set from your course team.\n2. Make the samples **varied**: change the angle, the distance, and the background a little each time.\n3. Keep the three classes **balanced**, with about the same number of samples in each.\n\nThis is your **training data**. The **labels** are the class names that you gave.\n\n---\n\n### Step 3: Train the model (3 minutes)\n1. Click **Train Model**.\n2. Keep the tab open and visible until training finishes (switching tabs can stop it).\n3. When it is done, you have a **model**.\n\n---\n\n### Step 4: Test it with new examples (5 minutes)\nNow give the model something new. Show each object or gesture to the camera, or upload a new image. The model will make a **prediction**, and it will show how confident it is.\n\nRun **at least 6 tests** (two for each class). Record the results in your **Personal Study Notes**, and **take one screenshot of the preview window while testing**:\n\n| Test | What I showed | Model’s prediction | Confidence (%) | Right or wrong? |\n| :---: | :--- | :--- | :---: | :---: |\n| **1–6** | *(Record 2 tests per class)* | | | |\n\n---\n\n### Step 5: Break it on purpose (10 minutes)\nNext, you will see what poor data does. Choose **one** of the two experiments:\n\n- **Experiment 1: Narrow data**\n  1. Delete all samples of one class.\n  2. Record new samples for that class, but **all in the same conditions**: the same angle, the same light, and the same background. Make the other two classes different from this.\n  3. Train again.\n  4. Test again in normal conditions, with a different angle, light, and background.\n- **Experiment 2: Too little data**\n  1. Delete most samples of one class, so that **only 3–5 remain**.\n  2. Train again.\n  3. Test all three classes again.\n\nRun **at least 6 tests** again, record the results in your **Personal Study Notes**, and **take one screenshot of the new results**.\n\n---\n\n### Step 6: Record your observations (2 minutes)\nComplete these 5 prompts in your **Personal Study Notes**:\n1. **My three classes were…**\n2. **Number of right answers in Step 4 (out of 6):**\n3. **Experiment I chose (1 or 2):**\n4. **Number of right answers in Step 5 (out of 6):**\n5. **What changed after I made the data poor?**\n\n---\n\n### Part D (Alternative for Part A if webcam/image tool is unavailable)\nTwo models were trained to tell apart a mug, a pen, and a phone. **Model 1** was trained on varied, balanced photos. **Model 2** was trained with all the mug photos taken in dim light from one angle:\n\n| Test | What was shown | Model 1 prediction | Model 2 prediction | Notes |\n| :---: | :--- | :--- | :--- | :--- |\n| **1** | Mug, bright light | Mug | Phone | Model 2 is wrong |\n| **2** | Mug, dim light | Mug | Mug | Both right |\n| **3** | Pen, bright light | Pen | Pen | Both right |\n| **4** | Phone, bright light | Phone | Phone | Both right |\n| **5** | Mug, side angle | Mug | Pen | Model 2 is wrong |\n| **6** | Pen, dim light | Pen | Mug | Model 2 is wrong |\n\n1. Count the correct answers for each model.\n2. Explain why Model 2 made its mistakes. Which part of the data was the problem?\n3. Describe two changes that would improve Model 2.",
             "duration_seconds": 2100,
             "position": 1,
             "is_free_preview": false,
@@ -1688,10 +1709,10 @@
           {
             "id": "les_aif_05_02",
             "section_id": "sec_aif_05",
-            "title": "5.2 Lab Part B (20m) & Part C (5m): Probe a Chatbot & Debrief Worksheet",
+            "title": "5.2 Guided Lab Parts B & C: Probe a Chatbot, Debrief & Troubleshooting (25 min)",
             "type": "article",
-            "summary": "Test a chatbot with three question types (well-known fact, obscure/tricky question, request for sources) and complete the 3-prompt Debrief Worksheet.",
-            "content": "> **What you will learn:** How a chatbot behaves on easy facts vs. tricky prompts vs. citation requests—and how to record your findings for the Authentic Assessment.\n\n### Part B: Probe a Chatbot with Three Question Types (20 Minutes)\nOpen any free chatbot and ask **these three specific question types**, saving screenshots or notes for your Authentic Assessment:\n1. **Question 1 — A Well-Known Fact**:\n   - Example: *\"In plain language, what is the difference between Machine Learning and traditional rule-based programming?\"*\n   - Check the reply against Module 1.\n2. **Question 2 — An Obscure or Tricky Question**:\n   - Example: *\"Summarize the 2025 Supreme Court case 'United States v. NeuralNet Corp' and quote the dissenting opinion.\"* (Or a tricky local/obscure fact.)\n   - Check whether the chatbot invents details or admits it does not know.\n3. **Question 3 — A Request for Sources**:\n   - Example: *\"Give me 3 peer-reviewed studies on AI bias in healthcare with exact article titles, authors, and links.\"*\n   - Search each title and link yourself to confirm whether the sources actually exist and say what the chatbot claims!\n\n---\n\n### Part C: Debrief Worksheet (5 Minutes)\nIn your **Personal Study Notes** tab below, answer these **three prompts**:\n1. **What the model learned**: In Part A, what visual clues did your image classifier seem to rely on?\n2. **What caused errors**: How did skewing one category (dim light / one angle) or asking a tricky chatbot prompt cause errors?\n3. **What surprised you**: What was the biggest surprise from testing both tools hands-on?",
+            "summary": "Test a chatbot with a well-known fact, a tricky/obscure prompt, and a 3-source check; complete the 5-prompt debrief worksheet and save your evidence for the final assessment.",
+            "content": "> **Your goal:** Test a chatbot with three kinds of questions, check what it says using the 4-step Verification Habit from Module 3, and complete your Debrief Worksheet. **Keep your Part B screenshots and notes—you will reuse them in the final assessment!** *(25 minutes total: 20m Part B + 5m Part C)*\n\n> **Before you start:** Do not type private information. Use general questions only. Chatbots can answer differently each time, so record what your chatbot really said, even if it differs from what others see.\n\n---\n\n### Part B: Probe a Chatbot (20 minutes)\n\n#### Question 1: A well-known fact (3 minutes)\nAsk something you can easily check, such as *“Who wrote the novel Pride and Prejudice?”* or *“At what temperature does water boil at sea level?”* Then check the answer.\n\n#### Question 2: A tricky or obscure question (5 minutes)\nAsk something that is hard or has a false idea inside it. Here are two examples you may use, or you may write your own:\n- *“When did Marie Curie win her Nobel Prize in Literature?”* (Her prizes were not in literature, so does the chatbot notice?)\n- *“Summarize the book ‘The Quiet River of Maplewood’ by A. Hartley.”* (This is a made-up title. Does the chatbot admit it does not know it?)\n\nThen check whether the answer is **true**, **partly true**, or **invented**.\n\n#### Question 3: A request for sources (8 minutes)\nAsk the chatbot about a topic you know a little about, and then ask: **“Give me three sources I can check.”**\nFor each source, search for it. Does the page, article, or book really exist, and does it say what the chatbot claimed?\n\n#### Record your results (4 minutes)\nTake **one screenshot for each question** (3 screenshots total). Then complete these two tables in your **Personal Study Notes**:\n\n| Question type | Question I asked | What I checked | Source I used | Result (correct, partly correct, or wrong) |\n| :--- | :--- | :--- | :--- | :--- |\n| **1. A well-known fact** | | | | |\n| **2. A tricky or obscure question** | | | | |\n| **3. A request for sources** | | | | |\n\nFor **Question 3**, list each source the chatbot gave:\n\n| Source the chatbot gave | Does it exist? (yes or no) | Does it say what the chatbot claimed? |\n| :--- | :---: | :--- |\n| **Source 1** | | |\n| **Source 2** | | |\n| **Source 3** | | |\n\n*(Alternative if no chatbot is available: Use the sample chatbot transcripts from your course team, mark verifiable claims, search for them, and fill in the tables above.)*\n\n---\n\n### Part C: Debrief and Submission (5 minutes)\n\n#### Debrief worksheet\nAnswer each prompt in **two or three sentences** in your **Personal Study Notes**:\n1. What did the image model learn from? Use the words **data**, **training**, and **model**.\n2. What caused the model’s mistakes when the data was poor?\n3. What surprised you in the chatbot test?\n4. Which verification step was the most useful, and why?\n5. What would you do differently next time you use a chatbot?\n\n#### What to submit / Completion checklist\n- [ ] Screenshot of the Step 4 test results\n- [ ] Screenshot of the Step 5 test results\n- [ ] Three chatbot screenshots, one for each question\n- [ ] The tables in Part A and Part B, with every row filled in\n- [ ] The debrief worksheet, with all five answers (at least two sentences each)\n\n> **Keep your Part B evidence!** In the final **“AI in My Life”** assessment, you will build on it for the hallucination test, so save your screenshots and notes.\n\n---\n\n### Part E: Troubleshooting Guide\n| Problem | What to try |\n| :--- | :--- |\n| **The webcam does not work** | Check that your browser has permission to use the camera. Or upload photos, or use the ready-made image set |\n| **Training seems stuck** | Keep the tab open and visible. Wait one more minute, then refresh and try again with fewer samples |\n| **The model gets everything wrong** | Check that each class has varied samples, and that the classes look clearly different from each other |\n| **The model is right only for one class** | One class may have far more samples than the others. Try to balance them |\n| **The chatbot refuses to answer** | Rephrase the question in a simple way. Do not ask for anything private or harmful |\n| **The chatbot gives a different answer from a classmate** | This is normal. Record what your chatbot said, and check it |\n| **I cannot find a source** | Treat it as unverified. Write “could not find it” in your table. That is a valid result |",
             "duration_seconds": 1500,
             "position": 2,
             "is_free_preview": false,
@@ -1741,9 +1762,9 @@
           {
             "id": "les_aif_07_02",
             "section_id": "sec_aif_07",
-            "title": "7.2 Post-Check: Retake the 10-Question Check to Measure Growth",
+            "title": "7.2 Post-Check: Retake the 11-Question Check to Measure Growth",
             "type": "quiz",
-            "summary": "Retake the exact 10 questions from the Orientation Pre-Check to see how much your understanding of AI has grown!",
+            "summary": "Retake the exact 11 questions from the Orientation Pre-Check and compare your Before and After score and 1–5 confidence ratings to see how much your understanding of AI has grown!",
             "duration_seconds": 600,
             "position": 2,
             "is_free_preview": false,
@@ -1752,140 +1773,167 @@
               {
                 "id": "q_aif_post_1",
                 "lesson_id": "les_aif_07_02",
-                "question": "Which statement best describes the relationship between Artificial Intelligence (AI) and Machine Learning (ML)?",
+                "question": "Which sentence best describes AI?",
                 "options": [
-                  "Machine Learning is a subset of AI where systems learn patterns from data instead of following only hand-coded rules",
-                  "AI and Machine Learning are completely unrelated fields",
-                  "AI is a small subset inside Machine Learning",
-                  "Machine Learning only works on physical robots, never on software"
+                  "A computer system that does tasks that usually need human thinking",
+                  "A robot that feels emotions",
+                  "Any machine that uses electricity",
+                  "A program that only works on the internet",
+                  "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "AI is the broad umbrella; Machine Learning is a major approach inside AI that learns patterns from examples.",
+                "explanation": "AI is software that does tasks that usually need human thinking. Covered in Module 1.",
                 "position": 1
               },
               {
                 "id": "q_aif_post_2",
                 "lesson_id": "les_aif_07_02",
-                "question": "Which everyday tool is an example of AI rather than a simple fixed-rule program?",
+                "question": "Which of these learns patterns from many examples?",
                 "options": [
-                  "A pocket calculator adding 2 + 2",
-                  "A grocery store automatic sliding door",
-                  "An email spam filter that adapts to new scam messages",
-                  "A mechanical washing machine timer"
+                  "A pocket calculator",
+                  "A thermostat with a fixed temperature rule",
+                  "An email spam filter",
+                  "A timer on a washing machine",
+                  "I’m not sure"
                 ],
                 "correct_option_index": 2,
-                "explanation": "A spam filter learns patterns from millions of emails to classify new messages, whereas calculators and timers follow fixed rules.",
+                "explanation": "A spam filter learns from examples, while the others follow fixed rules. Covered in Module 1.",
                 "position": 2
               },
               {
                 "id": "q_aif_post_3",
                 "lesson_id": "les_aif_07_02",
-                "question": "In Machine Learning, what is a \"model\"?",
+                "question": "What does generative AI do?",
                 "options": [
-                  "A human actor hired to demonstrate software",
-                  "The finished pattern-recognition system produced after training on data",
-                  "A physical 3D-printed microchip",
-                  "The internet browser used to open a website"
+                  "Only sorts emails",
+                  "Creates new content, such as text, images, or sound",
+                  "Only stores files",
+                  "Only measures speed",
+                  "I’m not sure"
                 ],
                 "correct_option_index": 1,
-                "explanation": "During training, an algorithm learns from data to build a model—a mathematical recipe that makes predictions on new inputs.",
+                "explanation": "Generative AI creates new content. Covered in Modules 1 and 3.",
                 "position": 3
               },
               {
                 "id": "q_aif_post_4",
                 "lesson_id": "les_aif_07_02",
-                "question": "What does \"Garbage in, garbage out\" mean in AI?",
+                "question": "Which order shows how a machine learning system works?",
                 "options": [
-                  "AI systems clean up messy computer hard drives automatically",
-                  "If training data is incomplete, inaccurate, or skewed, the AI model will make poor or biased predictions",
-                  "Computers need to be recycled every year",
-                  "AI only works when given random numbers"
+                  "Data, training, model, prediction",
+                  "Prediction, model, data, training",
+                  "Model, prediction, training, data",
+                  "Training, prediction, data, model",
+                  "I’m not sure"
                 ],
-                "correct_option_index": 1,
-                "explanation": "An AI model can only learn from the examples it is given. Flawed or unrepresentative data leads to flawed predictions.",
+                "correct_option_index": 0,
+                "explanation": "The system learns from data, trains, saves a model, and then makes predictions. Covered in Module 2.",
                 "position": 4
               },
               {
                 "id": "q_aif_post_5",
                 "lesson_id": "les_aif_07_02",
-                "question": "How does a Large Language Model (LLM) like ChatGPT or Gemini generate its replies?",
+                "question": "Why can a chatbot give a confident answer that is wrong?",
                 "options": [
-                  "By looking up verified answers in a locked encyclopedia",
-                  "By thinking consciously with human feelings",
-                  "By predicting the most statistically likely next word (or token) based on patterns in its training text",
-                  "By asking a human worker to type every reply live"
+                  "It writes text that sounds likely, and it does not guarantee the text is true",
+                  "It always looks up one correct answer",
+                  "It never makes mistakes",
+                  "It is switched off at night",
+                  "I’m not sure"
                 ],
-                "correct_option_index": 2,
-                "explanation": "LLMs are next-token prediction engines trained on vast text datasets, not conscious minds or fact-checked databases.",
+                "correct_option_index": 0,
+                "explanation": "A chatbot predicts likely words, so it can hallucinate. Covered in Module 3.",
                 "position": 5
               },
               {
                 "id": "q_aif_post_6",
                 "lesson_id": "les_aif_07_02",
-                "question": "What is an AI \"hallucination\"?",
+                "question": "A chatbot gives you a surprising statistic. What should you do first?",
                 "options": [
-                  "A computer screen flickering due to low battery",
-                  "When a chatbot confidently invents false facts, quotes, or sources that sound plausible",
-                  "When an image generator uses bright colors",
-                  "A virus that deletes files"
+                  "Share it with friends",
+                  "Cross-check it with a trusted source",
+                  "Trust it because it sounds exact",
+                  "Ask the chatbot to say it again",
+                  "I’m not sure"
                 ],
                 "correct_option_index": 1,
-                "explanation": "Because chatbots predict plausible-sounding words, they can fabricate details or citations with high confidence.",
+                "explanation": "Check important facts before you rely on them. Covered in Module 3.",
                 "position": 6
               },
               {
                 "id": "q_aif_post_7",
                 "lesson_id": "les_aif_07_02",
-                "question": "If a chatbot gives you a confident answer with an academic citation, what should you do before relying on it?",
+                "question": "Unfair results from an AI system often come from…",
                 "options": [
-                  "Trust it immediately because citations cannot be faked",
-                  "Confirm that the source actually exists and says what the chatbot claims",
-                  "Ask the same chatbot \"Are you sure?\" and accept its reply",
-                  "Assume any long answer is 100% accurate"
+                  "Data that is incomplete or unbalanced",
+                  "Computers that are too fast",
+                  "Screens that are too small",
+                  "Too many people online",
+                  "I’m not sure"
                 ],
-                "correct_option_index": 1,
-                "explanation": "Always cross-check and verify that cited sources exist and support the claim.",
+                "correct_option_index": 0,
+                "explanation": "A model learns from data, so poor data can lead to bias. Covered in Modules 2 and 4.",
                 "position": 7
               },
               {
                 "id": "q_aif_post_8",
                 "lesson_id": "les_aif_07_02",
-                "question": "Which type of information should you NEVER paste into a public AI chatbot?",
+                "question": "Which information is safest to type into a public chatbot?",
                 "options": [
-                  "A request to brainstorm dinner ideas",
-                  "Passwords, private medical records, or confidential customer data",
-                  "A public news headline to summarize",
-                  "A general question about world history"
+                  "A general question, such as how photosynthesis works",
+                  "Your password",
+                  "Your bank details",
+                  "A private document with other people’s names",
+                  "I’m not sure"
                 ],
-                "correct_option_index": 1,
-                "explanation": "Never share passwords, personal IDs, or private/confidential documents with public AI tools.",
+                "correct_option_index": 0,
+                "explanation": "Never share private information with a chatbot. Covered in Modules 3 and 4.",
                 "position": 8
               },
               {
                 "id": "q_aif_post_9",
                 "lesson_id": "les_aif_07_02",
-                "question": "True or False: Today’s AI systems are conscious and understand the world the same way humans do.",
+                "question": "What is a deepfake?",
                 "options": [
-                  "True — modern chatbots have real feelings and self-awareness",
-                  "False — AI systems process mathematical patterns without consciousness or true understanding"
+                  "A type of password",
+                  "A very fast computer",
+                  "A very realistic fake picture, voice, or video made with AI",
+                  "A deep learning textbook",
+                  "I’m not sure"
                 ],
-                "correct_option_index": 1,
-                "explanation": "AI can simulate fluent conversation, but it has no consciousness, beliefs, or lived understanding.",
+                "correct_option_index": 2,
+                "explanation": "Deepfakes can look and sound real, so check shocking content. Covered in Module 4.",
                 "position": 9
               },
               {
                 "id": "q_aif_post_10",
                 "lesson_id": "les_aif_07_02",
-                "question": "What is an example of Algorithmic Bias?",
+                "question": "What does “human in the loop” mean?",
                 "options": [
-                  "A face-recognition tool performing worse for people underrepresented in its training photos",
-                  "A laptop running faster when plugged into power",
-                  "A user preferring dark mode over light mode",
-                  "A spreadsheet sorting numbers from smallest to largest"
+                  "A person reviews and controls important decisions made with AI",
+                  "A robot lives in a house",
+                  "Only people can use AI",
+                  "AI works without any help",
+                  "I’m not sure"
                 ],
                 "correct_option_index": 0,
-                "explanation": "When training data underrepresents certain groups, the resulting model often makes more errors for those groups.",
+                "explanation": "Important decisions, such as hiring or health, need a person in charge. Covered in Module 4.",
                 "position": 10
+              },
+              {
+                "id": "q_aif_post_11",
+                "lesson_id": "les_aif_07_02",
+                "question": "Which statement about AI is true?",
+                "options": [
+                  "AI can make mistakes, so important information should be checked",
+                  "AI is always right",
+                  "AI feels emotions like a person",
+                  "AI needs no people to build or check it",
+                  "I’m not sure"
+                ],
+                "correct_option_index": 0,
+                "explanation": "AI is powerful but not perfect, and people stay important. Covered in Modules 1 and 3.",
+                "position": 11
               }
             ]
           }
