@@ -7,7 +7,6 @@ import WhyChooseReactJav from '@/components/home/WhyChooseReactJav';
 import InteractiveCampusPreview from '@/components/home/InteractiveCampusPreview';
 import FeaturedProgrammesSection from '@/components/home/FeaturedProgrammesSection';
 import AIBlogPreviewSection from '@/components/home/AIBlogPreviewSection';
-import TuitionSponsorshipSection from '@/components/home/TuitionSponsorshipSection';
 import REACTJavTrackOverview from '@/components/home/REACTJavTrackOverview';
 import REACTJavLearningModel from '@/components/home/REACTJavLearningModel';
 import REACTJavTestimonials from '@/components/home/REACTJavTestimonials';
@@ -611,10 +610,7 @@ export default function HomePage() {
         </div>
       </AdminEditableSection>
 
-      {/* 10. Tuition, Scholarships & Sponsorship Grant Breakdown */}
-      <TuitionSponsorshipSection />
-
-      {/* 11. Transformation in Action - Learner Voices */}
+      {/* 10. Transformation in Action - Learner Voices */}
       <AdminEditableSection
         sectionKey="testimonials"
         sectionTitle="Learner Voices & Proven Career Outcomes"

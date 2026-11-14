@@ -157,11 +157,6 @@ export default function Footer() {
                       Contact Admissions
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/subscribe" style={{ color: 'inherit', textDecoration: 'none' }}>
-                      Tuition & Sponsorship Grants
-                    </Link>
-                  </li>
                 </ul>
               </div>
 
