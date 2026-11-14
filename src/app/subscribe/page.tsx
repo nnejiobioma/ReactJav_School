@@ -170,7 +170,7 @@ function SubscribeContent() {
       <div className="container" style={{ padding: '6rem 1.5rem', textAlign: 'center', maxWidth: '520px' }}>
         <div className="glass-card" style={{ padding: '3.5rem 2rem' }}>
           <RefreshCw className="animate-spin" size={36} style={{ color: 'var(--primary)', margin: '0 auto 1.5rem' }} />
-          <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.65rem' }}>
+          <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.65rem' }}>
             Account Required for Enrollment
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.5, margin: 0 }}>
@@ -191,10 +191,10 @@ function SubscribeContent() {
           gap: '0.5rem',
           padding: '0.4rem 1.1rem',
           borderRadius: '9999px',
-          background: 'rgba(99, 102, 241, 0.1)',
-          border: '1px solid rgba(99, 102, 241, 0.3)',
+          background: 'rgba(37, 99, 235, 0.1)',
+          border: '1px solid rgba(37, 99, 235, 0.25)',
           fontSize: '0.85rem',
-          color: '#c7d2fe',
+          color: 'var(--primary)',
           fontWeight: 600,
           marginBottom: '1rem',
         }}>
@@ -289,12 +289,12 @@ function SubscribeContent() {
           <p style={{ color: 'var(--text-secondary)', maxWidth: '540px', margin: '0 auto 1.5rem', lineHeight: 1.6 }}>
             {selectedTutoringTrack ? (
               <>
-                Your tuition payment of <strong style={{ color: '#ffffff' }}>{formatCurrency(payableAmount)}</strong> for{' '}
+                Your tuition payment of <strong style={{ color: 'var(--text-primary)' }}>{formatCurrency(payableAmount)}</strong> for{' '}
                 <strong style={{ color: 'var(--accent-emerald)' }}>{selectedTutoringTrack.name}</strong> 1-on-1 Direct Tutoring has been confirmed. Full fellowship access to the Campus Intranet, CBT certifications, and your personal 1-on-1 Mentoring Pod has been granted!
               </>
             ) : selectedCourse ? (
               <>
-                Your payment of <strong style={{ color: '#ffffff' }}>{formatCurrency(selectedCourse.price)}</strong> for{' '}
+                Your payment of <strong style={{ color: 'var(--text-primary)' }}>{formatCurrency(selectedCourse.price)}</strong> for{' '}
                 <strong style={{ color: 'var(--primary)' }}>{selectedCourse.title}</strong> has been received. Your curriculum lessons and Campus Intranet privileges are now active!
               </>
             ) : (
@@ -312,7 +312,7 @@ function SubscribeContent() {
             maxWidth: '380px',
             margin: '0 auto 2rem',
             fontFamily: 'monospace',
-            color: '#34d399',
+            color: 'var(--accent-emerald)',
             fontSize: '1.05rem',
             fontWeight: 700,
           }}>
@@ -389,10 +389,10 @@ function SubscribeContent() {
 
       {/* SELECTED TUTORING TRACK SUMMARY BANNER */}
       {!isSuccess && selectedTutoringTrack && (
-        <div style={{
+        <div className="glass-card" style={{
           maxWidth: '780px',
           margin: '0 auto 2.5rem',
-          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.9) 100%)',
+          background: 'var(--bg-surface)',
           border: '1px solid rgba(16, 185, 129, 0.4)',
           borderRadius: '1.25rem',
           padding: '1.75rem 2rem',
@@ -411,27 +411,27 @@ function SubscribeContent() {
                 <span className="badge badge-primary">{selectedTutoringTrack.tier}</span>
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{selectedTutoringTrack.zoneName}</span>
               </div>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <span>{selectedTutoringTrack.icon}</span>
                 <span>{selectedTutoringTrack.name}</span>
               </h2>
               {tutoringDetails.learnerName && (
-                <div style={{ margin: '0.4rem 0 0', fontSize: '0.85rem', color: '#93c5fd', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                <div style={{ margin: '0.4rem 0 0', fontSize: '0.85rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                   <div>
-                    Enrolling Scholar: <strong style={{ color: '#ffffff' }}>{tutoringDetails.learnerName}</strong>
+                    Enrolling Scholar: <strong style={{ color: 'var(--text-primary)' }}>{tutoringDetails.learnerName}</strong>
                     {tutoringDetails.age && (
                       <span style={{ color: 'var(--text-muted)' }}> (Age {tutoringDetails.age} • {tutoringDetails.ageTier || selectedTutoringTrack.tier})</span>
                     )}
                     {' • '}
-                    Frequency: <strong style={{ color: '#ffffff' }}>{tutoringDetails.frequency || '2x per week'}</strong>
+                    Frequency: <strong style={{ color: 'var(--text-primary)' }}>{tutoringDetails.frequency || '2x per week'}</strong>
                   </div>
                   {tutoringDetails.objective && (
                     <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                      Objective: <span style={{ color: '#c7d2fe' }}>{tutoringDetails.objective}</span>
+                      Objective: <span style={{ color: 'var(--primary)', fontWeight: 600 }}>{tutoringDetails.objective}</span>
                     </div>
                   )}
                   {tutoringDetails.parentConsent && tutoringDetails.parentName && (
-                    <div style={{ fontSize: '0.78rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--accent-emerald)', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
                       <ShieldCheck size={14} />
                       <span>Parental Consent Approved & On File: {tutoringDetails.parentName}</span>
                     </div>
@@ -442,7 +442,7 @@ function SubscribeContent() {
 
             <div style={{ textAlign: 'right' }}>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block' }}>Tutoring Tuition Fee</span>
-              <span style={{ fontSize: '2rem', fontWeight: 800, color: '#34d399' }}>
+              <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--accent-emerald)' }}>
                 {formatCurrency(payableAmount)}
               </span>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block' }}>Monthly / Term Fellowship</span>
@@ -485,11 +485,11 @@ function SubscribeContent() {
 
       {/* SELECTED PROGRAMME TUITION SUMMARY BANNER (IF ENROLLING SPECIFIC COURSE) */}
       {!isSuccess && !selectedTutoringTrack && selectedCourse && (
-        <div style={{
+        <div className="glass-card" style={{
           maxWidth: '780px',
           margin: '0 auto 2.5rem',
-          background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%)',
-          border: '1px solid rgba(99, 102, 241, 0.35)',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-accent)',
           borderRadius: '1.25rem',
           padding: '1.75rem 2rem',
           boxShadow: 'var(--shadow-md)',
@@ -504,14 +504,14 @@ function SubscribeContent() {
                 <span className="badge badge-emerald">{selectedCourse.level || 'All Levels'}</span>
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{selectedCourse.track || selectedCourse.category}</span>
               </div>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                 {selectedCourse.title}
               </h2>
             </div>
 
             <div style={{ textAlign: 'right' }}>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block' }}>Tuition Fee</span>
-              <span style={{ fontSize: '2rem', fontWeight: 800, color: '#34d399' }}>
+              <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--accent-emerald)' }}>
                 {formatCurrency(selectedCourse.price)}
               </span>
             </div>
@@ -586,7 +586,7 @@ function SubscribeContent() {
           borderRadius: '1.25rem',
           textAlign: 'center',
         }}>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.75rem' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
             Choose a Programme to Continue
           </h3>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', marginBottom: '1.25rem' }}>
@@ -645,9 +645,9 @@ function SubscribeContent() {
                 gap: '0.5rem',
                 padding: '0.75rem',
                 borderRadius: '0.75rem',
-                background: paymentMethod === 'credit_card' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                background: paymentMethod === 'credit_card' ? 'rgba(37, 99, 235, 0.12)' : 'var(--bg-surface-elevated)',
                 border: paymentMethod === 'credit_card' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
-                color: paymentMethod === 'credit_card' ? '#a5b4fc' : 'var(--text-secondary)',
+                color: paymentMethod === 'credit_card' ? 'var(--primary)' : 'var(--text-secondary)',
                 cursor: 'pointer',
                 fontWeight: 600,
                 fontSize: '0.85rem',
@@ -667,9 +667,9 @@ function SubscribeContent() {
                 gap: '0.5rem',
                 padding: '0.75rem',
                 borderRadius: '0.75rem',
-                background: paymentMethod === 'bank_transfer' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                background: paymentMethod === 'bank_transfer' ? 'rgba(37, 99, 235, 0.12)' : 'var(--bg-surface-elevated)',
                 border: paymentMethod === 'bank_transfer' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
-                color: paymentMethod === 'bank_transfer' ? '#a5b4fc' : 'var(--text-secondary)',
+                color: paymentMethod === 'bank_transfer' ? 'var(--primary)' : 'var(--text-secondary)',
                 cursor: 'pointer',
                 fontWeight: 600,
                 fontSize: '0.85rem',
@@ -689,9 +689,9 @@ function SubscribeContent() {
                 gap: '0.5rem',
                 padding: '0.75rem',
                 borderRadius: '0.75rem',
-                background: paymentMethod === 'campus_voucher' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                background: paymentMethod === 'campus_voucher' ? 'rgba(37, 99, 235, 0.12)' : 'var(--bg-surface-elevated)',
                 border: paymentMethod === 'campus_voucher' ? '1px solid var(--primary)' : '1px solid var(--border-subtle)',
-                color: paymentMethod === 'campus_voucher' ? '#a5b4fc' : 'var(--text-secondary)',
+                color: paymentMethod === 'campus_voucher' ? 'var(--primary)' : 'var(--text-secondary)',
                 cursor: 'pointer',
                 fontWeight: 600,
                 fontSize: '0.85rem',
@@ -785,7 +785,7 @@ function SubscribeContent() {
                   Account: <strong>94820199201 (ReactJav LMS Campus)</strong><br />
                   Memo: <strong>{currentUser?.email || 'student-tuition'}</strong>
                 </p>
-                <p style={{ color: '#fbbf24', fontSize: '0.78rem', marginTop: '0.5rem' }}>
+                <p style={{ color: 'var(--accent-amber)', fontSize: '0.78rem', marginTop: '0.5rem' }}>
                   * Wire transfers generate a verification reference and are confirmed by Bursar during admin clearance.
                 </p>
               </div>
