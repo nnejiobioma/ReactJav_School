@@ -4929,26 +4929,26 @@
           {
             "id": "les_gpe_lab2_01",
             "section_id": "sec_gpe_lab2",
-            "title": "Lab 2 Parts A & B: Image Iteration & Audio Workshop (35 min)",
+            "title": "Lab 2 Parts A & B: Image Prompt in Three Rounds & Audio or Voice (35 min)",
             "type": "article",
-            "summary": "Iterate an image prompt across 3 one-change-at-a-time rounds + alt text (20 min), and complete an audio transcript/summary or voice script task (15 min). Analysis-only path included.",
+            "summary": "Improve an 8-part image prompt across three one-change-at-a-time rounds with alt text and AI label (20 min), then complete speech-to-text transcript checking or ear-ready text-to-speech scripting (15 min).",
             "duration_seconds": 2100,
             "position": 1,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **Guided Lab 2: Multimedia Prompt Workshop (60 minutes total)** — This is your **Part 2 Checkpoint**. Every step includes an **Analysis-Only Path** so no learner is blocked by tool limits or cost. **Do not use real people’s faces or voices.**\n\n---\n\n### Part A: Images — Three Rounds, One Change at a Time (20 minutes)\n1. Write a full **8-part image prompt** (Subject, Setting, Style, Composition, Lighting, Color/Mood, Format, Exclusions).\n2. Run Round 1 (or use the Sample Output below), then change **one element at a time** across Rounds 2 and 3 (for example: Round 2 changes lighting; Round 3 changes camera angle).\n3. Record what each single change did, and write **clear alt text** for your best result.\n\n*(Analysis-Only Sample: Round 1 “ceramic mug on wooden table, daylight” → cluttered background; Round 2 adds “clean blurred café window background” → subject pops; Round 3 changes to “45-degree overhead shot, warm morning light” → balanced composition. Alt text: “Close-up 45-degree photo of a ceramic coffee mug on a wooden café table in warm morning light.”)*\n\n---\n\n### Part B: Audio — Transcript Check or Voice Script (15 minutes)\nChoose **one**:\n- **Option 1 (Transcript & Summary):** Review an audio transcript (your own non-private sample or Module 7’s sample), list the transcription errors you found, and write a summary prompt.\n- **Option 2 (Voice Script):** Write a 60–90 word **ear-ready voice script** with short sentences, spelled-out numbers, and `[pronunciation notes]`. *(Bonus: draft a 6-parameter music bed prompt.)*"
+            "content": "**COURSE 2 | PART 2 CHECKPOINT | GUIDED LAB 2**\n**Guided Lab 2: Multimedia Prompt Workshop**\n*Learner worksheet, analysis-only alternative, troubleshooting, and instructor notes (60 minutes)*\n\n| Item | Details |\n| :--- | :--- |\n| **Time** | 60 minutes: Part A (20 min), Part B (15 min), Part C (15 min), Part D (10 min) |\n| **You will** | Improve an image prompt over three rounds, check an audio or voice result, plan a video or check an AI’s reading of an image, and review your results for consent, labeling, and risk |\n| **Tools** | Any image tool, audio tool, video tool, or chatbot that accepts images. You do not need all of them, and you never need to pay. An analysis-only alternative is provided |\n| **Coding** | None |\n| **Counts as** | A practice activity. It is marked complete when all tables are filled, the evidence is attached, and the debrief is done. Your evidence can be reused in the final portfolio |\n| **Connects to** | Modules 6 to 8: images, audio and speech, and video and multimodal prompting |\n\n**What is in this document:**\n- Part A: image prompt, three rounds (learner)\n- Part B: audio or voice (learner)\n- Part C: video plan or multimodal check (learner) *(in Lab 2 Part 2)*\n- Part D: responsible-use check, debrief, and submission (learner) *(in Lab 2 Part 2)*\n- Part E: analysis-only alternative (learner) *(in Lab 2 Part 2)*\n- Part F: troubleshooting (learner) *(in Lab 2 Part 2)*\n- Part G: instructor notes *(in Lab 2 Part 2)*\n\n> **Before you start:** Use made-up topics and objects. Do not use real people’s faces or voices, and do not upload private pictures, documents, or recordings. Label anything that AI made. Results vary, so record what your tools really gave you, even if it differs from other learners’ results. *(If you have no tool access, use Part E: Analysis-Only Alternative in the next lesson.)*\n\n---\n\n### Part A: Image Prompt in Three Rounds (20 minutes)\n\n> **Your goal:** Write an image prompt with the eight-part anatomy, and improve it over three rounds by changing one thing at a time. Then write alt text for your best result.\n\n#### Step 1: Round 1 (5 minutes)\nChoose a made-up subject with no real people, for example a community garden poster, a cozy cafe window, or a mountain trail. Write a prompt with at least five of the eight parts: **subject, setting, style, composition, lighting, color and mood, format, and what to avoid**. Run it, and record the result.\n\n#### Step 2: Rounds 2 and 3 (10 minutes)\nIn Round 2, change **only one thing**, such as the lighting or the camera view. In Round 3, change **one different thing**, such as the style or the colors. Record what each change did.\n\n| Round | My prompt | The one thing I changed | What changed in the picture | Keep or undo? |\n| :--- | :--- | :--- | :--- | :--- |\n| **1** | | *(first version)* | | |\n| **2** | | | | |\n| **3** | | | | |\n\n#### Step 3: Alt text and label (5 minutes)\n| Field | My answer |\n| :--- | :--- |\n| **My best round, and why** | |\n| **Alt text (one or two sentences, not starting with “image of”)** | |\n| **My label for sharing (for example, “Made with AI”)** | |\n\nTake one screenshot that shows your best image and its prompt.\n\n---\n\n### Part B: Audio or Voice (15 minutes)\n\n> **Your goal:** Check how well an audio tool handles your own words, or prepare a voice script written for the ear. Choose **Option 1** or **Option 2**. Use only your own voice, never another person’s.\n\n#### Option 1: Speech to text\n1. *(4 min)* Write a 30-second made-up announcement with a name, a date, a time, and an email address. Record yourself reading it, and run it through a speech-to-text tool.\n2. *(5 min)* Compare the transcript with your script. List every error.\n3. *(4 min)* Write a prompt that cleans the transcript using a facts sheet and summarizes it in three bullet points.\n4. *(2 min)* Complete the consent and label row.\n\n| # | Error in the transcript | What I said | Why the tool may have made this mistake |\n| :--- | :--- | :--- | :--- |\n| **1** | | | |\n| **2** | | | |\n| **3** | | | |\n\n#### Option 2: Text to speech\n1. *(5 min)* Write a 40-word announcement script for the ear, with short sentences, spoken numbers, a repeated key point, and a pronunciation note.\n2. *(5 min)* Run it through a text-to-speech tool, or read it aloud yourself. Listen to the whole result.\n3. *(3 min)* Note what to fix, and fix it.\n4. *(2 min)* Complete the consent and label row.\n\n| Field | My answer |\n| :--- | :--- |\n| **My script** | |\n| **My pronunciation note(s)** | |\n| **What I heard that needed fixing** | |\n| **My fix** | |\n\n#### Consent and label row\n| Consent and label row | My answer |\n| :--- | :--- |\n| **Whose voice did I use? Did they agree?** | |\n| **How I will label AI-generated audio** | |"
           },
           {
             "id": "les_gpe_lab2_02",
             "section_id": "sec_gpe_lab2",
-            "title": "Lab 2 Parts C & D: Video/Multimodal & Responsible-Use Debrief (25 min)",
+            "title": "Lab 2 Parts C–G: Video/Multimodal, Responsible-Use Debrief, Analysis-Only & Notes (25 min)",
             "type": "article",
-            "summary": "Build a 4-shot video storyboard or multimodal chart check (15 min), then apply Module 9’s five responsible-use questions and complete the Part 2 Self-Check (10 min).",
+            "summary": "Build a 3-shot video plan or two-step multimodal image check (15 min), complete the 5-question responsible-use check, debrief, and iteration log (10 min), plus Analysis-Only Alternative, Troubleshooting, and Instructor Notes.",
             "duration_seconds": 1500,
             "position": 2,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "### Part C: Video or Multimodal Task (15 minutes)\nChoose **one** (or both if time allows):\n- **Video Storyboard:** Write a **4-shot storyboard in prompts** (4 × 5s clips) for a short explainer, reusing a consistent character/setting note across all 4 shots.\n- **Multimodal Check:** Upload a non-private chart or UI screenshot (or use Module 8’s sample chart), ask the AI to extract the data, and log every misread or verified value against the original.\n\n---\n\n### Part D: Responsible-Use Check & Part 2 Self-Check Debrief (10 minutes)\nApply these **five questions** to your Lab 2 outputs in your **Personal Study Notes**:\n1. **Who is shown or heard?** *(Confirm no real person’s face or voice was used without consent.)*\n2. **Did they agree?**\n3. **Who owns or may use the result?** *(Check tool terms.)*\n4. **Is it labeled?** *(Write the AI disclosure label you would attach.)*\n5. **Could it mislead or harm?**\n6. **Part 2 Self-Check:** Confirm you have completed Modules 6–8 and saved alt text / transcripts for accessibility before moving to **Part 3 (Responsible & Advanced Use)**."
+            "content": "### Part C: Video Plan or Multimodal Check (15 minutes)\n\n> **Your goal:** Choose **Option 1 (video plan)** or **Option 2 (multimodal check)**, whichever fits the kind of task you want in your portfolio.\n\n#### Option 1: A three-shot video plan (10 minutes + 5 minutes to record)\nPlan a 15-second video as three shots of about five seconds each. Use a made-up idea with no real people. Write one style sheet and one prompt for each shot. If you have a video tool, run Shot 1 and watch it twice. If not, list three things that could go wrong in the clip.\n\n| Field | My answer |\n| :--- | :--- |\n| **Video idea** | |\n| **Shared style sheet** | |\n\n| Shot | What we see (one idea) | Camera and shot type | My prompt (with the style sheet) |\n| :--- | :--- | :--- | :--- |\n| **1** | | | |\n| **2** | | | |\n| **3** | | | |\n\n| Field | My answer |\n| :--- | :--- |\n| **What happened in Shot 1, or what could go wrong** | |\n| **What I would change** | |\n\n#### Option 2: Check an AI’s reading of an image (10 minutes + 5 minutes to record)\nUse a made-up flyer, chart, or screenshot with no private information. You can use the sample flyer in Part E. Upload it to a chatbot that accepts images, and use the two-step method:\n1. *“First list exactly what you see, and say ‘unclear’ if you cannot read something.”*\n2. *“Now, using only your list, answer: [your question].”*\n\nThen compare the AI’s list with the original.\n\n| Detail in the image | What the AI said | Right or wrong? What does the image really show? |\n| :--- | :--- | :--- |\n| **1** | | |\n| **2** | | |\n| **3** | | |\n| **4** | | |\n| **5** | | |\n\n---\n\n### Part D: Responsible-Use Check and Debrief (10 minutes)\n\n#### Step 1: The five questions (4 minutes)\nBefore you share any AI-made media, ask five questions. This is a first look. Module 9 explains them in more depth. Apply them to the results from Parts A, B, and C.\n\n| Question | Part A (image) | Part B (audio) | Part C (video or image reading) |\n| :--- | :--- | :--- | :--- |\n| **1. Who is shown or heard?** | | | |\n| **2. Did they agree?** | | | |\n| **3. Who owns or may use the result?** *(Check the tool’s terms.)* | | | |\n| **4. Is it labeled as AI-made?** | | | |\n| **5. Could it mislead or harm anyone?** | | | |\n\n#### Step 2: Debrief (6 minutes)\nAnswer each question in two or three sentences.\n\n| Prompt | My answer |\n| :--- | :--- |\n| **1. What did changing one thing at a time teach you about image prompts?** | |\n| **2. Which error or problem in audio or video surprised you most?** | |\n| **3. How did you check the AI’s work in Parts B and C?** | |\n| **4. Which part could become a portfolio entry, and why?** | |\n| **5. What is one rule you will follow when you use AI media?** | |\n\n#### Iteration log\nRecord one prompt that you improved in this lab.\n\n| Version | Prompt | Result | Problem | Fix for next time |\n| :--- | :--- | :--- | :--- | :--- |\n| **1** | | | | |\n| **2** | | | | |\n| **3** | | | | |\n\n#### What to submit\n- [ ] Part A: the three-round table, alt text, label, and one screenshot\n- [ ] Part B: your chosen option, with the tables filled in and the consent and label row\n- [ ] Part C: your chosen option, with the tables filled in\n- [ ] Part D: the five-question table, the debrief answers, and the iteration log\n\n> **Completion check:** All tables are filled in, the evidence is attached (or the analysis-only version is completed), and each debrief answer has at least two sentences. You will get instant feedback on what is missing.\n>\n> **Keep your evidence.** You can reuse your prompts, results, and iteration log in your portfolio, so save your screenshots and notes.\n\n---\n\n### Part E: Analysis-Only Alternative\n\nIf you cannot use image, audio, video, or chatbot tools, you can earn the lab credit by analyzing the samples below. They were written for this exercise, and real tools will give different results. Complete Parts A, B, and one of the two Part C tasks. Then do Part D.\n\n#### Part A alternative: three rounds, described in words\n| Round | Prompt | Sample result (described in words) |\n| :--- | :--- | :--- |\n| **1** | “A community garden on a sunny day, flat illustration style, wide image, bright colors, no text.” | Rows of vegetables and flowers in a green garden, with a small shed and blue sky. The light is even and bright. The view is straight on from the front. |\n| **2** | Round 1, but with lighting changed: “…at sunrise, soft golden light.” | The same garden, but the sky is orange and pink. Long soft shadows lie across the rows, and the whole picture feels warmer and quieter. |\n| **3** | Round 2, but with the camera view changed: “…seen from above.” | The garden is now seen from above, like a map, with neat rows and paths. The golden light remains, but the shed and sky are less visible. |\n\n- What did each change do? Which round would you keep for a poster, and why?\n- Write alt text (one or two sentences) for the Round 2 picture.\n- Which of the eight parts did the Round 1 prompt include? Which were missing?\n\n#### Part B alternative: transcript check\nA speech-to-text tool transcribed a short announcement. The transcript has **four errors**. Compare it with the facts sheet.\n\n| | |\n| :--- | :--- |\n| **Facts sheet** | Speaker: Priya, from Oak School. Event: bake sale on Friday, 7 June, at 3 p.m., in the school hall. All the money goes to the library. To donate cakes, email priya at oakschool dot example. |\n| **AI transcript (with errors)** | Hello, this is Pria from Oak School. Our bake sale is on Friday the seventh of June at tree p.m. in the school hole. All the money goes to the library. To donate cakes, email pria at oak school dot com. |\n\n- List the four errors, the correct text, and why each mistake may have happened.\n- Write a prompt that cleans the transcript with the facts sheet and summarizes it in three bullet points.\n- Which error would have been the hardest to notice without the facts sheet?\n\n#### Part C alternative 1: check an AI’s reading of a flyer\nHere is a made-up library flyer. An AI tool read it. Compare the AI’s reading with the flyer.\n\n> **Maple Library — Story Hour (Flyer Text):**\n> Every **Saturday** at **10:30 a.m.** in **Room 2**\n> For **ages 4 to 7** • **Free** • Please bring a blanket\n> Questions: `library@maple.example`\n\n*Accessibility: A text version of the flyer is stored in the image’s alt text, and the course team can provide it in another format on request.*\n\n> **AI’s reading of the flyer:**\n> Maple Library is holding Story Hour every Sunday at 10:30 a.m. in Room 3. It is for ages 5 to 8. It is free, and children should bring a blanket. Questions can be sent to library@maple.example.\n\n| Claim in the AI’s reading | Right or wrong? | What the flyer really says |\n| :--- | :--- | :--- |\n| Every Sunday at 10:30 a.m. | | |\n| Room 3 | | |\n| For ages 5 to 8 | | |\n| It is free, and children should bring a blanket | | |\n| Questions to library@maple.example | | |\n\n#### Part C alternative 2: review a video plan\nA learner wrote these three shot prompts for a 15-second video. Find the problems.\n\n| Shot | Prompt |\n| :--- | :--- |\n| **1** | “A girl walks through a busy market while a dog chases a ball and fireworks go off. The camera flies around everything. Write ‘WELCOME’ in big letters.” |\n| **2** | “Close-up of a bakery.” |\n| **3** | “A man who looks exactly like a famous actor tells a joke to the camera.” |\n\n- What is wrong with each prompt? Think about shots, style, text, and people.\n- Rewrite Shot 1 as two simpler shots with a shared style sheet.\n\n#### Answer guide for the alternative\n| Part | Key points |\n| :--- | :--- |\n| **A** | Round 2 changed only the lighting, so the colors and shadows changed. Round 3 changed only the camera view, so the layout changed, while the light stayed. Round 1 included subject, setting, style, color and mood, format, and what to avoid, but it was missing composition and lighting. Sample alt text: “A community garden with rows of vegetables and flowers under an orange and pink sunrise sky, with long soft shadows.” |\n| **B** | Errors: *Pria* should be *Priya* (an unusual name); *tree* should be *three* (a sound-alike word); *hole* should be *hall* (a sound-alike word); *oak school dot com* should be *oakschool dot example* (an email address is easy to mishear). A sample prompt: “Fix obvious errors in the transcript using the facts sheet, without changing the meaning or adding anything. Mark unclear words as [unclear]. Then summarize in three bullet points. Facts sheet: [paste]. Transcript: [paste].” The email address would be hardest to notice without the facts sheet. |\n| **C1** | Wrong: Sunday (the flyer says Saturday); Room 3 (the flyer says Room 2); ages 5 to 8 (the flyer says ages 4 to 7). Right: free and bring a blanket; the email address. Three of five claims were wrong, even though the reading sounded confident. |\n| **C2** | Shot 1 has too many actions and subjects (a girl, a dog, fireworks), an impossible camera move, and text, which is often wrong. Shot 2 has no action, no light, no style, and no camera move. Shot 3 asks for a real person’s likeness, which is not allowed in this course. A rewrite of Shot 1 as two shots with a style sheet: Style sheet: “realistic, warm afternoon light, the same busy market, no text.” Shot 1a: “Wide shot of a busy market, a girl walks past a fruit stall. Camera still.” Shot 1b: “Medium shot of a dog chasing a ball between market stalls. Camera follows slowly.” |\n\n---\n\n### Part F: Troubleshooting\n\n| Problem | What to try |\n| :--- | :--- |\n| **The image tool does not follow my prompt** | Simplify the prompt, put the most important words first, and change only one thing at a time |\n| **Every round looks the same** | Make a bigger change in one part, such as the style or the camera view |\n| **The transcript is almost perfect** | Record in a noisy place, or say a difficult name, number, and email address to see what happens |\n| **The voice mispronounces a name** | Add a pronunciation note, or spell the word as it sounds |\n| **The video tool is slow or unavailable** | Do the planning and the risk list, and use the analysis-only sample |\n| **The chatbot reads the image perfectly** | Accept the result, and try a harder image, such as a chart with small labels |\n| **I cannot use any tools** | Use the analysis-only alternative in Part E |\n\n---\n\n### Part G: Instructor Notes\n\n1. **Preparation**\n   - Tell learners which tools they may use, and make clear that they never have to pay.\n   - Check the terms, privacy notices, and recording rules of any tool that you recommend. They change often.\n   - Check the sample outputs, the transcript, and the flyer reading before each term, and update them if tools or examples change.\n\n2. **What learners should observe**\n   | Observation | Why it happens |\n   | :--- | :--- |\n| Changing one thing shows what each part of an image prompt does | The single change isolates the effect, so cause and effect are visible |\n| Transcripts go wrong on names, sound-alike words, numbers, and email addresses | The tool guesses words from sound, and unusual or similar-sounding words are easy to confuse |\n| Scripts written for the ear sound better when read aloud | Short sentences and spoken numbers match how people listen |\n| AI readings of images contain confident errors | The tool can misread small text and numbers, so people must compare with the original |\n| Video plans work better as simple shots | Short clips with one idea are easier to control and join |\n\n3. **Managing time**\n   - Part A and Part C are the most time-consuming. If learners run late, accept two rounds in Part A.\n   - Learners choose one option in each of Parts B and C. Encourage them to choose the option that fits the portfolio entry that they plan to do.\n\n4. **Consent, privacy, and safety**\n   - Make sure that learners use only their own voice, made-up topics, and non-private images.\n   - Do not let learners create or upload realistic images, voices, or videos of real people.\n   - Remind learners to label AI-made media.\n\n5. **Accessibility**\n   - Part E makes sure that nobody is blocked by access, cost, or equipment, and it earns the same credit as the full lab.\n   - Images in this document have alt text. Offer text versions of tables, and transcripts for any audio that you add.\n\n6. **Completion check and feedback**\n   - **Automated:** All tables are filled in, evidence is attached (or Part E is completed), the five-question table is complete, and each debrief answer has at least two sentences.\n   - **Feedback to show:** “Good work. You have practiced improving image prompts, checking audio and image readings, and reviewing media for consent and labeling. Keep your evidence for the portfolio.”\n   - **Not rubric-graded:** The lab is practice and supports the portfolio.\n\n7. **Part 2 checkpoint**\n   - After the lab, show learners a short self-check: *Can I write an image prompt with at least five parts and improve it one change at a time? Do I know which errors to look for in transcripts? Can I plan a video as simple shots? Can I check an AI’s reading of an image against the original?* Learners who answer “not yet” can return to the matching module before they start Part 3."
           }
         ]
       },
@@ -4961,26 +4961,26 @@
           {
             "id": "les_gpe_09_01",
             "section_id": "sec_gpe_09",
-            "title": "9.1 Lesson & Reading: Responsible AI Media & “Label It, Ask First” (20 min)",
+            "title": "9.1 Lesson & Reading: Responsible Use Across Media & “Label It, Ask First” (20 min)",
             "type": "article",
-            "summary": "Master the 5 responsible-media questions: consent & likeness, ownership & living artists, deepfakes & provenance labeling, bias/stereotypes, safety/privacy, and school/work rules.",
+            "summary": "Use five questions to review AI-made text, images, audio, and video, handle consent, likeness, ownership, labeling, bias, and safety, and decide when to proceed, ask first, or stop.",
             "duration_seconds": 1200,
             "position": 1,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **What you will learn:** Use AI-generated text, images, audio, and video honestly, safely, and with respect for others. *(12 min lesson + 8 min reading)*\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n#### 1. Five questions before using AI media\n| Question | Why it matters | Practical rule |\n| :--- | :--- | :--- |\n| **1. Who is shown or heard?** | Likeness, face, and voice belong to the person | Never generate or edit a real person’s face or voice without permission |\n| **2. Did they agree?** | Consent must be clear and informed | Ask first—especially for classmates, colleagues, or family |\n| **3. Who owns or may use the result?** | Laws and tool terms vary by country and plan | Read the tool’s commercial/usage terms; avoid copying living artists’ signature styles |\n| **4. Is it labeled?** | Viewers deserve to know what is AI-made | Add clear labels/captions and preserve provenance metadata where supported |\n| **5. Could it mislead or harm?** | Deepfakes, stereotypes, and scams cause real harm | Never publish realistic fake news, impersonations, or biased tropes |\n\n#### 2. Bias, Privacy, Provenance & Rules\n- **Bias & stereotypes:** Image and voice tools can over-represent stereotypes (e.g., showing only one gender/ethnicity for certain jobs). Check and correct your prompts.\n- **Privacy of uploads:** Photos and voice clips you upload may be retained per tool settings—keep IDs and private media out.\n- **Provenance labels:** Many tools embed invisible metadata or visible watermarks; keep them intact and follow school/workplace AI policies.\n\n---\n\n### Part B: Reading (8 minutes) — “Label It, Ask First”\nWhen sharing AI media, two habits prevent 90% of problems:\n1. **Ask first** whenever a real person’s face, voice, private work, or a team’s rules are involved.\n2. **Label it** plainly (*“Image created with AI”*, *“Drafted with AI and verified by the author”*). Honest labeling builds trust."
+            "content": "**COURSE 2 | PART 3: RESPONSIBLE AND ADVANCED USE**\n**Module 9: Responsible Use Across Media**\n*Written lesson and reading (20 minutes)*\n\n| Item | Details |\n| :--- | :--- |\n| **Module time** | 50 minutes: written lesson (12 min), reading (8 min), activity (15 min), knowledge check (15 min) |\n| **Level** | All levels. Modules 6 to 8 and the Part 2 lab are helpful |\n| **Tools** | No tools are needed. The activity is a discussion-style case review |\n| **Format** | Written lesson with tables, a short reading, a case-review activity, and a quiz |\n\n> **A note on law:** This module gives practical principles, not legal advice. Laws about copyright, privacy, likeness, and AI differ between countries and change often. For important or commercial work, check the rules that apply to you, and ask a qualified person when you are unsure.\n\n---\n\n### Part A: The Lesson (12 minutes)\n\n> **What you will learn:** By the end of this lesson, you will be able to use five questions to review AI-made text, images, audio, and video before you share them. You will also be able to handle consent, ownership, labeling, bias, and safety, and to decide when to proceed, ask first, or stop.\n\n#### 1. Why responsibility matters more with media\nFirst, let’s think about why this module matters. A wrong sentence in a text can usually be corrected quickly. In contrast, a realistic picture, voice, or video can feel true, even when it is not. It can spread fast, it can hurt real people, and it can be very hard to take back once it is shared.\n\nTherefore, the more realistic and the more personal your AI media is, the more careful you need to be. Fortunately, you do not need to memorize many rules. Instead, you can ask five simple questions.\n\n#### 2. The five questions\nBefore you use or share AI-made media, ask yourself these five questions. You first met them in Guided Lab 2.\n\n| Question | What to think about | Example |\n| :--- | :--- | :--- |\n| **1. Who is shown or heard?** | Real people, their faces, voices, names, or private details | A classmate’s photo in a cartoon |\n| **2. Did they agree?** | Clear permission for this exact use | “Yes, you can use my photo on the club poster.” |\n| **3. Who owns or may use the result?** | The tool’s terms, other people’s work, and any copying | “The free plan is for personal use only.” |\n| **4. Is it labeled?** | A clear, visible note that AI made or changed it | “Image created with AI” |\n| **5. Could it mislead or harm anyone?** | False impressions, embarrassment, unfairness, or danger | A fake voice message that sounds real |\n\n##### Three possible decisions\n| Decision | Meaning |\n| :--- | :--- |\n| **Proceed** | It is fine, and you add a label if the media is AI-made or AI-edited |\n| **Ask first** | You need permission or a check first, from a person, a rights holder, or the tool’s terms |\n| **Stop** | Do not do it, because it is likely to mislead, harm, or break rules |\n\n#### 3. Consent and likeness\nNext, let’s look at people. A person’s **likeness** means their face, body, voice, and other features that identify them. Using someone’s likeness without permission can embarrass, scare, or harm them, even if you meant it as a joke.\n- **Ask first.** Tell the person what you want to make, where it will be shared, and that they can say no. Then, accept the answer.\n- **Permission can change.** If someone later asks you to remove their image or voice, respect that.\n- **Extra care with children.** Do not upload or edit pictures or voices of children without proper permission from a parent or guardian, and follow your school’s rules.\n- **Public figures are people too.** Do not create realistic fake pictures, voices, or videos of real people, whether they are famous or not, saying or doing things that they did not say or do.\n- **Use made-up subjects.** Characters, objects, and places that are not real people avoid most of these problems.\n\n#### 4. Ownership, copying, and terms\nNow, let’s turn to ownership. This area is complicated, and the rules differ between places and tools. Still, three practical questions help you to stay on the safe side.\n- **Is the input mine?** Do not upload other people’s pictures, music, books, or documents to copy or change them, unless you have permission.\n- **Who may use the output?** Read the tool’s terms. They may limit commercial use, require credit, or give the company certain rights.\n- **Am I copying someone?** Do not ask for the voice of a real singer, the lyrics of a song, a famous character, or a brand logo. Also, take care when you ask for “the style of” a living artist. Even if a tool allows it, copying someone’s distinctive work can hurt their livelihood and may raise legal problems.\n\nIn addition, whether AI-made work can be owned, and by whom, is treated differently in different places. Therefore, for important or commercial uses, such as selling prints or using music in an ad, check the rules and the terms, and ask a qualified person if needed.\n\n#### 5. Deepfakes, honesty, and labeling\nA **deepfake** is a very realistic fake picture, voice, or video made with AI. Deepfakes can be used for fraud, bullying, and misinformation. So, the safest approach is to be honest about what you make.\n- **Label AI-made media.** Say clearly, near the media, that AI made or changed it. In audio, say it at the start.\n- **Say what AI did.** For example, *“Voice generated by AI. No real person is speaking,”* or *“Edited with AI: background replaced.”*\n- **Never present it as real evidence or news.** Do not use AI media to pretend that something happened.\n- **Label jokes and satire too.** Others may share your media without the joke.\n- **Do not remove provenance information.** Some tools add visible marks or hidden data that show media was made with AI. Keep them.\n\n#### 6. Bias and stereotypes in generated media\nFurthermore, AI media tools learn from human-made data, and it may contain stereotypes. For example, a tool may show certain jobs as mostly one gender, or it may make some accents sound less professional. As a result, you need to look at what the tool gives you.\n- **Ask:** Who is shown, who is missing, and how are they shown?\n- **Describe what you want.** If you need variety, say so in the prompt, such as people of different ages and backgrounds.\n- **Do not use AI people as proof.** A generated group of smiling “volunteers” is not a real group. Do not present it as one.\n\n#### 7. Safety limits and refusals\nMost tools refuse some requests, for example harmful, violent, or sexual content, or the impersonation of real people. When a tool refuses, treat it as a signal to rethink your request, not as an obstacle to get around. Do not try to trick a tool into breaking its rules. Doing so can harm others, and it can also lead to a closed account.\n\n#### 8. Privacy and rules where you study or work\n- **Keep private material out.** As you learned in Modules 7 and 8, do not upload faces, IDs, private recordings, or confidential documents.\n- **Follow the policy.** Schools and workplaces often have rules about AI. Read them, follow them, and ask when you are unsure.\n- **Disclose your use** when you are asked, and also when it matters to the people who will rely on your work.\n\n#### 9. If you see misuse\nSometimes, you will see AI media that harms someone, such as a fake picture or voice of a classmate. In that case:\n- **Do not share it**, even to show others how bad it is.\n- **Support the person** who is affected.\n- **Report it** to the platform, and to a teacher, manager, or other responsible person.\n- **Keep evidence**, such as a screenshot of where you found it, if it is safe to do so.\n\n#### Key takeaways\n- Ask five questions: who is shown or heard, did they agree, who owns or may use it, is it labeled, and could it mislead or harm?\n- Decide to proceed, ask first, or stop. Get permission for real people’s likeness, and never imitate real people deceptively.\n- Read the tool’s terms, avoid copying others, and check the rules for important or commercial uses.\n- Label AI-made media clearly, and do not remove provenance information.\n- Look for bias, respect safety limits, and report misuse.\n\n#### New words in this lesson\n| Word | Meaning |\n| :--- | :--- |\n| **Consent** | Clear permission from a person for a specific use |\n| **Likeness** | A person’s face, body, voice, or other features that identify them |\n| **Deepfake** | A very realistic fake picture, voice, or video made with AI |\n| **Provenance** | Information about where media came from and how it was made |\n| **Disclosure (label)** | A clear note that says that AI made or changed the media |\n| **Stereotype** | An unfair, oversimplified idea about a group of people |\n\n---\n\n### Part B: Reading (8 minutes): “Label It, Ask First”\n\nTwo habits solve most problems with AI media: **ask first**, and **label it**. Both are quick, and both build trust.\n\n#### Habit 1: Ask first\nWhen your work involves another person’s photo, voice, or words, send a short, clear message before you start. Here is an example:\n> “Hi [name], I would like to use your photo in a cartoon for our club poster. The poster will be shared on our club’s page and printed for the notice board. It will not be used for anything else. Is that OK? You can say no, and you can change your mind later. Thank you!”\n\n- **Be specific** about what you will make, where it will go, and for how long.\n- **Make no a safe answer.** Do not pressure the person.\n- **Keep their answer** where you can find it, if the use is important.\n\n#### Habit 2: Label it\nA good label is short, visible, and specific. It says what AI did, and it is placed where people will see it. Here are some examples.\n\n| Type of media | Example label |\n| :--- | :--- |\n| **Image created by AI** | “Image created with AI.” |\n| **Photo edited by AI** | “Photo edited with AI: background replaced.” |\n| **Synthetic voice** | “Voice generated by AI. No real person is speaking.” |\n| **AI music** | “Music created with AI.” |\n| **AI video** | “Video created with AI. The people and places are not real.” |\n| **Mixed work** | “Text drafted with AI and edited by [name]. Images created with AI.” |\n\n##### Labeling tips\n- **Do not hide it** in tiny letters or at the bottom of a long page.\n- **Put it near the media**, and say it at the start of audio.\n- **Keep it when others share**, by using a caption that travels with the image.\n- **Do not use a label to excuse harm.** A label does not make a harmful or deceptive piece acceptable.\n\n#### Your sharing checklist\n- [ ] Real people involved? I asked, and they agreed.\n- [ ] Other people’s work involved? I have permission, or I did not use it.\n- [ ] The tool’s terms allow this use.\n- [ ] It is labeled, clearly and visibly.\n- [ ] It will not mislead, embarrass, or harm anyone.\n- [ ] I followed my school’s or workplace’s rules.\n\n**In short:** Ask first, label it, and stop if you cannot answer the five questions with confidence."
           },
           {
             "id": "les_gpe_09_02",
             "section_id": "sec_gpe_09",
-            "title": "9.2 Activity: Case Clinic & Stretch Media Policy (15 min)",
+            "title": "9.2 Activity: “Case Clinic” & Stretch AI Media Policy (15 min)",
             "type": "article",
-            "summary": "Judge 5 real-world AI media cases (proceed, ask permission, or do not proceed) and write disclosure labels, plus a Stretch 1-page team AI media policy.",
+            "summary": "Judge five realistic media cases using the five questions, write a clear AI label and an “ask first” message, and try the Stretch one-page AI media policy task.",
             "duration_seconds": 900,
             "position": 2,
             "is_free_preview": false,
             "is_completed": false,
-            "content": "> **Your goal:** Judge the five cases below. For each, decide **Proceed**, **Ask permission**, or **Do not proceed**, explain why, and write a disclosure label if needed. *(15 minutes)*\n\n---\n\n### Five Cases\n1. **Voice imitation:** Cloning a manager’s voice without telling them to record a surprise birthday video for the office.\n2. **Realistic fake photo:** Posting an AI photo of a flooded local bridge as “breaking news” to get clicks.\n3. **Classmate’s picture:** Uploading a classmate’s selfie to an AI cartoon filter and posting it online without asking.\n4. **Original flyer illustration:** Generating an AI watercolor illustration of books for a community book-swap poster (no real faces, allowed by tool terms).\n5. **Customer audio:** Uploading a recorded customer support call (with full customer name and address) to a public transcription site without approval.\n\n#### Suggested Decisions\n1. **Do not proceed** (voice cloning without consent; high impersonation risk).\n2. **Do not proceed** (misleading deepfake / misinformation).\n3. **Ask permission** (never use a real person’s likeness or upload their photo without consent).\n4. **Proceed with label** (e.g., *“Illustration generated with AI”* + alt text).\n5. **Do not proceed / Ask approval** (privacy breach—strip private data and use an approved tool).\n\n---\n\n### Stretch Task (Advanced Users)\nWrite a **one-page AI media policy** for a small team, club, or community group covering: *Consent, Labeling, Privacy, Ownership/Terms, and Review before publishing*."
+            "content": "### Part C: Activity (15 minutes): “Case Clinic”\n\n> **Your goal:** Judge five realistic cases. For each one, decide to **proceed**, **ask first**, or **stop**, use the five questions to explain your decision, and write a label if one is needed. There is often more than one reasonable answer, so your reasoning matters most. No tools are needed.\n\n---\n\n#### Step 1: Read the cases (2 minutes)\n| # | Case |\n| :--- | :--- |\n| **1** | A student uses an AI voice tool to make the school principal “announce” a day off as a joke, and plays it in the hallway. |\n| **2** | A club leader wants a poster picture of “a diverse group of smiling volunteers”, made with AI. The caption will say “Our volunteers.” |\n| **3** | You want to turn a classmate’s photo into a funny cartoon with AI, and post it in the class chat. |\n| **4** | A small business owner wants AI-made background music for an online ad. The free plan’s terms say it is for personal use only. |\n| **5** | A student wants an AI image “in the exact style of a living illustrator” and plans to sell it as prints. |\n\n---\n\n#### Step 2: Decide and explain (9 minutes)\n| # | My decision (proceed, ask first, or stop) | Why? Use the five questions | Label, or message to send (if needed) |\n| :--- | :--- | :--- | :--- |\n| **1** | | | |\n| **2** | | | |\n| **3** | | | |\n| **4** | | | |\n| **5** | | | |\n\n---\n\n#### Step 3: Write one label and one “ask first” message (3 minutes)\n| Field | My answer |\n| :--- | :--- |\n| **A label for one of the cases that you would proceed with** | |\n| **An “ask first” message for one of the cases that need permission** | |\n\n#### Step 4: Reflect (1 minute)\n- Which case was hardest to decide, and why?\n\n---\n\n### Answer Guide and Feedback\n\nReasonable people can disagree on details. These are sample answers.\n\n| # | Sample decision | Sample reasoning |\n| :--- | :--- | :--- |\n| **1** | **Stop** | A realistic fake voice of a real person (Q1, Q2), without permission, could mislead many students and staff, and may cause trouble or harm for the principal and the student (Q5). Calling it a joke does not fix this. A safer idea: make a clearly fictional character announcement, labeled as AI. |\n| **2** | **Proceed, with changes** | No real people are shown (Q1), so consent is not needed. However, the caption “Our volunteers” would mislead (Q5). Change the caption, and add a label: “Illustration created with AI. These are not real volunteers.” Better still, ask real volunteers for permission to use real photos. Also, check the image for stereotypes (Q5). |\n| **3** | **Ask first** | A real person is shown (Q1), and they have not agreed (Q2). A “funny” image can embarrass someone, and it is easy to share widely (Q5). Send a clear message, accept a no, and label the result if they agree: “Cartoon edited with AI.” |\n| **4** | **Ask first (check the terms)** | The terms limit the free plan to personal use (Q3), so a business ad may break them. Check the terms, upgrade to a plan that allows commercial use, or choose music from a source that allows it. Label as needed: “Music created with AI.” |\n| **5** | **Stop (or change the plan)** | Copying the exact style of a living artist to sell prints may hurt that artist and may raise ownership problems (Q3). Instead, create your own style, use a source with a clear license, or ask the artist for permission and discuss terms. Label AI use. |\n\n#### Sample label and message\n- **Label (case 2):** *“Illustration created with AI. The people shown are not real volunteers.”*\n- **Message (case 3):** *“Hi [name], I’d like to turn your photo into a funny cartoon with AI, and post it in our class chat. It would stay there for one week. Is that OK? You can say no, and you can change your mind later.”*\n\n#### What good answers show\n- The learner uses the five questions, and does not only say “it’s fine” or “it’s bad.”\n- The learner treats real people’s consent seriously, and does not accept “it’s only a joke” as a reason.\n- The learner writes a clear, visible label and a respectful “ask first” message.\n\n#### Feedback to show learners\n- **Automated check:** All five cases have a decision and a reason with at least 20 words, and one label and one message are written.\n- **Feedback:** “Good work. Responsible use means asking first, labeling clearly, and thinking about who could be harmed. When in doubt, ask, or choose a safer way.”\n\n---\n\n### Stretch Task\nWrite a **one-page AI media policy** for a small team or club. Include: what is allowed, what needs permission, how to label, what is not allowed, who to ask when unsure, and how to report a problem. Keep it short and clear.\n\n> **Instructor notes:**\n> - This is a practice activity that supports the portfolio’s responsible-use notes. It is not rubric-graded.\n> - Encourage discussion. Accept different answers if the reasoning is sound, but do not accept “it’s only a joke” as a reason to use someone’s likeness without permission.\n> - Keep cases realistic and local. Update them each term, and check any legal points for your country.\n> - This module gives practical principles, not legal advice. Do not present learners with legal conclusions."
           },
           {
             "id": "les_gpe_09_03",
@@ -4996,273 +4996,277 @@
               {
                 "id": "q_gpe_09_1",
                 "lesson_id": "les_gpe_09_03",
-                "question": "Which five questions should you ask before using AI-generated media?",
+                "question": "Why do realistic AI images, voices, and videos need extra care?",
                 "options": [
-                  "Who is shown/heard, did they agree, who owns/may use it, is it labeled, and could it mislead/harm?",
-                  "Is it cheap, fast, loud, bright, and long?",
-                  "Only whether it looks cool",
-                  "None"
+                  "They are always illegal",
+                  "They can feel true, spread quickly, and hurt real people",
+                  "They cannot be shared",
+                  "They are always perfect"
                 ],
-                "correct_option_index": 0,
-                "explanation": "These five checks cover consent, rights, transparency, and harm.",
+                "correct_option_index": 1,
+                "explanation": "Realistic media can mislead people and be hard to take back.",
                 "position": 1
               },
               {
                 "id": "q_gpe_09_2",
                 "lesson_id": "les_gpe_09_03",
-                "question": "A friend wants to clone a teacher’s voice as a joke. What is the right decision?",
+                "question": "Which list contains the five questions of this module?",
                 "options": [
-                  "Do not proceed—never clone or imitate a real person’s voice without explicit consent",
-                  "Proceed and post it everywhere",
-                  "Proceed if it is under 30 seconds",
-                  "Only remove the label"
+                  "Who is shown or heard, did they agree, who owns or may use it, is it labeled, could it mislead or harm",
+                  "What color, how long, how loud, how fast, how cheap",
+                  "Who is online, where is the tool, when was it made, why, how much",
+                  "Which tool, which phone, which camera, which font, which song"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Voice likeness requires explicit consent.",
+                "explanation": "These five questions help you to review any AI media before you share it.",
                 "position": 2
               },
               {
                 "id": "q_gpe_09_3",
                 "lesson_id": "les_gpe_09_03",
-                "question": "Why should you take care when prompting “in the style of [living artist]”?",
+                "question": "What does “likeness” mean?",
                 "options": [
-                  "It raises ethical and copyright/ownership concerns around copying a living creator’s signature style",
-                  "AI cannot draw styles",
-                  "It makes files smaller",
-                  "It is required by law"
+                  "The color of an image",
+                  "The price of a tool",
+                  "A kind of file",
+                  "A person’s face, body, voice, or other features that identify them"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Describe visual traits (palette, brushwork, mood) rather than mimicking living artists.",
+                "correct_option_index": 3,
+                "explanation": "Using someone’s likeness needs their permission.",
                 "position": 3
               },
               {
                 "id": "q_gpe_09_4",
                 "lesson_id": "les_gpe_09_03",
-                "question": "What is “provenance” in AI media?",
+                "question": "You want to make a funny AI cartoon from a classmate’s photo. What should you do first?",
                 "options": [
-                  "Labels, notes, or metadata showing where media came from and whether AI was used",
-                  "The price of a camera",
-                  "A font name",
-                  "A Wi-Fi router"
+                  "Post it, and ask later",
+                  "Hide that it was made with AI",
+                  "Ask the classmate for permission, and accept a no",
+                  "Use the photo without telling anyone"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Provenance helps viewers verify origin and authenticity.",
+                "correct_option_index": 2,
+                "explanation": "A real person’s likeness needs their agreement.",
                 "position": 4
               },
               {
                 "id": "q_gpe_09_5",
                 "lesson_id": "les_gpe_09_03",
-                "question": "True or false: Posting a realistic AI photo of a fake disaster as real news is harmful misinformation even if meant as a prank.",
+                "question": "Which statement about permission is correct?",
                 "options": [
-                  "True",
-                  "False"
+                  "Once given, permission can never be withdrawn",
+                  "Permission can change, so you should respect a later request to remove the image",
+                  "Permission is never needed",
+                  "Only famous people can give permission"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Misleading synthetic media erodes trust and can cause real panic.",
+                "correct_option_index": 1,
+                "explanation": "Respect people’s later wishes.",
                 "position": 5
               },
               {
                 "id": "q_gpe_09_6",
                 "lesson_id": "les_gpe_09_03",
-                "question": "What does “Label it, ask first” mean?",
+                "question": "Which is the safest approach for images and voices?",
                 "options": [
-                  "Disclose AI generation honestly and get permission before using someone’s likeness, voice, or private data",
-                  "Hide AI use",
-                  "Ask only after publishing",
-                  "Label only text, never images"
+                  "Use made-up characters, objects, and places instead of real people",
+                  "Always use real classmates",
+                  "Copy a famous voice",
+                  "Use a stranger’s photo"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Consent before creating and transparency when sharing prevent most harms.",
+                "explanation": "Made-up subjects avoid most consent problems.",
                 "position": 6
               },
               {
                 "id": "q_gpe_09_7",
                 "lesson_id": "les_gpe_09_03",
-                "question": "If an AI image generator repeatedly shows only one gender when you prompt “engineer” or “nurse,” what issue are you seeing?",
+                "question": "What is a deepfake?",
                 "options": [
-                  "Bias and stereotypes in generated media",
-                  "Broken monitor pixels",
-                  "Missing audio",
-                  "Fast Wi-Fi"
+                  "A very deep lake",
+                  "A password",
+                  "A type of camera",
+                  "A very realistic fake picture, voice, or video made with AI"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Review outputs for bias and specify diverse, fair representation.",
+                "correct_option_index": 3,
+                "explanation": "Deepfakes can be used for fraud, bullying, and misinformation.",
                 "position": 7
               },
               {
                 "id": "q_gpe_09_8",
                 "lesson_id": "les_gpe_09_03",
-                "question": "Before using an AI image in a commercial flyer, what should you check?",
+                "question": "Which is a good label for a synthetic voice?",
                 "options": [
-                  "The tool’s terms of service on ownership and commercial rights",
-                  "Only the file extension",
-                  "Nothing",
-                  "Your neighbor’s opinion"
+                  "“Enjoy!”",
+                  "“Real recording.”",
+                  "“Voice generated by AI. No real person is speaking.”",
+                  "No label is needed if it is a joke"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Tool terms differ on free vs. paid commercial usage rights.",
+                "correct_option_index": 2,
+                "explanation": "A good label is clear, specific, and visible.",
                 "position": 8
               },
               {
                 "id": "q_gpe_09_9",
                 "lesson_id": "les_gpe_09_03",
-                "question": "True or false: Uploading a classmate’s photo to an AI editor without asking respects their privacy and likeness.",
+                "question": "Where should an AI label be placed?",
                 "options": [
-                  "True",
-                  "False"
+                  "In tiny letters at the bottom of a long page",
+                  "Near the media, where people will see it, and at the start of audio",
+                  "Nowhere",
+                  "Only in your private notes"
                 ],
                 "correct_option_index": 1,
-                "explanation": "Always ask permission before uploading someone else’s photo.",
+                "explanation": "A hidden label is not a real label.",
                 "position": 9
               },
               {
                 "id": "q_gpe_09_10",
                 "lesson_id": "les_gpe_09_03",
-                "question": "Which label is clearest on a community poster with an AI illustration?",
+                "question": "Is a label enough to make a harmful or deceptive piece acceptable?",
                 "options": [
-                  "“Illustration generated with AI”",
-                  "No label at all",
-                  "“100% hand-painted by a local artist”",
-                  "“Classified”"
+                  "No. A label does not excuse harm or deception",
+                  "Yes, any label fixes everything",
+                  "Yes, if the label is short",
+                  "Yes, if no one reads it"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Plain, honest disclosure is best.",
+                "explanation": "You must still avoid harm and deception.",
                 "position": 10
               },
               {
                 "id": "q_gpe_09_11",
                 "lesson_id": "les_gpe_09_03",
-                "question": "Why keep provenance metadata or watermarks intact when tools add them?",
+                "question": "What should you check before you use AI-made music in a business ad?",
                 "options": [
-                  "They help preserve transparency about how the media was made",
-                  "They double image resolution",
-                  "They speed up printing",
-                  "They translate text"
+                  "Only the length of the music",
+                  "Only the color of the tool’s logo",
+                  "Nothing, because all AI music is free",
+                  "The tool’s terms, to see whether commercial use is allowed"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Preserving provenance supports media literacy.",
+                "correct_option_index": 3,
+                "explanation": "Terms can limit commercial use or require credit.",
                 "position": 11
               },
               {
                 "id": "q_gpe_09_12",
                 "lesson_id": "les_gpe_09_03",
-                "question": "What should you do if a school or workplace forbids AI for a specific assignment?",
+                "question": "Which request is a bad idea?",
                 "options": [
-                  "Follow the rule and do not use AI on that assignment",
-                  "Use it secretly",
-                  "Remove the metadata",
-                  "Ask a friend to submit it"
+                  "Asking for calm piano music",
+                  "Asking for a made-up character’s voice",
+                  "Asking an AI tool to copy the exact voice of a real singer",
+                  "Asking for a watercolor flower"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Responsible use includes respecting local rules.",
+                "correct_option_index": 2,
+                "explanation": "Imitating a real person’s voice without permission can mislead and harm.",
                 "position": 12
               },
               {
                 "id": "q_gpe_09_13",
                 "lesson_id": "les_gpe_09_03",
-                "question": "True or false: Safety refusals in AI tools exist to block harmful content like impersonation or illegal acts.",
+                "question": "Why should you take care when you ask for “the style of” a living artist?",
                 "options": [
-                  "True",
-                  "False"
+                  "Styles can never be described",
+                  "Copying distinctive work can hurt the artist and may raise legal problems",
+                  "Artists do not use styles",
+                  "Tools always refuse this"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Guardrails help prevent obvious misuse, though human judgment is still needed.",
+                "correct_option_index": 1,
+                "explanation": "Take care, especially if you share or sell the result.",
                 "position": 13
               },
               {
                 "id": "q_gpe_09_14",
                 "lesson_id": "les_gpe_09_03",
-                "question": "Why avoid uploading private recordings to unknown free audio tools?",
+                "question": "A generated picture shows a group of smiling people. What should you NOT do?",
                 "options": [
-                  "Uploaded audio may be stored, reviewed, or used to train models depending on tool terms",
-                  "Audio files never upload",
-                  "Free tools delete everything in 1 millisecond",
-                  "Microphones break"
+                  "Present it as a photo of your real volunteers",
+                  "Label it as made with AI",
+                  "Describe it as an illustration",
+                  "Use it as an example of a style"
                 ],
                 "correct_option_index": 0,
-                "explanation": "Treat public tools as non-confidential unless approved.",
+                "explanation": "A generated group is not a real group, and presenting it as real misleads people.",
                 "position": 14
               },
               {
                 "id": "q_gpe_09_15",
                 "lesson_id": "les_gpe_09_03",
-                "question": "Which element belongs in a team’s one-page AI media policy?",
+                "question": "How can AI media tools show bias?",
                 "options": [
-                  "Clear rules on consent, honest labeling, privacy, and human review before publishing",
-                  "A list of passwords",
-                  "Bans on all accessibility",
-                  "Nothing about consent"
+                  "They always show perfect balance",
+                  "They never show people",
+                  "They only draw animals",
+                  "They may repeat stereotypes, such as showing certain jobs mostly as one gender"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Practical policies give teams clear, repeatable guardrails.",
+                "correct_option_index": 3,
+                "explanation": "Tools learn from human data that can contain stereotypes.",
                 "position": 15
               },
               {
                 "id": "q_gpe_09_16",
                 "lesson_id": "les_gpe_09_03",
-                "question": "If you edit a real photo heavily with AI so the scene looks totally different, should you disclose it?",
+                "question": "A tool refuses your request. What is the best response?",
                 "options": [
-                  "Yes, especially if viewers might mistake it for an unedited documentary photo",
-                  "No, never",
-                  "Only if it is black and white",
-                  "Only on Tuesdays"
+                  "Try to trick the tool into doing it",
+                  "Share the refused request with strangers",
+                  "Rethink your request instead of trying to trick the tool",
+                  "Use a fake account"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Disclosing major synthetic edits prevents misleading viewers.",
+                "correct_option_index": 2,
+                "explanation": "A refusal is a signal to reconsider. Trying to get around rules can cause harm and lead to a closed account.",
                 "position": 16
               },
               {
                 "id": "q_gpe_09_17",
                 "lesson_id": "les_gpe_09_03",
-                "question": "True or false: Copyright and AI ownership rules are identical in every country.",
+                "question": "True or false: Rules about copyright, likeness, and AI are the same everywhere.",
                 "options": [
                   "True",
                   "False"
                 ],
                 "correct_option_index": 1,
-                "explanation": "Rules differ by jurisdiction and change over time—check local guidance and tool terms.",
+                "explanation": "They differ between countries and change often, so check the rules that apply to you for important uses.",
                 "position": 17
               },
               {
                 "id": "q_gpe_09_18",
                 "lesson_id": "les_gpe_09_03",
-                "question": "What is the best response when an AI tool generates a stereotyped image?",
+                "question": "You see an AI-made fake picture of a classmate being shared. What should you do?",
                 "options": [
-                  "Do not use it; refine your prompt with specific, fair details and review again",
-                  "Publish it anyway",
-                  "Blame the viewer",
-                  "Remove alt text"
+                  "Do not share it, support the classmate, and report it to the platform and a responsible adult",
+                  "Share it to warn everyone",
+                  "Ignore it and say nothing",
+                  "Make a worse one"
                 ],
                 "correct_option_index": 0,
-                "explanation": "You control what you publish—refine and curate responsibly.",
+                "explanation": "Sharing it spreads the harm, even if you mean well.",
                 "position": 18
               },
               {
                 "id": "q_gpe_09_19",
                 "lesson_id": "les_gpe_09_03",
-                "question": "Which case requires “Ask permission” first?",
+                "question": "True or false: You may remove the labels or hidden provenance information that a tool adds, as long as the picture looks good.",
                 "options": [
-                  "Using a colleague’s headshot in an AI-styled team avatar",
-                  "Generating an abstract geometric background",
-                  "Summarizing your own public notes",
-                  "Drafting a fictional recipe"
+                  "True",
+                  "False"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Using any real person’s face requires their consent.",
+                "correct_option_index": 1,
+                "explanation": "Provenance information helps to show how media was made, so you should keep it.",
                 "position": 19
               },
               {
                 "id": "q_gpe_09_20",
                 "lesson_id": "les_gpe_09_03",
-                "question": "Who is accountable for misleading or harmful AI media once it is shared?",
+                "question": "What is the most helpful thing to include in an “ask first” message?",
                 "options": [
-                  "The person or organization who chose to generate and publish it",
-                  "The pixels alone",
-                  "The viewer",
-                  "Nobody"
+                  "A demand to answer within a minute",
+                  "No details at all",
+                  "What you will make, where it will be shared, and that the person can say no",
+                  "A warning that you will do it anyway"
                 ],
-                "correct_option_index": 0,
-                "explanation": "Human publishers remain responsible for what they release.",
+                "correct_option_index": 2,
+                "explanation": "Clear, specific, and respectful requests make real consent possible.",
                 "position": 20
               }
             ]
